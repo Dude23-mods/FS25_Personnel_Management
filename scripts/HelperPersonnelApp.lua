@@ -1,0 +1,884 @@
+HelperPersonnelApp = {}
+HelperPersonnelApp_mt = Class(HelperPersonnelApp)
+
+local function hpSetPageTitle(frame, text)
+    if frame == nil or text == nil or text == "" then
+        return
+    end
+
+    frame.title = text
+
+    if frame.elements ~= nil and frame.elements[1] ~= nil then
+        frame.elements[1].title = text
+    end
+end
+
+local function addInGameMenuPage(frame, pageName, iconFilename, iconUVs, iconUVPixels)
+    local inGameMenu = g_inGameMenu
+    if inGameMenu == nil and g_gui ~= nil and g_gui.screenControllers ~= nil then
+        inGameMenu = g_gui.screenControllers[InGameMenu]
+    end
+
+    if inGameMenu == nil or frame == nil then
+        return false
+    end
+
+    if inGameMenu[pageName] ~= nil then
+        return true
+    end
+
+    if inGameMenu.controlIDs ~= nil then
+        inGameMenu.controlIDs[pageName] = nil
+    end
+
+    local pageTitle = g_i18n ~= nil and g_i18n:getText("ui_ingameMenuHelperPersonnel") or "Personalmanagement"
+    hpSetPageTitle(frame, pageTitle)
+
+    inGameMenu[pageName] = frame
+
+    -- v1.5.6.10: Stabilitaet vor Positionierung.
+    -- Die Personalmanagement-Seite wird erst nach Mission00.loadMission00Finished registriert
+    -- und dann nur an die vom Spiel fertig aufgebaute Seitenliste angehaengt. Es wird keine
+    -- GIANTS-Seitenliste umsortiert und kein nachtraeglicher Reiterlisten-Refresh erzwungen.
+    local ok, message = pcall(function()
+        if inGameMenu.pagingElement ~= nil and inGameMenu.pagingElement.addElement ~= nil then
+            inGameMenu.pagingElement:addElement(frame)
+        else
+            error("PagingElement nicht verfuegbar")
+        end
+
+        if inGameMenu.exposeControlsAsFields ~= nil then
+            inGameMenu:exposeControlsAsFields(pageName)
+        end
+
+        inGameMenu:registerPage(frame)
+        inGameMenu:addPageTab(frame, iconFilename, iconUVs)
+    end)
+
+    if not ok then
+        Logging.warning("%s: ESC-Menüseite konnte nicht registriert werden (%s).", g_helperPersonnelApp ~= nil and g_helperPersonnelApp.modName or "FS25_HelperPersonnel", tostring(message))
+        inGameMenu[pageName] = nil
+        return false
+    end
+
+    if frame.applyScreenAlignment ~= nil then
+        frame:applyScreenAlignment()
+    end
+    if frame.updateAbsolutePosition ~= nil then
+        frame:updateAbsolutePosition()
+    end
+
+    return true
+end
+
+function HelperPersonnelApp.new(modName, modDir, customMt)
+    local self = setmetatable({}, customMt or HelperPersonnelApp_mt)
+
+    self.modName = modName
+    self.modDir = modDir
+    self.manager = nil
+    self.helperBridge = nil
+    self.selectionOverlay = nil
+    self.frame = nil
+    self.inGameMenu = nil
+    self.guiLoaded = false
+    self.menuRegistered = false
+    self.menuRegistrationAllowed = false
+    self.pendingWorkerIdsByVehicleKey = {}
+    self.pendingWorkerIdForNextAIJob = nil
+    self.activeJobsRestoreAttempts = 0
+    self.activeJobsRestoreDone = false
+    self.isMissionDeleting = false
+
+    return self
+end
+
+function HelperPersonnelApp:load()
+    self.manager = HelperPersonnelManager.new(self)
+    self.helperBridge = HelperPersonnelHelperBridge.new(self)
+    self.selectionOverlay = HelperPersonnelSelectionOverlay.new(self)
+
+    if self:isServerAuthority() then
+        self.manager:loadFromSavegame()
+        self.helperBridge:rebuildHelperProfiles()
+        if self.manager.repairApplicantGendersFromHelperProfiles ~= nil then
+            self.manager:repairApplicantGendersFromHelperProfiles()
+        end
+        self:restoreActiveAIJobs()
+        self.lastNetworkSyncCounter = -1
+    else
+        -- Multiplayer-Clients erzeugen keinen eigenen Bewerbermarkt.
+        -- Der vollstaendige Zustand kommt ausschliesslich vom Server.
+        self.manager.lastActionText = "Warte auf Serverdaten"
+        self:requestNetworkState()
+    end
+
+    if g_messageCenter ~= nil and MessageType ~= nil and MessageType.PERIOD_CHANGED ~= nil then
+        g_messageCenter:subscribe(MessageType.PERIOD_CHANGED, self.onPeriodChanged, self)
+    end
+
+    if g_currentMission ~= nil then
+        g_currentMission:addDrawable(self)
+        g_currentMission:addUpdateable(self)
+    end
+
+    self:tryRegisterGui()
+end
+
+function HelperPersonnelApp:beginMissionDelete()
+    self.isMissionDeleting = true
+
+    -- Zu Beginn des Missionsabbaus sind aktive KI-Jobs in der Regel noch vorhanden.
+    -- Der Snapshot wird hier nur im Speicher aktualisiert. Geschrieben wird beim eigentlichen
+    -- Savegame-Lauf, nicht beim spaeteren Aufraeumen der Mission.
+    if self.manager ~= nil and self.prepareSaveSnapshot ~= nil then
+        self:prepareSaveSnapshot()
+    end
+end
+
+function HelperPersonnelApp:delete()
+    if g_messageCenter ~= nil and g_messageCenter.unsubscribeAll ~= nil then
+        g_messageCenter:unsubscribeAll(self)
+    end
+
+    -- Nicht beim Loeschen/Verlassen sichern. Personal- und Bewerberdaten
+    -- duerfen nur beim regulaeren Savegame-Speichern dauerhaft geschrieben werden.
+    -- Dadurch werden Aenderungen korrekt verworfen, wenn der Spieler ohne Speichern beendet.
+
+    if self.selectionOverlay ~= nil then
+        self.selectionOverlay:delete()
+        self.selectionOverlay = nil
+    end
+
+    if self.helperBridge ~= nil then
+        self.helperBridge:delete()
+        self.helperBridge = nil
+    end
+
+    self.frame = nil
+    self.inGameMenu = nil
+    self.guiLoaded = false
+    self.menuRegistered = false
+end
+
+function HelperPersonnelApp:prepareSaveSnapshot()
+    if self.manager ~= nil and self.manager.captureSaveSnapshot ~= nil then
+        self.manager:captureSaveSnapshot(self:getActiveAIJobs(), function(vehicle)
+            return self:getVehicleKey(vehicle)
+        end, self.helperBridge)
+    end
+end
+
+function HelperPersonnelApp:save()
+    if not self:isServerAuthority() then
+        return
+    end
+
+    -- Vor jedem Schreiben der Mod-Savegame-Datei wird die laufende KI-Zuordnung
+    -- direkt aus dem aktuellen AISystem ermittelt. Damit ist die Zuordnung nicht
+    -- davon abhaengig, ob der vorgelagerte FSBaseMission.saveSavegame-Hook in
+    -- jeder Speichersituation sicher ausgefuehrt wurde.
+    self:prepareSaveSnapshot()
+
+    if self.manager ~= nil then
+        self.manager:saveToSavegame()
+    end
+end
+
+function HelperPersonnelApp:update(dt)
+    self:tryRegisterGui()
+
+    if self:isServerAuthority() and self.manager ~= nil and self.manager.update ~= nil then
+        self.manager:update(dt)
+        self:syncNetworkStateIfNeeded()
+    end
+
+    if self.selectionOverlay ~= nil then
+        self.selectionOverlay:update(dt)
+    end
+
+    if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.updatePendingSelection ~= nil then
+        HelperPersonnelAIStartHooks.updatePendingSelection(dt)
+    end
+
+    if self.activeJobsRestoreDone ~= true then
+        self.activeJobsRestoreAttempts = (self.activeJobsRestoreAttempts or 0) + 1
+        self:restoreActiveAIJobs()
+
+        if self.activeJobsRestoreAttempts >= 180 then
+            self.activeJobsRestoreDone = true
+            self:finishActiveJobRestore()
+        end
+    end
+end
+
+function HelperPersonnelApp:onPeriodChanged(period, year)
+    if not self:isServerAuthority() then
+        return
+    end
+
+    if self.manager ~= nil and self.manager.onPeriodChanged ~= nil then
+        self.manager:onPeriodChanged(period, year)
+        self:syncNetworkStateToClients()
+    end
+end
+
+function HelperPersonnelApp:finishActiveJobRestore()
+    if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.pendingRestoredJobs ~= nil then
+        for job, _ in pairs(HelperPersonnelAIJobHooks.pendingRestoredJobs) do
+            HelperPersonnelAIJobHooks.pendingRestoredJobs[job] = nil
+        end
+    end
+
+    if self.manager ~= nil then
+        for _, worker in ipairs(self.manager.workers or {}) do
+            if worker.restorePending == true and worker.busy ~= true then
+                worker.restorePending = false
+                worker.restoreVehicleName = nil
+                worker.restoreVehicleKey = nil
+                worker.vehicleName = ""
+                worker.vehicleKey = nil
+                worker.currentJobStartedAt = 0
+                worker.currentJobElapsedMs = 0
+            end
+        end
+    end
+end
+
+function HelperPersonnelApp:draw()
+    if self.selectionOverlay ~= nil then
+        self.selectionOverlay:draw()
+    end
+end
+
+function HelperPersonnelApp:mouseEvent(posX, posY, isDown, isUp, button)
+    if self.selectionOverlay ~= nil and self.selectionOverlay.mouseEvent ~= nil then
+        return self.selectionOverlay:mouseEvent(posX, posY, isDown, isUp, button)
+    end
+
+    return false
+end
+
+function HelperPersonnelApp:keyEvent(unicode, sym, modifier, isDown)
+    if self.selectionOverlay ~= nil then
+        return self.selectionOverlay:keyEvent(unicode, sym, modifier, isDown)
+    end
+
+    return false
+end
+
+function HelperPersonnelApp:getActiveAIJobs()
+    if g_currentMission == nil or g_currentMission.aiSystem == nil then
+        return nil
+    end
+
+    local aiSystem = g_currentMission.aiSystem
+    if aiSystem.getActiveJobs ~= nil then
+        return aiSystem:getActiveJobs()
+    end
+
+    return aiSystem.activeJobs
+end
+
+function HelperPersonnelApp:restoreActiveAIJobs()
+    if self.helperBridge == nil then
+        return false
+    end
+
+    local restored = 0
+    local activeJobs = self:getActiveAIJobs()
+
+    if activeJobs == nil then
+        return false
+    end
+
+    for _, job in pairs(activeJobs) do
+        if job ~= nil then
+            local workerId = nil
+
+            if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.pendingRestoredJobs ~= nil then
+                workerId = HelperPersonnelAIJobHooks.pendingRestoredJobs[job]
+            end
+
+            if workerId == nil and self.helperBridge.getWorkerIdByJob ~= nil then
+                workerId = self.helperBridge:getWorkerIdByJob(job)
+            end
+
+            if workerId == nil then
+                workerId = job.helperPersonnelWorkerId
+            end
+
+            if workerId == nil and self.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
+                workerId = self.helperBridge:resolveRestoredWorkerIdForJob(job)
+            end
+
+            if workerId == nil and self.helperBridge.getVehicleKeyFromJob ~= nil and self.helperBridge.getWorkerIdByVehicleKey ~= nil then
+                local vehicleKey = self.helperBridge:getVehicleKeyFromJob(job)
+                workerId = self.helperBridge:getWorkerIdByVehicleKey(vehicleKey)
+            end
+
+            if workerId == nil and job.helperIndex ~= nil and self.helperBridge.getWorkerIdByHelperIndex ~= nil then
+                workerId = self.helperBridge:getWorkerIdByHelperIndex(job.helperIndex)
+            end
+
+            if workerId ~= nil and self.helperBridge:attachRestoredJob(job, workerId) then
+                restored = restored + 1
+                if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.pendingRestoredJobs ~= nil then
+                    HelperPersonnelAIJobHooks.pendingRestoredJobs[job] = nil
+                end
+            end
+        end
+    end
+
+    return restored > 0
+end
+
+function HelperPersonnelApp:onMission00Loaded()
+    -- Die Datenlogik darf frueh laden, die ESC-Menue-Seite aber erst, wenn das Grundspiel
+    -- seine eigene InGameMenu-Seitenliste vollstaendig aufgebaut hat. Sonst wird die
+    -- Personalmanagement-Seite zwischen spaeter registrierte GIANTS-Seiten geschoben und die linke
+    -- Reiterliste berechnet ihre Scrollgrenzen sichtbar falsch.
+    self.menuRegistrationAllowed = true
+    self:tryRegisterGui()
+end
+
+function HelperPersonnelApp:getSavegamePath()
+    if g_currentMission == nil or g_currentMission.missionInfo == nil then
+        return nil
+    end
+
+    local savegameDirectory = g_currentMission.missionInfo.savegameDirectory
+    if savegameDirectory == nil or savegameDirectory == "" then
+        return nil
+    end
+
+    return savegameDirectory .. "/helperPersonnel.xml"
+end
+
+function HelperPersonnelApp:tryRegisterGui()
+    if self.menuRegistered or self.menuRegistrationAllowed ~= true or g_gui == nil or g_currentMission == nil then
+        return
+    end
+
+    local inGameMenu = g_inGameMenu
+    if inGameMenu == nil and g_gui.screenControllers ~= nil then
+        inGameMenu = g_gui.screenControllers[InGameMenu]
+    end
+
+    self.inGameMenu = inGameMenu
+
+    if inGameMenu == nil or inGameMenu.pagingElement == nil then
+        return
+    end
+
+    if not self.guiLoaded then
+        g_gui:loadProfiles(Utils.getFilename("gui/guiProfiles.xml", self.modDir))
+        self.frame = HelperPersonnelFrame.new(nil, g_messageCenter)
+        self.frame:setContext(self)
+        g_gui:loadGui(Utils.getFilename("gui/HelperPersonnelFrame.xml", self.modDir), "HelperPersonnelFrame", self.frame, true)
+        self.guiLoaded = true
+    end
+
+    if self.frame == nil then
+        return
+    end
+
+    local iconFilename = Utils.getFilename("gui/menuicon_personell.dds", self.modDir)
+    -- Eigenes 256x256-Icon: GuiUtils.getUVs nutzt ohne Referenz 1024x1024.
+    -- Mit expliziter Referenz wird die komplette Textur fuer den ESC-Menue-Reiter verwendet.
+    local iconUVs = GuiUtils.getUVs({0, 0, 256, 256}, {256, 256})
+
+    self.menuRegistered = addInGameMenuPage(self.frame, "helperPersonnelPage", iconFilename, iconUVs, {0, 0, 256, 256})
+
+    if self.frame ~= nil then
+        self.frame.inGameMenu = inGameMenu
+    end
+
+end
+
+function HelperPersonnelApp:getRootVehicle(vehicle)
+    if vehicle == nil then
+        return nil
+    end
+
+    if vehicle.getRootVehicle ~= nil then
+        return vehicle:getRootVehicle()
+    end
+
+    return vehicle
+end
+
+function HelperPersonnelApp:getVehicleKey(vehicle)
+    local rootVehicle = self:getRootVehicle(vehicle)
+    if rootVehicle == nil then
+        return nil
+    end
+
+    -- rootNode-Werte sind nur innerhalb der aktuellen Spielsitzung stabil.
+    -- Für Savegame-Wiederherstellungen wird deshalb zuerst die dauerhafte
+    -- Fahrzeug-ID aus dem Savegame verwendet, sofern das Fahrzeug sie anbietet.
+    if rootVehicle.getUniqueId ~= nil then
+        local success, uniqueId = pcall(rootVehicle.getUniqueId, rootVehicle)
+        if success and uniqueId ~= nil and tostring(uniqueId) ~= "" then
+            return "uid:" .. tostring(uniqueId)
+        end
+    end
+
+    if rootVehicle.uniqueId ~= nil and tostring(rootVehicle.uniqueId) ~= "" then
+        return "uid:" .. tostring(rootVehicle.uniqueId)
+    end
+
+    if rootVehicle.rootNode ~= nil then
+        return "node:" .. tostring(rootVehicle.rootNode)
+    end
+
+    return tostring(rootVehicle)
+end
+
+function HelperPersonnelApp:getVehicleName(vehicle)
+    local rootVehicle = self:getRootVehicle(vehicle)
+    if rootVehicle == nil then
+        return ""
+    end
+
+    if rootVehicle.getName ~= nil then
+        return rootVehicle:getName()
+    elseif rootVehicle.configFileName ~= nil then
+        return rootVehicle.configFileName
+    end
+
+    return "Fahrzeug"
+end
+
+function HelperPersonnelApp:setPendingWorkerForVehicle(vehicle, workerId)
+    self.pendingWorkerIdForNextAIJob = workerId
+
+    local key = self:getVehicleKey(vehicle)
+    if key == nil then
+        return
+    end
+
+    self.pendingWorkerIdsByVehicleKey[key] = workerId
+end
+
+function HelperPersonnelApp:getPendingWorkerForVehicle(vehicle)
+    local key = self:getVehicleKey(vehicle)
+    if key ~= nil and self.pendingWorkerIdsByVehicleKey[key] ~= nil then
+        return self.pendingWorkerIdsByVehicleKey[key]
+    end
+
+    return self.pendingWorkerIdForNextAIJob
+end
+
+function HelperPersonnelApp:consumePendingWorkerForVehicle(vehicle)
+    local workerId = self:getPendingWorkerForVehicle(vehicle)
+    local key = self:getVehicleKey(vehicle)
+
+    if key ~= nil then
+        self.pendingWorkerIdsByVehicleKey[key] = nil
+    end
+
+    if self.pendingWorkerIdForNextAIJob == workerId then
+        self.pendingWorkerIdForNextAIJob = nil
+    end
+
+    return workerId
+end
+
+function HelperPersonnelApp:isLocalizationKey(text)
+    if type(text) ~= "string" then
+        return false
+    end
+
+    -- Freitexte für Ingame-Meldungen dürfen nicht erneut als l10n-Schlüssel
+    -- behandelt werden. GIANTS gibt sonst "Missing '<Text>' in l10n..." zurück.
+    if string.find(text, " ", 1, true) ~= nil then
+        return false
+    end
+
+    return string.match(text, "^ui_") ~= nil
+        or string.match(text, "^input_") ~= nil
+        or string.match(text, "^button_") ~= nil
+        or string.match(text, "^action_") ~= nil
+end
+
+function HelperPersonnelApp:resolveText(textKeyOrText)
+    local text = textKeyOrText
+
+    if not self:isLocalizationKey(textKeyOrText) then
+        return text
+    end
+
+    if g_i18n ~= nil and g_i18n.getText ~= nil then
+        local ok, translated = pcall(function()
+            return g_i18n:getText(textKeyOrText)
+        end)
+
+        if ok and translated ~= nil and translated ~= "" and string.match(translated, "^Missing '") == nil then
+            text = translated
+        end
+    end
+
+    return text
+end
+
+function HelperPersonnelApp:showPlayerMessage(textKeyOrText)
+    local text = self:resolveText(textKeyOrText)
+
+    if text == nil or text == "" then
+        return
+    end
+
+    if g_currentMission ~= nil and g_currentMission.showBlinkingWarning ~= nil then
+        g_currentMission:showBlinkingWarning(text, 2200)
+    elseif Logging ~= nil and Logging.info ~= nil then
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: %s", tostring(text))
+    end
+end
+
+function HelperPersonnelApp:getDefaultNotificationType()
+    if FSBaseMission ~= nil and FSBaseMission.INGAME_NOTIFICATION_INFO ~= nil then
+        return FSBaseMission.INGAME_NOTIFICATION_INFO
+    end
+
+    return 0
+end
+
+function HelperPersonnelApp:showIngameNotificationLocal(textKeyOrText, notificationType)
+    local text = self:resolveText(textKeyOrText)
+
+    if text == nil or text == "" then
+        return
+    end
+
+    notificationType = notificationType or self:getDefaultNotificationType()
+
+    if g_currentMission ~= nil and g_currentMission.addIngameNotification ~= nil then
+        g_currentMission:addIngameNotification(notificationType, text)
+    elseif g_currentMission ~= nil and g_currentMission.showBlinkingWarning ~= nil then
+        g_currentMission:showBlinkingWarning(text, 2200)
+    elseif Logging ~= nil and Logging.info ~= nil then
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: %s", tostring(text))
+    end
+end
+
+function HelperPersonnelApp:showIngameNotification(textKeyOrText, notificationType)
+    local text = self:resolveText(textKeyOrText)
+
+    if text == nil or text == "" then
+        return
+    end
+
+    notificationType = notificationType or self:getDefaultNotificationType()
+    self:showIngameNotificationLocal(text, notificationType)
+
+    if self:isServerAuthority() and g_server ~= nil and HelperPersonnelNotificationEvent ~= nil then
+        g_server:broadcastEvent(HelperPersonnelNotificationEvent.new(text, notificationType), false, nil, nil)
+    end
+end
+
+function HelperPersonnelApp:prepareAIJobForWorker(aiJob, vehicle, workerId)
+    if workerId == nil then
+        return
+    end
+
+    self:setPendingWorkerForVehicle(vehicle, workerId)
+
+    if aiJob ~= nil then
+        aiJob.helperPersonnelWorkerId = workerId
+        if self.helperBridge ~= nil then
+            self.helperBridge:applyWorkerToJob(aiJob, workerId)
+        end
+    end
+end
+
+function HelperPersonnelApp:showWorkerSelectionForVehicle(vehicle, callback)
+    if self.selectionOverlay == nil then
+        return false
+    end
+
+    return self.selectionOverlay:open(vehicle, callback)
+end
+
+function HelperPersonnelApp:isServerAuthority()
+    if g_server ~= nil then
+        return true
+    end
+
+    if g_currentMission ~= nil and g_currentMission.getIsServer ~= nil then
+        return g_currentMission:getIsServer() == true
+    end
+
+    return false
+end
+
+function HelperPersonnelApp:isMultiplayerClient()
+    return g_server == nil and g_client ~= nil
+end
+
+function HelperPersonnelApp:getNetworkState()
+    if self.manager ~= nil and self.manager.getNetworkState ~= nil then
+        return self.manager:getNetworkState()
+    end
+
+    return nil
+end
+
+function HelperPersonnelApp:sendNetworkStateToConnection(connection)
+    if not self:isServerAuthority() or connection == nil or connection.sendEvent == nil then
+        return false
+    end
+
+    local state = self:getNetworkState()
+    if state == nil or HelperPersonnelNetworkStateEvent == nil then
+        return false
+    end
+
+    connection:sendEvent(HelperPersonnelNetworkStateEvent.new(state))
+    return true
+end
+
+function HelperPersonnelApp:syncNetworkStateToClients()
+    if not self:isServerAuthority() or g_server == nil or HelperPersonnelNetworkStateEvent == nil then
+        return false
+    end
+
+    local state = self:getNetworkState()
+    if state == nil then
+        return false
+    end
+
+    g_server:broadcastEvent(HelperPersonnelNetworkStateEvent.new(state), false, nil, nil)
+    self.lastNetworkSyncCounter = self.manager ~= nil and (self.manager.changeCounter or 0) or self.lastNetworkSyncCounter
+    return true
+end
+
+function HelperPersonnelApp:syncNetworkStateIfNeeded()
+    if not self:isServerAuthority() or self.manager == nil then
+        return
+    end
+
+    local counter = self.manager.changeCounter or 0
+    if self.lastNetworkSyncCounter ~= counter then
+        self:syncNetworkStateToClients()
+    end
+end
+
+function HelperPersonnelApp:requestNetworkState()
+    if not self:isMultiplayerClient() or g_client == nil or HelperPersonnelNetworkRequestStateEvent == nil then
+        return false
+    end
+
+    local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
+    if connection ~= nil and connection.sendEvent ~= nil then
+        connection:sendEvent(HelperPersonnelNetworkRequestStateEvent.new())
+        return true
+    end
+
+    return false
+end
+
+function HelperPersonnelApp:applyNetworkState(state)
+    if self:isServerAuthority() then
+        return false
+    end
+
+    if self.manager == nil or self.manager.applyNetworkState == nil then
+        return false
+    end
+
+    local applied = self.manager:applyNetworkState(state)
+    if applied then
+        if self.helperBridge ~= nil and self.helperBridge.rebuildHelperProfiles ~= nil then
+            self.helperBridge:rebuildHelperProfiles()
+        end
+
+        if self.frame ~= nil and self.frame.refresh ~= nil then
+            self.frame:refresh()
+        end
+    end
+
+    return applied
+end
+
+function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection)
+    if not self:isServerAuthority() or self.manager == nil then
+        return false
+    end
+
+    local changed = false
+
+    if actionName == HelperPersonnelNetwork.ACTION_HIRE and self.manager.hireApplicant ~= nil then
+        changed = self.manager:hireApplicant(targetId) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS and self.manager.dismissWorker ~= nil then
+        changed = self.manager:dismissWorker(targetId) == true
+    end
+
+    if changed then
+        self:syncNetworkStateToClients()
+    elseif connection ~= nil then
+        self:sendNetworkStateToConnection(connection)
+    end
+
+    return changed
+end
+
+function HelperPersonnelApp:requestHireApplicant(applicantId)
+    if self:isServerAuthority() then
+        local changed = self.manager ~= nil and self.manager.hireApplicant ~= nil and self.manager:hireApplicant(applicantId) == true
+        if changed then
+            self:syncNetworkStateToClients()
+        end
+        return changed
+    end
+
+    if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
+        local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
+        if connection ~= nil and connection.sendEvent ~= nil then
+            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_HIRE, applicantId))
+            return true
+        end
+    end
+
+    return false
+end
+
+function HelperPersonnelApp:requestDismissWorker(workerId)
+    if self:isServerAuthority() then
+        local changed = self.manager ~= nil and self.manager.dismissWorker ~= nil and self.manager:dismissWorker(workerId) == true
+        if changed then
+            self:syncNetworkStateToClients()
+        end
+        return changed
+    end
+
+    if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
+        local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
+        if connection ~= nil and connection.sendEvent ~= nil then
+            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_DISMISS, workerId))
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Multiplayer farm separation app glue (v1.5.1.0)
+local HP_ORIGINAL_APP_LOAD = HelperPersonnelApp.load
+local HP_ORIGINAL_APP_APPLY_NETWORK_STATE = HelperPersonnelApp.applyNetworkState
+
+function HelperPersonnelApp:getCurrentFarmId()
+    if self.manager ~= nil and self.manager.getCurrentFarmId ~= nil then
+        return self.manager:getCurrentFarmId()
+    end
+    if FarmManager ~= nil and FarmManager.SINGLEPLAYER_FARM_ID ~= nil then
+        return FarmManager.SINGLEPLAYER_FARM_ID
+    end
+    return 1
+end
+
+function HelperPersonnelApp:load()
+    HP_ORIGINAL_APP_LOAD(self)
+
+    if g_messageCenter ~= nil and MessageType ~= nil and MessageType.PLAYER_FARM_CHANGED ~= nil then
+        g_messageCenter:subscribe(MessageType.PLAYER_FARM_CHANGED, self.onPlayerFarmChanged, self)
+    end
+
+    if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
+        self.manager:refreshFarmContext()
+    end
+end
+
+function HelperPersonnelApp:onPlayerFarmChanged()
+    if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
+        self.manager:refreshFarmContext()
+    end
+
+    if self:isMultiplayerClient() then
+        self:requestNetworkState()
+    end
+
+    if self.frame ~= nil and self.frame.refresh ~= nil then
+        self.frame:refresh()
+    end
+end
+
+function HelperPersonnelApp:applyNetworkState(state)
+    local applied = HP_ORIGINAL_APP_APPLY_NETWORK_STATE(self, state)
+
+    if applied and self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
+        self.manager:refreshFarmContext()
+        if self.frame ~= nil and self.frame.refresh ~= nil then
+            self.frame:refresh()
+        end
+    end
+
+    return applied
+end
+
+function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId)
+    if not self:isServerAuthority() or self.manager == nil then
+        return false
+    end
+
+    farmId = tonumber(farmId) or self:getCurrentFarmId()
+    local changed = false
+
+    if actionName == HelperPersonnelNetwork.ACTION_HIRE and self.manager.hireApplicantForFarm ~= nil then
+        changed = self.manager:hireApplicantForFarm(targetId, farmId) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS and self.manager.dismissWorkerForFarm ~= nil then
+        changed = self.manager:dismissWorkerForFarm(targetId, farmId) == true
+    end
+
+    if changed then
+        self:syncNetworkStateToClients()
+    elseif connection ~= nil then
+        self:sendNetworkStateToConnection(connection)
+    end
+
+    return changed
+end
+
+function HelperPersonnelApp:requestHireApplicant(applicantId)
+    local farmId = self:getCurrentFarmId()
+
+    if self:isServerAuthority() then
+        local changed = self.manager ~= nil and self.manager.hireApplicantForFarm ~= nil and self.manager:hireApplicantForFarm(applicantId, farmId) == true
+        if changed then
+            self:syncNetworkStateToClients()
+        end
+        return changed
+    end
+
+    if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
+        local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
+        if connection ~= nil and connection.sendEvent ~= nil then
+            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_HIRE, applicantId, nil, farmId))
+            return true
+        end
+    end
+
+    return false
+end
+
+function HelperPersonnelApp:requestDismissWorker(workerId)
+    local farmId = self:getCurrentFarmId()
+
+    if self:isServerAuthority() then
+        local changed = self.manager ~= nil and self.manager.dismissWorkerForFarm ~= nil and self.manager:dismissWorkerForFarm(workerId, farmId) == true
+        if changed then
+            self:syncNetworkStateToClients()
+        end
+        return changed
+    end
+
+    if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
+        local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
+        if connection ~= nil and connection.sendEvent ~= nil then
+            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_DISMISS, workerId, nil, farmId))
+            return true
+        end
+    end
+
+    return false
+end

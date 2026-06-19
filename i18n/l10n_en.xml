@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<l10n>
+    <elements>
+        <e k="ui_ingameMenuHelperPersonnel" v="Personnel Management" />
+        <e k="ui_workersHeader" v="Employees" />
+        <e k="ui_applicantsHeader" v="Applicants" />
+        <e k="ui_summary_employees" v="Employees on staff: %d" />
+        <e k="ui_summary_available" v="Available: %d   |   Busy: %d" />
+        <e k="ui_summary_applicants" v="Applicants on market: %d" />
+        <e k="ui_summary_lastAction" v="Last change: %s" />
+        <e k="ui_summary_lastActionNone" v="None yet" />
+        <e k="ui_hint" v="Switch view, hire applicants or dismiss employees." />
+        <e k="ui_noWorkers" v="No employees hired yet" />
+        <e k="ui_noApplicants" v="No applicants are currently available" />
+        <e k="ui_status_idle" v="available" />
+        <e k="ui_status_busy" v="busy" />
+        <e k="ui_status_dismissed" v="dismissed" />
+        <e k="ui_status_resigned" v="resigned for end of month" />
+        <e k="ui_status_sick" v="sick" />
+        <e k="ui_rank_helper" v="Assistant" />
+        <e k="ui_rank_specialist" v="Specialist" />
+        <e k="ui_specialization_short" v="Specialization" />
+        <e k="ui_specialization_tillage" v="Tillage" />
+        <e k="ui_specialization_sowing" v="Sowing" />
+        <e k="ui_specialization_fertilizing" v="Fertilizing" />
+        <e k="ui_specialization_plantProtection" v="Crop Protection" />
+        <e k="ui_specialization_harvest" v="Harvest" />
+        <e k="ui_specialization_transport" v="Transport" />
+        <e k="ui_specialization_machineCare" v="Machine Care" />
+        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
+        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
+        <e k="ui_specialization_progress" v="learning %s %d%%" />
+        <e k="ui_rank_expert" v="Expert" />
+        <e k="ui_worker_line1" v="%s · Experience %d · Reliability %d · Loyalty %d" />
+        <e k="ui_worker_line2" v="Monthly salary: %s · Status: %s" />
+        <e k="ui_worker_line3" v="Jobs: %d · Work time: %s" />
+        <e k="ui_worker_hired_line" v="hired in %s year %d" />
+        <e k="ui_worker_hired_unknown" v="hired before records" />
+        <e k="ui_applicant_line1" v="%s · Experience %d · Reliability %d · Loyalty %d" />
+        <e k="ui_applicant_line2" v="Salary expectation: %s/month" />
+        <e k="ui_applicant_line2_age" v="Salary expectation: %s/month · %s" />
+        <e k="ui_applicantAgeNew" v="new on market" />
+        <e k="ui_applicantAgeMonths" v="on market for %d month" />
+        <e k="ui_button_switchList" v="Switch view" />
+        <e k="ui_button_hire" v="Hire" />
+        <e k="ui_button_fire" v="Dismiss" />
+        <e k="ui_button_back" v="Back" />
+        <e k="ui_dismissalNoticeNextMonth" v="%s has been dismissed for the end of next month." />
+        <e k="ui_dismissalNotice" v="%s has been dismissed for the end of the month." />
+        <e k="ui_fireDeniedPending" v="This employee is already dismissed." />
+        <e k="ui_fireDeniedBusy" v="This employee is currently working and cannot be dismissed." />
+        <e k="ui_hireSuccess" v="%s has been hired." />
+        <e k="ui_fireSuccess" v="%s has been dismissed." />
+        <e k="ui_selectionTitle" v="Select employee" />
+        <e k="ui_selectionHint" v="A/D or Left/Right to switch · Enter to confirm · Esc to cancel" />
+        <e k="ui_selectionNoWorkers" v="No available employee found." />
+        <e k="ui_selectionWorkerUnavailable" v="This employee is already working." />
+        <e k="ui_selectionNoEmployees" v="No employee has been hired yet." />
+        <e k="ui_selectionLineStats" v="%s · Experience %d · Reliability %d · Loyalty %d" />
+        <e k="ui_selectionLineWage" v="Monthly salary: %s" />
+        <e k="ui_selectionLineJobs" v="Jobs: %d · Work speed: %d%%" />
+        <e k="input_HP_SELECT_LEFT" v="Employee selection left" />
+        <e k="input_HP_SELECT_RIGHT" v="Employee selection right" />
+        <e k="input_HP_SELECT_CONFIRM" v="Confirm employee selection" />
+        <e k="input_HP_OPEN_APPLICANTS" v="Open applicant market" />
+        <e k="input_HP_TRANSPORT_TOGGLE" v="Toggle transport assignment" />
+        <e k="input_HP_SELECT_CANCEL" v="Cancel employee selection" />
+        <e k="ui_openWorkerView" v="Workers" />
+        <e k="ui_openApplicantView" v="Applicants" />
+        <e k="ui_backToOverview" v="Back to Overview" />
+        <e k="ui_headerTitle" v="PERSONNEL MANAGEMENT" />
+        <e k="ui_overviewCounts" v="Employees on staff: %d | Available: %d | Applicants on market: %d" />
+        <e k="ui_overviewReputation" v="Employer reputation: %d/100 (%s)" />
+        <e k="ui_reputationVeryGood" v="very good" />
+        <e k="ui_reputationGood" v="good" />
+        <e k="ui_reputationSolid" v="solid" />
+        <e k="ui_reputationWeak" v="weak" />
+        <e k="ui_reputationCritical" v="critical" />
+        <e k="ui_overviewLastReputationChange" v="Last reputation change: %s" />
+        <e k="ui_noReputationChange" v="none yet" />
+        <e k="ui_reputationHistoryHeader" v="REPUTATION CHANGES" />
+        <e k="ui_changeHistoryHeader" v="OTHER CHANGES" />
+        <e k="ui_workerStockHeader" v="EMPLOYEES AT WORK" />
+        <e k="ui_noWorkersUpper" v="NO EMPLOYEES AVAILABLE" />
+        <e k="ui_noActiveWorkers" v="No employee is currently at work." />
+        <e k="ui_activeWorkerStatusVehicle" v="Status: at work (%s)" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="Status: at work (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerActivityField" v="Task: %s | Field: %s" />
+        <e k="ui_activeWorkerUnknownVehicle" v="Vehicle" />
+        <e k="ui_activeWorkerUnknownField" v="unknown" />
+        <e k="ui_activityUnknown" v="unknown" />
+        <e k="ui_activityFieldWork" v="field work" />
+        <e k="ui_activityTransport" v="transport" />
+        <e k="ui_activityCultivating" v="cultivating" />
+        <e k="ui_activityPlowing" v="plowing" />
+        <e k="ui_activitySowing" v="sowing" />
+        <e k="ui_activitySpraying" v="fertilizing/spraying" />
+        <e k="ui_activityFertilizing" v="fertilizing" />
+        <e k="ui_activityHarvesting" v="harvesting" />
+        <e k="ui_activityMowing" v="mowing" />
+        <e k="ui_activityBaling" v="baling" />
+        <e k="ui_activityCollecting" v="collecting" />
+        <e k="ui_activityWindrowing" v="windrowing" />
+        <e k="ui_activityTedding" v="tedding" />
+        <e k="ui_activityRolling" v="rolling" />
+        <e k="ui_activityStonePicking" v="stone picking" />
+        <e k="ui_activityWeeding" v="weeding" />
+        <e k="ui_activityMulching" v="mulching" />
+        <e k="ui_moreWorkers" v="… and %d more employees" />
+        <e k="ui_moreActiveWorkers" v="… and %d more employees at work" />
+        <e k="ui_monthlyReportHeader" v="MONTHLY REPORT" />
+        <e k="ui_applicantsHeaderUpper" v="APPLICANTS" />
+        <e k="ui_workersHeaderUpper" v="EMPLOYEE MANAGEMENT" />
+        <e k="ui_instructionApplicant" v="ENTER hires the selected applicant. ESC returns to the overview." />
+        <e k="ui_instructionWorkerDismiss" v="Press ENTER to dismiss the selected employee." />
+        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
+        <e k="ui_instructionWorkerSalaryRaise" v="For raise requests: Press G to grant the raise, press N to decline it." />
+        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
+        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
+        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
+        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
+        <e k="ui_training_already_done" v="%s has already attended training this month." />
+        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_noApplicantsDetail" v="No applicants available" />
+        <e k="ui_noWorkersDetail" v="No employees available" />
+        <e k="ui_entryZero" v="Entry 0 of 0" />
+        <e k="ui_visibleRange" v="Visible %d-%d" />
+        <e k="ui_allEntriesVisible" v="All entries visible" />
+        <e k="ui_entryCounter" v="Entry %d of %d" />
+        <e k="ui_monthlyLineStaff" v="Staff: assistants %d | specialists %d | experts %d" />
+        <e k="ui_monthlyLineApplicantsReady" v="Applicant market ready: %d applicants are available." />
+        <e k="ui_monthlyLineApplicantsEmpty" v="Applicant market currently empty." />
+        <e k="ui_monthlyLineNoWorkers" v="No employees hired yet." />
+        <e k="ui_monthlyLineAvailableWorkers" v="Available employees: %d of %d" />
+        <e k="ui_monthlyLinePayroll" v="Last payroll: %s" />
+        <e k="ui_monthlyLineWorkStats" v="Work so far: %d jobs | %s | Monthly salaries: %s" />
+        <e k="ui_button_transport_assign" v="Assign transport" />
+        <e k="ui_button_transport_remove" v="Remove transport" />
+        <e k="ui_transportMarker" v="Transport" />
+        <e k="ui_transportActionAssigned" v="%s is assigned to transport duties." />
+        <e k="ui_transportActionRemoved" v="%s is no longer assigned to transport duties." />
+        <e k="ui_transportNoDriverAssigned" v="No employee is assigned to transport duties." />
+        <e k="ui_transportNoDriverAvailable" v="All employees assigned to transport duties are currently working." />
+        <e k="ui_transportAutoAssigned" v="Transport job is handled by an assigned employee." />
+        <e k="ui_experienceGainSingle" v="%s gained one experience point. Experience: %d to %d" />
+        <e k="ui_experienceGainMultiple" v="%s gained %d experience points. Experience: %d to %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s has reached the monthly experience limit." />
+        <e k="ui_loyaltyChanged" v="%s received a loyalty change: %s. Loyalty: %d to %d" />
+        <e k="ui_loyaltyWarningLow" v="%s seems dissatisfied." />
+        <e k="ui_loyaltyWarningVeryLow" v="%s is very dissatisfied." />
+        <e k="ui_loyaltyWarningCritical" v="%s is thinking about leaving." />
+        <e k="ui_loyaltyResignationNotice" v="%s has resigned for the end of the month." />
+        <e k="ui_sicknessNotice" v="%s is sick and cannot work today." />
+        <e k="ui_sicknessNoticeJobAborted" v="%s is sick and cannot work today. The current job was cancelled." />
+        <e k="ui_button_raise_grant" v="Grant raise" />
+        <e k="ui_button_raise_decline" v="Decline request" />
+        <e k="ui_salaryRaisePendingLine" v="Request: %s instead of %s" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s requests a raise after reaching %s level: %s." />
+        <e k="ui_salaryRaiseRequestHistory" v="Raise request: %s requests %s." />
+        <e k="ui_salaryRaiseGranted" v="Raise granted for %s: %s." />
+        <e k="ui_salaryRaiseDeclined" v="Raise request from %s declined." />
+        <e k="ui_salaryRaisePendingPenalty" v="Open raise request from %s affects loyalty: %s." />
+        <e k="ui_salaryRaiseGrantedReputation" v="Fair raise: %s reputation" />
+        <e k="ui_hpIngameMenuPrev" v="Previous Menu" />
+        <e k="ui_hpIngameMenuNext" v="Next Menu" />
+        <e k="ui_status_training" v="in training" />
+        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
+        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
+        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
+        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
+        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_training_last_none" v="-" />
+        <e k="ui_training_unknown" v="unknown" />
+        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
+        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
+        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
+        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
+        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
+        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
+        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
+
+        <e k="ui_hpSetting_on" v="On"/>
+
+        <e k="ui_hpSetting_off" v="Off"/>
+
+        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
+
+        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
+
+        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
+
+        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
+
+        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
+
+        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
+
+        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
+
+        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
+
+        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
+
+        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
+
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
+
+        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
+
+        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
+
+        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
+
+        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
+
+        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
+
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
+
+        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
+
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
+
+        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
+
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
+
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
+
+        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
+
+        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+    </elements>
+</l10n>
