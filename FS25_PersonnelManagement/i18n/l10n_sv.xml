@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<l10n>
+    <elements>
+        <e k="ui_ingameMenuHelperPersonnel" v="Personalhantering" />
+        <e k="ui_workersHeader" v="Anställda" />
+        <e k="ui_applicantsHeader" v="Sökande" />
+        <e k="ui_summary_employees" v="Anställda i personalen: %d" />
+        <e k="ui_summary_available" v="Tillgängliga: %d   |   Upptagna: %d" />
+        <e k="ui_summary_applicants" v="Sökande på marknaden: %d" />
+        <e k="ui_summary_lastAction" v="Senaste ändring: %s" />
+        <e k="ui_summary_lastActionNone" v="Ingen ännu" />
+        <e k="ui_hint" v="Byt vy, anställ sökande eller säg upp anställda." />
+        <e k="ui_noWorkers" v="Inga anställda ännu" />
+        <e k="ui_noApplicants" v="Det finns inga tillgängliga sökande just nu" />
+        <e k="ui_status_idle" v="tillgänglig" />
+        <e k="ui_status_busy" v="upptagen" />
+        <e k="ui_status_dismissed" v="uppsagd" />
+        <e k="ui_status_resigned" v="sagt upp sig till månadens slut" />
+        <e k="ui_status_sick" v="sjuk" />
+        <e k="ui_rank_helper" v="Hjälpare" />
+        <e k="ui_rank_specialist" v="Specialist" />
+        <e k="ui_specialization_short" v="Specialisering" />
+        <e k="ui_specialization_tillage" v="Tillage" />
+        <e k="ui_specialization_sowing" v="Sowing" />
+        <e k="ui_specialization_fertilizing" v="Fertilizing" />
+        <e k="ui_specialization_plantProtection" v="Crop Protection" />
+        <e k="ui_specialization_harvest" v="Harvest" />
+        <e k="ui_specialization_transport" v="Transport" />
+        <e k="ui_specialization_machineCare" v="Machine Care" />
+        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
+        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
+        <e k="ui_specialization_progress" v="lär sig %s %d%%" />
+        <e k="ui_rank_expert" v="Expert" />
+        <e k="ui_worker_line1" v="%s · Erfarenhet %d · Pålitlighet %d · Lojalitet %d" />
+        <e k="ui_worker_line2" v="Månadslön: %s · Status: %s" />
+        <e k="ui_worker_line3" v="Jobb: %d · Arbetstid: %s" />
+        <e k="ui_worker_hired_line" v="anställd i %s år %d" />
+        <e k="ui_worker_hired_unknown" v="anställd före registrering" />
+        <e k="ui_applicant_line1" v="%s · Erfarenhet %d · Pålitlighet %d · Lojalitet %d" />
+        <e k="ui_applicant_line2" v="Lönekrav: %s/månad" />
+        <e k="ui_applicant_line2_age" v="Lönekrav: %s/månad · %s" />
+        <e k="ui_applicantAgeNew" v="ny på marknaden" />
+        <e k="ui_applicantAgeMonths" v="på marknaden i %d månad" />
+        <e k="ui_button_switchList" v="Byt vy" />
+        <e k="ui_button_hire" v="Anställ" />
+        <e k="ui_button_fire" v="Säg upp" />
+        <e k="ui_button_back" v="Tillbaka" />
+        <e k="ui_dismissalNoticeNextMonth" v="%s har sagts upp till slutet av nästa månad." />
+        <e k="ui_dismissalNotice" v="%s är uppsagd till månadens slut." />
+        <e k="ui_fireDeniedPending" v="Denna medarbetare är redan uppsagd." />
+        <e k="ui_fireDeniedBusy" v="Anställda upptagen - säg upp nicht möglich." />
+        <e k="ui_hireSuccess" v="%s - anställ." />
+        <e k="ui_fireSuccess" v="%s - säg upp." />
+        <e k="ui_selectionTitle" v="Välj anställd" />
+        <e k="ui_selectionHint" v="A/D / Left/Right · Enter · Esc" />
+        <e k="ui_selectionNoWorkers" v="Det finns inga tillgängliga sökande just nu." />
+        <e k="ui_selectionWorkerUnavailable" v="upptagen." />
+        <e k="ui_selectionNoEmployees" v="Inga anställda ännu" />
+        <e k="ui_selectionLineStats" v="%s · Erfarenhet %d · Pålitlighet %d · Lojalitet %d" />
+        <e k="ui_selectionLineWage" v="Månadslön: %s" />
+        <e k="ui_selectionLineJobs" v="Jobb: %d · Work speed: %d%%" />
+        <e k="input_HP_SELECT_LEFT" v="Välj anställd left" />
+        <e k="input_HP_SELECT_RIGHT" v="Välj anställd right" />
+        <e k="input_HP_SELECT_CONFIRM" v="Bekräfta val av anställd" />
+        <e k="input_HP_OPEN_APPLICANTS" v="Sökande" />
+        <e k="input_HP_TRANSPORT_TOGGLE" v="transport toggle" />
+        <e k="input_HP_SELECT_CANCEL" v="Avbryt val av anställd" />
+        <e k="ui_openWorkerView" v="Arbetare" />
+        <e k="ui_openApplicantView" v="Sökande" />
+        <e k="ui_backToOverview" v="Tillbaka till översikt" />
+        <e k="ui_headerTitle" v="PERSONALHANTERING" />
+        <e k="ui_overviewCounts" v="Anställda i personalen: %d | Tillgängliga: %d | Sökande på marknaden: %d" />
+        <e k="ui_overviewReputation" v="Arbetsgivarens rykte: %d/100 (%s)" />
+        <e k="ui_reputationVeryGood" v="mycket gott" />
+        <e k="ui_reputationGood" v="gott" />
+        <e k="ui_reputationSolid" v="stabilt" />
+        <e k="ui_reputationWeak" v="svagt" />
+        <e k="ui_reputationCritical" v="kritiskt" />
+        <e k="ui_overviewLastReputationChange" v="Senaste ändring: %s" />
+        <e k="ui_noReputationChange" v="Ingen ännu" />
+        <e k="ui_reputationHistoryHeader" v="RYKTESFÖRÄNDRINGAR" />
+        <e k="ui_changeHistoryHeader" v="ANDRA ÄNDRINGAR" />
+        <e k="ui_workerStockHeader" v="ANSTÄLLDA I ARBETE" />
+        <e k="ui_noWorkersUpper" v="INGA ANSTÄLLDA TILLGÄNGLIGA" />
+        <e k="ui_noActiveWorkers" v="Inga anställda ännu" />
+        <e k="ui_activeWorkerStatusVehicle" v="Status: anställda i arbete (%s)" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="Status: anställda i arbete (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerActivityField" v="Uppgift: %s | Fält: %s" />
+        <e k="ui_activeWorkerUnknownVehicle" v="Fordon" />
+        <e k="ui_activeWorkerUnknownField" v="okänt" />
+        <e k="ui_activityUnknown" v="okänt" />
+        <e k="ui_activityFieldWork" v="fältarbete" />
+        <e k="ui_activityTransport" v="transport" />
+        <e k="ui_activityCultivating" v="kultivering" />
+        <e k="ui_activityPlowing" v="plöjning" />
+        <e k="ui_activitySowing" v="sådd" />
+        <e k="ui_activitySpraying" v="gödsling/sprutning" />
+        <e k="ui_activityFertilizing" v="gödsling" />
+        <e k="ui_activityHarvesting" v="skörd" />
+        <e k="ui_activityMowing" v="slåtter" />
+        <e k="ui_activityBaling" v="balning" />
+        <e k="ui_activityCollecting" v="insamling" />
+        <e k="ui_activityWindrowing" v="strängläggning" />
+        <e k="ui_activityTedding" v="vändning" />
+        <e k="ui_activityRolling" v="vältning" />
+        <e k="ui_activityStonePicking" v="stenplockning" />
+        <e k="ui_activityWeeding" v="ogräsrensning" />
+        <e k="ui_activityMulching" v="mulchning" />
+        <e k="ui_moreWorkers" v="... +%d anställda" />
+        <e k="ui_moreActiveWorkers" v="... +%d anställda i arbete" />
+        <e k="ui_monthlyReportHeader" v="MÅNADSRAPPORT" />
+        <e k="ui_applicantsHeaderUpper" v="SÖKANDE" />
+        <e k="ui_workersHeaderUpper" v="PERSONALHANTERING" />
+        <e k="ui_instructionApplicant" v="ENTER: Anställ. ESC: Tillbaka till översikt." />
+        <e k="ui_instructionWorkerDismiss" v="ENTER: Säg upp." />
+        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
+        <e k="ui_instructionWorkerSalaryRaise" v="G: Bevilja höjning. N: Avvisa begäran." />
+        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
+        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
+        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
+        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
+        <e k="ui_training_already_done" v="%s has already attended training this month." />
+        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_noApplicantsDetail" v="Det finns inga tillgängliga sökande just nu" />
+        <e k="ui_noWorkersDetail" v="Inga anställda ännu" />
+        <e k="ui_entryZero" v="Post 0 von 0" />
+        <e k="ui_visibleRange" v="Synlig %d-%d" />
+        <e k="ui_allEntriesVisible" v="Alla poster synliga" />
+        <e k="ui_entryCounter" v="Post %d von %d" />
+        <e k="ui_monthlyLineStaff" v="Anställda i personalen: hjälpare %d | specialist %d | expert %d" />
+        <e k="ui_monthlyLineApplicantsReady" v="Sökande på marknaden: %d" />
+        <e k="ui_monthlyLineApplicantsEmpty" v="Det finns inga tillgängliga sökande just nu" />
+        <e k="ui_monthlyLineNoWorkers" v="Inga anställda ännu" />
+        <e k="ui_monthlyLineAvailableWorkers" v="Tillgängliga: %d von %d" />
+        <e k="ui_monthlyLinePayroll" v="Månadslön: %s" />
+        <e k="ui_monthlyLineWorkStats" v="Arbetstid: %d jobb | %s | Månadslön: %s" />
+        <e k="ui_button_transport_assign" v="Tilldela transport" />
+        <e k="ui_button_transport_remove" v="Ta bort transport" />
+        <e k="ui_transportMarker" v="transport" />
+        <e k="ui_transportActionAssigned" v="%s - tilldela transport." />
+        <e k="ui_transportActionRemoved" v="%s - ta bort transport." />
+        <e k="ui_transportNoDriverAssigned" v="transport: ingen ännu." />
+        <e k="ui_transportNoDriverAvailable" v="transport: upptagna." />
+        <e k="ui_transportAutoAssigned" v="transport: tilldela transport." />
+        <e k="ui_experienceGainSingle" v="%s: Erfarenhet +1. Erfarenhet: %d to %d" />
+        <e k="ui_experienceGainMultiple" v="%s: Erfarenhet +%d. Erfarenhet: %d to %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s: Erfarenhet monthly limit reached." />
+        <e k="ui_loyaltyChanged" v="%s: Lojalitet %s. Lojalitet: %d to %d" />
+        <e k="ui_loyaltyWarningLow" v="%s: Lojalitet low." />
+        <e k="ui_loyaltyWarningVeryLow" v="%s: Lojalitet very low." />
+        <e k="ui_loyaltyWarningCritical" v="%s: sagt upp sig till månadens slut." />
+        <e k="ui_loyaltyResignationNotice" v="%s: sagt upp sig till månadens slut." />
+        <e k="ui_sicknessNotice" v="%s: sjuk - cannot work today." />
+        <e k="ui_sicknessNoticeJobAborted" v="%s: sjuk - current job cancelled." />
+        <e k="ui_button_raise_grant" v="Bevilja höjning" />
+        <e k="ui_button_raise_decline" v="Avvisa begäran" />
+        <e k="ui_salaryRaisePendingLine" v="Löneökning: %s statt %s" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s requests löneökning after reaching %s: %s." />
+        <e k="ui_salaryRaiseRequestHistory" v="Löneökning: %s requests %s." />
+        <e k="ui_salaryRaiseGranted" v="Bevilja höjning: %s - %s." />
+        <e k="ui_salaryRaiseDeclined" v="Avvisa begäran: %s." />
+        <e k="ui_salaryRaisePendingPenalty" v="Open löneökning: %s affects lojalitet: %s." />
+        <e k="ui_salaryRaiseGrantedReputation" v="Fair löneökning: %s Arbetsgivarens rykte" />
+        <e k="ui_hpIngameMenuPrev" v="Föregående meny" />
+        <e k="ui_hpIngameMenuNext" v="Nästa meny" />
+        <e k="ui_status_training" v="in training" />
+        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
+        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
+        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
+        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
+        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_training_last_none" v="-" />
+        <e k="ui_training_unknown" v="unknown" />
+        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
+        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
+        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
+        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
+        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
+        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
+        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
+
+        <e k="ui_hpSetting_on" v="On"/>
+
+        <e k="ui_hpSetting_off" v="Off"/>
+
+        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
+
+        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
+
+        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
+
+        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
+
+        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
+
+        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
+
+        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
+
+        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
+
+        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
+
+        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
+
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
+
+        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
+
+        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
+
+        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
+
+        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
+
+        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
+
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
+
+        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
+
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
+
+        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
+
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
+
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
+
+        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
+
+        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+    </elements>
+</l10n>
