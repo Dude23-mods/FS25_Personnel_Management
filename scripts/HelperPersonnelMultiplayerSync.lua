@@ -3258,3 +3258,384 @@ if HelperPersonnelHelperBridge ~= nil and HelperPersonnelHelperBridge.onJobStopp
         return result
     end
 end
+
+-- Multiplayer-Fix v1.0.1.0: serverautoritatives Bewerber-/Hof-Sync.
+-- Hintergrund: In echten Dedicated-Server-Tests konnten Clients lokale Bewerbermaerkte
+-- fuer ihre Farm erzeugen, bevor der Server diese Farm im Personalzustand angelegt hatte.
+-- Die anschliessende Hire-Anfrage wurde dann korrekt, aber fuer den Spieler unbrauchbar,
+-- mit "Ziel X gehoert nicht zu Hof Y" abgelehnt. Der Server erzeugt deshalb Farmdaten
+-- fuer bekannte und anfragende Hoefe vor jedem Zustandsversand. Clients verwerfen lokale,
+-- nicht vom Server gesendete Farmdaten und duerfen erst nach angewendetem Serverzustand
+-- Hire-/Dismiss-Anfragen senden.
+
+local function hpMP101NormalizeFarmId(farmId)
+    farmId = tonumber(farmId)
+    if farmId == nil or farmId <= 0 then
+        return nil
+    end
+
+    farmId = math.floor(farmId + 0.5)
+    if FarmManager ~= nil and FarmManager.SPECTATOR_FARM_ID ~= nil and farmId == FarmManager.SPECTATOR_FARM_ID then
+        return nil
+    end
+    if FarmManager ~= nil and FarmManager.NO_OWNER_FARM_ID ~= nil and farmId == FarmManager.NO_OWNER_FARM_ID then
+        return nil
+    end
+
+    return farmId
+end
+
+local function hpMP101AddFarmId(result, farmId)
+    farmId = hpMP101NormalizeFarmId(farmId)
+    if farmId == nil then
+        return
+    end
+
+    if result.lookup[farmId] ~= true then
+        result.lookup[farmId] = true
+        table.insert(result.ids, farmId)
+    end
+end
+
+local function hpMP101CollectKnownFarmIds()
+    local result = { ids = {}, lookup = {} }
+
+    if FarmManager ~= nil and FarmManager.SINGLEPLAYER_FARM_ID ~= nil then
+        hpMP101AddFarmId(result, FarmManager.SINGLEPLAYER_FARM_ID)
+    end
+
+    local managers = {}
+    if g_farmManager ~= nil then
+        table.insert(managers, g_farmManager)
+    end
+    if g_currentMission ~= nil and g_currentMission.farmManager ~= nil and g_currentMission.farmManager ~= g_farmManager then
+        table.insert(managers, g_currentMission.farmManager)
+    end
+
+    local function scanFarmTable(farms)
+        if type(farms) ~= "table" then
+            return
+        end
+
+        for key, farm in pairs(farms) do
+            hpMP101AddFarmId(result, key)
+            if type(farm) == "table" then
+                hpMP101AddFarmId(result, farm.farmId)
+                hpMP101AddFarmId(result, farm.id)
+            end
+        end
+    end
+
+    for _, manager in ipairs(managers) do
+        scanFarmTable(manager.farms)
+        scanFarmTable(manager.farmsById)
+        scanFarmTable(manager.farmIdToFarm)
+
+        if type(manager.farmIds) == "table" then
+            for _, farmId in pairs(manager.farmIds) do
+                hpMP101AddFarmId(result, farmId)
+            end
+        end
+    end
+
+    if g_currentMission ~= nil then
+        if g_currentMission.player ~= nil then
+            hpMP101AddFarmId(result, g_currentMission.player.farmId)
+        end
+        if g_currentMission.controlPlayer ~= nil then
+            hpMP101AddFarmId(result, g_currentMission.controlPlayer.farmId)
+        end
+    end
+
+    table.sort(result.ids, function(a, b) return tonumber(a) < tonumber(b) end)
+    return result.ids
+end
+
+function HelperPersonnelManager:hpMP101EnsureFarmDataForFarm(farmId)
+    farmId = hpMP101NormalizeFarmId(farmId)
+    if farmId == nil then
+        return false
+    end
+
+    if self.farms == nil then
+        self.farms = {}
+    end
+
+    local previousForcedFarmId = self.forcedFarmId
+    local previousCurrentFarmData = self.currentFarmData
+
+    self.forcedFarmId = farmId
+    local data = self:getOrCreateFarmData(farmId, true)
+    if data ~= nil then
+        if self.ensureInitialApplicantMarketForFarmData ~= nil then
+            self:ensureInitialApplicantMarketForFarmData(data)
+        end
+
+        for _, worker in ipairs(data.workers or {}) do
+            worker.farmId = farmId
+        end
+        for _, applicant in ipairs(data.applicants or {}) do
+            applicant.farmId = farmId
+        end
+    end
+
+    self.forcedFarmId = previousForcedFarmId
+    if previousCurrentFarmData ~= nil and self.bindFarmData ~= nil then
+        self:bindFarmData(previousCurrentFarmData)
+    end
+
+    return data ~= nil
+end
+
+function HelperPersonnelManager:hpMP101EnsureFarmDataForKnownFarms()
+    if self.farms == nil then
+        self.farms = {}
+    end
+
+    local previousData = self.currentFarmData
+    local changed = false
+
+    for _, farmId in ipairs(hpMP101CollectKnownFarmIds()) do
+        local hadData = self.farms[farmId] ~= nil
+        if self:hpMP101EnsureFarmDataForFarm(farmId) then
+            changed = changed or not hadData
+        end
+    end
+
+    if previousData ~= nil and self.bindFarmData ~= nil then
+        self:bindFarmData(previousData)
+    elseif self.refreshFarmContext ~= nil then
+        self:refreshFarmContext()
+    end
+
+    return changed
+end
+
+local HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE = HelperPersonnelManager.getNetworkState
+function HelperPersonnelManager:getNetworkState()
+    if g_server ~= nil or (g_currentMission ~= nil and g_currentMission.getIsServer ~= nil and g_currentMission:getIsServer() == true) then
+        if self.hpMP101EnsureFarmDataForKnownFarms ~= nil then
+            self:hpMP101EnsureFarmDataForKnownFarms()
+        end
+    end
+
+    if HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE ~= nil then
+        return HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE(self)
+    end
+
+    return nil
+end
+
+local HP_MP101_ORIGINAL_APP_SEND_NETWORK_STATE_TO_CONNECTION = HelperPersonnelApp.sendNetworkStateToConnection
+function HelperPersonnelApp:sendNetworkStateToConnection(connection)
+    if self:isServerAuthority() and self.manager ~= nil then
+        if self.getFarmIdFromConnection ~= nil then
+            local farmId = hpMP101NormalizeFarmId(self:getFarmIdFromConnection(connection))
+            if farmId ~= nil and self.manager.hpMP101EnsureFarmDataForFarm ~= nil then
+                self.manager:hpMP101EnsureFarmDataForFarm(farmId)
+            end
+        end
+
+        if self.manager.hpMP101EnsureFarmDataForKnownFarms ~= nil then
+            self.manager:hpMP101EnsureFarmDataForKnownFarms()
+        end
+    end
+
+    if HP_MP101_ORIGINAL_APP_SEND_NETWORK_STATE_TO_CONNECTION ~= nil then
+        return HP_MP101_ORIGINAL_APP_SEND_NETWORK_STATE_TO_CONNECTION(self, connection)
+    end
+
+    return false
+end
+
+local HP_MP101_ORIGINAL_APP_SYNC_NETWORK_STATE_TO_CLIENTS = HelperPersonnelApp.syncNetworkStateToClients
+function HelperPersonnelApp:syncNetworkStateToClients()
+    if self:isServerAuthority() and self.manager ~= nil and self.manager.hpMP101EnsureFarmDataForKnownFarms ~= nil then
+        self.manager:hpMP101EnsureFarmDataForKnownFarms()
+    end
+
+    if HP_MP101_ORIGINAL_APP_SYNC_NETWORK_STATE_TO_CLIENTS ~= nil then
+        return HP_MP101_ORIGINAL_APP_SYNC_NETWORK_STATE_TO_CLIENTS(self)
+    end
+
+    return false
+end
+
+function HelperPersonnelApp:hpMP101FilterClientStateToServerFarms(state)
+    if not self:isMultiplayerClient() or self.manager == nil or type(state) ~= "table" or type(state.farms) ~= "table" then
+        return false
+    end
+
+    local allowed = {}
+    local firstFarmId = nil
+    for _, farmState in ipairs(state.farms) do
+        local farmId = hpMP101NormalizeFarmId(farmState.farmId)
+        if farmId ~= nil then
+            allowed[farmId] = true
+            firstFarmId = firstFarmId or farmId
+        end
+    end
+
+    if firstFarmId == nil or type(self.manager.farms) ~= "table" then
+        return false
+    end
+
+    for farmId, _ in pairs(self.manager.farms) do
+        if allowed[hpMP101NormalizeFarmId(farmId)] ~= true then
+            self.manager.farms[farmId] = nil
+        end
+    end
+
+    local preferredFarmId = self.getCurrentFarmId ~= nil and hpMP101NormalizeFarmId(self:getCurrentFarmId()) or nil
+    local bindFarmId = nil
+    if preferredFarmId ~= nil and allowed[preferredFarmId] == true then
+        bindFarmId = preferredFarmId
+    else
+        local activeFarmId = hpMP101NormalizeFarmId(state.activeFarmId)
+        bindFarmId = (activeFarmId ~= nil and allowed[activeFarmId] == true) and activeFarmId or firstFarmId
+    end
+
+    local data = self.manager.farms[bindFarmId]
+    if data ~= nil and self.manager.bindFarmData ~= nil then
+        self.manager:bindFarmData(data)
+        return true
+    end
+
+    return false
+end
+
+local HP_MP101_ORIGINAL_APP_APPLY_NETWORK_STATE = HelperPersonnelApp.applyNetworkState
+function HelperPersonnelApp:applyNetworkState(state)
+    local applied = false
+    if HP_MP101_ORIGINAL_APP_APPLY_NETWORK_STATE ~= nil then
+        applied = HP_MP101_ORIGINAL_APP_APPLY_NETWORK_STATE(self, state) == true
+    end
+
+    if applied == true then
+        local rebound = self:hpMP101FilterClientStateToServerFarms(state) == true
+        if rebound == true then
+            if self.helperBridge ~= nil and self.helperBridge.rebuildHelperProfiles ~= nil then
+                self.helperBridge:rebuildHelperProfiles()
+            end
+            if self.frame ~= nil and self.frame.refresh ~= nil then
+                self.frame:refresh()
+            end
+        end
+    end
+
+    return applied
+end
+
+function HelperPersonnelApp:hpMP101ClientHasSyncedApplicant(applicantId)
+    if self.manager == nil or self.getCurrentFarmId == nil then
+        return false
+    end
+
+    local farmId = hpMP101NormalizeFarmId(self:getCurrentFarmId())
+    if farmId == nil then
+        return false
+    end
+
+    if self.manager.hasApplicantInFarm ~= nil then
+        return self.manager:hasApplicantInFarm(applicantId, farmId) == true
+    end
+
+    local data = self.manager.getFarmDataIfExists ~= nil and self.manager:getFarmDataIfExists(farmId) or nil
+    if data == nil then
+        return false
+    end
+    for _, applicant in ipairs(data.applicants or {}) do
+        if tonumber(applicant.id) == tonumber(applicantId) then
+            return true
+        end
+    end
+    return false
+end
+
+function HelperPersonnelApp:hpMP101ClientHasSyncedWorker(workerId)
+    if self.manager == nil or self.getCurrentFarmId == nil then
+        return false
+    end
+
+    local farmId = hpMP101NormalizeFarmId(self:getCurrentFarmId())
+    if farmId == nil then
+        return false
+    end
+
+    if self.manager.hasWorkerInFarm ~= nil then
+        return self.manager:hasWorkerInFarm(workerId, farmId) == true
+    end
+
+    local data = self.manager.getFarmDataIfExists ~= nil and self.manager:getFarmDataIfExists(farmId) or nil
+    if data == nil then
+        return false
+    end
+    for _, worker in ipairs(data.workers or {}) do
+        if tonumber(worker.id) == tonumber(workerId) then
+            return true
+        end
+    end
+    return false
+end
+
+local HP_MP101_ORIGINAL_APP_REQUEST_HIRE_APPLICANT = HelperPersonnelApp.requestHireApplicant
+function HelperPersonnelApp:requestHireApplicant(applicantId)
+    if self:isMultiplayerClient() then
+        if self.hpJoinSyncApplied ~= true or self:hpMP101ClientHasSyncedApplicant(applicantId) ~= true then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            if self.frame ~= nil and self.frame.refresh ~= nil then
+                self.frame:refresh()
+            end
+            return false
+        end
+    end
+
+    if HP_MP101_ORIGINAL_APP_REQUEST_HIRE_APPLICANT ~= nil then
+        return HP_MP101_ORIGINAL_APP_REQUEST_HIRE_APPLICANT(self, applicantId)
+    end
+
+    return false
+end
+
+local HP_MP101_ORIGINAL_APP_REQUEST_DISMISS_WORKER = HelperPersonnelApp.requestDismissWorker
+function HelperPersonnelApp:requestDismissWorker(workerId)
+    if self:isMultiplayerClient() then
+        if self.hpJoinSyncApplied ~= true or self:hpMP101ClientHasSyncedWorker(workerId) ~= true then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            if self.frame ~= nil and self.frame.refresh ~= nil then
+                self.frame:refresh()
+            end
+            return false
+        end
+    end
+
+    if HP_MP101_ORIGINAL_APP_REQUEST_DISMISS_WORKER ~= nil then
+        return HP_MP101_ORIGINAL_APP_REQUEST_DISMISS_WORKER(self, workerId)
+    end
+
+    return false
+end
+
+local HP_MP101_ORIGINAL_APP_PROCESS_NETWORK_ACTION = HelperPersonnelApp.processNetworkAction
+function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId)
+    if self:isServerAuthority() and self.manager ~= nil then
+        local requestedFarmId = hpMP101NormalizeFarmId(farmId)
+        if requestedFarmId == nil and self.getFarmIdFromConnection ~= nil then
+            requestedFarmId = hpMP101NormalizeFarmId(self:getFarmIdFromConnection(connection))
+        end
+
+        if requestedFarmId ~= nil and self.manager.hpMP101EnsureFarmDataForFarm ~= nil then
+            self.manager:hpMP101EnsureFarmDataForFarm(requestedFarmId)
+        end
+    end
+
+    if HP_MP101_ORIGINAL_APP_PROCESS_NETWORK_ACTION ~= nil then
+        return HP_MP101_ORIGINAL_APP_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, farmId)
+    end
+
+    return false
+end

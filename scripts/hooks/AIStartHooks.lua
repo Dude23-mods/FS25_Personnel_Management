@@ -107,7 +107,7 @@ function HelperPersonnelAIStartHooks.install(stageName)
 
     if HelperPersonnelAIStartHooks.isInstalled ~= true then
         HelperPersonnelAIStartHooks.isInstalled = true
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose aktiv | Version=1.0.0.0")
+        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose aktiv | Version=1.0.1.0")
     end
 
     local aivehicleAvailable = AIVehicle ~= nil and AIVehicle.startAIVehicle ~= nil

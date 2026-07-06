@@ -594,7 +594,7 @@ function HelperPersonnelExperienceEffects.logPrecisionFarmingDiagnosticsStart()
     HelperPersonnelExperienceEffects._precisionFarmingStartupLogged = true
 
     if Logging ~= nil and Logging.info ~= nil then
-        Logging.info("FS25_HelperPersonnel: Precision-Farming-Diagnose aktiv | Version=1.0.0.0 | PrecisionFarming=%s | Hinweis=BasisVerbrauch ist die Rueckgabe der vorherigen Spiel-/Mod-Funktionskette vor unserem Zusatzfaktor", HelperPersonnelExperienceEffects.getPrecisionFarmingDetectionText())
+        Logging.info("FS25_HelperPersonnel: Precision-Farming-Diagnose aktiv | Version=1.0.1.0 | PrecisionFarming=%s | Hinweis=BasisVerbrauch ist die Rueckgabe der vorherigen Spiel-/Mod-Funktionskette vor unserem Zusatzfaktor", HelperPersonnelExperienceEffects.getPrecisionFarmingDetectionText())
     end
 end
 
