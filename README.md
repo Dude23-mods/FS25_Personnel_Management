@@ -1,6 +1,61 @@
 ![Status](https://img.shields.io/badge/status-in%20development-orange) ![Version](https://img.shields.io/badge/version-1.0.1.0-blue) ![Game](https://img.shields.io/badge/Farming%20Simulator-25-green) ![Issues](https://img.shields.io/badge/issues-welcome-brightgreen)
 # FS25_Personnel_Management
 
-I'm continuously working on improving this mod and fixing issues as they are reported. However, I cant always test every feature as extensively as I would like, especially in areas such as multiplayer or dedicated server environments. If you encounter any bugs, compatibility problems or unexpected behavior, please report them. I'll review all reported issues as soon as possible.
+Personnel Management adds a more detailed employee system to Farming Simulator 25. Instead of using anonymous helpers only, your farm can hire, manage and assign individual employees with their own names, salaries, experience, reliability, loyalty and specializations.
 
-Personnel Management for Farming Simulator 25 adds an employee system with applicants, salaries, loyalty, experience, specializations, training, resignations and helper assignment, including savegame configuration and multiplayer sync.
+## Features
+### Applicant Market
+
+The mod adds an applicant market where new potential employees are available for hire. Applicants have individual names, salary expectations and different personal values such as experience, reliability and loyalty.
+
+### Permanent Employees
+
+Hired applicants become permanent employees of your farm. They remain part of your workforce, can be assigned to helper jobs and develop over time.
+
+### Individual Salaries
+
+Each employee has an individual monthly salary. Salaries are paid regularly and can become an important part of your farm’s long-term operating costs.
+
+### Experience System
+
+Employees gain experience through work. More experienced employees can become more valuable and may improve helper performance depending on the selected gameplay settings.
+
+### Reliability
+
+Reliability represents how dependable an employee is. It can influence employee behavior and adds more personality to your workforce.
+
+### Loyalty
+
+Loyalty reflects how satisfied an employee is with your farm. It can change over time depending on working conditions, salary decisions and other farm-related factors.
+
+### Specializations
+
+Employees can develop specializations through repeated work. This allows workers to become more suited for certain types of tasks over time.
+
+### Training
+
+Employees can take part in training to improve their abilities. Training adds another management option and allows you to invest in your workforce.
+
+### Resignations and Dismissals
+
+Employees can resign, and you can also dismiss them from your farm. This adds long-term consequences to personnel decisions and workforce planning.
+
+### Helper Assignment
+
+Personnel Management expands the normal helper system by allowing you to assign your own employees to helper jobs instead of relying only on anonymous helpers.
+
+### Gameplay Settings
+
+The mod includes configurable gameplay settings. You can decide how strongly employee values affect the game, including experience effects, salaries and other personnel-related mechanics.
+
+### Savegame Support
+
+Employee data is saved with your savegame, so your workforce remains persistent across game sessions.
+
+### Multiplayer Synchronization
+
+The mod includes multiplayer synchronization so employee data can be used in multiplayer games. Multiplayer and dedicated server behavior is actively being improved based on user feedback.
+
+## Development Status
+
+I am continuously working on improving this mod and fixing reported issues. Some areas, especially multiplayer, dedicated servers and compatibility with other AI-related mods, cannot always be tested as extensively as I would like. If you encounter bugs, compatibility issues or unexpected behavior, please report them through GitHub Issues.
