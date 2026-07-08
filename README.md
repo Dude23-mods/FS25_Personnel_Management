@@ -3,6 +3,12 @@
 
 Personnel Management adds a more detailed employee system to Farming Simulator 25. Instead of using anonymous helpers only, your farm can hire, manage and assign individual employees with their own names, salaries, experience, reliability, loyalty and specializations.
 
+## Compatibility Notice: AutoDrive and Courseplay
+![AutoDrive](https://img.shields.io/badge/AutoDrive-not%20supported-red)
+![Courseplay](https://img.shields.io/badge/Courseplay-not%20supported-red)
+
+AutoDrive and Courseplay are currently not supported by Personnel Management. These mods use their own AI and automation systems, which are not fully compatible with the way Personnel Management assigns and manages employees for helper jobs. Using AutoDrive or Courseplay together with this mod may lead to incorrect helper assignment, native Giants helpers being used instead of employees, Lua errors, or performance issues. For stable gameplay, it is recommended to disable AutoDrive and Courseplay when using Personnel Management.
+
 ## Features
 ### Applicant Market
 
