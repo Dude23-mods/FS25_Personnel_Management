@@ -1,21 +1,14 @@
 HelperPersonnelExperienceEffects = HelperPersonnelExperienceEffects or {}
 HelperPersonnelExperienceEffects.isInstalled = false
 
--- Erfahrungswirkung auf die Arbeitsgeschwindigkeit.
--- 0 Erfahrung = 70 % der normalen KI-Geschwindigkeit, 100 Erfahrung = 100 %.
--- Dadurch bleibt der Effekt spürbar, ohne Werkzeuge oder Fahrzeuge über ihre normale Grenze hinaus zu beschleunigen.
 HelperPersonnelExperienceEffects.MIN_WORK_SPEED_FACTOR = 0.70
 HelperPersonnelExperienceEffects.MAX_WORK_SPEED_FACTOR = 1.00
 HelperPersonnelExperienceEffects.MIN_CAP_SPEED = 1.5
 
--- Optionales Diagnose-Logging. Standardmaessig aus.
 HelperPersonnelExperienceEffects.SPEED_DEBUG_LOGGING = false
 HelperPersonnelExperienceEffects.SPEED_DEBUG_INTERVAL_MS = 30000
 HelperPersonnelExperienceEffects._speedLogStateByVehicle = {}
 
--- Zuverlaessigkeit: unter 85 koennen selten kurze Leistungsschwankungen auftreten.
--- 100 Zuverlaessigkeit = kein Einbruch. Die Pause nach einem ausgeloesten Effekt
--- betraegt 3 Minuten. Es gibt bewusst keine Gesamtdeckelung mit dem Erfahrungseffekt.
 HelperPersonnelExperienceEffects.RELIABILITY_DEBUG_LOGGING = false
 HelperPersonnelExperienceEffects.RELIABILITY_SLOWDOWN_MIN_RELIABILITY = 85
 HelperPersonnelExperienceEffects.RELIABILITY_SLOWDOWN_CHECK_INTERVAL_MS = 60000
@@ -28,7 +21,6 @@ HelperPersonnelExperienceEffects.RELIABILITY_SLOWDOWN_MAX_CHANCE_PER_CHECK = 0.1
 HelperPersonnelExperienceEffects.RELIABILITY_SLOWDOWN_CHANCE_EXPONENT = 1.4
 HelperPersonnelExperienceEffects._reliabilitySlowdownStateByVehicle = {}
 
--- Diagnose-Logging fuer Zusatzverschleiss. Standardmaessig aus.
 HelperPersonnelExperienceEffects.WEAR_DEBUG_LOGGING = false
 HelperPersonnelExperienceEffects.WEAR_DEBUG_INTERVAL_MS = 30000
 HelperPersonnelExperienceEffects.MAX_ADDITIONAL_WEAR_FACTOR = 0.15
@@ -39,13 +31,9 @@ HelperPersonnelExperienceEffects.WEAR_ECONOMY_DIFFICULTY_MULTIPLIERS = {
 }
 HelperPersonnelExperienceEffects._wearLogStateByVehicle = {}
 
--- 0 Erfahrung = bis zu 10 % Mehrverbrauch, 100 Erfahrung = kein Mehrverbrauch.
--- Der Wirtschafts-Schwierigkeitsgrad skaliert den Effekt wie beim Zusatzverschleiss.
--- Diagnose-Logging fuer Mehrverbrauch. Standardmaessig aus.
 HelperPersonnelExperienceEffects.CONSUMPTION_DEBUG_LOGGING = false
 HelperPersonnelExperienceEffects.CONSUMPTION_DEBUG_INTERVAL_MS = 10000
 
--- Optionale Diagnose fuer Precision-Farming-Kompatibilitaet. Standardmaessig aus.
 HelperPersonnelExperienceEffects.PRECISION_FARMING_DEBUG_LOGGING = false
 HelperPersonnelExperienceEffects.MAX_ADDITIONAL_CONSUMPTION_FACTOR = 0.10
 HelperPersonnelExperienceEffects.CONSUMPTION_ECONOMY_DIFFICULTY_MULTIPLIERS = {
@@ -56,9 +44,6 @@ HelperPersonnelExperienceEffects.CONSUMPTION_ECONOMY_DIFFICULTY_MULTIPLIERS = {
 HelperPersonnelExperienceEffects._consumptionLogStateByVehicle = {}
 HelperPersonnelExperienceEffects._consumptionDiagnosticLogState = {}
 
--- 0 Erfahrung = bis zu 10 % Mehrverbrauch, 100 Erfahrung = kein Mehrverbrauch.
--- Der Wirtschafts-Schwierigkeitsgrad skaliert den Effekt wie beim Zusatzverschleiss.
--- Diagnose-Logging ist standardmaessig aus.
 HelperPersonnelExperienceEffects.FUEL_DEBUG_LOGGING = false
 HelperPersonnelExperienceEffects.FUEL_DEBUG_INTERVAL_MS = 30000
 HelperPersonnelExperienceEffects.MAX_ADDITIONAL_FUEL_FACTOR = 0.10
@@ -261,8 +246,6 @@ function HelperPersonnelExperienceEffects.isSupportedConsumptionFillType(fillTyp
         end
     end
 
-    -- Fallback fuer Karten oder Mods, falls ein FillType vorhanden ist, aber kein
-    -- passender globaler FillType-Konstantenname bereitsteht.
     return HelperPersonnelExperienceEffects.matchesFillTypeName(fillType, {
         "SEEDS",
         "SEED",
@@ -331,9 +314,6 @@ function HelperPersonnelExperienceEffects.getVehicleLogKey(vehicle)
         return nil
     end
 
-    -- Fuer die Protokollierung wird das konkrete Fahrzeug/Geraet getrennt betrachtet.
-    -- Die Mitarbeiterzuordnung nutzt weiterhin das Root-Fahrzeug, damit angehaengte
-    -- Geraete vom gleichen Mitarbeiter erfasst werden.
     if vehicle.rootNode ~= nil then
         return "node:" .. tostring(vehicle.rootNode)
     end
@@ -594,10 +574,9 @@ function HelperPersonnelExperienceEffects.logPrecisionFarmingDiagnosticsStart()
     HelperPersonnelExperienceEffects._precisionFarmingStartupLogged = true
 
     if Logging ~= nil and Logging.info ~= nil then
-        Logging.info("FS25_HelperPersonnel: Precision-Farming-Diagnose aktiv | Version=1.0.1.0 | PrecisionFarming=%s | Hinweis=BasisVerbrauch ist die Rueckgabe der vorherigen Spiel-/Mod-Funktionskette vor unserem Zusatzfaktor", HelperPersonnelExperienceEffects.getPrecisionFarmingDetectionText())
+        Logging.info("FS25_HelperPersonnel: Precision-Farming-Diagnose aktiv | Version=1.0.2.1 | PrecisionFarming=%s | Hinweis=BasisVerbrauch ist die Rueckgabe der vorherigen Spiel-/Mod-Funktionskette vor unserem Zusatzfaktor", HelperPersonnelExperienceEffects.getPrecisionFarmingDetectionText())
     end
 end
-
 
 function HelperPersonnelExperienceEffects.logWearIfNeeded(vehicle, worker, baseChange, extraChange, factor, resultChange)
     if HelperPersonnelExperienceEffects.WEAR_DEBUG_LOGGING ~= true then
@@ -1227,8 +1206,6 @@ function HelperPersonnelExperienceEffects.getReliabilitySlowdownFactorForVehicle
         return 1
     end
 
-    -- Die zufaellige Ausloesung soll nur serverseitig stattfinden. Die Bewegung
-    -- der KI wird vom Server bestimmt; Clients sollen hier keine eigenen Ereignisse wuerfeln.
     if vehicle ~= nil and vehicle.isServer == false then
         return 1
     end
@@ -1478,9 +1455,6 @@ function HelperPersonnelManager:getWorkerWorkSpeedPercent(workerOrId)
     return math.floor((self:getWorkerWorkSpeedMultiplier(workerOrId) * 100) + 0.5)
 end
 
--- Schulung/Weiterbildung
--- Bewusst hier als Zusatzlogik, damit die empfindlichen Dateien
--- HelperPersonnelApp.lua und HelperPersonnelBootstrap.lua unangetastet bleiben.
 if HelperPersonnelNetwork ~= nil then
     HelperPersonnelNetwork.ACTION_TRAIN_WORKER = HelperPersonnelNetwork.ACTION_TRAIN_WORKER or "trainWorker"
 end

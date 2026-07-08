@@ -107,7 +107,7 @@ function HelperPersonnelAIStartHooks.install(stageName)
 
     if HelperPersonnelAIStartHooks.isInstalled ~= true then
         HelperPersonnelAIStartHooks.isInstalled = true
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose aktiv | Version=1.0.1.0")
+        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose aktiv | Version=1.0.2.1")
     end
 
     local aivehicleAvailable = AIVehicle ~= nil and AIVehicle.startAIVehicle ~= nil
@@ -135,7 +135,6 @@ function HelperPersonnelAIStartHooks.install(stageName)
         tostring(AIJobStartRequestEvent ~= nil),
         tostring(AISystem ~= nil and AISystem.startJob ~= nil))
 end
-
 
 function HelperPersonnelAIStartHooks.getAIModeDebugName(aiMode)
     if AIModeSelection ~= nil and AIModeSelection.MODE ~= nil then
@@ -300,10 +299,6 @@ function HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, fallbackJ
         return false
     end
 
-    -- Der Start aus dem erweiterten Helfer-Menue des Grundspiels laeuft teilweise
-    -- ueber eigene Einstellungsdialoge. Die Mitarbeiterauswahl wird deshalb einen
-    -- kurzen Moment spaeter geoeffnet, damit das Grundspiel-Menue seinen Startklick
-    -- sauber abschliessen kann und die konfigurierten Jobdaten erhalten bleiben.
     HelperPersonnelAIStartHooks.pendingSelection = {
         vehicle = vehicle,
         job = aiJob,
@@ -378,11 +373,6 @@ function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallba
         return false
     end
 
-    -- Bei ueber das ESC-Menue angelegten Aufgaben (z. B. A-nach-B-Fahrt)
-    -- enthaelt fallbackJob bereits Ziel, Fahrzeug und Jobtyp. Dieser Job darf
-    -- nicht durch vehicle:getStartableAIJob() ersetzt werden, weil sonst die
-    -- konkrete Fahraufgabe verloren geht und wieder ein normaler Helferjob
-    -- entstehen kann.
     local aiJob = fallbackJob
     if aiJob == nil and vehicle.getStartableAIJob ~= nil then
         aiJob = vehicle:getStartableAIJob()
@@ -537,11 +527,8 @@ function HelperPersonnelAIStartHooks.handleVehicleStart(vehicle, superFunc, ...)
         return nil
     end
 
-    -- Keine freien Mitarbeiter vorhanden oder Auswahlfenster konnte nicht geoeffnet werden.
-    -- In diesem Fall darf nicht automatisch der Giants-Standardhelfer starten.
     return nil
 end
-
 
 function HelperPersonnelAIStartHooks.onAIModeSettingsChanged(vehicle, superFunc, aiMode, fieldCourseSettings, ...)
     hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIModeSelection.aiModeSettingsChanged | Fahrzeug=%s | Modus=%s | HatSettings=%s",
@@ -607,11 +594,6 @@ end
 function HelperPersonnelAIStartHooks.onFieldWorkerActivate(worker, superFunc, ...)
     hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | onFieldWorkerActivate | Worker=%s | WorkerVehicle=%s | HatGetStartableAIJob=%s", hpGetDebugClassName(worker), HelperPersonnelAIStartHooks.getDebugVehicleName(worker ~= nil and worker.vehicle or nil), tostring(worker ~= nil and worker.getStartableAIJob ~= nil))
 
-    -- Das erweiterte Helfer-Menue des Grundspiels besitzt teilweise ein eigenes
-    -- AIFieldWorker-Objekt mit vehicle-Verweis. Dieses Menue darf nicht vorzeitig
-    -- abgewuergt werden, weil sonst die dort gesetzten Optionen wie Vorgewende
-    -- verloren gehen koennen. Der eigentliche Start wird anschliessend ueber
-    -- AIJobStartRequestEvent/AISystem.startJob abgefangen.
     if worker ~= nil and worker.getStartableAIJob == nil and worker.vehicle ~= nil then
         if superFunc ~= nil then
             return superFunc(worker, ...)

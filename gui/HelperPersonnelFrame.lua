@@ -2,9 +2,7 @@ HelperPersonnelFrame = {}
 local HelperPersonnelFrame_mt = Class(HelperPersonnelFrame, TabbedMenuFrameElement)
 
 HelperPersonnelFrame.PORTRAIT_FILENAMES = {
-    -- Fallback-Reihenfolge passend zu den zehn Standard-Helfern A bis J.
-    -- Wenn moeglich wird das Bild dynamisch aus genau dem PlayerStyle gelesen,
-    -- der auch fuer den tatsaechlichen KI-Helfer verwendet wird.
+
     [1] = "dataS/character/playerM/heads/mHead01.png",
     [2] = "dataS/character/playerM/heads/mHead02.png",
     [3] = "dataS/character/playerF/heads/fHead01.png",
@@ -35,9 +33,6 @@ HelperPersonnelFrame.MODE_OVERVIEW = 1
 HelperPersonnelFrame.MODE_WORKERS = 2
 HelperPersonnelFrame.MODE_APPLICANTS = 3
 
--- Detail list layout. The entries intentionally use a little more vertical
--- space so that stats, specialization, wage/status and optional requests do
--- not crowd into one long line. No GUI XML or profile changes are required.
 HelperPersonnelFrame.DETAIL_VISIBLE_COUNT = 4
 HelperPersonnelFrame.DETAIL_ROW_HEIGHT = 0.114
 HelperPersonnelFrame.DETAIL_ROW_STEP = 0.119
@@ -49,9 +44,6 @@ HelperPersonnelFrame.OVERVIEW_HISTORY_VISIBLE_ROWS = 8
 HelperPersonnelFrame.OVERVIEW_HISTORY_LINE_HEIGHT = 0.0129
 HelperPersonnelFrame.OVERVIEW_HISTORY_ENTRY_GAP = 0.0025
 
--- Diagnose-Logging fuer die Feldsuche. Standardmaessig deaktiviert; bei Bedarf
--- fuer gezielte Tests kurzzeitig aktivieren. Die Ausgabe ist zusaetzlich ueber
--- einen kleinen Zwischenspeicher gedrosselt.
 HelperPersonnelFrame.FIELD_DETECTION_DEBUG_LOGGING = false
 HelperPersonnelFrame.FIELD_DETECTION_CACHE_MS = 3000
 
@@ -80,10 +72,7 @@ local function hpGetInputConstant(name, fallback)
 end
 
 local function hpApplyPausedButton(button)
-    -- Eigene Mod-Eingabeaktionen muessen im pausierten ESC-Menue ausdruecklich
-    -- freigegeben werden. Sonst zeigt/registriert die GIANTS-Buttonleiste teils
-    -- Ersatzbelegungen aus dem Grundspiel, waehrend unsere direkte Tastaturabfrage
-    -- im Frame andere Tasten nutzt.
+
     if button ~= nil then
         button.showWhenPaused = true
     end
@@ -129,8 +118,7 @@ function HelperPersonnelFrame.new(subclass_mt, messageCenter)
     }
 
     self.btnBackToOverview = {
-        -- MENU_BACK ist im ESC-Menue die normale ESC-Aktion und wird als ESC
-        -- angezeigt. Der Callback fuehrt im Untermenue nur zur Uebersicht zurueck.
+
         inputAction = InputAction.MENU_BACK,
         text = self:getText("ui_backToOverview", "Zur Übersicht"),
         callback = function()
@@ -170,7 +158,6 @@ function HelperPersonnelFrame.new(subclass_mt, messageCenter)
         end
     })
 
-
     self.btnExecute = {
         inputAction = InputAction.MENU_ACCEPT,
         text = self:getText("ui_button_hire", "Einstellen"),
@@ -181,7 +168,6 @@ function HelperPersonnelFrame.new(subclass_mt, messageCenter)
 
     return self
 end
-
 
 function HelperPersonnelFrame:setContext(app)
     self.app = app
@@ -232,9 +218,6 @@ function HelperPersonnelFrame:onFrameOpen()
         self.inGameMenu = self.app.inGameMenu
     end
 
-    -- Wenn die Seite ueber die linke ESC-Menueleiste verlassen und spaeter wieder
-    -- geoeffnet wird, soll immer die Uebersicht erscheinen. Interne Wechsel in
-    -- Mitarbeiterverwaltung oder Bewerbermarkt laufen ohne onFrameOpen.
     self.mode = HelperPersonnelFrame.MODE_OVERVIEW
 
     self:refresh()
@@ -242,8 +225,7 @@ function HelperPersonnelFrame:onFrameOpen()
 end
 
 function HelperPersonnelFrame:onFrameClose()
-    -- Auch beim Verlassen ueber einen anderen ESC-Menuepunkt den internen Stand
-    -- zuruecksetzen, damit kein Untermenue stehen bleibt.
+
     self.mode = HelperPersonnelFrame.MODE_OVERVIEW
     HelperPersonnelFrame:superClass().onFrameClose(self)
 end
@@ -260,7 +242,6 @@ end
 
 function HelperPersonnelFrame:unregisterActionEvents()
 end
-
 
 function HelperPersonnelFrame:onInputConfirm(_, inputValue)
     if inputValue ~= 1 then
@@ -297,7 +278,6 @@ function HelperPersonnelFrame:onClickExtra1()
         self:showOverview()
     end
 end
-
 
 function HelperPersonnelFrame:getInGameMenu()
     local inGameMenu = self.inGameMenu
@@ -430,7 +410,6 @@ function HelperPersonnelFrame:activateCurrentEntry()
     self:updateButtons()
 end
 
-
 function HelperPersonnelFrame:refresh()
     local workers = self:getWorkers()
     local applicants = self:getApplicants()
@@ -450,11 +429,6 @@ end
 function HelperPersonnelFrame:applyMenuButtons(buttons)
     buttons = buttons or {}
 
-    -- Die GIANTS-Buttonleiste kann beim Wechsel aus anderen ESC-Seiten bis zur
-    -- naechsten TabbedMenu-Aktualisierung alte Aktionen anzeigen. Deshalb wird
-    -- die aktuelle Buttonliste nicht nur als dirty markiert, sondern bei aktivem
-    -- InGameMenu auch sofort ueber assignMenuButtonInfo angewendet. Diese
-    -- Grundspielfunktion leert alte Buttonaktionen vor dem Neuaufbau.
     self.menuButtonInfo = buttons
 
     if self.setMenuButtonInfo ~= nil then
@@ -1929,11 +1903,8 @@ function HelperPersonnelFrame:getActiveWorkerOverviewLines(worker)
     local fieldText = fieldId ~= nil and tostring(fieldId) or self:getText("ui_activeWorkerUnknownField", "unbekannt")
     local activityLine = string.format(self:getText("ui_activeWorkerActivityField", "Tätigkeit: %s | Feld: %s"), activityText, fieldText)
 
-    -- Keine künstliche Kürzung in der Übersicht: Geräte-/Anhängerbezeichnungen
-    -- sollen vollständig angezeigt werden, auch wenn sie länger sind.
     return statusLine, activityLine
 end
-
 
 function HelperPersonnelFrame:keyEvent(unicode, sym, modifier, isDown)
     if not isDown then
@@ -2565,10 +2536,8 @@ function HelperPersonnelFrame:getMonthlyReportLines(counts, applicants, workers)
     return lines
 end
 
-
 function HelperPersonnelFrame:loadPortraitOverlays()
-    -- Overlays werden erst bei Bedarf erzeugt. Dadurch kann jedes Portraet
-    -- aus dem gleichen PlayerStyle kommen, der auch fuer den KI-Helfer genutzt wird.
+
     self.portraitOverlays = self.portraitOverlays or {}
     self.portraitCount = #HelperPersonnelFrame.PORTRAIT_FILENAMES
 
@@ -2911,7 +2880,6 @@ function HelperPersonnelFrame:drawDetailScrollbar(x, y, width, height, firstInde
     self.lineOverlay:render()
 end
 
-
 function HelperPersonnelFrame:drawSeparator(x, y, width)
     if self.lineOverlay == nil then
         return
@@ -3064,8 +3032,7 @@ function HelperPersonnelFrame:drawDetailTextLine(x, y, size, text, r, g, b, a, v
 end
 
 function HelperPersonnelFrame:getCompactHistoryLine(text)
-    -- Verlaufseinträge werden im Übersichtsmenü vollständig angezeigt.
-    -- Lange Texte werden umbrochen, aber nicht mehr mit Auslassungspunkten gekürzt.
+
     return tostring(text or "")
 end
 

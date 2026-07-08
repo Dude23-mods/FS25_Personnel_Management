@@ -1,6 +1,4 @@
--- Multiplayer-Grundlage fuer FS25_HelperPersonnel.
--- Der Server bleibt die einzige Instanz, die Personal-, Bewerber- und Monatsdaten veraendert.
--- Clients senden nur Bedienanfragen und erhalten danach einen vollstaendigen Zustandsabgleich.
+
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
 HelperPersonnelNetwork.ACTION_HIRE = "hire"
@@ -334,7 +332,6 @@ function HelperPersonnelNetwork.readState(streamId)
     return state
 end
 
--- Server -> Client: vollstaendiger Personalzustand.
 HelperPersonnelNetworkStateEvent = {}
 local HelperPersonnelNetworkStateEvent_mt = Class(HelperPersonnelNetworkStateEvent, Event)
 InitEventClass(HelperPersonnelNetworkStateEvent, "HelperPersonnelNetworkStateEvent")
@@ -365,7 +362,6 @@ function HelperPersonnelNetworkStateEvent:run(connection)
     end
 end
 
--- Client -> Server: Bedienanfrage aus dem ESC-Menue.
 HelperPersonnelNetworkActionEvent = {}
 local HelperPersonnelNetworkActionEvent_mt = Class(HelperPersonnelNetworkActionEvent, Event)
 InitEventClass(HelperPersonnelNetworkActionEvent, "HelperPersonnelNetworkActionEvent")
@@ -398,14 +394,11 @@ function HelperPersonnelNetworkActionEvent:run(connection)
         return
     end
 
-    -- Auf dem Server kommt die Anfrage von einer Client-Verbindung.
-    -- Auf Clients werden ActionEvents nicht ausgefuehrt.
     if connection == nil or connection.getIsServer == nil or connection:getIsServer() ~= true then
         app:processNetworkAction(self.actionName, self.targetId, connection)
     end
 end
 
--- Client -> Server: ausdrueckliche Anforderung eines vollstaendigen Zustandsabgleichs.
 HelperPersonnelNetworkRequestStateEvent = {}
 local HelperPersonnelNetworkRequestStateEvent_mt = Class(HelperPersonnelNetworkRequestStateEvent, Event)
 InitEventClass(HelperPersonnelNetworkRequestStateEvent, "HelperPersonnelNetworkRequestStateEvent")
@@ -436,7 +429,6 @@ function HelperPersonnelNetworkRequestStateEvent:run(connection)
     end
 end
 
--- Server -> Client: kurze Spielmeldung oben rechts.
 HelperPersonnelNotificationEvent = {}
 local HelperPersonnelNotificationEvent_mt = Class(HelperPersonnelNotificationEvent, Event)
 InitEventClass(HelperPersonnelNotificationEvent, "HelperPersonnelNotificationEvent")
@@ -472,7 +464,6 @@ function HelperPersonnelNotificationEvent:run(connection)
     end
 end
 
--- Multiplayer farm separation stream format (v1.5.1.0)
 HelperPersonnelNetwork.STATE_VERSION = 14
 
 local function hpNetworkFarmIdBits()
@@ -594,7 +585,6 @@ function HelperPersonnelNetwork.readState(streamId)
         return state
     end
 
-    -- Rueckfall fuer fruehe Testversionen ohne Farm-Trennung.
     state.nextPersonId = streamReadInt32(streamId)
     state.changeCounter = streamReadInt32(streamId)
     state.workers = HelperPersonnelNetwork.readPersonArray(streamId)

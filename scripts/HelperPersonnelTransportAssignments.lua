@@ -1,13 +1,10 @@
--- Transportzuweisungen
--- Fuer A-nach-B-Auftraege aus dem ESC-Jobmenue wird kein Auswahlfenster geoeffnet.
--- Stattdessen koennen Mitarbeiter im Personalmanagement fuer Transporttaetigkeiten vorgemerkt werden.
--- Der erste freie Transportmitarbeiter uebernimmt solche Auftraege automatisch.
+
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
 HelperPersonnelNetwork.STATE_VERSION = math.max(tonumber(HelperPersonnelNetwork.STATE_VERSION) or 0, 7)
 HelperPersonnelNetwork.ACTION_TOGGLE_TRANSPORT = "toggleTransport"
 HelperPersonnelTransportAssignments = HelperPersonnelTransportAssignments or {}
--- Diagnose-Logging fuer Transportzuweisungen. Standardmaessig deaktiviert.
+
 HelperPersonnelTransportAssignments.TRANSPORT_DEBUG_LOGGING = false
 
 local function hp1570Debug(message, ...)
@@ -15,7 +12,6 @@ local function hp1570Debug(message, ...)
         Logging.info(message, ...)
     end
 end
-
 
 local function hp1570NormalizeFarmId(farmId)
     farmId = tonumber(farmId)
@@ -105,11 +101,6 @@ local function hp1570GetJobWorkerId(app, job)
         return nil
     end
 
-    -- Fuer die Transport-Verfuegbarkeitspruefung duerfen nur direkte, bereits
-    -- vorhandene Zuordnungen gelesen werden. Der allgemeine Fallback
-    -- HelperPersonnelAIJobHooks.getWorkerIdFromJob() kann ueber Fahrzeug- oder
-    -- HelperIndex-Reste selbst wieder alte Zuordnungen herstellen und hat dadurch
-    -- freie Transportfahrer faelschlich als aktiv erscheinen lassen.
     if type(job) == "table" and job.helperPersonnelWorkerId ~= nil then
         return tonumber(job.helperPersonnelWorkerId)
     end
@@ -151,9 +142,6 @@ local function hp1570WorkerHasActiveAIJob(app, workerId, worker)
     local assignedJob = bridge ~= nil and type(bridge.workerJobById) == "table" and bridge.workerJobById[workerId] or nil
     local activeJobs = hp1570GetActiveAIJobs(app)
 
-    -- Wenn die aktive Jobliste nicht verfuegbar ist, ist eine vorhandene Bridge-
-    -- Zuordnung die sicherste Information. Ohne Bridge-Zuordnung wird ein busy-
-    -- Restzustand als veraltet behandelt.
     if activeJobs == nil then
         return assignedJob ~= nil
     end
@@ -191,11 +179,6 @@ local function hp1570ClearStaleBridgeAssignment(app, worker)
         return
     end
 
-    -- Transportfahrer duerfen nur dann als beschaeftigt gelten, wenn wirklich ein
-    -- aktiver AIJob fuer diesen Mitarbeiter gefunden wird. Reine Restdaten wie
-    -- vehicleName, vehicleKey oder currentJobStartedAt koennen nach abgebrochenen
-    -- oder umgehaengten Transportstarts stehen bleiben und wuerden sonst freie
-    -- Transportmitarbeiter blockieren.
     if hp1570WorkerHasActiveAIJob(app, workerId, worker) then
         return
     end
@@ -238,10 +221,6 @@ local function hp1570ClearPendingWorkerForTransport(app, vehicle)
         return
     end
 
-    -- Normale Helferstarts verwenden eine kurze Pending-Zuordnung. Transportjobs
-    -- duerfen diese globale Restzuordnung nicht erben, weil sonst ein zuvor
-    -- ausgewaehlter, inzwischen beschaeftigter Mitarbeiter den Transportstart
-    -- blockieren kann.
     app.pendingWorkerIdForNextAIJob = nil
 
     if vehicle ~= nil and type(app.pendingWorkerIdsByVehicleKey) == "table" and app.getVehicleKey ~= nil then
@@ -349,9 +328,7 @@ if HelperPersonnelAIJobHooks ~= nil then
         if hp1570IsTransportJobByClass(job)
             and type(job) == "table"
             and job.helperPersonnelWorkerId == nil then
-            -- Transportauftraege werden ausschliesslich ueber die Transportfahrer-
-            -- Einteilung bedient. Dadurch erben sie keine alte Pending-Auswahl aus
-            -- einem vorherigen normalen Helferstart.
+
             return nil
         end
 
@@ -413,13 +390,6 @@ if HelperPersonnelHelperBridge ~= nil then
             return true
         end
 
-        -- Bei Grundspiel-Transportauftraegen kann das Spiel zwischen Zielauswahl,
-        -- Client/Server-Start und eigentlichem AISystem-Start ein neues AIJob-Objekt
-        -- verwenden. Dann ist derselbe Mitarbeiter bereits am vorbereiteten
-        -- Transportjob vorgemerkt, obwohl der tatsaechliche Startjob ein anderes
-        -- Lua-Objekt ist. Wenn beide Transportjobs eindeutig zum selben Fahrzeug
-        -- gehoeren, wird diese vorbereitete Zuordnung zugelassen und beim Start auf
-        -- den echten Job umgehaengt.
         if hp1570IsTransportJobByClass(job) ~= true or self.app == nil or self.app.manager == nil then
             return false
         end
@@ -540,11 +510,6 @@ if HelperPersonnelManager ~= nil then
             return false
         end
 
-        -- Zuerst wird streng geprueft: Ein Mitarbeiter, der im Manager noch als
-        -- beschaeftigt steht, wird nicht fuer Transport ausgewaehlt. Dadurch kann
-        -- ein tatsaechlich laufender Feldeinsatz nicht versehentlich als freier
-        -- Transportfahrer verwendet werden, nur weil die AIJob-Erkennung einen
-        -- aktiven Job nicht eindeutig findet.
         if worker.busy == true then
             if allowStaleCleanup ~= true then
                 return false
@@ -560,12 +525,7 @@ if HelperPersonnelManager ~= nil then
         end
 
         if allowStaleCleanup == true and self.app ~= nil then
-            -- Auch bei worker.busy ~= true koennen in der Bridge noch alte
-            -- workerJobById-/vehicleWorkerIds-Zuordnungen stehen. Diese fuehren
-            -- beim eigentlichen Transportstart zu "Mitarbeiter bereits im Einsatz",
-            -- obwohl der Mitarbeiter in der Verwaltung frei wirkt. Deshalb wird
-            -- vor der abschliessenden Verfuegbarkeitspruefung ein eindeutig nicht
-            -- aktiver Restzustand bereinigt.
+
             hp1570ClearStaleBridgeAssignment(self.app, worker)
         end
 
@@ -593,7 +553,6 @@ if HelperPersonnelManager ~= nil then
         local drivers = self:getTransportDriversSorted()
         local result = {}
 
-        -- Erster Durchlauf: nur eindeutig freie Mitarbeiter verwenden.
         for _, worker in ipairs(drivers) do
             if self:isTransportDriverAvailableForJob(worker, job, false) then
                 table.insert(result, worker)
@@ -604,10 +563,6 @@ if HelperPersonnelManager ~= nil then
             return result, nil, #drivers > 0
         end
 
-        -- Zweiter Durchlauf: freie Mitarbeiter mit veralteten Bridge-Restdaten
-        -- bereinigen. Das ist der wichtigste Fall nach abgebrochenen oder
-        -- umgehaengten Transportstarts: Der Mitarbeiter wirkt frei, hat aber
-        -- intern noch eine alte workerJobById-/vehicleWorkerIds-Zuordnung.
         for _, worker in ipairs(drivers) do
             if worker.busy ~= true and self:isTransportDriverAvailableForJob(worker, job, true) then
                 table.insert(result, worker)
@@ -618,10 +573,6 @@ if HelperPersonnelManager ~= nil then
             return result, nil, #drivers > 0
         end
 
-        -- Letzter Durchlauf: nur wenn wirklich kein freier Mitarbeiter gefunden
-        -- wurde, duerfen auch alte Busy-Restzustaende bereinigt werden. Ein
-        -- tatsaechlich aktiver AIJob bleibt durch hp1570WorkerHasActiveAIJob
-        -- geschuetzt.
         for _, worker in ipairs(drivers) do
             if worker.busy == true and self:isTransportDriverAvailableForJob(worker, job, true) then
                 table.insert(result, worker)
@@ -1044,10 +995,7 @@ if HelperPersonnelAIStartHooks ~= nil then
         if HelperPersonnelAIJobHooks ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob(job) == true then
-            -- Transportjobs nicht ueber den fahrzeugbasierten Helferstart behandeln.
-            -- Dieser Pfad kann waehrend der Zielauswahl im Grundspiel-Jobmenue zu frueh
-            -- feuern. Die automatische Transportfahrer-Auswahl erfolgt erst beim
-            -- tatsaechlichen AIJob-Start ueber queueSelectionForAIJob/openSelectionForAIJob.
+
             return false
         end
 
@@ -1176,10 +1124,6 @@ if HelperPersonnelFrame ~= nil then
             return false
         end
 
-        -- T kann im pausierten ESC-Menue je nach Eingabekontext direkt als
-        -- keyEvent oder als registriertes ActionEvent ankommen. Eine kurze Sperre
-        -- verhindert, dass ein einzelner Tastendruck die Zuordnung sofort wieder
-        -- an- und abwaehlt. Es wird bewusst kein unterer Menuebutton eingefuegt.
         local now = g_time or 0
         if now > 0 and self.hpLastTransportToggleTime ~= nil and now - self.hpLastTransportToggleTime < 200 then
             return true
@@ -1233,8 +1177,7 @@ if HelperPersonnelFrame ~= nil then
                 g_inputBinding:setActionEventText(actionEventId, hp1570GetText("input_HP_TRANSPORT_TOGGLE", "Transportzuweisung umschalten"))
             end
             if g_inputBinding.setActionEventTextVisibility ~= nil then
-                -- Das ActionEvent faengt nur T ab und soll keinen zusaetzlichen
-                -- Button in der unteren ESC-Menueleiste anzeigen.
+
                 g_inputBinding:setActionEventTextVisibility(actionEventId, false)
             end
             if g_inputBinding.setActionEventActive ~= nil then

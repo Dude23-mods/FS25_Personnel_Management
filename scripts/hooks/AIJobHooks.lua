@@ -86,8 +86,7 @@ function HelperPersonnelAIJobHooks.onAIJobLoadFromXMLFile(job, superFunc, xmlFil
         if baseHelperIndex ~= nil and baseHelperIndex > 0 then
             job.helperPersonnelBaseHelperIndex = baseHelperIndex
         end
-        -- Beim XML-Laden ist noch nicht sicher, ob dieser Job nach dem Laden wirklich aktiv ist.
-        -- Deshalb wird er nur vorgemerkt und spaeter gegen die aktiven KI-Jobs abgeglichen.
+
         HelperPersonnelAIJobHooks.pendingRestoredJobs[job] = workerId
     end
 end
@@ -336,9 +335,6 @@ function HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
             end
         end
 
-        -- Nach einem Savegame-Load ist die Fahrzeugzuordnung zuverlässiger als der
-        -- Grundspiel-helperIndex, weil mehrere Mitarbeiter dieselbe Standard-Optik
-        -- A bis J verwenden können.
         if app.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
             local restoredWorkerId = app.helperBridge:resolveRestoredWorkerIdForJob(job)
             if restoredWorkerId ~= nil then
@@ -356,8 +352,6 @@ function HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
             end
         end
 
-        -- Letzter Fallback: helperIndex. Dieser Wert ist bei Standard-Helfer A bis J
-        -- nicht eindeutig und darf deshalb erst nach Job- und Fahrzeugzuordnung genutzt werden.
         if job.helperIndex ~= nil and app.helperBridge.getWorkerIdByHelperIndex ~= nil then
             local workerId = app.helperBridge:getWorkerIdByHelperIndex(job.helperIndex)
             if workerId ~= nil then
@@ -389,10 +383,6 @@ function HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
         return job.helperPersonnelWorkerId
     end
 
-    -- Beim Laden eines Savegames startet Giants aktive KI-Jobs erneut.
-    -- In diesem Startpfad gibt es keinen neuen Spielerklick und damit auch
-    -- keinen Eintrag in der normalen Pending-Auswahl. Deshalb muss hier zuerst
-    -- die gespeicherte Fahrzeug-/Mitarbeiterzuordnung ausgewertet werden.
     if app.helperBridge ~= nil
         and app.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
         local restoredWorkerId = app.helperBridge:resolveRestoredWorkerIdForJob(job)
@@ -468,8 +458,6 @@ function HelperPersonnelAIJobHooks.callWithForcedHelper(job, workerId, callback)
     local forcedHelper = HelperPersonnelAIJobHooks.applyWorkerToJob(job, workerId)
     local originalGetRandomHelper = nil
 
-    -- AIJob:start waehlt intern standardmaessig selbst einen Helper aus.
-    -- Fuer diesen Startaufruf liefern wir gezielt den im Auswahlfenster ausgewaehlten Mitarbeiter zurueck.
     if forcedHelper ~= nil and g_helperManager ~= nil and g_helperManager.getRandomHelper ~= nil then
         originalGetRandomHelper = g_helperManager.getRandomHelper
         g_helperManager.getRandomHelper = function(helperManager, ...)
@@ -495,8 +483,6 @@ function HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
         return
     end
 
-    -- AISystem/AIJob kann den helperIndex während des Startvorgangs noch einmal setzen.
-    -- Deshalb die Mitarbeiterzuordnung nach superFunc erneut auf den Job schreiben.
     HelperPersonnelAIJobHooks.applyWorkerToJob(job, workerId)
 
     if app.helperBridge.onJobStarted ~= nil then
@@ -579,9 +565,6 @@ function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, 
         tostring(isRunningStartRequest),
         tostring(shouldHandleStart))
 
-    -- Aufgaben aus dem ESC-Jobmenue koennen direkt ueber AISystem:startJob
-    -- gestartet werden, ohne vorher den normalen H-Tasten-Pfad zu nutzen.
-    -- In diesem Fall muss hier die Mitarbeiterauswahl vorgeschaltet werden.
     if shouldHandleStart then
         local queued = false
         if HelperPersonnelAIStartHooks.queueSelectionForAIJob ~= nil then
@@ -612,10 +595,6 @@ function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, 
 
         hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob Ergebnis mit Mitarbeiter | Job=%s | Mitarbeiter=%s | Ergebnis=%s", hpJobDebugJobName(job), tostring(workerId), tostring(result))
 
-        -- Sicherheitsnetz fuer Startpfade, in denen AISystem.startJob den Job
-        -- fortsetzt, ohne dass unser AIJob.start-Hook anschliessend noch einmal
-        -- aufgerufen wird. Dadurch bleibt die Zuordnung auch nach Savegame-Load
-        -- am laufenden Job haengen.
         if result ~= false then
             HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
         end
@@ -641,8 +620,6 @@ function HelperPersonnelAIJobHooks.onAIJobStop(job, aiMessage)
     local app = g_helperPersonnelApp
     local workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
 
-    -- Beim Missionsabbau stoppt das Grundspiel aktive Jobs nur technisch.
-    -- Dieser Stop darf den Mitarbeiter nicht als fertig markieren und nicht in die XML zurueckschreiben.
     if app ~= nil and app.isMissionDeleting == true then
         if workerId ~= nil then
             HelperPersonnelAIJobHooks.applyWorkerToJob(job, workerId)
@@ -771,11 +748,7 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventWriteStream(event, su
 end
 
 function HelperPersonnelAIJobHooks.onAIJobStartRequestEventReadStream(event, streamId, connection)
-    -- AIJobStartRequestEvent:readStream ruft im Grundspiel am Ende direkt run() auf.
-    -- Deshalb duerfen eigene Zusatzdaten nicht erst nach dem Original-readStream
-    -- gelesen werden, sonst waeren Abbruchflag und Mitarbeiter-ID beim Start noch
-    -- nicht verfuegbar. Die Grundspiel-Leselogik wird hier bewusst nachgebildet
-    -- und danach erst run() aufgerufen.
+
     if event == nil or streamId == nil or connection == nil then
         return
     end

@@ -20,6 +20,7 @@ source(g_currentModDirectory .. "scripts/HelperPersonnelMultiplayerSync.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelTransportAssignments.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelSalaryRaiseRequests.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelExperienceEffects.lua")
+source(g_currentModDirectory .. "scripts/HelperPersonnelCompatibility.lua")
 
 HelperPersonnelBootstrap = {}
 HelperPersonnelBootstrap.modName = g_currentModName
@@ -33,15 +34,14 @@ function HelperPersonnelBootstrap.install()
 
     HelperPersonnelBootstrap.isInstalled = true
 
+    if HelperPersonnelCompatibility ~= nil and HelperPersonnelCompatibility.install ~= nil then
+        HelperPersonnelCompatibility.install()
+    end
+
     HelperPersonnelAIStartHooks.install("bootstrap")
     HelperPersonnelAIJobHooks.install("bootstrap")
     HelperPersonnelExperienceEffects.install()
 
-    -- Die Personalmanagement-Seite muss bereits VOR dem Fortsetzen gespeicherter KI-Jobs bereitstehen.
-    -- Das Basisspiel startet aktive Jobs beim Laden der Karte wieder an. Wird die App erst danach
-    -- erzeugt, kennt der Job zwar seine Grundspiel-Helferoptik, aber nicht mehr sicher den
-    -- zugeordneten Mitarbeiter. Deshalb versuchen wir den frühen Aufbau vor loadMapFinished und
-    -- behalten den bisherigen späten Aufbau als Sicherheitsnetz bei.
     FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, HelperPersonnelBootstrap.onBeforeLoadMapFinished)
     FSBaseMission.loadMapFinished = Utils.appendedFunction(FSBaseMission.loadMapFinished, HelperPersonnelBootstrap.onLoadMapFinished)
     FSBaseMission.saveSavegame = Utils.prependedFunction(FSBaseMission.saveSavegame, HelperPersonnelBootstrap.onBeforeSaveSavegame)
@@ -63,8 +63,6 @@ function HelperPersonnelBootstrap.isMissionReadyForApp()
         return false
     end
 
-    -- Bei Savegames soll der Speicherplatz schon bekannt sein, bevor die App lädt. Sonst würde sie
-    -- zunächst Default-Daten erzeugen und die gespeicherten Mitarbeiter erst zu spät sehen.
     local missionInfo = g_currentMission.missionInfo
     if missionInfo == nil then
         return false
@@ -74,13 +72,10 @@ function HelperPersonnelBootstrap.isMissionReadyForApp()
         return true
     end
 
-    -- Bei Savegames nicht zu frueh mit Default-Daten starten. Ohne Speicherordner
-    -- kann die Mitarbeiterdatei noch nicht sicher geladen werden.
     if missionInfo.savegameIndex ~= nil then
         return false
     end
 
-    -- Neues Spiel ohne vorhandenen Speicherstand: App darf mit Default-Daten starten.
     if missionInfo.isValid ~= false then
         return true
     end

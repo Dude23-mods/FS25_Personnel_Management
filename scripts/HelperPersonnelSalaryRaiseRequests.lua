@@ -1,5 +1,4 @@
--- Gehaltsforderungen bei Stufenaufstieg
--- Ergaenzt die bestehende Personal- und Menue-Logik ohne Aenderungen am GUI-Layout.
+
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
 HelperPersonnelNetwork.STATE_VERSION = math.max(tonumber(HelperPersonnelNetwork.STATE_VERSION) or 0, 11)
@@ -55,7 +54,6 @@ local function hpSRAddPeriods(period, year, periodsToAdd)
     local newPeriod = ((index - 1) % 12) + 1
     return newPeriod, newYear
 end
-
 
 if HelperPersonnelManager ~= nil then
     HelperPersonnelManager.SALARY_RAISE_STAGE_SPECIALIST = 2

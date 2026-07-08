@@ -216,10 +216,6 @@ function HelperPersonnelGameSettings.initialize()
                     element.isAlwaysFocusedOnOpen = false
                     element.focused = false
 
-                    -- The native game settings row contains the explanation text as
-                    -- the first child of the option widget.  If this is not
-                    -- overwritten, the cloned row keeps the description of the
-                    -- original base-game setting.
                     if element.elements ~= nil and element.elements[1] ~= nil and element.elements[1].setText ~= nil then
                         element.elements[1]:setText(hpGameSettingsText(setting.descriptionKey, ""))
                     end

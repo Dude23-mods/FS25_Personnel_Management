@@ -133,9 +133,6 @@ function HelperPersonnelConfig:isGameplayExperienceEffectEnabled(effectName)
         return false
     end
 
-    -- Zuverlaessigkeit ist ein eigener Gameplay-Wert und darf nicht am
-    -- Erfahrungshauptschalter haengen. Wird Erfahrung deaktiviert, soll
-    -- Zuverlaessigkeit getrennt weiter ein- oder ausgeschaltet werden koennen.
     if effectName == "reliability" then
         return self.reliabilityEffectsEnabled == true
     end

@@ -42,10 +42,7 @@ HelperPersonnelManager.LAST_NAMES = {
 HelperPersonnelManager.MIN_RECORDED_JOB_DURATION_MS = 10000
 HelperPersonnelManager.EXPERIENCE_MINUTES_PER_POINT = 50
 HelperPersonnelManager.MAX_EXPERIENCE_GAIN_PER_JOB = 2
--- Erfahrungszuwachs: Anfänger lernen noch spürbar, sehr erfahrene Mitarbeiter aber
--- deutlich langsamer. Werte ab 90 sollen im normalen Spielverlauf selten bleiben,
--- damit Spezialisierungen über lange Zeit sinnvoll bleiben und Erfahrung 100 ein
--- langfristiger Ausnahmefall ist.
+
 HelperPersonnelManager.EXPERIENCE_LEARNING_TIERS = {
     {maxExperience = 24, minutesPerPoint = 25, monthlyLimitAdjustment = 1},
     {maxExperience = 49, minutesPerPoint = 50, monthlyLimitAdjustment = 0},
@@ -94,7 +91,6 @@ HelperPersonnelManager.MIN_EMPLOYER_REPUTATION = 0
 HelperPersonnelManager.MAX_EMPLOYER_REPUTATION = 100
 HelperPersonnelManager.PERIOD_CHECK_INTERVAL_MS = 1000
 
--- Optionales Diagnose-Logging. Standardmaessig aus.
 HelperPersonnelManager.CONFIG_DEBUG_LOGGING = false
 HelperPersonnelManager.WAGE_DEBUG_LOGGING = false
 HelperPersonnelManager.WAGE_DEBUG_INTERVAL_MS = 30000
@@ -222,7 +218,6 @@ HelperPersonnelManager.SALARY_RELIABILITY_MAX_FACTOR = 1.06
 HelperPersonnelManager.APPLICANT_SALARY_RANDOM_MIN = 96
 HelperPersonnelManager.APPLICANT_SALARY_RANDOM_MAX = 106
 
-
 HelperPersonnelManager.SPECIALIZATION_NONE = "none"
 HelperPersonnelManager.SPECIALIZATION_TILLAGE = "tillage"
 HelperPersonnelManager.SPECIALIZATION_SOWING = "sowing"
@@ -237,22 +232,16 @@ HelperPersonnelManager.SPECIALIZATION_PRIMARY_EXPERIENCE_BONUS = 12
 HelperPersonnelManager.SPECIALIZATION_SECONDARY_EXPERIENCE_BONUS = 6
 HelperPersonnelManager.SPECIALIZATION_PRIMARY_WAGE_MULTIPLIER = 1.05
 HelperPersonnelManager.SPECIALIZATION_SECONDARY_WAGE_MULTIPLIER = 1.03
--- Lernzeit wird in echten Arbeitsminuten des KI-Einsatzes gezaehlt.
--- Die Werte sind bewusst erreichbar, aber nicht sofort: mehrere passende Einsaetze
--- sollen noetig sein, damit Spezialisierungen ein langfristiger Mitarbeiterwert bleiben.
+
 HelperPersonnelManager.SPECIALIZATION_PRIMARY_LEARN_MINUTES = 240
 HelperPersonnelManager.SPECIALIZATION_SECONDARY_LEARN_MINUTES = 420
 HelperPersonnelManager.SPECIALIZATION_MIN_PRACTICE_JOB_MINUTES = 3
 HelperPersonnelManager.SPECIALIZATION_LEARNING_MIN_FACTOR = 0.75
 HelperPersonnelManager.SPECIALIZATION_LEARNING_MAX_FACTOR = 1.30
 
--- Schulungen geben gezielt Fortschritt fuer die aktuell angezeigte Lernrichtung.
--- Sie ersetzen die Arbeit nicht, sondern helfen nach, wenn bereits praktische
--- Erfahrung in diesem Bereich vorhanden ist.
 HelperPersonnelManager.TRAINING_PROGRESS_FRACTION = 0.30
 HelperPersonnelManager.TRAINING_MIN_PROGRESS_MINUTES = 30
--- Schulungskosten orientieren sich am Monatsgehalt.
--- Der Faktor bildet nur ab, dass manche Fachrichtungen aufwendiger sind.
+
 HelperPersonnelManager.TRAINING_SALARY_FACTORS = {
     [HelperPersonnelManager.SPECIALIZATION_TILLAGE] = 0.75,
     [HelperPersonnelManager.SPECIALIZATION_SOWING] = 0.90,
@@ -310,7 +299,6 @@ HelperPersonnelManager.SPECIALIZATION_TASK_KEYS = {
     [HelperPersonnelManager.SPECIALIZATION_HARVEST] = true,
     [HelperPersonnelManager.SPECIALIZATION_TRANSPORT] = true
 }
-
 
 HelperPersonnelManager.namesXmlSchema = XMLSchema.new("helperPersonnelNames")
 HelperPersonnelManager.namesXmlSchema:register(XMLValueType.STRING, "helperPersonnelNames.firstNamesMale.name(?)#value", "Male first name")
@@ -407,7 +395,6 @@ local function hpNormalizeNamePoolLanguageCode(value)
         return "tr"
     end
 
-    -- LS/FS nutzt in den Sprachdateien dieses Mods "cz" fuer Tschechisch.
     if baseCode == "cz" or code == "cze" or code == "cesky" or code == "česky" or code == "czech" then
         return "cz"
     end
@@ -452,7 +439,6 @@ local function hpNormalizeNamePoolLanguageCode(value)
         return "kr"
     end
 
-    -- In den FS25-Sprachdateien dieses Mods steht "cs" fuer vereinfachtes Chinesisch.
     if baseCode == "cs" or baseCode == "zh" or baseCode == "cn" or baseCode == "ct" or code == "zh_cn" or code == "chs" or code == "chinese" or code == "simplified_chinese" then
         return "cs"
     end
@@ -757,7 +743,7 @@ function HelperPersonnelManager:loadNamePools()
         self.firstNamesFemale = self:loadNamePoolFromXML(xmlFile, localizedRootKey .. ".firstNamesFemale", HelperPersonnelManager.FIRST_NAMES_FEMALE)
         self.lastNames = self:loadNamePoolFromXML(xmlFile, localizedRootKey .. ".lastNames", HelperPersonnelManager.LAST_NAMES)
     else
-        -- Rueckwaertskompatibilitaet fuer alte Namensdateien ohne Sprachbloecke.
+
         self.firstNamesMale = self:loadNamePoolFromXML(xmlFile, "helperPersonnelNames.firstNamesMale", HelperPersonnelManager.FIRST_NAMES_MALE)
         self.firstNamesFemale = self:loadNamePoolFromXML(xmlFile, "helperPersonnelNames.firstNamesFemale", HelperPersonnelManager.FIRST_NAMES_FEMALE)
         self.lastNames = self:loadNamePoolFromXML(xmlFile, "helperPersonnelNames.lastNames", HelperPersonnelManager.LAST_NAMES)
@@ -1247,7 +1233,6 @@ function HelperPersonnelManager:copySpecializationProgresses(person)
     return result
 end
 
-
 function HelperPersonnelManager:readSpecializationProgressesFromXML(xmlFile, basePath)
     local progresses = {}
     if xmlFile == nil or basePath == nil then
@@ -1337,7 +1322,6 @@ function HelperPersonnelManager:getPersonSpecializationExperienceBonus(person, s
         return HelperPersonnelManager.SPECIALIZATION_SECONDARY_EXPERIENCE_BONUS or 0
     end
 
-    -- Allgemeine Spezialisierungen greifen etwas breiter, ohne die Maximalwerte zu überschreiten.
     if (specializationKey == HelperPersonnelManager.SPECIALIZATION_TILLAGE
         or specializationKey == HelperPersonnelManager.SPECIALIZATION_SOWING
         or specializationKey == HelperPersonnelManager.SPECIALIZATION_FERTILIZING
@@ -1764,9 +1748,6 @@ function HelperPersonnelManager:isTrainingStartAllowedNow()
         return false, "notFirstDay", currentDay, nil, daysPerMonth
     end
 
-    -- Bei einem Tag pro Monat waere eine Schulung um 23:50 Uhr sonst fast
-    -- folgenlos. Deshalb gilt hier derselbe einfache Stichtag wie bei
-    -- eintägigen Kuendigungsfristen: Beginn nur bis 12:00 Uhr.
     if daysPerMonth <= 1 then
         local currentMinute = self:getIngameDayMinute()
         local deadlineMinute = HelperPersonnelManager.TRAINING_SINGLE_DAY_START_DEADLINE_MINUTE or 720
@@ -1974,16 +1955,11 @@ end
 
 function HelperPersonnelManager:rollApplicantExperience()
     local reputation = self:getEmployerReputation()
-    -- Gutes Arbeitgeberansehen soll bessere Bewerber begünstigen, aber keine
-    -- dauerhaft hohen 90er-Werte auf den Markt spülen. Deshalb ist die Verschiebung
-    -- bewusst klein gedeckelt.
+
     local repShift = math.max(-4, math.min(4, math.floor(((reputation or 60) - 60) / 10 + 0.5)))
     local r = math.random()
     local experience
 
-    -- Die meisten Bewerber liegen im unteren bis mittleren Bereich. Starke Bewerber
-    -- kommen vor, sehr starke Bewerber sind selten, und 95-100 entsteht praktisch
-    -- nicht mehr zufällig auf dem Bewerbermarkt.
     if r < 0.64 then
         experience = math.random(8, 42)
     elseif r < 0.86 then
@@ -2003,10 +1979,6 @@ function HelperPersonnelManager:getApplicantSpecializationChance(experience, rel
     experience = self:clampPersonStat(experience or 0)
     reliability = self:clampPersonStat(reliability or 0)
 
-    -- Die erste Testfassung war spielmechanisch korrekt, aber fuer reale Tests
-    -- zu zurueckhaltend: Bei einem normalen Bewerbermarkt konnten sehr haeufig alle
-    -- Bewerber ohne Spezialisierung erscheinen. Die Chance bleibt gestaffelt und
-    -- begrenzt, ist aber sichtbar genug, um die neue Mechanik im normalen Spiel zu erleben.
     local chance = 0.14
 
     if experience >= 45 then
@@ -2071,9 +2043,6 @@ end
 function HelperPersonnelManager:getSmoothedExperienceForGameplay(experience)
     experience = self:clampPersonStat(experience or 0)
 
-    -- Anzeige und gespeicherter Wert bleiben unverändert. Nur die Wirkung im Spiel
-    -- wird leicht abgeflacht: Hohe Werte liegen näher beieinander, 100 bleibt aber
-    -- weiterhin der beste und vollständige Maximalwert.
     if experience <= 0 then
         return 0
     elseif experience >= 100 then
@@ -2344,8 +2313,7 @@ function HelperPersonnelManager:repairApplicantGendersFromHelperProfiles()
         if Logging ~= nil and Logging.info ~= nil then
             HelperPersonnel.debugInfo("FS25_HelperPersonnel: Bewerber-Geschlechter anhand der live erkannten Helferprofile korrigiert")
         end
-        -- Diese Korrektur laeuft direkt beim Laden. Ein GUI-Refresh ist hier nicht noetig
-        -- und darf nur aufgerufen werden, wenn die Methode in einer spaeteren Version existiert.
+
         if type(self.notifyDataChanged) == "function" then
             self:notifyDataChanged()
         end
@@ -2407,7 +2375,7 @@ function HelperPersonnelManager:resetWorkerExperiencePeriodIfNeeded(worker, peri
         worker.experiencePeriod = period
         worker.experienceYear = year
         worker.experienceThisPeriod = 0
-        -- Angearbeiteter Erfahrungsfortschritt bleibt erhalten. Nur das Monatslimit wird zurückgesetzt.
+
         worker.experienceProgressMinutes = math.max(0, math.floor((tonumber(worker.experienceProgressMinutes) or 0) + 0.5))
     end
 end
@@ -2729,8 +2697,7 @@ function HelperPersonnelManager:loadFromSavegame()
             trainingActiveSpecialization = xmlFile:getString(key .. "#trainingActiveSpecialization"),
             wage = xmlFile:getFloat(key .. "#wage", 1000),
             baseWage = xmlFile:getFloat(key .. "#baseWage"),
-            -- Der gespeicherte Beschaeftigt-Status ist nur ein Wiederherstellungs-Hinweis.
-            -- Wirklich "im Einsatz" wird der Mitarbeiter erst, wenn ein aktiver KI-Job gefunden wurde.
+
             busy = false,
             vehicleName = "",
             vehicleKey = nil,
@@ -3270,9 +3237,7 @@ function HelperPersonnelManager:loadRestoredActiveJobsFromVehiclesXML(savePath)
         local workerId = xmlFile:getInt(jobKey .. "#helperPersonnelWorkerId", -1)
 
         if workerId ~= nil and workerId > 0 then
-            -- Der Eintrag lastJob bleibt auch bei nicht aktiven Fahrzeugen bestehen.
-            -- Deshalb wird nur eine Zuordnung aus vehicles.xml uebernommen, wenn das Fahrzeug
-            -- beim Speichern wirklich einen aktiven Feldarbeits-KI-Job hatte.
+
             local isActiveFieldWorker = xmlFile:getBool(vehicleKey .. ".aiFieldWorker#isActive", false)
 
             if isActiveFieldWorker == true then
@@ -3398,9 +3363,6 @@ function HelperPersonnelManager:touch(lastActionText)
 
     self.changeCounter = self.changeCounter + 1
 
-    -- Nur als geaendert markieren. Dauerhaft geschrieben wird ausschliesslich
-    -- beim regulaeren Savegame-Speichern des Spiels. Dadurch werden Personal-
-    -- aenderungen korrekt verworfen, wenn der Spieler ohne Speichern beendet.
 end
 
 function HelperPersonnelManager:getLastActionText()
@@ -3475,7 +3437,6 @@ function HelperPersonnelManager:getWorkerByVehicleKey(vehicleKey)
 
     return nil
 end
-
 
 function HelperPersonnelManager:getPendingRestoredWorkerCount()
     local count = 0
@@ -3666,7 +3627,6 @@ function HelperPersonnelManager:hireApplicant(applicantId)
     return true
 end
 
-
 function HelperPersonnelManager:addMonthsToPeriod(period, year, months)
     period = math.max(1, math.floor((tonumber(period) or 1) + 0.5))
     year = math.max(1, math.floor((tonumber(year) or 1) + 0.5))
@@ -3696,7 +3656,7 @@ function HelperPersonnelManager:isDismissalNoticeInTimeForCurrentPeriod()
     local currentMinute = self:getIngameDayMinute()
 
     if currentDay == nil then
-        -- Ohne auslesbaren Spieltag wird zugunsten des Spielers vom rechtzeitigen Zugang ausgegangen.
+
         return true, nil, currentMinute, deadlineDay, deadlineMinute
     end
 
@@ -3858,9 +3818,6 @@ function HelperPersonnelManager:startWorkerJob(workerId, vehicleName, vehicleKey
     worker.vehicleKey = vehicleKey
     worker.nightWorkLastMinute = self:getIngameDayMinute()
 
-    -- Wird ein beim Speichern laufender Job nach dem Laden fortgesetzt, soll der
-    -- Mitarbeiter nicht als neuer Einsatz mit neuer Standard-Helferoptik starten.
-    -- Die bis zum Speichern gelaufene Einsatzzeit bleibt deshalb erhalten.
     if wasRestorePending and savedElapsedMs > 0 then
         worker.currentJobStartedAt = now - savedElapsedMs
         worker.currentJobElapsedMs = 0
@@ -3993,10 +3950,6 @@ function HelperPersonnelManager:normalizeHistoryText(text)
 
     text = tostring(text)
 
-    -- Verlaufstexte werden gespeichert und im Multiplayer vom Server an alle Clients
-    -- verteilt. Wenn ein Server mit englischer Spracheinstellung laeuft, sollen die
-    -- bisherigen deutschsprachigen Verlaufsbereiche im deutschen Spiel trotzdem nicht
-    -- mit englischen Standardmeldungen gefuellt werden.
     local hiredName = text:match("^(.+) has been hired%.$")
     if hiredName ~= nil then
         return string.format("%s wurde eingestellt.", hiredName)
@@ -4518,14 +4471,11 @@ end
 
 function HelperPersonnelManager:getPayrollMoneyType()
     if MoneyType ~= nil then
-        -- Monatsgehaelter sollen in der Finanzuebersicht als Lohnzahlung
-        -- erscheinen und nicht in der Sammelkategorie Sonstiges.
-        -- FS25 bucht KI-Helferkosten ueber MoneyType.AI.
+
         if MoneyType.AI ~= nil then
             return MoneyType.AI
         end
 
-        -- Fallbacks nur fuer abweichende oder kuenftige Spielversionen.
         local wageMoneyTypes = {
             MoneyType.HIRED_WORKER,
             MoneyType.HIRED_HELPER,
@@ -4773,9 +4723,6 @@ function HelperPersonnelManager:getApplicantPeriodInfo(period, year)
         local environmentPeriod = tonumber(environment.currentPeriod) or tonumber(environment.period)
         local environmentYear = tonumber(environment.currentYear) or tonumber(environment.year)
 
-        -- PERIOD_CHANGED and the following update tick can expose the period in slightly
-        -- different ways. Use the mission environment as canonical value whenever it is
-        -- available, so the applicant market is advanced only once per real period change.
         if environmentPeriod ~= nil then
             period = environmentPeriod
         end
@@ -4807,9 +4754,6 @@ end
 function HelperPersonnelManager:initializeNewApplicantMarket()
     self.applicants = {}
 
-    -- Neuer Spielstand / neuer Hof: Der Markt soll nicht leer starten. Die normale
-    -- Monatslogik bleibt zufallsbasiert, aber der erste Markt wird bewusst mit drei
-    -- Bewerbern gefuellt, damit direkt Personal eingestellt werden kann.
     local maxApplicants = HelperPersonnelManager.MAX_APPLICANTS or 6
     local initialApplicantCount = math.min(3, maxApplicants)
 
@@ -4828,8 +4772,6 @@ end
 function HelperPersonnelManager:getMonthlyApplicantChance()
     local reputation = self:clampEmployerReputation(self.employerReputation)
 
-    -- Bei schlechtem Ansehen ist auch 0 realistisch, bei gutem Ansehen sind 2 bis 3
-    -- Bewerber wahrscheinlicher. Trotzdem bleibt jede Monatsrunde ein Zufallsergebnis.
     return 0.15 + ((reputation / 100) * 0.70)
 end
 
@@ -4873,7 +4815,6 @@ function HelperPersonnelManager:generateMonthlyApplicants(forceAtLeastOne)
 
     return count
 end
-
 
 function HelperPersonnelManager:resetWorkerReliabilityDevelopmentCounters(worker, period, year)
     if type(worker) ~= "table" then
@@ -5294,9 +5235,6 @@ function HelperPersonnelManager:createRandomApplicant()
     local gender = math.random(1, 2) == 1 and HelperPersonnelManager.GENDER_MALE or HelperPersonnelManager.GENDER_FEMALE
     local avatarIndex = self:getRandomAvatarIndexForGender(gender)
 
-    -- Der Avatar bestimmt am Ende das sichtbare Erscheinungsbild.
-    -- Deshalb wird das Geschlecht nach der Avatar-Wahl noch einmal daran ausgerichtet,
-    -- damit Vorname, Porträt und späterer KI-Helfer zusammenpassen.
     gender = self:getGenderForAvatarIndex(avatarIndex) or gender
 
     local person = {
@@ -5406,9 +5344,7 @@ function HelperPersonnelManager:formatWorkMinutes(minutes)
 end
 
 function HelperPersonnelManager:getMonthName(period)
-    -- FS25 verwendet intern Perioden im Landwirtschaftsjahr.
-    -- Periode 1 ist März, Periode 6 ist August. Für die Anzeige darf
-    -- dieser Wert deshalb nicht wie ein normaler Kalendermonat gelesen werden.
+
     local monthNamesByPeriod = {
         "März", "April", "Mai", "Juni", "Juli", "August",
         "September", "Oktober", "November", "Dezember", "Januar", "Februar"
@@ -5806,7 +5742,6 @@ function HelperPersonnelManager:applyNetworkState(state)
     return true
 end
 
-
 function HelperPersonnelManager:getIngameDayMinute()
     local environment = g_currentMission ~= nil and g_currentMission.environment or nil
     local dayTime = nil
@@ -5831,8 +5766,6 @@ function HelperPersonnelManager:getIngameDayMinute()
         return nil
     end
 
-    -- Giants speichert die Tageszeit ueblicherweise in Millisekunden. Der Rueckfall
-    -- deckt Werte in Sekunden oder Minuten defensiv ab, falls ein anderer Pfad greift.
     if dayTime > 1440 then
         return math.floor((dayTime % 86400000) / 60000)
     elseif dayTime > 24 then
@@ -6238,9 +6171,6 @@ function HelperPersonnelManager:getPayrollLoyaltyDelta(payrollDelta)
         local reputation = self.getEmployerReputation ~= nil and self:getEmployerReputation() or self.employerReputation
         reputation = tonumber(reputation) or HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50
 
-        -- Puenktliche Gehaltszahlung ist bei schwachem Arbeitgeberansehen nur noch neutral.
-        -- Ein stark belastetes Verhaeltnis wird nicht automatisch durch eine einzelne
-        -- normale Gehaltszahlung verbessert.
         if reputation < (HelperPersonnelManager.LOYALTY_PAYROLL_BONUS_MIN_REPUTATION or 40) then
             return 0
         end
@@ -6299,10 +6229,6 @@ function HelperPersonnelManager:getNightWorkLoyaltyDelta(worker)
     local dampedWorkMinutes = math.min(ingameMinutes, realtimeMinutes * dampedRealtimeFactor)
     local penalty = 0
 
-    -- Nachtarbeit muss weiterhin nachts im Spiel stattgefunden haben. Die zweite
-    -- Komponente begrenzt extremen Zeitvorlauf: Bei 240x zaehlt eine komplette
-    -- Nacht nicht so stark wie bei normaler Geschwindigkeit, aber auch nicht als
-    -- fast folgenloser Zwei-Minuten-Einsatz.
     if ingameMinutes >= minIngameMinutes then
         penalty = penalty + 1
     end
@@ -6676,7 +6602,6 @@ function HelperPersonnelManager:processDailyLoyaltyChanges(period, year)
     return totalDelta, affectedWorkers
 end
 
-
 function HelperPersonnelManager:getLoyaltyResignationChance(worker)
     if type(worker) ~= "table" or worker.resignationPending == true or worker.dismissalPending == true then
         return 0
@@ -6866,9 +6791,6 @@ function HelperPersonnelManager:processDailyLoyaltyEvaluationIfDue(currentMinute
     local _, affectedWorkers = self:processDailyLoyaltyChanges(period, year)
     return affectedWorkers > 0
 end
-
--- Multiplayer farm separation (v1.5.1.0)
--- Keeps the existing UI untouched and moves all gameplay data into farm-scoped containers.
 
 local HP_ORIGINAL_MANAGER_LOAD_FROM_SAVEGAME = HelperPersonnelManager.loadFromSavegame
 local HP_ORIGINAL_MANAGER_ON_PERIOD_CHANGED = HelperPersonnelManager.onPeriodChanged
@@ -7206,8 +7128,6 @@ function HelperPersonnelManager:ensureInitialApplicantMarketForFarmData(data)
         return 0
     end
 
-    -- Wenn der Hof bereits echte Personaldaten oder Historie hat, darf ein leerer Markt
-    -- nicht automatisch aufgefuellt werden. Dann gilt der Markt als bereits initialisiert.
     local hasExistingProgress = #data.workers > 0
         or #data.applicants > 0
         or (data.lastActionText ~= nil and data.lastActionText ~= "")
@@ -8124,7 +8044,7 @@ function HelperPersonnelManager:applyNetworkState(state)
             self.farms[farmId] = data
         end
     else
-        -- Rueckfall fuer alte Netzwerkzustaende aus fruehen Testversionen.
+
         local farmId = state.activeFarmId or self:getCurrentFarmId()
         local data = self:createFarmData(farmId)
         data.workers = state.workers or {}
@@ -8205,7 +8125,6 @@ function HelperPersonnelManager:dismissWorkerForFarm(workerId, farmId)
     return result
 end
 
--- Farm-scoped calls from network actions must not accidentally switch back to the local player's farm.
 local HP_MANAGER_GET_CURRENT_FARM_ID_WITHOUT_FORCE = HelperPersonnelManager.getCurrentFarmId
 function HelperPersonnelManager:getCurrentFarmId()
     if self.forcedFarmId ~= nil then
@@ -8232,9 +8151,6 @@ function HelperPersonnelManager:dismissWorkerForFarm(workerId, farmId)
     return result
 end
 
--- Multiplayer farm authority refinement (v1.5.3.0)
--- Executes farm-specific server operations inside the requested farm context so that
--- payroll, applicant updates and network actions cannot accidentally use the host player's farm.
 function HelperPersonnelManager:executeWithFarmContext(farmId, callback, storeChanges)
     if callback == nil then
         return nil

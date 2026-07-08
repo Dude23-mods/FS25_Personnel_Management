@@ -8,10 +8,6 @@ HelperPersonnelHelperBridge.BASE_HELPER_NAMES_BY_AVATAR = {
 HelperPersonnelHelperBridge.GENDER_MALE = "male"
 HelperPersonnelHelperBridge.GENDER_FEMALE = "female"
 
--- Fallback fuer Standard-Helper A bis J. Wenn das Spiel die Geschlechtsinfo
--- aus dem PlayerStyle eindeutig hergibt, wird diese Tabelle zur Laufzeit
--- uebersteuert. Sie verhindert aber, dass bei nicht auslesbarer Style-Info
--- wahllos ein unpassender Standard-Helfer verwendet wird.
 HelperPersonnelHelperBridge.BASE_HELPER_GENDERS_BY_NAME = {
     A = HelperPersonnelHelperBridge.GENDER_MALE,
     B = HelperPersonnelHelperBridge.GENDER_MALE,
@@ -29,7 +25,6 @@ HelperPersonnelHelperBridge.BASE_HELPER_NAMES_BY_GENDER = {
     [HelperPersonnelHelperBridge.GENDER_MALE] = {"A", "B", "E", "G", "H", "J"},
     [HelperPersonnelHelperBridge.GENDER_FEMALE] = {"C", "D", "F", "I"}
 }
-
 
 function HelperPersonnelHelperBridge.new(app, customMt)
     local self = setmetatable({}, customMt or HelperPersonnelHelperBridge_mt)
@@ -168,8 +163,6 @@ function HelperPersonnelHelperBridge:detectGenderHintFromString(value)
 
     local lowerValue = string.lower(value)
 
-    -- Avatar-Pfade aus dem Grundspiel enthalten häufig playerF/playerM.
-    -- Diese Pfadangaben sind zuverlässiger als eine fest angenommene Helfer-Reihenfolge.
     if string.find(lowerValue, "playerf", 1, true) ~= nil or string.find(lowerValue, "/f/", 1, true) ~= nil or string.find(lowerValue, "\\f\\", 1, true) ~= nil then
         return HelperPersonnelHelperBridge.GENDER_FEMALE
     end
@@ -211,7 +204,6 @@ function HelperPersonnelHelperBridge:getSelectedConfigItem(config)
 
     return nil
 end
-
 
 function HelperPersonnelHelperBridge:normalizeHeadPortraitFilename(value)
     if type(value) ~= "string" then
@@ -399,8 +391,7 @@ function HelperPersonnelHelperBridge:getPortraitFilenameForPerson(person)
 
     local filename = self:getPortraitFilenameForBaseHelper(helper)
     if filename == nil then
-        -- Kein Cache fuer reine Fallbacks: Falls das Menue sehr frueh geoeffnet wird,
-        -- kann der echte PlayerStyle spaeter trotzdem noch nachgezogen werden.
+
         return self:getFallbackPortraitFilenameForPerson(person)
     end
 
@@ -725,9 +716,6 @@ function HelperPersonnelHelperBridge:getBaseHelperForWorker(worker)
         return genderMatchedHelper
     end
 
-    -- Fallback: Die Standard-Helfer werden vom Spiel vor eigenen Helper-Eintraegen geladen.
-    -- Falls der Name auf einer Map anders lautet, passt der Avatarindex deshalb in der Regel
-    -- trotzdem zum Helperindex A bis J.
     if avatarIndex ~= nil and g_helperManager.getHelperByIndex ~= nil then
         local helper = g_helperManager:getHelperByIndex(avatarIndex)
         if helper ~= nil and helper.playerStyle ~= nil and helper.helperPersonnelWorkerId == nil then
@@ -802,9 +790,7 @@ function HelperPersonnelHelperBridge:ensureHelperProfile(worker)
     end
 
     if helper ~= nil then
-        -- helper.name wird vom Spiel an mehreren Stellen direkt angezeigt
-        -- (z.B. Blockade-Meldungen und Fahrzeug-HUD). Der interne Schlüssel
-        -- bleibt separat gespeichert, damit die Zuordnung trotzdem stabil ist.
+
         helper.name = title
         helper.title = title
         helper.helperPersonnelKey = helperKey
@@ -831,9 +817,6 @@ function HelperPersonnelHelperBridge:ensureHelperProfile(worker)
         self.customProfilesByHelperName[helperKey] = worker.id
         self.workerIdByHelperIndex[helper.index] = worker.id
 
-        -- Beim Laden eines Spielstands startet das Grundspiel laufende KI-Jobs teilweise
-        -- schon mit dem Basis-Helfer A-J. Diese Rueckfallzuordnung sorgt dafuer, dass
-        -- der laufende Job trotzdem wieder dem gespeicherten Mitarbeiter gehoert.
         if worker.assignedBaseHelperIndex ~= nil and (worker.busy == true or worker.restorePending == true) then
             self.workerIdByHelperIndex[worker.assignedBaseHelperIndex] = worker.id
         end
@@ -1058,8 +1041,6 @@ function HelperPersonnelHelperBridge:getWorkerIdByJob(job)
         return workerId
     end
 
-    -- Nach Savegame-Load ist die Fahrzeugzuordnung zuverlässiger als der
-    -- Grundspiel-helperIndex. Den Index teilen sich weiterhin die Standard-Helfer A bis J.
     local vehicleKey = self:getVehicleKeyFromJob(job)
     if vehicleKey ~= nil then
         workerId = self:getWorkerIdByVehicleKey(vehicleKey)
@@ -1070,7 +1051,6 @@ function HelperPersonnelHelperBridge:getWorkerIdByJob(job)
 
     return nil
 end
-
 
 function HelperPersonnelHelperBridge:resolveRestoredWorkerIdForJob(job)
     if job == nil or self.app == nil or self.app.manager == nil then
@@ -1117,9 +1097,6 @@ function HelperPersonnelHelperBridge:resolveRestoredWorkerIdForJob(job)
         end
     end
 
-    -- Abwaertskompatibilitaet fuer alte Savegames: Dort wurde teils nur ein
-    -- sitzungsabhaengiger rootNode-Wert gespeichert. Wenn genau ein aktiver
-    -- Mitarbeiter wiederherzustellen ist, kann er eindeutig zugeordnet werden.
     if self.app.manager.getSinglePendingRestoredWorker ~= nil then
         local worker = self.app.manager:getSinglePendingRestoredWorker()
         if worker ~= nil then
@@ -1305,8 +1282,6 @@ function HelperPersonnelHelperBridge:onJobStopped(job)
     job.helperPersonnelWorkerId = nil
 end
 
-
--- Multiplayer farm separation: helper profiles must cover all hired employees, not only the local farm view.
 local HP_ORIGINAL_HELPER_BRIDGE_REBUILD_PROFILES = HelperPersonnelHelperBridge.rebuildHelperProfiles
 function HelperPersonnelHelperBridge:rebuildHelperProfiles()
     self:clearCustomProfiles()
@@ -1327,9 +1302,6 @@ function HelperPersonnelHelperBridge:rebuildHelperProfiles()
     end
 end
 
--- Multiplayer authority hardening (v1.5.2.0)
--- Clients may receive local AI job callbacks too, but gameplay state must only be changed by the server/host.
--- The local bridge maps are still maintained on every peer so helper names and restored job data remain readable.
 function HelperPersonnelHelperBridge:hpIsServerAuthority()
     if self.app ~= nil and self.app.isServerAuthority ~= nil then
         return self.app:isServerAuthority() == true
@@ -1397,7 +1369,6 @@ function HelperPersonnelHelperBridge:onJobStarted(job, workerId)
 
     self:hpSyncStateAfterJobChange(changed)
 end
-
 
 function HelperPersonnelHelperBridge:tryStopAIJob(job)
     if job == nil then

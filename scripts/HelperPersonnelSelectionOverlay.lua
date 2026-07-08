@@ -69,9 +69,7 @@ function HelperPersonnelSelectionOverlay:open(vehicle, callback)
     self.lastFallbackCommand = nil
 
     self:suspendGameplayInput()
-    -- Die Auswahl wird bewusst über den Tastatur-Fallback gesteuert.
-    -- Eigene ActionEvents kollidieren bei A/D mit der Fahrzeugsteuerung und
-    -- werden von FS25 je nach Kontext nicht zuverlässig registriert.
+
     self.actionsRegistered = false
     return true
 end
@@ -231,11 +229,6 @@ end
 function HelperPersonnelSelectionOverlay:suspendGameplayInput()
     self:restoreGameplayInput()
 
-    -- Das Auswahlfenster ist ein leichtes Spiel-Overlay und kein komplettes
-    -- Giants-GUI-Fenster. Damit A/D, Enter und Esc nicht gleichzeitig vom
-    -- Fahrzeug verarbeitet werden, wird die normale Spielsteuerung während
-    -- der Auswahl eingefroren. Die Rohabfrage der Tasten im Overlay bleibt
-    -- dabei funktionsfähig.
     if g_currentMission ~= nil then
         self.playerFrozenBackup = g_currentMission.isPlayerFrozen
         g_currentMission.isPlayerFrozen = true
@@ -448,8 +441,7 @@ function HelperPersonnelSelectionOverlay:isAnyKeyPressed(keyNames)
 end
 
 function HelperPersonnelSelectionOverlay:update(dt)
-    -- Zusätzlicher Tastatur-Fallback, falls FS25 eine benutzerdefinierte
-    -- inputBinding aus irgendeinem Grund nicht als ActionEvent annimmt.
+
     if not self.isVisible then
         self.lastFallbackCommand = nil
         return

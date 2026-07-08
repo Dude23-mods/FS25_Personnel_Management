@@ -36,10 +36,6 @@ local function addInGameMenuPage(frame, pageName, iconFilename, iconUVs, iconUVP
 
     inGameMenu[pageName] = frame
 
-    -- v1.5.6.10: Stabilitaet vor Positionierung.
-    -- Die Personalmanagement-Seite wird erst nach Mission00.loadMission00Finished registriert
-    -- und dann nur an die vom Spiel fertig aufgebaute Seitenliste angehaengt. Es wird keine
-    -- GIANTS-Seitenliste umsortiert und kein nachtraeglicher Reiterlisten-Refresh erzwungen.
     local ok, message = pcall(function()
         if inGameMenu.pagingElement ~= nil and inGameMenu.pagingElement.addElement ~= nil then
             inGameMenu.pagingElement:addElement(frame)
@@ -107,8 +103,7 @@ function HelperPersonnelApp:load()
         self:restoreActiveAIJobs()
         self.lastNetworkSyncCounter = -1
     else
-        -- Multiplayer-Clients erzeugen keinen eigenen Bewerbermarkt.
-        -- Der vollstaendige Zustand kommt ausschliesslich vom Server.
+
         self.manager.lastActionText = "Warte auf Serverdaten"
         self:requestNetworkState()
     end
@@ -128,9 +123,6 @@ end
 function HelperPersonnelApp:beginMissionDelete()
     self.isMissionDeleting = true
 
-    -- Zu Beginn des Missionsabbaus sind aktive KI-Jobs in der Regel noch vorhanden.
-    -- Der Snapshot wird hier nur im Speicher aktualisiert. Geschrieben wird beim eigentlichen
-    -- Savegame-Lauf, nicht beim spaeteren Aufraeumen der Mission.
     if self.manager ~= nil and self.prepareSaveSnapshot ~= nil then
         self:prepareSaveSnapshot()
     end
@@ -140,10 +132,6 @@ function HelperPersonnelApp:delete()
     if g_messageCenter ~= nil and g_messageCenter.unsubscribeAll ~= nil then
         g_messageCenter:unsubscribeAll(self)
     end
-
-    -- Nicht beim Loeschen/Verlassen sichern. Personal- und Bewerberdaten
-    -- duerfen nur beim regulaeren Savegame-Speichern dauerhaft geschrieben werden.
-    -- Dadurch werden Aenderungen korrekt verworfen, wenn der Spieler ohne Speichern beendet.
 
     if self.selectionOverlay ~= nil then
         self.selectionOverlay:delete()
@@ -174,10 +162,6 @@ function HelperPersonnelApp:save()
         return
     end
 
-    -- Vor jedem Schreiben der Mod-Savegame-Datei wird die laufende KI-Zuordnung
-    -- direkt aus dem aktuellen AISystem ermittelt. Damit ist die Zuordnung nicht
-    -- davon abhaengig, ob der vorgelagerte FSBaseMission.saveSavegame-Hook in
-    -- jeder Speichersituation sicher ausgefuehrt wurde.
     self:prepareSaveSnapshot()
 
     if self.manager ~= nil then
@@ -334,10 +318,7 @@ function HelperPersonnelApp:restoreActiveAIJobs()
 end
 
 function HelperPersonnelApp:onMission00Loaded()
-    -- Die Datenlogik darf frueh laden, die ESC-Menue-Seite aber erst, wenn das Grundspiel
-    -- seine eigene InGameMenu-Seitenliste vollstaendig aufgebaut hat. Sonst wird die
-    -- Personalmanagement-Seite zwischen spaeter registrierte GIANTS-Seiten geschoben und die linke
-    -- Reiterliste berechnet ihre Scrollgrenzen sichtbar falsch.
+
     self.menuRegistrationAllowed = true
     self:tryRegisterGui()
 end
@@ -384,8 +365,7 @@ function HelperPersonnelApp:tryRegisterGui()
     end
 
     local iconFilename = Utils.getFilename("gui/menuicon_personell.dds", self.modDir)
-    -- Eigenes 256x256-Icon: GuiUtils.getUVs nutzt ohne Referenz 1024x1024.
-    -- Mit expliziter Referenz wird die komplette Textur fuer den ESC-Menue-Reiter verwendet.
+
     local iconUVs = GuiUtils.getUVs({0, 0, 256, 256}, {256, 256})
 
     self.menuRegistered = addInGameMenuPage(self.frame, "helperPersonnelPage", iconFilename, iconUVs, {0, 0, 256, 256})
@@ -414,9 +394,6 @@ function HelperPersonnelApp:getVehicleKey(vehicle)
         return nil
     end
 
-    -- rootNode-Werte sind nur innerhalb der aktuellen Spielsitzung stabil.
-    -- Für Savegame-Wiederherstellungen wird deshalb zuerst die dauerhafte
-    -- Fahrzeug-ID aus dem Savegame verwendet, sofern das Fahrzeug sie anbietet.
     if rootVehicle.getUniqueId ~= nil then
         local success, uniqueId = pcall(rootVehicle.getUniqueId, rootVehicle)
         if success and uniqueId ~= nil and tostring(uniqueId) ~= "" then
@@ -490,8 +467,6 @@ function HelperPersonnelApp:isLocalizationKey(text)
         return false
     end
 
-    -- Freitexte für Ingame-Meldungen dürfen nicht erneut als l10n-Schlüssel
-    -- behandelt werden. GIANTS gibt sonst "Missing '<Text>' in l10n..." zurück.
     if string.find(text, " ", 1, true) ~= nil then
         return false
     end
@@ -763,7 +738,6 @@ function HelperPersonnelApp:requestDismissWorker(workerId)
     return false
 end
 
--- Multiplayer farm separation app glue (v1.5.1.0)
 local HP_ORIGINAL_APP_LOAD = HelperPersonnelApp.load
 local HP_ORIGINAL_APP_APPLY_NETWORK_STATE = HelperPersonnelApp.applyNetworkState
 

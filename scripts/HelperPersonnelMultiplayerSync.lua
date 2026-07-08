@@ -1,6 +1,4 @@
--- Multiplayer-Synchronisierung v1.5.6.5
--- Diese Datei erweitert die bestehende Multiplayer-Grundlage, ohne GUI-Layout,
--- Profile, Symbolgroessen oder sichtbare Menuepositionen zu veraendern.
+
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
 HelperPersonnelNetwork.STATE_VERSION = 14
@@ -282,7 +280,6 @@ function HelperPersonnelNetwork.readState(streamId)
         return state
     end
 
-    -- Rueckfall fuer sehr fruehe interne Testversionen ohne Farm-Trennung.
     state.nextPersonId = streamReadInt32(streamId)
     state.changeCounter = streamReadInt32(streamId)
     state.workers = HelperPersonnelNetwork.readPersonArray(streamId, 0)
@@ -347,7 +344,6 @@ function HelperPersonnelNetworkSelectedWorkerEvent:run(connection)
     end
 end
 
--- Manager-Erweiterungen fuer serverseitige, hofbezogene Zustandsbilder.
 function HelperPersonnelManager:getWorkerFarmId(workerId)
     if self.findWorkerFarmData ~= nil then
         local _, farmId = self:findWorkerFarmData(workerId)
@@ -579,7 +575,6 @@ function HelperPersonnelManager:finishWorkerJobForFarm(workerId, farmId)
     return HP_V1540_ORIGINAL_MANAGER_FINISH_WORKER_JOB ~= nil and HP_V1540_ORIGINAL_MANAGER_FINISH_WORKER_JOB(self, workerId) == true
 end
 
--- App-Erweiterungen: Clients senden nur Auswahlwunsch, der Server setzt ihn verbindlich.
 function HelperPersonnelApp:getFarmIdForVehicle(vehicle, fallbackFarmId)
     if vehicle ~= nil and vehicle.getOwnerFarmId ~= nil then
         local ok, farmId = pcall(vehicle.getOwnerFarmId, vehicle)
@@ -649,7 +644,6 @@ function HelperPersonnelApp:applyNetworkState(state)
     return applied
 end
 
--- Bridge-Erweiterungen: aktive Fahrzeugzuordnungen aus Serverdaten nachziehen und Jobwechsel hofbezogen buchen.
 function HelperPersonnelHelperBridge:syncNetworkAssignmentsFromManager()
     self.vehicleWorkerIds = self.vehicleWorkerIds or {}
 
@@ -775,10 +769,6 @@ function HelperPersonnelHelperBridge:onJobStopped(job)
 
     self:hpSyncStateAfterJobChange(changed)
 end
-
--- Multiplayer-Absicherung fuer echte Clients v1.5.5.0
--- Diese Schicht veraendert kein Menue-Layout. Sie schuetzt Netzwerkaktionen
--- zusaetzlich gegen falsche Hofzuordnungen und fremde Fahrzeug-/Mitarbeiterzuweisungen.
 
 local function hpV1550NormalizeFarmId(farmId)
     farmId = tonumber(farmId)
@@ -985,7 +975,6 @@ function HelperPersonnelApp:resolveAuthorizedFarmId(connection, requestedFarmId,
     local strictVehicleFarmId = hpV1550NormalizeFarmId(vehicleFarmId)
     local connectionFarmId = self:getFarmIdFromConnection(connection)
 
-    -- Lokaler Host / Singleplayer: keine Client-Verbindung, daher bleibt der angeforderte Hof massgeblich.
     if connection == nil then
         return true, strictVehicleFarmId or requestFarmId or (self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1), nil
     end
@@ -1004,8 +993,6 @@ function HelperPersonnelApp:resolveAuthorizedFarmId(connection, requestedFarmId,
         return true, connectionFarmId, connectionFarmId
     end
 
-    -- Rueckfall: Sollte Giants in einer Spielumgebung keine FarmId direkt an der Verbindung anbieten,
-    -- wird die Aktion nicht hart blockiert. Die Zielobjekte werden danach trotzdem gegen den Hof geprueft.
     return true, strictVehicleFarmId or requestFarmId or (self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1), nil
 end
 
@@ -1161,7 +1148,6 @@ if HelperPersonnelAIStartHooks ~= nil and HP_V1550_ORIGINAL_SEND_SELECTED_AI_JOB
     end
 end
 
--- Spaeter Sicherheits-Nachtrag v1.5.5.0: Fahrzeug-Hof robust aus Fahrzeug und Root-Fahrzeug lesen.
 function HelperPersonnelApp:getStrictFarmIdForVehicle(vehicle)
     if vehicle == nil then
         return nil
@@ -1192,7 +1178,6 @@ function HelperPersonnelApp:getStrictFarmIdForVehicle(vehicle)
     return nil
 end
 
--- Spaeter Sicherheits-Nachtrag v1.5.5.0: Client-Hof auch ueber UserManager-Rueckfaelle suchen.
 function HelperPersonnelApp:getFarmIdFromConnection(connection)
     if connection == nil then
         return nil
@@ -1253,12 +1238,6 @@ function HelperPersonnelApp:getFarmIdFromConnection(connection)
     return nil
 end
 
--- Multiplayer-Nachtrag v1.5.6.1: Zustandsabgleich fuer spaeter beitretende Clients.
--- Ziel: Ein Client, der einem laufenden Spiel beitritt, fordert den aktuellen Serverstand
--- mehrfach defensiv an, bis er erfolgreich angewendet wurde. Der Server versucht zusaetzlich,
--- neu erkannte Client-Verbindungen einmalig direkt mit dem aktuellen Zustand zu versorgen.
--- Diese Schicht aendert keine GUI-Dateien und keine sichtbare Darstellung.
-
 local HP_V1560_CLIENT_REQUEST_INTERVAL_MS = 1000
 local HP_V1561_CLIENT_INITIAL_DELAY_MS = 2000
 local HP_V1560_CLIENT_REQUEST_MAX_ATTEMPTS = 90
@@ -1301,9 +1280,7 @@ end
 
 local HP_V1560_ORIGINAL_APP_LOAD = HelperPersonnelApp.load
 function HelperPersonnelApp:load()
-    -- Waehrend der fruehen Missionserstellung sind die Netzwerk-Event-IDs auf echten
-    -- Clients noch nicht immer belastbar. Deshalb werden Client-Anfragen erst nach
-    -- dem vollstaendigen Laden und einer kurzen Anlaufzeit freigegeben.
+
     self.hpJoinSyncApplied = false
     self.hpJoinSyncRequestTimer = 0
     self.hpJoinSyncRequestAttempts = 0
@@ -1318,9 +1295,7 @@ function HelperPersonnelApp:load()
     if self:isServerAuthority() then
         self.hpKnownSyncConnections = self.hpKnownSyncConnections or setmetatable({}, {__mode = "k"})
     elseif self:isMultiplayerClient() then
-        -- Die erste Anfrage aus der Grundlogik kann beim Betreten eines Servers zu frueh kommen.
-        -- Der eigentliche Abruf laeuft deshalb erst ueber update() an und wird wiederholt,
-        -- bis ein Serverzustand erfolgreich angewendet wurde.
+
         self.hpJoinSyncRequestsEnabled = true
     end
 end
@@ -1444,8 +1419,6 @@ function HelperPersonnelApp:hp1560UpdateServerJoinSync(dt)
 
     self.hpKnownSyncConnections = self.hpKnownSyncConnections or setmetatable({}, {__mode = "k"})
 
-    -- Direkt nach Missionsstart ein paar sanfte Broadcasts, damit frueh beitretende Clients
-    -- auch dann Daten bekommen, wenn sie ihre erste Anfrage zu frueh senden.
     self.hpServerEarlyBroadcastTimer = (self.hpServerEarlyBroadcastTimer or 0) + (dt or 0)
     if (self.hpServerEarlyBroadcastCount or 0) < HP_V1560_SERVER_EARLY_BROADCAST_MAX
         and self.hpServerEarlyBroadcastTimer >= HP_V1560_SERVER_EARLY_BROADCAST_INTERVAL_MS then
@@ -1454,7 +1427,6 @@ function HelperPersonnelApp:hp1560UpdateServerJoinSync(dt)
         self:syncNetworkStateToClients()
     end
 
-    -- Zusaetzlich einmaliger Direktversand an neu erkannte Client-Verbindungen.
     self.hpServerConnectionScanTimer = (self.hpServerConnectionScanTimer or 0) + (dt or 0)
     if self.hpServerConnectionScanTimer < HP_V1560_SERVER_SCAN_INTERVAL_MS then
         return
@@ -1487,11 +1459,6 @@ function HelperPersonnelApp:applyNetworkState(state)
     return applied
 end
 
--- Client-Nachtrag v1.5.6.1: Beim Beitritt zu einem laufenden Spiel kann der
--- Server bereits KI-Job-Startinformationen liefern, bevor der vollstaendige
--- Personalzustand auf dem Client angewendet wurde. In dieser kurzen Phase darf
--- der Client solche serverseitigen Zuordnungen nicht wegen noch fehlender oder
--- alter lokaler Daten ablehnen. Die verbindliche Pruefung bleibt serverseitig.
 local HP_V1561_ORIGINAL_AIJOB_CAN_USE_WORKER_FOR_JOB = HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.canUseWorkerForJob or nil
 if HelperPersonnelAIJobHooks ~= nil and HP_V1561_ORIGINAL_AIJOB_CAN_USE_WORKER_FOR_JOB ~= nil then
     function HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job)
@@ -1520,12 +1487,6 @@ function HelperPersonnelApp:update(dt)
     self:hp1560UpdateServerJoinSync(dt)
 end
 
-
--- Multiplayer-Nachtrag v1.5.6.2: Client-Beitritt mit bereits laufenden KI-Jobs stabilisieren.
--- Ziel: Ein Client darf beim Nachladen eines vom Server bereits laufenden KI-Jobs
--- keine neue Mitarbeiterauswahl erzwingen und keine lokale Zwischenmeldung als
--- verbindliches Jobende behandeln. GUI, Layout, Profile und sichtbare Darstellung
--- bleiben unveraendert.
 local function hpV1562NormalizeVehicleKey(vehicleKey)
     if vehicleKey == nil then
         return nil
@@ -1664,10 +1625,6 @@ function HelperPersonnelHelperBridge:syncNetworkAssignmentsFromManager()
         end
     end
 
-    -- Auf Clients ist der Server verbindlich. Lokale Job-Objekte koennen beim
-    -- Beitritt kurz verschwinden oder neu angelegt werden. Veraltete lokale
-    -- Zuordnungen duerfen die spaetere Mitarbeiterauswahl nicht dauerhaft blockieren,
-    -- sobald der Server keinen aktiven Einsatz mehr meldet.
     if self.app ~= nil and self.app.isMultiplayerClient ~= nil and self.app:isMultiplayerClient() then
         for vehicleKey, _ in pairs(self.vehicleWorkerIds or {}) do
             if activeVehicleKeys[vehicleKey] ~= true then
@@ -1687,7 +1644,7 @@ function HelperPersonnelHelperBridge:syncNetworkAssignmentsFromManager()
             end
         end
     elseif HP_V1562_ORIGINAL_BRIDGE_SYNC_ASSIGNMENTS ~= nil then
-        -- Auf dem Server die bisherige Ergaenzungslogik beibehalten.
+
         HP_V1562_ORIGINAL_BRIDGE_SYNC_ASSIGNMENTS(self)
     end
 
@@ -1734,11 +1691,6 @@ if HelperPersonnelAIStartHooks ~= nil and HP_V1562_ORIGINAL_AI_START_HANDLE_VEHI
     function HelperPersonnelAIStartHooks.handleVehicleStart(vehicle, superFunc, ...)
         local app = g_helperPersonnelApp
 
-        -- Beim echten Client-Beitritt kann das Grundspiel einen bereits laufenden
-        -- Server-Job lokal erneut aufbauen. Dieser Pfad ist kein neuer Spielerklick.
-        -- Deshalb darf hier keine Mitarbeiterauswahl geoeffnet und der Start nicht
-        -- blockiert werden. Wenn moeglich haengen wir die vorhandene Serverzuordnung
-        -- direkt an, ansonsten lassen wir den Grundspiel-Start unveraendert durch.
         if hpV1562IsClientJoinRestorePhase(app) and vehicle ~= nil then
             local startableJob = nil
             if vehicle.getStartableAIJob ~= nil then
@@ -1763,11 +1715,7 @@ end
 
 local HP_V1562_ORIGINAL_BRIDGE_ON_JOB_STOPPED = HelperPersonnelHelperBridge.onJobStopped
 function HelperPersonnelHelperBridge:onJobStopped(job)
-    -- Lokale Stop-Callbacks auf einem beitretenden Client sind waehrend des
-    -- Wiederaufbaus nicht verbindlich. Der Serverzustand entscheidet, ob der
-    -- Einsatz wirklich beendet ist. Solange der Server noch eine aktive Zuordnung
-    -- meldet, behalten wir die lokale Verknuepfung bei und warten auf den naechsten
-    -- Zustandsabgleich oder ein neu angelegtes Job-Objekt.
+
     if not self:hpIsServerAuthority()
         and hpV1562IsClientJoinRestorePhase(self.app) then
         local workerId = self:getWorkerIdByJob(job)
@@ -1814,9 +1762,6 @@ function HelperPersonnelApp:applyNetworkState(state)
             self.helperBridge:syncNetworkAssignmentsFromManager()
         end
 
-        -- Trifft die aktive Einsatzliste erst nach Ablauf der ersten Restore-Schleife
-        -- ein, bekommt der Client ein neues kurzes Fenster, um die vom Server
-        -- gelieferten KI-Jobs an die gespeicherten Mitarbeiter zu haengen.
         if activeAssignmentCount > 0 then
             self.activeJobsRestoreDone = false
             self.activeJobsRestoreAttempts = 0
@@ -1829,12 +1774,6 @@ function HelperPersonnelApp:applyNetworkState(state)
     return applied
 end
 
--- Multiplayer-Nachtrag v1.5.6.3: Stale Einsatz-Zustaende nach Client-/Server-Wiederaufbau bereinigen.
--- Ziel: Wenn nach dem Laden kein echter laufender KI-Job mehr zu einer gespeicherten
--- Mitarbeiter-/Fahrzeugzuordnung existiert, darf der Mitarbeiter nicht dauerhaft als
--- "im Einsatz" blockiert bleiben. Gleichzeitig erzeugen Clients vor dem ersten
--- Serverzustand keine eigenen Bewerberdaten. GUI, Layout, Profile und sichtbare
--- Darstellung bleiben unveraendert.
 local function hpV1563NormalizeText(value)
     if value == nil then
         return nil
@@ -2005,10 +1944,6 @@ end
 function HelperPersonnelManager:hp1563CleanupStaleActiveAssignments(activeLookup)
     activeLookup = activeLookup or { count = 0, hasIdentifiers = false, workerIds = {}, vehicleKeys = {}, vehicleNames = {} }
 
-    -- Wenn das Grundspiel zwar aktive Jobs meldet, wir aber noch keinen einzigen
-    -- belastbaren Fahrzeug- oder Mitarbeiterbezug lesen koennen, wird vorsichtshalber
-    -- nichts geloescht. Das verhindert, dass ein tatsaechlich laufender Job nur wegen
-    -- eines fruehen Ladezeitpunkts aus dem Personalzustand entfernt wird.
     if (activeLookup.count or 0) > 0 and activeLookup.hasIdentifiers ~= true then
         return false
     end
@@ -2141,10 +2076,6 @@ function HelperPersonnelManager:hp1563PromoteRestoredWorkersWithActiveJobs(activ
     return changed
 end
 
--- Finaler Wrapper fuer v1.5.6.3: Der aktive Job-Lookup wird vor der alten
--- Aufraeumlogik gebildet. Dadurch werden echte laufende Restore-Jobs nicht
--- versehentlich geloescht, nur weil die lokale Verknuepfung noch nicht sauber
--- angehaengt war.
 local HP_V1563_FINAL_ORIGINAL_APP_FINISH_ACTIVE_JOB_RESTORE = HP_V1563_ORIGINAL_APP_FINISH_ACTIVE_JOB_RESTORE
 function HelperPersonnelApp:finishActiveJobRestore()
     local lookup = nil
@@ -2169,16 +2100,6 @@ function HelperPersonnelApp:finishActiveJobRestore()
         end
     end
 end
-
-
--- Multiplayer-Nachtrag v1.5.6.4: Wiederanlauf gespeicherter KI-Jobs und Start-/Stop-Rennen absichern.
--- Ziel: In Multiplayer-Spielstaenden kann ein vor dem Speichern laufender KI-Job nach dem Laden
--- als gespeicherte Mitarbeiterzuordnung vorhanden sein, ohne dass das Grundspiel den Job wirklich
--- wieder in die aktive KI-Jobliste uebernimmt. Der Server versucht deshalb waehrend der
--- Restore-Phase, solche gespeicherten Zuordnungen einmal sauber ueber das betroffene Fahrzeug
--- neu zu starten. Gleichzeitig darf ein KI-Start, der sofort wieder endet, keinen Mitarbeiter
--- dauerhaft als "im Einsatz" markieren. GUI, Layout, Profile und sichtbare Darstellung bleiben
--- unveraendert.
 
 local function hpV1564GetJobActiveState(app, job)
     if app == nil or job == nil or app.getActiveAIJobs == nil then
@@ -2205,7 +2126,6 @@ local function hpV1564ShouldFinalizeStartedJob(app, job)
         return active == true
     end
 
-    -- Wenn die aktive Jobliste nicht lesbar ist, bleibt das bisherige Verhalten erhalten.
     return true
 end
 
@@ -2219,10 +2139,6 @@ local function hpV1564ClearPendingStart(app, job)
     end
 end
 
--- AIJob.start wird im normalen AISystem-Startpfad teils vor dem Eintrag in die aktive Jobliste
--- ausgefuehrt. Deshalb markiert dieser Hook den Mitarbeiter waehrend eines AISystem.startJob nicht
--- mehr final als beschaeftigt. Das erfolgt erst danach im AISystem-Hook, wenn feststeht, dass der
--- Job wirklich aktiv geblieben ist.
 function HelperPersonnelAIJobHooks.onAIJobStart(job, superFunc, farmId, ...)
     local args = {...}
     local app = g_helperPersonnelApp
@@ -2451,8 +2367,6 @@ function HelperPersonnelApp:hp1564TryRestartRestoredAIJobs()
                 changed = true
             end
 
-            -- Wenn das Fahrzeug noch nicht gefunden wurde, koennen die Fahrzeuge noch im Aufbau sein.
-            -- Dann wird in einem der naechsten Restore-Durchlaeufe erneut versucht.
             if handled ~= true then
                 assignment.hp1564PendingRetry = true
             end
@@ -2474,8 +2388,6 @@ function HelperPersonnelApp:restoreActiveAIJobs()
         restored = HP_V1564_ORIGINAL_APP_RESTORE_ACTIVE_AI_JOBS(self) == true
     end
 
-    -- Wenn das Grundspiel keinen aktiven Job wiederhergestellt hat, wird der gespeicherte
-    -- Einsatz serverseitig neu gestartet, solange die Restore-Phase noch laeuft.
     if self:isServerAuthority() and restored ~= true then
         local restarted = self:hp1564TryRestartRestoredAIJobs() == true
         restored = restored or restarted
@@ -2483,14 +2395,6 @@ function HelperPersonnelApp:restoreActiveAIJobs()
 
     return restored
 end
-
-
-
--- Multiplayer-Nachtrag v1.5.6.5: fehlgeschlagene Restore-Neustarts konsequent freigeben.
--- Hintergrund: In echten Client-Tests konnte ein vor dem Speichern gestarteter Job nach dem Laden
--- sofort als beendet gelten oder nicht aktiv bleiben. In diesem Fall darf weder der alte Mitarbeiter
--- noch ein neu ausgewaehlter Mitarbeiter durch den technischen Start-/Stop-Pfad blockiert werden.
--- GUI, Layout, Profile, Groessen, Positionen, i18n und Texturen bleiben unveraendert.
 
 local function hpV1565GetTimeMs()
     if g_time ~= nil then
@@ -2714,8 +2618,6 @@ if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.onAIJobStop ~=
         local app = g_helperPersonnelApp
         local workerId = hpV1565GetWorkerIdFromJob(job)
 
-        -- Ein Job, der nie final als aktiver KI-Job uebernommen wurde, ist ein fehlgeschlagener
-        -- technischer Start. Er darf nicht als abgeschlossener Mitarbeitereinsatz verarbeitet werden.
         if job ~= nil and workerId ~= nil and job.hpHelperPersonnelFinalized ~= true then
             if app ~= nil and app.hp1565ClearFailedRestoreJob ~= nil then
                 app:hp1565ClearFailedRestoreJob(job, workerId, job.hp1565RestoreAssignment, "Job wurde nicht als aktiver Einsatz bestaetigt")
@@ -2723,9 +2625,6 @@ if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.onAIJobStop ~=
             return
         end
 
-        -- Ein automatisch neu gestarteter Restore-Job, der direkt nach dem Laden stoppt, ist ebenfalls
-        -- kein echter Abschluss. Die kurze Schutzfrist verhindert die falsche Abschlussmeldung und gibt
-        -- den Mitarbeiter sofort wieder frei.
         if job ~= nil and job.hp1565RestoreRestart == true then
             local now = hpV1565GetTimeMs()
             local protectUntil = job.hp1565RestoreProtectUntil or 0
@@ -2772,8 +2671,7 @@ function HelperPersonnelApp:hp1565VerifyPendingRestoreRestarts()
                         self.helperBridge:onJobStarted(job, record.workerId)
                     end
                     if self.manager ~= nil and self.manager.startWorkerJobForFarm ~= nil and farmId ~= nil then
-                        -- onJobStarted hat den Einsatz bereits gesetzt. Dieser Zweig bleibt bewusst leer;
-                        -- er dokumentiert nur, dass die Hof-ID erhalten bleibt.
+
                     end
                 end
                 if record.assignment ~= nil then
@@ -2786,7 +2684,7 @@ function HelperPersonnelApp:hp1565VerifyPendingRestoreRestarts()
                 self.hp1565PendingRestoreRestartJobs[job] = nil
                 changed = true
             else
-                -- Noch innerhalb der Wartezeit: spaeter erneut pruefen.
+
             end
         end
     end
@@ -2796,10 +2694,6 @@ function HelperPersonnelApp:hp1565VerifyPendingRestoreRestarts()
     end
 end
 
--- Die v1.5.6.4-Neustartfunktion wird hier bewusst ueberschrieben: Die Aktivitaet des Jobs
--- wird nicht mehr nur im selben Frame bewertet, sondern mit einer kurzen Nachpruefung. Damit
--- wird vermieden, dass ein spaet registrierter Job als fehlgeschlagen gilt oder ein sofortiger
--- Stop den Mitarbeiter blockiert.
 function HelperPersonnelApp:hp1564TryRestartRestoredAssignment(assignment)
     if assignment == nil or assignment.workerId == nil or self.manager == nil then
         return false, false
@@ -2905,14 +2799,6 @@ function HelperPersonnelApp:update(dt)
     self:hp1565VerifyPendingRestoreRestarts()
 end
 
-
--- Nachtrag v1.5.6.11: beendete KI-Jobs sicher freigeben.
--- Hintergrund: Einige KI-Jobarten, insbesondere einfache Fahrten von A nach B, koennen eigene
--- Stop-Pfade nutzen. Dann bleibt die normale AIJob.stop-Verknuepfung unter Umstaenden unberuehrt
--- und der Mitarbeiter bleibt im Personalmanagement als "im Einsatz" markiert. Dieser Nachtrag
--- haengt den Stop-Hook zusaetzlich an bekannte konkrete Jobklassen und prueft waehrend des Spiels
--- serverseitig, ob vorgemerkte Mitarbeitereinsaetze noch zu echten aktiven KI-Jobs passen.
--- GUI, Layout, Profile, Groessen, Positionen, i18n und Texturen bleiben unveraendert.
 local function hpV15611NormalizeVehicleKey(vehicleKey)
     if vehicleKey == nil then
         return nil
@@ -3224,12 +3110,6 @@ function HelperPersonnelApp:update(dt)
     end
 end
 
--- Nachtrag v1.5.18.2: Stop-Meldungen mit korrektem Mitarbeiternamen erhalten.
--- Der Stop-Hook laeuft vor der Grundspiel-Benachrichtigung. Deshalb darf die
--- Mitarbeiter-ID am Job erst nach der Meldung endgueltig verschwinden; sonst
--- kann das Grundspiel in der Meldung auf einen falschen Helper-Namen zurueckfallen.
--- Gleichzeitig verhindert die Markierung eine doppelte Einsatzwertung, falls ein
--- konkreter AIJob-Stop-Hook und der Basisklassen-Stop-Hook nacheinander ausloesen.
 if HelperPersonnelHelperBridge ~= nil and HelperPersonnelHelperBridge.onJobStopped ~= nil then
     local HP_V15182_ORIGINAL_BRIDGE_ON_JOB_STOPPED = HelperPersonnelHelperBridge.onJobStopped
     function HelperPersonnelHelperBridge:onJobStopped(job)
@@ -3258,15 +3138,6 @@ if HelperPersonnelHelperBridge ~= nil and HelperPersonnelHelperBridge.onJobStopp
         return result
     end
 end
-
--- Multiplayer-Fix v1.0.1.0: serverautoritatives Bewerber-/Hof-Sync.
--- Hintergrund: In echten Dedicated-Server-Tests konnten Clients lokale Bewerbermaerkte
--- fuer ihre Farm erzeugen, bevor der Server diese Farm im Personalzustand angelegt hatte.
--- Die anschliessende Hire-Anfrage wurde dann korrekt, aber fuer den Spieler unbrauchbar,
--- mit "Ziel X gehoert nicht zu Hof Y" abgelehnt. Der Server erzeugt deshalb Farmdaten
--- fuer bekannte und anfragende Hoefe vor jedem Zustandsversand. Clients verwerfen lokale,
--- nicht vom Server gesendete Farmdaten und duerfen erst nach angewendetem Serverzustand
--- Hire-/Dismiss-Anfragen senden.
 
 local function hpMP101NormalizeFarmId(farmId)
     farmId = tonumber(farmId)
@@ -3638,4 +3509,256 @@ function HelperPersonnelApp:processNetworkAction(actionName, targetId, connectio
     end
 
     return false
+end
+
+local function hpMP102IsMultiplayerClientRuntime()
+    if g_server ~= nil then
+        return false
+    end
+
+    if g_client ~= nil then
+        return true
+    end
+
+    local app = g_helperPersonnelApp
+    if app ~= nil and app.isMultiplayerClient ~= nil then
+        return app:isMultiplayerClient() == true
+    end
+
+    return false
+end
+
+local HP_MP102_ORIGINAL_MANAGER_ENSURE_INITIAL_MARKET = HelperPersonnelManager.ensureInitialApplicantMarketForFarmData
+function HelperPersonnelManager:ensureInitialApplicantMarketForFarmData(data)
+    if hpMP102IsMultiplayerClientRuntime() then
+        if type(data) == "table" then
+            data.workers = data.workers or {}
+            data.applicants = data.applicants or {}
+        end
+        return 0
+    end
+
+    if HP_MP102_ORIGINAL_MANAGER_ENSURE_INITIAL_MARKET ~= nil then
+        return HP_MP102_ORIGINAL_MANAGER_ENSURE_INITIAL_MARKET(self, data)
+    end
+
+    return 0
+end
+
+local HP_MP102_ORIGINAL_MANAGER_INITIALIZE_NEW_MARKET = HelperPersonnelManager.initializeNewApplicantMarket
+function HelperPersonnelManager:initializeNewApplicantMarket()
+    if hpMP102IsMultiplayerClientRuntime() then
+        self.applicants = self.applicants or {}
+        return 0
+    end
+
+    if HP_MP102_ORIGINAL_MANAGER_INITIALIZE_NEW_MARKET ~= nil then
+        return HP_MP102_ORIGINAL_MANAGER_INITIALIZE_NEW_MARKET(self)
+    end
+
+    return 0
+end
+
+local HP_MP102_ORIGINAL_MANAGER_ENSURE_APPLICANT_BUFFER = HelperPersonnelManager.ensureApplicantBuffer
+function HelperPersonnelManager:ensureApplicantBuffer(minimumCount, targetCount)
+    if hpMP102IsMultiplayerClientRuntime() then
+        self.applicants = self.applicants or {}
+        return 0
+    end
+
+    if HP_MP102_ORIGINAL_MANAGER_ENSURE_APPLICANT_BUFFER ~= nil then
+        return HP_MP102_ORIGINAL_MANAGER_ENSURE_APPLICANT_BUFFER(self, minimumCount, targetCount)
+    end
+
+    return 0
+end
+
+local HP_MP102_ORIGINAL_MANAGER_GENERATE_MONTHLY_APPLICANTS = HelperPersonnelManager.generateMonthlyApplicants
+function HelperPersonnelManager:generateMonthlyApplicants(forceAtLeastOne)
+    if hpMP102IsMultiplayerClientRuntime() then
+        self.applicants = self.applicants or {}
+        return 0
+    end
+
+    if HP_MP102_ORIGINAL_MANAGER_GENERATE_MONTHLY_APPLICANTS ~= nil then
+        return HP_MP102_ORIGINAL_MANAGER_GENERATE_MONTHLY_APPLICANTS(self, forceAtLeastOne)
+    end
+
+    return 0
+end
+
+function HelperPersonnelApp:hpMP102GetSyncedApplicantFarmId(applicantId)
+    if self.manager == nil then
+        return nil
+    end
+
+    applicantId = tonumber(applicantId)
+    if applicantId == nil then
+        return nil
+    end
+
+    for farmId, data in pairs(self.manager.farms or {}) do
+        for _, applicant in ipairs(data.applicants or {}) do
+            if tonumber(applicant.id) == applicantId then
+                return hpMP101NormalizeFarmId(farmId) or hpMP101NormalizeFarmId(data.farmId)
+            end
+        end
+    end
+
+    return nil
+end
+
+function HelperPersonnelApp:hpMP102GetSyncedWorkerFarmId(workerId)
+    if self.manager == nil then
+        return nil
+    end
+
+    workerId = tonumber(workerId)
+    if workerId == nil then
+        return nil
+    end
+
+    for farmId, data in pairs(self.manager.farms or {}) do
+        for _, worker in ipairs(data.workers or {}) do
+            if tonumber(worker.id) == workerId then
+                return hpMP101NormalizeFarmId(farmId) or hpMP101NormalizeFarmId(data.farmId)
+            end
+        end
+    end
+
+    return nil
+end
+
+local HP_MP102_ORIGINAL_APP_REQUEST_HIRE_APPLICANT = HelperPersonnelApp.requestHireApplicant
+function HelperPersonnelApp:requestHireApplicant(applicantId)
+    if self:isMultiplayerClient() then
+        if self.hpJoinSyncApplied ~= true then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            return false
+        end
+
+        local applicantFarmId = self:hpMP102GetSyncedApplicantFarmId(applicantId)
+        if applicantFarmId == nil then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            if self.frame ~= nil and self.frame.refresh ~= nil then
+                self.frame:refresh()
+            end
+            return false
+        end
+
+        if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
+            self.manager:refreshFarmContext(applicantFarmId)
+        end
+    end
+
+    if HP_MP102_ORIGINAL_APP_REQUEST_HIRE_APPLICANT ~= nil then
+        return HP_MP102_ORIGINAL_APP_REQUEST_HIRE_APPLICANT(self, applicantId)
+    end
+
+    return false
+end
+
+local HP_MP102_ORIGINAL_APP_REQUEST_DISMISS_WORKER = HelperPersonnelApp.requestDismissWorker
+function HelperPersonnelApp:requestDismissWorker(workerId)
+    if self:isMultiplayerClient() then
+        if self.hpJoinSyncApplied ~= true then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            return false
+        end
+
+        local workerFarmId = self:hpMP102GetSyncedWorkerFarmId(workerId)
+        if workerFarmId == nil then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            if self.frame ~= nil and self.frame.refresh ~= nil then
+                self.frame:refresh()
+            end
+            return false
+        end
+
+        if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
+            self.manager:refreshFarmContext(workerFarmId)
+        end
+    end
+
+    if HP_MP102_ORIGINAL_APP_REQUEST_DISMISS_WORKER ~= nil then
+        return HP_MP102_ORIGINAL_APP_REQUEST_DISMISS_WORKER(self, workerId)
+    end
+
+    return false
+end
+
+local HP_MP102_ORIGINAL_APP_PROCESS_NETWORK_ACTION = HelperPersonnelApp.processNetworkAction
+function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId)
+    if self:isServerAuthority() and self.manager ~= nil and actionName == "hire" then
+        local requestedFarmId = hpMP101NormalizeFarmId(farmId)
+        if requestedFarmId == nil and self.getFarmIdFromConnection ~= nil then
+            requestedFarmId = hpMP101NormalizeFarmId(self:getFarmIdFromConnection(connection))
+        end
+
+        if requestedFarmId ~= nil and self.manager.hasApplicantInFarm ~= nil and self.manager:hasApplicantInFarm(targetId, requestedFarmId) ~= true then
+            local foundFarmId = nil
+            for existingFarmId, data in pairs(self.manager.farms or {}) do
+                for _, applicant in ipairs(data.applicants or {}) do
+                    if tonumber(applicant.id) == tonumber(targetId) then
+                        foundFarmId = hpMP101NormalizeFarmId(existingFarmId) or hpMP101NormalizeFarmId(data.farmId)
+                        break
+                    end
+                end
+                if foundFarmId ~= nil then
+                    break
+                end
+            end
+
+            Logging.warning("FS25_HelperPersonnel: Netzwerkanfrage 'hire' Diagnose: Ziel=%s angefragterHof=%s gefundenerHof=%s", tostring(targetId), tostring(requestedFarmId), tostring(foundFarmId))
+        end
+    end
+
+    if HP_MP102_ORIGINAL_APP_PROCESS_NETWORK_ACTION ~= nil then
+        return HP_MP102_ORIGINAL_APP_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, farmId)
+    end
+
+    return false
+end
+
+local HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE = HelperPersonnelApp.hpMP101FilterClientStateToServerFarms
+function HelperPersonnelApp:hpMP101FilterClientStateToServerFarms(state)
+    if not self:isMultiplayerClient() or self.manager == nil or type(state) ~= "table" or type(state.farms) ~= "table" then
+        if HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE ~= nil then
+            return HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE(self, state)
+        end
+        return false
+    end
+
+    local currentFarmId = hpMP101NormalizeFarmId(self.manager.getCurrentFarmId ~= nil and self.manager:getCurrentFarmId() or nil)
+    local allowed = {}
+    for _, farmState in ipairs(state.farms) do
+        local farmId = hpMP101NormalizeFarmId(farmState.farmId)
+        if farmId ~= nil then
+            allowed[farmId] = true
+        end
+    end
+
+    local result = false
+    if HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE ~= nil then
+        result = HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE(self, state) == true
+    end
+
+    if currentFarmId ~= nil and allowed[currentFarmId] ~= true and self.manager.createFarmData ~= nil and self.manager.bindFarmData ~= nil then
+        local data = self.manager:createFarmData(currentFarmId)
+        data.applicantMarketInitialized = true
+        self.manager.farms = self.manager.farms or {}
+        self.manager.farms[currentFarmId] = data
+        self.manager:bindFarmData(data)
+        return true
+    end
+
+    return result
 end
