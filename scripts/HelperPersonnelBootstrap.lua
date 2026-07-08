@@ -113,6 +113,9 @@ function HelperPersonnelBootstrap.onLoadMapFinished(mission)
     if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.install ~= nil then
         HelperPersonnelAIJobHooks.install("loadMapFinished")
     end
+    if HelperPersonnelCompatibility ~= nil and HelperPersonnelCompatibility.installFollowMeHooks ~= nil then
+        HelperPersonnelCompatibility.installFollowMeHooks("loadMapFinished")
+    end
 
     HelperPersonnelBootstrap.ensureAppLoaded()
 
@@ -148,6 +151,9 @@ function HelperPersonnelBootstrap.onMissionLoaded(mission)
     end
     if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.install ~= nil then
         HelperPersonnelAIJobHooks.install("mission00Loaded")
+    end
+    if HelperPersonnelCompatibility ~= nil and HelperPersonnelCompatibility.installFollowMeHooks ~= nil then
+        HelperPersonnelCompatibility.installFollowMeHooks("mission00Loaded")
     end
 
     HelperPersonnelBootstrap.ensureAppLoaded()

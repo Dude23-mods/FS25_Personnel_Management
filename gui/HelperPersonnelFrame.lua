@@ -914,6 +914,100 @@ function HelperPersonnelFrame:getJobForWorker(worker)
     return nil
 end
 
+function HelperPersonnelFrame:getActiveWorkerContext(worker)
+    if type(worker) ~= "table" then
+        return nil
+    end
+
+    local workerId = tonumber(worker.id)
+    local bridge = self.app ~= nil and self.app.helperBridge or nil
+    if bridge ~= nil and bridge.followMeContextsByWorkerId ~= nil then
+        local context = nil
+        if workerId ~= nil then
+            context = bridge.followMeContextsByWorkerId[workerId] or bridge.followMeContextsByWorkerId[tostring(workerId)]
+        end
+        if context == nil and worker.id ~= nil then
+            context = bridge.followMeContextsByWorkerId[worker.id] or bridge.followMeContextsByWorkerId[tostring(worker.id)]
+        end
+        if type(context) == "table" then
+            return context
+        end
+    end
+
+    if bridge ~= nil and bridge.followMeContextsByVehicleKey ~= nil and worker.vehicleKey ~= nil then
+        local context = bridge.followMeContextsByVehicleKey[worker.vehicleKey]
+        if type(context) == "table" then
+            return context
+        end
+    end
+
+    if worker.currentJobActivityText ~= nil or worker.currentJobActivityKey ~= nil or worker.currentJobFieldId ~= nil or worker.currentJobFieldText ~= nil then
+        return {
+            activityText = worker.currentJobActivityText,
+            activityKey = worker.currentJobActivityKey,
+            activityFallback = worker.currentJobActivityFallback,
+            targetText = worker.currentJobFollowMeTargetText,
+            fieldId = worker.currentJobFieldId,
+            fieldText = worker.currentJobFieldText,
+            specializationKey = worker.currentJobSpecializationKey
+        }
+    end
+
+    return nil
+end
+
+function HelperPersonnelFrame:getVehicleFromActiveContext(context)
+    if type(context) ~= "table" then
+        return nil
+    end
+
+    if context.vehicle ~= nil then
+        return context.vehicle
+    end
+
+    local bridge = self.app ~= nil and self.app.helperBridge or nil
+    if bridge ~= nil and context.vehicleKey ~= nil and bridge.followMeContextsByVehicleKey ~= nil then
+        local vehicleContext = bridge.followMeContextsByVehicleKey[context.vehicleKey]
+        if type(vehicleContext) == "table" then
+            return vehicleContext.vehicle
+        end
+    end
+
+    return nil
+end
+
+function HelperPersonnelFrame:getFollowMeActivityTextFromContext(context)
+    if type(context) ~= "table" then
+        return nil
+    end
+
+    if context.activityText ~= nil and context.activityText ~= "" then
+        return tostring(context.activityText)
+    end
+
+    local activityBaseText = nil
+    if context.activityKey ~= nil then
+        activityBaseText = self:getText(context.activityKey, context.activityFallback or "")
+    else
+        activityBaseText = context.activityFallback
+    end
+
+    local targetText = context.targetText or ""
+    if context.transportOnly == true or context.specializationKey == "transport" then
+        return string.format(self:getText("ui_activityFollowMeTransport", "FollowMe bei %s"), targetText)
+    end
+
+    if activityBaseText ~= nil and activityBaseText ~= "" then
+        return string.format(self:getText("ui_activityFollowMeWork", "FollowMe: %s hinter %s"), activityBaseText, targetText)
+    end
+
+    if targetText ~= "" then
+        return string.format(self:getText("ui_activityFollowMeTransport", "FollowMe bei %s"), targetText)
+    end
+
+    return nil
+end
+
 function HelperPersonnelFrame:getVehicleFromJob(job)
     if self.app ~= nil and self.app.helperBridge ~= nil and self.app.helperBridge.getVehicleFromJob ~= nil then
         local ok, vehicle = pcall(function()
@@ -1843,6 +1937,38 @@ function HelperPersonnelFrame:getFieldIdFromWorkPositions(worker, job, vehicle)
     return nil, table.concat(notes, " | ")
 end
 
+
+function HelperPersonnelFrame:getFieldIdFromActiveContext(context)
+    if type(context) ~= "table" then
+        return nil
+    end
+
+    local fieldId = self:getNumericFieldIdFromValue(context.fieldId)
+    if fieldId ~= nil then
+        return fieldId
+    end
+
+    local samples = {}
+    self:addObjectPositionSamples(context.vehicle, samples, "FollowMe")
+    self:addObjectPositionSamples(context.leaderVehicle, samples, "FollowMeZiel")
+
+    for _, sample in ipairs(samples) do
+        local detectedFieldId = self:getFieldIdAtPosition(sample.x, sample.z)
+        if detectedFieldId ~= nil then
+            context.fieldId = detectedFieldId
+            if type(context.workerId) == "number" and self.app ~= nil and self.app.manager ~= nil and self.app.manager.getWorkerById ~= nil then
+                local worker = self.app.manager:getWorkerById(context.workerId)
+                if worker ~= nil then
+                    worker.currentJobFieldId = detectedFieldId
+                end
+            end
+            return detectedFieldId
+        end
+    end
+
+    return nil
+end
+
 function HelperPersonnelFrame:getCachedFieldIdForActiveWorker(worker, job, vehicle)
     local workerId = type(worker) == "table" and tonumber(worker.id) or nil
     local cacheKey = workerId or tostring(worker or "unknown")
@@ -1877,8 +2003,9 @@ function HelperPersonnelFrame:getCachedFieldIdForActiveWorker(worker, job, vehic
 end
 
 function HelperPersonnelFrame:getActiveWorkerOverviewLines(worker)
+    local context = self:getActiveWorkerContext(worker)
     local job = self:getJobForWorker(worker)
-    local vehicle = self:getVehicleFromJob(job)
+    local vehicle = self:getVehicleFromJob(job) or self:getVehicleFromActiveContext(context)
     local vehicleName = nil
 
     if vehicle ~= nil then
@@ -1897,10 +2024,28 @@ function HelperPersonnelFrame:getActiveWorkerOverviewLines(worker)
         statusLine = string.format(self:getText("ui_activeWorkerStatusVehicle", "Status: im Einsatz (%s)"), vehicleName)
     end
 
-    local activityText = self:detectActivityText(job, vehicle)
-    local fieldId = self:getCachedFieldIdForActiveWorker(worker, job, vehicle)
+    local activityText = self:getFollowMeActivityTextFromContext(context) or self:detectActivityText(job, vehicle)
+    local fieldId = type(context) == "table" and tonumber(context.fieldId) or nil
+    if fieldId == nil and type(worker) == "table" then
+        fieldId = tonumber(worker.currentJobFieldId)
+    end
+    if fieldId == nil and type(context) == "table" then
+        fieldId = self:getFieldIdFromActiveContext(context)
+    end
+    if fieldId == nil then
+        fieldId = self:getCachedFieldIdForActiveWorker(worker, job, vehicle)
+    end
 
-    local fieldText = fieldId ~= nil and tostring(fieldId) or self:getText("ui_activeWorkerUnknownField", "unbekannt")
+    local fieldText = nil
+    if fieldId ~= nil then
+        fieldText = tostring(fieldId)
+    elseif type(context) == "table" and context.fieldText ~= nil and context.fieldText ~= "" then
+        fieldText = tostring(context.fieldText)
+    elseif type(worker) == "table" and worker.currentJobFieldText ~= nil and worker.currentJobFieldText ~= "" then
+        fieldText = tostring(worker.currentJobFieldText)
+    else
+        fieldText = self:getText("ui_activeWorkerUnknownField", "unbekannt")
+    end
     local activityLine = string.format(self:getText("ui_activeWorkerActivityField", "Tätigkeit: %s | Feld: %s"), activityText, fieldText)
 
     return statusLine, activityLine

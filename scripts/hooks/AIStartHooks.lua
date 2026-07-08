@@ -107,7 +107,7 @@ function HelperPersonnelAIStartHooks.install(stageName)
 
     if HelperPersonnelAIStartHooks.isInstalled ~= true then
         HelperPersonnelAIStartHooks.isInstalled = true
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose aktiv | Version=1.0.2.1")
+        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose aktiv | Version=1.0.3.0")
     end
 
     local aivehicleAvailable = AIVehicle ~= nil and AIVehicle.startAIVehicle ~= nil
@@ -277,6 +277,57 @@ function HelperPersonnelAIStartHooks.shouldHandleAIJobStart(job)
     return true
 end
 
+
+function HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
+    if job == nil or job.followVehicleParameter == nil then
+        return nil
+    end
+
+    if job.followVehicleParameter.getVehicle ~= nil then
+        local success, vehicle = pcall(job.followVehicleParameter.getVehicle, job.followVehicleParameter)
+        if success and vehicle ~= nil then
+            return vehicle
+        end
+    end
+
+    if job.followVehicleParameter.vehicle ~= nil then
+        return job.followVehicleParameter.vehicle
+    end
+
+    return nil
+end
+
+function HelperPersonnelAIStartHooks.getExcludedWorkerIdsForJob(job)
+    local excludedWorkerIds = nil
+    local app = g_helperPersonnelApp
+
+    if app == nil or app.helperBridge == nil or job == nil then
+        return nil
+    end
+
+    if HelperPersonnelAIJobHooks == nil or HelperPersonnelAIJobHooks.isFollowMeJob == nil or not HelperPersonnelAIJobHooks.isFollowMeJob(job) then
+        return nil
+    end
+
+    local followVehicle = HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
+    local workerId = nil
+
+    if followVehicle ~= nil and app.helperBridge.getWorkerIdByVehicle ~= nil then
+        workerId = app.helperBridge:getWorkerIdByVehicle(followVehicle)
+    end
+
+    if workerId == nil and followVehicle ~= nil and app.getVehicleKey ~= nil and app.helperBridge.getWorkerIdByVehicleKey ~= nil then
+        workerId = app.helperBridge:getWorkerIdByVehicleKey(app:getVehicleKey(followVehicle))
+    end
+
+    if workerId ~= nil then
+        excludedWorkerIds = {}
+        excludedWorkerIds[tonumber(workerId) or workerId] = true
+    end
+
+    return excludedWorkerIds
+end
+
 function HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, fallbackJob, fallbackFarmId, reason, delayFrames)
     if vehicle == nil then
         hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | queueSelectionForVehicle=false | Grund=keinFahrzeug | Job=%s | Farm=%s | GrundPfad=%s",
@@ -319,6 +370,23 @@ end
 
 function HelperPersonnelAIStartHooks.queueSelectionForAIJob(job, fallbackFarmId)
     local vehicle = HelperPersonnelAIStartHooks.getVehicleFromAIJob(job)
+    local followVehicle = HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
+    local excludedWorkerIds = HelperPersonnelAIStartHooks.getExcludedWorkerIdsForJob(job)
+    local excludedCount = 0
+    if type(excludedWorkerIds) == "table" then
+        for _ in pairs(excludedWorkerIds) do
+            excludedCount = excludedCount + 1
+        end
+    end
+
+    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | queueSelectionForAIJob ENTER | Job=%s | Fahrzeug=%s | Ziel=%s | Farm=%s | FollowMe=%s | Excluded=%s",
+        HelperPersonnelAIStartHooks.getDebugJobName(job),
+        HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
+        HelperPersonnelAIStartHooks.getDebugVehicleName(followVehicle),
+        tostring(fallbackFarmId),
+        tostring(HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.isFollowMeJob ~= nil and HelperPersonnelAIJobHooks.isFollowMeJob(job) or nil),
+        tostring(excludedCount))
+
     if vehicle == nil then
         hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | queueSelectionForAIJob=false | Grund=keinFahrzeug | Job=%s | Farm=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), tostring(fallbackFarmId))
         return false
@@ -441,6 +509,7 @@ function HelperPersonnelAIStartHooks.openSelectionForVehicle(vehicle, fallbackJo
         tostring(app.selectionOverlay ~= nil),
         tostring(availableCount))
 
+    local excludedWorkerIds = HelperPersonnelAIStartHooks.getExcludedWorkerIdsForJob(fallbackJob)
     local opened = app:showWorkerSelectionForVehicle(vehicle, function(selectedWorker)
         if selectedWorker == nil then
             return
@@ -448,7 +517,7 @@ function HelperPersonnelAIStartHooks.openSelectionForVehicle(vehicle, fallbackJo
 
         hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | Mitarbeiterauswahl bestaetigt | Mitarbeiter=%s | Fahrzeug=%s | Job=%s", tostring(selectedWorker.id), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob))
         HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, selectedWorker.id, fallbackJob, fallbackFarmId)
-    end)
+    end, excludedWorkerIds)
 
     hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | openSelectionForVehicle Ergebnis | Geoeffnet=%s | Fahrzeug=%s | Job=%s", tostring(opened), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob))
 

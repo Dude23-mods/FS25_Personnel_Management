@@ -440,7 +440,7 @@ end
 
 function HelperPersonnelApp:getPendingWorkerForVehicle(vehicle)
     local key = self:getVehicleKey(vehicle)
-    if key ~= nil and self.pendingWorkerIdsByVehicleKey[key] ~= nil then
+    if key ~= nil then
         return self.pendingWorkerIdsByVehicleKey[key]
     end
 
@@ -448,11 +448,14 @@ function HelperPersonnelApp:getPendingWorkerForVehicle(vehicle)
 end
 
 function HelperPersonnelApp:consumePendingWorkerForVehicle(vehicle)
-    local workerId = self:getPendingWorkerForVehicle(vehicle)
     local key = self:getVehicleKey(vehicle)
+    local workerId = nil
 
     if key ~= nil then
+        workerId = self.pendingWorkerIdsByVehicleKey[key]
         self.pendingWorkerIdsByVehicleKey[key] = nil
+    else
+        workerId = self.pendingWorkerIdForNextAIJob
     end
 
     if self.pendingWorkerIdForNextAIJob == workerId then
@@ -567,12 +570,12 @@ function HelperPersonnelApp:prepareAIJobForWorker(aiJob, vehicle, workerId)
     end
 end
 
-function HelperPersonnelApp:showWorkerSelectionForVehicle(vehicle, callback)
+function HelperPersonnelApp:showWorkerSelectionForVehicle(vehicle, callback, excludedWorkerIds)
     if self.selectionOverlay == nil then
         return false
     end
 
-    return self.selectionOverlay:open(vehicle, callback)
+    return self.selectionOverlay:open(vehicle, callback, excludedWorkerIds)
 end
 
 function HelperPersonnelApp:isServerAuthority()

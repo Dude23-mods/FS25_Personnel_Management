@@ -1041,6 +1041,10 @@ function HelperPersonnelHelperBridge:getWorkerIdByJob(job)
         return workerId
     end
 
+    if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.isFollowMeJob ~= nil and HelperPersonnelAIJobHooks.isFollowMeJob(job) then
+        return nil
+    end
+
     local vehicleKey = self:getVehicleKeyFromJob(job)
     if vehicleKey ~= nil then
         workerId = self:getWorkerIdByVehicleKey(vehicleKey)

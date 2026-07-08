@@ -88,9 +88,12 @@
         <e k="ui_activeWorkerActivityField" v="Nhiệm vụ: %s | Ruộng: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Phương tiện" />
         <e k="ui_activeWorkerUnknownField" v="không rõ" />
+        <e k="ui_activeWorkerNoField" v="not field-bound" />
         <e k="ui_activityUnknown" v="không rõ" />
         <e k="ui_activityFieldWork" v="làm việc trên ruộng" />
         <e k="ui_activityTransport" v="vận chuyển" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
         <e k="ui_activityCultivating" v="xới đất" />
         <e k="ui_activityPlowing" v="cày" />
         <e k="ui_activitySowing" v="gieo hạt" />

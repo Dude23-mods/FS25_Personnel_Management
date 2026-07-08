@@ -88,9 +88,12 @@
         <e k="ui_activeWorkerActivityField" v="Görev: %s | Tarla: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Araç" />
         <e k="ui_activeWorkerUnknownField" v="bilinmiyor" />
+        <e k="ui_activeWorkerNoField" v="not field-bound" />
         <e k="ui_activityUnknown" v="bilinmiyor" />
         <e k="ui_activityFieldWork" v="tarla işi" />
         <e k="ui_activityTransport" v="taşıma" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
         <e k="ui_activityCultivating" v="kültivasyon" />
         <e k="ui_activityPlowing" v="sürme" />
         <e k="ui_activitySowing" v="ekim" />

@@ -1,5 +1,43 @@
 HelperPersonnelSelectionOverlay = {}
 HelperPersonnelSelectionOverlay_mt = Class(HelperPersonnelSelectionOverlay)
+HelperPersonnelSelectionOverlay.DEBUG_LOGGING = false
+
+local function hpSelectionDebug(message, ...)
+    if HelperPersonnelSelectionOverlay.DEBUG_LOGGING == true and Logging ~= nil and Logging.info ~= nil then
+        Logging.info(message, ...)
+    end
+end
+
+local function hpSelectionVehicleName(vehicle)
+    if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.getDebugVehicleName ~= nil then
+        return HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle)
+    end
+
+    if vehicle == nil then
+        return "nil"
+    end
+
+    if vehicle.getName ~= nil then
+        local ok, name = pcall(vehicle.getName, vehicle)
+        if ok and name ~= nil and name ~= "" then
+            return tostring(name)
+        end
+    end
+
+    return tostring(vehicle)
+end
+
+local function hpSelectionCountExcluded(excludedWorkerIds)
+    if type(excludedWorkerIds) ~= "table" then
+        return 0
+    end
+
+    local count = 0
+    for _ in pairs(excludedWorkerIds) do
+        count = count + 1
+    end
+    return count
+end
 
 HelperPersonnelSelectionOverlay.KEYS_LEFT = { "KEY_left", "KEY_a" }
 HelperPersonnelSelectionOverlay.KEYS_RIGHT = { "KEY_right", "KEY_d" }
@@ -47,13 +85,40 @@ function HelperPersonnelSelectionOverlay:delete()
     end
 end
 
-function HelperPersonnelSelectionOverlay:open(vehicle, callback)
+function HelperPersonnelSelectionOverlay:open(vehicle, callback, excludedWorkerIds)
     local availableWorkers = self.app.manager:getAvailableWorkers()
+    local originalCount = #availableWorkers
+    local excludedCount = hpSelectionCountExcluded(excludedWorkerIds)
+
+    hpSelectionDebug("FS25_HelperPersonnel: Auswahl-Diagnose | open ENTER | Fahrzeug=%s | Original=%s | Excluded=%s | Sichtbar=%s | Callback=%s",
+        hpSelectionVehicleName(vehicle),
+        tostring(originalCount),
+        tostring(excludedCount),
+        tostring(self.isVisible == true),
+        tostring(callback ~= nil))
+
+    if excludedWorkerIds ~= nil then
+        local filteredWorkers = {}
+        for _, worker in ipairs(availableWorkers) do
+            local workerId = worker ~= nil and worker.id or nil
+            local excluded = workerId ~= nil and (excludedWorkerIds[workerId] == true or excludedWorkerIds[tostring(workerId)] == true)
+            hpSelectionDebug("FS25_HelperPersonnel: Auswahl-Diagnose | Kandidat | Mitarbeiter=%s | Ausgeschlossen=%s | Fahrzeug=%s", tostring(workerId), tostring(excluded == true), hpSelectionVehicleName(vehicle))
+            if workerId ~= nil and not excluded then
+                table.insert(filteredWorkers, worker)
+            end
+        end
+        availableWorkers = filteredWorkers
+    end
+
+    hpSelectionDebug("FS25_HelperPersonnel: Auswahl-Diagnose | open Gefiltert | Fahrzeug=%s | Verfuegbar=%s | Original=%s | Excluded=%s", hpSelectionVehicleName(vehicle), tostring(#availableWorkers), tostring(originalCount), tostring(excludedCount))
+
     if #availableWorkers == 0 then
         local warningText = g_i18n:getText("ui_selectionNoWorkers")
         if #self.app.manager.workers == 0 then
             warningText = g_i18n:getText("ui_selectionNoEmployees")
         end
+
+        hpSelectionDebug("FS25_HelperPersonnel: Auswahl-Diagnose | open=false | Grund=keineVerfuegbarenMitarbeiter | Fahrzeug=%s | MitarbeiterGesamt=%s", hpSelectionVehicleName(vehicle), tostring(#self.app.manager.workers))
 
         if g_currentMission ~= nil then
             g_currentMission:showBlinkingWarning(warningText, 2200)
@@ -71,10 +136,13 @@ function HelperPersonnelSelectionOverlay:open(vehicle, callback)
     self:suspendGameplayInput()
 
     self.actionsRegistered = false
+    hpSelectionDebug("FS25_HelperPersonnel: Auswahl-Diagnose | open=true | Fahrzeug=%s | Verfuegbar=%s | ErsteAuswahl=%s", hpSelectionVehicleName(vehicle), tostring(#availableWorkers), tostring(availableWorkers[1] ~= nil and availableWorkers[1].id or nil))
     return true
 end
 
 function HelperPersonnelSelectionOverlay:close(confirmSelection)
+    hpSelectionDebug("FS25_HelperPersonnel: Auswahl-Diagnose | close ENTER | Confirm=%s | Fahrzeug=%s | SelectedIndex=%s | Verfuegbar=%s", tostring(confirmSelection == true), hpSelectionVehicleName(self.vehicle), tostring(self.selectedIndex), tostring(#self.availableWorkers))
+
     local callback = self.callback
     local selectedWorker = nil
 
@@ -97,6 +165,8 @@ function HelperPersonnelSelectionOverlay:close(confirmSelection)
 
     self:unregisterActionEvents()
     self:restoreGameplayInput()
+
+    hpSelectionDebug("FS25_HelperPersonnel: Auswahl-Diagnose | close Callback | HatCallback=%s | Mitarbeiter=%s", tostring(callback ~= nil), tostring(selectedWorker ~= nil and selectedWorker.id or nil))
 
     if callback ~= nil then
         callback(selectedWorker)

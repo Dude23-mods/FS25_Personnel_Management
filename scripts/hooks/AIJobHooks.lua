@@ -153,7 +153,8 @@ function HelperPersonnelAIJobHooks.install(stageName)
             "AIJobDeliver",
             "AIJobConveyor",
             "AIJobGoTo",
-            "AIJobLoadAndDeliver"
+            "AIJobLoadAndDeliver",
+            "AIJobFollowVehicle"
         }
 
         for _, className in ipairs(delayedJobHookTargets) do
@@ -229,7 +230,8 @@ function HelperPersonnelAIJobHooks.install(stageName)
         "AIJobDeliver",
         "AIJobConveyor",
         "AIJobGoTo",
-        "AIJobLoadAndDeliver"
+        "AIJobLoadAndDeliver",
+        "AIJobFollowVehicle"
     }
 
     for _, className in ipairs(jobHookTargets) do
@@ -257,6 +259,39 @@ function HelperPersonnelAIJobHooks.getWorkerIdFromHelperName(helperName)
     end
 
     return nil
+end
+
+function HelperPersonnelAIJobHooks.isFollowMeJob(job)
+    if HelperPersonnelCompatibility ~= nil and HelperPersonnelCompatibility.isFollowMeJob ~= nil then
+        return HelperPersonnelCompatibility.isFollowMeJob(job) == true
+    end
+
+    if job == nil then
+        return false
+    end
+
+    if AIJobFollowVehicle ~= nil and job.isa ~= nil then
+        local success, result = pcall(job.isa, job, AIJobFollowVehicle)
+        if success and result == true then
+            return true
+        end
+    end
+
+    if job.followVehicleTask ~= nil or job.followVehicleParameter ~= nil then
+        return true
+    end
+
+    local text = ""
+    if type(job) == "table" then
+        text = tostring(job.className or "") .. " " .. tostring(job.typeName or "") .. " " .. tostring(job.name or "")
+        local mt = getmetatable(job)
+        if type(mt) == "table" then
+            text = text .. " " .. tostring(mt.__name or "") .. " " .. tostring(mt.className or "")
+        end
+    end
+    text = string.lower(text .. " " .. tostring(job))
+
+    return string.find(text, "aijobfollowvehicle", 1, true) ~= nil or string.find(text, "followvehicle", 1, true) ~= nil
 end
 
 function HelperPersonnelAIJobHooks.getVehicleFromJob(job)
@@ -321,6 +356,19 @@ function HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
         return nil
     end
 
+    if HelperPersonnelAIJobHooks.isFollowMeJob(job) then
+        local app = g_helperPersonnelApp
+        if app ~= nil and app.helperBridge ~= nil and app.helperBridge.jobWorkerIds ~= nil and app.helperBridge.jobWorkerIds[job] ~= nil then
+            return app.helperBridge.jobWorkerIds[job]
+        end
+
+        if job.helperPersonnelWorkerId ~= nil then
+            return job.helperPersonnelWorkerId
+        end
+
+        return nil
+    end
+
     if job.helperPersonnelWorkerId ~= nil then
         return job.helperPersonnelWorkerId
     end
@@ -379,6 +427,28 @@ function HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
         return nil
     end
 
+    local vehicle = HelperPersonnelAIJobHooks.getVehicleFromJob(job)
+
+    if HelperPersonnelAIJobHooks.isFollowMeJob(job) then
+        local workerId = job.helperPersonnelWorkerId
+        if workerId ~= nil then
+            local bridge = app.helperBridge
+            if bridge ~= nil and bridge.jobWorkerIds ~= nil and bridge.jobWorkerIds[job] == workerId then
+                return workerId
+            end
+
+            if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.isSendingSelectedAIJob == true then
+                return workerId
+            end
+
+            if HelperPersonnelAIJobHooks.isRunningStartRequestEvent == true then
+                return workerId
+            end
+        end
+
+        return nil
+    end
+
     if job.helperPersonnelWorkerId ~= nil then
         return job.helperPersonnelWorkerId
     end
@@ -391,8 +461,6 @@ function HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
             return restoredWorkerId
         end
     end
-
-    local vehicle = HelperPersonnelAIJobHooks.getVehicleFromJob(job)
 
     if app.consumePendingWorkerForVehicle ~= nil then
         return app:consumePendingWorkerForVehicle(vehicle)
@@ -555,9 +623,17 @@ function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, 
         shouldHandleStart = HelperPersonnelAIStartHooks.shouldHandleAIJobStart(job)
     end
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob | Job=%s | Fahrzeug=%s | Farm=%s | Mitarbeiter=%s | Restore=%s | SelectedSend=%s | EventRun=%s | SollteAuswahl=%s",
+    local isFollowMe = HelperPersonnelAIJobHooks.isFollowMeJob(job)
+    local followVehicle = nil
+    if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow ~= nil then
+        followVehicle = HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
+    end
+
+    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob | Job=%s | FollowMe=%s | Fahrzeug=%s | Ziel=%s | Farm=%s | Mitarbeiter=%s | Restore=%s | SelectedSend=%s | EventRun=%s | SollteAuswahl=%s",
         hpJobDebugJobName(job),
+        tostring(isFollowMe),
         hpJobDebugVehicleName(HelperPersonnelAIJobHooks.getVehicleFromJob(job)),
+        hpJobDebugVehicleName(followVehicle),
         tostring(farmId),
         tostring(workerId),
         tostring(isRestorePhase),
@@ -619,11 +695,30 @@ end
 function HelperPersonnelAIJobHooks.onAIJobStop(job, aiMessage)
     local app = g_helperPersonnelApp
     local workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
+    local isFollowMe = HelperPersonnelAIJobHooks.isFollowMeJob(job)
+    local followVehicle = nil
+    if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow ~= nil then
+        followVehicle = HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
+    end
+
+    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJob.stop | Job=%s | FollowMe=%s | Fahrzeug=%s | Ziel=%s | Mitarbeiter=%s | MissionDelete=%s | Message=%s",
+        hpJobDebugJobName(job),
+        tostring(isFollowMe),
+        hpJobDebugVehicleName(HelperPersonnelAIJobHooks.getVehicleFromJob(job)),
+        hpJobDebugVehicleName(followVehicle),
+        tostring(workerId),
+        tostring(app ~= nil and app.isMissionDeleting == true),
+        tostring(aiMessage))
 
     if app ~= nil and app.isMissionDeleting == true then
         if workerId ~= nil then
             HelperPersonnelAIJobHooks.applyWorkerToJob(job, workerId)
         end
+        return
+    end
+
+    if isFollowMe and workerId == nil then
+        hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJob.stop ignoriert | Grund=FollowMeOhnePersonalzuordnung | Job=%s", hpJobDebugJobName(job))
         return
     end
 

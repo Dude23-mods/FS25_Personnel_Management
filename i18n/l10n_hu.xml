@@ -88,9 +88,12 @@
         <e k="ui_activeWorkerActivityField" v="Feladat: %s | Tábla: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Jármű" />
         <e k="ui_activeWorkerUnknownField" v="ismeretlen" />
+        <e k="ui_activeWorkerNoField" v="not field-bound" />
         <e k="ui_activityUnknown" v="ismeretlen" />
         <e k="ui_activityFieldWork" v="földmunka" />
         <e k="ui_activityTransport" v="szállítás" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
         <e k="ui_activityCultivating" v="kultivátorozás" />
         <e k="ui_activityPlowing" v="szántás" />
         <e k="ui_activitySowing" v="vetés" />

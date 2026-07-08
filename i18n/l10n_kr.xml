@@ -88,9 +88,12 @@
         <e k="ui_activeWorkerActivityField" v="작업: %s | 밭: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="차량" />
         <e k="ui_activeWorkerUnknownField" v="알 수 없음" />
+        <e k="ui_activeWorkerNoField" v="not field-bound" />
         <e k="ui_activityUnknown" v="알 수 없음" />
         <e k="ui_activityFieldWork" v="밭 작업" />
         <e k="ui_activityTransport" v="운송" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
         <e k="ui_activityCultivating" v="경작" />
         <e k="ui_activityPlowing" v="쟁기질" />
         <e k="ui_activitySowing" v="파종" />

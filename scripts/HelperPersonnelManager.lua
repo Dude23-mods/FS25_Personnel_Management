@@ -1543,6 +1543,11 @@ function HelperPersonnelManager:clearWorkerSpecializationRuntimeContext(worker)
 
     worker.currentJobSpecializationKey = nil
     worker.currentJobSpecializationPractice = nil
+    worker.currentJobActivityText = nil
+    worker.currentJobActivityKey = nil
+    worker.currentJobActivityFallback = nil
+    worker.currentJobFollowMeTargetText = nil
+    worker.currentJobFieldId = nil
 end
 
 function HelperPersonnelManager:addWorkerSpecializationProgress(worker, specializationKey, workMinutes)
@@ -7381,23 +7386,6 @@ function HelperPersonnelManager:forEachFarm(callback)
     self:refreshFarmContext()
 end
 
-function HelperPersonnelManager:onPeriodChanged(period, year)
-    if HP_ORIGINAL_MANAGER_ON_PERIOD_CHANGED == nil then
-        return
-    end
-
-    self:refreshFarmContext()
-    for _, farmId in ipairs(self:getSortedFarmIds()) do
-        local data = self.farms[farmId]
-        if data ~= nil then
-            self:bindFarmData(data)
-            HP_ORIGINAL_MANAGER_ON_PERIOD_CHANGED(self, period, year)
-            self:storeCurrentFarmData()
-        end
-    end
-    self:refreshFarmContext()
-end
-
 function HelperPersonnelManager:readPersonFromXML(xmlFile, key)
     local person = {
         id = xmlFile:getInt(key .. "#id"),
@@ -8108,47 +8096,13 @@ for _, methodName in ipairs(HP_FARM_SCOPED_METHODS) do
 end
 
 local HP_ORIGINAL_MANAGER_HIRE_APPLICANT = HelperPersonnelManager.hireApplicant
-function HelperPersonnelManager:hireApplicantForFarm(applicantId, farmId)
-    self:refreshFarmContext(farmId)
-    local result = HP_ORIGINAL_MANAGER_HIRE_APPLICANT(self, applicantId)
-    self:storeCurrentFarmData()
-    self:refreshFarmContext()
-    return result
-end
-
 local HP_ORIGINAL_MANAGER_DISMISS_WORKER = HelperPersonnelManager.dismissWorker
-function HelperPersonnelManager:dismissWorkerForFarm(workerId, farmId)
-    self:refreshFarmContext(farmId)
-    local result = HP_ORIGINAL_MANAGER_DISMISS_WORKER(self, workerId)
-    self:storeCurrentFarmData()
-    self:refreshFarmContext()
-    return result
-end
-
 local HP_MANAGER_GET_CURRENT_FARM_ID_WITHOUT_FORCE = HelperPersonnelManager.getCurrentFarmId
 function HelperPersonnelManager:getCurrentFarmId()
     if self.forcedFarmId ~= nil then
         return self.forcedFarmId
     end
     return HP_MANAGER_GET_CURRENT_FARM_ID_WITHOUT_FORCE(self)
-end
-
-function HelperPersonnelManager:hireApplicantForFarm(applicantId, farmId)
-    self.forcedFarmId = tonumber(farmId) or self:getCurrentFarmId()
-    local result = HP_ORIGINAL_MANAGER_HIRE_APPLICANT(self, applicantId)
-    self.forcedFarmId = nil
-    self:storeCurrentFarmData()
-    self:refreshFarmContext()
-    return result
-end
-
-function HelperPersonnelManager:dismissWorkerForFarm(workerId, farmId)
-    self.forcedFarmId = tonumber(farmId) or self:getCurrentFarmId()
-    local result = HP_ORIGINAL_MANAGER_DISMISS_WORKER(self, workerId)
-    self.forcedFarmId = nil
-    self:storeCurrentFarmData()
-    self:refreshFarmContext()
-    return result
 end
 
 function HelperPersonnelManager:executeWithFarmContext(farmId, callback, storeChanges)

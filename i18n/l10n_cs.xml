@@ -88,9 +88,12 @@
         <e k="ui_activeWorkerActivityField" v="任务: %s | 田地: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="车辆" />
         <e k="ui_activeWorkerUnknownField" v="未知" />
+        <e k="ui_activeWorkerNoField" v="not field-bound" />
         <e k="ui_activityUnknown" v="未知" />
         <e k="ui_activityFieldWork" v="田间作业" />
         <e k="ui_activityTransport" v="运输" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
         <e k="ui_activityCultivating" v="耕作" />
         <e k="ui_activityPlowing" v="犁地" />
         <e k="ui_activitySowing" v="播种" />

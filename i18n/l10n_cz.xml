@@ -88,9 +88,12 @@
         <e k="ui_activeWorkerActivityField" v="Úkol: %s | Pole: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Vozidlo" />
         <e k="ui_activeWorkerUnknownField" v="neznámé" />
+        <e k="ui_activeWorkerNoField" v="not field-bound" />
         <e k="ui_activityUnknown" v="neznámé" />
         <e k="ui_activityFieldWork" v="práce na poli" />
         <e k="ui_activityTransport" v="doprava" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
         <e k="ui_activityCultivating" v="kultivace" />
         <e k="ui_activityPlowing" v="orba" />
         <e k="ui_activitySowing" v="setí" />

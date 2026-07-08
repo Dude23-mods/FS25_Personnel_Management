@@ -88,9 +88,12 @@
         <e k="ui_activeWorkerActivityField" v="Tâche : %s | Champ : %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Véhicule" />
         <e k="ui_activeWorkerUnknownField" v="inconnu" />
+        <e k="ui_activeWorkerNoField" v="hors champ" />
         <e k="ui_activityUnknown" v="inconnu" />
         <e k="ui_activityFieldWork" v="travail aux champs" />
         <e k="ui_activityTransport" v="transport" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe avec %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe : %s derrière %s" />
         <e k="ui_activityCultivating" v="déchaumage" />
         <e k="ui_activityPlowing" v="labour" />
         <e k="ui_activitySowing" v="semis" />
