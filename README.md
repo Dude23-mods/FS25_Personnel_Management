@@ -1,4 +1,4 @@
-![Status](https://img.shields.io/badge/status-in%20development-orange) ![Version](https://img.shields.io/badge/version-1.0.1.0-blue) ![Game](https://img.shields.io/badge/Farming%20Simulator-25-green) ![Issues](https://img.shields.io/badge/issues-welcome-brightgreen)
+![Status](https://img.shields.io/badge/status-in%20development-orange) ![Version](https://img.shields.io/badge/version-1.0.3.0-blue) ![Game](https://img.shields.io/badge/Farming%20Simulator-25-green) ![Issues](https://img.shields.io/badge/issues-welcome-brightgreen)
 # FS25_Personnel_Management
 
 Personnel Management adds a more detailed employee system to Farming Simulator 25. Instead of using anonymous helpers only, your farm can hire, manage and assign individual employees with their own names, salaries, experience, reliability, loyalty and specializations.
