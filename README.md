@@ -3,11 +3,20 @@
 
 Personnel Management adds a more detailed employee system to Farming Simulator 25. Instead of using anonymous helpers only, your farm can hire, manage and assign individual employees with their own names, salaries, experience, reliability, loyalty and specializations.
 
-## Compatibility Notice: AutoDrive and Courseplay
+## Compatibility Notice 
+
+### AutoDrive and Courseplay
 ![AutoDrive](https://img.shields.io/badge/AutoDrive-not%20supported-red)
 ![Courseplay](https://img.shields.io/badge/Courseplay-not%20supported-red)
 
 AutoDrive and Courseplay are currently not supported by Personnel Management. These mods use their own AI and automation systems, which are not fully compatible with the way Personnel Management assigns and manages employees for helper jobs. Using AutoDrive or Courseplay together with this mod may lead to incorrect helper assignment, native Giants helpers being used instead of employees, Lua errors, or performance issues. For stable gameplay, it is recommended to disable AutoDrive and Courseplay when using Personnel Management.
+
+### FollowMe
+![FollowMe Supported](https://img.shields.io/badge/FollowMe-supported-brightgreen)
+
+FollowMe is supported by Personnel Management since v1.0.3.0. When starting a FollowMe job, the mod opens the Personnel Management employee selection and requires an additional available employee for the following vehicle. The FollowMe job no longer runs through an unnamed native Giants helper, but is assigned to a real employee from your staff.
+
+The assigned employee is shown in job messages and in the employee menu. FollowMe working time also contributes to experience and specialization progress, depending on the detected activity. Pure following without a trailer or implement is treated as transport-related work, while FollowMe jobs with suitable attached implements may be recognized as field work such as tillage, sowing, fertilizing, plant protection, harvesting or transport.
 
 ## Features
 ### Applicant Market
