@@ -1550,10 +1550,9 @@ if HelperPersonnelFrame ~= nil then
         return worker
     end
 
-    function HelperPersonnelFrame:onClickTrainWorker()
-        local worker = self:getSelectedWorkerForTrainingAction()
+    function HelperPersonnelFrame:performTrainWorker(worker)
         if worker == nil then
-            return false
+            return
         end
 
         local changed = false
@@ -1571,6 +1570,26 @@ if HelperPersonnelFrame ~= nil then
             if self.updateButtons ~= nil then
                 self:updateButtons()
             end
+        end
+    end
+
+    function HelperPersonnelFrame:onClickTrainWorker()
+        local worker = self:getSelectedWorkerForTrainingAction()
+        if worker == nil then
+            return false
+        end
+
+        -- Confirm before sending to training so an accidental S key press can't
+        -- silently pull an employee off field work (issue #5).
+        local workerName = self.getWorkerDisplayName ~= nil and self:getWorkerDisplayName(worker) or tostring(worker.id or "")
+        local text = string.format(self:getText("ui_confirmTrainText", "Send %s to training? They cannot be assigned to field work while in training."), workerName)
+
+        if HelperPersonnelFrame.showConfirmationDialog ~= nil then
+            HelperPersonnelFrame.showConfirmationDialog(text, function()
+                self:performTrainWorker(worker)
+            end)
+        else
+            self:performTrainWorker(worker)
         end
 
         return true

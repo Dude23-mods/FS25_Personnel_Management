@@ -358,6 +358,81 @@ function HelperPersonnelFrame:showApplicantsView()
     self:updateButtons()
 end
 
+-- Show a Yes/No confirmation before a destructive action (dismissal / training),
+-- then run onConfirm only if the player confirms. Guards accidental key/button
+-- presses (issue #5). Falls back to running directly if the dialog is unavailable,
+-- so behaviour never breaks. Static so other files (training) can reuse it.
+function HelperPersonnelFrame.showConfirmationDialog(text, onConfirm)
+    if text == nil or text == "" then
+        if onConfirm ~= nil then
+            onConfirm()
+        end
+        return
+    end
+
+    if g_gui ~= nil and g_gui.showYesNoDialog ~= nil then
+        g_gui:showYesNoDialog({
+            text = text,
+            callback = function(yes)
+                if yes == true and onConfirm ~= nil then
+                    onConfirm()
+                end
+            end
+        })
+        return
+    end
+
+    if onConfirm ~= nil then
+        onConfirm()
+    end
+end
+
+function HelperPersonnelFrame:getWorkerDisplayName(worker)
+    if worker == nil then
+        return ""
+    end
+
+    local manager = self:getManager()
+    if manager ~= nil and manager.getFullName ~= nil then
+        local ok, name = pcall(manager.getFullName, manager, worker)
+        if ok and name ~= nil and name ~= "" then
+            return name
+        end
+    end
+
+    local firstName = worker.firstName or ""
+    local lastName = worker.lastName or ""
+    local name = string.format("%s %s", firstName, lastName)
+    if name ~= " " then
+        return name
+    end
+
+    return tostring(worker.id or "")
+end
+
+function HelperPersonnelFrame:performDismissWorker(worker)
+    local manager = self:getManager()
+    if worker == nil or manager == nil then
+        return
+    end
+
+    if self.app ~= nil and self.app.requestDismissWorker ~= nil then
+        self.app:requestDismissWorker(worker.id)
+    else
+        manager:dismissWorker(worker.id)
+    end
+
+    local workers = self:getWorkers()
+    if #workers == 0 then
+        self:showOverview()
+    else
+        self.workerIndex = hpClamp(self.workerIndex, 1, #workers)
+    end
+
+    self:refresh()
+    self:updateButtons()
+end
+
 function HelperPersonnelFrame:activateCurrentEntry()
     local manager = self:getManager()
     if manager == nil then
@@ -372,18 +447,11 @@ function HelperPersonnelFrame:activateCurrentEntry()
         end
 
         local worker = workers[self.workerIndex]
-        if self.app ~= nil and self.app.requestDismissWorker ~= nil then
-            self.app:requestDismissWorker(worker.id)
-        else
-            manager:dismissWorker(worker.id)
-        end
-        workers = self:getWorkers()
-
-        if #workers == 0 then
-            self:showOverview()
-        else
-            self.workerIndex = hpClamp(self.workerIndex, 1, #workers)
-        end
+        local text = string.format(self:getText("ui_confirmDismissText", "Do you really want to dismiss %s?"), self:getWorkerDisplayName(worker))
+        HelperPersonnelFrame.showConfirmationDialog(text, function()
+            self:performDismissWorker(worker)
+        end)
+        return
     elseif self.mode == HelperPersonnelFrame.MODE_APPLICANTS then
         local applicants = self:getApplicants()
         if #applicants == 0 then

@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <l10n>
     <elements>
+        <e k="ui_confirmDismissText" v="Do you really want to dismiss %s?" />
+        <e k="ui_confirmTrainText" v="Send %s to training? They cannot be assigned to field work while in training." />
         <e k="ui_ingameMenuHelperPersonnel" v="Personnel Management" />
         <e k="ui_workersHeader" v="Employees" />
         <e k="ui_applicantsHeader" v="Applicants" />

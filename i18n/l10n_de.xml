@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <l10n>
     <elements>
+        <e k="ui_confirmDismissText" v="Willst du %s wirklich entlassen?" />
+        <e k="ui_confirmTrainText" v="%s in die Schulung schicken? Während der Schulung kann der Mitarbeiter nicht für Feldarbeit eingeteilt werden." />
         <e k="ui_ingameMenuHelperPersonnel" v="Personalmanagement" />
         <e k="ui_workersHeader" v="Mitarbeiter" />
         <e k="ui_applicantsHeader" v="Bewerbermarkt" />
