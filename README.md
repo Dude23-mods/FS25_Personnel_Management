@@ -4,6 +4,35 @@
 
 Personnel Management adds a more detailed employee system to Farming Simulator 25. Instead of using anonymous helpers only, your farm can hire, manage and assign individual employees with their own names, salaries, experience, reliability, loyalty and specializations.
 
+## Contents
+- [Compatibility Notice](#compatibility-notice)
+  - [AutoDrive and Courseplay](#autodrive-and-courseplay)
+  - [FollowMe](#followme)
+- [Features](#features)
+  - [Applicant Market](#applicant-market)
+  - [Permanent employees](#permanent-employees)
+  - [Individual salaries](#individual-salaries)
+  - [Experience System](#experience-system)
+  - [Reliability](#reliability)
+  - [Loyalty](#loyalty)
+  - [Specializations](#specializations)
+  - [Training](#training)
+  - [Resignations and Dismissals](#resignations-and-dismissals)
+  - [Helper Assignment](#helper-assignment)
+  - [Gameplay Settings](#gameplay-settings)
+  - [Savegame Support](#savegame-support)
+  - [Multiplayer Synchronization](#multiplayer-synchronization)
+- [Preview 1.1.0.0](#preview-1100)
+  - [New Personnel Management Menu](#new-personnel-management-menu)
+  - [Reworked Applicant Market](#reworked-applicant-market)
+  - [Age, Birthdays and Professional Backgrounds](#age-birthdays-and-professional-backgrounds)
+  - [Retirement System](#retirement-system)
+  - [Expanded Training System](#expanded-training-system)
+  - [Reliability and Assignment Interruptions](#reliability-and-assignment-interruptions)
+  - [Confirmation Dialogs and Input Safety](#confirmation-dialogs-and-input-safety)
+  - [Salaries and Settings](#salaries-and-settings)
+- [Development Status](#development-status)
+  
 ## Compatibility Notice 
 
 ### AutoDrive and Courseplay
@@ -71,6 +100,37 @@ Employee data is saved with your savegame, so your workforce remains persistent 
 ### Multiplayer Synchronization
 
 The mod includes multiplayer synchronization so employee data can be used in multiplayer games. Multiplayer and dedicated server behavior is actively being improved based on user feedback.
+
+## Preview 1.1.0.0
+
+### New Personnel Management Menu
+
+Version 1.1.0.0 will introduce a new standalone Personnel Management menu. It brings applicants, employees, training, farm statistics and settings together in one clear interface.
+
+The redesigned menu offers easier navigation, more detailed employee profiles, improved training information and a better overview of your farm’s workforce. Development is still ongoing, so further improvements and features may be added before release.
+
+### Reworked Applicant Market
+
+The applicant market has been extensively revised. More applicants can now be available at the same time, candidates remain on the market for individual periods, and better-qualified applicants may leave sooner because they are more likely to receive offers elsewhere. This makes recruitment more dynamic and requires more careful decisions.
+
+### Age, Birthdays and Professional Backgrounds
+
+Applicants and employees now receive persistent birthdays and continue to age as the game progresses. Their age is combined with individual professional backgrounds such as farm work, agricultural contracting, machinery maintenance, logistics or office employment. These backgrounds influence their starting experience and help create more believable career histories.
+
+### Retirement System
+Employees may now retire as they grow older. The probability of retirement increases with age and is based on an individually stored retirement profile. Retirement is announced in advance, and the employee remains available until the end of the current month.
+
+### Expanded Training System
+The training system has been significantly expanded. The new training page shows categories, progress, costs and price adjustments more clearly. Training offers change every month, prices may vary, and individual categories may temporarily have no available places.
+
+### Reliability and Assignment Interruptions
+Reliability now has an additional practical effect. Employees with low reliability may interrupt an assignment after it has started. The assignment is then ended through the server-authoritative workflow, the employee becomes available again, and the incident is recorded in the employee’s career history.
+
+### Confirmation Dialogs and Input Safety
+Important actions such as dismissing an employee or sending someone to training now require confirmation. Keyboard input is only processed by the currently active page, preventing hidden or inactive menu pages from reacting to keys such as Enter and triggering unintended actions.
+
+### Salaries and Settings
+The standard monthly salary can now be edited directly on the settings page. Valid values are stored through the existing configuration system and synchronized in multiplayer. The settings page itself has also been reorganized into clearer sections covering work performance, personnel development, economic effects and salaries.
 
 ## Development Status
 
