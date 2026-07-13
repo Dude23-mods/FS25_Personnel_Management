@@ -110,7 +110,7 @@ end
 
 function HelperPersonnelNetwork.readPersonArray(streamId, version)
     local people = {}
-    local count = math.max(0, streamReadInt32(streamId) or 0)
+    local count = math.min(HelperPersonnelNetwork.MAX_NETWORK_ARRAY or 100000, math.max(0, streamReadInt32(streamId) or 0))
 
     for _ = 1, count do
         table.insert(people, HelperPersonnelNetwork.readPerson(streamId, version))
@@ -151,7 +151,7 @@ end
 
 function HelperPersonnelNetwork.readAssignmentArray(streamId)
     local assignments = {}
-    local count = math.max(0, streamReadInt32(streamId) or 0)
+    local count = math.min(HelperPersonnelNetwork.MAX_NETWORK_ARRAY or 100000, math.max(0, streamReadInt32(streamId) or 0))
 
     for _ = 1, count do
         table.insert(assignments, HelperPersonnelNetwork.readAssignment(streamId))
@@ -272,7 +272,7 @@ function HelperPersonnelNetwork.readState(streamId)
             state.config = HelperPersonnelNetwork.readConfigState(streamId, version)
         end
 
-        local farmCount = math.max(0, streamReadInt32(streamId) or 0)
+        local farmCount = math.min(HelperPersonnelNetwork.MAX_NETWORK_ARRAY or 100000, math.max(0, streamReadInt32(streamId) or 0))
         for _ = 1, farmCount do
             table.insert(state.farms, HelperPersonnelNetwork.readFarmState(streamId, version))
         end
@@ -993,7 +993,11 @@ function HelperPersonnelApp:resolveAuthorizedFarmId(connection, requestedFarmId,
         return true, connectionFarmId, connectionFarmId
     end
 
-    return true, strictVehicleFarmId or requestFarmId or (self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1), nil
+    -- Security: the connection exists but its farm could not be resolved. Fail CLOSED —
+    -- never fall back to the client-supplied farm id here, or a malicious/buggy client
+    -- could act on a farm it does not own (hire/dismiss/train/pay on another farm).
+    hpV1550Warn("Netzwerkanfrage '%s' abgelehnt: Hof der Verbindung nicht ermittelbar.", tostring(actionText or "?"))
+    return false, nil, nil
 end
 
 function HelperPersonnelApp:validateNetworkActionTarget(actionName, targetId, farmId)

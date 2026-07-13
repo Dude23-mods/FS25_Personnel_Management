@@ -249,9 +249,14 @@ function HelperPersonnelNetwork.writeHistory(streamId, history)
     end
 end
 
+-- Security cap: reject absurd client-supplied array lengths so a malicious client
+-- cannot freeze the (single-threaded) server in an unbounded read loop. Generous
+-- enough that it never truncates legitimate data.
+HelperPersonnelNetwork.MAX_NETWORK_ARRAY = HelperPersonnelNetwork.MAX_NETWORK_ARRAY or 100000
+
 function HelperPersonnelNetwork.readHistory(streamId)
     local history = {}
-    local count = math.max(0, streamReadInt32(streamId) or 0)
+    local count = math.min(HelperPersonnelNetwork.MAX_NETWORK_ARRAY, math.max(0, streamReadInt32(streamId) or 0))
 
     for _ = 1, count do
         table.insert(history, {
