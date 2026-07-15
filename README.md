@@ -6,6 +6,12 @@ Personnel Management adds a persistent employee system to Farming Simulator 25. 
 
 Version 1.1.0.0 introduces a standalone Personnel Management menu, a persistent and more dynamic applicant market, expanded employee development, centralized salary request management, transport-driver priorities, retirement and long-term farm statistics.
 
+### Support 
+[![Support me on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20my%20work-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/dude23mods)
+
+All of my mods are available completely free of charge. Nobody has to pay to download or use them. I do not intend to make a profit from my mods, nor do I expect donations to cover all of my development-related expenses.
+Your support just helps me spending more time developing, testing and maintaining my mods. Thank you for supporting!
+
 ## Contents
 - [Compatibility Notice](#compatibility-notice)
   - [AutoDrive and Courseplay](#autodrive-and-courseplay)
