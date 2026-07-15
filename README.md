@@ -183,6 +183,6 @@ This prevents players from modifying another farm's personnel and preserves cons
 
 ## Development Status
 
-Personnel Management is under active development. Multiplayer, dedicated-server behavior, savegame migration and compatibility with other AI-related mods are tested and improved continuously, but not every possible mod combination can be covered.
+Personnel Management is under active development. Multiplayer, dedicated-server behavior, savegame migration and compatibility with other mods are tested and improved continuously, but not every possible mod combination can be covered.
 
 Please report reproducible bugs, compatibility problems or unexpected behavior through GitHub Issues. Logs, screenshots, savegame details and exact reproduction steps are especially helpful.
