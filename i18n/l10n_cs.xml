@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <l10n>
     <elements>
         <e k="ui_ingameMenuHelperPersonnel" v="人员管理" />
@@ -20,16 +20,16 @@
         <e k="ui_rank_helper" v="助手" />
         <e k="ui_rank_specialist" v="专家" />
         <e k="ui_specialization_short" v="专精" />
-        <e k="ui_specialization_tillage" v="Tillage" />
-        <e k="ui_specialization_sowing" v="Sowing" />
-        <e k="ui_specialization_fertilizing" v="Fertilizing" />
-        <e k="ui_specialization_plantProtection" v="Crop Protection" />
-        <e k="ui_specialization_harvest" v="Harvest" />
-        <e k="ui_specialization_transport" v="Transport" />
-        <e k="ui_specialization_machineCare" v="Machine Care" />
-        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
-        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
-        <e k="ui_specialization_progress" v="learning %s %d%%" />
+        <e k="ui_specialization_tillage" v="耕作" />
+        <e k="ui_specialization_sowing" v="播种" />
+        <e k="ui_specialization_fertilizing" v="施肥" />
+        <e k="ui_specialization_plantProtection" v="作物保护" />
+        <e k="ui_specialization_harvest" v="收获" />
+        <e k="ui_specialization_transport" v="运输" />
+        <e k="ui_specialization_machineCare" v="机器保养" />
+        <e k="ui_specialization_resourceSaver" v="节约作业" />
+        <e k="ui_specializationLearned" v="%s 已掌握一项专长：%s。" />
+        <e k="ui_specialization_progress" v="正在学习 %s %d%%" />
         <e k="ui_rank_expert" v="熟练工" />
         <e k="ui_worker_line1" v="%s · 经验 %d · 可靠性 %d · 忠诚度 %d" />
         <e k="ui_worker_line2" v="月薪: %s · 状态: %s" />
@@ -48,22 +48,22 @@
         <e k="ui_dismissalNoticeNextMonth" v="%s 已安排在下月底解雇。" />
         <e k="ui_dismissalNotice" v="%s 已安排在月底解雇。" />
         <e k="ui_fireDeniedPending" v="该员工已安排解雇。" />
-        <e k="ui_fireDeniedBusy" v="员工 忙碌 - 解雇 nicht möglich." />
+        <e k="ui_fireDeniedBusy" v="该员工正在工作，无法解雇。" />
         <e k="ui_hireSuccess" v="%s - 雇用." />
         <e k="ui_fireSuccess" v="%s - 解雇." />
         <e k="ui_selectionTitle" v="选择员工" />
-        <e k="ui_selectionHint" v="A/D / Left/Right · Enter · Esc" />
+        <e k="ui_selectionHint" v="A/D 或 左/右切换 · 空格键或鼠标点击确认 · Esc 取消" />
         <e k="ui_selectionNoWorkers" v="当前没有可用申请人." />
         <e k="ui_selectionWorkerUnavailable" v="忙碌." />
         <e k="ui_selectionNoEmployees" v="尚未雇用员工" />
         <e k="ui_selectionLineStats" v="%s · 经验 %d · 可靠性 %d · 忠诚度 %d" />
         <e k="ui_selectionLineWage" v="月薪: %s" />
-        <e k="ui_selectionLineJobs" v="工作: %d · Work speed: %d%%" />
-        <e k="input_HP_SELECT_LEFT" v="选择员工 left" />
-        <e k="input_HP_SELECT_RIGHT" v="选择员工 right" />
+        <e k="ui_selectionLineJobs" v="任务：%d · 工作速度：%d%%" />
+        <e k="input_HP_SELECT_LEFT" v="选择上一位员工" />
+        <e k="input_HP_SELECT_RIGHT" v="选择下一位员工" />
         <e k="input_HP_SELECT_CONFIRM" v="确认员工选择" />
-        <e k="input_HP_OPEN_APPLICANTS" v="申请人" />
-        <e k="input_HP_TRANSPORT_TOGGLE" v="运输 toggle" />
+        <e k="input_HP_TRANSPORT_MANAGE" v="管理运输任务" />
+        <e k="input_HP_SALARY_RAISE_MANAGE" v="工资要求管理" />
         <e k="input_HP_SELECT_CANCEL" v="取消员工选择" />
         <e k="ui_openWorkerView" v="员工" />
         <e k="ui_openApplicantView" v="申请人" />
@@ -84,16 +84,16 @@
         <e k="ui_noWorkersUpper" v="没有可用员工" />
         <e k="ui_noActiveWorkers" v="尚未雇用员工" />
         <e k="ui_activeWorkerStatusVehicle" v="状态: 正在工作的员工 (%s)" />
-        <e k="ui_activeWorkerStatusVehicleImplement" v="状态: 正在工作的员工 (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="状态：员工正在工作（%s）| 工具/拖车：%s" />
         <e k="ui_activeWorkerActivityField" v="任务: %s | 田地: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="车辆" />
         <e k="ui_activeWorkerUnknownField" v="未知" />
-        <e k="ui_activeWorkerNoField" v="not field-bound" />
+        <e k="ui_activeWorkerNoField" v="不绑定田地" />
         <e k="ui_activityUnknown" v="未知" />
         <e k="ui_activityFieldWork" v="田间作业" />
         <e k="ui_activityTransport" v="运输" />
-        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
-        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
+        <e k="ui_activityFollowMeTransport" v="与 %s 一起执行 FollowMe 运输" />
+        <e k="ui_activityFollowMeWork" v="FollowMe：%s 跟随在 %s 后方" />
         <e k="ui_activityCultivating" v="耕作" />
         <e k="ui_activityPlowing" v="犁地" />
         <e k="ui_activitySowing" v="播种" />
@@ -116,25 +116,26 @@
         <e k="ui_workersHeaderUpper" v="员工管理" />
         <e k="ui_instructionApplicant" v="ENTER: 雇用. ESC: 返回概览." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: 解雇." />
-        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="G: 批准加薪. N: 拒绝请求." />
-        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
-        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
-        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
-        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
-        <e k="ui_training_already_done" v="%s has already attended training this month." />
-        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_instructionWorkerTransport" v="使用运输按钮管理运输顺序，按 S 培训员工。" />
+        <e k="ui_instructionWorkerSalaryRaise" v="未处理的加薪要求可通过“工资要求管理”按钮处理。" />
+        <e k="ui_instructionSwitchEntry" v="单击条目进行选择；使用鼠标滚轮滚动。" />
+        <e k="ui_training_no_progress" v="该员工目前还没有合适的学习方向。" />
+        <e k="ui_training_worker_busy" v="该员工正在工作，无法参加培训。" />
+        <e k="ui_training_worker_sick" v="该员工生病了，无法参加培训。" />
+        <e k="ui_training_already_done" v="%s 本月已经参加过培训。" />
+        <e k="ui_training_started" v="%s 开始参加 %s 培训，持续到月底（%s）。" />
+        <e k="ui_training_completed" v="%s 已完成 %s 培训：%d%% 提升至 %d%%。" />
         <e k="ui_noApplicantsDetail" v="当前没有可用申请人" />
         <e k="ui_noWorkersDetail" v="尚未雇用员工" />
-        <e k="ui_entryZero" v="条目 0 von 0" />
+        <e k="ui_entryZero" v="条目 0 / 0" />
         <e k="ui_visibleRange" v="可见 %d-%d" />
         <e k="ui_allEntriesVisible" v="所有条目可见" />
-        <e k="ui_entryCounter" v="条目 %d von %d" />
+        <e k="ui_entryCounter" v="条目 %d / %d" />
         <e k="ui_monthlyLineStaff" v="在职员工: 助手 %d | 专家 %d | 熟练工 %d" />
         <e k="ui_monthlyLineApplicantsReady" v="市场申请人: %d" />
         <e k="ui_monthlyLineApplicantsEmpty" v="当前没有可用申请人" />
         <e k="ui_monthlyLineNoWorkers" v="尚未雇用员工" />
-        <e k="ui_monthlyLineAvailableWorkers" v="可用: %d von %d" />
+        <e k="ui_monthlyLineAvailableWorkers" v="可用：%d / %d" />
         <e k="ui_monthlyLinePayroll" v="月薪: %s" />
         <e k="ui_monthlyLineWorkStats" v="工作时间: %d 工作 | %s | 月薪: %s" />
         <e k="ui_button_transport_assign" v="分配运输" />
@@ -145,94 +146,347 @@
         <e k="ui_transportNoDriverAssigned" v="运输: 暂无." />
         <e k="ui_transportNoDriverAvailable" v="运输: 忙碌." />
         <e k="ui_transportAutoAssigned" v="运输: 分配运输." />
-        <e k="ui_experienceGainSingle" v="%s: 经验 +1. 经验: %d to %d" />
-        <e k="ui_experienceGainMultiple" v="%s: 经验 +%d. 经验: %d to %d" />
-        <e k="ui_experienceMonthlyLimitReached" v="%s: 经验 monthly limit reached." />
-        <e k="ui_loyaltyChanged" v="%s: 忠诚度 %s. 忠诚度: %d to %d" />
-        <e k="ui_loyaltyWarningLow" v="%s: 忠诚度 low." />
-        <e k="ui_loyaltyWarningVeryLow" v="%s: 忠诚度 very low." />
+        <e k="ui_experienceGainSingle" v="%s：经验 +1。经验：%d → %d" />
+        <e k="ui_experienceGainMultiple" v="%s：经验 +%d。经验：%d → %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s：已达到本月经验上限。" />
+        <e k="ui_loyaltyChanged" v="%s：忠诚度 %s。忠诚度：%d → %d" />
+        <e k="ui_loyaltyWarningLow" v="%s：忠诚度较低。" />
+        <e k="ui_loyaltyWarningVeryLow" v="%s：忠诚度非常低。" />
         <e k="ui_loyaltyWarningCritical" v="%s: 月底离职." />
         <e k="ui_loyaltyResignationNotice" v="%s: 月底离职." />
-        <e k="ui_sicknessNotice" v="%s: 生病 - cannot work today." />
-        <e k="ui_sicknessNoticeJobAborted" v="%s: 生病 - current job cancelled." />
+        <e k="ui_sicknessNotice" v="%s：生病，今天无法工作。" />
+        <e k="ui_sicknessNoticeJobAborted" v="%s：生病，当前任务已取消。" />
         <e k="ui_button_raise_grant" v="批准加薪" />
         <e k="ui_button_raise_decline" v="拒绝请求" />
-        <e k="ui_salaryRaisePendingLine" v="加薪: %s statt %s" />
-        <e k="ui_salaryRaiseRequestNotification" v="%s requests 加薪 after reaching %s: %s." />
-        <e k="ui_salaryRaiseRequestHistory" v="加薪: %s requests %s." />
+        <e k="ui_button_salary_manage_long" v="工资要求管理" />
+        <e k="ui_salaryRequestsTitle" v="工资要求管理" />
+        <e k="ui_salaryRequestsIntro" v="此处列出所有未处理的加薪要求。选择一名员工，然后决定批准或拒绝该要求。" />
+        <e k="ui_salaryRequestsHeaderEmployee" v="员工" />
+        <e k="ui_salaryRequestsHeaderCurrent" v="当前工资" />
+        <e k="ui_salaryRequestsHeaderRequested" v="要求的工资" />
+        <e k="ui_salaryRequestsNoRequests" v="没有未处理的加薪要求。" />
+        <e k="ui_salaryRequestsControls" v="上/下方向键：选择 | Enter：批准 | 空格键：拒绝" />
+        <e k="ui_salaryRaisePendingLine" v="加薪：%s，原为 %s" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s 在达到 %s 后要求加薪：%s。" />
+        <e k="ui_salaryRaiseRequestHistory" v="加薪：%s 要求 %s。" />
         <e k="ui_salaryRaiseGranted" v="批准加薪: %s - %s." />
         <e k="ui_salaryRaiseDeclined" v="拒绝请求: %s." />
-        <e k="ui_salaryRaisePendingPenalty" v="Open 加薪: %s affects 忠诚度: %s." />
-        <e k="ui_salaryRaiseGrantedReputation" v="Fair 加薪: %s 雇主声誉" />
+        <e k="ui_salaryRaisePendingPenalty" v="待处理加薪：%s 影响忠诚度：%s。" />
+        <e k="ui_salaryRaiseGrantedReputation" v="公平加薪：雇主声誉 %s" />
         <e k="ui_hpIngameMenuPrev" v="上一个菜单" />
         <e k="ui_hpIngameMenuNext" v="下一个菜单" />
-        <e k="ui_status_training" v="in training" />
-        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
-        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
-        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
-        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
-        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_status_training" v="培训中" />
+        <e k="ui_training_worker_in_training" v="该员工已经在参加培训，持续到月底。" />
+        <e k="ui_training_not_first_day" v="培训只能在每月第一天开始。" />
+        <e k="ui_training_not_single_day_deadline" v="当每月设为 1 天时，培训只能在第一天 12:00 前开始。" />
+        <e k="ui_training_line_single_day_deadline" v="培训：每月 1 天时仅限 12:00 前 · %s %s · 上次：%s" />
+        <e k="ui_training_already_done_year" v="%s 今年已经参加过培训。" />
         <e k="ui_training_last_none" v="-" />
-        <e k="ui_training_unknown" v="unknown" />
-        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
-        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
-        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
-        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
-        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
-        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
-        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
-
-        <e k="ui_hpSetting_on" v="On"/>
-
-        <e k="ui_hpSetting_off" v="Off"/>
-
-        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
-
-        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
-
-        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
-
-        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
-
-        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
-
-        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
-
-        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
-
-        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
-
-        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
-
-        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
-
-        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
-
-        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
-        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
-
-        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
-
-        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
-
-        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
-
-        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
-
-        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
-
-        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
-
-        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
-
-        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
-
-        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
-
-        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+        <e k="ui_training_unknown" v="未知" />
+        <e k="ui_training_line_active" v="培训：%s，持续到月底 · 上次：%s" />
+        <e k="ui_training_line_no_direction" v="培训：没有学习方向 · 上次：%s" />
+        <e k="ui_training_line_year_blocked" v="培训：只能明年参加 · 上次：%s" />
+        <e k="ui_training_line_first_day" v="培训：仅限第一天 · %s %s · 上次：%s" />
+        <e k="ui_training_line_busy" v="培训：工作中，无法参加 · %s %s · 上次：%s" />
+        <e k="ui_training_line_sick" v="培训：生病，无法参加 · %s %s · 上次：%s" />
+        <e k="ui_training_line_possible" v="培训：可参加 %s，%s · 上次：%s" />
+        <e k="ui_hpSetting_on" v="开" />
+        <e k="ui_hpSetting_off" v="关" />
+        <e k="ui_hpSetting_section" v="人员管理" />
+        <e k="ui_hpSetting_gameplayEffects" v="人员管理：游戏效果" />
+        <e k="ui_hpSetting_experienceEffects" v="人员管理：经验效果" />
+        <e k="ui_hpSetting_speedEffect" v="人员管理：工作速度" />
+        <e k="ui_hpSetting_wearEffect" v="人员管理：磨损" />
+        <e k="ui_hpSetting_consumablesEffect" v="人员管理：材料消耗" />
+        <e k="ui_hpSetting_fuelEffect" v="人员管理：燃料消耗" />
+        <e k="ui_hpSetting_reliabilityEffects" v="人员管理：可靠性" />
+        <e k="ui_hpSetting_personnelEffects" v="人员管理：人员效果" />
+        <e k="ui_hpSetting_loyaltyEffects" v="人员管理：忠诚度变化" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="人员管理：夜间工作" />
+        <e k="ui_hpSetting_economicEffects" v="人员管理：经济" />
+        <e k="ui_hpSetting_individualWages" v="人员管理：个人工资" />
+        <e k="ui_hpSetting_gameplayEffects_desc" v="启用或禁用人员管理的所有游戏效果。显示的数值、保存的数据和历史记录仍会保留。" />
+        <e k="ui_hpSetting_experienceEffects_desc" v="决定员工经验和专长是否影响正在执行的帮工任务。" />
+        <e k="ui_hpSetting_speedEffect_desc" v="决定经验和匹配的专长是否影响工作速度。" />
+        <e k="ui_hpSetting_wearEffect_desc" v="决定经验和匹配的专长是否影响车辆和工具的额外磨损。" />
+        <e k="ui_hpSetting_consumablesEffect_desc" v="决定经验和匹配的专长是否影响种子、肥料、除草剂、液体肥料、沼渣、粪肥及类似材料的使用量。" />
+        <e k="ui_hpSetting_fuelEffect_desc" v="决定经验和匹配的专长是否影响燃料消耗。" />
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="决定员工可靠性是否会导致短时性能下降和病假。" />
+        <e k="ui_hpSetting_personnelEffects_desc" v="启用或禁用忠诚度发展、夜间工作影响等人员相关效果。" />
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="决定发放工资、夜间工作或雇主声誉等事件是否会改变员工忠诚度。" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="决定夜间工作是否影响忠诚度和雇主声誉。" />
+        <e k="ui_hpSetting_economicEffects_desc" v="决定是否使用个人经济计算。禁用时使用中性的标准工资。" />
+        <e k="ui_hpSetting_individualWages_desc" v="决定员工是否根据职位、经验、可靠性和专长获得个人工资。" />
+        <e k="ui_hpSetting_groupWork" v="工作表现" />
+        <e k="ui_hpSetting_groupPersonnel" v="人员发展" />
+        <e k="ui_hpSetting_groupEconomy" v="经济与工资" />
+        <e k="ui_hpSetting_standardWage" v="标准月工资" />
+        <e k="ui_hpSetting_standardWage_desc" v="设置在停用个人工资时使用的基础月工资。该数值从下一次工资计算开始生效。" />
+        <e k="ui_hpSetting_standardWageInvalid" v="请输入 %d 到 %d 之间的数值。金额将四舍五入到最接近的 10。" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="打开人员管理" />
+        <e k="ui_pmMenuPageOverview" v="概览" />
+        <e k="ui_pmMenuPageApplicants" v="申请人" />
+        <e k="ui_pmMenuPageEmployees" v="员工" />
+        <e k="ui_pmMenuPageTraining" v="培训" />
+        <e k="ui_pmMenuPageAssignments" v="任务分配" />
+        <e k="ui_pmMenuPrevPerson" v="上一人" />
+        <e k="ui_pmMenuNextPerson" v="下一人" />
+        <e k="ui_pmPersonCounter" v="第 %d 位，共 %d 位" />
+        <e k="ui_pmMenuNoPermission" v="你无权为该农场做出人员决定。" />
+        <e k="ui_pmConfirmHire" v="确定雇用 %s 吗？" />
+        <e k="ui_pmConfirmDismiss" v="确定解雇 %s 吗？" />
+        <e k="ui_pmConfirmTraining" v="开始培训 %s 吗？" />
+        <e k="ui_pmProfileHeader" v="档案" />
+        <e k="ui_pmHistoryHeader" v="历史" />
+        <e k="ui_button_train" v="培训" />
+        <e k="ui_pmStatusApplicant" v="申请人" />
+        <e k="ui_pmBirthLine" v="出生日期：%s" />
+        <e k="ui_pmOriginLine" v="职业背景：%s" />
+        <e k="ui_pmStatsLine" v="经验 %d · 可靠性 %d · 忠诚度 %d" />
+        <e k="ui_pmStatExperience" v="经验" />
+        <e k="ui_pmStatReliability" v="可靠性" />
+        <e k="ui_pmStatLoyalty" v="忠诚度" />
+        <e k="ui_pmWageLine" v="工资：%s" />
+        <e k="ui_pmStatusLine" v="状态：%s" />
+        <e k="ui_pmOrigin1" v="乡村家庭农场" />
+        <e k="ui_pmOrigin2" v="小型奶牛场" />
+        <e k="ui_pmOrigin3" v="农业承包企业" />
+        <e k="ui_pmOrigin4" v="种植农场" />
+        <e k="ui_pmOrigin5" v="混合农场" />
+        <e k="ui_pmStrengthReliable" v="沉稳可靠的工作方式" />
+        <e k="ui_pmStrengthTransport" v="有条理的运输和场区物流" />
+        <e k="ui_pmStrengthHarvest" v="细致的收获作业" />
+        <e k="ui_pmStrengthSowing" v="精准的播种和田地准备" />
+        <e k="ui_pmApplicantProfileText" v="%s 以 %s 的职业背景提出申请。当前档案显示其特点为 %s。这些数值是申请档案的当前快照。" />
+        <e k="ui_pmWorkerProfileText" v="%s 自 %s 起成为农场的一员。其发展显示出 %s。后续记录会通过任务、培训和人员决定生成。" />
+        <e k="ui_pmHistoryJobs" v="已完成任务：%d。" />
+        <e k="ui_pmHistoryWorkTime" v="总工作时间：%s。" />
+        <e k="ui_pmHistoryTrainingActive" v="当前培训：%s。" />
+        <e k="ui_pmHistoryTrainingLast" v="上次培训：第 %d 年。" />
+        <e k="ui_pmHistoryTrainingNone" v="尚无培训记录。" />
+        <e k="ui_pmHistoryTransportEnabled" v="已标记为运输任务人员。" />
+        <e k="ui_pmHistoryTransportDisabled" v="未标记为运输任务人员。" />
+        <e k="ui_pmMenuPageSettings" v="设置" />
+        <e k="ui_pmSettingsInfo" v="这些设置分别应用于每个存档。" />
+        <e k="ui_pmSettingsHostOnly" v="多人游戏中，只有服务器可以更改这些设置。" />
+        <e k="ui_pmSettingsSectionGameplay" v="游戏效果" />
+        <e k="ui_pmSettingsSectionPersonnel" v="人员" />
+        <e k="ui_pmSettingsSectionEconomic" v="经济" />
+        <e k="ui_button_transport_assign_long" v="分配运输任务" />
+        <e k="ui_button_transport_manage_long" v="管理运输任务" />
+        <e k="ui_transportPriorityTitle" v="运输优先级" />
+        <e k="ui_transportPriorityIntro" v="设置哪些员工可承担运输任务以及检查顺序。" />
+        <e k="ui_transportPriorityHeaderPriority" v="优先级" />
+        <e k="ui_transportPriorityHeaderEmployee" v="员工" />
+        <e k="ui_transportPriorityHeaderStatus" v="状态" />
+        <e k="ui_transportPriorityHeaderEnabled" v="运输" />
+        <e k="ui_transportPriorityActive" v="已启用" />
+        <e k="ui_transportPriorityInactive" v="未分配" />
+        <e k="ui_transportPriorityMoveUp" v="上移" />
+        <e k="ui_transportPriorityMoveDown" v="下移" />
+        <e k="ui_transportPriorityToggle" v="启用/停用" />
+        <e k="ui_transportPriorityApply" v="应用" />
+        <e k="ui_transportPriorityCancel" v="取消" />
+        <e k="ui_transportPrioritySaved" v="运输顺序已保存。" />
+        <e k="ui_transportPriorityNoWorkers" v="没有员工。" />
+        <e k="ui_transportPriorityControls" v="↑/↓：选择   A/D：移动   空格：启用/停用   Enter：应用" />
+        <e k="ui_button_transport_remove_long" v="移除运输任务" />
+        <e k="ui_helperPersonnelMenuOverview" v="概览" />
+        <e k="ui_helperPersonnelMenuApplicants" v="申请人" />
+        <e k="ui_helperPersonnelMenuEmployees" v="员工" />
+        <e k="ui_helperPersonnelMenuTraining" v="培训" />
+        <e k="ui_helperPersonnelMenuSettings" v="游戏设置" />
+        <e k="ui_pmBirthDateAge" v="%s（%d 岁）" />
+        <e k="ui_pmOrigin6" v="物流公司" />
+        <e k="ui_pmOrigin7" v="农业机械维修车间" />
+        <e k="ui_pmOrigin8" v="办公室职业" />
+        <e k="ui_status_retirementPending" v="将在月底退休" />
+        <e k="ui_retirementNotice" v="%s 将在月底退休。" />
+        <e k="ui_pmTrainingIntro" v="专长会提升员工在相应学习类别中的表现。培训持续到本月底，期间该员工无法参加工作。学习进度只会在培训完成后计入。并非每个月都会为所有类别提供培训。课程价格可能低于或高于正常价格。每名员工在每个从三月到次年二月的农业年度中只能完成一次培训。每名员工最多可获得两项专长。请选择所需的学习类别。" />
+        <e k="ui_pmTrainingCategoryHeader" v="学习类别" />
+        <e k="ui_pmTrainingProgressHeader" v="专业化进度" />
+        <e k="ui_pmTrainingRunning" v="培训进行中" />
+        <e k="ui_pmTrainingSelectCategory" v="请先选择培训类别" />
+        <e k="ui_pmTrainingConfirm" v="为 %s 开始 %s 类别的培训吗？" />
+        <e k="ui_training_line_no_capacity" v="培训：已获得两项专长 · 上次：%s" />
+        <e k="ui_training_line_single_day_deadline_select" v="培训：每月 1 天时仅限 12:00 前 · 请在培训菜单中选择类别 · 上次：%s" />
+        <e k="ui_training_line_first_day_select" v="培训：仅限第一天 · 请在培训菜单中选择类别 · 上次：%s" />
+        <e k="ui_training_line_busy_select" v="培训：工作期间无法参加 · 上次：%s" />
+        <e k="ui_training_line_sick_select" v="培训：生病期间无法参加 · 上次：%s" />
+        <e k="ui_training_line_select_category" v="培训：请在培训菜单中选择类别 · 上次：%s" />
+        <e k="ui_pmTrainingCostHeader" v="费用" />
+        <e k="ui_pmTrainingAdjustmentHeader" v="折扣/额外费用" />
+        <e k="ui_pmTrainingNoPlaces" v="目前没有名额" />
+        <e k="ui_pmTrainingNoPlacesMessage" v="该培训课程目前没有可用名额。" />
+        <e k="ui_pmProfileIntro1" v="%s 以前曾在%s工作，已在农场工作 %d 个月。" />
+        <e k="ui_pmProfileIntro2" v="%s 拥有曾在%s工作的经验，加入团队已有 %d 个月。" />
+        <e k="ui_pmProfileExperience1_1" v="%s 目前实践经验很少，仍需巩固许多工作流程。" />
+        <e k="ui_pmProfileExperience1_2" v="%s 在日常工作中仍明显处于熟悉阶段。" />
+        <e k="ui_pmProfileExperience2_1" v="%s 已积累一些实践经验，但处理更复杂的任务时仍需要支持。" />
+        <e k="ui_pmProfileExperience2_2" v="%s 对基础工作越来越熟悉，但多个领域仍缺少熟练度。" />
+        <e k="ui_pmProfileExperience3_1" v="%s 拥有扎实经验，能够独立完成大多数常规任务。" />
+        <e k="ui_pmProfileExperience3_2" v="%s 熟练处理日常工作，并能很好地适应变化的任务。" />
+        <e k="ui_pmProfileExperience4_1" v="%s 拥有丰富经验，即使面对高要求任务也能自信工作。" />
+        <e k="ui_pmProfileExperience4_2" v="%s 凭借多年的实践经验，在大多数情况下都能安全、独立地处理复杂工作。" />
+        <e k="ui_pmProfileExperience5_1" v="%s 是农场最优秀的专业人员之一，拥有极其丰富的经验。" />
+        <e k="ui_pmProfileExperience5_2" v="%s 是农场经验最丰富、能力最全面的团队成员之一。" />
+        <e k="ui_pmProfileReliability1_1" v="%s 目前很难被可靠地安排工作；协议和工作流程经常没有按预期执行。" />
+        <e k="ui_pmProfileReliability1_2" v="%s 在守时、遵守约定和细致执行方面存在明显不足。" />
+        <e k="ui_pmProfileReliability2_1" v="%s 的工作可靠性不够稳定，在重要任务中应受到密切关注。" />
+        <e k="ui_pmProfileReliability2_2" v="%s 通常会遵守约定，但可靠性仍有明显波动。" />
+        <e k="ui_pmProfileReliability3_1" v="%s 总体工作得当，并在大多数情况下遵守约定。" />
+        <e k="ui_pmProfileReliability3_2" v="%s 在日常工作中通常值得信赖，也便于安排。" />
+        <e k="ui_pmProfileReliability4_1" v="%s 是一名可靠且便于安排的团队成员。" />
+        <e k="ui_pmProfileReliability4_2" v="%s 即使在较长或较复杂的任务中也能可靠地遵守约定。" />
+        <e k="ui_pmProfileReliability5_1" v="%s 极其可靠，为农场提供了很高的计划确定性。" />
+        <e k="ui_pmProfileReliability5_2" v="%s 几乎总能遵守约定，并以极高的细致度完成任务。" />
+        <e k="ui_pmProfileLoyalty1_1" v="%s 目前对农场几乎没有归属感，随时可能发生变动。" />
+        <e k="ui_pmProfileLoyalty1_2" v="%s 与农场的联系似乎很弱，如果出现合适机会可能很快离开。" />
+        <e k="ui_pmProfileLoyalty2_1" v="%s 目前与农场的联系有限，未来发展仍不确定。" />
+        <e k="ui_pmProfileLoyalty2_2" v="%s 表现出的投入度相对较低，尚未与农场建立牢固联系。" />
+        <e k="ui_pmProfileLoyalty3_1" v="%s 总体忠于农场，但目前还没有特别紧密的联系。" />
+        <e k="ui_pmProfileLoyalty3_2" v="%s 已与农场建立稳定关系，并表现出良好的投入度。" />
+        <e k="ui_pmProfileLoyalty4_1" v="%s 明显认同农场，并表现出很强的投入度。" />
+        <e k="ui_pmProfileLoyalty4_2" v="%s 已与农场建立牢固纽带，很可能长期留下。" />
+        <e k="ui_pmProfileLoyalty5_1" v="%s 与农场的联系极其紧密，是最忠诚的团队成员之一。" />
+        <e k="ui_pmProfileLoyalty5_2" v="%s 与农场形成了非常牢固且稳定的长期联系。" />
+        <e k="ui_pmProfileSpecializations" v="职业优势尤其体现在 %s 方面。" />
+        <e k="ui_pmProfileLearningProgress" v="目前学习进度最高的领域是 %s（%d %%）。" />
+        <e k="ui_pmProfileNoSpecialization" v="目前尚未形成明确的职业专长。" />
+        <e k="ui_pmProfileActivity" v="%s 目前已完成 %d 项任务和 %d 次培训。" />
+        <e k="ui_pmProfileNoActivity" v="%s 仍在积累最初的农场经验；尚未完成任务或培训。" />
+        <e k="ui_pmChronicleImportedEmployment" v="现有雇佣关系已添加到个人履历中。" />
+        <e k="ui_pmChronicleHired" v="已雇用员工。" />
+        <e k="ui_pmChronicleJobStarted" v="任务已开始。" />
+        <e k="ui_pmChronicleJobCompleted" v="任务已完成。" />
+        <e k="ui_pmChronicleSpecialization" v="已获得专长。" />
+        <e k="ui_pmChronicleTrainingStarted" v="培训已开始。" />
+        <e k="ui_pmChronicleTrainingCompleted" v="培训已完成。" />
+        <e k="ui_pmChronicleSickness" v="因病缺勤。" />
+        <e k="ui_pmChronicleDismissal" v="农场已发出解雇通知。" />
+        <e k="ui_pmChronicleResignation" v="已宣布将在月底离职。" />
+        <e k="ui_pmChronicleRetirement" v="已宣布将在月底退休。" />
+        <e k="ui_pmChronicleEmploymentEnded" v="雇佣关系已结束。" />
+        <e k="ui_pmChronicleSalaryRequest" v="已提出加薪要求。" />
+        <e k="ui_pmChronicleSalaryGranted" v="已批准加薪。" />
+        <e k="ui_pmChronicleSalaryDeclined" v="已拒绝加薪要求。" />
+        <e k="ui_pmProfileEmployeeMale" v="男员工" />
+        <e k="ui_pmProfileEmployeeFemale" v="女员工" />
+        <e k="ui_pmProfilePronounMale" v="他" />
+        <e k="ui_pmProfilePronounFemale" v="她" />
+        <e k="ui_pmProfileBackgroundFamilyFarm" v="乡村家庭农场" />
+        <e k="ui_pmProfileBackgroundDairyFarm" v="小型奶牛场" />
+        <e k="ui_pmProfileBackgroundContractor" v="农业承包企业" />
+        <e k="ui_pmProfileBackgroundArableFarm" v="种植农场" />
+        <e k="ui_pmProfileBackgroundMixedFarm" v="混合农场" />
+        <e k="ui_pmProfileBackgroundLogistics" v="物流公司" />
+        <e k="ui_pmProfileBackgroundWorkshop" v="农业机械维修车间" />
+        <e k="ui_pmProfileBackgroundOffice" v="办公室职业" />
+        <e k="ui_pmProfileIntro3" v="%s 已在农场工作 %d 个月，此前曾在%s任职。" />
+        <e k="ui_pmProfileExperience1_3" v="%s 了解基本流程，但许多任务仍需要指导和练习。" />
+        <e k="ui_pmProfileExperience2_3" v="%s 对常见任务的处理越来越好，但仍需深入掌握复杂流程。" />
+        <e k="ui_pmProfileExperience3_3" v="%s 拥有可靠的技术基础，可承担多种职责。" />
+        <e k="ui_pmProfileExperience4_3" v="%s 通过实践经验了解许多农场流程，并能承担更困难的任务。" />
+        <e k="ui_pmProfileExperience5_3" v="%s 拥有极其广泛的专业知识，即使面对非常复杂的任务也能自信应对。" />
+        <e k="ui_pmProfileReliability1_3" v="%s 因工作表现不可靠，反复给工作计划带来不确定性。" />
+        <e k="ui_pmProfileReliability2_3" v="%s 能完成常规任务，但在高要求工作中还不能始终保持可靠。" />
+        <e k="ui_pmProfileReliability3_3" v="%s 能认真完成大多数任务，但偶尔仍会出现波动。" />
+        <e k="ui_pmProfileReliability4_3" v="%s 工作稳定细致，只有少量缺勤或异常情况。" />
+        <e k="ui_pmProfileReliability5_3" v="%s 即使在困难任务中也能保持极高的可靠性和稳定性。" />
+        <e k="ui_pmProfileLoyalty1_3" v="%s 似乎更把这份工作当作短期选择，而不是长期岗位。" />
+        <e k="ui_pmProfileLoyalty2_3" v="%s 仍留在农场，但尚不能保证会长期任职。" />
+        <e k="ui_pmProfileLoyalty3_3" v="%s 似乎很适应团队，但与农场的联系仍可进一步加强。" />
+        <e k="ui_pmProfileLoyalty4_3" v="%s 对农场有很强的认同感，并忠实支持经营。" />
+        <e k="ui_pmProfileLoyalty5_3" v="%s 对农场有特别强的认同感，很可能长期保持投入。" />
+        <e k="ui_pmProfileSpecializations2" v="%s 主要专精于 %s。" />
+        <e k="ui_pmProfileSpecializations3" v="%s 在 %s 方面表现出特别优势。" />
+        <e k="ui_pmProfileLearningProgress2" v="%s 目前在 %s 方面发展得特别好（%d %%）。" />
+        <e k="ui_pmProfileLearningProgress3" v="%s 目前在 %s 方面取得了最高学习进度（%d %%）。" />
+        <e k="ui_pmProfileNoSpecialization2" v="%s 尚未形成固定专长。" />
+        <e k="ui_pmProfileNoSpecialization3" v="%s 的职业方向仍未确定。" />
+        <e k="ui_pmProfileActivity2" v="目前在农场的经历包括 %d 项已完成任务和 %d 次培训。" />
+        <e k="ui_pmProfileActivity3" v="%s 目前已完成 %d 项任务和 %d 次培训。" />
+        <e k="ui_pmProfileNoActivity2" v="%s 在农场的实践发展才刚刚开始。" />
+        <e k="ui_pmProfileNoActivity3" v="%s 尚未完成任务或参加培训。" />
+        <e k="ui_hpSetting_toggle" v="切换" />
+        <e k="ui_worker_status_line" v="状态：%s" />
+        <e k="ui_pmApplicantProfileIntro" v="%s此前曾在%s工作。" />
+        <e k="ui_pmApplicantProfileMarketNew" v="该申请本月刚进入市场。" />
+        <e k="ui_pmApplicantProfileMarketOneMonth" v="该申请已在市场上发布 1 个月。" />
+        <e k="ui_pmApplicantProfileMarketMonths" v="该申请已在市场上发布 %d 个月。" />
+        <e k="ui_pmApplicantProfileAge1" v="%d岁时，职业道路仍处于起步阶段。还有很大的发展空间。" />
+        <e k="ui_pmApplicantProfileAge2" v="%d岁时，职业发展正处于积累阶段，未来仍可明显提升。" />
+        <e k="ui_pmApplicantProfileAge3" v="%d岁时，已经具备较稳定的职业经历。此前的职业背景决定了这些经验对农业工作的帮助程度。" />
+        <e k="ui_pmApplicantProfileAge4" v="%d岁时，通常可以期待较丰富的一般职业经验，但这并不自动等同于农业实践经验。" />
+        <e k="ui_pmApplicantProfileExperience1" v="实际农业经验仍然很少。需要充分培训。" />
+        <e k="ui_pmApplicantProfileExperience2" v="已经具备基础农业知识，但在较复杂的任务中仍缺乏熟练度。" />
+        <e k="ui_pmApplicantProfileExperience3" v="现有经验能够胜任常规工作，但并非所有领域都能熟练掌握。" />
+        <e k="ui_pmApplicantProfileExperience4" v="农业经验较为丰富，适合承担多种工作。" />
+        <e k="ui_pmApplicantProfileExperience5" v="经验水平非常突出，能够胜任要求较高的任务。" />
+        <e k="ui_pmApplicantProfileReliability1" v="可靠性数值表明，在计划、遵守约定和认真执行方面存在明显风险。" />
+        <e k="ui_pmApplicantProfileReliability2" v="可靠性仍有波动。重要任务应当密切关注。" />
+        <e k="ui_pmApplicantProfileReliability3" v="可靠性处于良好水平，通常可以进行较稳定的工作安排。" />
+        <e k="ui_pmApplicantProfileReliability4" v="较高的可靠性意味着工作稳定、细致且便于安排。" />
+        <e k="ui_pmApplicantProfileReliability5" v="极高的可靠性能够提供非常高的计划保障。" />
+        <e k="ui_pmApplicantProfileLoyalty1" v="较低的忠诚度意味着与未来雇主的联系可能较弱。" />
+        <e k="ui_pmApplicantProfileLoyalty2" v="忠诚度仍较保守。长期归属感需要逐步建立。" />
+        <e k="ui_pmApplicantProfileLoyalty3" v="忠诚度处于稳定的中等水平，为长期合作提供了良好基础。" />
+        <e k="ui_pmApplicantProfileLoyalty4" v="较高的忠诚度表明愿意长期留在农场。" />
+        <e k="ui_pmApplicantProfileLoyalty5" v="极高的忠诚度表明具有非常强的长期归属意愿。" />
+        <e k="ui_pmHistoryColumnCareer" v="既往记录" />
+        <e k="ui_pmHistoryColumnRecent" v="最近事件" />
+        <e k="ui_pmHistoryColumnTotals" v="合计" />
+        <e k="ui_pmHistoryNoRecord" v="无记录" />
+        <e k="ui_pmHistoryDateFormat" v="第%d天 · %d/%d" />
+        <e k="ui_pmHistorySalaryAccepted" v="已接受" />
+        <e k="ui_pmHistorySalaryDeclined" v="已拒绝" />
+        <e k="ui_pmHistorySalaryPending" v="待处理" />
+        <e k="ui_pmHistorySalaryUnresolved" v="未记录决定" />
+        <e k="ui_pmHistoryAbortSickness" v="生病" />
+        <e k="ui_pmHistoryAbortUnreliability" v="可靠性不足" />
+        <e k="ui_pmHistoryAbortOther" v="其他原因" />
+        <e k="ui_pmHistoryLastSickness" v="最近生病：%s" />
+        <e k="ui_pmHistoryLastSalaryRequest" v="最近加薪要求：%s · %s" />
+        <e k="ui_pmHistoryLastAbort" v="最近中止任务：%s · %s" />
+        <e k="ui_pmHistoryTotalSickness" v="累计病假天数：%d" />
+        <e k="ui_pmHistoryTotalSalaryRequests" v="加薪要求：%d" />
+        <e k="ui_pmHistoryTotalAborts" v="中止任务：%d" />
+        <e k="ui_pmHistoryTotalSalaryPaid" v="累计工资：%s" />
+        <e k="ui_pmHistoryTrainingYearCompact" v="第%d年" />
+        <e k="ui_pmHistoryTrainingNoneCompact" v="无" />
+        <e k="ui_pmHistoryCareerJobs" v="完成任务：%d" />
+        <e k="ui_pmHistoryCareerWorkTime" v="工作时间：%s" />
+        <e k="ui_pmHistoryCareerTraining" v="培训：%s" />
+        <e k="ui_pmHistoryCareerTransport" v="运输：%s" />
+        <e k="ui_pmHistoryValueActive" v="启用" />
+        <e k="ui_pmHistoryValueInactive" v="未启用" />
+        <e k="ui_monthlyRowApplicants" v="应聘者" />
+        <e k="ui_monthlyRowEmployees" v="员工" />
+        <e k="ui_monthlyRowAvailable" v="可用" />
+        <e k="ui_monthlyRowJobs" v="任务" />
+        <e k="ui_monthlyRowWorkTime" v="工作时间" />
+        <e k="ui_monthlyRowWages" v="月工资总额" />
+        <e k="ui_monthlyRowPayroll" v="上次工资结算" />
+        <e k="ui_pmOverviewOverallHeader" v="总计" />
+        <e k="ui_pmOverviewTotalJobs" v="总任务数" />
+        <e k="ui_pmOverviewTotalWorkTime" v="总工作时间" />
+        <e k="ui_pmOverviewTotalPayroll" v="工资总额" />
+        <e k="ui_pmOverviewEverHired" v="累计雇用" />
+        <e k="ui_pmOverviewDismissed" v="已解雇" />
+        <e k="ui_pmOverviewResigned" v="主动辞职" />
+        <e k="ui_pmOverviewRetired" v="已退休" />
+        <e k="ui_pmChronicleJobAbortedSickness" v="因病中止任务。" />
+        <e k="ui_reliabilityJobAbortOtherTaskMale" v="%s中止了正在进行的任务，因为他认为另一项工作更重要。" />
+        <e k="ui_reliabilityJobAbortOtherTaskFemale" v="%s中止了正在进行的任务，因为她认为另一项工作更重要。" />
+        <e k="ui_reliabilityJobAbortBreakMale" v="%s中止了正在进行的任务。他想休息一下。" />
+        <e k="ui_reliabilityJobAbortBreakFemale" v="%s中止了正在进行的任务。她想休息一下。" />
+        <e k="ui_reliabilityJobAbortPrivateMale" v="%s中止了正在进行的任务。他必须处理私人事务。" />
+        <e k="ui_reliabilityJobAbortPrivateFemale" v="%s中止了正在进行的任务。她必须处理私人事务。" />
+        <e k="ui_reliabilityJobAbortStoveMale" v="%s中止了正在进行的任务，因为他忘了关掉家里的炉灶，所以开车回家了。" />
+        <e k="ui_reliabilityJobAbortStoveFemale" v="%s中止了正在进行的任务，因为她忘了关掉家里的炉灶，所以开车回家了。" />
+        <e k="ui_reliabilityJobAbortFriendsMale" v="%s中止了正在进行的任务，因为他临时决定去见朋友。" />
+        <e k="ui_reliabilityJobAbortFriendsFemale" v="%s中止了正在进行的任务，因为她临时决定去见朋友。" />
+        <e k="ui_reliabilityJobAbortPartnerMale" v="%s中止了正在进行的任务，临时去和女朋友喝咖啡。" />
+        <e k="ui_reliabilityJobAbortPartnerFemale" v="%s中止了正在进行的任务，临时去和男朋友喝咖啡。" />
     </elements>
 </l10n>

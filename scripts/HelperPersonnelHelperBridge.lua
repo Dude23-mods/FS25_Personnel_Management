@@ -90,17 +90,6 @@ function HelperPersonnelHelperBridge:clearCustomProfiles()
     self.portraitFilenamesByWorkerId = {}
 end
 
-function HelperPersonnelHelperBridge:rebuildHelperProfiles()
-    self:clearCustomProfiles()
-
-    if self.app == nil or self.app.manager == nil then
-        return
-    end
-
-    for _, worker in ipairs(self.app.manager.workers or {}) do
-        self:ensureHelperProfile(worker)
-    end
-end
 
 function HelperPersonnelHelperBridge:normalizeGender(gender)
     if gender == HelperPersonnelHelperBridge.GENDER_MALE or gender == HelperPersonnelHelperBridge.GENDER_FEMALE then
@@ -1218,6 +1207,8 @@ function HelperPersonnelHelperBridge:attachRestoredJob(job, workerId)
     worker.restorePending = false
     worker.restoreVehicleName = nil
     worker.restoreVehicleKey = nil
+    worker.reliabilityJobAbortChecked = true
+    worker.reliabilityJobAbortCheckAt = 0
 
     if vehicleName ~= nil and vehicleName ~= "" then
         worker.vehicleName = vehicleName
@@ -1230,63 +1221,8 @@ function HelperPersonnelHelperBridge:attachRestoredJob(job, workerId)
     return true
 end
 
-function HelperPersonnelHelperBridge:onJobStarted(job, workerId)
-    if job == nil or workerId == nil then
-        return
-    end
 
-    self.jobWorkerIds[job] = workerId
-    self.workerJobById[workerId] = job
-    job.helperPersonnelWorkerId = workerId
 
-    local vehicle = self:getVehicleFromJob(job)
-    local vehicleKey = self:getVehicleKeyFromJob(job)
-    if vehicleKey ~= nil then
-        self.vehicleWorkerIds[vehicleKey] = workerId
-        local worker = self.app.manager:getWorkerById(workerId)
-        if worker ~= nil then
-            worker.vehicleKey = vehicleKey
-        end
-    end
-
-    vehicle = self.app:getRootVehicle(vehicle)
-    local vehicleName = self.app:getVehicleName(vehicle)
-
-    if self.app.manager.startWorkerJob ~= nil then
-        self.app.manager:startWorkerJob(workerId, vehicleName, vehicleKey)
-    else
-        self.app.manager:setWorkerBusy(workerId, true, vehicleName, vehicleKey)
-    end
-end
-
-function HelperPersonnelHelperBridge:onJobStopped(job)
-    if job == nil then
-        return
-    end
-
-    local workerId = self:getWorkerIdByJob(job)
-    if workerId ~= nil then
-        local assignedJob = self.workerJobById[workerId]
-        if assignedJob == nil or assignedJob == job then
-            self.workerJobById[workerId] = nil
-            if self.app.manager.finishWorkerJob ~= nil then
-                self.app.manager:finishWorkerJob(workerId)
-            else
-                self.app.manager:setWorkerBusy(workerId, false, "")
-            end
-        end
-    end
-
-    local vehicleKey = self:getVehicleKeyFromJob(job)
-    if vehicleKey ~= nil then
-        self.vehicleWorkerIds[vehicleKey] = nil
-    end
-
-    self.jobWorkerIds[job] = nil
-    job.helperPersonnelWorkerId = nil
-end
-
-local HP_ORIGINAL_HELPER_BRIDGE_REBUILD_PROFILES = HelperPersonnelHelperBridge.rebuildHelperProfiles
 function HelperPersonnelHelperBridge:rebuildHelperProfiles()
     self:clearCustomProfiles()
 

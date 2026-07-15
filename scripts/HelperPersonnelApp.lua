@@ -1,93 +1,28 @@
 HelperPersonnelApp = {}
 HelperPersonnelApp_mt = Class(HelperPersonnelApp)
 
-local function hpSetPageTitle(frame, text)
-    if frame == nil or text == nil or text == "" then
-        return
-    end
-
-    frame.title = text
-
-    if frame.elements ~= nil and frame.elements[1] ~= nil then
-        frame.elements[1].title = text
-    end
-end
-
-local function addInGameMenuPage(frame, pageName, iconFilename, iconUVs, iconUVPixels)
-    local inGameMenu = g_inGameMenu
-    if inGameMenu == nil and g_gui ~= nil and g_gui.screenControllers ~= nil then
-        inGameMenu = g_gui.screenControllers[InGameMenu]
-    end
-
-    if inGameMenu == nil or frame == nil then
-        return false
-    end
-
-    if inGameMenu[pageName] ~= nil then
-        return true
-    end
-
-    if inGameMenu.controlIDs ~= nil then
-        inGameMenu.controlIDs[pageName] = nil
-    end
-
-    local pageTitle = g_i18n ~= nil and g_i18n:getText("ui_ingameMenuHelperPersonnel") or "Personalmanagement"
-    hpSetPageTitle(frame, pageTitle)
-
-    inGameMenu[pageName] = frame
-
-    local ok, message = pcall(function()
-        if inGameMenu.pagingElement ~= nil and inGameMenu.pagingElement.addElement ~= nil then
-            inGameMenu.pagingElement:addElement(frame)
-        else
-            error("PagingElement nicht verfuegbar")
-        end
-
-        if inGameMenu.exposeControlsAsFields ~= nil then
-            inGameMenu:exposeControlsAsFields(pageName)
-        end
-
-        inGameMenu:registerPage(frame)
-        inGameMenu:addPageTab(frame, iconFilename, iconUVs)
-    end)
-
-    if not ok then
-        Logging.warning("%s: ESC-Menüseite konnte nicht registriert werden (%s).", g_helperPersonnelApp ~= nil and g_helperPersonnelApp.modName or "FS25_HelperPersonnel", tostring(message))
-        inGameMenu[pageName] = nil
-        return false
-    end
-
-    if frame.applyScreenAlignment ~= nil then
-        frame:applyScreenAlignment()
-    end
-    if frame.updateAbsolutePosition ~= nil then
-        frame:updateAbsolutePosition()
-    end
-
-    return true
-end
-
 function HelperPersonnelApp.new(modName, modDir, customMt)
     local self = setmetatable({}, customMt or HelperPersonnelApp_mt)
-
     self.modName = modName
     self.modDir = modDir
     self.manager = nil
     self.helperBridge = nil
     self.selectionOverlay = nil
-    self.frame = nil
-    self.inGameMenu = nil
-    self.guiLoaded = false
-    self.menuRegistered = false
-    self.menuRegistrationAllowed = false
     self.pendingWorkerIdsByVehicleKey = {}
     self.pendingWorkerIdForNextAIJob = nil
     self.activeJobsRestoreAttempts = 0
     self.activeJobsRestoreDone = false
     self.isMissionDeleting = false
-
+    self.standaloneMenu = nil
+    self.standaloneMenuPages = nil
+    self.standaloneMenuLoaded = false
+    self.standaloneMenuTextureLoaded = false
+    self.standaloneMenuActionRegistered = false
+    self.standaloneMenuActionEventId = nil
+    self.standaloneMenuHotkeyDown = false
     return self
 end
+
 
 function HelperPersonnelApp:load()
     self.manager = HelperPersonnelManager.new(self)
@@ -103,13 +38,17 @@ function HelperPersonnelApp:load()
         self:restoreActiveAIJobs()
         self.lastNetworkSyncCounter = -1
     else
-
         self.manager.lastActionText = "Warte auf Serverdaten"
         self:requestNetworkState()
     end
 
-    if g_messageCenter ~= nil and MessageType ~= nil and MessageType.PERIOD_CHANGED ~= nil then
-        g_messageCenter:subscribe(MessageType.PERIOD_CHANGED, self.onPeriodChanged, self)
+    if g_messageCenter ~= nil and MessageType ~= nil then
+        if MessageType.PERIOD_CHANGED ~= nil then
+            g_messageCenter:subscribe(MessageType.PERIOD_CHANGED, self.onPeriodChanged, self)
+        end
+        if MessageType.PLAYER_FARM_CHANGED ~= nil then
+            g_messageCenter:subscribe(MessageType.PLAYER_FARM_CHANGED, self.onPlayerFarmChanged, self)
+        end
     end
 
     if g_currentMission ~= nil then
@@ -117,8 +56,15 @@ function HelperPersonnelApp:load()
         g_currentMission:addUpdateable(self)
     end
 
-    self:tryRegisterGui()
+    if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
+        self.manager:refreshFarmContext()
+    end
+
+    self:tryRegisterStandaloneMenu()
+    self:registerStandaloneMenuAction()
+    self:updateStandaloneMenuHotkey()
 end
+
 
 function HelperPersonnelApp:beginMissionDelete()
     self.isMissionDeleting = true
@@ -133,6 +79,11 @@ function HelperPersonnelApp:delete()
         g_messageCenter:unsubscribeAll(self)
     end
 
+    self:unregisterStandaloneMenuAction()
+    self.standaloneMenu = nil
+    self.standaloneMenuPages = nil
+    self.standaloneMenuLoaded = false
+
     if self.selectionOverlay ~= nil then
         self.selectionOverlay:delete()
         self.selectionOverlay = nil
@@ -142,12 +93,8 @@ function HelperPersonnelApp:delete()
         self.helperBridge:delete()
         self.helperBridge = nil
     end
-
-    self.frame = nil
-    self.inGameMenu = nil
-    self.guiLoaded = false
-    self.menuRegistered = false
 end
+
 
 function HelperPersonnelApp:prepareSaveSnapshot()
     if self.manager ~= nil and self.manager.captureSaveSnapshot ~= nil then
@@ -170,7 +117,9 @@ function HelperPersonnelApp:save()
 end
 
 function HelperPersonnelApp:update(dt)
-    self:tryRegisterGui()
+    self:tryRegisterStandaloneMenu()
+    self:registerStandaloneMenuAction()
+    self:updateStandaloneMenuHotkey()
 
     if self:isServerAuthority() and self.manager ~= nil and self.manager.update ~= nil then
         self.manager:update(dt)
@@ -188,13 +137,13 @@ function HelperPersonnelApp:update(dt)
     if self.activeJobsRestoreDone ~= true then
         self.activeJobsRestoreAttempts = (self.activeJobsRestoreAttempts or 0) + 1
         self:restoreActiveAIJobs()
-
         if self.activeJobsRestoreAttempts >= 180 then
             self.activeJobsRestoreDone = true
             self:finishActiveJobRestore()
         end
     end
 end
+
 
 function HelperPersonnelApp:onPeriodChanged(period, year)
     if not self:isServerAuthority() then
@@ -318,10 +267,10 @@ function HelperPersonnelApp:restoreActiveAIJobs()
 end
 
 function HelperPersonnelApp:onMission00Loaded()
-
-    self.menuRegistrationAllowed = true
-    self:tryRegisterGui()
+    self:tryRegisterStandaloneMenu()
+    self:registerStandaloneMenuAction()
 end
+
 
 function HelperPersonnelApp:getSavegamePath()
     if g_currentMission == nil or g_currentMission.missionInfo == nil then
@@ -336,45 +285,6 @@ function HelperPersonnelApp:getSavegamePath()
     return savegameDirectory .. "/helperPersonnel.xml"
 end
 
-function HelperPersonnelApp:tryRegisterGui()
-    if self.menuRegistered or self.menuRegistrationAllowed ~= true or g_gui == nil or g_currentMission == nil then
-        return
-    end
-
-    local inGameMenu = g_inGameMenu
-    if inGameMenu == nil and g_gui.screenControllers ~= nil then
-        inGameMenu = g_gui.screenControllers[InGameMenu]
-    end
-
-    self.inGameMenu = inGameMenu
-
-    if inGameMenu == nil or inGameMenu.pagingElement == nil then
-        return
-    end
-
-    if not self.guiLoaded then
-        g_gui:loadProfiles(Utils.getFilename("gui/guiProfiles.xml", self.modDir))
-        self.frame = HelperPersonnelFrame.new(nil, g_messageCenter)
-        self.frame:setContext(self)
-        g_gui:loadGui(Utils.getFilename("gui/HelperPersonnelFrame.xml", self.modDir), "HelperPersonnelFrame", self.frame, true)
-        self.guiLoaded = true
-    end
-
-    if self.frame == nil then
-        return
-    end
-
-    local iconFilename = Utils.getFilename("gui/menuicon_personell.dds", self.modDir)
-
-    local iconUVs = GuiUtils.getUVs({0, 0, 256, 256}, {256, 256})
-
-    self.menuRegistered = addInGameMenuPage(self.frame, "helperPersonnelPage", iconFilename, iconUVs, {0, 0, 256, 256})
-
-    if self.frame ~= nil then
-        self.frame.inGameMenu = inGameMenu
-    end
-
-end
 
 function HelperPersonnelApp:getRootVehicle(vehicle)
     if vehicle == nil then
@@ -660,7 +570,6 @@ function HelperPersonnelApp:applyNetworkState(state)
     if self:isServerAuthority() then
         return false
     end
-
     if self.manager == nil or self.manager.applyNetworkState == nil then
         return false
     end
@@ -670,79 +579,18 @@ function HelperPersonnelApp:applyNetworkState(state)
         if self.helperBridge ~= nil and self.helperBridge.rebuildHelperProfiles ~= nil then
             self.helperBridge:rebuildHelperProfiles()
         end
-
-        if self.frame ~= nil and self.frame.refresh ~= nil then
-            self.frame:refresh()
+        if self.manager.refreshFarmContext ~= nil then
+            self.manager:refreshFarmContext()
         end
+        self:refreshPersonnelMenu()
     end
-
     return applied
 end
 
-function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection)
-    if not self:isServerAuthority() or self.manager == nil then
-        return false
-    end
 
-    local changed = false
 
-    if actionName == HelperPersonnelNetwork.ACTION_HIRE and self.manager.hireApplicant ~= nil then
-        changed = self.manager:hireApplicant(targetId) == true
-    elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS and self.manager.dismissWorker ~= nil then
-        changed = self.manager:dismissWorker(targetId) == true
-    end
 
-    if changed then
-        self:syncNetworkStateToClients()
-    elseif connection ~= nil then
-        self:sendNetworkStateToConnection(connection)
-    end
 
-    return changed
-end
-
-function HelperPersonnelApp:requestHireApplicant(applicantId)
-    if self:isServerAuthority() then
-        local changed = self.manager ~= nil and self.manager.hireApplicant ~= nil and self.manager:hireApplicant(applicantId) == true
-        if changed then
-            self:syncNetworkStateToClients()
-        end
-        return changed
-    end
-
-    if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
-        local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
-        if connection ~= nil and connection.sendEvent ~= nil then
-            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_HIRE, applicantId))
-            return true
-        end
-    end
-
-    return false
-end
-
-function HelperPersonnelApp:requestDismissWorker(workerId)
-    if self:isServerAuthority() then
-        local changed = self.manager ~= nil and self.manager.dismissWorker ~= nil and self.manager:dismissWorker(workerId) == true
-        if changed then
-            self:syncNetworkStateToClients()
-        end
-        return changed
-    end
-
-    if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
-        local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
-        if connection ~= nil and connection.sendEvent ~= nil then
-            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_DISMISS, workerId))
-            return true
-        end
-    end
-
-    return false
-end
-
-local HP_ORIGINAL_APP_LOAD = HelperPersonnelApp.load
-local HP_ORIGINAL_APP_APPLY_NETWORK_STATE = HelperPersonnelApp.applyNetworkState
 
 function HelperPersonnelApp:getCurrentFarmId()
     if self.manager ~= nil and self.manager.getCurrentFarmId ~= nil then
@@ -754,17 +602,6 @@ function HelperPersonnelApp:getCurrentFarmId()
     return 1
 end
 
-function HelperPersonnelApp:load()
-    HP_ORIGINAL_APP_LOAD(self)
-
-    if g_messageCenter ~= nil and MessageType ~= nil and MessageType.PLAYER_FARM_CHANGED ~= nil then
-        g_messageCenter:subscribe(MessageType.PLAYER_FARM_CHANGED, self.onPlayerFarmChanged, self)
-    end
-
-    if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
-        self.manager:refreshFarmContext()
-    end
-end
 
 function HelperPersonnelApp:onPlayerFarmChanged()
     if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
@@ -774,26 +611,11 @@ function HelperPersonnelApp:onPlayerFarmChanged()
     if self:isMultiplayerClient() then
         self:requestNetworkState()
     end
-
-    if self.frame ~= nil and self.frame.refresh ~= nil then
-        self.frame:refresh()
-    end
+    self:refreshPersonnelMenu()
 end
 
-function HelperPersonnelApp:applyNetworkState(state)
-    local applied = HP_ORIGINAL_APP_APPLY_NETWORK_STATE(self, state)
 
-    if applied and self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
-        self.manager:refreshFarmContext()
-        if self.frame ~= nil and self.frame.refresh ~= nil then
-            self.frame:refresh()
-        end
-    end
-
-    return applied
-end
-
-function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId)
+function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId, actionData)
     if not self:isServerAuthority() or self.manager == nil then
         return false
     end

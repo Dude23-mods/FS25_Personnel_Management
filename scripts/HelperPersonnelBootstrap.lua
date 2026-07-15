@@ -7,8 +7,12 @@ function HelperPersonnel.debugInfo(message, ...)
     end
 end
 
-source(g_currentModDirectory .. "gui/HelperPersonnelFrame.lua")
+source(g_currentModDirectory .. "gui/HelperPersonnelViewBase.lua")
+source(g_currentModDirectory .. "gui/HelperPersonnelMenuPage.lua")
+source(g_currentModDirectory .. "gui/HelperPersonnelMenuFrames.lua")
+source(g_currentModDirectory .. "gui/HelperPersonnelInGameMenu.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelConfig.lua")
+source(g_currentModDirectory .. "scripts/HelperPersonnelGameSettings.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelManager.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelNetwork.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelHelperBridge.lua")
@@ -21,6 +25,7 @@ source(g_currentModDirectory .. "scripts/HelperPersonnelTransportAssignments.lua
 source(g_currentModDirectory .. "scripts/HelperPersonnelSalaryRaiseRequests.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelExperienceEffects.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelCompatibility.lua")
+source(g_currentModDirectory .. "scripts/HelperPersonnelStandaloneMenu.lua")
 
 HelperPersonnelBootstrap = {}
 HelperPersonnelBootstrap.modName = g_currentModName
@@ -52,6 +57,7 @@ function HelperPersonnelBootstrap.install()
     if BaseMission ~= nil and BaseMission.mouseEvent ~= nil then
         BaseMission.mouseEvent = Utils.appendedFunction(BaseMission.mouseEvent, HelperPersonnelBootstrap.onMouseEvent)
     end
+
 
     if Mission00 ~= nil and Mission00.loadMission00Finished ~= nil then
         Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, HelperPersonnelBootstrap.onMissionLoaded)
@@ -121,7 +127,6 @@ function HelperPersonnelBootstrap.onLoadMapFinished(mission)
 
     if HelperPersonnelBootstrap.mission00Loaded == true
         and g_helperPersonnelApp ~= nil
-        and g_helperPersonnelApp.menuRegistrationAllowed ~= true
         and g_helperPersonnelApp.onMission00Loaded ~= nil then
         g_helperPersonnelApp:onMission00Loaded()
     end

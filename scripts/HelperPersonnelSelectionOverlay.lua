@@ -41,7 +41,7 @@ end
 
 HelperPersonnelSelectionOverlay.KEYS_LEFT = { "KEY_left", "KEY_a" }
 HelperPersonnelSelectionOverlay.KEYS_RIGHT = { "KEY_right", "KEY_d" }
-HelperPersonnelSelectionOverlay.KEYS_CONFIRM = { "KEY_return", "KEY_enter", "KEY_space" }
+HelperPersonnelSelectionOverlay.KEYS_CONFIRM = { "KEY_space" }
 HelperPersonnelSelectionOverlay.KEYS_CANCEL = { "KEY_esc", "KEY_escape" }
 
 function HelperPersonnelSelectionOverlay.new(app, customMt)
@@ -62,10 +62,16 @@ function HelperPersonnelSelectionOverlay.new(app, customMt)
 
     local pixelFile = Utils.getFilename("gui/solidPixel.dds", app.modDir)
     self.backgroundOverlay = Overlay.new(pixelFile, 0.25, 0.375, 0.50, 0.29)
-    self.backgroundOverlay:setColor(0, 0, 0, 0.82)
+    self.backgroundOverlay:setColor(0.045, 0.055, 0.04, 0.94)
 
     self.highlightOverlay = Overlay.new(pixelFile, 0.29, 0.43, 0.42, 0.115)
-    self.highlightOverlay:setColor(0.18, 0.45, 0.9, 0.45)
+    self.highlightOverlay:setColor(0.11, 0.13, 0.075, 0.96)
+
+    self.accentOverlay = Overlay.new(pixelFile, 0.25, 0.661, 0.50, 0.004)
+    self.accentOverlay:setColor(0.61, 0.73, 0.07, 1)
+
+    self.cardAccentOverlay = Overlay.new(pixelFile, 0.29, 0.43, 0.004, 0.115)
+    self.cardAccentOverlay:setColor(0.61, 0.73, 0.07, 1)
 
     return self
 end
@@ -82,6 +88,16 @@ function HelperPersonnelSelectionOverlay:delete()
     if self.highlightOverlay ~= nil then
         self.highlightOverlay:delete()
         self.highlightOverlay = nil
+    end
+
+    if self.accentOverlay ~= nil then
+        self.accentOverlay:delete()
+        self.accentOverlay = nil
+    end
+
+    if self.cardAccentOverlay ~= nil then
+        self.cardAccentOverlay:delete()
+        self.cardAccentOverlay = nil
     end
 end
 
@@ -462,11 +478,18 @@ function HelperPersonnelSelectionOverlay:mouseEvent(posX, posY, isDown, isUp, bu
         return true
     end
 
+    local leftMouseButton = Input ~= nil and Input.MOUSE_BUTTON_LEFT or nil
+    local isLeftMouseButton = button == nil or button == 0 or button == 1 or (leftMouseButton ~= nil and button == leftMouseButton)
+
     for i = #(self.clickAreas or {}), 1, -1 do
         local area = self.clickAreas[i]
         if area ~= nil and self:isPointInArea(posX, posY, area) then
             if area.workerIndex ~= nil and self.availableWorkers[area.workerIndex] ~= nil then
                 self.selectedIndex = area.workerIndex
+            end
+
+            if isUp and isLeftMouseButton then
+                self:close(true)
             end
 
             return true
@@ -561,7 +584,7 @@ function HelperPersonnelSelectionOverlay:keyEvent(unicode, sym, modifier, isDown
     elseif sym == self:getKeyConstant("KEY_right") or sym == self:getKeyConstant("KEY_d") then
         self:onActionRight(nil, 1)
         return true
-    elseif sym == self:getKeyConstant("KEY_return") or sym == self:getKeyConstant("KEY_enter") or sym == self:getKeyConstant("KEY_space") then
+    elseif sym == self:getKeyConstant("KEY_space") then
         self:onActionConfirm(nil, 1)
         return true
     elseif sym == self:getKeyConstant("KEY_esc") or sym == self:getKeyConstant("KEY_escape") then
@@ -583,6 +606,10 @@ function HelperPersonnelSelectionOverlay:draw()
         self.backgroundOverlay:render()
     end
 
+    if self.accentOverlay ~= nil then
+        self.accentOverlay:render()
+    end
+
     local centerX = 0.5
     local titleY = 0.64
     local infoY = 0.61
@@ -594,13 +621,13 @@ function HelperPersonnelSelectionOverlay:draw()
     local worker = self.availableWorkers[self.selectedIndex]
 
     setTextAlignment(RenderText.ALIGN_CENTER)
-    setTextColor(1, 1, 1, 1)
+    setTextColor(0.61, 0.73, 0.07, 1)
     setTextBold(true)
     renderText(centerX, titleY, 0.022, g_i18n:getText("ui_selectionTitle"))
     setTextBold(false)
 
     setTextColor(0.82, 0.82, 0.82, 1)
-    renderText(centerX, infoY, 0.013, g_i18n:getText("ui_selectionHint"))
+    renderText(centerX, infoY, 0.0105, g_i18n:getText("ui_selectionHint"))
 
     if count > 0 then
         setTextColor(0.78, 0.78, 0.78, 1)
@@ -615,6 +642,12 @@ function HelperPersonnelSelectionOverlay:draw()
             self.highlightOverlay:setPosition(cardX, cardY)
             self.highlightOverlay:setDimension(cardWidth, cardHeight)
             self.highlightOverlay:render()
+        end
+
+        if self.cardAccentOverlay ~= nil then
+            self.cardAccentOverlay:setPosition(cardX, cardY)
+            self.cardAccentOverlay:setDimension(0.004, cardHeight)
+            self.cardAccentOverlay:render()
         end
 
         setTextColor(1, 1, 1, 1)
@@ -641,7 +674,7 @@ function HelperPersonnelSelectionOverlay:draw()
         local detailLine2 = string.format(g_i18n:getText("ui_selectionLineWage"), wageText)
         local detailLine3 = string.format(g_i18n:getText("ui_selectionLineJobs"), jobsCompleted, workSpeedPercent)
 
-        setTextColor(0.88, 0.88, 0.88, 1)
+        setTextColor(0.61, 0.73, 0.07, 1)
         renderText(centerX, cardY + 0.056, 0.0125, detailLine1)
         setTextColor(0.84, 0.84, 0.84, 1)
         renderText(centerX, cardY + 0.035, 0.0125, detailLine2)

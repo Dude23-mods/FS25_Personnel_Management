@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <l10n>
     <elements>
         <e k="ui_ingameMenuHelperPersonnel" v="Gestión de personal" />
@@ -20,16 +20,16 @@
         <e k="ui_rank_helper" v="Ayudante" />
         <e k="ui_rank_specialist" v="Especialista" />
         <e k="ui_specialization_short" v="Especialización" />
-        <e k="ui_specialization_tillage" v="Tillage" />
-        <e k="ui_specialization_sowing" v="Sowing" />
-        <e k="ui_specialization_fertilizing" v="Fertilizing" />
-        <e k="ui_specialization_plantProtection" v="Crop Protection" />
-        <e k="ui_specialization_harvest" v="Harvest" />
-        <e k="ui_specialization_transport" v="Transport" />
-        <e k="ui_specialization_machineCare" v="Machine Care" />
-        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
-        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
-        <e k="ui_specialization_progress" v="aprende %s %d%%" />
+        <e k="ui_specialization_tillage" v="Labranza" />
+        <e k="ui_specialization_sowing" v="Siembra" />
+        <e k="ui_specialization_fertilizing" v="Fertilización" />
+        <e k="ui_specialization_plantProtection" v="Protección de cultivos" />
+        <e k="ui_specialization_harvest" v="Cosecha" />
+        <e k="ui_specialization_transport" v="Transporte" />
+        <e k="ui_specialization_machineCare" v="Cuidado de la maquinaria" />
+        <e k="ui_specialization_resourceSaver" v="Uso eficiente" />
+        <e k="ui_specializationLearned" v="%s ha desarrollado una especialización: %s." />
+        <e k="ui_specialization_progress" v="aprendiendo %s %d%%" />
         <e k="ui_rank_expert" v="Experto" />
         <e k="ui_worker_line1" v="%s · Experiencia %d · Fiabilidad %d · Lealtad %d" />
         <e k="ui_worker_line2" v="Salario mensual: %s · Estado: %s" />
@@ -52,7 +52,7 @@
         <e k="ui_hireSuccess" v="%s ha sido contratado." />
         <e k="ui_fireSuccess" v="%s ha sido despedido." />
         <e k="ui_selectionTitle" v="Seleccionar empleado" />
-        <e k="ui_selectionHint" v="A/D o izquierda/derecha para cambiar · Intro para confirmar · Esc para cancelar" />
+        <e k="ui_selectionHint" v="A/D o izquierda/derecha para cambiar · Espacio o clic del ratón para confirmar · Esc para cancelar" />
         <e k="ui_selectionNoWorkers" v="No hay empleados disponibles." />
         <e k="ui_selectionWorkerUnavailable" v="Este empleado ya está trabajando." />
         <e k="ui_selectionNoEmployees" v="Aún no se ha contratado ningún empleado." />
@@ -62,8 +62,8 @@
         <e k="input_HP_SELECT_LEFT" v="Selección de empleado a la izquierda" />
         <e k="input_HP_SELECT_RIGHT" v="Selección de empleado a la derecha" />
         <e k="input_HP_SELECT_CONFIRM" v="Confirmar selección de empleado" />
-        <e k="input_HP_OPEN_APPLICANTS" v="Abrir mercado de candidatos" />
-        <e k="input_HP_TRANSPORT_TOGGLE" v="Cambiar asignación de transporte" />
+        <e k="input_HP_TRANSPORT_MANAGE" v="Gestionar trabajos de transporte" />
+        <e k="input_HP_SALARY_RAISE_MANAGE" v="Gestionar solicitudes de aumento" />
         <e k="input_HP_SELECT_CANCEL" v="Cancelar selección de empleado" />
         <e k="ui_openWorkerView" v="Empleados" />
         <e k="ui_openApplicantView" v="Candidatos" />
@@ -88,12 +88,12 @@
         <e k="ui_activeWorkerActivityField" v="Tarea: %s | Campo: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Vehículo" />
         <e k="ui_activeWorkerUnknownField" v="desconocido" />
-        <e k="ui_activeWorkerNoField" v="not field-bound" />
+        <e k="ui_activeWorkerNoField" v="no vinculado a un campo" />
         <e k="ui_activityUnknown" v="desconocido" />
         <e k="ui_activityFieldWork" v="trabajo de campo" />
         <e k="ui_activityTransport" v="transporte" />
-        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
-        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe con %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s detrás de %s" />
         <e k="ui_activityCultivating" v="cultivar" />
         <e k="ui_activityPlowing" v="arar" />
         <e k="ui_activitySowing" v="sembrar" />
@@ -116,18 +116,19 @@
         <e k="ui_workersHeaderUpper" v="GESTIÓN DE EMPLEADOS" />
         <e k="ui_instructionApplicant" v="INTRO contrata al candidato seleccionado. ESC vuelve al resumen." />
         <e k="ui_instructionWorkerDismiss" v="Pulsa INTRO para despedir al empleado seleccionado." />
-        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Para solicitudes de aumento: pulsa G para concederlo y N para rechazarlo." />
+        <e k="ui_instructionWorkerTransport" v="Usa el botón de transporte para gestionar el orden y pulsa S para formar al empleado." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Las solicitudes de aumento pendientes se gestionan con el botón Gestionar solicitudes de aumento." />
         <e k="ui_instructionSwitchEntry" v="Haz clic en una entrada para seleccionarla; usa la rueda del ratón para desplazarte." />
-        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
-        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
-        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
-        <e k="ui_training_already_done" v="%s has already attended training this month." />
-        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_training_no_progress" v="Este empleado todavía no tiene una orientación de aprendizaje adecuada." />
+        <e k="ui_training_worker_busy" v="El empleado está trabajando y no puede asistir a una formación." />
+        <e k="ui_training_worker_sick" v="El empleado está enfermo y no puede asistir a una formación." />
+        <e k="ui_training_already_done" v="%s ya ha asistido a una formación este mes." />
+        <e k="ui_training_started" v="%s comienza una formación en %s hasta final de mes (%s)." />
+        <e k="ui_training_completed" v="%s ha completado una formación en %s: de %d%% a %d%%." />
         <e k="ui_noApplicantsDetail" v="No hay candidatos disponibles" />
         <e k="ui_noWorkersDetail" v="No hay empleados disponibles" />
         <e k="ui_entryZero" v="Entrada 0 de 0" />
-        <e k="ui_visibleRange" v="Visible %d-%d" />
+        <e k="ui_visibleRange" v="Mostrando %d-%d" />
         <e k="ui_allEntriesVisible" v="Todas las entradas visibles" />
         <e k="ui_entryCounter" v="Entrada %d de %d" />
         <e k="ui_monthlyLineStaff" v="Plantilla: ayudantes %d | especialistas %d | expertos %d" />
@@ -157,6 +158,14 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s está enfermo y no puede trabajar hoy. El trabajo actual se ha cancelado." />
         <e k="ui_button_raise_grant" v="Conceder aumento" />
         <e k="ui_button_raise_decline" v="Rechazar solicitud" />
+        <e k="ui_button_salary_manage_long" v="Gestionar solicitudes de aumento" />
+        <e k="ui_salaryRequestsTitle" v="Gestionar solicitudes de aumento" />
+        <e k="ui_salaryRequestsIntro" v="Aquí se muestran todas las solicitudes de aumento pendientes. Selecciona un empleado y decide si aceptas o rechazas la solicitud." />
+        <e k="ui_salaryRequestsHeaderEmployee" v="Empleado" />
+        <e k="ui_salaryRequestsHeaderCurrent" v="Salario actual" />
+        <e k="ui_salaryRequestsHeaderRequested" v="Salario solicitado" />
+        <e k="ui_salaryRequestsNoRequests" v="No hay solicitudes de aumento pendientes." />
+        <e k="ui_salaryRequestsControls" v="Flecha arriba/abajo: seleccionar | Enter: aceptar | Espacio: rechazar" />
         <e k="ui_salaryRaisePendingLine" v="Solicitud: %s en vez de %s" />
         <e k="ui_salaryRaiseRequestNotification" v="%s solicita un aumento tras alcanzar el nivel %s: %s." />
         <e k="ui_salaryRaiseRequestHistory" v="Solicitud de aumento: %s solicita %s." />
@@ -166,73 +175,318 @@
         <e k="ui_salaryRaiseGrantedReputation" v="Aumento justo: %s reputación" />
         <e k="ui_hpIngameMenuPrev" v="Menú anterior" />
         <e k="ui_hpIngameMenuNext" v="Menú siguiente" />
-        <e k="ui_status_training" v="in training" />
-        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
-        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
-        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
-        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
-        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_status_training" v="en formación" />
+        <e k="ui_training_worker_in_training" v="El empleado ya está en formación hasta final de mes." />
+        <e k="ui_training_not_first_day" v="La formación solo puede iniciarse el primer día del mes." />
+        <e k="ui_training_not_single_day_deadline" v="Con 1 día por mes, la formación solo puede comenzar el primer día antes de las 12:00." />
+        <e k="ui_training_line_single_day_deadline" v="Formación: con 1 día/mes solo hasta las 12:00 · %s %s · última: %s" />
+        <e k="ui_training_already_done_year" v="%s ya ha asistido a una formación este año." />
         <e k="ui_training_last_none" v="-" />
-        <e k="ui_training_unknown" v="unknown" />
-        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
-        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
-        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
-        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
-        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
-        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
-        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
-
-        <e k="ui_hpSetting_on" v="On"/>
-
-        <e k="ui_hpSetting_off" v="Off"/>
-
-        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
-
-        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
-
-        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
-
-        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
-
-        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
-
-        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
-
-        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
-
-        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
-
-        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
-
-        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
-
-        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
-
-        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
-        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
-
-        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
-
-        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
-
-        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
-
-        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
-
-        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
-
-        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
-
-        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
-
-        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
-
-        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
-
-        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+        <e k="ui_training_unknown" v="desconocida" />
+        <e k="ui_training_line_active" v="Formación: %s hasta final de mes · última: %s" />
+        <e k="ui_training_line_no_direction" v="Formación: sin orientación de aprendizaje · última: %s" />
+        <e k="ui_training_line_year_blocked" v="Formación: solo el próximo año · última: %s" />
+        <e k="ui_training_line_first_day" v="Formación: solo el primer día · %s %s · última: %s" />
+        <e k="ui_training_line_busy" v="Formación: no disponible, trabajando · %s %s · última: %s" />
+        <e k="ui_training_line_sick" v="Formación: no disponible, enfermo · %s %s · última: %s" />
+        <e k="ui_training_line_possible" v="Formación: disponible %s, %s · última: %s" />
+        <e k="ui_hpSetting_on" v="Activado" />
+        <e k="ui_hpSetting_off" v="Desactivado" />
+        <e k="ui_hpSetting_section" v="GESTIÓN DE PERSONAL" />
+        <e k="ui_hpSetting_gameplayEffects" v="Gestión de personal: efectos de juego" />
+        <e k="ui_hpSetting_experienceEffects" v="Gestión de personal: efectos de experiencia" />
+        <e k="ui_hpSetting_speedEffect" v="Gestión de personal: velocidad de trabajo" />
+        <e k="ui_hpSetting_wearEffect" v="Gestión de personal: desgaste" />
+        <e k="ui_hpSetting_consumablesEffect" v="Gestión de personal: materiales" />
+        <e k="ui_hpSetting_fuelEffect" v="Gestión de personal: consumo de combustible" />
+        <e k="ui_hpSetting_reliabilityEffects" v="Gestión de personal: fiabilidad" />
+        <e k="ui_hpSetting_personnelEffects" v="Gestión de personal: efectos sobre el personal" />
+        <e k="ui_hpSetting_loyaltyEffects" v="Gestión de personal: cambios de lealtad" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Gestión de personal: trabajo nocturno" />
+        <e k="ui_hpSetting_economicEffects" v="Gestión de personal: economía" />
+        <e k="ui_hpSetting_individualWages" v="Gestión de personal: salarios individuales" />
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Activa o desactiva todos los efectos de juego de Gestión de personal. Los valores mostrados, los datos guardados y el historial permanecen disponibles." />
+        <e k="ui_hpSetting_experienceEffects_desc" v="Determina si la experiencia y las especializaciones de los empleados afectan al trabajo activo de los ayudantes." />
+        <e k="ui_hpSetting_speedEffect_desc" v="Determina si la experiencia y las especializaciones adecuadas afectan a la velocidad de trabajo." />
+        <e k="ui_hpSetting_wearEffect_desc" v="Determina si la experiencia y las especializaciones adecuadas afectan al desgaste adicional de vehículos y aperos." />
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Determina si la experiencia y las especializaciones adecuadas afectan al uso de semillas, fertilizante, herbicida, purín, digestato, estiércol y materiales similares." />
+        <e k="ui_hpSetting_fuelEffect_desc" v="Determina si la experiencia y las especializaciones adecuadas afectan al consumo de combustible." />
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determina si la fiabilidad de los empleados puede causar breves bajadas de rendimiento y días de enfermedad." />
+        <e k="ui_hpSetting_personnelEffects_desc" v="Activa o desactiva efectos relacionados con el personal, como la evolución de la lealtad y los efectos del trabajo nocturno." />
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determina si la lealtad de los empleados cambia por acontecimientos como el pago de salarios, el trabajo nocturno o la reputación del empleador." />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determina si el trabajo nocturno afecta a la lealtad y a la reputación del empleador." />
+        <e k="ui_hpSetting_economicEffects_desc" v="Determina si se utilizan cálculos económicos individuales. Si se desactiva, se usan valores salariales estándar neutros." />
+        <e k="ui_hpSetting_individualWages_desc" v="Determina si los empleados reciben salarios individuales según su función, experiencia, fiabilidad y especializaciones." />
+        <e k="ui_hpSetting_groupWork" v="RENDIMIENTO LABORAL" />
+        <e k="ui_hpSetting_groupPersonnel" v="DESARROLLO DEL PERSONAL" />
+        <e k="ui_hpSetting_groupEconomy" v="ECONOMÍA Y SALARIOS" />
+        <e k="ui_hpSetting_standardWage" v="Salario mensual estándar" />
+        <e k="ui_hpSetting_standardWage_desc" v="Define el salario mensual base utilizado cuando los salarios individuales están desactivados. El valor se aplica a partir del próximo cálculo salarial." />
+        <e k="ui_hpSetting_standardWageInvalid" v="Introduce un valor entre %d y %d. La cantidad se redondeará al múltiplo de 10 más cercano." />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Abrir Gestión de personal" />
+        <e k="ui_pmMenuPageOverview" v="Resumen" />
+        <e k="ui_pmMenuPageApplicants" v="Candidatos" />
+        <e k="ui_pmMenuPageEmployees" v="Empleados" />
+        <e k="ui_pmMenuPageTraining" v="Formación" />
+        <e k="ui_pmMenuPageAssignments" v="Asignaciones" />
+        <e k="ui_pmMenuPrevPerson" v="Persona anterior" />
+        <e k="ui_pmMenuNextPerson" v="Persona siguiente" />
+        <e k="ui_pmPersonCounter" v="%d de %d" />
+        <e k="ui_pmMenuNoPermission" v="No tienes permiso para tomar decisiones de personal para esta granja." />
+        <e k="ui_pmConfirmHire" v="¿Contratar realmente a %s?" />
+        <e k="ui_pmConfirmDismiss" v="¿Despedir realmente a %s?" />
+        <e k="ui_pmConfirmTraining" v="¿Iniciar una formación para %s?" />
+        <e k="ui_pmProfileHeader" v="PERFIL" />
+        <e k="ui_pmHistoryHeader" v="HISTORIAL" />
+        <e k="ui_button_train" v="Formar" />
+        <e k="ui_pmStatusApplicant" v="Candidato" />
+        <e k="ui_pmBirthLine" v="Nacimiento: %s" />
+        <e k="ui_pmOriginLine" v="Experiencia profesional: %s" />
+        <e k="ui_pmStatsLine" v="Experiencia %d · Fiabilidad %d · Lealtad %d" />
+        <e k="ui_pmStatExperience" v="Experiencia" />
+        <e k="ui_pmStatReliability" v="Fiabilidad" />
+        <e k="ui_pmStatLoyalty" v="Lealtad" />
+        <e k="ui_pmWageLine" v="Salario: %s" />
+        <e k="ui_pmStatusLine" v="Estado: %s" />
+        <e k="ui_pmOrigin1" v="granja familiar rural" />
+        <e k="ui_pmOrigin2" v="pequeña explotación lechera" />
+        <e k="ui_pmOrigin3" v="empresa de servicios agrícolas" />
+        <e k="ui_pmOrigin4" v="explotación agrícola" />
+        <e k="ui_pmOrigin5" v="explotación mixta" />
+        <e k="ui_pmStrengthReliable" v="estilo de trabajo tranquilo y fiable" />
+        <e k="ui_pmStrengthTransport" v="transporte y logística de patio bien organizados" />
+        <e k="ui_pmStrengthHarvest" v="trabajo de cosecha cuidadoso" />
+        <e k="ui_pmStrengthSowing" v="siembra precisa y preparación del campo" />
+        <e k="ui_pmApplicantProfileText" v="%s solicita el puesto con experiencia profesional en %s. El perfil actual apunta a %s. Estos valores reflejan el perfil en el momento de la solicitud." />
+        <e k="ui_pmWorkerProfileText" v="%s forma parte de la granja desde %s. Su evolución apunta a %s. Se añaden más registros mediante trabajos, formaciones y decisiones de personal." />
+        <e k="ui_pmHistoryJobs" v="Trabajos completados: %d." />
+        <e k="ui_pmHistoryWorkTime" v="Tiempo total de trabajo: %s." />
+        <e k="ui_pmHistoryTrainingActive" v="Formación actual: %s." />
+        <e k="ui_pmHistoryTrainingLast" v="Última formación: año %d." />
+        <e k="ui_pmHistoryTrainingNone" v="Todavía no hay formaciones registradas." />
+        <e k="ui_pmHistoryTransportEnabled" v="Marcado para tareas de transporte." />
+        <e k="ui_pmHistoryTransportDisabled" v="No marcado para tareas de transporte." />
+        <e k="ui_pmMenuPageSettings" v="Ajustes" />
+        <e k="ui_pmSettingsInfo" v="Estos ajustes se aplican por partida guardada." />
+        <e k="ui_pmSettingsHostOnly" v="En multijugador, estos ajustes solo pueden modificarse en el servidor." />
+        <e k="ui_pmSettingsSectionGameplay" v="EFECTOS DE JUEGO" />
+        <e k="ui_pmSettingsSectionPersonnel" v="PERSONAL" />
+        <e k="ui_pmSettingsSectionEconomic" v="ECONOMÍA" />
+        <e k="ui_button_transport_assign_long" v="Asignar trabajos de transporte" />
+        <e k="ui_button_transport_manage_long" v="Gestionar trabajos de transporte" />
+        <e k="ui_transportPriorityTitle" v="Prioridad de transporte" />
+        <e k="ui_transportPriorityIntro" v="Elige qué empleados pueden asumir trabajos de transporte y el orden en que se comprueban." />
+        <e k="ui_transportPriorityHeaderPriority" v="Prioridad" />
+        <e k="ui_transportPriorityHeaderEmployee" v="Empleado" />
+        <e k="ui_transportPriorityHeaderStatus" v="Estado" />
+        <e k="ui_transportPriorityHeaderEnabled" v="Transporte" />
+        <e k="ui_transportPriorityActive" v="Activo" />
+        <e k="ui_transportPriorityInactive" v="No asignado" />
+        <e k="ui_transportPriorityMoveUp" v="Subir" />
+        <e k="ui_transportPriorityMoveDown" v="Bajar" />
+        <e k="ui_transportPriorityToggle" v="Activar/desactivar" />
+        <e k="ui_transportPriorityApply" v="Aplicar" />
+        <e k="ui_transportPriorityCancel" v="Cancelar" />
+        <e k="ui_transportPrioritySaved" v="Orden de transporte guardado." />
+        <e k="ui_transportPriorityNoWorkers" v="No hay empleados disponibles." />
+        <e k="ui_transportPriorityControls" v="↑/↓: seleccionar   A/D: mover   Espacio: activar/desactivar   Enter: aplicar" />
+        <e k="ui_button_transport_remove_long" v="Retirar trabajos de transporte" />
+        <e k="ui_helperPersonnelMenuOverview" v="Resumen" />
+        <e k="ui_helperPersonnelMenuApplicants" v="Candidatos" />
+        <e k="ui_helperPersonnelMenuEmployees" v="Empleados" />
+        <e k="ui_helperPersonnelMenuTraining" v="Formación" />
+        <e k="ui_helperPersonnelMenuSettings" v="AJUSTES DEL JUEGO" />
+        <e k="ui_pmBirthDateAge" v="%s (%d años)" />
+        <e k="ui_pmOrigin6" v="empresa de logística" />
+        <e k="ui_pmOrigin7" v="taller de maquinaria agrícola" />
+        <e k="ui_pmOrigin8" v="profesión de oficina" />
+        <e k="ui_status_retirementPending" v="se jubilará a final de mes" />
+        <e k="ui_retirementNotice" v="%s se jubilará a final de mes." />
+        <e k="ui_pmTrainingIntro" v="Las especializaciones mejoran el rendimiento de un empleado en la categoría de aprendizaje correspondiente. Una formación dura hasta el final del mes actual y el empleado no está disponible para trabajar durante ese tiempo. El progreso se acredita solo al finalizar la formación. No se ofrece formación para todas las categorías todos los meses. Los cursos pueden ser más baratos o más caros que el precio habitual. Cada empleado solo puede realizar una formación por año agrícola, de marzo a febrero. Cada empleado puede obtener como máximo dos especializaciones. Selecciona la categoría de aprendizaje deseada." />
+        <e k="ui_pmTrainingCategoryHeader" v="Categoría de aprendizaje" />
+        <e k="ui_pmTrainingProgressHeader" v="Progreso hacia la especialización" />
+        <e k="ui_pmTrainingRunning" v="formación en curso" />
+        <e k="ui_pmTrainingSelectCategory" v="Selecciona primero una categoría de formación" />
+        <e k="ui_pmTrainingConfirm" v="¿Iniciar una formación para %s en la categoría %s?" />
+        <e k="ui_training_line_no_capacity" v="Formación: se han alcanzado dos especializaciones · última: %s" />
+        <e k="ui_training_line_single_day_deadline_select" v="Formación: con 1 día/mes solo hasta las 12:00 · elige una categoría en el menú de formación · última: %s" />
+        <e k="ui_training_line_first_day_select" v="Formación: solo el primer día · elige una categoría en el menú de formación · última: %s" />
+        <e k="ui_training_line_busy_select" v="Formación: no es posible mientras trabaja · última: %s" />
+        <e k="ui_training_line_sick_select" v="Formación: no es posible mientras está enfermo · última: %s" />
+        <e k="ui_training_line_select_category" v="Formación: elige una categoría en el menú de formación · última: %s" />
+        <e k="ui_pmTrainingCostHeader" v="Coste" />
+        <e k="ui_pmTrainingAdjustmentHeader" v="Descuento/coste adicional" />
+        <e k="ui_pmTrainingNoPlaces" v="no hay plazas disponibles actualmente" />
+        <e k="ui_pmTrainingNoPlacesMessage" v="Actualmente no hay plazas disponibles para esta formación." />
+        <e k="ui_pmProfileIntro1" v="%s trabajó anteriormente %s y lleva %d meses en la granja." />
+        <e k="ui_pmProfileIntro2" v="%s aporta experiencia de un trabajo anterior %s y forma parte del equipo desde hace %d meses." />
+        <e k="ui_pmProfileExperience1_1" v="%s tiene todavía muy poca experiencia práctica y debe afianzar muchos procesos de trabajo." />
+        <e k="ui_pmProfileExperience1_2" v="%s sigue claramente en la fase de adaptación al trabajo diario." />
+        <e k="ui_pmProfileExperience2_1" v="%s ha adquirido cierta experiencia práctica, pero aún necesita apoyo en tareas más exigentes." />
+        <e k="ui_pmProfileExperience2_2" v="%s gana seguridad con los fundamentos, aunque todavía le falta rutina en varias áreas." />
+        <e k="ui_pmProfileExperience3_1" v="%s tiene una experiencia sólida y realiza de forma independiente la mayoría de las tareas habituales." />
+        <e k="ui_pmProfileExperience3_2" v="%s trabaja con soltura en el día a día y se adapta bien a tareas cambiantes." />
+        <e k="ui_pmProfileExperience4_1" v="%s aporta una amplia experiencia y trabaja con seguridad incluso en tareas exigentes." />
+        <e k="ui_pmProfileExperience4_2" v="Gracias a años de práctica, %s realiza trabajos complejos con seguridad y autonomía en la mayoría de los casos." />
+        <e k="ui_pmProfileExperience5_1" v="%s se encuentra entre los especialistas más destacados de la granja y posee una experiencia excepcional." />
+        <e k="ui_pmProfileExperience5_2" v="%s es uno de los miembros más experimentados y versátiles del equipo." />
+        <e k="ui_pmProfileReliability1_1" v="Actualmente es difícil planificar a %s con fiabilidad; a menudo no se cumplen los acuerdos y procesos como se esperaba." />
+        <e k="ui_pmProfileReliability1_2" v="%s muestra claras debilidades en puntualidad, cumplimiento de acuerdos y ejecución cuidadosa." />
+        <e k="ui_pmProfileReliability2_1" v="%s no trabaja con una fiabilidad constante y debe supervisarse de cerca en tareas importantes." />
+        <e k="ui_pmProfileReliability2_2" v="%s suele cumplir los acuerdos, pero todavía muestra variaciones apreciables en su fiabilidad." />
+        <e k="ui_pmProfileReliability3_1" v="%s trabaja correctamente en general y cumple los acuerdos en la mayoría de los casos." />
+        <e k="ui_pmProfileReliability3_2" v="%s suele ser fiable en el trabajo diario y se puede planificar bien." />
+        <e k="ui_pmProfileReliability4_1" v="%s es un miembro fiable del equipo y fácil de planificar." />
+        <e k="ui_pmProfileReliability4_2" v="%s cumple los acuerdos con fiabilidad incluso en tareas largas o exigentes." />
+        <e k="ui_pmProfileReliability5_1" v="%s es excepcionalmente fiable y ofrece a la granja una gran seguridad de planificación." />
+        <e k="ui_pmProfileReliability5_2" v="%s cumple los acuerdos casi sin excepción y realiza las tareas con gran cuidado." />
+        <e k="ui_pmProfileLoyalty1_1" v="%s muestra actualmente poco apego a la granja; podría marcharse en cualquier momento." />
+        <e k="ui_pmProfileLoyalty1_2" v="%s parece tener poca vinculación con la granja y podría marcharse rápidamente ante una oferta adecuada." />
+        <e k="ui_pmProfileLoyalty2_1" v="%s solo tiene una vinculación limitada con la granja, por lo que su evolución futura es incierta." />
+        <e k="ui_pmProfileLoyalty2_2" v="%s muestra un compromiso relativamente bajo y todavía no ha establecido un vínculo firme con la granja." />
+        <e k="ui_pmProfileLoyalty3_1" v="%s es leal a la granja en general, aunque todavía no tiene un vínculo especialmente estrecho." />
+        <e k="ui_pmProfileLoyalty3_2" v="%s ha desarrollado una relación estable con la granja y muestra un compromiso sólido." />
+        <e k="ui_pmProfileLoyalty4_1" v="%s se siente claramente vinculado a la granja y muestra un fuerte compromiso." />
+        <e k="ui_pmProfileLoyalty4_2" v="%s ha establecido un vínculo fuerte con la granja y probablemente permanecerá a largo plazo." />
+        <e k="ui_pmProfileLoyalty5_1" v="%s está excepcionalmente unido a la granja y se encuentra entre los miembros más leales del equipo." />
+        <e k="ui_pmProfileLoyalty5_2" v="%s muestra una vinculación a largo plazo muy fuerte y firmemente establecida con la granja." />
+        <e k="ui_pmProfileSpecializations" v="Sus puntos fuertes profesionales destacan especialmente en %s." />
+        <e k="ui_pmProfileLearningProgress" v="El mayor progreso de aprendizaje se encuentra actualmente en %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization" v="Todavía no se ha desarrollado una especialización profesional clara." />
+        <e k="ui_pmProfileActivity" v="%s ha completado hasta ahora %d trabajos y %d formaciones." />
+        <e k="ui_pmProfileNoActivity" v="%s todavía está adquiriendo experiencia inicial en la granja; aún no ha completado trabajos ni formaciones." />
+        <e k="ui_pmChronicleImportedEmployment" v="La relación laboral existente se añadió a la crónica personal." />
+        <e k="ui_pmChronicleHired" v="El empleado fue contratado." />
+        <e k="ui_pmChronicleJobStarted" v="Trabajo iniciado." />
+        <e k="ui_pmChronicleJobCompleted" v="Trabajo completado." />
+        <e k="ui_pmChronicleSpecialization" v="Especialización adquirida." />
+        <e k="ui_pmChronicleTrainingStarted" v="Formación iniciada." />
+        <e k="ui_pmChronicleTrainingCompleted" v="Formación completada." />
+        <e k="ui_pmChronicleSickness" v="Ausencia por enfermedad." />
+        <e k="ui_pmChronicleDismissal" v="Despido comunicado por la granja." />
+        <e k="ui_pmChronicleResignation" v="Renuncia anunciada para final de mes." />
+        <e k="ui_pmChronicleRetirement" v="Jubilación anunciada para final de mes." />
+        <e k="ui_pmChronicleEmploymentEnded" v="Relación laboral finalizada." />
+        <e k="ui_pmChronicleSalaryRequest" v="Aumento salarial solicitado." />
+        <e k="ui_pmChronicleSalaryGranted" v="Aumento salarial concedido." />
+        <e k="ui_pmChronicleSalaryDeclined" v="Solicitud de aumento salarial rechazada." />
+        <e k="ui_pmProfileEmployeeMale" v="El empleado" />
+        <e k="ui_pmProfileEmployeeFemale" v="La empleada" />
+        <e k="ui_pmProfilePronounMale" v="Él" />
+        <e k="ui_pmProfilePronounFemale" v="Ella" />
+        <e k="ui_pmProfileBackgroundFamilyFarm" v="en una granja familiar rural" />
+        <e k="ui_pmProfileBackgroundDairyFarm" v="en una pequeña explotación lechera" />
+        <e k="ui_pmProfileBackgroundContractor" v="para una empresa de servicios agrícolas" />
+        <e k="ui_pmProfileBackgroundArableFarm" v="en una explotación agrícola" />
+        <e k="ui_pmProfileBackgroundMixedFarm" v="en una explotación mixta" />
+        <e k="ui_pmProfileBackgroundLogistics" v="en una empresa de logística" />
+        <e k="ui_pmProfileBackgroundWorkshop" v="en un taller de maquinaria agrícola" />
+        <e k="ui_pmProfileBackgroundOffice" v="en una profesión de oficina" />
+        <e k="ui_pmProfileIntro3" v="%s lleva %d meses trabajando en la granja y anteriormente estuvo empleado %s." />
+        <e k="ui_pmProfileExperience1_3" v="%s comprende los procesos básicos, pero todavía necesita orientación y práctica para muchas tareas." />
+        <e k="ui_pmProfileExperience2_3" v="%s realiza cada vez mejor las tareas habituales, pero todavía debe profundizar en procesos más complejos." />
+        <e k="ui_pmProfileExperience3_3" v="%s tiene una base técnica fiable y puede utilizarse en distintas tareas." />
+        <e k="ui_pmProfileExperience4_3" v="%s conoce muchos procesos agrícolas por experiencia práctica y puede asumir trabajos más difíciles." />
+        <e k="ui_pmProfileExperience5_3" v="%s posee conocimientos excepcionalmente amplios y realiza con seguridad incluso tareas muy exigentes." />
+        <e k="ui_pmProfileReliability1_3" v="%s genera repetidamente incertidumbre en la planificación del trabajo debido a un rendimiento poco fiable." />
+        <e k="ui_pmProfileReliability2_3" v="%s puede realizar tareas rutinarias, pero aún no es constantemente fiable en trabajos exigentes." />
+        <e k="ui_pmProfileReliability3_3" v="%s completa la mayoría de los trabajos con responsabilidad, aunque todavía se producen variaciones ocasionales." />
+        <e k="ui_pmProfileReliability4_3" v="%s trabaja de forma constante y cuidadosa, con pocas ausencias o irregularidades." />
+        <e k="ui_pmProfileReliability5_3" v="%s mantiene una fiabilidad y constancia excepcionales incluso en trabajos difíciles." />
+        <e k="ui_pmProfileLoyalty1_3" v="%s parece considerar el empleo más como una solución temporal que como un puesto duradero." />
+        <e k="ui_pmProfileLoyalty2_3" v="%s permanece en la granja, pero todavía no puede darse por segura su continuidad a largo plazo." />
+        <e k="ui_pmProfileLoyalty3_3" v="%s parece encontrarse cómodo en el equipo, aunque el vínculo aún puede fortalecerse." />
+        <e k="ui_pmProfileLoyalty4_3" v="%s se identifica firmemente con la granja y apoya lealmente el negocio." />
+        <e k="ui_pmProfileLoyalty5_3" v="%s se identifica de manera especialmente fuerte con la granja y probablemente mantendrá un compromiso permanente." />
+        <e k="ui_pmProfileSpecializations2" v="%s se ha especializado principalmente en %s." />
+        <e k="ui_pmProfileSpecializations3" v="%s muestra puntos fuertes especiales en %s." />
+        <e k="ui_pmProfileLearningProgress2" v="%s está progresando especialmente bien en %s (%d %%)." />
+        <e k="ui_pmProfileLearningProgress3" v="%s ha alcanzado hasta ahora su mayor progreso de aprendizaje en %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization2" v="%s todavía no ha desarrollado una especialización fija." />
+        <e k="ui_pmProfileNoSpecialization3" v="La orientación profesional de %s sigue abierta." />
+        <e k="ui_pmProfileActivity2" v="El tiempo en la granja incluye hasta ahora %d trabajos completados y %d formaciones." />
+        <e k="ui_pmProfileActivity3" v="%s ha completado hasta ahora %d trabajos y %d formaciones." />
+        <e k="ui_pmProfileNoActivity2" v="Para %s, el desarrollo práctico en la granja acaba de comenzar." />
+        <e k="ui_pmProfileNoActivity3" v="%s todavía no ha completado ningún trabajo ni participado en una formación." />
+        <e k="ui_hpSetting_toggle" v="Cambiar" />
+        <e k="ui_worker_status_line" v="Estado: %s" />
+        <e k="ui_pmApplicantProfileIntro" v="%s trabajó anteriormente %s." />
+        <e k="ui_pmApplicantProfileMarketNew" v="La candidatura se ha incorporado al mercado este mes." />
+        <e k="ui_pmApplicantProfileMarketOneMonth" v="La candidatura lleva un mes en el mercado." />
+        <e k="ui_pmApplicantProfileMarketMonths" v="La candidatura lleva %d meses en el mercado." />
+        <e k="ui_pmApplicantProfileAge1" v="Con %d años, la trayectoria profesional todavía está comenzando. Existe un gran potencial de desarrollo." />
+        <e k="ui_pmApplicantProfileAge2" v="Con %d años, el desarrollo profesional todavía está consolidándose y puede progresar de forma notable." />
+        <e k="ui_pmApplicantProfileAge3" v="Con %d años, ya existe una trayectoria profesional consolidada. La utilidad de esa experiencia para la agricultura depende del historial anterior." />
+        <e k="ui_pmApplicantProfileAge4" v="Con %d años, cabe esperar una amplia experiencia laboral general, aunque no equivale automáticamente a práctica agrícola." />
+        <e k="ui_pmApplicantProfileExperience1" v="La experiencia agrícola práctica todavía es muy limitada. Será necesaria una formación exhaustiva." />
+        <e k="ui_pmApplicantProfileExperience2" v="Existen conocimientos agrícolas básicos, pero aún falta rutina en las tareas exigentes." />
+        <e k="ui_pmApplicantProfileExperience3" v="La experiencia disponible ofrece una base sólida para los trabajos habituales, aunque no se dominan con seguridad todas las áreas." />
+        <e k="ui_pmApplicantProfileExperience4" v="La experiencia agrícola está claramente desarrollada y permite un uso versátil." />
+        <e k="ui_pmApplicantProfileExperience5" v="La experiencia alcanza un nivel excepcional y permite afrontar trabajos exigentes." />
+        <e k="ui_pmApplicantProfileReliability1" v="El valor de fiabilidad indica riesgos claros en la planificación, los acuerdos y la ejecución cuidadosa." />
+        <e k="ui_pmApplicantProfileReliability2" v="La fiabilidad todavía es irregular. Las tareas importantes deben supervisarse atentamente." />
+        <e k="ui_pmApplicantProfileReliability3" v="La fiabilidad se encuentra en un nivel adecuado y normalmente permite una planificación previsible." />
+        <e k="ui_pmApplicantProfileReliability4" v="La alta fiabilidad apunta a un trabajo constante, cuidadoso y fácil de planificar." />
+        <e k="ui_pmApplicantProfileReliability5" v="La fiabilidad excepcionalmente alta ofrece un nivel muy elevado de seguridad en la planificación." />
+        <e k="ui_pmApplicantProfileLoyalty1" v="La baja lealtad sugiere una vinculación débil con un futuro empleador." />
+        <e k="ui_pmApplicantProfileLoyalty2" v="La lealtad todavía es reservada. El compromiso a largo plazo aún debe desarrollarse." />
+        <e k="ui_pmApplicantProfileLoyalty3" v="La lealtad se mantiene en un nivel medio estable y ofrece una buena base para una colaboración a largo plazo." />
+        <e k="ui_pmApplicantProfileLoyalty4" v="La alta lealtad indica una fuerte disposición a permanecer en la explotación a largo plazo." />
+        <e k="ui_pmApplicantProfileLoyalty5" v="La lealtad excepcionalmente alta indica una disposición especialmente fuerte a establecer un vínculo duradero." />
+        <e k="ui_pmHistoryColumnCareer" v="Historial anterior" />
+        <e k="ui_pmHistoryColumnRecent" v="Últimos eventos" />
+        <e k="ui_pmHistoryColumnTotals" v="Totales" />
+        <e k="ui_pmHistoryNoRecord" v="sin registro" />
+        <e k="ui_pmHistoryDateFormat" v="Día %d · %d/%d" />
+        <e k="ui_pmHistorySalaryAccepted" v="aceptada" />
+        <e k="ui_pmHistorySalaryDeclined" v="rechazada" />
+        <e k="ui_pmHistorySalaryPending" v="pendiente" />
+        <e k="ui_pmHistorySalaryUnresolved" v="sin decisión registrada" />
+        <e k="ui_pmHistoryAbortSickness" v="enfermedad" />
+        <e k="ui_pmHistoryAbortUnreliability" v="falta de fiabilidad" />
+        <e k="ui_pmHistoryAbortOther" v="otro motivo" />
+        <e k="ui_pmHistoryLastSickness" v="Última enfermedad: %s" />
+        <e k="ui_pmHistoryLastSalaryRequest" v="Última solicitud salarial: %s · %s" />
+        <e k="ui_pmHistoryLastAbort" v="Última tarea abortada: %s · %s" />
+        <e k="ui_pmHistoryTotalSickness" v="Días de enfermedad: %d" />
+        <e k="ui_pmHistoryTotalSalaryRequests" v="Solicitudes salariales: %d" />
+        <e k="ui_pmHistoryTotalAborts" v="Tareas abortadas: %d" />
+        <e k="ui_pmHistoryTotalSalaryPaid" v="Salario total: %s" />
+        <e k="ui_pmHistoryTrainingYearCompact" v="Año %d" />
+        <e k="ui_pmHistoryTrainingNoneCompact" v="ninguna" />
+        <e k="ui_pmHistoryCareerJobs" v="Tareas: %d" />
+        <e k="ui_pmHistoryCareerWorkTime" v="Tiempo de trabajo: %s" />
+        <e k="ui_pmHistoryCareerTraining" v="Formación: %s" />
+        <e k="ui_pmHistoryCareerTransport" v="Transporte: %s" />
+        <e k="ui_pmHistoryValueActive" v="activo" />
+        <e k="ui_pmHistoryValueInactive" v="inactivo" />
+        <e k="ui_monthlyRowApplicants" v="Candidatos" />
+        <e k="ui_monthlyRowEmployees" v="Empleados" />
+        <e k="ui_monthlyRowAvailable" v="Disponibles" />
+        <e k="ui_monthlyRowJobs" v="Tareas" />
+        <e k="ui_monthlyRowWorkTime" v="Tiempo de trabajo" />
+        <e k="ui_monthlyRowWages" v="Salarios mensuales" />
+        <e k="ui_monthlyRowPayroll" v="Última nómina" />
+        <e k="ui_pmOverviewOverallHeader" v="TOTAL" />
+        <e k="ui_pmOverviewTotalJobs" v="Trabajos totales" />
+        <e k="ui_pmOverviewTotalWorkTime" v="Tiempo de trabajo total" />
+        <e k="ui_pmOverviewTotalPayroll" v="Salarios pagados" />
+        <e k="ui_pmOverviewEverHired" v="Contratados en total" />
+        <e k="ui_pmOverviewDismissed" v="Despedidos" />
+        <e k="ui_pmOverviewResigned" v="Renuncias" />
+        <e k="ui_pmOverviewRetired" v="Jubilaciones" />
+        <e k="ui_pmChronicleJobAbortedSickness" v="Tarea abortada por enfermedad." />
+        <e k="ui_reliabilityJobAbortOtherTaskMale" v="%s ha abandonado el trabajo en curso porque consideró que otra tarea era más importante." />
+        <e k="ui_reliabilityJobAbortOtherTaskFemale" v="%s ha abandonado el trabajo en curso porque consideró que otra tarea era más importante." />
+        <e k="ui_reliabilityJobAbortBreakMale" v="%s ha abandonado el trabajo en curso. Quería hacer una pausa." />
+        <e k="ui_reliabilityJobAbortBreakFemale" v="%s ha abandonado el trabajo en curso. Quería hacer una pausa." />
+        <e k="ui_reliabilityJobAbortPrivateMale" v="%s ha abandonado el trabajo en curso. Tenía que ocuparse de asuntos privados." />
+        <e k="ui_reliabilityJobAbortPrivateFemale" v="%s ha abandonado el trabajo en curso. Tenía que ocuparse de asuntos privados." />
+        <e k="ui_reliabilityJobAbortStoveMale" v="%s ha abandonado el trabajo en curso porque había olvidado apagar la cocina en casa y regresó." />
+        <e k="ui_reliabilityJobAbortStoveFemale" v="%s ha abandonado el trabajo en curso porque había olvidado apagar la cocina en casa y regresó." />
+        <e k="ui_reliabilityJobAbortFriendsMale" v="%s ha abandonado el trabajo en curso porque decidió quedar espontáneamente con sus amigos." />
+        <e k="ui_reliabilityJobAbortFriendsFemale" v="%s ha abandonado el trabajo en curso porque decidió quedar espontáneamente con sus amigos." />
+        <e k="ui_reliabilityJobAbortPartnerMale" v="%s ha abandonado el trabajo en curso para quedar espontáneamente a tomar café con su novia." />
+        <e k="ui_reliabilityJobAbortPartnerFemale" v="%s ha abandonado el trabajo en curso para quedar espontáneamente a tomar café con su novio." />
     </elements>
 </l10n>

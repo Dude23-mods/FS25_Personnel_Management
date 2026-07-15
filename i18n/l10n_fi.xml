@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <l10n>
     <elements>
         <e k="ui_ingameMenuHelperPersonnel" v="Henkilöstönhallinta" />
@@ -20,16 +20,16 @@
         <e k="ui_rank_helper" v="Apulainen" />
         <e k="ui_rank_specialist" v="Asiantuntija" />
         <e k="ui_specialization_short" v="Erikoistuminen" />
-        <e k="ui_specialization_tillage" v="Tillage" />
-        <e k="ui_specialization_sowing" v="Sowing" />
-        <e k="ui_specialization_fertilizing" v="Fertilizing" />
-        <e k="ui_specialization_plantProtection" v="Crop Protection" />
-        <e k="ui_specialization_harvest" v="Harvest" />
-        <e k="ui_specialization_transport" v="Transport" />
-        <e k="ui_specialization_machineCare" v="Machine Care" />
-        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
-        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
-        <e k="ui_specialization_progress" v="oppii %s %d%%" />
+        <e k="ui_specialization_tillage" v="Maanmuokkaus" />
+        <e k="ui_specialization_sowing" v="Kylvö" />
+        <e k="ui_specialization_fertilizing" v="Lannoitus" />
+        <e k="ui_specialization_plantProtection" v="Kasvinsuojelu" />
+        <e k="ui_specialization_harvest" v="Sadonkorjuu" />
+        <e k="ui_specialization_transport" v="Kuljetus" />
+        <e k="ui_specialization_machineCare" v="Koneiden hoito" />
+        <e k="ui_specialization_resourceSaver" v="Säästävä työskentely" />
+        <e k="ui_specializationLearned" v="%s on kehittänyt erikoistumisen: %s." />
+        <e k="ui_specialization_progress" v="opiskelee %s %d%%" />
         <e k="ui_rank_expert" v="Ammattilainen" />
         <e k="ui_worker_line1" v="%s · Kokemus %d · Luotettavuus %d · Uskollisuus %d" />
         <e k="ui_worker_line2" v="Kuukausipalkka: %s · Tila: %s" />
@@ -48,22 +48,22 @@
         <e k="ui_dismissalNoticeNextMonth" v="%s on irtisanottu seuraavan kuukauden loppuun." />
         <e k="ui_dismissalNotice" v="%s on irtisanottu kuukauden loppuun." />
         <e k="ui_fireDeniedPending" v="Tämä työntekijä on jo irtisanottu." />
-        <e k="ui_fireDeniedBusy" v="Työntekijät varattu - irtisano nicht möglich." />
+        <e k="ui_fireDeniedBusy" v="Työntekijä työskentelee eikä häntä voi irtisanoa." />
         <e k="ui_hireSuccess" v="%s - palkkaa." />
         <e k="ui_fireSuccess" v="%s - irtisano." />
         <e k="ui_selectionTitle" v="Valitse työntekijä" />
-        <e k="ui_selectionHint" v="A/D / Left/Right · Enter · Esc" />
+        <e k="ui_selectionHint" v="Vaihda A/D- tai vasen/oikea-näppäimillä · vahvista välilyönnillä tai hiiren napsautuksella · peruuta Escillä" />
         <e k="ui_selectionNoWorkers" v="Hakijoita ei ole tällä hetkellä saatavilla." />
         <e k="ui_selectionWorkerUnavailable" v="varattu." />
         <e k="ui_selectionNoEmployees" v="Työntekijöitä ei ole vielä palkattu" />
         <e k="ui_selectionLineStats" v="%s · Kokemus %d · Luotettavuus %d · Uskollisuus %d" />
         <e k="ui_selectionLineWage" v="Kuukausipalkka: %s" />
-        <e k="ui_selectionLineJobs" v="Työt: %d · Work speed: %d%%" />
-        <e k="input_HP_SELECT_LEFT" v="Valitse työntekijä left" />
-        <e k="input_HP_SELECT_RIGHT" v="Valitse työntekijä right" />
+        <e k="ui_selectionLineJobs" v="Työt: %d · Työnopeus: %d%%" />
+        <e k="input_HP_SELECT_LEFT" v="Valitse edellinen työntekijä" />
+        <e k="input_HP_SELECT_RIGHT" v="Valitse seuraava työntekijä" />
         <e k="input_HP_SELECT_CONFIRM" v="Vahvista työntekijän valinta" />
-        <e k="input_HP_OPEN_APPLICANTS" v="Hakijat" />
-        <e k="input_HP_TRANSPORT_TOGGLE" v="kuljetus toggle" />
+        <e k="input_HP_TRANSPORT_MANAGE" v="Hallitse kuljetustehtäviä" />
+        <e k="input_HP_SALARY_RAISE_MANAGE" v="Hallitse palkankorotuspyyntöjä" />
         <e k="input_HP_SELECT_CANCEL" v="Peru työntekijän valinta" />
         <e k="ui_openWorkerView" v="Työntekijät" />
         <e k="ui_openApplicantView" v="Hakijat" />
@@ -84,16 +84,16 @@
         <e k="ui_noWorkersUpper" v="EI TYÖNTEKIJÖITÄ SAATAVILLA" />
         <e k="ui_noActiveWorkers" v="Työntekijöitä ei ole vielä palkattu" />
         <e k="ui_activeWorkerStatusVehicle" v="Tila: työssä olevat työntekijät (%s)" />
-        <e k="ui_activeWorkerStatusVehicleImplement" v="Tila: työssä olevat työntekijät (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="Tila: työntekijä työssä (%s) | Työkone/perävaunu: %s" />
         <e k="ui_activeWorkerActivityField" v="Tehtävä: %s | Pelto: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Ajoneuvo" />
         <e k="ui_activeWorkerUnknownField" v="tuntematon" />
-        <e k="ui_activeWorkerNoField" v="not field-bound" />
+        <e k="ui_activeWorkerNoField" v="ei sidottu peltoon" />
         <e k="ui_activityUnknown" v="tuntematon" />
         <e k="ui_activityFieldWork" v="peltotyö" />
         <e k="ui_activityTransport" v="kuljetus" />
-        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
-        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe henkilön %s kanssa" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s henkilön %s perässä" />
         <e k="ui_activityCultivating" v="kultivointi" />
         <e k="ui_activityPlowing" v="kyntö" />
         <e k="ui_activitySowing" v="kylvö" />
@@ -116,25 +116,26 @@
         <e k="ui_workersHeaderUpper" v="TYÖNTEKIJÖIDEN HALLINTA" />
         <e k="ui_instructionApplicant" v="ENTER: Palkkaa. ESC: Takaisin yhteenvetoon." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Irtisano." />
-        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="G: Myönnä korotus. N: Hylkää pyyntö." />
-        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
-        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
-        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
-        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
-        <e k="ui_training_already_done" v="%s has already attended training this month." />
-        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_instructionWorkerTransport" v="Hallitse kuljetusjärjestystä kuljetuspainikkeella ja kouluta työntekijää painamalla S." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Avoimet palkankorotuspyynnöt käsitellään Hallitse palkankorotuspyyntöjä -painikkeella." />
+        <e k="ui_instructionSwitchEntry" v="Valitse merkintä napsauttamalla; vieritä hiiren rullalla." />
+        <e k="ui_training_no_progress" v="Tällä työntekijällä ei vielä ole sopivaa oppimissuuntaa." />
+        <e k="ui_training_worker_busy" v="Työntekijä työskentelee parhaillaan eikä voi osallistua koulutukseen." />
+        <e k="ui_training_worker_sick" v="Työntekijä on sairaana eikä voi osallistua koulutukseen." />
+        <e k="ui_training_already_done" v="%s on jo osallistunut koulutukseen tässä kuussa." />
+        <e k="ui_training_started" v="%s aloittaa koulutuksen aiheesta %s kuukauden loppuun asti (%s)." />
+        <e k="ui_training_completed" v="%s on suorittanut koulutuksen aiheesta %s: %d%%–%d%%." />
         <e k="ui_noApplicantsDetail" v="Hakijoita ei ole tällä hetkellä saatavilla" />
         <e k="ui_noWorkersDetail" v="Työntekijöitä ei ole vielä palkattu" />
-        <e k="ui_entryZero" v="Merkintä 0 von 0" />
+        <e k="ui_entryZero" v="Merkintä 0/0" />
         <e k="ui_visibleRange" v="Näkyvissä %d-%d" />
         <e k="ui_allEntriesVisible" v="Kaikki merkinnät näkyvissä" />
-        <e k="ui_entryCounter" v="Merkintä %d von %d" />
+        <e k="ui_entryCounter" v="Merkintä %d/%d" />
         <e k="ui_monthlyLineStaff" v="Työntekijöitä palveluksessa: apulainen %d | asiantuntija %d | ammattilainen %d" />
         <e k="ui_monthlyLineApplicantsReady" v="Hakijoita markkinoilla: %d" />
         <e k="ui_monthlyLineApplicantsEmpty" v="Hakijoita ei ole tällä hetkellä saatavilla" />
         <e k="ui_monthlyLineNoWorkers" v="Työntekijöitä ei ole vielä palkattu" />
-        <e k="ui_monthlyLineAvailableWorkers" v="Saatavilla: %d von %d" />
+        <e k="ui_monthlyLineAvailableWorkers" v="Saatavilla: %d/%d" />
         <e k="ui_monthlyLinePayroll" v="Kuukausipalkka: %s" />
         <e k="ui_monthlyLineWorkStats" v="Työaika: %d työt | %s | Kuukausipalkka: %s" />
         <e k="ui_button_transport_assign" v="Määritä kuljetus" />
@@ -145,94 +146,347 @@
         <e k="ui_transportNoDriverAssigned" v="kuljetus: ei vielä." />
         <e k="ui_transportNoDriverAvailable" v="kuljetus: varattu." />
         <e k="ui_transportAutoAssigned" v="kuljetus: määritä kuljetus." />
-        <e k="ui_experienceGainSingle" v="%s: Kokemus +1. Kokemus: %d to %d" />
-        <e k="ui_experienceGainMultiple" v="%s: Kokemus +%d. Kokemus: %d to %d" />
-        <e k="ui_experienceMonthlyLimitReached" v="%s: Kokemus monthly limit reached." />
-        <e k="ui_loyaltyChanged" v="%s: Uskollisuus %s. Uskollisuus: %d to %d" />
-        <e k="ui_loyaltyWarningLow" v="%s: Uskollisuus low." />
-        <e k="ui_loyaltyWarningVeryLow" v="%s: Uskollisuus very low." />
+        <e k="ui_experienceGainSingle" v="%s: kokemus +1. Kokemus: %d → %d" />
+        <e k="ui_experienceGainMultiple" v="%s: kokemus +%d. Kokemus: %d → %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s: kuukausittainen kokemusraja on saavutettu." />
+        <e k="ui_loyaltyChanged" v="%s: lojaalius %s. Lojaalius: %d → %d" />
+        <e k="ui_loyaltyWarningLow" v="%s: alhainen lojaalius." />
+        <e k="ui_loyaltyWarningVeryLow" v="%s: erittäin alhainen lojaalius." />
         <e k="ui_loyaltyWarningCritical" v="%s: irtisanoutunut kuukauden loppuun." />
         <e k="ui_loyaltyResignationNotice" v="%s: irtisanoutunut kuukauden loppuun." />
-        <e k="ui_sicknessNotice" v="%s: sairas - cannot work today." />
-        <e k="ui_sicknessNoticeJobAborted" v="%s: sairas - current job cancelled." />
+        <e k="ui_sicknessNotice" v="%s: sairaana eikä voi työskennellä tänään." />
+        <e k="ui_sicknessNoticeJobAborted" v="%s: sairaana, nykyinen työ keskeytettiin." />
         <e k="ui_button_raise_grant" v="Myönnä korotus" />
         <e k="ui_button_raise_decline" v="Hylkää pyyntö" />
-        <e k="ui_salaryRaisePendingLine" v="Palkankorotus: %s statt %s" />
-        <e k="ui_salaryRaiseRequestNotification" v="%s requests palkankorotus after reaching %s: %s." />
-        <e k="ui_salaryRaiseRequestHistory" v="Palkankorotus: %s requests %s." />
+        <e k="ui_button_salary_manage_long" v="Hallitse palkankorotuspyyntöjä" />
+        <e k="ui_salaryRequestsTitle" v="Hallitse palkankorotuspyyntöjä" />
+        <e k="ui_salaryRequestsIntro" v="Kaikki avoimet palkankorotuspyynnöt näkyvät tässä. Valitse työntekijä ja päätä, hyväksytäänkö vai hylätäänkö pyyntö." />
+        <e k="ui_salaryRequestsHeaderEmployee" v="Työntekijä" />
+        <e k="ui_salaryRequestsHeaderCurrent" v="Nykyinen palkka" />
+        <e k="ui_salaryRequestsHeaderRequested" v="Pyydetty palkka" />
+        <e k="ui_salaryRequestsNoRequests" v="Ei avoimia palkankorotuspyyntöjä." />
+        <e k="ui_salaryRequestsControls" v="Nuoli ylös/alas: valitse | Enter: hyväksy | Välilyönti: hylkää" />
+        <e k="ui_salaryRaisePendingLine" v="Palkankorotus: %s aiemman %s sijaan" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s pyytää tason %s saavutettuaan palkaksi %s." />
+        <e k="ui_salaryRaiseRequestHistory" v="Palkankorotus: %s pyytää %s." />
         <e k="ui_salaryRaiseGranted" v="Myönnä korotus: %s - %s." />
         <e k="ui_salaryRaiseDeclined" v="Hylkää pyyntö: %s." />
-        <e k="ui_salaryRaisePendingPenalty" v="Open palkankorotus: %s affects uskollisuus: %s." />
-        <e k="ui_salaryRaiseGrantedReputation" v="Fair palkankorotus: %s Työnantajan maine" />
+        <e k="ui_salaryRaisePendingPenalty" v="Avoin palkankorotus: %s vaikuttaa lojaaliuteen %s." />
+        <e k="ui_salaryRaiseGrantedReputation" v="Oikeudenmukainen palkankorotus: työnantajan maine %s" />
         <e k="ui_hpIngameMenuPrev" v="Edellinen valikko" />
         <e k="ui_hpIngameMenuNext" v="Seuraava valikko" />
-        <e k="ui_status_training" v="in training" />
-        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
-        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
-        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
-        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
-        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_status_training" v="koulutuksessa" />
+        <e k="ui_training_worker_in_training" v="Työntekijä on jo koulutuksessa kuukauden loppuun asti." />
+        <e k="ui_training_not_first_day" v="Koulutuksen voi aloittaa vain kuukauden ensimmäisenä päivänä." />
+        <e k="ui_training_not_single_day_deadline" v="Kun kuukaudessa on 1 päivä, koulutuksen voi aloittaa vain ensimmäisenä päivänä ennen klo 12.00." />
+        <e k="ui_training_line_single_day_deadline" v="Koulutus: 1 päivä/kuukausi vain klo 12.00 asti · %s %s · viimeksi: %s" />
+        <e k="ui_training_already_done_year" v="%s on jo osallistunut koulutukseen tänä vuonna." />
         <e k="ui_training_last_none" v="-" />
-        <e k="ui_training_unknown" v="unknown" />
-        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
-        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
-        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
-        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
-        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
-        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
-        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
-
-        <e k="ui_hpSetting_on" v="On"/>
-
-        <e k="ui_hpSetting_off" v="Off"/>
-
-        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
-
-        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
-
-        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
-
-        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
-
-        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
-
-        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
-
-        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
-
-        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
-
-        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
-
-        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
-
-        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
-
-        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
-        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
-
-        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
-
-        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
-
-        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
-
-        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
-
-        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
-
-        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
-
-        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
-
-        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
-
-        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
-
-        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+        <e k="ui_training_unknown" v="tuntematon" />
+        <e k="ui_training_line_active" v="Koulutus: %s kuukauden loppuun asti · viimeksi: %s" />
+        <e k="ui_training_line_no_direction" v="Koulutus: ei oppimissuuntaa · viimeksi: %s" />
+        <e k="ui_training_line_year_blocked" v="Koulutus: vasta ensi vuonna · viimeksi: %s" />
+        <e k="ui_training_line_first_day" v="Koulutus: vain ensimmäisenä päivänä · %s %s · viimeksi: %s" />
+        <e k="ui_training_line_busy" v="Koulutus: ei käytettävissä, työskentelee · %s %s · viimeksi: %s" />
+        <e k="ui_training_line_sick" v="Koulutus: ei käytettävissä, sairaana · %s %s · viimeksi: %s" />
+        <e k="ui_training_line_possible" v="Koulutus: käytettävissä %s, %s · viimeksi: %s" />
+        <e k="ui_hpSetting_on" v="Päällä" />
+        <e k="ui_hpSetting_off" v="Pois" />
+        <e k="ui_hpSetting_section" v="HENKILÖSTÖHALLINTO" />
+        <e k="ui_hpSetting_gameplayEffects" v="Henkilöstöhallinto: pelivaikutukset" />
+        <e k="ui_hpSetting_experienceEffects" v="Henkilöstöhallinto: kokemuksen vaikutukset" />
+        <e k="ui_hpSetting_speedEffect" v="Henkilöstöhallinto: työnopeus" />
+        <e k="ui_hpSetting_wearEffect" v="Henkilöstöhallinto: kuluminen" />
+        <e k="ui_hpSetting_consumablesEffect" v="Henkilöstöhallinto: materiaalit" />
+        <e k="ui_hpSetting_fuelEffect" v="Henkilöstöhallinto: polttoaineenkulutus" />
+        <e k="ui_hpSetting_reliabilityEffects" v="Henkilöstöhallinto: luotettavuus" />
+        <e k="ui_hpSetting_personnelEffects" v="Henkilöstöhallinto: henkilöstövaikutukset" />
+        <e k="ui_hpSetting_loyaltyEffects" v="Henkilöstöhallinto: lojaaliuden muutokset" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Henkilöstöhallinto: yötyö" />
+        <e k="ui_hpSetting_economicEffects" v="Henkilöstöhallinto: talous" />
+        <e k="ui_hpSetting_individualWages" v="Henkilöstöhallinto: yksilölliset palkat" />
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Ottaa käyttöön tai poistaa käytöstä kaikki henkilöstöhallinnon pelivaikutukset. Näytetyt arvot, tallennetut tiedot ja historia säilyvät käytettävissä." />
+        <e k="ui_hpSetting_experienceEffects_desc" v="Määrittää, vaikuttavatko työntekijöiden kokemus ja erikoistumiset aktiivisten apulaisten työhön." />
+        <e k="ui_hpSetting_speedEffect_desc" v="Määrittää, vaikuttavatko kokemus ja sopivat erikoistumiset työnopeuteen." />
+        <e k="ui_hpSetting_wearEffect_desc" v="Määrittää, vaikuttavatko kokemus ja sopivat erikoistumiset ajoneuvojen ja työkoneiden lisäkulumiseen." />
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Määrittää, vaikuttavatko kokemus ja sopivat erikoistumiset siementen, lannoitteen, rikkakasviaineen, lietteen, mädätteen, lannan ja vastaavien materiaalien kulutukseen." />
+        <e k="ui_hpSetting_fuelEffect_desc" v="Määrittää, vaikuttavatko kokemus ja sopivat erikoistumiset polttoaineenkulutukseen." />
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Määrittää, voiko työntekijän luotettavuus aiheuttaa lyhyitä suorituskyvyn laskuja ja sairauspäiviä." />
+        <e k="ui_hpSetting_personnelEffects_desc" v="Ottaa käyttöön tai poistaa käytöstä henkilöstöön liittyvät vaikutukset, kuten lojaaliuden kehittymisen ja yötyön vaikutukset." />
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Määrittää, muuttuuko työntekijän lojaalius palkanmaksun, yötyön tai työnantajan maineen kaltaisten tapahtumien seurauksena." />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Määrittää, vaikuttaako yötyö lojaaliuteen ja työnantajan maineeseen." />
+        <e k="ui_hpSetting_economicEffects_desc" v="Määrittää, käytetäänkö yksilöllisiä talouslaskelmia. Jos ne poistetaan käytöstä, käytetään neutraaleja vakiopalkkoja." />
+        <e k="ui_hpSetting_individualWages_desc" v="Määrittää, saavatko työntekijät rooliin, kokemukseen, luotettavuuteen ja erikoistumisiin perustuvan yksilöllisen palkan." />
+        <e k="ui_hpSetting_groupWork" v="TYÖSUORITUS" />
+        <e k="ui_hpSetting_groupPersonnel" v="HENKILÖSTÖN KEHITYS" />
+        <e k="ui_hpSetting_groupEconomy" v="TALOUS JA PALKAT" />
+        <e k="ui_hpSetting_standardWage" v="Vakio kuukausipalkka" />
+        <e k="ui_hpSetting_standardWage_desc" v="Määrittää peruskuukausipalkan, jota käytetään, kun yksilölliset palkat ovat pois käytöstä. Arvo tulee voimaan seuraavassa palkanlaskennassa." />
+        <e k="ui_hpSetting_standardWageInvalid" v="Syötä arvo väliltä %d–%d. Summa pyöristetään lähimpään kymmeneen." />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Avaa henkilöstöhallinto" />
+        <e k="ui_pmMenuPageOverview" v="Yleiskatsaus" />
+        <e k="ui_pmMenuPageApplicants" v="Hakijat" />
+        <e k="ui_pmMenuPageEmployees" v="Työntekijät" />
+        <e k="ui_pmMenuPageTraining" v="Koulutus" />
+        <e k="ui_pmMenuPageAssignments" v="Tehtäväjaot" />
+        <e k="ui_pmMenuPrevPerson" v="Edellinen henkilö" />
+        <e k="ui_pmMenuNextPerson" v="Seuraava henkilö" />
+        <e k="ui_pmPersonCounter" v="%d/%d" />
+        <e k="ui_pmMenuNoPermission" v="Sinulla ei ole oikeutta tehdä tämän tilan henkilöstöpäätöksiä." />
+        <e k="ui_pmConfirmHire" v="Palkataanko %s varmasti?" />
+        <e k="ui_pmConfirmDismiss" v="Irtisanotaanko %s varmasti?" />
+        <e k="ui_pmConfirmTraining" v="Aloitetaanko henkilön %s koulutus?" />
+        <e k="ui_pmProfileHeader" v="PROFIILI" />
+        <e k="ui_pmHistoryHeader" v="HISTORIA" />
+        <e k="ui_button_train" v="Kouluta" />
+        <e k="ui_pmStatusApplicant" v="Hakija" />
+        <e k="ui_pmBirthLine" v="Syntynyt: %s" />
+        <e k="ui_pmOriginLine" v="Ammatillinen tausta: %s" />
+        <e k="ui_pmStatsLine" v="Kokemus %d · Luotettavuus %d · Lojaalius %d" />
+        <e k="ui_pmStatExperience" v="Kokemus" />
+        <e k="ui_pmStatReliability" v="Luotettavuus" />
+        <e k="ui_pmStatLoyalty" v="Lojaalius" />
+        <e k="ui_pmWageLine" v="Palkka: %s" />
+        <e k="ui_pmStatusLine" v="Tila: %s" />
+        <e k="ui_pmOrigin1" v="maaseudun perhetila" />
+        <e k="ui_pmOrigin2" v="pieni maitotila" />
+        <e k="ui_pmOrigin3" v="maatalousurakointiyritys" />
+        <e k="ui_pmOrigin4" v="kasvinviljelytila" />
+        <e k="ui_pmOrigin5" v="sekamuotoinen maatila" />
+        <e k="ui_pmStrengthReliable" v="rauhallinen ja luotettava työskentelytapa" />
+        <e k="ui_pmStrengthTransport" v="järjestelmällinen kuljetus ja pihalogistiikka" />
+        <e k="ui_pmStrengthHarvest" v="huolellinen sadonkorjuutyö" />
+        <e k="ui_pmStrengthSowing" v="tarkka kylvö ja pellon valmistelu" />
+        <e k="ui_pmApplicantProfileText" v="%s hakee tehtävään ammatillisella taustalla alalta %s. Nykyinen profiili viittaa ominaisuuteen %s. Arvot kuvaavat hakijaprofiilin tämänhetkistä tilaa." />
+        <e k="ui_pmWorkerProfileText" v="%s on kuulunut tilaan ajankohdasta %s lähtien. Kehitys viittaa ominaisuuteen %s. Lisää merkintöjä syntyy tehtävistä, koulutuksista ja henkilöstöpäätöksistä." />
+        <e k="ui_pmHistoryJobs" v="Suoritetut tehtävät: %d." />
+        <e k="ui_pmHistoryWorkTime" v="Kokonais työaika: %s." />
+        <e k="ui_pmHistoryTrainingActive" v="Nykyinen koulutus: %s." />
+        <e k="ui_pmHistoryTrainingLast" v="Viimeisin koulutus: vuosi %d." />
+        <e k="ui_pmHistoryTrainingNone" v="Koulutusta ei ole vielä kirjattu." />
+        <e k="ui_pmHistoryTransportEnabled" v="Merkitty kuljetustehtäviin." />
+        <e k="ui_pmHistoryTransportDisabled" v="Ei merkitty kuljetustehtäviin." />
+        <e k="ui_pmMenuPageSettings" v="Asetukset" />
+        <e k="ui_pmSettingsInfo" v="Nämä asetukset ovat tallennuskohtaisia." />
+        <e k="ui_pmSettingsHostOnly" v="Moninpelissä näitä asetuksia voi muuttaa vain palvelimella." />
+        <e k="ui_pmSettingsSectionGameplay" v="PELIVAIKUTUKSET" />
+        <e k="ui_pmSettingsSectionPersonnel" v="HENKILÖSTÖ" />
+        <e k="ui_pmSettingsSectionEconomic" v="TALOUS" />
+        <e k="ui_button_transport_assign_long" v="Määritä kuljetustehtäviä" />
+        <e k="ui_button_transport_manage_long" v="Hallitse kuljetustehtäviä" />
+        <e k="ui_transportPriorityTitle" v="Kuljetusprioriteetti" />
+        <e k="ui_transportPriorityIntro" v="Valitse kuljetustehtäviin osallistuvat työntekijät ja järjestys, jossa heidän saatavuutensa tarkistetaan." />
+        <e k="ui_transportPriorityHeaderPriority" v="Prioriteetti" />
+        <e k="ui_transportPriorityHeaderEmployee" v="Työntekijä" />
+        <e k="ui_transportPriorityHeaderStatus" v="Tila" />
+        <e k="ui_transportPriorityHeaderEnabled" v="Kuljetus" />
+        <e k="ui_transportPriorityActive" v="Aktiivinen" />
+        <e k="ui_transportPriorityInactive" v="Ei määritetty" />
+        <e k="ui_transportPriorityMoveUp" v="Siirrä ylös" />
+        <e k="ui_transportPriorityMoveDown" v="Siirrä alas" />
+        <e k="ui_transportPriorityToggle" v="Ota käyttöön/pois" />
+        <e k="ui_transportPriorityApply" v="Käytä" />
+        <e k="ui_transportPriorityCancel" v="Peruuta" />
+        <e k="ui_transportPrioritySaved" v="Kuljetusjärjestys tallennettu." />
+        <e k="ui_transportPriorityNoWorkers" v="Työntekijöitä ei ole." />
+        <e k="ui_transportPriorityControls" v="↑/↓: valitse   A/D: siirrä   Välilyönti: päälle/pois   Enter: käytä" />
+        <e k="ui_button_transport_remove_long" v="Poista kuljetustehtäviä" />
+        <e k="ui_helperPersonnelMenuOverview" v="Yleiskatsaus" />
+        <e k="ui_helperPersonnelMenuApplicants" v="Hakijat" />
+        <e k="ui_helperPersonnelMenuEmployees" v="Työntekijät" />
+        <e k="ui_helperPersonnelMenuTraining" v="Koulutus" />
+        <e k="ui_helperPersonnelMenuSettings" v="PELI-ASETUKSET" />
+        <e k="ui_pmBirthDateAge" v="%s (%d vuotta)" />
+        <e k="ui_pmOrigin6" v="logistiikkayritys" />
+        <e k="ui_pmOrigin7" v="maatalouskonekorjaamo" />
+        <e k="ui_pmOrigin8" v="toimistotyö" />
+        <e k="ui_status_retirementPending" v="jää eläkkeelle kuukauden lopussa" />
+        <e k="ui_retirementNotice" v="%s jää eläkkeelle kuukauden lopussa." />
+        <e k="ui_pmTrainingIntro" v="Erikoistumiset parantavat työntekijän suorituskykyä kyseisessä oppimiskategoriassa. Koulutus kestää kuluvan kuukauden loppuun, eikä työntekijä ole sinä aikana käytettävissä töihin. Oppimisen edistyminen lisätään vasta koulutuksen päätyttyä. Kaikissa kategorioissa ei ole koulutusta tarjolla joka kuukausi. Koulutus voi olla tavallista hintaa edullisempi tai kalliimpi. Kukin työntekijä voi osallistua vain yhteen koulutukseen maatalousvuodessa maaliskuusta helmikuuhun. Työntekijä voi saada enintään kaksi erikoistumista. Valitse haluttu oppimiskategoria." />
+        <e k="ui_pmTrainingCategoryHeader" v="Oppimiskategoria" />
+        <e k="ui_pmTrainingProgressHeader" v="Edistyminen kohti erikoistumista" />
+        <e k="ui_pmTrainingRunning" v="koulutus käynnissä" />
+        <e k="ui_pmTrainingSelectCategory" v="Valitse ensin koulutuskategoria" />
+        <e k="ui_pmTrainingConfirm" v="Aloitetaanko henkilölle %s koulutus kategoriassa %s?" />
+        <e k="ui_training_line_no_capacity" v="Koulutus: kaksi erikoistumista saavutettu · viimeksi: %s" />
+        <e k="ui_training_line_single_day_deadline_select" v="Koulutus: 1 päivä/kuukausi vain klo 12.00 asti · valitse kategoria koulutusvalikossa · viimeksi: %s" />
+        <e k="ui_training_line_first_day_select" v="Koulutus: vain ensimmäisenä päivänä · valitse kategoria koulutusvalikossa · viimeksi: %s" />
+        <e k="ui_training_line_busy_select" v="Koulutus: ei mahdollinen työskentelyn aikana · viimeksi: %s" />
+        <e k="ui_training_line_sick_select" v="Koulutus: ei mahdollinen sairauden aikana · viimeksi: %s" />
+        <e k="ui_training_line_select_category" v="Koulutus: valitse kategoria koulutusvalikossa · viimeksi: %s" />
+        <e k="ui_pmTrainingCostHeader" v="Hinta" />
+        <e k="ui_pmTrainingAdjustmentHeader" v="Alennus/lisäkustannus" />
+        <e k="ui_pmTrainingNoPlaces" v="ei vapaita paikkoja tällä hetkellä" />
+        <e k="ui_pmTrainingNoPlacesMessage" v="Tällä koulutuskurssilla ei ole tällä hetkellä vapaita paikkoja." />
+        <e k="ui_pmProfileIntro1" v="%s työskenteli aiemmin %s ja on ollut tilalla %d kuukautta." />
+        <e k="ui_pmProfileIntro2" v="%s tuo kokemusta aiemmasta työstä %s ja on kuulunut tiimiin %d kuukautta." />
+        <e k="ui_pmProfileExperience1_1" v="%s:llä on toistaiseksi hyvin vähän käytännön kokemusta, ja monia työvaiheita on vielä vahvistettava." />
+        <e k="ui_pmProfileExperience1_2" v="%s on päivittäisessä työssä edelleen selvästi perehdytysvaiheessa." />
+        <e k="ui_pmProfileExperience2_1" v="%s on saanut jonkin verran käytännön kokemusta, mutta tarvitsee yhä tukea vaativammissa tehtävissä." />
+        <e k="ui_pmProfileExperience2_2" v="%s hallitsee perusteet yhä varmemmin, vaikka useilta alueilta puuttuu vielä rutiinia." />
+        <e k="ui_pmProfileExperience3_1" v="%s:llä on vankka kokemus ja hän hoitaa useimmat tavalliset tehtävät itsenäisesti." />
+        <e k="ui_pmProfileExperience3_2" v="%s työskentelee päivittäisessä toiminnassa rutiininomaisesti ja sopeutuu hyvin vaihtuviin tehtäviin." />
+        <e k="ui_pmProfileExperience4_1" v="%s tuo mukanaan laajan kokemuksen ja työskentelee varmasti myös vaativissa tehtävissä." />
+        <e k="ui_pmProfileExperience4_2" v="%s hallitsee vuosien käytännön ansiosta monimutkaiset työt useimmiten turvallisesti ja itsenäisesti." />
+        <e k="ui_pmProfileExperience5_1" v="%s kuuluu tilan vahvimpiin asiantuntijoihin ja hänellä on poikkeuksellisen paljon kokemusta." />
+        <e k="ui_pmProfileExperience5_2" v="%s on yksi tilan kokeneimmista ja monipuolisimmista tiimin jäsenistä." />
+        <e k="ui_pmProfileReliability1_1" v="%s:n työpanosta on tällä hetkellä vaikea suunnitella luotettavasti; sopimuksia ja työvaiheita ei usein noudateta odotetusti." />
+        <e k="ui_pmProfileReliability1_2" v="%s osoittaa selviä puutteita täsmällisyydessä, sopimusten noudattamisessa ja huolellisessa toteutuksessa." />
+        <e k="ui_pmProfileReliability2_1" v="%s ei työskentele tasaisen luotettavasti, ja tärkeissä tehtävissä häntä tulisi seurata tarkasti." />
+        <e k="ui_pmProfileReliability2_2" v="%s noudattaa yleensä sopimuksia, mutta luotettavuudessa esiintyy edelleen huomattavia vaihteluita." />
+        <e k="ui_pmProfileReliability3_1" v="%s työskentelee kokonaisuutena asianmukaisesti ja noudattaa sopimuksia useimmiten." />
+        <e k="ui_pmProfileReliability3_2" v="%s on päivittäisessä toiminnassa yleensä luotettava ja helposti suunniteltavissa." />
+        <e k="ui_pmProfileReliability4_1" v="%s on luotettava ja helposti suunniteltava tiimin jäsen." />
+        <e k="ui_pmProfileReliability4_2" v="%s noudattaa sopimuksia luotettavasti myös pitkissä tai vaativissa tehtävissä." />
+        <e k="ui_pmProfileReliability5_1" v="%s on poikkeuksellisen luotettava ja antaa tilalle suuren suunnitteluvarmuuden." />
+        <e k="ui_pmProfileReliability5_2" v="%s noudattaa sopimuksia lähes poikkeuksetta ja suorittaa tehtävät erittäin huolellisesti." />
+        <e k="ui_pmProfileLoyalty1_1" v="%s osoittaa tällä hetkellä vain vähäistä kiintymystä tilaan; muutos voi tapahtua milloin tahansa." />
+        <e k="ui_pmProfileLoyalty1_2" v="%s vaikuttaa olevan vain heikosti sidoksissa tilaan ja saattaa lähteä nopeasti sopivan tarjouksen saatuaan." />
+        <e k="ui_pmProfileLoyalty2_1" v="%s:n yhteys tilaan on toistaiseksi rajallinen, joten tuleva kehitys on epävarmaa." />
+        <e k="ui_pmProfileLoyalty2_2" v="%s osoittaa melko vähäistä sitoutumista eikä ole vielä muodostanut vahvaa yhteyttä tilaan." />
+        <e k="ui_pmProfileLoyalty3_1" v="%s on yleensä lojaali tilalle, mutta ei ole vielä erityisen vahvasti kiinnittynyt siihen." />
+        <e k="ui_pmProfileLoyalty3_2" v="%s on kehittänyt vakaan suhteen tilaan ja osoittaa hyvää sitoutumista." />
+        <e k="ui_pmProfileLoyalty4_1" v="%s tuntee selvästi kuuluvansa tilaan ja osoittaa vahvaa sitoutumista." />
+        <e k="ui_pmProfileLoyalty4_2" v="%s on rakentanut vahvan siteen tilaan ja pysyy todennäköisesti pitkään." />
+        <e k="ui_pmProfileLoyalty5_1" v="%s on poikkeuksellisen vahvasti sidoksissa tilaan ja kuuluu sen lojaaleimpiin tiimin jäseniin." />
+        <e k="ui_pmProfileLoyalty5_2" v="%s osoittaa erittäin vahvaa ja vakiintunutta pitkäaikaista yhteyttä tilaan." />
+        <e k="ui_pmProfileSpecializations" v="Ammatilliset vahvuudet näkyvät erityisesti alueella %s." />
+        <e k="ui_pmProfileLearningProgress" v="Suurin oppimisedistys on tällä hetkellä alueella %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization" v="Selkeää ammatillista erikoistumista ei ole vielä muodostunut." />
+        <e k="ui_pmProfileActivity" v="%s on tähän mennessä suorittanut %d tehtävää ja %d koulutusta." />
+        <e k="ui_pmProfileNoActivity" v="%s kerää vielä ensimmäisiä kokemuksia tilalla; tehtäviä tai koulutuksia ei ole vielä suoritettu." />
+        <e k="ui_pmChronicleImportedEmployment" v="Nykyinen työsuhde lisättiin henkilökohtaiseen kronikkaan." />
+        <e k="ui_pmChronicleHired" v="Työntekijä palkattiin." />
+        <e k="ui_pmChronicleJobStarted" v="Tehtävä aloitettu." />
+        <e k="ui_pmChronicleJobCompleted" v="Tehtävä suoritettu." />
+        <e k="ui_pmChronicleSpecialization" v="Erikoistuminen saavutettu." />
+        <e k="ui_pmChronicleTrainingStarted" v="Koulutus aloitettu." />
+        <e k="ui_pmChronicleTrainingCompleted" v="Koulutus suoritettu." />
+        <e k="ui_pmChronicleSickness" v="Sairauteen liittyvä poissaolo." />
+        <e k="ui_pmChronicleDismissal" v="Tila antoi irtisanomisen." />
+        <e k="ui_pmChronicleResignation" v="Irtisanoutuminen ilmoitettu kuukauden loppuun." />
+        <e k="ui_pmChronicleRetirement" v="Eläkkeelle jääminen ilmoitettu kuukauden loppuun." />
+        <e k="ui_pmChronicleEmploymentEnded" v="Työsuhde päättyi." />
+        <e k="ui_pmChronicleSalaryRequest" v="Palkankorotusta pyydetty." />
+        <e k="ui_pmChronicleSalaryGranted" v="Palkankorotus myönnetty." />
+        <e k="ui_pmChronicleSalaryDeclined" v="Palkankorotuspyyntö hylätty." />
+        <e k="ui_pmProfileEmployeeMale" v="Työntekijä" />
+        <e k="ui_pmProfileEmployeeFemale" v="Työntekijä" />
+        <e k="ui_pmProfilePronounMale" v="Hän" />
+        <e k="ui_pmProfilePronounFemale" v="Hän" />
+        <e k="ui_pmProfileBackgroundFamilyFarm" v="maaseudun perhetilalla" />
+        <e k="ui_pmProfileBackgroundDairyFarm" v="pienellä maitotilalla" />
+        <e k="ui_pmProfileBackgroundContractor" v="maatalousurakoitsijalla" />
+        <e k="ui_pmProfileBackgroundArableFarm" v="kasvinviljelytilalla" />
+        <e k="ui_pmProfileBackgroundMixedFarm" v="sekamuotoisella maatilalla" />
+        <e k="ui_pmProfileBackgroundLogistics" v="logistiikkayrityksessä" />
+        <e k="ui_pmProfileBackgroundWorkshop" v="maatalouskonekorjaamossa" />
+        <e k="ui_pmProfileBackgroundOffice" v="toimistotyössä" />
+        <e k="ui_pmProfileIntro3" v="%s on nyt työskennellyt tilalla %d kuukautta ja oli aiemmin töissä %s." />
+        <e k="ui_pmProfileExperience1_3" v="%s ymmärtää perusprosessit, mutta tarvitsee monissa tehtävissä edelleen ohjausta ja harjoittelua." />
+        <e k="ui_pmProfileExperience2_3" v="%s selviytyy tavallisista tehtävistä yhä paremmin, mutta monimutkaisempia työvaiheita on vielä syvennettävä." />
+        <e k="ui_pmProfileExperience3_3" v="%s:llä on luotettava ammatillinen perusta ja häntä voidaan käyttää monenlaisissa tehtävissä." />
+        <e k="ui_pmProfileExperience4_3" v="%s tuntee käytännön kokemuksesta monet tilan prosessit ja pystyy ottamaan vastaan vaikeampia tehtäviä." />
+        <e k="ui_pmProfileExperience5_3" v="%s:llä on poikkeuksellisen laaja asiantuntemus ja hän hoitaa myös erittäin vaativat tehtävät varmasti." />
+        <e k="ui_pmProfileReliability1_3" v="%s aiheuttaa toistuvasti epävarmuutta työn suunnitteluun epäluotettavan suorituksensa vuoksi." />
+        <e k="ui_pmProfileReliability2_3" v="%s pystyy hoitamaan rutiinitehtäviä, mutta ei ole vielä johdonmukaisesti luotettava vaativissa töissä." />
+        <e k="ui_pmProfileReliability3_3" v="%s suorittaa useimmat tehtävät tunnollisesti, vaikka satunnaisia vaihteluita esiintyy yhä." />
+        <e k="ui_pmProfileReliability4_3" v="%s työskentelee johdonmukaisesti ja huolellisesti, vain vähäisin poissaoloin tai poikkeamin." />
+        <e k="ui_pmProfileReliability5_3" v="%s pysyy poikkeuksellisen luotettavana ja tasaisena myös vaikeissa tehtävissä." />
+        <e k="ui_pmProfileLoyalty1_3" v="%s näyttää pitävän työtä enemmän lyhytaikaisena ratkaisuna kuin pysyvänä tehtävänä." />
+        <e k="ui_pmProfileLoyalty2_3" v="%s pysyy tilalla, mutta pitkäaikaista jäsenyyttä ei vielä voida pitää itsestään selvänä." />
+        <e k="ui_pmProfileLoyalty3_3" v="%s vaikuttaa viihtyvän tiimissä, vaikka yhteys tilaan voi vielä vahvistua." />
+        <e k="ui_pmProfileLoyalty4_3" v="%s samaistuu vahvasti tilaan ja seisoo lojaalisti yrityksen takana." />
+        <e k="ui_pmProfileLoyalty5_3" v="%s samaistuu tilaan erityisen vahvasti ja pysyy todennäköisesti pysyvästi sitoutuneena." />
+        <e k="ui_pmProfileSpecializations2" v="%s on erikoistunut pääasiassa alueeseen %s." />
+        <e k="ui_pmProfileSpecializations3" v="%s osoittaa erityisiä vahvuuksia alueella %s." />
+        <e k="ui_pmProfileLearningProgress2" v="%s kehittyy tällä hetkellä erityisen hyvin alueella %s (%d %%)." />
+        <e k="ui_pmProfileLearningProgress3" v="%s on tähän mennessä saavuttanut suurimman oppimisedistyksen alueella %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization2" v="%s ei ole vielä kehittänyt kiinteää erikoistumista." />
+        <e k="ui_pmProfileNoSpecialization3" v="Henkilön %s ammatillinen suunta on vielä avoin." />
+        <e k="ui_pmProfileActivity2" v="Tähänastiseen aikaan tilalla sisältyy %d suoritettua tehtävää ja %d koulutusta." />
+        <e k="ui_pmProfileActivity3" v="%s on tähän mennessä suorittanut %d tehtävää ja %d koulutusta." />
+        <e k="ui_pmProfileNoActivity2" v="Henkilön %s käytännön kehitys tilalla on vasta alkamassa." />
+        <e k="ui_pmProfileNoActivity3" v="%s ei ole vielä suorittanut tehtävää tai osallistunut koulutukseen." />
+        <e k="ui_hpSetting_toggle" v="Vaihda" />
+        <e k="ui_worker_status_line" v="Tila: %s" />
+        <e k="ui_pmApplicantProfileIntro" v="%s työskenteli aiemmin %s." />
+        <e k="ui_pmApplicantProfileMarketNew" v="Hakemus on uusi markkinoilla tässä kuussa." />
+        <e k="ui_pmApplicantProfileMarketOneMonth" v="Hakemus on ollut markkinoilla yhden kuukauden." />
+        <e k="ui_pmApplicantProfileMarketMonths" v="Hakemus on ollut markkinoilla %d kuukautta." />
+        <e k="ui_pmApplicantProfileAge1" v="%d-vuotiaana työura on vielä alkuvaiheessa. Kehityspotentiaalia on paljon." />
+        <e k="ui_pmApplicantProfileAge2" v="%d-vuotiaana ammatillinen kehitys on vielä rakentumassa ja voi vahvistua huomattavasti." />
+        <e k="ui_pmApplicantProfileAge3" v="%d-vuotiaana taustalla on jo vakiintunut työura. Kokemuksen hyöty maataloudessa riippuu aiemmasta urasta." />
+        <e k="ui_pmApplicantProfileAge4" v="%d-vuotiaana voidaan odottaa laajaa yleistä työkokemusta, mutta se ei automaattisesti tarkoita maatalouskäytäntöä." />
+        <e k="ui_pmApplicantProfileExperience1" v="Käytännön maatalouskokemus on vielä hyvin vähäinen. Perusteellinen perehdytys on tarpeen." />
+        <e k="ui_pmApplicantProfileExperience2" v="Maatalouden perusteet ovat hallussa, mutta vaativammista tehtävistä puuttuu vielä rutiinia." />
+        <e k="ui_pmApplicantProfileExperience3" v="Nykyinen kokemus antaa hyvän pohjan tavallisiin töihin, vaikka kaikki osa-alueet eivät vielä suju varmasti." />
+        <e k="ui_pmApplicantProfileExperience4" v="Maatalouskokemus on selvästi kehittynyt ja mahdollistaa monipuolisen käytön." />
+        <e k="ui_pmApplicantProfileExperience5" v="Kokemus on poikkeuksellisen korkealla tasolla ja antaa valmiudet vaativiinkin tehtäviin." />
+        <e k="ui_pmApplicantProfileReliability1" v="Luotettavuusarvo osoittaa selviä riskejä suunnittelussa, sopimusten noudattamisessa ja huolellisessa toteutuksessa." />
+        <e k="ui_pmApplicantProfileReliability2" v="Luotettavuus vaihtelee vielä. Tärkeitä tehtäviä on seurattava tarkasti." />
+        <e k="ui_pmApplicantProfileReliability3" v="Luotettavuus on hyvällä tasolla ja mahdollistaa yleensä ennakoitavan suunnittelun." />
+        <e k="ui_pmApplicantProfileReliability4" v="Korkea luotettavuus viittaa tasaiseen, huolelliseen ja helposti suunniteltavaan työskentelyyn." />
+        <e k="ui_pmApplicantProfileReliability5" v="Poikkeuksellisen korkea luotettavuus tarjoaa erittäin suuren suunnitteluvarmuuden." />
+        <e k="ui_pmApplicantProfileLoyalty1" v="Matala lojaalisuus viittaa vain heikkoon sitoutumiseen tulevaan työnantajaan." />
+        <e k="ui_pmApplicantProfileLoyalty2" v="Sitoutuminen on vielä varovaista. Pitkäaikaisen siteen on ensin kehityttävä." />
+        <e k="ui_pmApplicantProfileLoyalty3" v="Lojaalisuus on vakaalla keskitasolla ja tarjoaa hyvän pohjan pidempiaikaiselle yhteistyölle." />
+        <e k="ui_pmApplicantProfileLoyalty4" v="Korkea lojaalisuus viittaa vahvaan haluun pysyä tilalla pitkällä aikavälillä." />
+        <e k="ui_pmApplicantProfileLoyalty5" v="Poikkeuksellisen korkea lojaalisuus osoittaa erityisen vahvaa halua pitkäaikaiseen sitoutumiseen." />
+        <e k="ui_pmHistoryColumnCareer" v="Aiempi kehitys" />
+        <e k="ui_pmHistoryColumnRecent" v="Viimeisimmät tapahtumat" />
+        <e k="ui_pmHistoryColumnTotals" v="Yhteensä" />
+        <e k="ui_pmHistoryNoRecord" v="ei merkintää" />
+        <e k="ui_pmHistoryDateFormat" v="Päivä %d · %d/%d" />
+        <e k="ui_pmHistorySalaryAccepted" v="hyväksytty" />
+        <e k="ui_pmHistorySalaryDeclined" v="hylätty" />
+        <e k="ui_pmHistorySalaryPending" v="avoin" />
+        <e k="ui_pmHistorySalaryUnresolved" v="päätöstä ei kirjattu" />
+        <e k="ui_pmHistoryAbortSickness" v="sairaus" />
+        <e k="ui_pmHistoryAbortUnreliability" v="epäluotettavuus" />
+        <e k="ui_pmHistoryAbortOther" v="muu syy" />
+        <e k="ui_pmHistoryLastSickness" v="Viimeksi sairaana: %s" />
+        <e k="ui_pmHistoryLastSalaryRequest" v="Viimeisin palkkapyyntö: %s · %s" />
+        <e k="ui_pmHistoryLastAbort" v="Viimeisin keskeytys: %s · %s" />
+        <e k="ui_pmHistoryTotalSickness" v="Sairauspäivät: %d" />
+        <e k="ui_pmHistoryTotalSalaryRequests" v="Palkkapyynnöt: %d" />
+        <e k="ui_pmHistoryTotalAborts" v="Keskeytetyt työt: %d" />
+        <e k="ui_pmHistoryTotalSalaryPaid" v="Palkka yhteensä: %s" />
+        <e k="ui_pmHistoryTrainingYearCompact" v="Vuosi %d" />
+        <e k="ui_pmHistoryTrainingNoneCompact" v="ei mitään" />
+        <e k="ui_pmHistoryCareerJobs" v="Työt: %d" />
+        <e k="ui_pmHistoryCareerWorkTime" v="Työaika: %s" />
+        <e k="ui_pmHistoryCareerTraining" v="Koulutus: %s" />
+        <e k="ui_pmHistoryCareerTransport" v="Kuljetus: %s" />
+        <e k="ui_pmHistoryValueActive" v="aktiivinen" />
+        <e k="ui_pmHistoryValueInactive" v="ei aktiivinen" />
+        <e k="ui_monthlyRowApplicants" v="Hakijat" />
+        <e k="ui_monthlyRowEmployees" v="Työntekijät" />
+        <e k="ui_monthlyRowAvailable" v="Saatavilla" />
+        <e k="ui_monthlyRowJobs" v="Työt" />
+        <e k="ui_monthlyRowWorkTime" v="Työaika" />
+        <e k="ui_monthlyRowWages" v="Kuukausipalkat" />
+        <e k="ui_monthlyRowPayroll" v="Viimeisin palkanmaksu" />
+        <e k="ui_pmOverviewOverallHeader" v="YHTEENSÄ" />
+        <e k="ui_pmOverviewTotalJobs" v="Tehtäviä yhteensä" />
+        <e k="ui_pmOverviewTotalWorkTime" v="Työaika yhteensä" />
+        <e k="ui_pmOverviewTotalPayroll" v="Palkat yhteensä" />
+        <e k="ui_pmOverviewEverHired" v="Palkattu yhteensä" />
+        <e k="ui_pmOverviewDismissed" v="Irtisanotut" />
+        <e k="ui_pmOverviewResigned" v="Irtisanoutuneet" />
+        <e k="ui_pmOverviewRetired" v="Eläkkeelle jääneet" />
+        <e k="ui_pmChronicleJobAbortedSickness" v="Työ keskeytettiin sairauden vuoksi." />
+        <e k="ui_reliabilityJobAbortOtherTaskMale" v="%s keskeytti käynnissä olevan tehtävän, koska hän piti toista tehtävää tärkeämpänä." />
+        <e k="ui_reliabilityJobAbortOtherTaskFemale" v="%s keskeytti käynnissä olevan tehtävän, koska hän piti toista tehtävää tärkeämpänä." />
+        <e k="ui_reliabilityJobAbortBreakMale" v="%s keskeytti käynnissä olevan tehtävän. Hän halusi pitää tauon." />
+        <e k="ui_reliabilityJobAbortBreakFemale" v="%s keskeytti käynnissä olevan tehtävän. Hän halusi pitää tauon." />
+        <e k="ui_reliabilityJobAbortPrivateMale" v="%s keskeytti käynnissä olevan tehtävän. Hänen piti hoitaa yksityisasioita." />
+        <e k="ui_reliabilityJobAbortPrivateFemale" v="%s keskeytti käynnissä olevan tehtävän. Hänen piti hoitaa yksityisasioita." />
+        <e k="ui_reliabilityJobAbortStoveMale" v="%s keskeytti käynnissä olevan tehtävän, koska hän oli unohtanut sammuttaa lieden kotona ja palasi takaisin." />
+        <e k="ui_reliabilityJobAbortStoveFemale" v="%s keskeytti käynnissä olevan tehtävän, koska hän oli unohtanut sammuttaa lieden kotona ja palasi takaisin." />
+        <e k="ui_reliabilityJobAbortFriendsMale" v="%s keskeytti käynnissä olevan tehtävän, koska hän päätti spontaanisti tavata ystäviä." />
+        <e k="ui_reliabilityJobAbortFriendsFemale" v="%s keskeytti käynnissä olevan tehtävän, koska hän päätti spontaanisti tavata ystäviä." />
+        <e k="ui_reliabilityJobAbortPartnerMale" v="%s keskeytti käynnissä olevan tehtävän mennäkseen spontaanisti kahville tyttöystävänsä kanssa." />
+        <e k="ui_reliabilityJobAbortPartnerFemale" v="%s keskeytti käynnissä olevan tehtävän mennäkseen spontaanisti kahville poikaystävänsä kanssa." />
     </elements>
 </l10n>

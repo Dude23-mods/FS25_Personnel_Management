@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <l10n>
     <elements>
         <e k="ui_ingameMenuHelperPersonnel" v="Gestionarea personalului" />
@@ -18,19 +18,19 @@
         <e k="ui_status_resigned" v="a demisionat pentru sfârșitul lunii" />
         <e k="ui_status_sick" v="bolnav" />
         <e k="ui_rank_helper" v="Ajutor" />
-        <e k="ui_rank_specialist" v="Specialist" />
+        <e k="ui_rank_specialist" v="Calificat" />
         <e k="ui_specialization_short" v="Specializare" />
-        <e k="ui_specialization_tillage" v="Tillage" />
-        <e k="ui_specialization_sowing" v="Sowing" />
-        <e k="ui_specialization_fertilizing" v="Fertilizing" />
-        <e k="ui_specialization_plantProtection" v="Crop Protection" />
-        <e k="ui_specialization_harvest" v="Harvest" />
+        <e k="ui_specialization_tillage" v="Prelucrarea solului" />
+        <e k="ui_specialization_sowing" v="Semănat" />
+        <e k="ui_specialization_fertilizing" v="Fertilizare" />
+        <e k="ui_specialization_plantProtection" v="Protecția culturilor" />
+        <e k="ui_specialization_harvest" v="Recoltare" />
         <e k="ui_specialization_transport" v="Transport" />
-        <e k="ui_specialization_machineCare" v="Machine Care" />
-        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
-        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
+        <e k="ui_specialization_machineCare" v="Îngrijirea utilajelor" />
+        <e k="ui_specialization_resourceSaver" v="Utilizare eficientă" />
+        <e k="ui_specializationLearned" v="%s a dezvoltat o specializare: %s." />
         <e k="ui_specialization_progress" v="învață %s %d%%" />
-        <e k="ui_rank_expert" v="Expert" />
+        <e k="ui_rank_expert" v="Profesionist" />
         <e k="ui_worker_line1" v="%s · Experiență %d · Fiabilitate %d · Loialitate %d" />
         <e k="ui_worker_line2" v="Salariu lunar: %s · Stare: %s" />
         <e k="ui_worker_line3" v="Lucrări: %d · Timp de lucru: %s" />
@@ -48,22 +48,22 @@
         <e k="ui_dismissalNoticeNextMonth" v="%s a fost concediat pentru sfârșitul lunii următoare." />
         <e k="ui_dismissalNotice" v="%s este concediat la sfârșitul lunii." />
         <e k="ui_fireDeniedPending" v="Acest angajat este deja concediat." />
-        <e k="ui_fireDeniedBusy" v="Angajați ocupat - concediază nicht möglich." />
+        <e k="ui_fireDeniedBusy" v="Angajatul lucrează și nu poate fi concediat." />
         <e k="ui_hireSuccess" v="%s - angajează." />
         <e k="ui_fireSuccess" v="%s - concediază." />
         <e k="ui_selectionTitle" v="Selectează angajatul" />
-        <e k="ui_selectionHint" v="A/D / Left/Right · Enter · Esc" />
+        <e k="ui_selectionHint" v="Schimbă cu A/D sau stânga/dreapta · confirmă cu Spațiu sau clic de mouse · anulează cu Esc" />
         <e k="ui_selectionNoWorkers" v="Nu există candidați disponibili momentan." />
         <e k="ui_selectionWorkerUnavailable" v="ocupat." />
         <e k="ui_selectionNoEmployees" v="Nu a fost angajat niciun angajat" />
         <e k="ui_selectionLineStats" v="%s · Experiență %d · Fiabilitate %d · Loialitate %d" />
         <e k="ui_selectionLineWage" v="Salariu lunar: %s" />
-        <e k="ui_selectionLineJobs" v="Lucrări: %d · Work speed: %d%%" />
-        <e k="input_HP_SELECT_LEFT" v="Selectează angajatul left" />
-        <e k="input_HP_SELECT_RIGHT" v="Selectează angajatul right" />
+        <e k="ui_selectionLineJobs" v="Lucrări: %d · Viteză de lucru: %d%%" />
+        <e k="input_HP_SELECT_LEFT" v="Selectează angajatul anterior" />
+        <e k="input_HP_SELECT_RIGHT" v="Selectează angajatul următor" />
         <e k="input_HP_SELECT_CONFIRM" v="Confirmă selecția angajatului" />
-        <e k="input_HP_OPEN_APPLICANTS" v="Candidați" />
-        <e k="input_HP_TRANSPORT_TOGGLE" v="transport toggle" />
+        <e k="input_HP_TRANSPORT_MANAGE" v="Gestionează sarcinile de transport" />
+        <e k="input_HP_SALARY_RAISE_MANAGE" v="Gestionează cererile de mărire" />
         <e k="input_HP_SELECT_CANCEL" v="Anulează selecția angajatului" />
         <e k="ui_openWorkerView" v="Lucrători" />
         <e k="ui_openApplicantView" v="Candidați" />
@@ -84,16 +84,16 @@
         <e k="ui_noWorkersUpper" v="NICIUN ANGAJAT DISPONIBIL" />
         <e k="ui_noActiveWorkers" v="Nu a fost angajat niciun angajat" />
         <e k="ui_activeWorkerStatusVehicle" v="Stare: angajați la lucru (%s)" />
-        <e k="ui_activeWorkerStatusVehicleImplement" v="Stare: angajați la lucru (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="Stare: angajat la lucru (%s) | Utilaj/remorcă: %s" />
         <e k="ui_activeWorkerActivityField" v="Sarcină: %s | Câmp: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Vehicul" />
         <e k="ui_activeWorkerUnknownField" v="necunoscut" />
-        <e k="ui_activeWorkerNoField" v="not field-bound" />
+        <e k="ui_activeWorkerNoField" v="fără legătură cu un câmp" />
         <e k="ui_activityUnknown" v="necunoscut" />
         <e k="ui_activityFieldWork" v="lucru pe câmp" />
-        <e k="ui_activityTransport" v="transport" />
-        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
-        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
+        <e k="ui_activityTransport" v="transporturi" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe cu %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s în spatele lui %s" />
         <e k="ui_activityCultivating" v="cultivare" />
         <e k="ui_activityPlowing" v="arat" />
         <e k="ui_activitySowing" v="semănat" />
@@ -116,25 +116,26 @@
         <e k="ui_workersHeaderUpper" v="GESTIONAREA ANGAJAȚILOR" />
         <e k="ui_instructionApplicant" v="ENTER: Angajează. ESC: Înapoi la prezentare." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Concediază." />
-        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="G: Acordă mărire. N: Respinge cererea." />
-        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
-        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
-        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
-        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
-        <e k="ui_training_already_done" v="%s has already attended training this month." />
-        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_instructionWorkerTransport" v="Folosește butonul de transport pentru a gestiona ordinea și apasă S pentru a instrui angajatul." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Cererile de mărire în așteptare sunt gestionate cu butonul Gestionează cererile de mărire." />
+        <e k="ui_instructionSwitchEntry" v="Fă clic pe o intrare pentru a o selecta; folosește rotița mouse-ului pentru derulare." />
+        <e k="ui_training_no_progress" v="Acest angajat nu are încă o direcție de învățare potrivită." />
+        <e k="ui_training_worker_busy" v="Angajatul lucrează în prezent și nu poate participa la instruire." />
+        <e k="ui_training_worker_sick" v="Angajatul este bolnav și nu poate participa la instruire." />
+        <e k="ui_training_already_done" v="%s a participat deja la o instruire în această lună." />
+        <e k="ui_training_started" v="%s începe instruirea în %s până la sfârșitul lunii (%s)." />
+        <e k="ui_training_completed" v="%s a încheiat instruirea în %s: de la %d%% la %d%%." />
         <e k="ui_noApplicantsDetail" v="Nu există candidați disponibili momentan" />
         <e k="ui_noWorkersDetail" v="Nu a fost angajat niciun angajat" />
-        <e k="ui_entryZero" v="Intrare 0 von 0" />
+        <e k="ui_entryZero" v="Intrare 0 din 0" />
         <e k="ui_visibleRange" v="Vizibil %d-%d" />
         <e k="ui_allEntriesVisible" v="Toate intrările vizibile" />
-        <e k="ui_entryCounter" v="Intrare %d von %d" />
-        <e k="ui_monthlyLineStaff" v="Angajați în personal: ajutor %d | specialist %d | expert %d" />
+        <e k="ui_entryCounter" v="Intrare %d din %d" />
+        <e k="ui_monthlyLineStaff" v="Personal: ajutoare %d | calificați %d | profesioniști %d" />
         <e k="ui_monthlyLineApplicantsReady" v="Candidați pe piață: %d" />
         <e k="ui_monthlyLineApplicantsEmpty" v="Nu există candidați disponibili momentan" />
         <e k="ui_monthlyLineNoWorkers" v="Nu a fost angajat niciun angajat" />
-        <e k="ui_monthlyLineAvailableWorkers" v="Disponibili: %d von %d" />
+        <e k="ui_monthlyLineAvailableWorkers" v="Disponibili: %d din %d" />
         <e k="ui_monthlyLinePayroll" v="Salariu lunar: %s" />
         <e k="ui_monthlyLineWorkStats" v="Timp de lucru: %d lucrări | %s | Salariu lunar: %s" />
         <e k="ui_button_transport_assign" v="Atribuie transport" />
@@ -145,94 +146,347 @@
         <e k="ui_transportNoDriverAssigned" v="transport: niciuna încă." />
         <e k="ui_transportNoDriverAvailable" v="transport: ocupați." />
         <e k="ui_transportAutoAssigned" v="transport: atribuie transport." />
-        <e k="ui_experienceGainSingle" v="%s: Experiență +1. Experiență: %d to %d" />
-        <e k="ui_experienceGainMultiple" v="%s: Experiență +%d. Experiență: %d to %d" />
-        <e k="ui_experienceMonthlyLimitReached" v="%s: Experiență monthly limit reached." />
-        <e k="ui_loyaltyChanged" v="%s: Loialitate %s. Loialitate: %d to %d" />
-        <e k="ui_loyaltyWarningLow" v="%s: Loialitate low." />
-        <e k="ui_loyaltyWarningVeryLow" v="%s: Loialitate very low." />
+        <e k="ui_experienceGainSingle" v="%s: experiență +1. Experiență: %d → %d" />
+        <e k="ui_experienceGainMultiple" v="%s: experiență +%d. Experiență: %d → %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s: limita lunară de experiență a fost atinsă." />
+        <e k="ui_loyaltyChanged" v="%s: loialitate %s. Loialitate: %d → %d" />
+        <e k="ui_loyaltyWarningLow" v="%s: loialitate scăzută." />
+        <e k="ui_loyaltyWarningVeryLow" v="%s: loialitate foarte scăzută." />
         <e k="ui_loyaltyWarningCritical" v="%s: a demisionat pentru sfârșitul lunii." />
         <e k="ui_loyaltyResignationNotice" v="%s: a demisionat pentru sfârșitul lunii." />
-        <e k="ui_sicknessNotice" v="%s: bolnav - cannot work today." />
-        <e k="ui_sicknessNoticeJobAborted" v="%s: bolnav - current job cancelled." />
+        <e k="ui_sicknessNotice" v="%s: bolnav, nu poate lucra astăzi." />
+        <e k="ui_sicknessNoticeJobAborted" v="%s: bolnav, lucrarea curentă a fost anulată." />
         <e k="ui_button_raise_grant" v="Acordă mărire" />
         <e k="ui_button_raise_decline" v="Respinge cererea" />
-        <e k="ui_salaryRaisePendingLine" v="Mărire: %s statt %s" />
-        <e k="ui_salaryRaiseRequestNotification" v="%s requests mărire after reaching %s: %s." />
-        <e k="ui_salaryRaiseRequestHistory" v="Mărire: %s requests %s." />
+        <e k="ui_button_salary_manage_long" v="Gestionează cererile de mărire" />
+        <e k="ui_salaryRequestsTitle" v="Gestionează cererile de mărire" />
+        <e k="ui_salaryRequestsIntro" v="Aici sunt afișate toate cererile de mărire aflate în așteptare. Selectează un angajat și decide dacă accepți sau respingi cererea." />
+        <e k="ui_salaryRequestsHeaderEmployee" v="Angajat" />
+        <e k="ui_salaryRequestsHeaderCurrent" v="Salariu actual" />
+        <e k="ui_salaryRequestsHeaderRequested" v="Salariu solicitat" />
+        <e k="ui_salaryRequestsNoRequests" v="Nu există cereri de mărire în așteptare." />
+        <e k="ui_salaryRequestsControls" v="Săgeată sus/jos: selectare | Enter: acceptare | Spațiu: respingere" />
+        <e k="ui_salaryRaisePendingLine" v="Mărire salarială: %s în loc de %s" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s solicită, după atingerea nivelului %s, un salariu de %s." />
+        <e k="ui_salaryRaiseRequestHistory" v="Mărire salarială: %s solicită %s." />
         <e k="ui_salaryRaiseGranted" v="Acordă mărire: %s - %s." />
         <e k="ui_salaryRaiseDeclined" v="Respinge cererea: %s." />
-        <e k="ui_salaryRaisePendingPenalty" v="Open mărire: %s affects loialitate: %s." />
-        <e k="ui_salaryRaiseGrantedReputation" v="Fair mărire: %s Reputația angajatorului" />
+        <e k="ui_salaryRaisePendingPenalty" v="Mărire salarială în așteptare: %s afectează loialitatea cu %s." />
+        <e k="ui_salaryRaiseGrantedReputation" v="Mărire salarială echitabilă: reputația angajatorului %s" />
         <e k="ui_hpIngameMenuPrev" v="Meniul anterior" />
         <e k="ui_hpIngameMenuNext" v="Meniul următor" />
-        <e k="ui_status_training" v="in training" />
-        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
-        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
-        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
-        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
-        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_status_training" v="în instruire" />
+        <e k="ui_training_worker_in_training" v="Angajatul se află deja în instruire până la sfârșitul lunii." />
+        <e k="ui_training_not_first_day" v="Instruirea poate începe doar în prima zi a lunii." />
+        <e k="ui_training_not_single_day_deadline" v="Cu 1 zi pe lună, instruirea poate începe doar în prima zi înainte de ora 12:00." />
+        <e k="ui_training_line_single_day_deadline" v="Instruire: cu 1 zi/lună doar până la 12:00 · %s %s · ultima: %s" />
+        <e k="ui_training_already_done_year" v="%s a participat deja la o instruire în acest an." />
         <e k="ui_training_last_none" v="-" />
-        <e k="ui_training_unknown" v="unknown" />
-        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
-        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
-        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
-        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
-        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
-        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
-        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
-
-        <e k="ui_hpSetting_on" v="On"/>
-
-        <e k="ui_hpSetting_off" v="Off"/>
-
-        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
-
-        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
-
-        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
-
-        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
-
-        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
-
-        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
-
-        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
-
-        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
-
-        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
-
-        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
-
-        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
-
-        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
-        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
-
-        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
-
-        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
-
-        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
-
-        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
-
-        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
-
-        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
-
-        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
-
-        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
-
-        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
-
-        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+        <e k="ui_training_unknown" v="necunoscută" />
+        <e k="ui_training_line_active" v="Instruire: %s până la sfârșitul lunii · ultima: %s" />
+        <e k="ui_training_line_no_direction" v="Instruire: fără direcție de învățare · ultima: %s" />
+        <e k="ui_training_line_year_blocked" v="Instruire: doar anul viitor · ultima: %s" />
+        <e k="ui_training_line_first_day" v="Instruire: doar în prima zi · %s %s · ultima: %s" />
+        <e k="ui_training_line_busy" v="Instruire: indisponibil, lucrează · %s %s · ultima: %s" />
+        <e k="ui_training_line_sick" v="Instruire: indisponibil, bolnav · %s %s · ultima: %s" />
+        <e k="ui_training_line_possible" v="Instruire: disponibilă %s, %s · ultima: %s" />
+        <e k="ui_hpSetting_on" v="Pornit" />
+        <e k="ui_hpSetting_off" v="Oprit" />
+        <e k="ui_hpSetting_section" v="GESTIONAREA PERSONALULUI" />
+        <e k="ui_hpSetting_gameplayEffects" v="Gestionarea personalului: efecte de joc" />
+        <e k="ui_hpSetting_experienceEffects" v="Gestionarea personalului: efectele experienței" />
+        <e k="ui_hpSetting_speedEffect" v="Gestionarea personalului: viteza de lucru" />
+        <e k="ui_hpSetting_wearEffect" v="Gestionarea personalului: uzură" />
+        <e k="ui_hpSetting_consumablesEffect" v="Gestionarea personalului: materiale" />
+        <e k="ui_hpSetting_fuelEffect" v="Gestionarea personalului: consum de combustibil" />
+        <e k="ui_hpSetting_reliabilityEffects" v="Gestionarea personalului: fiabilitate" />
+        <e k="ui_hpSetting_personnelEffects" v="Gestionarea personalului: efecte asupra personalului" />
+        <e k="ui_hpSetting_loyaltyEffects" v="Gestionarea personalului: modificări ale loialității" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Gestionarea personalului: muncă de noapte" />
+        <e k="ui_hpSetting_economicEffects" v="Gestionarea personalului: economie" />
+        <e k="ui_hpSetting_individualWages" v="Gestionarea personalului: salarii individuale" />
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Activează sau dezactivează toate efectele de joc ale gestionării personalului. Valorile afișate, datele salvate și istoricul rămân disponibile." />
+        <e k="ui_hpSetting_experienceEffects_desc" v="Stabilește dacă experiența și specializările angajaților influențează munca activă a ajutoarelor." />
+        <e k="ui_hpSetting_speedEffect_desc" v="Stabilește dacă experiența și specializările potrivite influențează viteza de lucru." />
+        <e k="ui_hpSetting_wearEffect_desc" v="Stabilește dacă experiența și specializările potrivite influențează uzura suplimentară a vehiculelor și utilajelor." />
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Stabilește dacă experiența și specializările potrivite influențează folosirea semințelor, îngrășămintelor, erbicidelor, dejecțiilor lichide, digestatului, gunoiului de grajd și materialelor similare." />
+        <e k="ui_hpSetting_fuelEffect_desc" v="Stabilește dacă experiența și specializările potrivite influențează consumul de combustibil." />
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Stabilește dacă fiabilitatea angajaților poate provoca scăderi scurte de performanță și zile de boală." />
+        <e k="ui_hpSetting_personnelEffects_desc" v="Activează sau dezactivează efectele legate de personal, precum evoluția loialității și efectele muncii de noapte." />
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Stabilește dacă loialitatea angajaților se schimbă prin evenimente precum plata salariilor, munca de noapte sau reputația angajatorului." />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Stabilește dacă munca de noapte influențează loialitatea și reputația angajatorului." />
+        <e k="ui_hpSetting_economicEffects_desc" v="Stabilește dacă sunt folosite calcule economice individuale. Dacă opțiunea este dezactivată, se folosesc valori salariale standard neutre." />
+        <e k="ui_hpSetting_individualWages_desc" v="Stabilește dacă angajații primesc salarii individuale în funcție de rol, experiență, fiabilitate și specializări." />
+        <e k="ui_hpSetting_groupWork" v="PERFORMANȚĂ ÎN MUNCĂ" />
+        <e k="ui_hpSetting_groupPersonnel" v="DEZVOLTAREA PERSONALULUI" />
+        <e k="ui_hpSetting_groupEconomy" v="ECONOMIE ȘI SALARII" />
+        <e k="ui_hpSetting_standardWage" v="Salariu lunar standard" />
+        <e k="ui_hpSetting_standardWage_desc" v="Stabilește salariul lunar de bază folosit când salariile individuale sunt dezactivate. Valoarea se aplică de la următorul calcul salarial." />
+        <e k="ui_hpSetting_standardWageInvalid" v="Introdu o valoare între %d și %d. Suma va fi rotunjită la cel mai apropiat multiplu de 10." />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Deschide Gestionarea personalului" />
+        <e k="ui_pmMenuPageOverview" v="Prezentare generală" />
+        <e k="ui_pmMenuPageApplicants" v="Candidați" />
+        <e k="ui_pmMenuPageEmployees" v="Angajați" />
+        <e k="ui_pmMenuPageTraining" v="Instruire" />
+        <e k="ui_pmMenuPageAssignments" v="Atribuiri" />
+        <e k="ui_pmMenuPrevPerson" v="Persoana anterioară" />
+        <e k="ui_pmMenuNextPerson" v="Persoana următoare" />
+        <e k="ui_pmPersonCounter" v="%d din %d" />
+        <e k="ui_pmMenuNoPermission" v="Nu ai permisiunea de a lua decizii privind personalul acestei ferme." />
+        <e k="ui_pmConfirmHire" v="Îl angajezi cu adevărat pe %s?" />
+        <e k="ui_pmConfirmDismiss" v="Îl concediezi cu adevărat pe %s?" />
+        <e k="ui_pmConfirmTraining" v="Începi instruirea pentru %s?" />
+        <e k="ui_pmProfileHeader" v="PROFIL" />
+        <e k="ui_pmHistoryHeader" v="ISTORIC" />
+        <e k="ui_button_train" v="Instruiește" />
+        <e k="ui_pmStatusApplicant" v="Candidat" />
+        <e k="ui_pmBirthLine" v="Născut(ă): %s" />
+        <e k="ui_pmOriginLine" v="Experiență profesională: %s" />
+        <e k="ui_pmStatsLine" v="Experiență %d · Fiabilitate %d · Loialitate %d" />
+        <e k="ui_pmStatExperience" v="Experiență" />
+        <e k="ui_pmStatReliability" v="Fiabilitate" />
+        <e k="ui_pmStatLoyalty" v="Loialitate" />
+        <e k="ui_pmWageLine" v="Salariu: %s" />
+        <e k="ui_pmStatusLine" v="Stare: %s" />
+        <e k="ui_pmOrigin1" v="fermă familială rurală" />
+        <e k="ui_pmOrigin2" v="fermă mică de lapte" />
+        <e k="ui_pmOrigin3" v="firmă de servicii agricole" />
+        <e k="ui_pmOrigin4" v="fermă de culturi arabile" />
+        <e k="ui_pmOrigin5" v="fermă mixtă" />
+        <e k="ui_pmStrengthReliable" v="stil de lucru calm și fiabil" />
+        <e k="ui_pmStrengthTransport" v="transport și logistică în curte bine organizate" />
+        <e k="ui_pmStrengthHarvest" v="muncă atentă la recoltare" />
+        <e k="ui_pmStrengthSowing" v="semănat precis și pregătirea câmpului" />
+        <e k="ui_pmApplicantProfileText" v="%s candidează cu experiență profesională în %s. Profilul actual indică %s. Aceste valori reprezintă profilul din momentul candidaturii." />
+        <e k="ui_pmWorkerProfileText" v="%s face parte din fermă din %s. Evoluția indică %s. Alte înregistrări sunt create prin sarcini, instruiri și decizii de personal." />
+        <e k="ui_pmHistoryJobs" v="Sarcini finalizate: %d." />
+        <e k="ui_pmHistoryWorkTime" v="Timp total de lucru: %s." />
+        <e k="ui_pmHistoryTrainingActive" v="Instruire curentă: %s." />
+        <e k="ui_pmHistoryTrainingLast" v="Ultima instruire: anul %d." />
+        <e k="ui_pmHistoryTrainingNone" v="Nu există încă instruiri înregistrate." />
+        <e k="ui_pmHistoryTransportEnabled" v="Marcat pentru sarcini de transport." />
+        <e k="ui_pmHistoryTransportDisabled" v="Nemarcat pentru sarcini de transport." />
+        <e k="ui_pmMenuPageSettings" v="Setări" />
+        <e k="ui_pmSettingsInfo" v="Aceste setări se aplică fiecărui joc salvat." />
+        <e k="ui_pmSettingsHostOnly" v="În multiplayer, aceste setări pot fi modificate doar pe server." />
+        <e k="ui_pmSettingsSectionGameplay" v="EFECTE DE JOC" />
+        <e k="ui_pmSettingsSectionPersonnel" v="PERSONAL" />
+        <e k="ui_pmSettingsSectionEconomic" v="ECONOMIE" />
+        <e k="ui_button_transport_assign_long" v="Atribuie sarcini de transport" />
+        <e k="ui_button_transport_manage_long" v="Gestionează sarcinile de transport" />
+        <e k="ui_transportPriorityTitle" v="Prioritate transport" />
+        <e k="ui_transportPriorityIntro" v="Alege angajații care pot prelua sarcini de transport și ordinea în care sunt verificați." />
+        <e k="ui_transportPriorityHeaderPriority" v="Prioritate" />
+        <e k="ui_transportPriorityHeaderEmployee" v="Angajat" />
+        <e k="ui_transportPriorityHeaderStatus" v="Stare" />
+        <e k="ui_transportPriorityHeaderEnabled" v="Transport" />
+        <e k="ui_transportPriorityActive" v="Activ" />
+        <e k="ui_transportPriorityInactive" v="Nealocat" />
+        <e k="ui_transportPriorityMoveUp" v="Mută în sus" />
+        <e k="ui_transportPriorityMoveDown" v="Mută în jos" />
+        <e k="ui_transportPriorityToggle" v="Activează/dezactivează" />
+        <e k="ui_transportPriorityApply" v="Aplică" />
+        <e k="ui_transportPriorityCancel" v="Anulează" />
+        <e k="ui_transportPrioritySaved" v="Ordinea de transport a fost salvată." />
+        <e k="ui_transportPriorityNoWorkers" v="Nu există angajați disponibili." />
+        <e k="ui_transportPriorityControls" v="↑/↓: selectare   A/D: mutare   Spațiu: activare/dezactivare   Enter: aplicare" />
+        <e k="ui_button_transport_remove_long" v="Elimină sarcinile de transport" />
+        <e k="ui_helperPersonnelMenuOverview" v="Prezentare generală" />
+        <e k="ui_helperPersonnelMenuApplicants" v="Candidați" />
+        <e k="ui_helperPersonnelMenuEmployees" v="Angajați" />
+        <e k="ui_helperPersonnelMenuTraining" v="Instruire" />
+        <e k="ui_helperPersonnelMenuSettings" v="SETĂRI DE JOC" />
+        <e k="ui_pmBirthDateAge" v="%s (%d ani)" />
+        <e k="ui_pmOrigin6" v="firmă de logistică" />
+        <e k="ui_pmOrigin7" v="atelier de utilaje agricole" />
+        <e k="ui_pmOrigin8" v="profesie de birou" />
+        <e k="ui_status_retirementPending" v="se pensionează la sfârșitul lunii" />
+        <e k="ui_retirementNotice" v="%s se va pensiona la sfârșitul lunii." />
+        <e k="ui_pmTrainingIntro" v="Specializările îmbunătățesc performanța unui angajat în categoria de învățare respectivă. Un curs durează până la sfârșitul lunii curente, iar angajatul nu este disponibil pentru muncă în această perioadă. Progresul este acordat numai după finalizarea cursului. Nu toate categoriile au cursuri disponibile în fiecare lună. Cursurile pot fi mai ieftine sau mai scumpe decât prețul obișnuit. Fiecare angajat poate urma un singur curs pe an agricol, din martie până în februarie. Un angajat poate obține cel mult două specializări. Selectează categoria de învățare dorită." />
+        <e k="ui_pmTrainingCategoryHeader" v="Categorie de învățare" />
+        <e k="ui_pmTrainingProgressHeader" v="Progres către specializare" />
+        <e k="ui_pmTrainingRunning" v="instruire în desfășurare" />
+        <e k="ui_pmTrainingSelectCategory" v="Selectează mai întâi o categorie de instruire" />
+        <e k="ui_pmTrainingConfirm" v="Începi instruirea pentru %s în categoria %s?" />
+        <e k="ui_training_line_no_capacity" v="Instruire: două specializări atinse · ultima: %s" />
+        <e k="ui_training_line_single_day_deadline_select" v="Instruire: cu 1 zi/lună doar până la 12:00 · alege o categorie în meniul de instruire · ultima: %s" />
+        <e k="ui_training_line_first_day_select" v="Instruire: doar în prima zi · alege o categorie în meniul de instruire · ultima: %s" />
+        <e k="ui_training_line_busy_select" v="Instruire: imposibilă în timpul lucrului · ultima: %s" />
+        <e k="ui_training_line_sick_select" v="Instruire: imposibilă în timpul bolii · ultima: %s" />
+        <e k="ui_training_line_select_category" v="Instruire: alege o categorie în meniul de instruire · ultima: %s" />
+        <e k="ui_pmTrainingCostHeader" v="Cost" />
+        <e k="ui_pmTrainingAdjustmentHeader" v="Reducere/cost suplimentar" />
+        <e k="ui_pmTrainingNoPlaces" v="momentan nu sunt locuri disponibile" />
+        <e k="ui_pmTrainingNoPlacesMessage" v="Momentan nu sunt locuri disponibile pentru această instruire." />
+        <e k="ui_pmProfileIntro1" v="%s a lucrat anterior %s și se află la fermă de %d luni." />
+        <e k="ui_pmProfileIntro2" v="%s aduce experiență dintr-un loc de muncă anterior %s și face parte din echipă de %d luni." />
+        <e k="ui_pmProfileExperience1_1" v="%s are încă foarte puțină experiență practică și trebuie să consolideze multe procese de lucru." />
+        <e k="ui_pmProfileExperience1_2" v="%s se află încă în mod clar în faza de acomodare cu munca zilnică." />
+        <e k="ui_pmProfileExperience2_1" v="%s a dobândit ceva experiență practică, dar încă are nevoie de sprijin la sarcinile mai dificile." />
+        <e k="ui_pmProfileExperience2_2" v="%s devine mai sigur în privința elementelor de bază, deși rutina lipsește încă în mai multe domenii." />
+        <e k="ui_pmProfileExperience3_1" v="%s are experiență solidă și îndeplinește independent majoritatea sarcinilor obișnuite." />
+        <e k="ui_pmProfileExperience3_2" v="%s lucrează cu rutină în activitatea zilnică și se adaptează bine la sarcini variate." />
+        <e k="ui_pmProfileExperience4_1" v="%s are o experiență vastă și lucrează cu încredere chiar și la sarcini dificile." />
+        <e k="ui_pmProfileExperience4_2" v="Datorită anilor de practică, %s execută în majoritatea cazurilor lucrări complexe în siguranță și independent." />
+        <e k="ui_pmProfileExperience5_1" v="%s se numără printre cei mai buni specialiști ai fermei și are o experiență excepțională." />
+        <e k="ui_pmProfileExperience5_2" v="%s este unul dintre cei mai experimentați și versatili membri ai echipei." />
+        <e k="ui_pmProfileReliability1_1" v="În prezent, %s este greu de planificat în mod fiabil; acordurile și procesele nu sunt adesea respectate conform așteptărilor." />
+        <e k="ui_pmProfileReliability1_2" v="%s prezintă slăbiciuni clare privind punctualitatea, respectarea acordurilor și execuția atentă." />
+        <e k="ui_pmProfileReliability2_1" v="%s nu lucrează cu fiabilitate constantă și trebuie urmărit atent la sarcinile importante." />
+        <e k="ui_pmProfileReliability2_2" v="%s respectă de obicei acordurile, dar încă prezintă variații vizibile de fiabilitate." />
+        <e k="ui_pmProfileReliability3_1" v="%s lucrează corect în general și respectă acordurile în majoritatea cazurilor." />
+        <e k="ui_pmProfileReliability3_2" v="%s este în general de încredere în activitatea zilnică și poate fi planificat bine." />
+        <e k="ui_pmProfileReliability4_1" v="%s este un membru de încredere al echipei și ușor de planificat." />
+        <e k="ui_pmProfileReliability4_2" v="%s respectă acordurile în mod fiabil chiar și la sarcini lungi sau dificile." />
+        <e k="ui_pmProfileReliability5_1" v="%s este excepțional de fiabil și oferă fermei o mare siguranță a planificării." />
+        <e k="ui_pmProfileReliability5_2" v="%s respectă acordurile aproape fără excepție și îndeplinește sarcinile cu mare grijă." />
+        <e k="ui_pmProfileLoyalty1_1" v="%s arată în prezent puțin atașament față de fermă; o plecare poate avea loc oricând." />
+        <e k="ui_pmProfileLoyalty1_2" v="%s pare slab legat de fermă și ar putea pleca rapid pentru o ofertă potrivită." />
+        <e k="ui_pmProfileLoyalty2_1" v="%s are până acum doar o legătură limitată cu ferma, ceea ce face evoluția viitoare incertă." />
+        <e k="ui_pmProfileLoyalty2_2" v="%s arată un angajament relativ scăzut și încă nu a construit o legătură fermă cu ferma." />
+        <e k="ui_pmProfileLoyalty3_1" v="%s este în general loial fermei, fără a fi încă foarte strâns legat de aceasta." />
+        <e k="ui_pmProfileLoyalty3_2" v="%s a dezvoltat o relație stabilă cu ferma și arată un angajament solid." />
+        <e k="ui_pmProfileLoyalty4_1" v="%s se simte clar legat de fermă și arată un angajament puternic." />
+        <e k="ui_pmProfileLoyalty4_2" v="%s a construit o legătură puternică cu ferma și probabil va rămâne pe termen lung." />
+        <e k="ui_pmProfileLoyalty5_1" v="%s este excepțional de strâns legat de fermă și se numără printre cei mai loiali membri ai echipei." />
+        <e k="ui_pmProfileLoyalty5_2" v="%s arată o legătură pe termen lung foarte puternică și bine stabilită cu ferma." />
+        <e k="ui_pmProfileSpecializations" v="Punctele forte profesionale sunt deosebit de evidente în %s." />
+        <e k="ui_pmProfileLearningProgress" v="Cel mai mare progres de învățare este în prezent în %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization" v="Nu s-a dezvoltat încă o specializare profesională clară." />
+        <e k="ui_pmProfileActivity" v="%s a finalizat până acum %d sarcini și %d instruiri." />
+        <e k="ui_pmProfileNoActivity" v="%s dobândește încă primele experiențe la fermă; nu a finalizat încă sarcini sau instruiri." />
+        <e k="ui_pmChronicleImportedEmployment" v="Raportul de muncă existent a fost adăugat în cronica personală." />
+        <e k="ui_pmChronicleHired" v="Angajatul a fost angajat." />
+        <e k="ui_pmChronicleJobStarted" v="Sarcină începută." />
+        <e k="ui_pmChronicleJobCompleted" v="Sarcină finalizată." />
+        <e k="ui_pmChronicleSpecialization" v="Specializare dobândită." />
+        <e k="ui_pmChronicleTrainingStarted" v="Instruire începută." />
+        <e k="ui_pmChronicleTrainingCompleted" v="Instruire finalizată." />
+        <e k="ui_pmChronicleSickness" v="Absență din cauza bolii." />
+        <e k="ui_pmChronicleDismissal" v="Concediere dispusă de fermă." />
+        <e k="ui_pmChronicleResignation" v="Demisie anunțată pentru sfârșitul lunii." />
+        <e k="ui_pmChronicleRetirement" v="Pensionare anunțată pentru sfârșitul lunii." />
+        <e k="ui_pmChronicleEmploymentEnded" v="Raport de muncă încheiat." />
+        <e k="ui_pmChronicleSalaryRequest" v="Majorare salarială solicitată." />
+        <e k="ui_pmChronicleSalaryGranted" v="Majorare salarială acordată." />
+        <e k="ui_pmChronicleSalaryDeclined" v="Cerere de majorare salarială respinsă." />
+        <e k="ui_pmProfileEmployeeMale" v="Angajatul" />
+        <e k="ui_pmProfileEmployeeFemale" v="Angajata" />
+        <e k="ui_pmProfilePronounMale" v="El" />
+        <e k="ui_pmProfilePronounFemale" v="Ea" />
+        <e k="ui_pmProfileBackgroundFamilyFarm" v="la o fermă familială rurală" />
+        <e k="ui_pmProfileBackgroundDairyFarm" v="la o fermă mică de lapte" />
+        <e k="ui_pmProfileBackgroundContractor" v="la o firmă de servicii agricole" />
+        <e k="ui_pmProfileBackgroundArableFarm" v="la o fermă de culturi arabile" />
+        <e k="ui_pmProfileBackgroundMixedFarm" v="la o fermă mixtă" />
+        <e k="ui_pmProfileBackgroundLogistics" v="la o firmă de logistică" />
+        <e k="ui_pmProfileBackgroundWorkshop" v="într-un atelier de utilaje agricole" />
+        <e k="ui_pmProfileBackgroundOffice" v="într-o profesie de birou" />
+        <e k="ui_pmProfileIntro3" v="%s lucrează acum la fermă de %d luni și a fost angajat anterior %s." />
+        <e k="ui_pmProfileExperience1_3" v="%s înțelege procesele de bază, dar încă are nevoie de îndrumare și practică pentru multe sarcini." />
+        <e k="ui_pmProfileExperience2_3" v="%s gestionează tot mai bine sarcinile obișnuite, dar trebuie să aprofundeze procesele mai complexe." />
+        <e k="ui_pmProfileExperience3_3" v="%s are o bază tehnică solidă și poate fi folosit într-o gamă variată de sarcini." />
+        <e k="ui_pmProfileExperience4_3" v="%s cunoaște multe procese agricole din experiență practică și poate prelua sarcini mai dificile." />
+        <e k="ui_pmProfileExperience5_3" v="%s are cunoștințe excepțional de vaste și gestionează cu încredere chiar și sarcini foarte dificile." />
+        <e k="ui_pmProfileReliability1_3" v="%s creează în mod repetat incertitudine în planificarea muncii prin performanțe nesigure." />
+        <e k="ui_pmProfileReliability2_3" v="%s poate îndeplini sarcini de rutină, dar nu este încă mereu de încredere la munca dificilă." />
+        <e k="ui_pmProfileReliability3_3" v="%s finalizează conștiincios majoritatea sarcinilor, deși încă apar variații ocazionale." />
+        <e k="ui_pmProfileReliability4_3" v="%s lucrează constant și atent, cu puține absențe sau neregularități." />
+        <e k="ui_pmProfileReliability5_3" v="%s rămâne excepțional de fiabil și constant chiar și la sarcini dificile." />
+        <e k="ui_pmProfileLoyalty1_3" v="%s pare să considere locul de muncă mai degrabă o soluție temporară decât un rol de durată." />
+        <e k="ui_pmProfileLoyalty2_3" v="%s rămâne la fermă, dar apartenența pe termen lung nu poate fi încă considerată sigură." />
+        <e k="ui_pmProfileLoyalty3_3" v="%s pare să se simtă bine în echipă, deși legătura poate deveni și mai puternică." />
+        <e k="ui_pmProfileLoyalty4_3" v="%s se identifică puternic cu ferma și susține loial afacerea." />
+        <e k="ui_pmProfileLoyalty5_3" v="%s se identifică în mod deosebit cu ferma și probabil va rămâne dedicat permanent." />
+        <e k="ui_pmProfileSpecializations2" v="%s s-a specializat în principal în %s." />
+        <e k="ui_pmProfileSpecializations3" v="%s arată puncte forte deosebite în %s." />
+        <e k="ui_pmProfileLearningProgress2" v="%s progresează deosebit de bine în %s (%d %%)." />
+        <e k="ui_pmProfileLearningProgress3" v="%s a realizat până acum cel mai mare progres de învățare în %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization2" v="%s nu a dezvoltat încă o specializare fixă." />
+        <e k="ui_pmProfileNoSpecialization3" v="Direcția profesională a lui %s este încă deschisă." />
+        <e k="ui_pmProfileActivity2" v="Timpul petrecut până acum la fermă include %d sarcini finalizate și %d instruiri." />
+        <e k="ui_pmProfileActivity3" v="%s a finalizat până acum %d sarcini și %d instruiri." />
+        <e k="ui_pmProfileNoActivity2" v="Pentru %s, dezvoltarea practică la fermă abia începe." />
+        <e k="ui_pmProfileNoActivity3" v="%s nu a finalizat încă nicio sarcină și nu a participat la nicio instruire." />
+        <e k="ui_hpSetting_toggle" v="Comută" />
+        <e k="ui_worker_status_line" v="Stare: %s" />
+        <e k="ui_pmApplicantProfileIntro" v="%s a lucrat anterior %s." />
+        <e k="ui_pmApplicantProfileMarketNew" v="Candidatura a apărut pe piață în această lună." />
+        <e k="ui_pmApplicantProfileMarketOneMonth" v="Candidatura este pe piață de o lună." />
+        <e k="ui_pmApplicantProfileMarketMonths" v="Candidatura este pe piață de %d luni." />
+        <e k="ui_pmApplicantProfileAge1" v="La %d ani, parcursul profesional este încă la început. Potențialul de dezvoltare este mare." />
+        <e k="ui_pmApplicantProfileAge2" v="La %d ani, dezvoltarea profesională este încă în curs de consolidare și poate progresa semnificativ." />
+        <e k="ui_pmApplicantProfileAge3" v="La %d ani, există deja un parcurs profesional bine conturat. Utilitatea acestei experiențe în agricultură depinde de activitatea anterioară." />
+        <e k="ui_pmApplicantProfileAge4" v="La %d ani, este de așteptat o experiență profesională generală vastă, fără ca aceasta să însemne automat practică agricolă." />
+        <e k="ui_pmApplicantProfileExperience1" v="Experiența agricolă practică este încă foarte redusă. Va fi necesară o instruire temeinică." />
+        <e k="ui_pmApplicantProfileExperience2" v="Există cunoștințe agricole de bază, dar lipsește încă rutina pentru sarcinile dificile." />
+        <e k="ui_pmApplicantProfileExperience3" v="Experiența existentă oferă o bază solidă pentru lucrările obișnuite, chiar dacă nu toate domeniile sunt stăpânite cu siguranță." />
+        <e k="ui_pmApplicantProfileExperience4" v="Experiența agricolă este clar dezvoltată și permite o utilizare versatilă." />
+        <e k="ui_pmApplicantProfileExperience5" v="Experiența se află la un nivel excepțional și permite asumarea sarcinilor dificile." />
+        <e k="ui_pmApplicantProfileReliability1" v="Valoarea fiabilității indică riscuri clare în planificare, respectarea înțelegerilor și execuția atentă." />
+        <e k="ui_pmApplicantProfileReliability2" v="Fiabilitatea este încă oscilantă. Sarcinile importante trebuie urmărite cu atenție." />
+        <e k="ui_pmApplicantProfileReliability3" v="Fiabilitatea se află la un nivel bun și permite de regulă o planificare previzibilă." />
+        <e k="ui_pmApplicantProfileReliability4" v="Fiabilitatea ridicată indică o muncă stabilă, atentă și ușor de planificat." />
+        <e k="ui_pmApplicantProfileReliability5" v="Fiabilitatea excepțional de ridicată oferă un nivel foarte mare de siguranță în planificare." />
+        <e k="ui_pmApplicantProfileLoyalty1" v="Loialitatea scăzută sugerează doar o legătură slabă cu un viitor angajator." />
+        <e k="ui_pmApplicantProfileLoyalty2" v="Loialitatea este încă rezervată. O legătură pe termen lung trebuie să se dezvolte." />
+        <e k="ui_pmApplicantProfileLoyalty3" v="Loialitatea se află într-o zonă medie stabilă și oferă o bază bună pentru o colaborare pe termen lung." />
+        <e k="ui_pmApplicantProfileLoyalty4" v="Loialitatea ridicată indică o disponibilitate puternică de a rămâne pe termen lung în fermă." />
+        <e k="ui_pmApplicantProfileLoyalty5" v="Loialitatea excepțional de ridicată indică o disponibilitate deosebit de puternică pentru o legătură durabilă." />
+        <e k="ui_pmHistoryColumnCareer" v="Istoric anterior" />
+        <e k="ui_pmHistoryColumnRecent" v="Evenimente recente" />
+        <e k="ui_pmHistoryColumnTotals" v="Totaluri" />
+        <e k="ui_pmHistoryNoRecord" v="fără înregistrare" />
+        <e k="ui_pmHistoryDateFormat" v="Ziua %d · %d/%d" />
+        <e k="ui_pmHistorySalaryAccepted" v="acceptată" />
+        <e k="ui_pmHistorySalaryDeclined" v="respinsă" />
+        <e k="ui_pmHistorySalaryPending" v="în așteptare" />
+        <e k="ui_pmHistorySalaryUnresolved" v="fără decizie înregistrată" />
+        <e k="ui_pmHistoryAbortSickness" v="boală" />
+        <e k="ui_pmHistoryAbortUnreliability" v="lipsă de fiabilitate" />
+        <e k="ui_pmHistoryAbortOther" v="alt motiv" />
+        <e k="ui_pmHistoryLastSickness" v="Ultima îmbolnăvire: %s" />
+        <e k="ui_pmHistoryLastSalaryRequest" v="Ultima cerere salarială: %s · %s" />
+        <e k="ui_pmHistoryLastAbort" v="Ultima sarcină întreruptă: %s · %s" />
+        <e k="ui_pmHistoryTotalSickness" v="Zile de boală: %d" />
+        <e k="ui_pmHistoryTotalSalaryRequests" v="Cereri salariale: %d" />
+        <e k="ui_pmHistoryTotalAborts" v="Sarcini întrerupte: %d" />
+        <e k="ui_pmHistoryTotalSalaryPaid" v="Salariu total: %s" />
+        <e k="ui_pmHistoryTrainingYearCompact" v="Anul %d" />
+        <e k="ui_pmHistoryTrainingNoneCompact" v="niciuna" />
+        <e k="ui_pmHistoryCareerJobs" v="Sarcini: %d" />
+        <e k="ui_pmHistoryCareerWorkTime" v="Timp de lucru: %s" />
+        <e k="ui_pmHistoryCareerTraining" v="Instruire: %s" />
+        <e k="ui_pmHistoryCareerTransport" v="Transport: %s" />
+        <e k="ui_pmHistoryValueActive" v="activ" />
+        <e k="ui_pmHistoryValueInactive" v="inactiv" />
+        <e k="ui_monthlyRowApplicants" v="Candidați" />
+        <e k="ui_monthlyRowEmployees" v="Angajați" />
+        <e k="ui_monthlyRowAvailable" v="Disponibili" />
+        <e k="ui_monthlyRowJobs" v="Sarcini" />
+        <e k="ui_monthlyRowWorkTime" v="Timp de lucru" />
+        <e k="ui_monthlyRowWages" v="Salarii lunare" />
+        <e k="ui_monthlyRowPayroll" v="Ultima plată salarială" />
+        <e k="ui_pmOverviewOverallHeader" v="TOTAL" />
+        <e k="ui_pmOverviewTotalJobs" v="Sarcini totale" />
+        <e k="ui_pmOverviewTotalWorkTime" v="Timp total de lucru" />
+        <e k="ui_pmOverviewTotalPayroll" v="Salarii plătite" />
+        <e k="ui_pmOverviewEverHired" v="Total angajați vreodată" />
+        <e k="ui_pmOverviewDismissed" v="Concedieri" />
+        <e k="ui_pmOverviewResigned" v="Demisii" />
+        <e k="ui_pmOverviewRetired" v="Pensionări" />
+        <e k="ui_pmChronicleJobAbortedSickness" v="Sarcină întreruptă din cauza bolii." />
+        <e k="ui_reliabilityJobAbortOtherTaskMale" v="%s a întrerupt sarcina în desfășurare deoarece a considerat că o altă sarcină era mai importantă." />
+        <e k="ui_reliabilityJobAbortOtherTaskFemale" v="%s a întrerupt sarcina în desfășurare deoarece a considerat că o altă sarcină era mai importantă." />
+        <e k="ui_reliabilityJobAbortBreakMale" v="%s a întrerupt sarcina în desfășurare. Voia să ia o pauză." />
+        <e k="ui_reliabilityJobAbortBreakFemale" v="%s a întrerupt sarcina în desfășurare. Voia să ia o pauză." />
+        <e k="ui_reliabilityJobAbortPrivateMale" v="%s a întrerupt sarcina în desfășurare. Trebuia să se ocupe de probleme personale." />
+        <e k="ui_reliabilityJobAbortPrivateFemale" v="%s a întrerupt sarcina în desfășurare. Trebuia să se ocupe de probleme personale." />
+        <e k="ui_reliabilityJobAbortStoveMale" v="%s a întrerupt sarcina în desfășurare deoarece a uitat să oprească aragazul acasă și s-a întors." />
+        <e k="ui_reliabilityJobAbortStoveFemale" v="%s a întrerupt sarcina în desfășurare deoarece a uitat să oprească aragazul acasă și s-a întors." />
+        <e k="ui_reliabilityJobAbortFriendsMale" v="%s a întrerupt sarcina în desfășurare deoarece a decis spontan să se întâlnească cu prietenii." />
+        <e k="ui_reliabilityJobAbortFriendsFemale" v="%s a întrerupt sarcina în desfășurare deoarece a decis spontan să se întâlnească cu prietenii." />
+        <e k="ui_reliabilityJobAbortPartnerMale" v="%s a întrerupt sarcina în desfășurare pentru a ieși spontan la o cafea cu prietena lui." />
+        <e k="ui_reliabilityJobAbortPartnerFemale" v="%s a întrerupt sarcina în desfășurare pentru a ieși spontan la o cafea cu prietenul ei." />
     </elements>
 </l10n>

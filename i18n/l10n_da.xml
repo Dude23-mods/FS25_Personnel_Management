@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <l10n>
     <elements>
         <e k="ui_ingameMenuHelperPersonnel" v="Personaleadministration" />
@@ -18,17 +18,17 @@
         <e k="ui_status_resigned" v="sagt op til månedens slutning" />
         <e k="ui_status_sick" v="syg" />
         <e k="ui_rank_helper" v="Hjælper" />
-        <e k="ui_rank_specialist" v="Specialist" />
+        <e k="ui_rank_specialist" v="Fagkraft" />
         <e k="ui_specialization_short" v="Speciale" />
-        <e k="ui_specialization_tillage" v="Tillage" />
-        <e k="ui_specialization_sowing" v="Sowing" />
-        <e k="ui_specialization_fertilizing" v="Fertilizing" />
-        <e k="ui_specialization_plantProtection" v="Crop Protection" />
-        <e k="ui_specialization_harvest" v="Harvest" />
+        <e k="ui_specialization_tillage" v="Jordbearbejdning" />
+        <e k="ui_specialization_sowing" v="Såning" />
+        <e k="ui_specialization_fertilizing" v="Gødskning" />
+        <e k="ui_specialization_plantProtection" v="Plantebeskyttelse" />
+        <e k="ui_specialization_harvest" v="Høst" />
         <e k="ui_specialization_transport" v="Transport" />
-        <e k="ui_specialization_machineCare" v="Machine Care" />
-        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
-        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
+        <e k="ui_specialization_machineCare" v="Maskinpleje" />
+        <e k="ui_specialization_resourceSaver" v="Ressourcebesparelse" />
+        <e k="ui_specializationLearned" v="%s har udviklet en specialisering: %s." />
         <e k="ui_specialization_progress" v="lærer %s %d%%" />
         <e k="ui_rank_expert" v="Ekspert" />
         <e k="ui_worker_line1" v="%s · Erfaring %d · Pålidelighed %d · Loyalitet %d" />
@@ -48,22 +48,22 @@
         <e k="ui_dismissalNoticeNextMonth" v="%s er opsagt til udgangen af næste måned." />
         <e k="ui_dismissalNotice" v="%s er opsagt til månedens udgang." />
         <e k="ui_fireDeniedPending" v="Denne medarbejder er allerede opsagt." />
-        <e k="ui_fireDeniedBusy" v="Medarbejdere optaget - afskedig nicht möglich." />
+        <e k="ui_fireDeniedBusy" v="Medarbejderen arbejder og kan ikke afskediges." />
         <e k="ui_hireSuccess" v="%s - ansæt." />
         <e k="ui_fireSuccess" v="%s - afskedig." />
         <e k="ui_selectionTitle" v="Vælg medarbejder" />
-        <e k="ui_selectionHint" v="A/D / Left/Right · Enter · Esc" />
+        <e k="ui_selectionHint" v="A/D eller venstre/højre for at skifte · mellemrum eller museklik for at bekræfte · Esc for at annullere" />
         <e k="ui_selectionNoWorkers" v="Der er i øjeblikket ingen ansøgere." />
         <e k="ui_selectionWorkerUnavailable" v="optaget." />
         <e k="ui_selectionNoEmployees" v="Ingen medarbejdere ansat endnu" />
         <e k="ui_selectionLineStats" v="%s · Erfaring %d · Pålidelighed %d · Loyalitet %d" />
         <e k="ui_selectionLineWage" v="Månedsløn: %s" />
-        <e k="ui_selectionLineJobs" v="Opgaver: %d · Work speed: %d%%" />
-        <e k="input_HP_SELECT_LEFT" v="Vælg medarbejder left" />
-        <e k="input_HP_SELECT_RIGHT" v="Vælg medarbejder right" />
+        <e k="ui_selectionLineJobs" v="Opgaver: %d · Arbejdshastighed: %d%%" />
+        <e k="input_HP_SELECT_LEFT" v="Vælg forrige medarbejder" />
+        <e k="input_HP_SELECT_RIGHT" v="Vælg næste medarbejder" />
         <e k="input_HP_SELECT_CONFIRM" v="Bekræft medarbejdervalg" />
-        <e k="input_HP_OPEN_APPLICANTS" v="Ansøgere" />
-        <e k="input_HP_TRANSPORT_TOGGLE" v="transport toggle" />
+        <e k="input_HP_TRANSPORT_MANAGE" v="Administrer transportopgaver" />
+        <e k="input_HP_SALARY_RAISE_MANAGE" v="Administrer lønkrav" />
         <e k="input_HP_SELECT_CANCEL" v="Annuller medarbejdervalg" />
         <e k="ui_openWorkerView" v="Medarbejdere" />
         <e k="ui_openApplicantView" v="Ansøgere" />
@@ -84,16 +84,16 @@
         <e k="ui_noWorkersUpper" v="INGEN MEDARBEJDERE TILGÆNGELIGE" />
         <e k="ui_noActiveWorkers" v="Ingen medarbejdere ansat endnu" />
         <e k="ui_activeWorkerStatusVehicle" v="Status: medarbejdere i arbejde (%s)" />
-        <e k="ui_activeWorkerStatusVehicleImplement" v="Status: medarbejdere i arbejde (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="Status: medarbejder i arbejde (%s) | Redskab/anhænger: %s" />
         <e k="ui_activeWorkerActivityField" v="Opgave: %s | Mark: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Køretøj" />
         <e k="ui_activeWorkerUnknownField" v="ukendt" />
-        <e k="ui_activeWorkerNoField" v="not field-bound" />
+        <e k="ui_activeWorkerNoField" v="ikke markbundet" />
         <e k="ui_activityUnknown" v="ukendt" />
         <e k="ui_activityFieldWork" v="markarbejde" />
-        <e k="ui_activityTransport" v="transport" />
-        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
-        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
+        <e k="ui_activityTransport" v="transportarbejde" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe med %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s bag %s" />
         <e k="ui_activityCultivating" v="kultivering" />
         <e k="ui_activityPlowing" v="pløjning" />
         <e k="ui_activitySowing" v="såning" />
@@ -116,25 +116,26 @@
         <e k="ui_workersHeaderUpper" v="MEDARBEJDERADMINISTRATION" />
         <e k="ui_instructionApplicant" v="ENTER: Ansæt. ESC: Tilbage til oversigt." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Afskedig." />
-        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="G: Giv lønforhøjelse. N: Afvis anmodning." />
-        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
-        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
-        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
-        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
-        <e k="ui_training_already_done" v="%s has already attended training this month." />
-        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_instructionWorkerTransport" v="Brug transportknappen til at administrere transportrækkefølgen, og tryk S for at træne medarbejderen." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Åbne lønkrav behandles via knappen Administrer lønkrav." />
+        <e k="ui_instructionSwitchEntry" v="Klik på en post for at vælge den; brug musehjulet til at rulle." />
+        <e k="ui_training_no_progress" v="Denne medarbejder har endnu ingen passende læringsretning." />
+        <e k="ui_training_worker_busy" v="Medarbejderen arbejder i øjeblikket og kan ikke deltage i træning." />
+        <e k="ui_training_worker_sick" v="Medarbejderen er syg og kan ikke deltage i træning." />
+        <e k="ui_training_already_done" v="%s har allerede deltaget i træning denne måned." />
+        <e k="ui_training_started" v="%s starter træning i %s indtil månedens udgang (%s)." />
+        <e k="ui_training_completed" v="%s har gennemført træning i %s: %d%% til %d%%." />
         <e k="ui_noApplicantsDetail" v="Der er i øjeblikket ingen ansøgere" />
         <e k="ui_noWorkersDetail" v="Ingen medarbejdere ansat endnu" />
-        <e k="ui_entryZero" v="Post 0 von 0" />
+        <e k="ui_entryZero" v="Post 0 af 0" />
         <e k="ui_visibleRange" v="Synlig %d-%d" />
         <e k="ui_allEntriesVisible" v="Alle poster synlige" />
-        <e k="ui_entryCounter" v="Post %d von %d" />
-        <e k="ui_monthlyLineStaff" v="Medarbejdere ansat: hjælper %d | specialist %d | ekspert %d" />
+        <e k="ui_entryCounter" v="Post %d af %d" />
+        <e k="ui_monthlyLineStaff" v="Medarbejdere: hjælpere %d | faglærte %d | professionelle %d" />
         <e k="ui_monthlyLineApplicantsReady" v="Ansøgere på markedet: %d" />
         <e k="ui_monthlyLineApplicantsEmpty" v="Der er i øjeblikket ingen ansøgere" />
         <e k="ui_monthlyLineNoWorkers" v="Ingen medarbejdere ansat endnu" />
-        <e k="ui_monthlyLineAvailableWorkers" v="Tilgængelige: %d von %d" />
+        <e k="ui_monthlyLineAvailableWorkers" v="Tilgængelige: %d af %d" />
         <e k="ui_monthlyLinePayroll" v="Månedsløn: %s" />
         <e k="ui_monthlyLineWorkStats" v="Arbejdstid: %d opgaver | %s | Månedsløn: %s" />
         <e k="ui_button_transport_assign" v="Tildel transport" />
@@ -145,94 +146,347 @@
         <e k="ui_transportNoDriverAssigned" v="transport: ingen endnu." />
         <e k="ui_transportNoDriverAvailable" v="transport: optaget." />
         <e k="ui_transportAutoAssigned" v="transport: tildel transport." />
-        <e k="ui_experienceGainSingle" v="%s: Erfaring +1. Erfaring: %d to %d" />
-        <e k="ui_experienceGainMultiple" v="%s: Erfaring +%d. Erfaring: %d to %d" />
-        <e k="ui_experienceMonthlyLimitReached" v="%s: Erfaring monthly limit reached." />
-        <e k="ui_loyaltyChanged" v="%s: Loyalitet %s. Loyalitet: %d to %d" />
-        <e k="ui_loyaltyWarningLow" v="%s: Loyalitet low." />
-        <e k="ui_loyaltyWarningVeryLow" v="%s: Loyalitet very low." />
+        <e k="ui_experienceGainSingle" v="%s: erfaring +1. Erfaring: %d → %d" />
+        <e k="ui_experienceGainMultiple" v="%s: erfaring +%d. Erfaring: %d → %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s: månedens erfaringsgrænse er nået." />
+        <e k="ui_loyaltyChanged" v="%s: loyalitet %s. Loyalitet: %d → %d" />
+        <e k="ui_loyaltyWarningLow" v="%s: lav loyalitet." />
+        <e k="ui_loyaltyWarningVeryLow" v="%s: meget lav loyalitet." />
         <e k="ui_loyaltyWarningCritical" v="%s: sagt op til månedens slutning." />
         <e k="ui_loyaltyResignationNotice" v="%s: sagt op til månedens slutning." />
-        <e k="ui_sicknessNotice" v="%s: syg - cannot work today." />
-        <e k="ui_sicknessNoticeJobAborted" v="%s: syg - current job cancelled." />
+        <e k="ui_sicknessNotice" v="%s: syg og kan ikke arbejde i dag." />
+        <e k="ui_sicknessNoticeJobAborted" v="%s: syg, det aktuelle arbejde blev afbrudt." />
         <e k="ui_button_raise_grant" v="Giv lønforhøjelse" />
         <e k="ui_button_raise_decline" v="Afvis anmodning" />
-        <e k="ui_salaryRaisePendingLine" v="Lønforhøjelse: %s statt %s" />
-        <e k="ui_salaryRaiseRequestNotification" v="%s requests lønforhøjelse after reaching %s: %s." />
-        <e k="ui_salaryRaiseRequestHistory" v="Lønforhøjelse: %s requests %s." />
+        <e k="ui_button_salary_manage_long" v="Administrer lønkrav" />
+        <e k="ui_salaryRequestsTitle" v="Administrer lønkrav" />
+        <e k="ui_salaryRequestsIntro" v="Her vises alle åbne krav om lønforhøjelse. Vælg en medarbejder, og beslut om kravet skal godkendes eller afvises." />
+        <e k="ui_salaryRequestsHeaderEmployee" v="Medarbejder" />
+        <e k="ui_salaryRequestsHeaderCurrent" v="Nuværende løn" />
+        <e k="ui_salaryRequestsHeaderRequested" v="Ønsket løn" />
+        <e k="ui_salaryRequestsNoRequests" v="Ingen åbne lønkrav." />
+        <e k="ui_salaryRequestsControls" v="Pil op/ned: vælg | Enter: godkend | Mellemrum: afvis" />
+        <e k="ui_salaryRaisePendingLine" v="Lønforhøjelse: %s i stedet for %s" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s anmoder efter at have nået %s om en løn på %s." />
+        <e k="ui_salaryRaiseRequestHistory" v="Lønforhøjelse: %s anmoder om %s." />
         <e k="ui_salaryRaiseGranted" v="Giv lønforhøjelse: %s - %s." />
         <e k="ui_salaryRaiseDeclined" v="Afvis anmodning: %s." />
-        <e k="ui_salaryRaisePendingPenalty" v="Open lønforhøjelse: %s affects loyalitet: %s." />
-        <e k="ui_salaryRaiseGrantedReputation" v="Fair lønforhøjelse: %s Arbejdsgiveromdømme" />
+        <e k="ui_salaryRaisePendingPenalty" v="Åben lønforhøjelse: %s påvirker loyaliteten med %s." />
+        <e k="ui_salaryRaiseGrantedReputation" v="Rimelig lønforhøjelse: arbejdsgiveromdømme %s" />
         <e k="ui_hpIngameMenuPrev" v="Forrige menu" />
         <e k="ui_hpIngameMenuNext" v="Næste menu" />
-        <e k="ui_status_training" v="in training" />
-        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
-        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
-        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
-        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
-        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_status_training" v="under træning" />
+        <e k="ui_training_worker_in_training" v="Medarbejderen er allerede under træning indtil månedens udgang." />
+        <e k="ui_training_not_first_day" v="Træning kan kun startes på den første dag i en måned." />
+        <e k="ui_training_not_single_day_deadline" v="Ved 1 dag pr. måned kan træning kun begynde den første dag før kl. 12.00." />
+        <e k="ui_training_line_single_day_deadline" v="Træning: ved 1 dag/måned kun indtil kl. 12.00 · %s %s · senest: %s" />
+        <e k="ui_training_already_done_year" v="%s har allerede deltaget i træning i år." />
         <e k="ui_training_last_none" v="-" />
-        <e k="ui_training_unknown" v="unknown" />
-        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
-        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
-        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
-        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
-        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
-        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
-        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
-
-        <e k="ui_hpSetting_on" v="On"/>
-
-        <e k="ui_hpSetting_off" v="Off"/>
-
-        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
-
-        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
-
-        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
-
-        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
-
-        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
-
-        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
-
-        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
-
-        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
-
-        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
-
-        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
-
-        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
-
-        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
-        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
-
-        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
-
-        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
-
-        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
-
-        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
-
-        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
-
-        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
-
-        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
-
-        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
-
-        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
-
-        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+        <e k="ui_training_unknown" v="ukendt" />
+        <e k="ui_training_line_active" v="Træning: %s indtil månedens udgang · senest: %s" />
+        <e k="ui_training_line_no_direction" v="Træning: ingen læringsretning · senest: %s" />
+        <e k="ui_training_line_year_blocked" v="Træning: først næste år · senest: %s" />
+        <e k="ui_training_line_first_day" v="Træning: kun første dag · %s %s · senest: %s" />
+        <e k="ui_training_line_busy" v="Træning: ikke tilgængelig, arbejder · %s %s · senest: %s" />
+        <e k="ui_training_line_sick" v="Træning: ikke tilgængelig, syg · %s %s · senest: %s" />
+        <e k="ui_training_line_possible" v="Træning: tilgængelig %s, %s · senest: %s" />
+        <e k="ui_hpSetting_on" v="Til" />
+        <e k="ui_hpSetting_off" v="Fra" />
+        <e k="ui_hpSetting_section" v="PERSONALELEDELSE" />
+        <e k="ui_hpSetting_gameplayEffects" v="Personaleledelse: Spileffekter" />
+        <e k="ui_hpSetting_experienceEffects" v="Personaleledelse: Erfaringseffekter" />
+        <e k="ui_hpSetting_speedEffect" v="Personaleledelse: Arbejdshastighed" />
+        <e k="ui_hpSetting_wearEffect" v="Personaleledelse: Slitage" />
+        <e k="ui_hpSetting_consumablesEffect" v="Personaleledelse: Materialer" />
+        <e k="ui_hpSetting_fuelEffect" v="Personaleledelse: Brændstofforbrug" />
+        <e k="ui_hpSetting_reliabilityEffects" v="Personaleledelse: Pålidelighed" />
+        <e k="ui_hpSetting_personnelEffects" v="Personaleledelse: Personaleeffekter" />
+        <e k="ui_hpSetting_loyaltyEffects" v="Personaleledelse: Loyalitetsændringer" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personaleledelse: Natarbejde" />
+        <e k="ui_hpSetting_economicEffects" v="Personaleledelse: Økonomi" />
+        <e k="ui_hpSetting_individualWages" v="Personaleledelse: Individuelle lønninger" />
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Aktiverer eller deaktiverer alle spileffekter fra personaleledelsen. Viste værdier, gemte data og historik forbliver tilgængelige." />
+        <e k="ui_hpSetting_experienceEffects_desc" v="Bestemmer, om medarbejdernes erfaring og specialiseringer påvirker aktive hjælperopgaver." />
+        <e k="ui_hpSetting_speedEffect_desc" v="Bestemmer, om erfaring og passende specialiseringer påvirker arbejdshastigheden." />
+        <e k="ui_hpSetting_wearEffect_desc" v="Bestemmer, om erfaring og passende specialiseringer påvirker ekstra slitage på køretøjer og redskaber." />
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Bestemmer, om erfaring og passende specialiseringer påvirker forbruget af såsæd, gødning, herbicid, gylle, afgasset biomasse, husdyrgødning og lignende materialer." />
+        <e k="ui_hpSetting_fuelEffect_desc" v="Bestemmer, om erfaring og passende specialiseringer påvirker brændstofforbruget." />
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Bestemmer, om medarbejderens pålidelighed kan medføre korte ydelsesfald og sygedage." />
+        <e k="ui_hpSetting_personnelEffects_desc" v="Aktiverer eller deaktiverer personalerelaterede effekter som loyalitetsudvikling og påvirkning fra natarbejde." />
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Bestemmer, om medarbejdernes loyalitet ændres gennem hændelser som lønudbetalinger, natarbejde eller arbejdsgiverens omdømme." />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Bestemmer, om natarbejde påvirker loyalitet og arbejdsgiverens omdømme." />
+        <e k="ui_hpSetting_economicEffects_desc" v="Bestemmer, om individuelle økonomiske beregninger bruges. Hvis de er deaktiveret, bruges neutrale standardlønninger." />
+        <e k="ui_hpSetting_individualWages_desc" v="Bestemmer, om medarbejderne får individuelle lønninger baseret på deres rolle, erfaring, pålidelighed og specialiseringer." />
+        <e k="ui_hpSetting_groupWork" v="ARBEJDSYDELSE" />
+        <e k="ui_hpSetting_groupPersonnel" v="PERSONALEUDVIKLING" />
+        <e k="ui_hpSetting_groupEconomy" v="ØKONOMI OG LØNNINGER" />
+        <e k="ui_hpSetting_standardWage" v="Standardmånedsløn" />
+        <e k="ui_hpSetting_standardWage_desc" v="Fastlægger den grundlæggende månedsløn, når individuelle lønninger er slået fra. Værdien gælder fra næste lønberegning." />
+        <e k="ui_hpSetting_standardWageInvalid" v="Indtast en værdi mellem %d og %d. Beløbet afrundes til nærmeste 10." />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Åbn personaleledelse" />
+        <e k="ui_pmMenuPageOverview" v="Oversigt" />
+        <e k="ui_pmMenuPageApplicants" v="Ansøgere" />
+        <e k="ui_pmMenuPageEmployees" v="Medarbejdere" />
+        <e k="ui_pmMenuPageTraining" v="Træning" />
+        <e k="ui_pmMenuPageAssignments" v="Tildelinger" />
+        <e k="ui_pmMenuPrevPerson" v="Forrige person" />
+        <e k="ui_pmMenuNextPerson" v="Næste person" />
+        <e k="ui_pmPersonCounter" v="%d af %d" />
+        <e k="ui_pmMenuNoPermission" v="Du har ikke tilladelse til at træffe personalebeslutninger for denne gård." />
+        <e k="ui_pmConfirmHire" v="Vil du virkelig ansætte %s?" />
+        <e k="ui_pmConfirmDismiss" v="Vil du virkelig afskedige %s?" />
+        <e k="ui_pmConfirmTraining" v="Start træning for %s?" />
+        <e k="ui_pmProfileHeader" v="PROFIL" />
+        <e k="ui_pmHistoryHeader" v="HISTORIK" />
+        <e k="ui_button_train" v="Træn" />
+        <e k="ui_pmStatusApplicant" v="Ansøger" />
+        <e k="ui_pmBirthLine" v="Født: %s" />
+        <e k="ui_pmOriginLine" v="Erhvervsmæssig baggrund: %s" />
+        <e k="ui_pmStatsLine" v="Erfaring %d · Pålidelighed %d · Loyalitet %d" />
+        <e k="ui_pmStatExperience" v="Erfaring" />
+        <e k="ui_pmStatReliability" v="Pålidelighed" />
+        <e k="ui_pmStatLoyalty" v="Loyalitet" />
+        <e k="ui_pmWageLine" v="Løn: %s" />
+        <e k="ui_pmStatusLine" v="Status: %s" />
+        <e k="ui_pmOrigin1" v="landligt familiebrug" />
+        <e k="ui_pmOrigin2" v="lille malkekvægsbedrift" />
+        <e k="ui_pmOrigin3" v="maskinstation" />
+        <e k="ui_pmOrigin4" v="planteavlsbrug" />
+        <e k="ui_pmOrigin5" v="blandet landbrug" />
+        <e k="ui_pmStrengthReliable" v="rolig og pålidelig arbejdsstil" />
+        <e k="ui_pmStrengthTransport" v="struktureret transport og gårdlogistik" />
+        <e k="ui_pmStrengthHarvest" v="omhyggeligt høstarbejde" />
+        <e k="ui_pmStrengthSowing" v="præcis såning og markforberedelse" />
+        <e k="ui_pmApplicantProfileText" v="%s søger med en erhvervsmæssig baggrund inden for %s. Den aktuelle profil tyder på %s. Værdierne er et øjebliksbillede af ansøgerprofilen." />
+        <e k="ui_pmWorkerProfileText" v="%s har været en del af gården siden %s. Udviklingen tyder på %s. Yderligere registreringer oprettes gennem opgaver, træning og personalebeslutninger." />
+        <e k="ui_pmHistoryJobs" v="Fuldførte opgaver: %d." />
+        <e k="ui_pmHistoryWorkTime" v="Samlet arbejdstid: %s." />
+        <e k="ui_pmHistoryTrainingActive" v="Aktuel træning: %s." />
+        <e k="ui_pmHistoryTrainingLast" v="Seneste træning: år %d." />
+        <e k="ui_pmHistoryTrainingNone" v="Der er endnu ikke registreret træning." />
+        <e k="ui_pmHistoryTransportEnabled" v="Markeret til transportopgaver." />
+        <e k="ui_pmHistoryTransportDisabled" v="Ikke markeret til transportopgaver." />
+        <e k="ui_pmMenuPageSettings" v="Indstillinger" />
+        <e k="ui_pmSettingsInfo" v="Disse indstillinger gælder pr. gemt spil." />
+        <e k="ui_pmSettingsHostOnly" v="I multiplayer kan disse indstillinger kun ændres på serveren." />
+        <e k="ui_pmSettingsSectionGameplay" v="SPILLEFFEKTER" />
+        <e k="ui_pmSettingsSectionPersonnel" v="PERSONALE" />
+        <e k="ui_pmSettingsSectionEconomic" v="ØKONOMI" />
+        <e k="ui_button_transport_assign_long" v="Tildel transportopgaver" />
+        <e k="ui_button_transport_manage_long" v="Administrer transportopgaver" />
+        <e k="ui_transportPriorityTitle" v="Transportprioritet" />
+        <e k="ui_transportPriorityIntro" v="Vælg, hvilke medarbejdere der må overtage transportopgaver, og i hvilken rækkefølge de kontrolleres." />
+        <e k="ui_transportPriorityHeaderPriority" v="Prioritet" />
+        <e k="ui_transportPriorityHeaderEmployee" v="Medarbejder" />
+        <e k="ui_transportPriorityHeaderStatus" v="Status" />
+        <e k="ui_transportPriorityHeaderEnabled" v="Transport" />
+        <e k="ui_transportPriorityActive" v="Aktiv" />
+        <e k="ui_transportPriorityInactive" v="Ikke tildelt" />
+        <e k="ui_transportPriorityMoveUp" v="Flyt op" />
+        <e k="ui_transportPriorityMoveDown" v="Flyt ned" />
+        <e k="ui_transportPriorityToggle" v="Aktivér/deaktivér" />
+        <e k="ui_transportPriorityApply" v="Anvend" />
+        <e k="ui_transportPriorityCancel" v="Annuller" />
+        <e k="ui_transportPrioritySaved" v="Transportrækkefølgen er gemt." />
+        <e k="ui_transportPriorityNoWorkers" v="Der er ingen medarbejdere." />
+        <e k="ui_transportPriorityControls" v="↑/↓: vælg   A/D: flyt   Mellemrum: til/fra   Enter: anvend" />
+        <e k="ui_button_transport_remove_long" v="Fjern transportopgaver" />
+        <e k="ui_helperPersonnelMenuOverview" v="Oversigt" />
+        <e k="ui_helperPersonnelMenuApplicants" v="Ansøgere" />
+        <e k="ui_helperPersonnelMenuEmployees" v="Medarbejdere" />
+        <e k="ui_helperPersonnelMenuTraining" v="Træning" />
+        <e k="ui_helperPersonnelMenuSettings" v="SPILINDSTILLINGER" />
+        <e k="ui_pmBirthDateAge" v="%s (%d år)" />
+        <e k="ui_pmOrigin6" v="logistikvirksomhed" />
+        <e k="ui_pmOrigin7" v="landbrugsmaskinværksted" />
+        <e k="ui_pmOrigin8" v="kontorarbejde" />
+        <e k="ui_status_retirementPending" v="går på pension ved månedens udgang" />
+        <e k="ui_retirementNotice" v="%s går på pension ved månedens udgang." />
+        <e k="ui_pmTrainingIntro" v="Specialiseringer forbedrer en medarbejders præstation i den relevante læringskategori. Et kursus varer til udgangen af den aktuelle måned, og medarbejderen er ikke tilgængelig for arbejde i denne periode. Læringsfremskridtet tilskrives først, når kurset er afsluttet. Der tilbydes ikke undervisning i alle kategorier hver måned. Kurser kan være billigere eller dyrere end normalprisen. Hver medarbejder kan kun gennemføre ét kursus pr. landbrugsår fra marts til februar. Hver medarbejder kan højst opnå to specialiseringer. Vælg den ønskede læringskategori." />
+        <e k="ui_pmTrainingCategoryHeader" v="Læringskategori" />
+        <e k="ui_pmTrainingProgressHeader" v="Fremskridt mod specialisering" />
+        <e k="ui_pmTrainingRunning" v="træning i gang" />
+        <e k="ui_pmTrainingSelectCategory" v="Vælg først en træningskategori" />
+        <e k="ui_pmTrainingConfirm" v="Start træning for %s i kategorien %s?" />
+        <e k="ui_training_line_no_capacity" v="Træning: to specialiseringer opnået · senest: %s" />
+        <e k="ui_training_line_single_day_deadline_select" v="Træning: ved 1 dag/måned kun indtil kl. 12.00 · vælg en kategori i træningsmenuen · senest: %s" />
+        <e k="ui_training_line_first_day_select" v="Træning: kun på den første dag · vælg en kategori i træningsmenuen · senest: %s" />
+        <e k="ui_training_line_busy_select" v="Træning: ikke mulig under arbejde · senest: %s" />
+        <e k="ui_training_line_sick_select" v="Træning: ikke mulig under sygdom · senest: %s" />
+        <e k="ui_training_line_select_category" v="Træning: vælg en kategori i træningsmenuen · senest: %s" />
+        <e k="ui_pmTrainingCostHeader" v="Pris" />
+        <e k="ui_pmTrainingAdjustmentHeader" v="Rabat/ekstra omkostning" />
+        <e k="ui_pmTrainingNoPlaces" v="der er ingen ledige pladser i øjeblikket" />
+        <e k="ui_pmTrainingNoPlacesMessage" v="Der er i øjeblikket ingen ledige pladser på dette kursus." />
+        <e k="ui_pmProfileIntro1" v="%s arbejdede tidligere %s og har været på gården i %d måneder." />
+        <e k="ui_pmProfileIntro2" v="%s medbringer erfaring fra tidligere arbejde %s og har været en del af holdet i %d måneder." />
+        <e k="ui_pmProfileExperience1_1" v="%s har indtil videre meget lidt praktisk erfaring og skal stadig konsolidere mange arbejdsgange." />
+        <e k="ui_pmProfileExperience1_2" v="%s befinder sig stadig tydeligt i oplæringsfasen i det daglige arbejde." />
+        <e k="ui_pmProfileExperience2_1" v="%s har fået noget praktisk erfaring, men har stadig brug for støtte ved mere krævende opgaver." />
+        <e k="ui_pmProfileExperience2_2" v="%s bliver stadig mere sikker i grundprincipperne, selv om rutinen fortsat mangler på flere områder." />
+        <e k="ui_pmProfileExperience3_1" v="%s har solid erfaring og håndterer de fleste almindelige opgaver selvstændigt." />
+        <e k="ui_pmProfileExperience3_2" v="%s arbejder rutineret i den daglige drift og tilpasser sig godt til skiftende opgaver." />
+        <e k="ui_pmProfileExperience4_1" v="%s har omfattende erfaring og arbejder sikkert selv med krævende opgaver." />
+        <e k="ui_pmProfileExperience4_2" v="%s håndterer i de fleste tilfælde komplekst arbejde sikkert og selvstændigt takket være mange års praksis." />
+        <e k="ui_pmProfileExperience5_1" v="%s er blandt gårdens stærkeste specialister og har en usædvanlig stor erfaring." />
+        <e k="ui_pmProfileExperience5_2" v="%s er et af gårdens mest erfarne og alsidige holdmedlemmer." />
+        <e k="ui_pmProfileReliability1_1" v="%s er i øjeblikket vanskelig at planlægge pålideligt; aftaler og arbejdsgange følges ofte ikke som forventet." />
+        <e k="ui_pmProfileReliability1_2" v="%s viser tydelige svagheder i punktlighed, aftaler og omhyggelig udførelse." />
+        <e k="ui_pmProfileReliability2_1" v="%s arbejder ikke konstant pålideligt og bør overvåges nøje ved vigtige opgaver." />
+        <e k="ui_pmProfileReliability2_2" v="%s overholder som regel aftaler, men viser stadig mærkbare udsving i pålideligheden." />
+        <e k="ui_pmProfileReliability3_1" v="%s arbejder samlet set ordentligt og overholder aftaler i de fleste tilfælde." />
+        <e k="ui_pmProfileReliability3_2" v="%s er generelt pålidelig i den daglige drift og kan planlægges godt." />
+        <e k="ui_pmProfileReliability4_1" v="%s er et pålideligt og let planlæggeligt medlem af holdet." />
+        <e k="ui_pmProfileReliability4_2" v="%s overholder aftaler pålideligt selv ved længere eller mere krævende opgaver." />
+        <e k="ui_pmProfileReliability5_1" v="%s er usædvanligt pålidelig og giver gården stor planlægningssikkerhed." />
+        <e k="ui_pmProfileReliability5_2" v="%s overholder aftaler næsten uden undtagelse og udfører opgaver med stor omhu." />
+        <e k="ui_pmProfileLoyalty1_1" v="%s viser i øjeblikket kun ringe tilknytning til gården; et skifte kan ske når som helst." />
+        <e k="ui_pmProfileLoyalty1_2" v="%s virker kun svagt knyttet til gården og kan hurtigt forlade den ved et passende tilbud." />
+        <e k="ui_pmProfileLoyalty2_1" v="%s har indtil videre kun en begrænset tilknytning til gården, så den fremtidige udvikling er usikker." />
+        <e k="ui_pmProfileLoyalty2_2" v="%s viser forholdsvis lavt engagement og har endnu ikke opbygget en fast tilknytning til gården." />
+        <e k="ui_pmProfileLoyalty3_1" v="%s er generelt loyal over for gården uden endnu at være særligt tæt knyttet til den." />
+        <e k="ui_pmProfileLoyalty3_2" v="%s har udviklet et stabilt forhold til gården og viser et solidt engagement." />
+        <e k="ui_pmProfileLoyalty4_1" v="%s føler sig tydeligt knyttet til gården og viser stærkt engagement." />
+        <e k="ui_pmProfileLoyalty4_2" v="%s har opbygget et stærkt bånd til gården og vil sandsynligvis blive på lang sigt." />
+        <e k="ui_pmProfileLoyalty5_1" v="%s er usædvanligt tæt knyttet til gården og er blandt dens mest loyale holdmedlemmer." />
+        <e k="ui_pmProfileLoyalty5_2" v="%s viser en meget stærk og fast etableret langsigtet tilknytning til gården." />
+        <e k="ui_pmProfileSpecializations" v="De faglige styrker er især tydelige inden for %s." />
+        <e k="ui_pmProfileLearningProgress" v="Det største læringsfremskridt er i øjeblikket inden for %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization" v="Der er endnu ikke udviklet en klar faglig specialisering." />
+        <e k="ui_pmProfileActivity" v="%s har indtil videre gennemført %d opgaver og %d træningsforløb." />
+        <e k="ui_pmProfileNoActivity" v="%s er stadig ved at få de første erfaringer på gården; der er endnu ikke gennemført opgaver eller træningsforløb." />
+        <e k="ui_pmChronicleImportedEmployment" v="Det eksisterende ansættelsesforhold blev føjet til den personlige kronik." />
+        <e k="ui_pmChronicleHired" v="Medarbejderen blev ansat." />
+        <e k="ui_pmChronicleJobStarted" v="Opgave startet." />
+        <e k="ui_pmChronicleJobCompleted" v="Opgave fuldført." />
+        <e k="ui_pmChronicleSpecialization" v="Specialisering opnået." />
+        <e k="ui_pmChronicleTrainingStarted" v="Træning startet." />
+        <e k="ui_pmChronicleTrainingCompleted" v="Træning gennemført." />
+        <e k="ui_pmChronicleSickness" v="Sygdomsrelateret fravær." />
+        <e k="ui_pmChronicleDismissal" v="Afskedigelse udstedt af gården." />
+        <e k="ui_pmChronicleResignation" v="Opsigelse meddelt til månedens udgang." />
+        <e k="ui_pmChronicleRetirement" v="Pensionering meddelt til månedens udgang." />
+        <e k="ui_pmChronicleEmploymentEnded" v="Ansættelsesforhold afsluttet." />
+        <e k="ui_pmChronicleSalaryRequest" v="Lønforhøjelse anmodet." />
+        <e k="ui_pmChronicleSalaryGranted" v="Lønforhøjelse godkendt." />
+        <e k="ui_pmChronicleSalaryDeclined" v="Anmodning om lønforhøjelse afvist." />
+        <e k="ui_pmProfileEmployeeMale" v="Medarbejderen" />
+        <e k="ui_pmProfileEmployeeFemale" v="Medarbejderen" />
+        <e k="ui_pmProfilePronounMale" v="Han" />
+        <e k="ui_pmProfilePronounFemale" v="Hun" />
+        <e k="ui_pmProfileBackgroundFamilyFarm" v="på et landligt familiebrug" />
+        <e k="ui_pmProfileBackgroundDairyFarm" v="på en lille malkekvægsbedrift" />
+        <e k="ui_pmProfileBackgroundContractor" v="for en maskinstation" />
+        <e k="ui_pmProfileBackgroundArableFarm" v="på et planteavlsbrug" />
+        <e k="ui_pmProfileBackgroundMixedFarm" v="på et blandet landbrug" />
+        <e k="ui_pmProfileBackgroundLogistics" v="i en logistikvirksomhed" />
+        <e k="ui_pmProfileBackgroundWorkshop" v="på et landbrugsmaskinværksted" />
+        <e k="ui_pmProfileBackgroundOffice" v="i et kontorjob" />
+        <e k="ui_pmProfileIntro3" v="%s har nu arbejdet på gården i %d måneder og var tidligere ansat %s." />
+        <e k="ui_pmProfileExperience1_3" v="%s forstår de grundlæggende processer, men har stadig brug for vejledning og øvelse til mange opgaver." />
+        <e k="ui_pmProfileExperience2_3" v="%s klarer almindelige opgaver stadig bedre, men skal fortsat uddybe mere komplekse arbejdsgange." />
+        <e k="ui_pmProfileExperience3_3" v="%s har et pålideligt fagligt fundament og kan bruges til en række forskellige opgaver." />
+        <e k="ui_pmProfileExperience4_3" v="%s kender mange af gårdens processer fra praktisk erfaring og kan påtage sig vanskeligere opgaver." />
+        <e k="ui_pmProfileExperience5_3" v="%s har en usædvanlig bred ekspertise og håndterer selv meget krævende opgaver sikkert." />
+        <e k="ui_pmProfileReliability1_3" v="%s skaber gentagne gange usikkerhed i arbejdsplanlægningen gennem upålidelig indsats." />
+        <e k="ui_pmProfileReliability2_3" v="%s kan håndtere rutineopgaver, men er endnu ikke konsekvent pålidelig ved krævende arbejde." />
+        <e k="ui_pmProfileReliability3_3" v="%s udfører de fleste opgaver samvittighedsfuldt, selv om der stadig forekommer enkelte udsving." />
+        <e k="ui_pmProfileReliability4_3" v="%s arbejder stabilt og omhyggeligt med kun få fravær eller uregelmæssigheder." />
+        <e k="ui_pmProfileReliability5_3" v="%s forbliver usædvanligt pålidelig og stabil selv ved vanskelige opgaver." />
+        <e k="ui_pmProfileLoyalty1_3" v="%s ser tilsyneladende jobbet mere som en kortsigtet løsning end som en varig rolle." />
+        <e k="ui_pmProfileLoyalty2_3" v="%s bliver på gården, men et langsigtet tilhørsforhold kan endnu ikke tages for givet." />
+        <e k="ui_pmProfileLoyalty3_3" v="%s virker tilpas på holdet, selv om tilknytningen stadig kan blive stærkere." />
+        <e k="ui_pmProfileLoyalty4_3" v="%s identificerer sig stærkt med gården og står loyalt bag virksomheden." />
+        <e k="ui_pmProfileLoyalty5_3" v="%s identificerer sig særligt stærkt med gården og vil sandsynligvis forblive varigt engageret." />
+        <e k="ui_pmProfileSpecializations2" v="%s har hovedsageligt specialiseret sig i %s." />
+        <e k="ui_pmProfileSpecializations3" v="%s viser særlige styrker inden for %s." />
+        <e k="ui_pmProfileLearningProgress2" v="%s udvikler sig i øjeblikket særligt godt inden for %s (%d %%)." />
+        <e k="ui_pmProfileLearningProgress3" v="%s har hidtil opnået det største læringsfremskridt inden for %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization2" v="%s har endnu ikke udviklet en fast specialisering." />
+        <e k="ui_pmProfileNoSpecialization3" v="Den faglige retning for %s er stadig åben." />
+        <e k="ui_pmProfileActivity2" v="Tiden på gården omfatter indtil videre %d fuldførte opgaver og %d træningsforløb." />
+        <e k="ui_pmProfileActivity3" v="%s har indtil videre fuldført %d opgaver og %d træningsforløb." />
+        <e k="ui_pmProfileNoActivity2" v="For %s er den praktiske udvikling på gården kun lige begyndt." />
+        <e k="ui_pmProfileNoActivity3" v="%s har endnu ikke fuldført en opgave eller deltaget i et træningsforløb." />
+        <e k="ui_hpSetting_toggle" v="Skift" />
+        <e k="ui_worker_status_line" v="Arbejdsstatus: %s" />
+        <e k="ui_pmApplicantProfileIntro" v="%s har tidligere arbejdet %s." />
+        <e k="ui_pmApplicantProfileMarketNew" v="Ansøgningen er ny på markedet denne måned." />
+        <e k="ui_pmApplicantProfileMarketOneMonth" v="Ansøgningen har været på markedet i en måned." />
+        <e k="ui_pmApplicantProfileMarketMonths" v="Ansøgningen har været på markedet i %d måneder." />
+        <e k="ui_pmApplicantProfileAge1" v="Som %d-årig er karriereforløbet stadig i begyndelsen. Der er et stort udviklingspotentiale." />
+        <e k="ui_pmApplicantProfileAge2" v="Som %d-årig er den faglige udvikling stadig under opbygning og kan endnu styrkes betydeligt." />
+        <e k="ui_pmApplicantProfileAge3" v="Som %d-årig foreligger der allerede et veletableret karriereforløb. Hvor nyttig erfaringen er i landbruget, afhænger af den tidligere baggrund." />
+        <e k="ui_pmApplicantProfileAge4" v="Som %d-årig kan der forventes omfattende generel erhvervserfaring, men det er ikke automatisk det samme som landbrugspraksis." />
+        <e k="ui_pmApplicantProfileExperience1" v="Den praktiske landbrugserfaring er stadig meget begrænset. En grundig oplæring er nødvendig." />
+        <e k="ui_pmApplicantProfileExperience2" v="Der er grundlæggende landbrugskendskab, men krævende opgaver mangler stadig rutine." />
+        <e k="ui_pmApplicantProfileExperience3" v="Den eksisterende erfaring giver et solidt grundlag for almindelige opgaver, selv om ikke alle områder beherskes sikkert." />
+        <e k="ui_pmApplicantProfileExperience4" v="Landbrugserfaringen er tydeligt udviklet og taler for alsidig anvendelse." />
+        <e k="ui_pmApplicantProfileExperience5" v="Erfaringen ligger på et usædvanligt højt niveau og gør krævende opgaver realistiske." />
+        <e k="ui_pmApplicantProfileReliability1" v="Pålidelighedsværdien peger på tydelige risici ved planlægning, aftaler og omhyggelig udførelse." />
+        <e k="ui_pmApplicantProfileReliability2" v="Pålideligheden er stadig svingende. Vigtige opgaver bør følges nøje." />
+        <e k="ui_pmApplicantProfileReliability3" v="Pålideligheden ligger på et fornuftigt niveau og muliggør som regel forudsigelig planlægning." />
+        <e k="ui_pmApplicantProfileReliability4" v="Den høje pålidelighed peger på stabilt, omhyggeligt og let planlæggeligt arbejde." />
+        <e k="ui_pmApplicantProfileReliability5" v="Den usædvanligt høje pålidelighed giver en meget høj grad af planlægningssikkerhed." />
+        <e k="ui_pmApplicantProfileLoyalty1" v="Den lave loyalitet tyder kun på en svag tilknytning til en fremtidig arbejdsgiver." />
+        <e k="ui_pmApplicantProfileLoyalty2" v="Loyaliteten er stadig tilbageholdende. En langsigtet tilknytning skal først udvikles." />
+        <e k="ui_pmApplicantProfileLoyalty3" v="Loyaliteten ligger stabilt i midterfeltet og giver et godt grundlag for et længere samarbejde." />
+        <e k="ui_pmApplicantProfileLoyalty4" v="Den høje loyalitet tyder på en stærk vilje til at blive på bedriften på lang sigt." />
+        <e k="ui_pmApplicantProfileLoyalty5" v="Den usædvanligt høje loyalitet tyder på en særlig stærk vilje til at opbygge en varig tilknytning." />
+        <e k="ui_pmHistoryColumnCareer" v="Tidligere forløb" />
+        <e k="ui_pmHistoryColumnRecent" v="Seneste hændelser" />
+        <e k="ui_pmHistoryColumnTotals" v="Summer" />
+        <e k="ui_pmHistoryNoRecord" v="ingen registrering" />
+        <e k="ui_pmHistoryDateFormat" v="Dag %d · %d/%d" />
+        <e k="ui_pmHistorySalaryAccepted" v="godkendt" />
+        <e k="ui_pmHistorySalaryDeclined" v="afvist" />
+        <e k="ui_pmHistorySalaryPending" v="åben" />
+        <e k="ui_pmHistorySalaryUnresolved" v="ingen registreret afgørelse" />
+        <e k="ui_pmHistoryAbortSickness" v="sygdom" />
+        <e k="ui_pmHistoryAbortUnreliability" v="upålidelighed" />
+        <e k="ui_pmHistoryAbortOther" v="anden årsag" />
+        <e k="ui_pmHistoryLastSickness" v="Senest syg: %s" />
+        <e k="ui_pmHistoryLastSalaryRequest" v="Seneste lønkrav: %s · %s" />
+        <e k="ui_pmHistoryLastAbort" v="Seneste afbrudte opgave: %s · %s" />
+        <e k="ui_pmHistoryTotalSickness" v="Sygedage: %d" />
+        <e k="ui_pmHistoryTotalSalaryRequests" v="Lønkrav: %d" />
+        <e k="ui_pmHistoryTotalAborts" v="Afbrudte opgaver: %d" />
+        <e k="ui_pmHistoryTotalSalaryPaid" v="Løn i alt: %s" />
+        <e k="ui_pmHistoryTrainingYearCompact" v="År %d" />
+        <e k="ui_pmHistoryTrainingNoneCompact" v="ingen" />
+        <e k="ui_pmHistoryCareerJobs" v="Opgaver: %d" />
+        <e k="ui_pmHistoryCareerWorkTime" v="Arbejdstid: %s" />
+        <e k="ui_pmHistoryCareerTraining" v="Kursus: %s" />
+        <e k="ui_pmHistoryCareerTransport" v="Transport: %s" />
+        <e k="ui_pmHistoryValueActive" v="aktiv" />
+        <e k="ui_pmHistoryValueInactive" v="ikke aktiv" />
+        <e k="ui_monthlyRowApplicants" v="Ansøgere" />
+        <e k="ui_monthlyRowEmployees" v="Medarbejdere" />
+        <e k="ui_monthlyRowAvailable" v="Ledige" />
+        <e k="ui_monthlyRowJobs" v="Opgaver" />
+        <e k="ui_monthlyRowWorkTime" v="Arbejdstid" />
+        <e k="ui_monthlyRowWages" v="Månedslønninger" />
+        <e k="ui_monthlyRowPayroll" v="Seneste lønafregning" />
+        <e k="ui_pmOverviewOverallHeader" v="I ALT" />
+        <e k="ui_pmOverviewTotalJobs" v="Opgaver i alt" />
+        <e k="ui_pmOverviewTotalWorkTime" v="Arbejdstid i alt" />
+        <e k="ui_pmOverviewTotalPayroll" v="Lønninger i alt" />
+        <e k="ui_pmOverviewEverHired" v="Ansat i alt" />
+        <e k="ui_pmOverviewDismissed" v="Afskediget" />
+        <e k="ui_pmOverviewResigned" v="Egne opsigelser" />
+        <e k="ui_pmOverviewRetired" v="Pensioneret" />
+        <e k="ui_pmChronicleJobAbortedSickness" v="Opgave afbrudt på grund af sygdom." />
+        <e k="ui_reliabilityJobAbortOtherTaskMale" v="%s afbrød den igangværende opgave, fordi han mente, at en anden opgave var vigtigere." />
+        <e k="ui_reliabilityJobAbortOtherTaskFemale" v="%s afbrød den igangværende opgave, fordi hun mente, at en anden opgave var vigtigere." />
+        <e k="ui_reliabilityJobAbortBreakMale" v="%s afbrød den igangværende opgave. Han ville holde en pause." />
+        <e k="ui_reliabilityJobAbortBreakFemale" v="%s afbrød den igangværende opgave. Hun ville holde en pause." />
+        <e k="ui_reliabilityJobAbortPrivateMale" v="%s afbrød den igangværende opgave. Han skulle tage sig af private anliggender." />
+        <e k="ui_reliabilityJobAbortPrivateFemale" v="%s afbrød den igangværende opgave. Hun skulle tage sig af private anliggender." />
+        <e k="ui_reliabilityJobAbortStoveMale" v="%s afbrød den igangværende opgave, fordi han havde glemt at slukke komfuret derhjemme og derfor kørte hjem." />
+        <e k="ui_reliabilityJobAbortStoveFemale" v="%s afbrød den igangværende opgave, fordi hun havde glemt at slukke komfuret derhjemme og derfor kørte hjem." />
+        <e k="ui_reliabilityJobAbortFriendsMale" v="%s afbrød den igangværende opgave, fordi han spontant besluttede at mødes med venner." />
+        <e k="ui_reliabilityJobAbortFriendsFemale" v="%s afbrød den igangværende opgave, fordi hun spontant besluttede at mødes med venner." />
+        <e k="ui_reliabilityJobAbortPartnerMale" v="%s afbrød den igangværende opgave for spontant at drikke kaffe med sin kæreste." />
+        <e k="ui_reliabilityJobAbortPartnerFemale" v="%s afbrød den igangværende opgave for spontant at drikke kaffe med sin kæreste." />
     </elements>
 </l10n>

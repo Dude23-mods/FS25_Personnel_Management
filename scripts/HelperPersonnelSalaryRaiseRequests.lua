@@ -2,8 +2,6 @@
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
 HelperPersonnelNetwork.STATE_VERSION = math.max(tonumber(HelperPersonnelNetwork.STATE_VERSION) or 0, 11)
-HelperPersonnelNetwork.ACTION_GRANT_SALARY_RAISE = "grantSalaryRaise"
-HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE = "declineSalaryRaise"
 
 local function hpSRGetText(key, fallback)
     if g_i18n ~= nil and g_i18n.getText ~= nil then
@@ -312,6 +310,17 @@ if HelperPersonnelManager ~= nil then
         end
 
         self:showSalaryRaiseRequestNotification(worker)
+        if self.addPersonChronicleEntry ~= nil then
+            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_SALARY_REQUEST, {
+                reason = isFollowupCheck == true and "followup" or "experienceStage",
+                valueName = "baseWage",
+                oldValue = tonumber(worker.salaryRaisePreviousBaseWage) or tonumber(previousBaseWage) or 0,
+                newValue = tonumber(worker.salaryRaiseTargetBaseWage) or 0,
+                delta = (tonumber(worker.salaryRaiseTargetBaseWage) or 0) - (tonumber(worker.salaryRaisePreviousBaseWage) or tonumber(previousBaseWage) or 0),
+                amount = tonumber(worker.salaryRaiseTargetBaseWage) or 0,
+                text = hpSRGetText("ui_pmChronicleSalaryRequest", "Gehaltsforderung gestellt.")
+            })
+        end
         return true
     end
 
@@ -500,6 +509,17 @@ if HelperPersonnelManager ~= nil then
 
             local template = hpSRGetText("ui_salaryRaisePendingPenalty", "Offene Gehaltsforderung von %s belastet die Loyalitaet: %s.")
             self:touch(string.format(template, self:getFullName(worker), self:formatSignedDelta(appliedDelta)))
+            if self.addPersonChronicleEntry ~= nil then
+                self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_LOYALTY_CHANGED, {
+                    period = period,
+                    gameYear = year,
+                    reason = "openSalaryRequest",
+                    valueName = "loyalty",
+                    oldValue = oldLoyalty,
+                    newValue = newLoyalty,
+                    delta = appliedDelta
+                })
+            end
         else
             self.changeCounter = (self.changeCounter or 0) + 1
         end
@@ -526,6 +546,8 @@ if HelperPersonnelManager ~= nil then
             return false
         end
 
+        local oldWage = tonumber(worker.baseWage)
+        local oldLoyalty = tonumber(worker.loyalty)
         local targetBaseWage = math.max(tonumber(worker.salaryRaiseTargetBaseWage) or 0, tonumber(worker.baseWage) or 0)
         if targetBaseWage <= 0 then
             targetBaseWage = self:calculateSalaryRaiseTargetBaseWage(worker, worker.salaryRaiseStage or self:getExperienceStage(worker.experience or 0))
@@ -551,6 +573,27 @@ if HelperPersonnelManager ~= nil then
 
         local template = hpSRGetText("ui_salaryRaiseGranted", "Gehaltserhöhung für %s gewährt: %s.")
         self:touch(string.format(template, fullName, targetText))
+        if self.addPersonChronicleEntry ~= nil then
+            local newWage = tonumber(worker.baseWage) or oldWage or 0
+            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_SALARY_CHANGED, {
+                reason = "salaryRaiseGranted",
+                valueName = "baseWage",
+                oldValue = oldWage,
+                newValue = newWage,
+                delta = oldWage ~= nil and newWage - oldWage or nil,
+                amount = newWage,
+                text = hpSRGetText("ui_pmChronicleSalaryGranted", "Gehaltserhöhung gewährt.")
+            })
+            if oldLoyalty ~= nil and tonumber(worker.loyalty) ~= oldLoyalty then
+                self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_LOYALTY_CHANGED, {
+                    reason = "salaryRaiseGranted",
+                    valueName = "loyalty",
+                    oldValue = oldLoyalty,
+                    newValue = tonumber(worker.loyalty),
+                    delta = tonumber(worker.loyalty) - oldLoyalty
+                })
+            end
+        end
         return true
     end
 
@@ -560,6 +603,8 @@ if HelperPersonnelManager ~= nil then
             return false
         end
 
+        local oldLoyalty = tonumber(worker.loyalty)
+        local targetWage = tonumber(worker.salaryRaiseTargetBaseWage)
         local loyaltyEffectsEnabled = self.isPersonnelEffectEnabled == nil or self:isPersonnelEffectEnabled("loyalty")
         if loyaltyEffectsEnabled then
             local oldLoyalty = self:clampPersonStat(worker.loyalty or HelperPersonnelManager.DEFAULT_LOYALTY)
@@ -580,6 +625,22 @@ if HelperPersonnelManager ~= nil then
 
         local template = hpSRGetText("ui_salaryRaiseDeclined", "Gehaltsforderung von %s abgelehnt.")
         self:touch(string.format(template, fullName))
+        if self.addPersonChronicleEntry ~= nil then
+            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_SALARY_REQUEST_DECLINED, {
+                reason = "salaryRaiseDeclined",
+                amount = targetWage,
+                text = hpSRGetText("ui_pmChronicleSalaryDeclined", "Gehaltsforderung abgelehnt.")
+            })
+            if oldLoyalty ~= nil and tonumber(worker.loyalty) ~= oldLoyalty then
+                self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_LOYALTY_CHANGED, {
+                    reason = "salaryRaiseDeclined",
+                    valueName = "loyalty",
+                    oldValue = oldLoyalty,
+                    newValue = tonumber(worker.loyalty),
+                    delta = tonumber(worker.loyalty) - oldLoyalty
+                })
+            end
+        end
         return true
     end
 
@@ -604,7 +665,7 @@ if HelperPersonnelManager ~= nil then
     end
 
     local HP_SR_ORIGINAL_AWARD_WORKER_EXPERIENCE = HelperPersonnelManager.awardWorkerExperience
-    function HelperPersonnelManager:awardWorkerExperience(worker, workMinutes)
+    local function hpOverride_HelperPersonnelManager_awardWorkerExperience_1(self, worker, workMinutes)
         if HP_SR_ORIGINAL_AWARD_WORKER_EXPERIENCE == nil then
             return 0, 0
         end
@@ -619,9 +680,10 @@ if HelperPersonnelManager ~= nil then
 
         return experienceGain, monthlyLimit
     end
+    HelperPersonnelManager.awardWorkerExperience = hpOverride_HelperPersonnelManager_awardWorkerExperience_1
 
     local HP_SR_ORIGINAL_NORMALIZE_PERSON = HelperPersonnelManager.normalizePersonRuntimeData
-    function HelperPersonnelManager:normalizePersonRuntimeData(person)
+    local function hpOverride_HelperPersonnelManager_normalizePersonRuntimeData_2(self, person)
         if HP_SR_ORIGINAL_NORMALIZE_PERSON ~= nil then
             HP_SR_ORIGINAL_NORMALIZE_PERSON(self, person)
         end
@@ -646,9 +708,10 @@ if HelperPersonnelManager ~= nil then
 
         return person
     end
+    HelperPersonnelManager.normalizePersonRuntimeData = hpOverride_HelperPersonnelManager_normalizePersonRuntimeData_2
 
     local HP_SR_ORIGINAL_COPY_PERSON_FOR_NETWORK = HelperPersonnelManager.copyPersonForNetwork
-    function HelperPersonnelManager:copyPersonForNetwork(person)
+    local function hpOverride_HelperPersonnelManager_copyPersonForNetwork_2(self, person)
         local copy = HP_SR_ORIGINAL_COPY_PERSON_FOR_NETWORK ~= nil and HP_SR_ORIGINAL_COPY_PERSON_FOR_NETWORK(self, person) or {}
         if type(person) == "table" then
             copy.salaryRaisePending = person.salaryRaisePending == true
@@ -670,9 +733,10 @@ if HelperPersonnelManager ~= nil then
 
         return copy
     end
+    HelperPersonnelManager.copyPersonForNetwork = hpOverride_HelperPersonnelManager_copyPersonForNetwork_2
 
     local HP_SR_ORIGINAL_READ_PERSON_FROM_XML = HelperPersonnelManager.readPersonFromXML
-    function HelperPersonnelManager:readPersonFromXML(xmlFile, key)
+    local function hpOverride_HelperPersonnelManager_readPersonFromXML_2(self, xmlFile, key)
         local person = HP_SR_ORIGINAL_READ_PERSON_FROM_XML ~= nil and HP_SR_ORIGINAL_READ_PERSON_FROM_XML(self, xmlFile, key) or nil
         if person ~= nil and xmlFile ~= nil and key ~= nil then
             person.salaryRaisePending = xmlFile:getBool(key .. "#salaryRaisePending", false) == true
@@ -694,9 +758,10 @@ if HelperPersonnelManager ~= nil then
 
         return person
     end
+    HelperPersonnelManager.readPersonFromXML = hpOverride_HelperPersonnelManager_readPersonFromXML_2
 
     local HP_SR_ORIGINAL_WRITE_PERSON_TO_XML = HelperPersonnelManager.writePersonToXML
-    function HelperPersonnelManager:writePersonToXML(xmlFile, key, person, includeWorkerState)
+    local function hpOverride_HelperPersonnelManager_writePersonToXML_2(self, xmlFile, key, person, includeWorkerState)
         if HP_SR_ORIGINAL_WRITE_PERSON_TO_XML ~= nil then
             HP_SR_ORIGINAL_WRITE_PERSON_TO_XML(self, xmlFile, key, person, includeWorkerState)
         end
@@ -721,9 +786,10 @@ if HelperPersonnelManager ~= nil then
         xmlFile:setInt(key .. "#salaryRaiseDeclinedUntilPeriod", tonumber(person.salaryRaiseDeclinedUntilPeriod) or 0)
         xmlFile:setInt(key .. "#salaryRaiseDeclinedUntilYear", tonumber(person.salaryRaiseDeclinedUntilYear) or 0)
     end
+    HelperPersonnelManager.writePersonToXML = hpOverride_HelperPersonnelManager_writePersonToXML_2
 
     local HP_SR_ORIGINAL_WORKER_HIRED_LINE = HelperPersonnelManager.getWorkerHiredLine
-    function HelperPersonnelManager:getWorkerHiredLine(person)
+    local function hpOverride_HelperPersonnelManager_getWorkerHiredLine_2(self, person)
         local line = HP_SR_ORIGINAL_WORKER_HIRED_LINE ~= nil and HP_SR_ORIGINAL_WORKER_HIRED_LINE(self, person) or ""
         local salaryRaiseLine = self:getSalaryRaiseLine(person)
         if salaryRaiseLine ~= nil and salaryRaiseLine ~= "" then
@@ -735,9 +801,10 @@ if HelperPersonnelManager ~= nil then
 
         return line
     end
+    HelperPersonnelManager.getWorkerHiredLine = hpOverride_HelperPersonnelManager_getWorkerHiredLine_2
 
     local HP_SR_ORIGINAL_PROCESS_APPLICANT_PERIOD_CHANGE = HelperPersonnelManager.processApplicantPeriodChange
-    function HelperPersonnelManager:processApplicantPeriodChange(period, year, forceCheck)
+    local function hpOverride_HelperPersonnelManager_processApplicantPeriodChange_1(self, period, year, forceCheck)
         local changed = HP_SR_ORIGINAL_PROCESS_APPLICANT_PERIOD_CHANGE ~= nil and HP_SR_ORIGINAL_PROCESS_APPLICANT_PERIOD_CHANGE(self, period, year, forceCheck) or false
 
         if self.getApplicantPeriodInfo ~= nil then
@@ -747,9 +814,10 @@ if HelperPersonnelManager ~= nil then
         local penaltyCount = self:processOpenSalaryRaiseRequestPenalties(period, year)
         return changed == true or (tonumber(createdCount) or 0) > 0 or (tonumber(penaltyCount) or 0) > 0
     end
+    HelperPersonnelManager.processApplicantPeriodChange = hpOverride_HelperPersonnelManager_processApplicantPeriodChange_1
 
     local HP_SR_ORIGINAL_GET_LOYALTY_RESIGNATION_CHANCE = HelperPersonnelManager.getLoyaltyResignationChance
-    function HelperPersonnelManager:getLoyaltyResignationChance(worker)
+    local function hpOverride_HelperPersonnelManager_getLoyaltyResignationChance_1(self, worker)
         local chance = HP_SR_ORIGINAL_GET_LOYALTY_RESIGNATION_CHANCE ~= nil and HP_SR_ORIGINAL_GET_LOYALTY_RESIGNATION_CHANCE(self, worker) or 0
 
         if chance > 0 and self:isSalaryRaiseDeclineAftereffectActive(worker) then
@@ -758,11 +826,12 @@ if HelperPersonnelManager ~= nil then
 
         return chance
     end
+    HelperPersonnelManager.getLoyaltyResignationChance = hpOverride_HelperPersonnelManager_getLoyaltyResignationChance_1
 end
 
 if HelperPersonnelNetwork ~= nil then
     local HP_SR_ORIGINAL_WRITE_PERSON = HelperPersonnelNetwork.writePerson
-    function HelperPersonnelNetwork.writePerson(streamId, person)
+    local function hpOverride_HelperPersonnelNetwork_writePerson_1(streamId, person)
         if HP_SR_ORIGINAL_WRITE_PERSON ~= nil then
             HP_SR_ORIGINAL_WRITE_PERSON(streamId, person)
         end
@@ -789,9 +858,10 @@ if HelperPersonnelNetwork ~= nil then
         streamWriteInt32(streamId, tonumber(person.dismissalEffectivePeriod) or 0)
         streamWriteInt32(streamId, tonumber(person.dismissalEffectiveYear) or 0)
     end
+    HelperPersonnelNetwork.writePerson = hpOverride_HelperPersonnelNetwork_writePerson_1
 
     local HP_SR_ORIGINAL_READ_PERSON = HelperPersonnelNetwork.readPerson
-    function HelperPersonnelNetwork.readPerson(streamId, version)
+    local function hpOverride_HelperPersonnelNetwork_readPerson_1(streamId, version)
         local person = HP_SR_ORIGINAL_READ_PERSON ~= nil and HP_SR_ORIGINAL_READ_PERSON(streamId, version) or {}
 
         if (version or 0) >= 8 then
@@ -856,6 +926,7 @@ if HelperPersonnelNetwork ~= nil then
 
         return person
     end
+    HelperPersonnelNetwork.readPerson = hpOverride_HelperPersonnelNetwork_readPerson_1
 end
 
 if HelperPersonnelApp ~= nil then
@@ -901,132 +972,4 @@ if HelperPersonnelApp ~= nil then
         return changed
     end
 
-    local HP_SR_ORIGINAL_VALIDATE_NETWORK_ACTION_TARGET = HelperPersonnelApp.validateNetworkActionTarget
-    function HelperPersonnelApp:validateNetworkActionTarget(actionName, targetId, farmId)
-        if actionName == HelperPersonnelNetwork.ACTION_GRANT_SALARY_RAISE or actionName == HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE then
-            return self.manager ~= nil and self.manager.hasWorkerInFarm ~= nil and self.manager:hasWorkerInFarm(targetId, farmId) == true
-        end
-
-        if HP_SR_ORIGINAL_VALIDATE_NETWORK_ACTION_TARGET ~= nil then
-            return HP_SR_ORIGINAL_VALIDATE_NETWORK_ACTION_TARGET(self, actionName, targetId, farmId)
-        end
-
-        return false
-    end
-
-    local HP_SR_ORIGINAL_PROCESS_NETWORK_ACTION = HelperPersonnelApp.processNetworkAction
-    function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId)
-        if actionName ~= HelperPersonnelNetwork.ACTION_GRANT_SALARY_RAISE and actionName ~= HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE then
-            if HP_SR_ORIGINAL_PROCESS_NETWORK_ACTION ~= nil then
-                return HP_SR_ORIGINAL_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, farmId)
-            end
-            return false
-        end
-
-        if self.isServerAuthority == nil or self:isServerAuthority() ~= true or self.manager == nil then
-            return false
-        end
-
-        local authorizedFarmId = tonumber(farmId) or (self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1)
-        if self.resolveAuthorizedFarmId ~= nil then
-            local allowed, resolvedFarmId = self:resolveAuthorizedFarmId(connection, farmId, nil, actionName)
-            if not allowed then
-                if connection ~= nil and self.sendNetworkStateToConnection ~= nil then
-                    self:sendNetworkStateToConnection(connection)
-                end
-                return false
-            end
-            authorizedFarmId = resolvedFarmId or authorizedFarmId
-        end
-
-        if self.validateNetworkActionTarget ~= nil and not self:validateNetworkActionTarget(actionName, targetId, authorizedFarmId) then
-            if connection ~= nil and self.sendNetworkStateToConnection ~= nil then
-                self:sendNetworkStateToConnection(connection)
-            end
-            return false
-        end
-
-        local changed = false
-        if actionName == HelperPersonnelNetwork.ACTION_GRANT_SALARY_RAISE and self.manager.grantSalaryRaiseForFarm ~= nil then
-            changed = self.manager:grantSalaryRaiseForFarm(targetId, authorizedFarmId) == true
-        elseif actionName == HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE and self.manager.declineSalaryRaiseForFarm ~= nil then
-            changed = self.manager:declineSalaryRaiseForFarm(targetId, authorizedFarmId) == true
-        end
-
-        if changed and self.syncNetworkStateToClients ~= nil then
-            self:syncNetworkStateToClients()
-        elseif connection ~= nil and self.sendNetworkStateToConnection ~= nil then
-            self:sendNetworkStateToConnection(connection)
-        end
-
-        return changed
-    end
-end
-
-if HelperPersonnelFrame ~= nil then
-    function HelperPersonnelFrame:getSelectedWorkerForSalaryRaiseAction()
-        if self.mode ~= HelperPersonnelFrame.MODE_WORKERS then
-            return nil
-        end
-
-        local workers = self:getWorkers()
-        if #workers == 0 then
-            return nil
-        end
-
-        self.workerIndex = math.max(1, math.min(self.workerIndex or 1, #workers))
-        local worker = workers[self.workerIndex]
-        if worker ~= nil and worker.salaryRaisePending == true then
-            return worker
-        end
-
-        return nil
-    end
-
-    function HelperPersonnelFrame:onClickGrantSalaryRaise()
-        local worker = self:getSelectedWorkerForSalaryRaiseAction()
-        if worker == nil or self.app == nil or self.app.requestGrantSalaryRaise == nil then
-            return false
-        end
-
-        local changed = self.app:requestGrantSalaryRaise(worker.id) == true
-        if changed then
-            self.requestRender = true
-            self:updateButtons()
-        end
-
-        return true
-    end
-
-    function HelperPersonnelFrame:onClickDeclineSalaryRaise()
-        local worker = self:getSelectedWorkerForSalaryRaiseAction()
-        if worker == nil or self.app == nil or self.app.requestDeclineSalaryRaise == nil then
-            return false
-        end
-
-        local changed = self.app:requestDeclineSalaryRaise(worker.id) == true
-        if changed then
-            self.requestRender = true
-            self:updateButtons()
-        end
-
-        return true
-    end
-
-    local HP_SR_ORIGINAL_KEY_EVENT = HelperPersonnelFrame.keyEvent
-    function HelperPersonnelFrame:keyEvent(unicode, sym, modifier, isDown)
-        if isDown and self.mode == HelperPersonnelFrame.MODE_WORKERS and Input ~= nil and self:getSelectedWorkerForSalaryRaiseAction() ~= nil then
-            if Input.KEY_g ~= nil and sym == Input.KEY_g then
-                return self:onClickGrantSalaryRaise()
-            elseif (Input.KEY_n ~= nil and sym == Input.KEY_n) or (Input.KEY_x ~= nil and sym == Input.KEY_x) then
-                return self:onClickDeclineSalaryRaise()
-            end
-        end
-
-        if HP_SR_ORIGINAL_KEY_EVENT ~= nil then
-            return HP_SR_ORIGINAL_KEY_EVENT(self, unicode, sym, modifier, isDown)
-        end
-
-        return false
-    end
 end

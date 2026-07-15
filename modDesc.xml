@@ -1,31 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
 <modDesc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" descVersion="109" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>Dude23</author>
-    <version>1.0.3.0</version>
+    <version>1.1.0.0</version>
     <title>
         <en>Personnel Management</en>
         <de>Personalmanagement</de>
         <fr>Gestion Du Personnel</fr>
     </title>
     <description>
-        <en>Personnel Management expands the AI helper system with named employees and long-term staff management. Use the ESC menu to hire applicants, manage your team, assign employees to field work or transport jobs, and follow their development over time. Each employee has experience, reliability, loyalty and, in some cases, specializations; these values affect work performance, consumption, wear, sick days, salary demands and the risk of resignations. Salaries are paid monthly, depend on the days-per-month setting and the economy difficulty, and are posted as wage payments. Many gameplay effects can be adjusted or disabled per savegame. Includes multilingual name pools, a detailed ReadMe and multiplayer support. Employees can be trained once per year; training is available only at the beginning of a month, blocks the employee until the end of that month and costs an amount based on the monthly wage.</en>
-        <de>Personalmanagement erweitert die KI-Helfer um ein eigenes Mitarbeitersystem. Über das ESC-Menü kannst du Bewerber einstellen, Mitarbeiter verwalten, sie für Feldarbeiten oder Transportaufträge einsetzen und ihre Entwicklung verfolgen. Jeder Mitarbeiter besitzt Erfahrung, Zuverlässigkeit, Loyalität und teilweise Spezialisierungen; diese Werte beeinflussen Leistung, Verbrauch, Verschleiß, Krankheitstage, Gehaltsforderungen und das Risiko von Kündigungen. Gehälter werden monatlich gezahlt, richten sich nach Tage-pro-Monat-Einstellung und Wirtschaftsschwierigkeit und werden als Lohnzahlungen gebucht. Viele Auswirkungen können je Spielstand angepasst oder deaktiviert werden. Enthält mehrsprachige Namen, eine ausführliche ReadMe und Multiplayer-Unterstützung. Mitarbeiter können einmal pro Jahr geschult werden; Schulungen sind nur zu Monatsbeginn möglich, sperren den Mitarbeiter bis Monatsende und kosten einen vom Monatsgehalt abhängigen Betrag.</de>
-        <fr>Gestion du personnel ajoute un vrai système d'employés aux aides IA. Depuis le menu Échap, vous pouvez recruter des candidats, gérer votre équipe, affecter des employés aux travaux des champs ou aux transports et suivre leur évolution. Chaque employé possède de l'expérience, de la fiabilité et de la loyauté ; ces valeurs influencent les performances, la consommation, l'usure, les jours de maladie, les demandes de salaire et le risque de départ. Les salaires sont payés chaque mois, dépendent des jours par mois et de la difficulté économique, et sont comptabilisés comme salaires. De nombreux effets peuvent être réglés ou désactivés par sauvegarde. Inclut des listes de noms multilingues, un ReadMe détaillé et le support multijoueur. Les employés peuvent suivre une formation une fois par an ; elle n’est possible qu’au début du mois, rend l’employé indisponible jusqu’à la fin du mois et coûte un montant basé sur le salaire mensuel.</fr>
+        <en>Personnel Management expands the AI helper system with named employees and long-term staff management. Use the dedicated personnel menu, opened by shortcut, to hire applicants, manage your team, assign employees to field work or transport jobs, and follow their development over time. Each employee has experience, reliability, loyalty and, in some cases, specializations; these values affect work performance, consumption, wear, sick days, salary demands and the risk of resignations. Salaries are paid monthly, depend on the days-per-month setting and the economy difficulty, and are posted as wage payments. Many gameplay effects can be adjusted or disabled per savegame. Includes multilingual name pools, a detailed ReadMe and multiplayer support. Employees can be trained once per year; training is available only at the beginning of a month, blocks the employee until the end of that month and costs an amount based on the monthly wage.</en>
+        <de>Personalmanagement erweitert die KI-Helfer um ein eigenes Mitarbeitersystem. Über das eigene Personalmanagement-Menü, das per Tastenkombination geöffnet wird, kannst du Bewerber einstellen, Mitarbeiter verwalten, sie für Feldarbeiten oder Transportaufträge einsetzen und ihre Entwicklung verfolgen. Jeder Mitarbeiter besitzt Erfahrung, Zuverlässigkeit, Loyalität und teilweise Spezialisierungen; diese Werte beeinflussen Leistung, Verbrauch, Verschleiß, Krankheitstage, Gehaltsforderungen und das Risiko von Kündigungen. Gehälter werden monatlich gezahlt, richten sich nach Tage-pro-Monat-Einstellung und Wirtschaftsschwierigkeit und werden als Lohnzahlungen gebucht. Viele Auswirkungen können je Spielstand angepasst oder deaktiviert werden. Enthält mehrsprachige Namen, eine ausführliche ReadMe und Multiplayer-Unterstützung. Mitarbeiter können einmal pro Jahr geschult werden; Schulungen sind nur zu Monatsbeginn möglich, sperren den Mitarbeiter bis Monatsende und kosten einen vom Monatsgehalt abhängigen Betrag.</de>
+        <fr>Gestion du personnel ajoute un vrai système d'employés aux aides IA. Depuis le menu dédié au personnel, ouvert par raccourci clavier, vous pouvez recruter des candidats, gérer votre équipe, affecter des employés aux travaux des champs ou aux transports et suivre leur évolution. Chaque employé possède de l'expérience, de la fiabilité et de la loyauté ; ces valeurs influencent les performances, la consommation, l'usure, les jours de maladie, les demandes de salaire et le risque de départ. Les salaires sont payés chaque mois, dépendent des jours par mois et de la difficulté économique, et sont comptabilisés comme salaires. De nombreux effets peuvent être réglés ou désactivés par sauvegarde. Inclut des listes de noms multilingues, un ReadMe détaillé et le support multijoueur. Les employés peuvent suivre une formation une fois par an ; elle n’est possible qu’au début du mois, rend l’employé indisponible jusqu’à la fin du mois et coûte un montant basé sur le salaire mensuel.</fr>
     </description>
     <iconFilename>icon_personnelManagement.dds</iconFilename>
     <multiplayer supported="true" />
     <l10n filenamePrefix="i18n/l10n" />
     <extraSourceFiles>
         <sourceFile filename="scripts/HelperPersonnelBootstrap.lua" />
-        <sourceFile filename="scripts/HelperPersonnelGameSettings.lua" />
     </extraSourceFiles>
     <actions>
         <action name="HP_SELECT_LEFT" category="VEHICLE" axisType="HALF" />
         <action name="HP_SELECT_RIGHT" category="VEHICLE" axisType="HALF" />
         <action name="HP_SELECT_CONFIRM" category="VEHICLE" axisType="HALF" />
         <action name="HP_SELECT_CANCEL" category="VEHICLE" axisType="HALF" />
-        <action name="HP_TRANSPORT_TOGGLE" category="VEHICLE" axisType="HALF" />
-        <action name="HP_OPEN_APPLICANTS" category="VEHICLE" axisType="HALF" />
+        <action name="HP_TRANSPORT_MANAGE" category="VEHICLE" axisType="HALF" />
+        <action name="HP_SALARY_RAISE_MANAGE" category="VEHICLE" axisType="HALF" />
+        <action name="HP_OPEN_PERSONNEL_MENU" />
     </actions>
     <inputBinding>
         <actionBinding action="HP_SELECT_LEFT">
@@ -37,18 +37,20 @@
             <binding device="KB_MOUSE_DEFAULT" input="KEY_d" />
         </actionBinding>
         <actionBinding action="HP_SELECT_CONFIRM">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_return" />
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_enter" />
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_space" />
         </actionBinding>
         <actionBinding action="HP_SELECT_CANCEL">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_esc" />
             <binding device="KB_MOUSE_DEFAULT" input="KEY_escape" />
         </actionBinding>
-        <actionBinding action="HP_TRANSPORT_TOGGLE">
+        <actionBinding action="HP_TRANSPORT_MANAGE">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_t" />
         </actionBinding>
-        <actionBinding action="HP_OPEN_APPLICANTS">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_space" />
+        <actionBinding action="HP_SALARY_RAISE_MANAGE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_g" />
+        </actionBinding>
+        <actionBinding action="HP_OPEN_PERSONNEL_MENU">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_m" />
         </actionBinding>
     </inputBinding>
 </modDesc>

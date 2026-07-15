@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <l10n>
     <elements>
         <e k="ui_ingameMenuHelperPersonnel" v="Personel yönetimi" />
@@ -20,16 +20,16 @@
         <e k="ui_rank_helper" v="Yardımcı" />
         <e k="ui_rank_specialist" v="Uzman" />
         <e k="ui_specialization_short" v="Uzmanlık" />
-        <e k="ui_specialization_tillage" v="Tillage" />
-        <e k="ui_specialization_sowing" v="Sowing" />
-        <e k="ui_specialization_fertilizing" v="Fertilizing" />
-        <e k="ui_specialization_plantProtection" v="Crop Protection" />
-        <e k="ui_specialization_harvest" v="Harvest" />
-        <e k="ui_specialization_transport" v="Transport" />
-        <e k="ui_specialization_machineCare" v="Machine Care" />
-        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
-        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
-        <e k="ui_specialization_progress" v="%s öğreniyor %d%%" />
+        <e k="ui_specialization_tillage" v="Toprak işleme" />
+        <e k="ui_specialization_sowing" v="Ekim" />
+        <e k="ui_specialization_fertilizing" v="Gübreleme" />
+        <e k="ui_specialization_plantProtection" v="Bitki koruma" />
+        <e k="ui_specialization_harvest" v="Hasat" />
+        <e k="ui_specialization_transport" v="Taşıma" />
+        <e k="ui_specialization_machineCare" v="Makine bakımı" />
+        <e k="ui_specialization_resourceSaver" v="Tasarruflu çalışma" />
+        <e k="ui_specializationLearned" v="%s bir uzmanlık geliştirdi: %s." />
+        <e k="ui_specialization_progress" v="%s öğreniliyor %d%%" />
         <e k="ui_rank_expert" v="Profesyonel" />
         <e k="ui_worker_line1" v="%s · Deneyim %d · Güvenilirlik %d · Bağlılık %d" />
         <e k="ui_worker_line2" v="Aylık maaş: %s · Durum: %s" />
@@ -48,22 +48,22 @@
         <e k="ui_dismissalNoticeNextMonth" v="%s gelecek ayın sonu için işten çıkarıldı." />
         <e k="ui_dismissalNotice" v="%s ay sonunda işten çıkarılacak." />
         <e k="ui_fireDeniedPending" v="Bu çalışan zaten işten çıkarıldı." />
-        <e k="ui_fireDeniedBusy" v="Çalışanlar meşgul - i̇şten çıkar nicht möglich." />
+        <e k="ui_fireDeniedBusy" v="Çalışan görevde olduğu için işten çıkarılamaz." />
         <e k="ui_hireSuccess" v="%s - i̇şe al." />
         <e k="ui_fireSuccess" v="%s - i̇şten çıkar." />
         <e k="ui_selectionTitle" v="Çalışan seç" />
-        <e k="ui_selectionHint" v="A/D / Left/Right · Enter · Esc" />
+        <e k="ui_selectionHint" v="A/D veya sol/sağ ile değiştir · Boşluk tuşu ya da fare tıklamasıyla onayla · Esc ile iptal et" />
         <e k="ui_selectionNoWorkers" v="Şu anda uygun aday yok." />
         <e k="ui_selectionWorkerUnavailable" v="meşgul." />
         <e k="ui_selectionNoEmployees" v="Henüz çalışan işe alınmadı" />
         <e k="ui_selectionLineStats" v="%s · Deneyim %d · Güvenilirlik %d · Bağlılık %d" />
         <e k="ui_selectionLineWage" v="Aylık maaş: %s" />
-        <e k="ui_selectionLineJobs" v="İşler: %d · Work speed: %d%%" />
-        <e k="input_HP_SELECT_LEFT" v="Çalışan seç left" />
-        <e k="input_HP_SELECT_RIGHT" v="Çalışan seç right" />
+        <e k="ui_selectionLineJobs" v="Görevler: %d · Çalışma hızı: %d%%" />
+        <e k="input_HP_SELECT_LEFT" v="Önceki çalışanı seç" />
+        <e k="input_HP_SELECT_RIGHT" v="Sonraki çalışanı seç" />
         <e k="input_HP_SELECT_CONFIRM" v="Çalışan seçimini onayla" />
-        <e k="input_HP_OPEN_APPLICANTS" v="Adaylar" />
-        <e k="input_HP_TRANSPORT_TOGGLE" v="taşıma toggle" />
+        <e k="input_HP_TRANSPORT_MANAGE" v="Taşıma görevlerini yönet" />
+        <e k="input_HP_SALARY_RAISE_MANAGE" v="Zam taleplerini yönet" />
         <e k="input_HP_SELECT_CANCEL" v="Çalışan seçimini iptal et" />
         <e k="ui_openWorkerView" v="Çalışanlar" />
         <e k="ui_openApplicantView" v="Adaylar" />
@@ -84,16 +84,16 @@
         <e k="ui_noWorkersUpper" v="UYGUN ÇALIŞAN YOK" />
         <e k="ui_noActiveWorkers" v="Henüz çalışan işe alınmadı" />
         <e k="ui_activeWorkerStatusVehicle" v="Durum: çalişan personel (%s)" />
-        <e k="ui_activeWorkerStatusVehicleImplement" v="Durum: çalişan personel (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="Durum: çalışan görevde (%s) | Ekipman/römork: %s" />
         <e k="ui_activeWorkerActivityField" v="Görev: %s | Tarla: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Araç" />
         <e k="ui_activeWorkerUnknownField" v="bilinmiyor" />
-        <e k="ui_activeWorkerNoField" v="not field-bound" />
+        <e k="ui_activeWorkerNoField" v="tarlaya bağlı değil" />
         <e k="ui_activityUnknown" v="bilinmiyor" />
         <e k="ui_activityFieldWork" v="tarla işi" />
         <e k="ui_activityTransport" v="taşıma" />
-        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
-        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
+        <e k="ui_activityFollowMeTransport" v="%s ile FollowMe taşıması" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s, %s arkasında" />
         <e k="ui_activityCultivating" v="kültivasyon" />
         <e k="ui_activityPlowing" v="sürme" />
         <e k="ui_activitySowing" v="ekim" />
@@ -116,25 +116,26 @@
         <e k="ui_workersHeaderUpper" v="ÇALIŞAN YÖNETİMİ" />
         <e k="ui_instructionApplicant" v="ENTER: İşe al. ESC: Genel bakışa dön." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: İşten çıkar." />
-        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="G: Zammı onayla. N: Talebi reddet." />
-        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
-        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
-        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
-        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
-        <e k="ui_training_already_done" v="%s has already attended training this month." />
-        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_instructionWorkerTransport" v="Taşıma sırasını taşıma düğmesiyle yönetin, çalışanı eğitmek için S’ye basın." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Bekleyen zam talepleri Zam taleplerini yönet düğmesiyle işlenir." />
+        <e k="ui_instructionSwitchEntry" v="Seçmek için bir kayda tıklayın; kaydırmak için fare tekerleğini kullanın." />
+        <e k="ui_training_no_progress" v="Bu çalışanın henüz uygun bir öğrenme yönü yok." />
+        <e k="ui_training_worker_busy" v="Çalışan şu anda görevde ve eğitime katılamaz." />
+        <e k="ui_training_worker_sick" v="Çalışan hasta ve eğitime katılamaz." />
+        <e k="ui_training_already_done" v="%s bu ay zaten eğitime katıldı." />
+        <e k="ui_training_started" v="%s ay sonuna kadar %s eğitimine başlıyor (%s)." />
+        <e k="ui_training_completed" v="%s, %s eğitimini tamamladı: %d%%'den %d%%'ye." />
         <e k="ui_noApplicantsDetail" v="Şu anda uygun aday yok" />
         <e k="ui_noWorkersDetail" v="Henüz çalışan işe alınmadı" />
-        <e k="ui_entryZero" v="Kayıt 0 von 0" />
+        <e k="ui_entryZero" v="Kayıt 0 / 0" />
         <e k="ui_visibleRange" v="Görünür %d-%d" />
         <e k="ui_allEntriesVisible" v="Tüm kayıtlar görünür" />
-        <e k="ui_entryCounter" v="Kayıt %d von %d" />
+        <e k="ui_entryCounter" v="Kayıt %d / %d" />
         <e k="ui_monthlyLineStaff" v="Kadrodaki çalışanlar: yardımcı %d | uzman %d | profesyonel %d" />
         <e k="ui_monthlyLineApplicantsReady" v="Pazardaki adaylar: %d" />
         <e k="ui_monthlyLineApplicantsEmpty" v="Şu anda uygun aday yok" />
         <e k="ui_monthlyLineNoWorkers" v="Henüz çalışan işe alınmadı" />
-        <e k="ui_monthlyLineAvailableWorkers" v="Uygun: %d von %d" />
+        <e k="ui_monthlyLineAvailableWorkers" v="Uygun: %d / %d" />
         <e k="ui_monthlyLinePayroll" v="Aylık maaş: %s" />
         <e k="ui_monthlyLineWorkStats" v="Çalışma süresi: %d i̇şler | %s | Aylık maaş: %s" />
         <e k="ui_button_transport_assign" v="Taşımaya ata" />
@@ -145,94 +146,347 @@
         <e k="ui_transportNoDriverAssigned" v="taşıma: henüz yok." />
         <e k="ui_transportNoDriverAvailable" v="taşıma: meşgul." />
         <e k="ui_transportAutoAssigned" v="taşıma: taşımaya ata." />
-        <e k="ui_experienceGainSingle" v="%s: Deneyim +1. Deneyim: %d to %d" />
-        <e k="ui_experienceGainMultiple" v="%s: Deneyim +%d. Deneyim: %d to %d" />
-        <e k="ui_experienceMonthlyLimitReached" v="%s: Deneyim monthly limit reached." />
-        <e k="ui_loyaltyChanged" v="%s: Bağlılık %s. Bağlılık: %d to %d" />
-        <e k="ui_loyaltyWarningLow" v="%s: Bağlılık low." />
-        <e k="ui_loyaltyWarningVeryLow" v="%s: Bağlılık very low." />
+        <e k="ui_experienceGainSingle" v="%s: deneyim +1. Deneyim: %d → %d" />
+        <e k="ui_experienceGainMultiple" v="%s: deneyim +%d. Deneyim: %d → %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s: aylık deneyim sınırına ulaşıldı." />
+        <e k="ui_loyaltyChanged" v="%s: sadakat %s. Sadakat: %d → %d" />
+        <e k="ui_loyaltyWarningLow" v="%s: düşük sadakat." />
+        <e k="ui_loyaltyWarningVeryLow" v="%s: çok düşük sadakat." />
         <e k="ui_loyaltyWarningCritical" v="%s: ay sonunda ayrılacak." />
         <e k="ui_loyaltyResignationNotice" v="%s: ay sonunda ayrılacak." />
-        <e k="ui_sicknessNotice" v="%s: hasta - cannot work today." />
-        <e k="ui_sicknessNoticeJobAborted" v="%s: hasta - current job cancelled." />
+        <e k="ui_sicknessNotice" v="%s: hasta ve bugün çalışamaz." />
+        <e k="ui_sicknessNoticeJobAborted" v="%s: hasta, mevcut görev iptal edildi." />
         <e k="ui_button_raise_grant" v="Zammı onayla" />
         <e k="ui_button_raise_decline" v="Talebi reddet" />
-        <e k="ui_salaryRaisePendingLine" v="Zam: %s statt %s" />
-        <e k="ui_salaryRaiseRequestNotification" v="%s requests zam after reaching %s: %s." />
-        <e k="ui_salaryRaiseRequestHistory" v="Zam: %s requests %s." />
+        <e k="ui_button_salary_manage_long" v="Zam taleplerini yönet" />
+        <e k="ui_salaryRequestsTitle" v="Zam taleplerini yönet" />
+        <e k="ui_salaryRequestsIntro" v="Bekleyen tüm zam talepleri burada gösterilir. Bir çalışan seç ve talebi kabul etmeye veya reddetmeye karar ver." />
+        <e k="ui_salaryRequestsHeaderEmployee" v="Çalışan" />
+        <e k="ui_salaryRequestsHeaderCurrent" v="Mevcut maaş" />
+        <e k="ui_salaryRequestsHeaderRequested" v="Talep edilen maaş" />
+        <e k="ui_salaryRequestsNoRequests" v="Bekleyen zam talebi yok." />
+        <e k="ui_salaryRequestsControls" v="Yukarı/aşağı ok: seç | Enter: kabul et | Boşluk: reddet" />
+        <e k="ui_salaryRaisePendingLine" v="Ücret artışı: %s, önceki %s" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s, %s seviyesine ulaştıktan sonra %s ücret talep ediyor." />
+        <e k="ui_salaryRaiseRequestHistory" v="Ücret artışı: %s, %s talep ediyor." />
         <e k="ui_salaryRaiseGranted" v="Zammı onayla: %s - %s." />
         <e k="ui_salaryRaiseDeclined" v="Talebi reddet: %s." />
-        <e k="ui_salaryRaisePendingPenalty" v="Open zam: %s affects bağlılık: %s." />
-        <e k="ui_salaryRaiseGrantedReputation" v="Fair zam: %s İşveren itibarı" />
+        <e k="ui_salaryRaisePendingPenalty" v="Bekleyen ücret artışı: %s, sadakati %s etkiliyor." />
+        <e k="ui_salaryRaiseGrantedReputation" v="Adil ücret artışı: işveren itibarı %s" />
         <e k="ui_hpIngameMenuPrev" v="Önceki menü" />
         <e k="ui_hpIngameMenuNext" v="Sonraki menü" />
-        <e k="ui_status_training" v="in training" />
-        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
-        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
-        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
-        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
-        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_status_training" v="eğitimde" />
+        <e k="ui_training_worker_in_training" v="Çalışan zaten ay sonuna kadar eğitimde." />
+        <e k="ui_training_not_first_day" v="Eğitim yalnızca ayın ilk günü başlatılabilir." />
+        <e k="ui_training_not_single_day_deadline" v="Ayda 1 gün ayarında eğitim yalnızca ilk gün saat 12.00'den önce başlayabilir." />
+        <e k="ui_training_line_single_day_deadline" v="Eğitim: ayda 1 gün ise yalnızca 12.00'ye kadar · %s %s · son: %s" />
+        <e k="ui_training_already_done_year" v="%s bu yıl zaten eğitime katıldı." />
         <e k="ui_training_last_none" v="-" />
-        <e k="ui_training_unknown" v="unknown" />
-        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
-        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
-        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
-        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
-        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
-        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
-        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
-
-        <e k="ui_hpSetting_on" v="On"/>
-
-        <e k="ui_hpSetting_off" v="Off"/>
-
-        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
-
-        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
-
-        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
-
-        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
-
-        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
-
-        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
-
-        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
-
-        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
-
-        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
-
-        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
-
-        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
-
-        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
-        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
-
-        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
-
-        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
-
-        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
-
-        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
-
-        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
-
-        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
-
-        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
-
-        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
-
-        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
-
-        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+        <e k="ui_training_unknown" v="bilinmiyor" />
+        <e k="ui_training_line_active" v="Eğitim: %s, ay sonuna kadar · son: %s" />
+        <e k="ui_training_line_no_direction" v="Eğitim: öğrenme yönü yok · son: %s" />
+        <e k="ui_training_line_year_blocked" v="Eğitim: yalnızca gelecek yıl · son: %s" />
+        <e k="ui_training_line_first_day" v="Eğitim: yalnızca ilk gün · %s %s · son: %s" />
+        <e k="ui_training_line_busy" v="Eğitim: çalıştığı için kullanılamaz · %s %s · son: %s" />
+        <e k="ui_training_line_sick" v="Eğitim: hasta olduğu için kullanılamaz · %s %s · son: %s" />
+        <e k="ui_training_line_possible" v="Eğitim: kullanılabilir %s, %s · son: %s" />
+        <e k="ui_hpSetting_on" v="Açık" />
+        <e k="ui_hpSetting_off" v="Kapalı" />
+        <e k="ui_hpSetting_section" v="PERSONEL YÖNETİMİ" />
+        <e k="ui_hpSetting_gameplayEffects" v="Personel Yönetimi: Oynanış etkileri" />
+        <e k="ui_hpSetting_experienceEffects" v="Personel Yönetimi: Deneyim etkileri" />
+        <e k="ui_hpSetting_speedEffect" v="Personel Yönetimi: Çalışma hızı" />
+        <e k="ui_hpSetting_wearEffect" v="Personel Yönetimi: Aşınma" />
+        <e k="ui_hpSetting_consumablesEffect" v="Personel Yönetimi: Malzeme kullanımı" />
+        <e k="ui_hpSetting_fuelEffect" v="Personel Yönetimi: Yakıt tüketimi" />
+        <e k="ui_hpSetting_reliabilityEffects" v="Personel Yönetimi: Güvenilirlik" />
+        <e k="ui_hpSetting_personnelEffects" v="Personel Yönetimi: Personel etkileri" />
+        <e k="ui_hpSetting_loyaltyEffects" v="Personel Yönetimi: Sadakat değişimleri" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personel Yönetimi: Gece çalışması" />
+        <e k="ui_hpSetting_economicEffects" v="Personel Yönetimi: Ekonomi" />
+        <e k="ui_hpSetting_individualWages" v="Personel Yönetimi: Bireysel ücretler" />
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Personel Yönetiminin tüm oynanış etkilerini açar veya kapatır. Görüntülenen değerler, kayıtlı veriler ve geçmiş erişilebilir kalır." />
+        <e k="ui_hpSetting_experienceEffects_desc" v="Çalışan deneyimi ve uzmanlıklarının aktif yardımcı çalışmalarını etkileyip etkilemediğini belirler." />
+        <e k="ui_hpSetting_speedEffect_desc" v="Deneyimin ve uygun uzmanlıkların çalışma hızını etkileyip etkilemediğini belirler." />
+        <e k="ui_hpSetting_wearEffect_desc" v="Deneyimin ve uygun uzmanlıkların araç ve ekipmanlardaki ek aşınmayı etkileyip etkilemediğini belirler." />
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Deneyimin ve uygun uzmanlıkların tohum, gübre, herbisit, sıvı gübre, fermantasyon artığı, katı gübre ve benzeri malzemelerin kullanımını etkileyip etkilemediğini belirler." />
+        <e k="ui_hpSetting_fuelEffect_desc" v="Deneyimin ve uygun uzmanlıkların yakıt tüketimini etkileyip etkilemediğini belirler." />
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Çalışan güvenilirliğinin kısa performans düşüşlerine ve hastalık günlerine yol açıp açmayacağını belirler." />
+        <e k="ui_hpSetting_personnelEffects_desc" v="Sadakat gelişimi ve gece çalışması etkileri gibi personelle ilgili etkileri açar veya kapatır." />
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Ücret ödemeleri, gece çalışması veya işveren itibarı gibi olayların çalışan sadakatini değiştirip değiştirmediğini belirler." />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Gece çalışmasının sadakati ve işveren itibarını etkileyip etkilemediğini belirler." />
+        <e k="ui_hpSetting_economicEffects_desc" v="Bireysel ekonomik hesaplamaların kullanılıp kullanılmayacağını belirler. Kapalıysa tarafsız standart ücretler kullanılır." />
+        <e k="ui_hpSetting_individualWages_desc" v="Çalışanların rollerine, deneyimlerine, güvenilirliklerine ve uzmanlıklarına göre bireysel ücret alıp almayacağını belirler." />
+        <e k="ui_hpSetting_groupWork" v="İŞ PERFORMANSI" />
+        <e k="ui_hpSetting_groupPersonnel" v="PERSONEL GELİŞİMİ" />
+        <e k="ui_hpSetting_groupEconomy" v="EKONOMİ VE MAAŞLAR" />
+        <e k="ui_hpSetting_standardWage" v="Standart aylık maaş" />
+        <e k="ui_hpSetting_standardWage_desc" v="Bireysel maaşlar kapalıyken kullanılan temel aylık maaşı belirler. Değer bir sonraki maaş hesaplamasından itibaren geçerli olur." />
+        <e k="ui_hpSetting_standardWageInvalid" v="%d ile %d arasında bir değer girin. Tutar en yakın 10'a yuvarlanır." />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Personel Yönetimini aç" />
+        <e k="ui_pmMenuPageOverview" v="Genel bakış" />
+        <e k="ui_pmMenuPageApplicants" v="Adaylar" />
+        <e k="ui_pmMenuPageEmployees" v="Çalışanlar" />
+        <e k="ui_pmMenuPageTraining" v="Eğitim" />
+        <e k="ui_pmMenuPageAssignments" v="Görevlendirmeler" />
+        <e k="ui_pmMenuPrevPerson" v="Önceki kişi" />
+        <e k="ui_pmMenuNextPerson" v="Sonraki kişi" />
+        <e k="ui_pmPersonCounter" v="%d / %d" />
+        <e k="ui_pmMenuNoPermission" v="Bu çiftlik için personel kararları verme izniniz yok." />
+        <e k="ui_pmConfirmHire" v="%s gerçekten işe alınsın mı?" />
+        <e k="ui_pmConfirmDismiss" v="%s gerçekten işten çıkarılsın mı?" />
+        <e k="ui_pmConfirmTraining" v="%s için eğitim başlatılsın mı?" />
+        <e k="ui_pmProfileHeader" v="PROFİL" />
+        <e k="ui_pmHistoryHeader" v="GEÇMİŞ" />
+        <e k="ui_button_train" v="Eğit" />
+        <e k="ui_pmStatusApplicant" v="Aday" />
+        <e k="ui_pmBirthLine" v="Doğum: %s" />
+        <e k="ui_pmOriginLine" v="Mesleki geçmiş: %s" />
+        <e k="ui_pmStatsLine" v="Deneyim %d · Güvenilirlik %d · Sadakat %d" />
+        <e k="ui_pmStatExperience" v="Deneyim" />
+        <e k="ui_pmStatReliability" v="Güvenilirlik" />
+        <e k="ui_pmStatLoyalty" v="Sadakat" />
+        <e k="ui_pmWageLine" v="Ücret: %s" />
+        <e k="ui_pmStatusLine" v="Durum: %s" />
+        <e k="ui_pmOrigin1" v="kırsal aile çiftliği" />
+        <e k="ui_pmOrigin2" v="küçük süt çiftliği" />
+        <e k="ui_pmOrigin3" v="tarımsal yüklenici" />
+        <e k="ui_pmOrigin4" v="bitkisel üretim çiftliği" />
+        <e k="ui_pmOrigin5" v="karma çiftlik" />
+        <e k="ui_pmStrengthReliable" v="sakin ve güvenilir çalışma tarzı" />
+        <e k="ui_pmStrengthTransport" v="düzenli taşıma ve çiftlik lojistiği" />
+        <e k="ui_pmStrengthHarvest" v="özenli hasat çalışması" />
+        <e k="ui_pmStrengthSowing" v="hassas ekim ve tarla hazırlığı" />
+        <e k="ui_pmApplicantProfileText" v="%s, %s alanında mesleki geçmişle başvuruyor. Mevcut profil %s özelliğine işaret ediyor. Bu değerler başvuru profilinin anlık görünümüdür." />
+        <e k="ui_pmWorkerProfileText" v="%s, %s tarihinden beri çiftliğin bir parçası. Gelişimi %s özelliğine işaret ediyor. Görevler, eğitimler ve personel kararlarıyla yeni kayıtlar oluşturulur." />
+        <e k="ui_pmHistoryJobs" v="Tamamlanan görevler: %d." />
+        <e k="ui_pmHistoryWorkTime" v="Toplam çalışma süresi: %s." />
+        <e k="ui_pmHistoryTrainingActive" v="Mevcut eğitim: %s." />
+        <e k="ui_pmHistoryTrainingLast" v="Son eğitim: %d. yıl." />
+        <e k="ui_pmHistoryTrainingNone" v="Henüz eğitim kaydedilmedi." />
+        <e k="ui_pmHistoryTransportEnabled" v="Taşıma görevleri için işaretlendi." />
+        <e k="ui_pmHistoryTransportDisabled" v="Taşıma görevleri için işaretlenmedi." />
+        <e k="ui_pmMenuPageSettings" v="Ayarlar" />
+        <e k="ui_pmSettingsInfo" v="Bu ayarlar her kayıt için ayrı uygulanır." />
+        <e k="ui_pmSettingsHostOnly" v="Çok oyunculu modda bu ayarları yalnızca sunucu değiştirebilir." />
+        <e k="ui_pmSettingsSectionGameplay" v="OYNANIŞ ETKİLERİ" />
+        <e k="ui_pmSettingsSectionPersonnel" v="PERSONEL" />
+        <e k="ui_pmSettingsSectionEconomic" v="EKONOMİ" />
+        <e k="ui_button_transport_assign_long" v="Taşıma görevleri ata" />
+        <e k="ui_button_transport_manage_long" v="Taşıma görevlerini yönet" />
+        <e k="ui_transportPriorityTitle" v="Taşıma önceliği" />
+        <e k="ui_transportPriorityIntro" v="Taşıma görevlerini üstlenebilecek çalışanları ve kontrol sıralarını belirleyin." />
+        <e k="ui_transportPriorityHeaderPriority" v="Öncelik" />
+        <e k="ui_transportPriorityHeaderEmployee" v="Çalışan" />
+        <e k="ui_transportPriorityHeaderStatus" v="Durum" />
+        <e k="ui_transportPriorityHeaderEnabled" v="Taşıma" />
+        <e k="ui_transportPriorityActive" v="Etkin" />
+        <e k="ui_transportPriorityInactive" v="Atanmamış" />
+        <e k="ui_transportPriorityMoveUp" v="Yukarı taşı" />
+        <e k="ui_transportPriorityMoveDown" v="Aşağı taşı" />
+        <e k="ui_transportPriorityToggle" v="Etkinleştir/devre dışı bırak" />
+        <e k="ui_transportPriorityApply" v="Uygula" />
+        <e k="ui_transportPriorityCancel" v="İptal" />
+        <e k="ui_transportPrioritySaved" v="Taşıma sırası kaydedildi." />
+        <e k="ui_transportPriorityNoWorkers" v="Çalışan yok." />
+        <e k="ui_transportPriorityControls" v="↑/↓: seç   A/D: taşı   Boşluk: aç/kapat   Enter: uygula" />
+        <e k="ui_button_transport_remove_long" v="Taşıma görevlerini kaldır" />
+        <e k="ui_helperPersonnelMenuOverview" v="Genel bakış" />
+        <e k="ui_helperPersonnelMenuApplicants" v="Adaylar" />
+        <e k="ui_helperPersonnelMenuEmployees" v="Çalışanlar" />
+        <e k="ui_helperPersonnelMenuTraining" v="Eğitim" />
+        <e k="ui_helperPersonnelMenuSettings" v="OYUN AYARLARI" />
+        <e k="ui_pmBirthDateAge" v="%s (%d yaş)" />
+        <e k="ui_pmOrigin6" v="lojistik şirketi" />
+        <e k="ui_pmOrigin7" v="tarım makineleri atölyesi" />
+        <e k="ui_pmOrigin8" v="ofis mesleği" />
+        <e k="ui_status_retirementPending" v="ay sonunda emekli olacak" />
+        <e k="ui_retirementNotice" v="%s ay sonunda emekli olacak." />
+        <e k="ui_pmTrainingIntro" v="Uzmanlıklar, çalışanın ilgili öğrenme kategorisindeki performansını artırır. Eğitim mevcut ayın sonuna kadar sürer ve bu süre boyunca çalışan görevlerde kullanılamaz. Öğrenme ilerlemesi yalnızca eğitim tamamlandıktan sonra eklenir. Her kategori için her ay eğitim sunulmaz. Eğitimler normal fiyattan daha ucuz veya daha pahalı olabilir. Her çalışan marttan şubata kadar olan tarım yılı başına yalnızca bir eğitim alabilir. Bir çalışan en fazla iki uzmanlık kazanabilir. İstenen öğrenme kategorisini seçin." />
+        <e k="ui_pmTrainingCategoryHeader" v="Öğrenme kategorisi" />
+        <e k="ui_pmTrainingProgressHeader" v="Uzmanlığa doğru ilerleme" />
+        <e k="ui_pmTrainingRunning" v="eğitim devam ediyor" />
+        <e k="ui_pmTrainingSelectCategory" v="Önce bir eğitim kategorisi seçin" />
+        <e k="ui_pmTrainingConfirm" v="%s için %s kategorisinde eğitim başlatılsın mı?" />
+        <e k="ui_training_line_no_capacity" v="Eğitim: iki uzmanlığa ulaşıldı · son: %s" />
+        <e k="ui_training_line_single_day_deadline_select" v="Eğitim: ayda 1 gün ise yalnızca 12.00'ye kadar · eğitim menüsünden kategori seçin · son: %s" />
+        <e k="ui_training_line_first_day_select" v="Eğitim: yalnızca ilk gün · eğitim menüsünden kategori seçin · son: %s" />
+        <e k="ui_training_line_busy_select" v="Eğitim: çalışırken mümkün değil · son: %s" />
+        <e k="ui_training_line_sick_select" v="Eğitim: hastayken mümkün değil · son: %s" />
+        <e k="ui_training_line_select_category" v="Eğitim: eğitim menüsünden kategori seçin · son: %s" />
+        <e k="ui_pmTrainingCostHeader" v="Maliyet" />
+        <e k="ui_pmTrainingAdjustmentHeader" v="İndirim/ek maliyet" />
+        <e k="ui_pmTrainingNoPlaces" v="şu anda boş yer yok" />
+        <e k="ui_pmTrainingNoPlacesMessage" v="Bu eğitim kursunda şu anda boş yer yok." />
+        <e k="ui_pmProfileIntro1" v="%s daha önce %s çalıştı ve %d aydır çiftlikte." />
+        <e k="ui_pmProfileIntro2" v="%s, daha önce %s çalışmasından deneyim getiriyor ve %d aydır ekibin bir parçası." />
+        <e k="ui_pmProfileExperience1_1" v="%s henüz çok az pratik deneyime sahip ve birçok iş akışını pekiştirmesi gerekiyor." />
+        <e k="ui_pmProfileExperience1_2" v="%s günlük işlerde hâlâ belirgin biçimde alışma aşamasında." />
+        <e k="ui_pmProfileExperience2_1" v="%s biraz pratik deneyim kazandı, ancak daha zorlu görevlerde hâlâ desteğe ihtiyaç duyuyor." />
+        <e k="ui_pmProfileExperience2_2" v="%s temel konularda giderek daha emin oluyor, ancak bazı alanlarda hâlâ rutin eksikliği var." />
+        <e k="ui_pmProfileExperience3_1" v="%s sağlam deneyime sahip ve çoğu düzenli görevi bağımsız yürütüyor." />
+        <e k="ui_pmProfileExperience3_2" v="%s günlük işlerde rutinle çalışıyor ve değişen görevlere iyi uyum sağlıyor." />
+        <e k="ui_pmProfileExperience4_1" v="%s geniş deneyime sahip ve zorlu görevlerde bile güvenle çalışıyor." />
+        <e k="ui_pmProfileExperience4_2" v="%s yılların pratiği sayesinde karmaşık işleri çoğu durumda güvenli ve bağımsız biçimde yürütüyor." />
+        <e k="ui_pmProfileExperience5_1" v="%s çiftliğin en güçlü uzmanları arasında ve olağanüstü düzeyde deneyime sahip." />
+        <e k="ui_pmProfileExperience5_2" v="%s çiftliğin en deneyimli ve çok yönlü ekip üyelerinden biri." />
+        <e k="ui_pmProfileReliability1_1" v="%s şu anda güvenilir biçimde planlanması zor biri; anlaşmalar ve iş akışları çoğu zaman beklendiği gibi takip edilmiyor." />
+        <e k="ui_pmProfileReliability1_2" v="%s dakiklik, anlaşmalara uyma ve özenli uygulama konularında belirgin zayıflıklar gösteriyor." />
+        <e k="ui_pmProfileReliability2_1" v="%s sürekli güvenilir çalışmıyor ve önemli görevlerde yakından izlenmeli." />
+        <e k="ui_pmProfileReliability2_2" v="%s genellikle anlaşmalara uyuyor, ancak güvenilirliğinde hâlâ belirgin dalgalanmalar var." />
+        <e k="ui_pmProfileReliability3_1" v="%s genel olarak düzgün çalışıyor ve çoğu durumda anlaşmalara uyuyor." />
+        <e k="ui_pmProfileReliability3_2" v="%s günlük işlerde genel olarak güvenilir ve kolay planlanabilir." />
+        <e k="ui_pmProfileReliability4_1" v="%s güvenilir ve kolay planlanabilen bir ekip üyesi." />
+        <e k="ui_pmProfileReliability4_2" v="%s daha uzun veya zorlu görevlerde bile anlaşmalara güvenilir biçimde uyuyor." />
+        <e k="ui_pmProfileReliability5_1" v="%s olağanüstü güvenilir ve çiftliğe yüksek planlama güvenliği sağlıyor." />
+        <e k="ui_pmProfileReliability5_2" v="%s anlaşmalara neredeyse istisnasız uyuyor ve görevleri büyük özenle tamamlıyor." />
+        <e k="ui_pmProfileLoyalty1_1" v="%s şu anda çiftliğe çok az bağlılık gösteriyor; her an değişiklik olabilir." />
+        <e k="ui_pmProfileLoyalty1_2" v="%s çiftliğe yalnızca zayıf biçimde bağlı görünüyor ve uygun bir teklifle hızla ayrılabilir." />
+        <e k="ui_pmProfileLoyalty2_1" v="%s henüz çiftliğe sınırlı biçimde bağlı, bu nedenle gelecekteki gelişim belirsiz." />
+        <e k="ui_pmProfileLoyalty2_2" v="%s görece düşük bağlılık gösteriyor ve çiftlikle henüz sağlam bir ilişki kurmadı." />
+        <e k="ui_pmProfileLoyalty3_1" v="%s çiftliğe genel olarak sadık, ancak henüz özellikle yakın bir bağ geliştirmedi." />
+        <e k="ui_pmProfileLoyalty3_2" v="%s çiftlikle istikrarlı bir ilişki geliştirdi ve sağlam bağlılık gösteriyor." />
+        <e k="ui_pmProfileLoyalty4_1" v="%s çiftliğe açıkça bağlı hissediyor ve güçlü bağlılık gösteriyor." />
+        <e k="ui_pmProfileLoyalty4_2" v="%s çiftlikle güçlü bir bağ kurdu ve büyük olasılıkla uzun süre kalacak." />
+        <e k="ui_pmProfileLoyalty5_1" v="%s çiftliğe olağanüstü derecede yakın bağlı ve en sadık ekip üyeleri arasında." />
+        <e k="ui_pmProfileLoyalty5_2" v="%s çiftlikle çok güçlü ve sağlam biçimde yerleşmiş uzun vadeli bir bağ gösteriyor." />
+        <e k="ui_pmProfileSpecializations" v="Mesleki güçlü yönler özellikle %s alanında görülüyor." />
+        <e k="ui_pmProfileLearningProgress" v="En güçlü öğrenme ilerlemesi şu anda %s alanında (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization" v="Henüz belirgin bir mesleki uzmanlık gelişmedi." />
+        <e k="ui_pmProfileActivity" v="%s şimdiye kadar %d görev ve %d eğitim tamamladı." />
+        <e k="ui_pmProfileNoActivity" v="%s çiftlikte ilk deneyimlerini kazanmaya devam ediyor; henüz görev veya eğitim tamamlanmadı." />
+        <e k="ui_pmChronicleImportedEmployment" v="Mevcut çalışma ilişkisi kişisel geçmişe eklendi." />
+        <e k="ui_pmChronicleHired" v="Çalışan işe alındı." />
+        <e k="ui_pmChronicleJobStarted" v="Görev başladı." />
+        <e k="ui_pmChronicleJobCompleted" v="Görev tamamlandı." />
+        <e k="ui_pmChronicleSpecialization" v="Uzmanlık kazanıldı." />
+        <e k="ui_pmChronicleTrainingStarted" v="Eğitim başladı." />
+        <e k="ui_pmChronicleTrainingCompleted" v="Eğitim tamamlandı." />
+        <e k="ui_pmChronicleSickness" v="Hastalık nedeniyle devamsızlık." />
+        <e k="ui_pmChronicleDismissal" v="Çiftlik tarafından işten çıkarma bildirildi." />
+        <e k="ui_pmChronicleResignation" v="Ay sonu için istifa bildirildi." />
+        <e k="ui_pmChronicleRetirement" v="Ay sonu için emeklilik bildirildi." />
+        <e k="ui_pmChronicleEmploymentEnded" v="Çalışma ilişkisi sona erdi." />
+        <e k="ui_pmChronicleSalaryRequest" v="Ücret artışı talep edildi." />
+        <e k="ui_pmChronicleSalaryGranted" v="Ücret artışı kabul edildi." />
+        <e k="ui_pmChronicleSalaryDeclined" v="Ücret artışı talebi reddedildi." />
+        <e k="ui_pmProfileEmployeeMale" v="Erkek çalışan" />
+        <e k="ui_pmProfileEmployeeFemale" v="Kadın çalışan" />
+        <e k="ui_pmProfilePronounMale" v="O" />
+        <e k="ui_pmProfilePronounFemale" v="O" />
+        <e k="ui_pmProfileBackgroundFamilyFarm" v="kırsal bir aile çiftliğinde" />
+        <e k="ui_pmProfileBackgroundDairyFarm" v="küçük bir süt çiftliğinde" />
+        <e k="ui_pmProfileBackgroundContractor" v="bir tarımsal yüklenicide" />
+        <e k="ui_pmProfileBackgroundArableFarm" v="bir bitkisel üretim çiftliğinde" />
+        <e k="ui_pmProfileBackgroundMixedFarm" v="bir karma çiftlikte" />
+        <e k="ui_pmProfileBackgroundLogistics" v="bir lojistik şirketinde" />
+        <e k="ui_pmProfileBackgroundWorkshop" v="bir tarım makineleri atölyesinde" />
+        <e k="ui_pmProfileBackgroundOffice" v="bir ofis mesleğinde" />
+        <e k="ui_pmProfileIntro3" v="%s artık %d aydır çiftlikte çalışıyor ve daha önce %s çalışıyordu." />
+        <e k="ui_pmProfileExperience1_3" v="%s temel süreçleri anlıyor, ancak birçok görev için hâlâ yönlendirme ve pratiğe ihtiyaç duyuyor." />
+        <e k="ui_pmProfileExperience2_3" v="%s yaygın görevleri giderek daha iyi yürütüyor, ancak karmaşık iş akışlarını daha da geliştirmesi gerekiyor." />
+        <e k="ui_pmProfileExperience3_3" v="%s güvenilir bir teknik temele sahip ve çeşitli görevlerde kullanılabilir." />
+        <e k="ui_pmProfileExperience4_3" v="%s birçok çiftlik sürecini pratik deneyimden biliyor ve daha zor görevleri üstlenebilir." />
+        <e k="ui_pmProfileExperience5_3" v="%s olağanüstü geniş uzmanlığa sahip ve son derece zorlu görevleri bile güvenle yürütüyor." />
+        <e k="ui_pmProfileReliability1_3" v="%s güvenilmez performansıyla iş planlamasında tekrar tekrar belirsizlik yaratıyor." />
+        <e k="ui_pmProfileReliability2_3" v="%s rutin görevleri yapabiliyor, ancak zorlu işlerde henüz sürekli güvenilir değil." />
+        <e k="ui_pmProfileReliability3_3" v="%s çoğu görevi özenle tamamlıyor, ancak zaman zaman dalgalanmalar yaşanıyor." />
+        <e k="ui_pmProfileReliability4_3" v="%s yalnızca az sayıda devamsızlık veya düzensizlikle tutarlı ve dikkatli çalışıyor." />
+        <e k="ui_pmProfileReliability5_3" v="%s zor görevlerde bile olağanüstü güvenilir ve tutarlı kalıyor." />
+        <e k="ui_pmProfileLoyalty1_3" v="%s işi kalıcı bir rolden çok kısa vadeli bir çözüm olarak görüyor gibi." />
+        <e k="ui_pmProfileLoyalty2_3" v="%s çiftlikte kalıyor, ancak uzun vadeli üyelik henüz kesin kabul edilemez." />
+        <e k="ui_pmProfileLoyalty3_3" v="%s ekipte rahat görünüyor, ancak çiftlikle bağı daha da güçlenebilir." />
+        <e k="ui_pmProfileLoyalty4_3" v="%s çiftlikle güçlü biçimde özdeşleşiyor ve işletmenin sadakatle arkasında duruyor." />
+        <e k="ui_pmProfileLoyalty5_3" v="%s çiftlikle özellikle güçlü biçimde özdeşleşiyor ve büyük olasılıkla kalıcı olarak bağlı kalacak." />
+        <e k="ui_pmProfileSpecializations2" v="%s esas olarak %s alanında uzmanlaştı." />
+        <e k="ui_pmProfileSpecializations3" v="%s, %s alanında özel güçlü yönler gösteriyor." />
+        <e k="ui_pmProfileLearningProgress2" v="%s şu anda %s alanında özellikle iyi gelişiyor (%d %%)." />
+        <e k="ui_pmProfileLearningProgress3" v="%s şimdiye kadarki en büyük öğrenme ilerlemesini %s alanında elde etti (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization2" v="%s henüz sabit bir uzmanlık geliştirmedi." />
+        <e k="ui_pmProfileNoSpecialization3" v="%s için mesleki yön hâlâ açık." />
+        <e k="ui_pmProfileActivity2" v="Çiftlikte geçirilen süre şimdiye kadar %d tamamlanmış görev ve %d eğitim içeriyor." />
+        <e k="ui_pmProfileActivity3" v="%s şimdiye kadar %d görev ve %d eğitim tamamladı." />
+        <e k="ui_pmProfileNoActivity2" v="%s için çiftlikteki pratik gelişim daha yeni başlıyor." />
+        <e k="ui_pmProfileNoActivity3" v="%s henüz bir görev tamamlamadı veya eğitime katılmadı." />
+        <e k="ui_hpSetting_toggle" v="Değiştir" />
+        <e k="ui_worker_status_line" v="Durum: %s" />
+        <e k="ui_pmApplicantProfileIntro" v="%s daha önce %s çalıştı." />
+        <e k="ui_pmApplicantProfileMarketNew" v="Başvuru bu ay piyasaya yeni çıktı." />
+        <e k="ui_pmApplicantProfileMarketOneMonth" v="Başvuru bir aydır piyasada." />
+        <e k="ui_pmApplicantProfileMarketMonths" v="Başvuru %d aydır piyasada." />
+        <e k="ui_pmApplicantProfileAge1" v="%d yaşında meslek hayatı henüz başlangıç aşamasındadır. Önemli bir gelişim potansiyeli vardır." />
+        <e k="ui_pmApplicantProfileAge2" v="%d yaşında mesleki gelişim hâlâ şekillenmektedir ve belirgin biçimde güçlenebilir." />
+        <e k="ui_pmApplicantProfileAge3" v="%d yaşında yerleşmiş bir meslek geçmişi vardır. Bu deneyimin tarımda ne kadar yararlı olduğu önceki mesleğe bağlıdır." />
+        <e k="ui_pmApplicantProfileAge4" v="%d yaşında geniş bir genel iş deneyimi beklenebilir, ancak bu otomatik olarak tarımsal uygulama anlamına gelmez." />
+        <e k="ui_pmApplicantProfileExperience1" v="Pratik tarım deneyimi hâlâ çok azdır. Kapsamlı bir eğitim gereklidir." />
+        <e k="ui_pmApplicantProfileExperience2" v="Temel tarım bilgisi vardır, ancak zorlu görevlerde henüz yeterli rutin bulunmamaktadır." />
+        <e k="ui_pmApplicantProfileExperience3" v="Mevcut deneyim yaygın işler için sağlam bir temel oluşturur, ancak tüm alanlar güvenle yönetilemez." />
+        <e k="ui_pmApplicantProfileExperience4" v="Tarım deneyimi belirgin biçimde gelişmiştir ve çok yönlü görevlendirmeye uygundur." />
+        <e k="ui_pmApplicantProfileExperience5" v="Deneyim olağanüstü yüksek düzeydedir ve zorlu görevlerin üstlenilmesini mümkün kılar." />
+        <e k="ui_pmApplicantProfileReliability1" v="Güvenilirlik değeri planlama, anlaşmalara uyma ve dikkatli uygulama konusunda belirgin riskler gösterir." />
+        <e k="ui_pmApplicantProfileReliability2" v="Güvenilirlik hâlâ değişkendir. Önemli görevler yakından izlenmelidir." />
+        <e k="ui_pmApplicantProfileReliability3" v="Güvenilirlik iyi bir düzeydedir ve genellikle öngörülebilir planlama sağlar." />
+        <e k="ui_pmApplicantProfileReliability4" v="Yüksek güvenilirlik düzenli, dikkatli ve kolay planlanabilir bir çalışma biçimine işaret eder." />
+        <e k="ui_pmApplicantProfileReliability5" v="Olağanüstü yüksek güvenilirlik çok yüksek bir planlama güvenliği sağlar." />
+        <e k="ui_pmApplicantProfileLoyalty1" v="Düşük sadakat, gelecekteki bir işverene yalnızca zayıf bir bağlılık gösterebilir." />
+        <e k="ui_pmApplicantProfileLoyalty2" v="Sadakat hâlâ temkinlidir. Uzun vadeli bağlılığın önce gelişmesi gerekir." />
+        <e k="ui_pmApplicantProfileLoyalty3" v="Sadakat istikrarlı bir orta düzeydedir ve uzun vadeli iş birliği için iyi bir temel sağlar." />
+        <e k="ui_pmApplicantProfileLoyalty4" v="Yüksek sadakat, çiftlikte uzun süre kalma konusunda güçlü bir isteğe işaret eder." />
+        <e k="ui_pmApplicantProfileLoyalty5" v="Olağanüstü yüksek sadakat, kalıcı bir bağlılık kurma konusunda özellikle güçlü bir isteği gösterir." />
+        <e k="ui_pmHistoryColumnCareer" v="Önceki geçmiş" />
+        <e k="ui_pmHistoryColumnRecent" v="Son olaylar" />
+        <e k="ui_pmHistoryColumnTotals" v="Toplamlar" />
+        <e k="ui_pmHistoryNoRecord" v="kayıt yok" />
+        <e k="ui_pmHistoryDateFormat" v="%d. gün · %d/%d" />
+        <e k="ui_pmHistorySalaryAccepted" v="kabul edildi" />
+        <e k="ui_pmHistorySalaryDeclined" v="reddedildi" />
+        <e k="ui_pmHistorySalaryPending" v="beklemede" />
+        <e k="ui_pmHistorySalaryUnresolved" v="kayıtlı karar yok" />
+        <e k="ui_pmHistoryAbortSickness" v="hastalık" />
+        <e k="ui_pmHistoryAbortUnreliability" v="güvenilmezlik" />
+        <e k="ui_pmHistoryAbortOther" v="diğer neden" />
+        <e k="ui_pmHistoryLastSickness" v="Son hastalık: %s" />
+        <e k="ui_pmHistoryLastSalaryRequest" v="Son maaş talebi: %s · %s" />
+        <e k="ui_pmHistoryLastAbort" v="Son yarıda kesilen görev: %s · %s" />
+        <e k="ui_pmHistoryTotalSickness" v="Hastalık günleri: %d" />
+        <e k="ui_pmHistoryTotalSalaryRequests" v="Maaş talepleri: %d" />
+        <e k="ui_pmHistoryTotalAborts" v="Yarıda kesilen görevler: %d" />
+        <e k="ui_pmHistoryTotalSalaryPaid" v="Toplam maaş: %s" />
+        <e k="ui_pmHistoryTrainingYearCompact" v="%d. yıl" />
+        <e k="ui_pmHistoryTrainingNoneCompact" v="yok" />
+        <e k="ui_pmHistoryCareerJobs" v="Görevler: %d" />
+        <e k="ui_pmHistoryCareerWorkTime" v="Çalışma süresi: %s" />
+        <e k="ui_pmHistoryCareerTraining" v="Eğitim: %s" />
+        <e k="ui_pmHistoryCareerTransport" v="Taşıma: %s" />
+        <e k="ui_pmHistoryValueActive" v="etkin" />
+        <e k="ui_pmHistoryValueInactive" v="etkin değil" />
+        <e k="ui_monthlyRowApplicants" v="Adaylar" />
+        <e k="ui_monthlyRowEmployees" v="Çalışanlar" />
+        <e k="ui_monthlyRowAvailable" v="Müsait" />
+        <e k="ui_monthlyRowJobs" v="Görevler" />
+        <e k="ui_monthlyRowWorkTime" v="Çalışma süresi" />
+        <e k="ui_monthlyRowWages" v="Aylık maaşlar" />
+        <e k="ui_monthlyRowPayroll" v="Son maaş ödemesi" />
+        <e k="ui_pmOverviewOverallHeader" v="TOPLAM" />
+        <e k="ui_pmOverviewTotalJobs" v="Toplam görev" />
+        <e k="ui_pmOverviewTotalWorkTime" v="Toplam çalışma süresi" />
+        <e k="ui_pmOverviewTotalPayroll" v="Toplam ödenen maaş" />
+        <e k="ui_pmOverviewEverHired" v="Toplam işe alınan" />
+        <e k="ui_pmOverviewDismissed" v="İşten çıkarılan" />
+        <e k="ui_pmOverviewResigned" v="İstifa eden" />
+        <e k="ui_pmOverviewRetired" v="Emekli olan" />
+        <e k="ui_pmChronicleJobAbortedSickness" v="Görev hastalık nedeniyle yarıda kesildi." />
+        <e k="ui_reliabilityJobAbortOtherTaskMale" v="%s devam eden görevi başka bir işi daha önemli gördüğü için yarıda bıraktı." />
+        <e k="ui_reliabilityJobAbortOtherTaskFemale" v="%s devam eden görevi başka bir işi daha önemli gördüğü için yarıda bıraktı." />
+        <e k="ui_reliabilityJobAbortBreakMale" v="%s devam eden görevi yarıda bıraktı. Mola vermek istedi." />
+        <e k="ui_reliabilityJobAbortBreakFemale" v="%s devam eden görevi yarıda bıraktı. Mola vermek istedi." />
+        <e k="ui_reliabilityJobAbortPrivateMale" v="%s devam eden görevi yarıda bıraktı. Özel işleriyle ilgilenmesi gerekiyordu." />
+        <e k="ui_reliabilityJobAbortPrivateFemale" v="%s devam eden görevi yarıda bıraktı. Özel işleriyle ilgilenmesi gerekiyordu." />
+        <e k="ui_reliabilityJobAbortStoveMale" v="%s evde ocağı kapatmayı unuttuğu için devam eden görevi yarıda bırakıp eve döndü." />
+        <e k="ui_reliabilityJobAbortStoveFemale" v="%s evde ocağı kapatmayı unuttuğu için devam eden görevi yarıda bırakıp eve döndü." />
+        <e k="ui_reliabilityJobAbortFriendsMale" v="%s arkadaşlarıyla aniden buluşmaya karar verdiği için devam eden görevi yarıda bıraktı." />
+        <e k="ui_reliabilityJobAbortFriendsFemale" v="%s arkadaşlarıyla aniden buluşmaya karar verdiği için devam eden görevi yarıda bıraktı." />
+        <e k="ui_reliabilityJobAbortPartnerMale" v="%s kız arkadaşıyla aniden kahve içmeye gitmek için devam eden görevi yarıda bıraktı." />
+        <e k="ui_reliabilityJobAbortPartnerFemale" v="%s erkek arkadaşıyla aniden kahve içmeye gitmek için devam eden görevi yarıda bıraktı." />
     </elements>
 </l10n>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <l10n>
     <elements>
         <e k="ui_ingameMenuHelperPersonnel" v="Személyzetkezelés" />
@@ -20,16 +20,16 @@
         <e k="ui_rank_helper" v="Segítő" />
         <e k="ui_rank_specialist" v="Szakember" />
         <e k="ui_specialization_short" v="Szakosodás" />
-        <e k="ui_specialization_tillage" v="Tillage" />
-        <e k="ui_specialization_sowing" v="Sowing" />
-        <e k="ui_specialization_fertilizing" v="Fertilizing" />
-        <e k="ui_specialization_plantProtection" v="Crop Protection" />
-        <e k="ui_specialization_harvest" v="Harvest" />
-        <e k="ui_specialization_transport" v="Transport" />
-        <e k="ui_specialization_machineCare" v="Machine Care" />
-        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
-        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
-        <e k="ui_specialization_progress" v="tanulja: %s %d%%" />
+        <e k="ui_specialization_tillage" v="Talajművelés" />
+        <e k="ui_specialization_sowing" v="Vetés" />
+        <e k="ui_specialization_fertilizing" v="Trágyázás" />
+        <e k="ui_specialization_plantProtection" v="Növényvédelem" />
+        <e k="ui_specialization_harvest" v="Betakarítás" />
+        <e k="ui_specialization_transport" v="Szállítás" />
+        <e k="ui_specialization_machineCare" v="Gépkímélés" />
+        <e k="ui_specialization_resourceSaver" v="Takarékos munkavégzés" />
+        <e k="ui_specializationLearned" v="%s új szakosodást szerzett: %s." />
+        <e k="ui_specialization_progress" v="%s tanulása %d%%" />
         <e k="ui_rank_expert" v="Profi" />
         <e k="ui_worker_line1" v="%s · Tapasztalat %d · Megbízhatóság %d · Hűség %d" />
         <e k="ui_worker_line2" v="Havi fizetés: %s · Állapot: %s" />
@@ -48,22 +48,22 @@
         <e k="ui_dismissalNoticeNextMonth" v="%s a következő hónap végére el lett bocsátva." />
         <e k="ui_dismissalNotice" v="%s el lett bocsátva a hónap végére." />
         <e k="ui_fireDeniedPending" v="Ez az alkalmazott már el van bocsátva." />
-        <e k="ui_fireDeniedBusy" v="Alkalmazottak dolgozik - elbocsátás nicht möglich." />
+        <e k="ui_fireDeniedBusy" v="A dolgozó éppen dolgozik, ezért nem bocsátható el." />
         <e k="ui_hireSuccess" v="%s - felvétel." />
         <e k="ui_fireSuccess" v="%s - elbocsátás." />
         <e k="ui_selectionTitle" v="Alkalmazott kiválasztása" />
-        <e k="ui_selectionHint" v="A/D / Left/Right · Enter · Esc" />
+        <e k="ui_selectionHint" v="Váltás A/D vagy bal/jobb gombbal · megerősítés szóközzel vagy egérkattintással · megszakítás Esc-pel" />
         <e k="ui_selectionNoWorkers" v="Jelenleg nincs elérhető jelentkező." />
         <e k="ui_selectionWorkerUnavailable" v="dolgozik." />
         <e k="ui_selectionNoEmployees" v="Még nincs felvett alkalmazott" />
         <e k="ui_selectionLineStats" v="%s · Tapasztalat %d · Megbízhatóság %d · Hűség %d" />
         <e k="ui_selectionLineWage" v="Havi fizetés: %s" />
-        <e k="ui_selectionLineJobs" v="Munkák: %d · Work speed: %d%%" />
-        <e k="input_HP_SELECT_LEFT" v="Alkalmazott kiválasztása left" />
-        <e k="input_HP_SELECT_RIGHT" v="Alkalmazott kiválasztása right" />
+        <e k="ui_selectionLineJobs" v="Munkák: %d · Munkasebesség: %d%%" />
+        <e k="input_HP_SELECT_LEFT" v="Előző dolgozó kiválasztása" />
+        <e k="input_HP_SELECT_RIGHT" v="Következő dolgozó kiválasztása" />
         <e k="input_HP_SELECT_CONFIRM" v="Alkalmazott kiválasztásának megerősítése" />
-        <e k="input_HP_OPEN_APPLICANTS" v="Jelentkezők" />
-        <e k="input_HP_TRANSPORT_TOGGLE" v="szállítás toggle" />
+        <e k="input_HP_TRANSPORT_MANAGE" v="Szállítási feladatok kezelése" />
+        <e k="input_HP_SALARY_RAISE_MANAGE" v="Béremelési kérelmek kezelése" />
         <e k="input_HP_SELECT_CANCEL" v="Kiválasztás megszakítása" />
         <e k="ui_openWorkerView" v="Dolgozók" />
         <e k="ui_openApplicantView" v="Jelentkezők" />
@@ -84,16 +84,16 @@
         <e k="ui_noWorkersUpper" v="NINCS ELÉRHETŐ ALKALMAZOTT" />
         <e k="ui_noActiveWorkers" v="Még nincs felvett alkalmazott" />
         <e k="ui_activeWorkerStatusVehicle" v="Állapot: dolgozó alkalmazottak (%s)" />
-        <e k="ui_activeWorkerStatusVehicleImplement" v="Állapot: dolgozó alkalmazottak (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="Állapot: dolgozó munkában (%s) | Eszköz/pótkocsi: %s" />
         <e k="ui_activeWorkerActivityField" v="Feladat: %s | Tábla: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Jármű" />
         <e k="ui_activeWorkerUnknownField" v="ismeretlen" />
-        <e k="ui_activeWorkerNoField" v="not field-bound" />
+        <e k="ui_activeWorkerNoField" v="nem mezőhöz kötött" />
         <e k="ui_activityUnknown" v="ismeretlen" />
         <e k="ui_activityFieldWork" v="földmunka" />
         <e k="ui_activityTransport" v="szállítás" />
-        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
-        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe %s segítségével" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s %s mögött" />
         <e k="ui_activityCultivating" v="kultivátorozás" />
         <e k="ui_activityPlowing" v="szántás" />
         <e k="ui_activitySowing" v="vetés" />
@@ -116,25 +116,26 @@
         <e k="ui_workersHeaderUpper" v="ALKALMAZOTTAK KEZELÉSE" />
         <e k="ui_instructionApplicant" v="ENTER: Felvétel. ESC: Vissza az áttekintéshez." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Elbocsátás." />
-        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="G: Emelés megadása. N: Kérelem elutasítása." />
-        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
-        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
-        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
-        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
-        <e k="ui_training_already_done" v="%s has already attended training this month." />
-        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_instructionWorkerTransport" v="A szállítási sorrendet a szállítás gombbal kezelheted, az S billentyűvel pedig képezheted a dolgozót." />
+        <e k="ui_instructionWorkerSalaryRaise" v="A nyitott béremelési kérelmek a Béremelési kérelmek kezelése gombbal intézhetők." />
+        <e k="ui_instructionSwitchEntry" v="Kattints egy bejegyzésre a kijelöléshez; görgetéshez használd az egérgörgőt." />
+        <e k="ui_training_no_progress" v="Ennek a dolgozónak még nincs megfelelő fejlődési iránya." />
+        <e k="ui_training_worker_busy" v="A dolgozó jelenleg munkát végez, ezért nem vehet részt képzésen." />
+        <e k="ui_training_worker_sick" v="A dolgozó beteg, ezért nem vehet részt képzésen." />
+        <e k="ui_training_already_done" v="%s ebben a hónapban már részt vett képzésen." />
+        <e k="ui_training_started" v="%s a hónap végéig képzésen vesz részt a(z) %s területen (%s)." />
+        <e k="ui_training_completed" v="%s befejezte a(z) %s képzést: %d%% → %d%%." />
         <e k="ui_noApplicantsDetail" v="Jelenleg nincs elérhető jelentkező" />
         <e k="ui_noWorkersDetail" v="Még nincs felvett alkalmazott" />
-        <e k="ui_entryZero" v="Bejegyzés 0 von 0" />
+        <e k="ui_entryZero" v="Bejegyzés 0 / 0" />
         <e k="ui_visibleRange" v="Látható %d-%d" />
         <e k="ui_allEntriesVisible" v="Minden bejegyzés látható" />
-        <e k="ui_entryCounter" v="Bejegyzés %d von %d" />
+        <e k="ui_entryCounter" v="Bejegyzés %d / %d" />
         <e k="ui_monthlyLineStaff" v="Alkalmazottak száma: segítő %d | szakember %d | profi %d" />
         <e k="ui_monthlyLineApplicantsReady" v="Jelentkezők a piacon: %d" />
         <e k="ui_monthlyLineApplicantsEmpty" v="Jelenleg nincs elérhető jelentkező" />
         <e k="ui_monthlyLineNoWorkers" v="Még nincs felvett alkalmazott" />
-        <e k="ui_monthlyLineAvailableWorkers" v="Elérhető: %d von %d" />
+        <e k="ui_monthlyLineAvailableWorkers" v="Elérhető: %d / %d" />
         <e k="ui_monthlyLinePayroll" v="Havi fizetés: %s" />
         <e k="ui_monthlyLineWorkStats" v="Munkaidő: %d munkák | %s | Havi fizetés: %s" />
         <e k="ui_button_transport_assign" v="Szállítás hozzárendelése" />
@@ -145,94 +146,347 @@
         <e k="ui_transportNoDriverAssigned" v="szállítás: még nincs." />
         <e k="ui_transportNoDriverAvailable" v="szállítás: elfoglalt." />
         <e k="ui_transportAutoAssigned" v="szállítás: szállítás hozzárendelése." />
-        <e k="ui_experienceGainSingle" v="%s: Tapasztalat +1. Tapasztalat: %d to %d" />
-        <e k="ui_experienceGainMultiple" v="%s: Tapasztalat +%d. Tapasztalat: %d to %d" />
-        <e k="ui_experienceMonthlyLimitReached" v="%s: Tapasztalat monthly limit reached." />
-        <e k="ui_loyaltyChanged" v="%s: Hűség %s. Hűség: %d to %d" />
-        <e k="ui_loyaltyWarningLow" v="%s: Hűség low." />
-        <e k="ui_loyaltyWarningVeryLow" v="%s: Hűség very low." />
+        <e k="ui_experienceGainSingle" v="%s: tapasztalat +1. Tapasztalat: %d → %d" />
+        <e k="ui_experienceGainMultiple" v="%s: tapasztalat +%d. Tapasztalat: %d → %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s: elérte a havi tapasztalati korlátot." />
+        <e k="ui_loyaltyChanged" v="%s: lojalitás %s. Lojalitás: %d → %d" />
+        <e k="ui_loyaltyWarningLow" v="%s: alacsony lojalitás." />
+        <e k="ui_loyaltyWarningVeryLow" v="%s: nagyon alacsony lojalitás." />
         <e k="ui_loyaltyWarningCritical" v="%s: hónap végén felmondott." />
         <e k="ui_loyaltyResignationNotice" v="%s: hónap végén felmondott." />
-        <e k="ui_sicknessNotice" v="%s: beteg - cannot work today." />
-        <e k="ui_sicknessNoticeJobAborted" v="%s: beteg - current job cancelled." />
+        <e k="ui_sicknessNotice" v="%s: beteg, ma nem tud dolgozni." />
+        <e k="ui_sicknessNoticeJobAborted" v="%s: beteg, az aktuális feladat megszakadt." />
         <e k="ui_button_raise_grant" v="Emelés megadása" />
         <e k="ui_button_raise_decline" v="Kérelem elutasítása" />
-        <e k="ui_salaryRaisePendingLine" v="Emelés: %s statt %s" />
-        <e k="ui_salaryRaiseRequestNotification" v="%s requests emelés after reaching %s: %s." />
-        <e k="ui_salaryRaiseRequestHistory" v="Emelés: %s requests %s." />
+        <e k="ui_button_salary_manage_long" v="Béremelési kérelmek kezelése" />
+        <e k="ui_salaryRequestsTitle" v="Béremelési kérelmek kezelése" />
+        <e k="ui_salaryRequestsIntro" v="Itt látható minden nyitott béremelési kérelem. Válassz egy alkalmazottat, majd fogadd el vagy utasítsd el a kérelmet." />
+        <e k="ui_salaryRequestsHeaderEmployee" v="Alkalmazott" />
+        <e k="ui_salaryRequestsHeaderCurrent" v="Jelenlegi bér" />
+        <e k="ui_salaryRequestsHeaderRequested" v="Kért bér" />
+        <e k="ui_salaryRequestsNoRequests" v="Nincs nyitott béremelési kérelem." />
+        <e k="ui_salaryRequestsControls" v="Fel/le nyíl: kiválasztás | Enter: elfogadás | Szóköz: elutasítás" />
+        <e k="ui_salaryRaisePendingLine" v="Béremelés: %s a korábbi %s helyett" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s a(z) %s szint elérése után %s összegű bért kér." />
+        <e k="ui_salaryRaiseRequestHistory" v="Béremelés: %s összeget kér: %s." />
         <e k="ui_salaryRaiseGranted" v="Emelés megadása: %s - %s." />
         <e k="ui_salaryRaiseDeclined" v="Kérelem elutasítása: %s." />
-        <e k="ui_salaryRaisePendingPenalty" v="Open emelés: %s affects hűség: %s." />
-        <e k="ui_salaryRaiseGrantedReputation" v="Fair emelés: %s Munkáltatói hírnév" />
+        <e k="ui_salaryRaisePendingPenalty" v="Függő béremelés: %s hatása a lojalitásra: %s." />
+        <e k="ui_salaryRaiseGrantedReputation" v="Méltányos béremelés: munkáltatói hírnév %s" />
         <e k="ui_hpIngameMenuPrev" v="Előző menü" />
         <e k="ui_hpIngameMenuNext" v="Következő menü" />
-        <e k="ui_status_training" v="in training" />
-        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
-        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
-        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
-        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
-        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_status_training" v="képzésen" />
+        <e k="ui_training_worker_in_training" v="A dolgozó a hónap végéig már képzésen vesz részt." />
+        <e k="ui_training_not_first_day" v="Képzés csak a hónap első napján indítható." />
+        <e k="ui_training_not_single_day_deadline" v="Havi 1 nap esetén a képzés csak az első napon 12:00 előtt indítható." />
+        <e k="ui_training_line_single_day_deadline" v="Képzés: havi 1 napnál csak 12:00-ig · %s %s · legutóbb: %s" />
+        <e k="ui_training_already_done_year" v="%s ebben az évben már részt vett képzésen." />
         <e k="ui_training_last_none" v="-" />
-        <e k="ui_training_unknown" v="unknown" />
-        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
-        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
-        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
-        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
-        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
-        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
-        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
-
-        <e k="ui_hpSetting_on" v="On"/>
-
-        <e k="ui_hpSetting_off" v="Off"/>
-
-        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
-
-        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
-
-        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
-
-        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
-
-        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
-
-        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
-
-        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
-
-        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
-
-        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
-
-        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
-
-        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
-
-        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
-        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
-
-        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
-
-        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
-
-        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
-
-        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
-
-        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
-
-        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
-
-        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
-
-        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
-
-        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
-
-        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+        <e k="ui_training_unknown" v="ismeretlen" />
+        <e k="ui_training_line_active" v="Képzés: %s a hónap végéig · legutóbb: %s" />
+        <e k="ui_training_line_no_direction" v="Képzés: nincs fejlődési irány · legutóbb: %s" />
+        <e k="ui_training_line_year_blocked" v="Képzés: csak jövőre · legutóbb: %s" />
+        <e k="ui_training_line_first_day" v="Képzés: csak az első napon · %s %s · legutóbb: %s" />
+        <e k="ui_training_line_busy" v="Képzés: nem elérhető, dolgozik · %s %s · legutóbb: %s" />
+        <e k="ui_training_line_sick" v="Képzés: nem elérhető, beteg · %s %s · legutóbb: %s" />
+        <e k="ui_training_line_possible" v="Képzés: elérhető %s, %s · legutóbb: %s" />
+        <e k="ui_hpSetting_on" v="Be" />
+        <e k="ui_hpSetting_off" v="Ki" />
+        <e k="ui_hpSetting_section" v="SZEMÉLYZETI MENEDZSMENT" />
+        <e k="ui_hpSetting_gameplayEffects" v="Személyzeti menedzsment: játékmeneti hatások" />
+        <e k="ui_hpSetting_experienceEffects" v="Személyzeti menedzsment: tapasztalati hatások" />
+        <e k="ui_hpSetting_speedEffect" v="Személyzeti menedzsment: munkasebesség" />
+        <e k="ui_hpSetting_wearEffect" v="Személyzeti menedzsment: kopás" />
+        <e k="ui_hpSetting_consumablesEffect" v="Személyzeti menedzsment: anyagfelhasználás" />
+        <e k="ui_hpSetting_fuelEffect" v="Személyzeti menedzsment: üzemanyag-fogyasztás" />
+        <e k="ui_hpSetting_reliabilityEffects" v="Személyzeti menedzsment: megbízhatóság" />
+        <e k="ui_hpSetting_personnelEffects" v="Személyzeti menedzsment: személyzeti hatások" />
+        <e k="ui_hpSetting_loyaltyEffects" v="Személyzeti menedzsment: lojalitásváltozások" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Személyzeti menedzsment: éjszakai munka" />
+        <e k="ui_hpSetting_economicEffects" v="Személyzeti menedzsment: gazdaság" />
+        <e k="ui_hpSetting_individualWages" v="Személyzeti menedzsment: egyéni bérek" />
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Be- vagy kikapcsolja a személyzeti menedzsment összes játékmeneti hatását. A megjelenített értékek, mentett adatok és előzmények továbbra is elérhetők maradnak." />
+        <e k="ui_hpSetting_experienceEffects_desc" v="Meghatározza, hogy a dolgozók tapasztalata és szakosodása befolyásolja-e az aktív segítők munkáját." />
+        <e k="ui_hpSetting_speedEffect_desc" v="Meghatározza, hogy a tapasztalat és a megfelelő szakosodás befolyásolja-e a munkasebességet." />
+        <e k="ui_hpSetting_wearEffect_desc" v="Meghatározza, hogy a tapasztalat és a megfelelő szakosodás befolyásolja-e a járművek és eszközök többletkopását." />
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Meghatározza, hogy a tapasztalat és a megfelelő szakosodás befolyásolja-e a vetőmag, műtrágya, gyomirtó, hígtrágya, fermentlé, trágya és hasonló anyagok felhasználását." />
+        <e k="ui_hpSetting_fuelEffect_desc" v="Meghatározza, hogy a tapasztalat és a megfelelő szakosodás befolyásolja-e az üzemanyag-fogyasztást." />
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Meghatározza, hogy a dolgozó megbízhatósága okozhat-e rövid teljesítménycsökkenéseket és betegnapokat." />
+        <e k="ui_hpSetting_personnelEffects_desc" v="Be- vagy kikapcsolja a személyzeti hatásokat, például a lojalitás alakulását és az éjszakai munka következményeit." />
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Meghatározza, hogy a dolgozó lojalitása változik-e olyan események hatására, mint a bérfizetés, az éjszakai munka vagy a munkáltató hírneve." />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Meghatározza, hogy az éjszakai munka befolyásolja-e a lojalitást és a munkáltató hírnevét." />
+        <e k="ui_hpSetting_economicEffects_desc" v="Meghatározza, hogy egyéni gazdasági számítások legyenek-e használatban. Kikapcsolás esetén semleges alapbérek érvényesek." />
+        <e k="ui_hpSetting_individualWages_desc" v="Meghatározza, hogy a dolgozók szerepük, tapasztalatuk, megbízhatóságuk és szakosodásuk alapján egyéni bért kapjanak-e." />
+        <e k="ui_hpSetting_groupWork" v="MUNKATELJESÍTMÉNY" />
+        <e k="ui_hpSetting_groupPersonnel" v="SZEMÉLYZETFEJLESZTÉS" />
+        <e k="ui_hpSetting_groupEconomy" v="GAZDASÁG ÉS BÉREK" />
+        <e k="ui_hpSetting_standardWage" v="Alap havi fizetés" />
+        <e k="ui_hpSetting_standardWage_desc" v="Beállítja az egyéni bérek kikapcsolásakor használt havi alapbért. Az érték a következő bérszámítástól érvényes." />
+        <e k="ui_hpSetting_standardWageInvalid" v="Adj meg egy %d és %d közötti értéket. Az összeg a legközelebbi 10-re lesz kerekítve." />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Személyzeti menedzsment megnyitása" />
+        <e k="ui_pmMenuPageOverview" v="Áttekintés" />
+        <e k="ui_pmMenuPageApplicants" v="Jelentkezők" />
+        <e k="ui_pmMenuPageEmployees" v="Dolgozók" />
+        <e k="ui_pmMenuPageTraining" v="Képzés" />
+        <e k="ui_pmMenuPageAssignments" v="Beosztások" />
+        <e k="ui_pmMenuPrevPerson" v="Előző személy" />
+        <e k="ui_pmMenuNextPerson" v="Következő személy" />
+        <e k="ui_pmPersonCounter" v="%d / %d" />
+        <e k="ui_pmMenuNoPermission" v="Nincs jogosultságod személyzeti döntéseket hozni ennél a gazdaságnál." />
+        <e k="ui_pmConfirmHire" v="Biztosan felveszed: %s?" />
+        <e k="ui_pmConfirmDismiss" v="Biztosan elbocsátod: %s?" />
+        <e k="ui_pmConfirmTraining" v="Elindítod %s képzését?" />
+        <e k="ui_pmProfileHeader" v="PROFIL" />
+        <e k="ui_pmHistoryHeader" v="ELŐZMÉNYEK" />
+        <e k="ui_button_train" v="Képzés" />
+        <e k="ui_pmStatusApplicant" v="Jelentkező" />
+        <e k="ui_pmBirthLine" v="Született: %s" />
+        <e k="ui_pmOriginLine" v="Szakmai háttér: %s" />
+        <e k="ui_pmStatsLine" v="Tapasztalat %d · Megbízhatóság %d · Lojalitás %d" />
+        <e k="ui_pmStatExperience" v="Tapasztalat" />
+        <e k="ui_pmStatReliability" v="Megbízhatóság" />
+        <e k="ui_pmStatLoyalty" v="Lojalitás" />
+        <e k="ui_pmWageLine" v="Bér: %s" />
+        <e k="ui_pmStatusLine" v="Állapot: %s" />
+        <e k="ui_pmOrigin1" v="vidéki családi gazdaság" />
+        <e k="ui_pmOrigin2" v="kis tejgazdaság" />
+        <e k="ui_pmOrigin3" v="mezőgazdasági bérvállalkozás" />
+        <e k="ui_pmOrigin4" v="szántóföldi gazdaság" />
+        <e k="ui_pmOrigin5" v="vegyes gazdaság" />
+        <e k="ui_pmStrengthReliable" v="nyugodt és megbízható munkastílus" />
+        <e k="ui_pmStrengthTransport" v="szervezett szállítás és udvari logisztika" />
+        <e k="ui_pmStrengthHarvest" v="gondos betakarítási munka" />
+        <e k="ui_pmStrengthSowing" v="pontos vetés és talaj-előkészítés" />
+        <e k="ui_pmApplicantProfileText" v="%s %s szakmai háttérrel jelentkezik. A jelenlegi profil alapján erőssége: %s. Ezek az értékek a jelentkezési profil pillanatnyi állapotát mutatják." />
+        <e k="ui_pmWorkerProfileText" v="%s %s óta a gazdaság tagja. Fejlődése alapján erőssége: %s. További bejegyzések a munkák, képzések és személyzeti döntések során készülnek." />
+        <e k="ui_pmHistoryJobs" v="Befejezett feladatok: %d." />
+        <e k="ui_pmHistoryWorkTime" v="Összes munkaidő: %s." />
+        <e k="ui_pmHistoryTrainingActive" v="Aktuális képzés: %s." />
+        <e k="ui_pmHistoryTrainingLast" v="Legutóbbi képzés: %d. év." />
+        <e k="ui_pmHistoryTrainingNone" v="Még nincs rögzített képzés." />
+        <e k="ui_pmHistoryTransportEnabled" v="Szállítási feladatokra kijelölve." />
+        <e k="ui_pmHistoryTransportDisabled" v="Nincs szállítási feladatokra kijelölve." />
+        <e k="ui_pmMenuPageSettings" v="Beállítások" />
+        <e k="ui_pmSettingsInfo" v="Ezek a beállítások mentésenként érvényesek." />
+        <e k="ui_pmSettingsHostOnly" v="Többjátékos módban ezeket a beállításokat csak a szerver módosíthatja." />
+        <e k="ui_pmSettingsSectionGameplay" v="JÁTÉKMENETI HATÁSOK" />
+        <e k="ui_pmSettingsSectionPersonnel" v="SZEMÉLYZET" />
+        <e k="ui_pmSettingsSectionEconomic" v="GAZDASÁG" />
+        <e k="ui_button_transport_assign_long" v="Szállítási feladatok hozzárendelése" />
+        <e k="ui_button_transport_manage_long" v="Szállítási feladatok kezelése" />
+        <e k="ui_transportPriorityTitle" v="Szállítási prioritás" />
+        <e k="ui_transportPriorityIntro" v="Állítsd be, mely dolgozók vállalhatnak szállítási feladatokat, és milyen sorrendben ellenőrizze őket a rendszer." />
+        <e k="ui_transportPriorityHeaderPriority" v="Prioritás" />
+        <e k="ui_transportPriorityHeaderEmployee" v="Dolgozó" />
+        <e k="ui_transportPriorityHeaderStatus" v="Állapot" />
+        <e k="ui_transportPriorityHeaderEnabled" v="Szállítás" />
+        <e k="ui_transportPriorityActive" v="Aktív" />
+        <e k="ui_transportPriorityInactive" v="Nincs beosztva" />
+        <e k="ui_transportPriorityMoveUp" v="Feljebb" />
+        <e k="ui_transportPriorityMoveDown" v="Lejjebb" />
+        <e k="ui_transportPriorityToggle" v="Be-/kikapcsolás" />
+        <e k="ui_transportPriorityApply" v="Alkalmaz" />
+        <e k="ui_transportPriorityCancel" v="Mégse" />
+        <e k="ui_transportPrioritySaved" v="A szállítási sorrend mentve." />
+        <e k="ui_transportPriorityNoWorkers" v="Nincs elérhető dolgozó." />
+        <e k="ui_transportPriorityControls" v="↑/↓: kijelölés   A/D: mozgatás   Szóköz: be/ki   Enter: alkalmaz" />
+        <e k="ui_button_transport_remove_long" v="Szállítási feladatok eltávolítása" />
+        <e k="ui_helperPersonnelMenuOverview" v="Áttekintés" />
+        <e k="ui_helperPersonnelMenuApplicants" v="Jelentkezők" />
+        <e k="ui_helperPersonnelMenuEmployees" v="Dolgozók" />
+        <e k="ui_helperPersonnelMenuTraining" v="Képzés" />
+        <e k="ui_helperPersonnelMenuSettings" v="JÁTÉKBEÁLLÍTÁSOK" />
+        <e k="ui_pmBirthDateAge" v="%s (%d éves)" />
+        <e k="ui_pmOrigin6" v="logisztikai vállalat" />
+        <e k="ui_pmOrigin7" v="mezőgazdasági gépműhely" />
+        <e k="ui_pmOrigin8" v="irodai foglalkozás" />
+        <e k="ui_status_retirementPending" v="a hónap végén nyugdíjba vonul" />
+        <e k="ui_retirementNotice" v="%s a hónap végén nyugdíjba vonul." />
+        <e k="ui_pmTrainingIntro" v="A specializációk javítják a dolgozó teljesítményét az adott tanulási kategóriában. A képzés az aktuális hónap végéig tart, és ezalatt a dolgozó nem áll rendelkezésre munkára. A tanulási előrehaladás csak a képzés befejezése után kerül jóváírásra. Nem minden kategóriához érhető el képzés minden hónapban. A képzés a szokásos árnál olcsóbb vagy drágább is lehet. Egy dolgozó mezőgazdasági évenként, márciustól februárig csak egy képzésen vehet részt. Egy dolgozó legfeljebb két specializációt szerezhet. Válaszd ki a kívánt tanulási kategóriát." />
+        <e k="ui_pmTrainingCategoryHeader" v="Fejlődési terület" />
+        <e k="ui_pmTrainingProgressHeader" v="Haladás a szakosodás felé" />
+        <e k="ui_pmTrainingRunning" v="képzés folyamatban" />
+        <e k="ui_pmTrainingSelectCategory" v="Először válassz képzési területet" />
+        <e k="ui_pmTrainingConfirm" v="Elindítod %s képzését a(z) %s területen?" />
+        <e k="ui_training_line_no_capacity" v="Képzés: két szakosodás elérve · legutóbb: %s" />
+        <e k="ui_training_line_single_day_deadline_select" v="Képzés: havi 1 napnál csak 12:00-ig · válassz területet a képzési menüben · legutóbb: %s" />
+        <e k="ui_training_line_first_day_select" v="Képzés: csak az első napon · válassz területet a képzési menüben · legutóbb: %s" />
+        <e k="ui_training_line_busy_select" v="Képzés: munka közben nem lehetséges · legutóbb: %s" />
+        <e k="ui_training_line_sick_select" v="Képzés: betegség alatt nem lehetséges · legutóbb: %s" />
+        <e k="ui_training_line_select_category" v="Képzés: válassz területet a képzési menüben · legutóbb: %s" />
+        <e k="ui_pmTrainingCostHeader" v="Költség" />
+        <e k="ui_pmTrainingAdjustmentHeader" v="Kedvezmény/felár" />
+        <e k="ui_pmTrainingNoPlaces" v="jelenleg nincs szabad hely" />
+        <e k="ui_pmTrainingNoPlacesMessage" v="Erre a képzésre jelenleg nincs szabad hely." />
+        <e k="ui_pmProfileIntro1" v="%s korábban %s dolgozott, és %d hónapja van a gazdaságnál." />
+        <e k="ui_pmProfileIntro2" v="%s korábbi, %s végzett munkából származó tapasztalatot hoz, és %d hónapja a csapat tagja." />
+        <e k="ui_pmProfileExperience1_1" v="%s egyelőre nagyon kevés gyakorlati tapasztalattal rendelkezik, és még sok munkafolyamatot kell megszilárdítania." />
+        <e k="ui_pmProfileExperience1_2" v="%s a mindennapi munkában még egyértelműen a betanulási szakaszban van." />
+        <e k="ui_pmProfileExperience2_1" v="%s már szerzett némi gyakorlati tapasztalatot, de az igényesebb feladatoknál továbbra is támogatásra szorul." />
+        <e k="ui_pmProfileExperience2_2" v="%s egyre magabiztosabban kezeli az alapokat, bár több területen még hiányzik a rutin." />
+        <e k="ui_pmProfileExperience3_1" v="%s megfelelő tapasztalattal rendelkezik, és a legtöbb rendszeres feladatot önállóan végzi." />
+        <e k="ui_pmProfileExperience3_2" v="%s rutinosan dolgozik a mindennapi üzemben, és jól alkalmazkodik a változó feladatokhoz." />
+        <e k="ui_pmProfileExperience4_1" v="%s széles körű tapasztalatot hoz, és az igényes feladatokat is magabiztosan végzi." />
+        <e k="ui_pmProfileExperience4_2" v="%s többéves gyakorlata révén a legtöbb esetben biztonságosan és önállóan kezeli az összetett munkákat." />
+        <e k="ui_pmProfileExperience5_1" v="%s a gazdaság legerősebb szakemberei közé tartozik, és kivételesen nagy tapasztalattal rendelkezik." />
+        <e k="ui_pmProfileExperience5_2" v="%s a gazdaság egyik legtapasztaltabb és legsokoldalúbb csapattagja." />
+        <e k="ui_pmProfileReliability1_1" v="%s munkája jelenleg nehezen tervezhető megbízhatóan; a megállapodásokat és munkafolyamatokat gyakran nem az elvárások szerint tartja be." />
+        <e k="ui_pmProfileReliability1_2" v="%s egyértelmű gyengeségeket mutat a pontosság, a megállapodások és a gondos végrehajtás terén." />
+        <e k="ui_pmProfileReliability2_1" v="%s nem dolgozik következetesen megbízhatóan, ezért fontos feladatoknál szoros felügyeletet igényel." />
+        <e k="ui_pmProfileReliability2_2" v="%s általában betartja a megállapodásokat, de megbízhatósága továbbra is észrevehetően ingadozik." />
+        <e k="ui_pmProfileReliability3_1" v="%s összességében rendesen dolgozik, és a legtöbb esetben betartja a megállapodásokat." />
+        <e k="ui_pmProfileReliability3_2" v="%s a mindennapi üzemben általában megbízható és jól beosztható." />
+        <e k="ui_pmProfileReliability4_1" v="%s megbízható és könnyen beosztható tagja a csapatnak." />
+        <e k="ui_pmProfileReliability4_2" v="%s hosszabb vagy igényesebb feladatoknál is megbízhatóan betartja a megállapodásokat." />
+        <e k="ui_pmProfileReliability5_1" v="%s kivételesen megbízható, és nagy tervezési biztonságot ad a gazdaságnak." />
+        <e k="ui_pmProfileReliability5_2" v="%s szinte kivétel nélkül betartja a megállapodásokat, és nagy gondossággal végzi feladatait." />
+        <e k="ui_pmProfileLoyalty1_1" v="%s jelenleg alig kötődik a gazdasághoz; bármikor válthat." />
+        <e k="ui_pmProfileLoyalty1_2" v="%s csak gyengén kötődik a gazdasághoz, és megfelelő ajánlat esetén gyorsan távozhat." />
+        <e k="ui_pmProfileLoyalty2_1" v="%s egyelőre csak korlátozottan kötődik a gazdasághoz, ezért a jövőbeli fejlődés bizonytalan." />
+        <e k="ui_pmProfileLoyalty2_2" v="%s viszonylag csekély elkötelezettséget mutat, és még nem alakított ki szilárd kapcsolatot a gazdasággal." />
+        <e k="ui_pmProfileLoyalty3_1" v="%s általában lojális a gazdasághoz, bár még nem kötődik hozzá különösen szorosan." />
+        <e k="ui_pmProfileLoyalty3_2" v="%s stabil kapcsolatot alakított ki a gazdasággal, és megfelelő elkötelezettséget mutat." />
+        <e k="ui_pmProfileLoyalty4_1" v="%s egyértelműen kötődik a gazdasághoz, és erős elkötelezettséget mutat." />
+        <e k="ui_pmProfileLoyalty4_2" v="%s erős köteléket alakított ki a gazdasággal, és várhatóan hosszú távon marad." />
+        <e k="ui_pmProfileLoyalty5_1" v="%s kivételesen szorosan kötődik a gazdasághoz, és a leglojálisabb csapattagok közé tartozik." />
+        <e k="ui_pmProfileLoyalty5_2" v="%s nagyon erős és szilárdan kialakult hosszú távú kapcsolatot mutat a gazdasággal." />
+        <e k="ui_pmProfileSpecializations" v="A szakmai erősségek különösen a(z) %s területen mutatkoznak meg." />
+        <e k="ui_pmProfileLearningProgress" v="A legnagyobb fejlődés jelenleg a(z) %s területen látható (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization" v="Még nem alakult ki egyértelmű szakmai specializáció." />
+        <e k="ui_pmProfileActivity" v="%s eddig %d feladatot és %d képzést teljesített." />
+        <e k="ui_pmProfileNoActivity" v="%s még az első gazdasági tapasztalatait szerzi; feladatot vagy képzést még nem teljesített." />
+        <e k="ui_pmChronicleImportedEmployment" v="A meglévő munkaviszony bekerült a személyes krónikába." />
+        <e k="ui_pmChronicleHired" v="A dolgozót felvették." />
+        <e k="ui_pmChronicleJobStarted" v="Feladat elindítva." />
+        <e k="ui_pmChronicleJobCompleted" v="Feladat befejezve." />
+        <e k="ui_pmChronicleSpecialization" v="Szakosodás megszerezve." />
+        <e k="ui_pmChronicleTrainingStarted" v="Képzés elindítva." />
+        <e k="ui_pmChronicleTrainingCompleted" v="Képzés befejezve." />
+        <e k="ui_pmChronicleSickness" v="Betegség miatti távollét." />
+        <e k="ui_pmChronicleDismissal" v="A gazdaság felmondást adott." />
+        <e k="ui_pmChronicleResignation" v="Felmondás bejelentve a hónap végére." />
+        <e k="ui_pmChronicleRetirement" v="Nyugdíjba vonulás bejelentve a hónap végére." />
+        <e k="ui_pmChronicleEmploymentEnded" v="A munkaviszony véget ért." />
+        <e k="ui_pmChronicleSalaryRequest" v="Béremelés kérve." />
+        <e k="ui_pmChronicleSalaryGranted" v="Béremelés megadva." />
+        <e k="ui_pmChronicleSalaryDeclined" v="Béremelési kérelem elutasítva." />
+        <e k="ui_pmProfileEmployeeMale" v="A dolgozó" />
+        <e k="ui_pmProfileEmployeeFemale" v="A dolgozó" />
+        <e k="ui_pmProfilePronounMale" v="Ő" />
+        <e k="ui_pmProfilePronounFemale" v="Ő" />
+        <e k="ui_pmProfileBackgroundFamilyFarm" v="egy vidéki családi gazdaságban" />
+        <e k="ui_pmProfileBackgroundDairyFarm" v="egy kis tejgazdaságban" />
+        <e k="ui_pmProfileBackgroundContractor" v="egy mezőgazdasági bérvállalkozónál" />
+        <e k="ui_pmProfileBackgroundArableFarm" v="egy szántóföldi gazdaságban" />
+        <e k="ui_pmProfileBackgroundMixedFarm" v="egy vegyes gazdaságban" />
+        <e k="ui_pmProfileBackgroundLogistics" v="egy logisztikai vállalatnál" />
+        <e k="ui_pmProfileBackgroundWorkshop" v="egy mezőgazdasági gépműhelyben" />
+        <e k="ui_pmProfileBackgroundOffice" v="egy irodai munkakörben" />
+        <e k="ui_pmProfileIntro3" v="%s már %d hónapja dolgozik a gazdaságban, korábban pedig %s volt alkalmazásban." />
+        <e k="ui_pmProfileExperience1_3" v="%s érti az alapvető folyamatokat, de sok feladatnál még útmutatásra és gyakorlásra van szüksége." />
+        <e k="ui_pmProfileExperience2_3" v="%s egyre jobban kezeli a gyakori feladatokat, de az összetettebb munkafolyamatokat még el kell mélyítenie." />
+        <e k="ui_pmProfileExperience3_3" v="%s megbízható szakmai alappal rendelkezik, és többféle feladatra bevethető." />
+        <e k="ui_pmProfileExperience4_3" v="%s gyakorlati tapasztalatból ismeri a gazdaság számos folyamatát, és nehezebb feladatokat is vállalhat." />
+        <e k="ui_pmProfileExperience5_3" v="%s kivételesen széles szakértelemmel rendelkezik, és a különösen igényes feladatokat is magabiztosan kezeli." />
+        <e k="ui_pmProfileReliability1_3" v="%s megbízhatatlan teljesítményével ismételten bizonytalanságot okoz a munkatervezésben." />
+        <e k="ui_pmProfileReliability2_3" v="%s el tudja látni a rutinfeladatokat, de az igényes munkáknál még nem következetesen megbízható." />
+        <e k="ui_pmProfileReliability3_3" v="%s a legtöbb feladatot lelkiismeretesen végzi, bár alkalmanként továbbra is előfordulnak ingadozások." />
+        <e k="ui_pmProfileReliability4_3" v="%s következetesen és gondosan dolgozik, csak kevés hiányzással vagy rendellenességgel." />
+        <e k="ui_pmProfileReliability5_3" v="%s még nehéz feladatoknál is kivételesen megbízható és kiegyensúlyozott marad." />
+        <e k="ui_pmProfileLoyalty1_3" v="%s valószínűleg inkább rövid távú megoldásként tekint a munkára, mint tartós szerepként." />
+        <e k="ui_pmProfileLoyalty2_3" v="%s a gazdaságnál marad, de a hosszú távú tagság még nem vehető biztosra." />
+        <e k="ui_pmProfileLoyalty3_3" v="%s jól érzi magát a csapatban, bár a kötődés még erősödhet." />
+        <e k="ui_pmProfileLoyalty4_3" v="%s erősen azonosul a gazdasággal, és lojálisan kiáll a vállalkozás mellett." />
+        <e k="ui_pmProfileLoyalty5_3" v="%s különösen erősen azonosul a gazdasággal, és várhatóan tartósan elkötelezett marad." />
+        <e k="ui_pmProfileSpecializations2" v="%s főként a(z) %s területre szakosodott." />
+        <e k="ui_pmProfileSpecializations3" v="%s különleges erősségeket mutat a(z) %s területen." />
+        <e k="ui_pmProfileLearningProgress2" v="%s jelenleg különösen jól fejlődik a(z) %s területen (%d %%)." />
+        <e k="ui_pmProfileLearningProgress3" v="%s eddig a(z) %s területen érte el a legnagyobb fejlődést (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization2" v="%s még nem alakított ki állandó specializációt." />
+        <e k="ui_pmProfileNoSpecialization3" v="%s szakmai iránya még nyitott." />
+        <e k="ui_pmProfileActivity2" v="A gazdaságnál eltöltött idő eddig %d befejezett feladatot és %d képzést foglal magában." />
+        <e k="ui_pmProfileActivity3" v="%s eddig %d feladatot és %d képzést teljesített." />
+        <e k="ui_pmProfileNoActivity2" v="%s gyakorlati fejlődése a gazdaságban még csak most kezdődik." />
+        <e k="ui_pmProfileNoActivity3" v="%s még nem fejezett be feladatot és nem vett részt képzésen." />
+        <e k="ui_hpSetting_toggle" v="Átváltás" />
+        <e k="ui_worker_status_line" v="Állapot: %s" />
+        <e k="ui_pmApplicantProfileIntro" v="%s korábban %s dolgozott." />
+        <e k="ui_pmApplicantProfileMarketNew" v="A jelentkezés ebben a hónapban került a piacra." />
+        <e k="ui_pmApplicantProfileMarketOneMonth" v="A jelentkezés egy hónapja van a piacon." />
+        <e k="ui_pmApplicantProfileMarketMonths" v="A jelentkezés %d hónapja van a piacon." />
+        <e k="ui_pmApplicantProfileAge1" v="%d évesen a szakmai pálya még a kezdetén jár. Jelentős fejlődési lehetőség áll előtte." />
+        <e k="ui_pmApplicantProfileAge2" v="%d évesen a szakmai fejlődés még kialakulóban van, és tovább erősödhet." />
+        <e k="ui_pmApplicantProfileAge3" v="%d évesen már kialakult szakmai pálya áll mögötte. Az előző munkakör határozza meg, mennyire hasznos ez a tapasztalat a mezőgazdaságban." />
+        <e k="ui_pmApplicantProfileAge4" v="%d évesen széles körű általános munkatapasztalat várható, ez azonban nem jelent automatikusan mezőgazdasági gyakorlatot." />
+        <e k="ui_pmApplicantProfileExperience1" v="A gyakorlati mezőgazdasági tapasztalat még nagyon kevés. Alapos betanítás szükséges." />
+        <e k="ui_pmApplicantProfileExperience2" v="Az alapvető mezőgazdasági ismeretek megvannak, de az összetettebb feladatokhoz még hiányzik a rutin." />
+        <e k="ui_pmApplicantProfileExperience3" v="A meglévő tapasztalat jó alapot ad a szokásos munkákhoz, még ha nem is minden területet kezel magabiztosan." />
+        <e k="ui_pmApplicantProfileExperience4" v="A mezőgazdasági tapasztalat egyértelműen fejlett, és sokoldalú bevethetőséget jelez." />
+        <e k="ui_pmApplicantProfileExperience5" v="A tapasztalat kivételesen magas szintű, és az összetett feladatok ellátását is lehetővé teszi." />
+        <e k="ui_pmApplicantProfileReliability1" v="A megbízhatósági érték jelentős kockázatot jelez a tervezés, a megállapodások és a gondos végrehajtás terén." />
+        <e k="ui_pmApplicantProfileReliability2" v="A megbízhatóság még ingadozó. A fontos feladatokat szorosan követni kell." />
+        <e k="ui_pmApplicantProfileReliability3" v="A megbízhatóság megfelelő szinten van, és általában kiszámítható beosztást tesz lehetővé." />
+        <e k="ui_pmApplicantProfileReliability4" v="A magas megbízhatóság állandó, gondos és jól tervezhető munkát ígér." />
+        <e k="ui_pmApplicantProfileReliability5" v="A kivételesen magas megbízhatóság nagyon nagy tervezési biztonságot nyújt." />
+        <e k="ui_pmApplicantProfileLoyalty1" v="Az alacsony lojalitás csak gyenge kötődést jelez egy jövőbeli munkáltatóhoz." />
+        <e k="ui_pmApplicantProfileLoyalty2" v="A lojalitás még visszafogott. A hosszú távú kötődésnek előbb ki kell alakulnia." />
+        <e k="ui_pmApplicantProfileLoyalty3" v="A lojalitás stabil középszinten van, és jó alapot ad a hosszabb távú együttműködéshez." />
+        <e k="ui_pmApplicantProfileLoyalty4" v="A magas lojalitás erős hajlandóságot jelez a gazdaságnál való hosszú távú maradásra." />
+        <e k="ui_pmApplicantProfileLoyalty5" v="A kivételesen magas lojalitás különösen erős hosszú távú kötődési hajlandóságot mutat." />
+        <e k="ui_pmHistoryColumnCareer" v="Korábbi pálya" />
+        <e k="ui_pmHistoryColumnRecent" v="Legutóbbi események" />
+        <e k="ui_pmHistoryColumnTotals" v="Összesen" />
+        <e k="ui_pmHistoryNoRecord" v="nincs bejegyzés" />
+        <e k="ui_pmHistoryDateFormat" v="%d. nap · %d/%d" />
+        <e k="ui_pmHistorySalaryAccepted" v="elfogadva" />
+        <e k="ui_pmHistorySalaryDeclined" v="elutasítva" />
+        <e k="ui_pmHistorySalaryPending" v="függőben" />
+        <e k="ui_pmHistorySalaryUnresolved" v="nincs rögzített döntés" />
+        <e k="ui_pmHistoryAbortSickness" v="betegség" />
+        <e k="ui_pmHistoryAbortUnreliability" v="megbízhatatlanság" />
+        <e k="ui_pmHistoryAbortOther" v="egyéb ok" />
+        <e k="ui_pmHistoryLastSickness" v="Legutóbbi betegség: %s" />
+        <e k="ui_pmHistoryLastSalaryRequest" v="Legutóbbi béremelési igény: %s · %s" />
+        <e k="ui_pmHistoryLastAbort" v="Legutóbbi megszakított munka: %s · %s" />
+        <e k="ui_pmHistoryTotalSickness" v="Betegnapok: %d" />
+        <e k="ui_pmHistoryTotalSalaryRequests" v="Bérigények: %d" />
+        <e k="ui_pmHistoryTotalAborts" v="Megszakított munkák: %d" />
+        <e k="ui_pmHistoryTotalSalaryPaid" v="Összes bér: %s" />
+        <e k="ui_pmHistoryTrainingYearCompact" v="%d. év" />
+        <e k="ui_pmHistoryTrainingNoneCompact" v="nincs" />
+        <e k="ui_pmHistoryCareerJobs" v="Munkák: %d" />
+        <e k="ui_pmHistoryCareerWorkTime" v="Munkaidő: %s" />
+        <e k="ui_pmHistoryCareerTraining" v="Képzés: %s" />
+        <e k="ui_pmHistoryCareerTransport" v="Szállítás: %s" />
+        <e k="ui_pmHistoryValueActive" v="aktív" />
+        <e k="ui_pmHistoryValueInactive" v="nem aktív" />
+        <e k="ui_monthlyRowApplicants" v="Jelentkezők" />
+        <e k="ui_monthlyRowEmployees" v="Alkalmazottak" />
+        <e k="ui_monthlyRowAvailable" v="Elérhető" />
+        <e k="ui_monthlyRowJobs" v="Munkák" />
+        <e k="ui_monthlyRowWorkTime" v="Munkaidő" />
+        <e k="ui_monthlyRowWages" v="Havi bérek" />
+        <e k="ui_monthlyRowPayroll" v="Legutóbbi bérfizetés" />
+        <e k="ui_pmOverviewOverallHeader" v="ÖSSZESEN" />
+        <e k="ui_pmOverviewTotalJobs" v="Összes munka" />
+        <e k="ui_pmOverviewTotalWorkTime" v="Összes munkaidő" />
+        <e k="ui_pmOverviewTotalPayroll" v="Összes kifizetett bér" />
+        <e k="ui_pmOverviewEverHired" v="Valaha alkalmazva" />
+        <e k="ui_pmOverviewDismissed" v="Elbocsátások" />
+        <e k="ui_pmOverviewResigned" v="Felmondások" />
+        <e k="ui_pmOverviewRetired" v="Nyugdíjazások" />
+        <e k="ui_pmChronicleJobAbortedSickness" v="A munka betegség miatt megszakadt." />
+        <e k="ui_reliabilityJobAbortOtherTaskMale" v="%s megszakította a folyamatban lévő munkát, mert egy másik feladatot fontosabbnak tartott." />
+        <e k="ui_reliabilityJobAbortOtherTaskFemale" v="%s megszakította a folyamatban lévő munkát, mert egy másik feladatot fontosabbnak tartott." />
+        <e k="ui_reliabilityJobAbortBreakMale" v="%s megszakította a folyamatban lévő munkát. Szünetet akart tartani." />
+        <e k="ui_reliabilityJobAbortBreakFemale" v="%s megszakította a folyamatban lévő munkát. Szünetet akart tartani." />
+        <e k="ui_reliabilityJobAbortPrivateMale" v="%s megszakította a folyamatban lévő munkát. Magánügyeket kellett intéznie." />
+        <e k="ui_reliabilityJobAbortPrivateFemale" v="%s megszakította a folyamatban lévő munkát. Magánügyeket kellett intéznie." />
+        <e k="ui_reliabilityJobAbortStoveMale" v="%s megszakította a folyamatban lévő munkát, mert elfelejtette kikapcsolni otthon a tűzhelyet, ezért hazament." />
+        <e k="ui_reliabilityJobAbortStoveFemale" v="%s megszakította a folyamatban lévő munkát, mert elfelejtette kikapcsolni otthon a tűzhelyet, ezért hazament." />
+        <e k="ui_reliabilityJobAbortFriendsMale" v="%s megszakította a folyamatban lévő munkát, mert spontán úgy döntött, hogy találkozik a barátaival." />
+        <e k="ui_reliabilityJobAbortFriendsFemale" v="%s megszakította a folyamatban lévő munkát, mert spontán úgy döntött, hogy találkozik a barátaival." />
+        <e k="ui_reliabilityJobAbortPartnerMale" v="%s megszakította a folyamatban lévő munkát, hogy spontán kávézzon a barátnőjével." />
+        <e k="ui_reliabilityJobAbortPartnerFemale" v="%s megszakította a folyamatban lévő munkát, hogy spontán kávézzon a barátjával." />
     </elements>
 </l10n>

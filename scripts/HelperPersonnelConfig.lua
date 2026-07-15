@@ -2,6 +2,9 @@ HelperPersonnelConfig = HelperPersonnelConfig or {}
 HelperPersonnelConfig_mt = Class(HelperPersonnelConfig)
 
 HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE = 2500
+HelperPersonnelConfig.MIN_STANDARD_BASE_MONTHLY_WAGE = 100
+HelperPersonnelConfig.MAX_STANDARD_BASE_MONTHLY_WAGE = 100000
+HelperPersonnelConfig.STANDARD_BASE_MONTHLY_WAGE_STEP = 10
 
 HelperPersonnelConfig.xmlSchema = XMLSchema.new("helperPersonnelConfig")
 HelperPersonnelConfig.xmlSchema:register(XMLValueType.BOOL, "helperPersonnelConfig.gameplayEffects#enabled", "Gameplay-Auswirkungen der Mitarbeiterwerte aktiv", true)
@@ -176,6 +179,22 @@ function HelperPersonnelConfig:getStandardBaseMonthlyWage()
     return tonumber(self.standardBaseMonthlyWage) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
 end
 
+function HelperPersonnelConfig.normalizeStandardBaseMonthlyWage(value)
+    local numericValue = tonumber(value)
+    if numericValue == nil then
+        return nil
+    end
+
+    local minimum = HelperPersonnelConfig.MIN_STANDARD_BASE_MONTHLY_WAGE
+    local maximum = HelperPersonnelConfig.MAX_STANDARD_BASE_MONTHLY_WAGE
+    if numericValue < minimum or numericValue > maximum then
+        return nil
+    end
+
+    local step = HelperPersonnelConfig.STANDARD_BASE_MONTHLY_WAGE_STEP
+    return math.floor((numericValue + step * 0.5) / step) * step
+end
+
 function HelperPersonnelConfig:getNetworkState()
     return {
         gameplayEffectsEnabled = self.gameplayEffectsEnabled == true,
@@ -212,6 +231,10 @@ function HelperPersonnelConfig:applyNetworkState(state)
     self.economicEffectsEnabled = state.economicEffectsEnabled == true
     self.individualWagesEnabled = state.individualWagesEnabled == true
     self.standardBaseMonthlyWage = tonumber(state.standardBaseMonthlyWage) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
+
+    if HelperPersonnelGameSettings ~= nil and HelperPersonnelGameSettings.syncElementsFromConfig ~= nil then
+        HelperPersonnelGameSettings.syncElementsFromConfig()
+    end
 
     return true
 end

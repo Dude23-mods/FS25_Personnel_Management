@@ -2,7 +2,7 @@
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
 HelperPersonnelNetwork.STATE_VERSION = math.max(tonumber(HelperPersonnelNetwork.STATE_VERSION) or 0, 7)
-HelperPersonnelNetwork.ACTION_TOGGLE_TRANSPORT = "toggleTransport"
+HelperPersonnelNetwork.ACTION_SET_TRANSPORT_PRIORITY = "setTransportPriority"
 HelperPersonnelTransportAssignments = HelperPersonnelTransportAssignments or {}
 
 HelperPersonnelTransportAssignments.TRANSPORT_DEBUG_LOGGING = false
@@ -32,14 +32,6 @@ local function hp1570GetText(key, fallback)
     end
 
     return fallback or key
-end
-
-local function hp1570GetInputAction(actionName)
-    if InputAction ~= nil and InputAction[actionName] ~= nil then
-        return InputAction[actionName]
-    end
-
-    return actionName
 end
 
 local function hp1570GetWorkerName(manager, worker)
@@ -324,7 +316,7 @@ if HelperPersonnelAIJobHooks ~= nil then
     end
 
     local HP_V15192_ORIGINAL_GET_WORKER_ID_FOR_JOB = HelperPersonnelAIJobHooks.getWorkerIdForJob
-    function HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
+    local function hpOverride_HelperPersonnelAIJobHooks_getWorkerIdForJob_1(app, job)
         if hp1570IsTransportJobByClass(job)
             and type(job) == "table"
             and job.helperPersonnelWorkerId == nil then
@@ -338,6 +330,7 @@ if HelperPersonnelAIJobHooks ~= nil then
 
         return nil
     end
+    HelperPersonnelAIJobHooks.getWorkerIdForJob = hpOverride_HelperPersonnelAIJobHooks_getWorkerIdForJob_1
 end
 
 local function hp1570GetBridgeVehicleKey(bridge, job)
@@ -384,7 +377,7 @@ end
 
 if HelperPersonnelHelperBridge ~= nil then
     local HP_V15193_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB = HelperPersonnelHelperBridge.canUseWorkerForJob
-    function HelperPersonnelHelperBridge:canUseWorkerForJob(workerId, job)
+    local function hpOverride_HelperPersonnelHelperBridge_canUseWorkerForJob_2(self, workerId, job)
         if HP_V15193_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB ~= nil
             and HP_V15193_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB(self, workerId, job) == true then
             return true
@@ -414,65 +407,36 @@ if HelperPersonnelHelperBridge ~= nil then
 
         return false
     end
+    HelperPersonnelHelperBridge.canUseWorkerForJob = hpOverride_HelperPersonnelHelperBridge_canUseWorkerForJob_2
 end
 
 if HelperPersonnelManager ~= nil then
-    local HP_V1570_ORIGINAL_NORMALIZE_PERSON = HelperPersonnelManager.normalizePersonRuntimeData
-    function HelperPersonnelManager:normalizePersonRuntimeData(person)
-        if HP_V1570_ORIGINAL_NORMALIZE_PERSON ~= nil then
-            HP_V1570_ORIGINAL_NORMALIZE_PERSON(self, person)
-        end
+    function HelperPersonnelManager:normalizeTransportPriorities()
+        local active = {}
+        local changed = false
 
-        if type(person) == "table" then
-            person.transportDriver = person.transportDriver == true
-        end
-
-        return person
-    end
-
-    local HP_V1570_ORIGINAL_READ_PERSON_XML = HelperPersonnelManager.readPersonFromXML
-    function HelperPersonnelManager:readPersonFromXML(xmlFile, key)
-        local person = HP_V1570_ORIGINAL_READ_PERSON_XML ~= nil and HP_V1570_ORIGINAL_READ_PERSON_XML(self, xmlFile, key) or nil
-        if type(person) == "table" and xmlFile ~= nil and key ~= nil and xmlFile.getBool ~= nil then
-            person.transportDriver = xmlFile:getBool(key .. "#transportDriver", false) == true
-        end
-        return person
-    end
-
-    local HP_V1570_ORIGINAL_WRITE_PERSON_XML = HelperPersonnelManager.writePersonToXML
-    function HelperPersonnelManager:writePersonToXML(xmlFile, key, person, includeWorkerState)
-        if HP_V1570_ORIGINAL_WRITE_PERSON_XML ~= nil then
-            HP_V1570_ORIGINAL_WRITE_PERSON_XML(self, xmlFile, key, person, includeWorkerState)
-        end
-
-        if xmlFile ~= nil and key ~= nil and person ~= nil and includeWorkerState == true then
-            xmlFile:setBool(key .. "#transportDriver", person.transportDriver == true)
-        end
-    end
-
-    local HP_V1570_ORIGINAL_COPY_PERSON_NETWORK = HelperPersonnelManager.copyPersonForNetwork
-    function HelperPersonnelManager:copyPersonForNetwork(person)
-        local copy = HP_V1570_ORIGINAL_COPY_PERSON_NETWORK ~= nil and HP_V1570_ORIGINAL_COPY_PERSON_NETWORK(self, person) or {}
-        if type(person) == "table" then
-            copy.transportDriver = person.transportDriver == true
-        end
-        return copy
-    end
-
-    if HelperPersonnelManager.xmlSchema ~= nil and XMLValueType ~= nil then
-        HelperPersonnelManager.xmlSchema:register(XMLValueType.BOOL, "helperPersonnel.farms.farm(?).workers.worker(?)#transportDriver", "Mitarbeiter ist fuer Transporttaetigkeiten vorgemerkt")
-    end
-
-    function HelperPersonnelManager:getTransportDriversSorted()
-        local result = {}
         for _, worker in ipairs(self.workers or {}) do
             self:normalizePersonRuntimeData(worker)
             if worker.transportDriver == true then
-                table.insert(result, worker)
+                table.insert(active, worker)
+            elseif (tonumber(worker.transportPriority) or 0) ~= 0 then
+                worker.transportPriority = 0
+                changed = true
             end
         end
 
-        table.sort(result, function(a, b)
+        table.sort(active, function(a, b)
+            local priorityA = math.max(0, math.floor((tonumber(a.transportPriority) or 0) + 0.5))
+            local priorityB = math.max(0, math.floor((tonumber(b.transportPriority) or 0) + 0.5))
+            if priorityA > 0 or priorityB > 0 then
+                if priorityA == 0 then
+                    return false
+                elseif priorityB == 0 then
+                    return true
+                elseif priorityA ~= priorityB then
+                    return priorityA < priorityB
+                end
+            end
             if (a.reliability or 0) ~= (b.reliability or 0) then
                 return (a.reliability or 0) > (b.reliability or 0)
             end
@@ -481,10 +445,25 @@ if HelperPersonnelManager ~= nil then
             end
             local nameA = tostring(a.firstName or "") .. tostring(a.lastName or "")
             local nameB = tostring(b.firstName or "") .. tostring(b.lastName or "")
-            return nameA < nameB
+            if nameA ~= nameB then
+                return nameA < nameB
+            end
+            return (tonumber(a.id) or 0) < (tonumber(b.id) or 0)
         end)
 
-        return result
+        for index, worker in ipairs(active) do
+            if tonumber(worker.transportPriority) ~= index then
+                worker.transportPriority = index
+                changed = true
+            end
+        end
+
+        return changed, active
+    end
+
+    function HelperPersonnelManager:getTransportDriversSorted()
+        local _, active = self:normalizeTransportPriorities()
+        return active or {}
     end
 
     function HelperPersonnelManager:isTransportDriverAvailableForJob(worker, job, allowStaleCleanup)
@@ -525,7 +504,6 @@ if HelperPersonnelManager ~= nil then
         end
 
         if allowStaleCleanup == true and self.app ~= nil then
-
             hp1570ClearStaleBridgeAssignment(self.app, worker)
         end
 
@@ -632,267 +610,179 @@ if HelperPersonnelManager ~= nil then
         return #(self:getTransportDriversSorted()) > 0
     end
 
-    function HelperPersonnelManager:setWorkerTransportDriver(workerId, enabled)
-        workerId = tonumber(workerId)
-        if workerId == nil then
+    function HelperPersonnelManager:setTransportPriorityOrder(workerIds)
+        if type(workerIds) ~= "table" then
             return false
         end
 
-        local worker = self:getWorkerById(workerId)
-        if worker == nil then
-            return false
-        end
-
-        local newValue = enabled == true
-        if worker.transportDriver == newValue then
-            return false
-        end
-
-        worker.transportDriver = newValue
-        self:normalizePersonRuntimeData(worker)
-
-        local name = hp1570GetWorkerName(self, worker)
-        local textKey = newValue and "ui_transportActionAssigned" or "ui_transportActionRemoved"
-        local fallback = newValue and "%s ist fuer Transporttaetigkeiten eingeteilt." or "%s ist nicht mehr fuer Transporttaetigkeiten eingeteilt."
-        local actionText = string.format(hp1570GetText(textKey, fallback), name)
-
-        if self.touch ~= nil then
-            self:touch(actionText)
-        end
-
-        return true
-    end
-
-    function HelperPersonnelManager:toggleWorkerTransportDriver(workerId)
-        local worker = self:getWorkerById(workerId)
-        if worker == nil then
-            return false
-        end
-
-        return self:setWorkerTransportDriver(workerId, worker.transportDriver ~= true)
-    end
-
-    function HelperPersonnelManager:toggleWorkerTransportDriverForFarm(workerId, farmId)
-        farmId = hp1570NormalizeFarmId(farmId)
-        if farmId ~= nil and self.executeWithFarmContext ~= nil then
-            return self:executeWithFarmContext(farmId, function()
-                return self:toggleWorkerTransportDriver(workerId)
-            end, true) == true
-        end
-
-        return self:toggleWorkerTransportDriver(workerId)
-    end
-
-    local HP_V1570_ORIGINAL_WORKER_HIRED_LINE = HelperPersonnelManager.getWorkerHiredLine
-    function HelperPersonnelManager:getWorkerHiredLine(person)
-        local line = HP_V1570_ORIGINAL_WORKER_HIRED_LINE ~= nil and HP_V1570_ORIGINAL_WORKER_HIRED_LINE(self, person) or ""
-        if type(person) == "table" and person.transportDriver == true then
-            return string.format("%s | %s", line, hp1570GetText("ui_transportMarker", "Transport"))
-        end
-        return line
-    end
-end
-
-if HelperPersonnelNetwork ~= nil then
-    local function hp1570WriteTransportFlags(streamId, workers)
-        for _, worker in ipairs(workers or {}) do
-            streamWriteBool(streamId, worker ~= nil and worker.transportDriver == true)
-        end
-    end
-
-    local function hp1570ReadTransportFlags(streamId, workers)
-        for _, worker in ipairs(workers or {}) do
-            if type(worker) == "table" then
-                worker.transportDriver = streamReadBool(streamId) == true
-            else
-                streamReadBool(streamId)
+        local workersById = {}
+        for _, worker in ipairs(self.workers or {}) do
+            local workerId = tonumber(worker.id)
+            if workerId ~= nil then
+                workersById[workerId] = worker
             end
         end
-    end
 
-    function HelperPersonnelNetwork.writeFarmState(streamId, farmState)
-        farmState = farmState or {}
-
-        HelperPersonnelNetwork.writeFarmId(streamId, farmState.farmId or 1)
-        streamWriteUInt8(streamId, farmState.employerReputation or 50)
-        streamWriteString(streamId, farmState.lastActionText or "")
-        streamWriteString(streamId, farmState.lastReputationChangeText or "")
-        streamWriteString(streamId, farmState.lastPayrollText or "")
-        streamWriteFloat32(streamId, farmState.lastPayrollAmount or 0)
-        streamWriteFloat32(streamId, farmState.totalPayrollPaid or 0)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.dismissalPeriod)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.dismissalYear)
-        streamWriteInt32(streamId, farmState.monthlyDismissals or 0)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.lastApplicantPeriod)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.lastApplicantYear)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.lastLoyaltyDailyCheckMinute)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.lastSicknessDailyCheckMinute)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.sicknessCurrentDay)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.sicknessDayPeriod)
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.sicknessDayYear)
-        streamWriteInt32(streamId, tonumber(farmState.pendingPayrollLoyaltyDelta) or 0)
-        streamWriteBool(streamId, farmState.applicantMarketInitialized == true)
-
-        HelperPersonnelNetwork.writePersonArray(streamId, farmState.workers or {})
-        HelperPersonnelNetwork.writePersonArray(streamId, farmState.applicants or {})
-        HelperPersonnelNetwork.writeHistory(streamId, farmState.reputationHistory or {})
-        HelperPersonnelNetwork.writeHistory(streamId, farmState.actionHistory or {})
-
-        HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.selectedWorkerId)
-        HelperPersonnelNetwork.writeString(streamId, farmState.selectedVehicleKey)
-        HelperPersonnelNetwork.writeString(streamId, farmState.selectedVehicleName)
-        HelperPersonnelNetwork.writeAssignmentArray(streamId, farmState.activeAssignments or {})
-
-        hp1570WriteTransportFlags(streamId, farmState.workers or {})
-    end
-
-    function HelperPersonnelNetwork.readFarmState(streamId, version)
-        local farmState = {}
-
-        farmState.farmId = HelperPersonnelNetwork.readFarmId(streamId)
-        farmState.employerReputation = streamReadUInt8(streamId)
-        farmState.lastActionText = streamReadString(streamId)
-        farmState.lastReputationChangeText = streamReadString(streamId)
-        farmState.lastPayrollText = streamReadString(streamId)
-        farmState.lastPayrollAmount = streamReadFloat32(streamId)
-        farmState.totalPayrollPaid = streamReadFloat32(streamId)
-        farmState.dismissalPeriod = HelperPersonnelNetwork.readOptionalInt(streamId)
-        farmState.dismissalYear = HelperPersonnelNetwork.readOptionalInt(streamId)
-        farmState.monthlyDismissals = streamReadInt32(streamId)
-        farmState.lastApplicantPeriod = HelperPersonnelNetwork.readOptionalInt(streamId)
-        farmState.lastApplicantYear = HelperPersonnelNetwork.readOptionalInt(streamId)
-        if (version or 0) >= 6 then
-            farmState.lastLoyaltyDailyCheckMinute = HelperPersonnelNetwork.readOptionalInt(streamId)
-            if (version or 0) >= 7 then
-                farmState.lastSicknessDailyCheckMinute = HelperPersonnelNetwork.readOptionalInt(streamId)
-                farmState.sicknessCurrentDay = HelperPersonnelNetwork.readOptionalInt(streamId)
-                farmState.sicknessDayPeriod = HelperPersonnelNetwork.readOptionalInt(streamId)
-                farmState.sicknessDayYear = HelperPersonnelNetwork.readOptionalInt(streamId)
-            end
-            farmState.pendingPayrollLoyaltyDelta = streamReadInt32(streamId) or 0
-        else
-            farmState.pendingPayrollLoyaltyDelta = 0
-        end
-        if (version or 0) >= 4 then
-            farmState.applicantMarketInitialized = streamReadBool(streamId) == true
-        else
-            farmState.applicantMarketInitialized = false
-        end
-
-        farmState.workers = HelperPersonnelNetwork.readPersonArray(streamId, version)
-        farmState.applicants = HelperPersonnelNetwork.readPersonArray(streamId, version)
-        farmState.reputationHistory = HelperPersonnelNetwork.readHistory(streamId)
-        farmState.actionHistory = HelperPersonnelNetwork.readHistory(streamId)
-
-        if (version or 0) >= 3 then
-            farmState.selectedWorkerId = HelperPersonnelNetwork.readOptionalInt(streamId)
-            farmState.selectedVehicleKey = HelperPersonnelNetwork.readString(streamId)
-            farmState.selectedVehicleName = HelperPersonnelNetwork.readString(streamId)
-            farmState.activeAssignments = HelperPersonnelNetwork.readAssignmentArray(streamId)
-        else
-            farmState.activeAssignments = {}
-        end
-
-        if (version or 0) >= 5 then
-            hp1570ReadTransportFlags(streamId, farmState.workers or {})
-        end
-
-        return farmState
-    end
-end
-
-if HelperPersonnelApp ~= nil then
-    function HelperPersonnelApp:requestToggleTransportDriver(workerId)
-        if workerId == nil or self.manager == nil then
+        if #workerIds > #(self.workers or {}) then
             return false
         end
 
-        local farmId = self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1
-        local changed = false
-
-        if self.isServerAuthority ~= nil and self:isServerAuthority() then
-            if self.manager.toggleWorkerTransportDriverForFarm ~= nil then
-                changed = self.manager:toggleWorkerTransportDriverForFarm(workerId, farmId) == true
-            elseif self.manager.toggleWorkerTransportDriver ~= nil then
-                changed = self.manager:toggleWorkerTransportDriver(workerId) == true
+        local seen = {}
+        local normalizedIds = {}
+        for _, value in ipairs(workerIds) do
+            local workerId = tonumber(value)
+            if workerId == nil or workerId <= 0 or workerId ~= math.floor(workerId) then
+                return false
             end
-
-            if changed and self.syncNetworkStateToClients ~= nil then
-                self:syncNetworkStateToClients()
+            workerId = math.floor(workerId)
+            if seen[workerId] == true or workersById[workerId] == nil then
+                return false
             end
-        elseif HelperPersonnelNetworkActionEvent ~= nil and HelperPersonnelNetworkActionEvent.send ~= nil then
-            HelperPersonnelNetworkActionEvent.send(HelperPersonnelNetwork.ACTION_TOGGLE_TRANSPORT, workerId, self.manager.changeCounter or 0, farmId)
-            changed = true
+            seen[workerId] = true
+            table.insert(normalizedIds, workerId)
+        end
+
+        local oldOrder = {}
+        for _, worker in ipairs(self:getTransportDriversSorted()) do
+            table.insert(oldOrder, tonumber(worker.id))
+        end
+
+        local oldStates = {}
+        for workerId, worker in pairs(workersById) do
+            oldStates[workerId] = worker.transportDriver == true
+            worker.transportDriver = false
+            worker.transportPriority = 0
+        end
+
+        for index, workerId in ipairs(normalizedIds) do
+            local worker = workersById[workerId]
+            worker.transportDriver = true
+            worker.transportPriority = index
+        end
+
+        local changed = #oldOrder ~= #normalizedIds
+        if not changed then
+            for index, workerId in ipairs(normalizedIds) do
+                if oldOrder[index] ~= workerId then
+                    changed = true
+                    break
+                end
+            end
+        end
+
+        for workerId, worker in pairs(workersById) do
+            local enabledChanged = oldStates[workerId] ~= (worker.transportDriver == true)
+            if enabledChanged then
+                changed = true
+                if self.addPersonChronicleEntry ~= nil then
+                    local textKey = worker.transportDriver == true and "ui_transportActionAssigned" or "ui_transportActionRemoved"
+                    local fallback = worker.transportDriver == true and "%s ist für Transporttätigkeiten eingeteilt." or "%s ist nicht mehr für Transporttätigkeiten eingeteilt."
+                    self:addPersonChronicleEntry(worker, worker.transportDriver == true and HelperPersonnelManager.CHRONICLE_EVENT_TRANSPORT_ASSIGNED or HelperPersonnelManager.CHRONICLE_EVENT_TRANSPORT_REMOVED, {
+                        reason = "manualAssignment",
+                        text = string.format(hp1570GetText(textKey, fallback), hp1570GetWorkerName(self, worker))
+                    })
+                end
+            end
+        end
+
+        if changed and self.touch ~= nil then
+            self:touch(hp1570GetText("ui_transportPrioritySaved", "Transportreihenfolge gespeichert."))
         end
 
         return changed
     end
 
-    local HP_V1570_ORIGINAL_VALIDATE_NETWORK_ACTION_TARGET = HelperPersonnelApp.validateNetworkActionTarget
-    function HelperPersonnelApp:validateNetworkActionTarget(actionName, targetId, farmId)
-        if actionName == HelperPersonnelNetwork.ACTION_TOGGLE_TRANSPORT then
-            return self.manager ~= nil and self.manager.hasWorkerInFarm ~= nil and self.manager:hasWorkerInFarm(targetId, farmId) == true
+    function HelperPersonnelManager:setTransportPriorityOrderForFarm(workerIds, farmId)
+        farmId = hp1570NormalizeFarmId(farmId)
+        if farmId ~= nil and self.executeWithFarmContext ~= nil then
+            return self:executeWithFarmContext(farmId, function()
+                return self:setTransportPriorityOrder(workerIds)
+            end, true) == true
         end
 
-        if HP_V1570_ORIGINAL_VALIDATE_NETWORK_ACTION_TARGET ~= nil then
-            return HP_V1570_ORIGINAL_VALIDATE_NETWORK_ACTION_TARGET(self, actionName, targetId, farmId)
+        return self:setTransportPriorityOrder(workerIds)
+    end
+
+end
+
+if HelperPersonnelApp ~= nil then
+    function HelperPersonnelApp:encodeTransportPriorityOrder(workerIds)
+        local values = {}
+        for _, workerId in ipairs(workerIds or {}) do
+            local id = tonumber(workerId)
+            if id ~= nil and id > 0 then
+                table.insert(values, tostring(math.floor(id + 0.5)))
+            end
+        end
+        return table.concat(values, ",")
+    end
+
+    function HelperPersonnelApp:decodeTransportPriorityOrder(actionData)
+        local result = {}
+        local seen = {}
+        local text = tostring(actionData or "")
+        if text == "" then
+            return result
+        end
+        if #text > 16384 then
+            return nil
+        end
+
+        for token in string.gmatch(text, "[^,]+") do
+            local workerId = tonumber(token)
+            if workerId == nil or workerId <= 0 or workerId ~= math.floor(workerId) then
+                return nil
+            end
+            workerId = math.floor(workerId)
+            if seen[workerId] == true then
+                return nil
+            end
+            seen[workerId] = true
+            table.insert(result, workerId)
+            if #result > (HelperPersonnelNetwork.MAX_NETWORK_PEOPLE or 1024) then
+                return nil
+            end
+        end
+
+        return result
+    end
+
+    function HelperPersonnelApp:requestSetTransportPriority(workerIds)
+        if self.manager == nil then
+            return false
+        end
+
+        local farmId = self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1
+        if self.isServerAuthority ~= nil and self:isServerAuthority() then
+            if self.isConnectionFarmManager ~= nil and not self:isConnectionFarmManager(nil, farmId) then
+                return false
+            end
+            local changed = self.manager.setTransportPriorityOrderForFarm ~= nil and self.manager:setTransportPriorityOrderForFarm(workerIds, farmId) == true
+            if changed and self.syncNetworkStateToClients ~= nil then
+                self:syncNetworkStateToClients()
+            end
+            return changed
+        end
+
+        if HelperPersonnelNetworkActionEvent ~= nil and HelperPersonnelNetworkActionEvent.send ~= nil then
+            HelperPersonnelNetworkActionEvent.send(HelperPersonnelNetwork.ACTION_SET_TRANSPORT_PRIORITY, 0, self.manager.changeCounter or 0, farmId, self:encodeTransportPriorityOrder(workerIds))
+            return true
+        elseif g_client ~= nil and g_client.getServerConnection ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
+            local connection = g_client:getServerConnection()
+            if connection ~= nil and connection.sendEvent ~= nil then
+                connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_SET_TRANSPORT_PRIORITY, 0, self.manager.changeCounter or 0, farmId, self:encodeTransportPriorityOrder(workerIds)))
+                return true
+            end
         end
 
         return false
     end
 
-    local HP_V1570_ORIGINAL_PROCESS_NETWORK_ACTION = HelperPersonnelApp.processNetworkAction
-    function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId)
-        if actionName ~= HelperPersonnelNetwork.ACTION_TOGGLE_TRANSPORT then
-            if HP_V1570_ORIGINAL_PROCESS_NETWORK_ACTION ~= nil then
-                return HP_V1570_ORIGINAL_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, farmId)
-            end
-            return false
-        end
-
-        if self.isServerAuthority == nil or self:isServerAuthority() ~= true or self.manager == nil then
-            return false
-        end
-
-        local authorizedFarmId = hp1570NormalizeFarmId(farmId) or (self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1)
-        if self.resolveAuthorizedFarmId ~= nil then
-            local allowed, resolvedFarmId = self:resolveAuthorizedFarmId(connection, farmId, nil, actionName)
-            if not allowed then
-                if connection ~= nil and self.sendNetworkStateToConnection ~= nil then
-                    self:sendNetworkStateToConnection(connection)
-                end
-                return false
-            end
-            authorizedFarmId = resolvedFarmId or authorizedFarmId
-        end
-
-        if self.validateNetworkActionTarget ~= nil and not self:validateNetworkActionTarget(actionName, targetId, authorizedFarmId) then
-            if connection ~= nil and self.sendNetworkStateToConnection ~= nil then
-                self:sendNetworkStateToConnection(connection)
-            end
-            return false
-        end
-
-        local changed = false
-        if self.manager.toggleWorkerTransportDriverForFarm ~= nil then
-            changed = self.manager:toggleWorkerTransportDriverForFarm(targetId, authorizedFarmId) == true
-        elseif self.manager.toggleWorkerTransportDriver ~= nil then
-            changed = self.manager:toggleWorkerTransportDriver(targetId) == true
-        end
-
-        if changed and self.syncNetworkStateToClients ~= nil then
-            self:syncNetworkStateToClients()
-        elseif connection ~= nil and self.sendNetworkStateToConnection ~= nil then
-            self:sendNetworkStateToConnection(connection)
-        end
-
-        return changed
-    end
 end
 
 if HelperPersonnelAIStartHooks ~= nil then
     local HP_V1570_ORIGINAL_OPEN_SELECTION_FOR_AI_JOB = HelperPersonnelAIStartHooks.openSelectionForAIJob
-    function HelperPersonnelAIStartHooks.openSelectionForAIJob(job, fallbackFarmId)
+    local function hpOverride_HelperPersonnelAIStartHooks_openSelectionForAIJob_1(job, fallbackFarmId)
         if HelperPersonnelAIJobHooks ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob(job) == true then
@@ -981,9 +871,10 @@ if HelperPersonnelAIStartHooks ~= nil then
 
         return false
     end
+    HelperPersonnelAIStartHooks.openSelectionForAIJob = hpOverride_HelperPersonnelAIStartHooks_openSelectionForAIJob_1
 
     local HP_V15191_ORIGINAL_QUEUE_SELECTION_FOR_VEHICLE = HelperPersonnelAIStartHooks.queueSelectionForVehicle
-    function HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, fallbackJob, fallbackFarmId, reason, delayFrames)
+    local function hpOverride_HelperPersonnelAIStartHooks_queueSelectionForVehicle_1(vehicle, fallbackJob, fallbackFarmId, reason, delayFrames)
         local job = fallbackJob
         if job == nil and vehicle ~= nil and vehicle.getStartableAIJob ~= nil then
             local ok, startableJob = pcall(vehicle.getStartableAIJob, vehicle)
@@ -1005,9 +896,10 @@ if HelperPersonnelAIStartHooks ~= nil then
 
         return false
     end
+    HelperPersonnelAIStartHooks.queueSelectionForVehicle = hpOverride_HelperPersonnelAIStartHooks_queueSelectionForVehicle_1
 
     local HP_V15191_ORIGINAL_QUEUE_SELECTION_FOR_AI_JOB = HelperPersonnelAIStartHooks.queueSelectionForAIJob
-    function HelperPersonnelAIStartHooks.queueSelectionForAIJob(job, fallbackFarmId)
+    local function hpOverride_HelperPersonnelAIStartHooks_queueSelectionForAIJob_1(job, fallbackFarmId)
         if HelperPersonnelAIJobHooks ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob(job) == true then
@@ -1020,11 +912,12 @@ if HelperPersonnelAIStartHooks ~= nil then
 
         return false
     end
+    HelperPersonnelAIStartHooks.queueSelectionForAIJob = hpOverride_HelperPersonnelAIStartHooks_queueSelectionForAIJob_1
 end
 
 if HelperPersonnelAIJobHooks ~= nil then
     local HP_V15197_ORIGINAL_GET_WORKER_ID_FOR_JOB = HelperPersonnelAIJobHooks.getWorkerIdForJob
-    function HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
+    local function hpOverride_HelperPersonnelAIJobHooks_getWorkerIdForJob_2(app, job)
         if HelperPersonnelAIJobHooks.isTransportJob ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob(job) == true
             and not (HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.isSendingSelectedAIJob == true)
@@ -1042,9 +935,10 @@ if HelperPersonnelAIJobHooks ~= nil then
 
         return nil
     end
+    HelperPersonnelAIJobHooks.getWorkerIdForJob = hpOverride_HelperPersonnelAIJobHooks_getWorkerIdForJob_2
 
     local HP_V15197_ORIGINAL_GET_WORKER_ID_FROM_JOB = HelperPersonnelAIJobHooks.getWorkerIdFromJob
-    function HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
+    local function hpOverride_HelperPersonnelAIJobHooks_getWorkerIdFromJob_1(job)
         if HelperPersonnelAIJobHooks.isTransportJob ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob(job) == true
             and not (HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.isSendingSelectedAIJob == true)
@@ -1064,11 +958,12 @@ if HelperPersonnelAIJobHooks ~= nil then
 
         return nil
     end
+    HelperPersonnelAIJobHooks.getWorkerIdFromJob = hpOverride_HelperPersonnelAIJobHooks_getWorkerIdFromJob_1
 end
 
 if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.sendSelectedAIJob ~= nil then
     local HP_V15197_ORIGINAL_SEND_SELECTED_AI_JOB = HelperPersonnelAIStartHooks.sendSelectedAIJob
-    function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallbackJob, fallbackFarmId)
+    local function hpOverride_HelperPersonnelAIStartHooks_sendSelectedAIJob_2(vehicle, workerId, fallbackJob, fallbackFarmId)
         if HelperPersonnelAIJobHooks ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob ~= nil
             and HelperPersonnelAIJobHooks.isTransportJob(fallbackJob) == true then
@@ -1101,173 +996,5 @@ if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.sendSelect
 
         return HP_V15197_ORIGINAL_SEND_SELECTED_AI_JOB(vehicle, workerId, fallbackJob, fallbackFarmId)
     end
-end
-
-if HelperPersonnelFrame ~= nil then
-    function HelperPersonnelFrame:getSelectedWorkerForTransportToggle()
-        if self.mode ~= HelperPersonnelFrame.MODE_WORKERS then
-            return nil
-        end
-
-        local workers = self:getWorkers()
-        if #workers == 0 then
-            return nil
-        end
-
-        self.workerIndex = math.max(1, math.min(self.workerIndex or 1, #workers))
-        return workers[self.workerIndex]
-    end
-
-    function HelperPersonnelFrame:onClickTransportToggle()
-        local worker = self:getSelectedWorkerForTransportToggle()
-        if worker == nil or self.app == nil or self.app.requestToggleTransportDriver == nil then
-            return false
-        end
-
-        local now = g_time or 0
-        if now > 0 and self.hpLastTransportToggleTime ~= nil and now - self.hpLastTransportToggleTime < 200 then
-            return true
-        end
-        if now > 0 then
-            self.hpLastTransportToggleTime = now
-        end
-
-        local changed = self.app:requestToggleTransportDriver(worker.id) == true
-        if changed then
-            self.requestRender = true
-            if self.setMenuButtonInfoDirty ~= nil then
-                self:setMenuButtonInfoDirty()
-            end
-        end
-
-        return true
-    end
-
-    function HelperPersonnelFrame:onActionTransportToggle(actionName, inputValue)
-        if inputValue ~= nil and inputValue <= 0 then
-            return
-        end
-
-        if self.mode == HelperPersonnelFrame.MODE_WORKERS then
-            self:onClickTransportToggle()
-        end
-    end
-
-    function HelperPersonnelFrame:registerTransportActionEvent()
-        if self.hpTransportActionRegistered == true or g_inputBinding == nil then
-            return
-        end
-
-        self.hpTransportActionEventIds = {}
-
-        local contextName = g_inputBinding.currentContextName
-        local modificationStarted = false
-        if contextName ~= nil and g_inputBinding.beginActionEventsModification ~= nil then
-            g_inputBinding:beginActionEventsModification(contextName)
-            modificationStarted = true
-        end
-
-        local actionId = hp1570GetInputAction("HP_TRANSPORT_TOGGLE")
-        local success, actionEventId = g_inputBinding:registerActionEvent(actionId, self, self.onActionTransportToggle, false, true, false, true, nil, true)
-
-        if success == true and actionEventId ~= nil then
-            table.insert(self.hpTransportActionEventIds, actionEventId)
-
-            if g_inputBinding.setActionEventText ~= nil then
-                g_inputBinding:setActionEventText(actionEventId, hp1570GetText("input_HP_TRANSPORT_TOGGLE", "Transportzuweisung umschalten"))
-            end
-            if g_inputBinding.setActionEventTextVisibility ~= nil then
-
-                g_inputBinding:setActionEventTextVisibility(actionEventId, false)
-            end
-            if g_inputBinding.setActionEventActive ~= nil then
-                g_inputBinding:setActionEventActive(actionEventId, true)
-            end
-
-            self.hpTransportActionRegistered = true
-        elseif Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("[HelperPersonnel] Could not register transport input action '%s'", tostring("HP_TRANSPORT_TOGGLE"))
-        end
-
-        if modificationStarted and g_inputBinding.endActionEventsModification ~= nil then
-            g_inputBinding:endActionEventsModification()
-        end
-    end
-
-    function HelperPersonnelFrame:unregisterTransportActionEvent()
-        if self.hpTransportActionRegistered ~= true or g_inputBinding == nil then
-            self.hpTransportActionEventIds = {}
-            self.hpTransportActionRegistered = false
-            return
-        end
-
-        if self.hpTransportActionEventIds ~= nil and g_inputBinding.removeActionEvent ~= nil then
-            for _, actionEventId in ipairs(self.hpTransportActionEventIds) do
-                g_inputBinding:removeActionEvent(actionEventId)
-            end
-        elseif g_inputBinding.removeActionEventsByTarget ~= nil then
-            g_inputBinding:removeActionEventsByTarget(self)
-        end
-
-        self.hpTransportActionEventIds = {}
-        self.hpTransportActionRegistered = false
-    end
-
-    local HP_V151910_ORIGINAL_REGISTER_ACTION_EVENTS = HelperPersonnelFrame.registerActionEvents
-    function HelperPersonnelFrame:registerActionEvents()
-        if HP_V151910_ORIGINAL_REGISTER_ACTION_EVENTS ~= nil then
-            HP_V151910_ORIGINAL_REGISTER_ACTION_EVENTS(self)
-        end
-
-        self:registerTransportActionEvent()
-    end
-
-    local HP_V151910_ORIGINAL_UNREGISTER_ACTION_EVENTS = HelperPersonnelFrame.unregisterActionEvents
-    function HelperPersonnelFrame:unregisterActionEvents()
-        self:unregisterTransportActionEvent()
-
-        if HP_V151910_ORIGINAL_UNREGISTER_ACTION_EVENTS ~= nil then
-            HP_V151910_ORIGINAL_UNREGISTER_ACTION_EVENTS(self)
-        end
-    end
-
-    local HP_V151910_ORIGINAL_FRAME_OPEN = HelperPersonnelFrame.onFrameOpen
-    function HelperPersonnelFrame:onFrameOpen()
-        if HP_V151910_ORIGINAL_FRAME_OPEN ~= nil then
-            HP_V151910_ORIGINAL_FRAME_OPEN(self)
-        end
-
-        self:registerTransportActionEvent()
-    end
-
-    local HP_V151910_ORIGINAL_FRAME_CLOSE = HelperPersonnelFrame.onFrameClose
-    function HelperPersonnelFrame:onFrameClose()
-        self:unregisterTransportActionEvent()
-
-        if HP_V151910_ORIGINAL_FRAME_CLOSE ~= nil then
-            HP_V151910_ORIGINAL_FRAME_CLOSE(self)
-        end
-    end
-
-    local HP_V151910_ORIGINAL_KEY_EVENT = HelperPersonnelFrame.keyEvent
-    function HelperPersonnelFrame:keyEvent(unicode, sym, modifier, isDown)
-        if isDown and self.mode == HelperPersonnelFrame.MODE_WORKERS then
-            local isTransportKey = false
-            if Input ~= nil and Input.KEY_t ~= nil and sym == Input.KEY_t then
-                isTransportKey = true
-            elseif unicode == string.byte("t") or unicode == string.byte("T") then
-                isTransportKey = true
-            end
-
-            if isTransportKey then
-                return self:onClickTransportToggle()
-            end
-        end
-
-        if HP_V151910_ORIGINAL_KEY_EVENT ~= nil then
-            return HP_V151910_ORIGINAL_KEY_EVENT(self, unicode, sym, modifier, isDown)
-        end
-
-        return false
-    end
+    HelperPersonnelAIStartHooks.sendSelectedAIJob = hpOverride_HelperPersonnelAIStartHooks_sendSelectedAIJob_2
 end

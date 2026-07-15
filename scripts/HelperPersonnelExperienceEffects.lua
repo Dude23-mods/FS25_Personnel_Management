@@ -1461,11 +1461,11 @@ end
 
 local HP_TRAIN_ORIGINAL_APP_REQUEST_TRAIN_WORKER = HelperPersonnelApp ~= nil and HelperPersonnelApp.requestTrainWorker or nil
 if HelperPersonnelApp ~= nil then
-    function HelperPersonnelApp:requestTrainWorker(workerId)
+    function HelperPersonnelApp:requestTrainWorker(workerId, specializationKey)
         local farmId = self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1
 
         if self.isServerAuthority ~= nil and self:isServerAuthority() then
-            local changed = self.manager ~= nil and self.manager.trainWorkerForFarm ~= nil and self.manager:trainWorkerForFarm(workerId, farmId) == true
+            local changed = self.manager ~= nil and self.manager.trainWorkerForFarm ~= nil and self.manager:trainWorkerForFarm(workerId, farmId, specializationKey) == true
             if changed and self.syncNetworkStateToClients ~= nil then
                 self:syncNetworkStateToClients()
             end
@@ -1475,20 +1475,20 @@ if HelperPersonnelApp ~= nil then
         if self.isMultiplayerClient ~= nil and self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
             local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
             if connection ~= nil and connection.sendEvent ~= nil then
-                connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_TRAIN_WORKER, workerId, nil, farmId))
+                connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_TRAIN_WORKER, workerId, nil, farmId, specializationKey))
                 return true
             end
         end
 
         if HP_TRAIN_ORIGINAL_APP_REQUEST_TRAIN_WORKER ~= nil then
-            return HP_TRAIN_ORIGINAL_APP_REQUEST_TRAIN_WORKER(self, workerId)
+            return HP_TRAIN_ORIGINAL_APP_REQUEST_TRAIN_WORKER(self, workerId, specializationKey)
         end
 
         return false
     end
 
     local HP_TRAIN_ORIGINAL_APP_PROCESS_NETWORK_ACTION = HelperPersonnelApp.processNetworkAction
-    function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId)
+    local function hpOverride_HelperPersonnelApp_processNetworkAction_4(self, actionName, targetId, connection, farmId, actionData)
         if HelperPersonnelNetwork ~= nil and actionName == HelperPersonnelNetwork.ACTION_TRAIN_WORKER then
             if self.isServerAuthority == nil or not self:isServerAuthority() or self.manager == nil then
                 return false
@@ -1516,7 +1516,7 @@ if HelperPersonnelApp ~= nil then
                 return false
             end
 
-            local changed = self.manager.trainWorkerForFarm ~= nil and self.manager:trainWorkerForFarm(targetId, authorizedFarmId) == true
+            local changed = self.manager.trainWorkerForFarm ~= nil and self.manager:trainWorkerForFarm(targetId, authorizedFarmId, actionData) == true
             if changed then
                 if self.syncNetworkStateToClients ~= nil then
                     self:syncNetworkStateToClients()
@@ -1528,16 +1528,17 @@ if HelperPersonnelApp ~= nil then
         end
 
         if HP_TRAIN_ORIGINAL_APP_PROCESS_NETWORK_ACTION ~= nil then
-            return HP_TRAIN_ORIGINAL_APP_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, farmId)
+            return HP_TRAIN_ORIGINAL_APP_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, farmId, actionData)
         end
 
         return false
     end
+    HelperPersonnelApp.processNetworkAction = hpOverride_HelperPersonnelApp_processNetworkAction_4
 end
 
-if HelperPersonnelFrame ~= nil then
-    function HelperPersonnelFrame:getSelectedWorkerForTrainingAction()
-        if self.mode ~= HelperPersonnelFrame.MODE_WORKERS then
+if HelperPersonnelViewBase ~= nil then
+    function HelperPersonnelViewBase:getSelectedWorkerForTrainingAction()
+        if self.mode ~= HelperPersonnelViewBase.MODE_WORKERS then
             return nil
         end
 
@@ -1550,7 +1551,7 @@ if HelperPersonnelFrame ~= nil then
         return worker
     end
 
-    function HelperPersonnelFrame:onClickTrainWorker()
+    function HelperPersonnelViewBase:onClickTrainWorker()
         local worker = self:getSelectedWorkerForTrainingAction()
         if worker == nil then
             return false
@@ -1576,9 +1577,9 @@ if HelperPersonnelFrame ~= nil then
         return true
     end
 
-    local HP_TRAIN_ORIGINAL_FRAME_KEY_EVENT = HelperPersonnelFrame.keyEvent
-    function HelperPersonnelFrame:keyEvent(unicode, sym, modifier, isDown)
-        if isDown and self.mode == HelperPersonnelFrame.MODE_WORKERS and Input ~= nil and Input.KEY_s ~= nil and sym == Input.KEY_s then
+    local HP_TRAIN_ORIGINAL_FRAME_KEY_EVENT = HelperPersonnelViewBase.keyEvent
+    local function hpOverride_HelperPersonnelViewBase_keyEvent_3(self, unicode, sym, modifier, isDown)
+        if isDown and self.mode == HelperPersonnelViewBase.MODE_WORKERS and Input ~= nil and Input.KEY_s ~= nil and sym == Input.KEY_s then
             return self:onClickTrainWorker()
         end
 
@@ -1588,4 +1589,5 @@ if HelperPersonnelFrame ~= nil then
 
         return false
     end
+    HelperPersonnelViewBase.keyEvent = hpOverride_HelperPersonnelViewBase_keyEvent_3
 end

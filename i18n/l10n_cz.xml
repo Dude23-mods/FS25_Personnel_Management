@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <l10n>
     <elements>
         <e k="ui_ingameMenuHelperPersonnel" v="Správa personálu" />
@@ -20,17 +20,17 @@
         <e k="ui_rank_helper" v="Pomocník" />
         <e k="ui_rank_specialist" v="Specialista" />
         <e k="ui_specialization_short" v="Specializace" />
-        <e k="ui_specialization_tillage" v="Tillage" />
-        <e k="ui_specialization_sowing" v="Sowing" />
-        <e k="ui_specialization_fertilizing" v="Fertilizing" />
-        <e k="ui_specialization_plantProtection" v="Crop Protection" />
-        <e k="ui_specialization_harvest" v="Harvest" />
-        <e k="ui_specialization_transport" v="Transport" />
-        <e k="ui_specialization_machineCare" v="Machine Care" />
-        <e k="ui_specialization_resourceSaver" v="Efficient Use" />
-        <e k="ui_specializationLearned" v="%s has developed a specialization: %s." />
-        <e k="ui_specialization_progress" v="učí se %s %d%%" />
-        <e k="ui_rank_expert" v="Expert" />
+        <e k="ui_specialization_tillage" v="Zpracování půdy" />
+        <e k="ui_specialization_sowing" v="Setí" />
+        <e k="ui_specialization_fertilizing" v="Hnojení" />
+        <e k="ui_specialization_plantProtection" v="Ochrana rostlin" />
+        <e k="ui_specialization_harvest" v="Sklizeň" />
+        <e k="ui_specialization_transport" v="Doprava" />
+        <e k="ui_specialization_machineCare" v="Péče o stroje" />
+        <e k="ui_specialization_resourceSaver" v="Úsporné hospodaření" />
+        <e k="ui_specializationLearned" v="%s získal(a) specializaci: %s." />
+        <e k="ui_specialization_progress" v="učení %s %d%%" />
+        <e k="ui_rank_expert" v="Odborník" />
         <e k="ui_worker_line1" v="%s · Zkušenost %d · Spolehlivost %d · Loajalita %d" />
         <e k="ui_worker_line2" v="Měsíční mzda: %s · Stav: %s" />
         <e k="ui_worker_line3" v="Práce: %d · Pracovní čas: %s" />
@@ -48,22 +48,22 @@
         <e k="ui_dismissalNoticeNextMonth" v="%s byl propuštěn ke konci příštího měsíce." />
         <e k="ui_dismissalNotice" v="%s je propuštěn ke konci měsíce." />
         <e k="ui_fireDeniedPending" v="Tento zaměstnanec je již propuštěn." />
-        <e k="ui_fireDeniedBusy" v="Zaměstnanci pracuje - propustit nicht möglich." />
+        <e k="ui_fireDeniedBusy" v="Zaměstnanec právě pracuje a nelze ho propustit." />
         <e k="ui_hireSuccess" v="%s - najmout." />
         <e k="ui_fireSuccess" v="%s - propustit." />
         <e k="ui_selectionTitle" v="Vybrat zaměstnance" />
-        <e k="ui_selectionHint" v="A/D / Left/Right · Enter · Esc" />
+        <e k="ui_selectionHint" v="A/D nebo vlevo/vpravo pro změnu · mezerník nebo kliknutí myší pro potvrzení · Esc pro zrušení" />
         <e k="ui_selectionNoWorkers" v="Momentálně nejsou k dispozici žádní uchazeči." />
         <e k="ui_selectionWorkerUnavailable" v="pracuje." />
         <e k="ui_selectionNoEmployees" v="Zatím nebyli najati žádní zaměstnanci" />
         <e k="ui_selectionLineStats" v="%s · Zkušenost %d · Spolehlivost %d · Loajalita %d" />
         <e k="ui_selectionLineWage" v="Měsíční mzda: %s" />
-        <e k="ui_selectionLineJobs" v="Práce: %d · Work speed: %d%%" />
-        <e k="input_HP_SELECT_LEFT" v="Vybrat zaměstnance left" />
-        <e k="input_HP_SELECT_RIGHT" v="Vybrat zaměstnance right" />
+        <e k="ui_selectionLineJobs" v="Práce: %d · Rychlost práce: %d%%" />
+        <e k="input_HP_SELECT_LEFT" v="Vybrat předchozího zaměstnance" />
+        <e k="input_HP_SELECT_RIGHT" v="Vybrat dalšího zaměstnance" />
         <e k="input_HP_SELECT_CONFIRM" v="Potvrdit výběr zaměstnance" />
-        <e k="input_HP_OPEN_APPLICANTS" v="Uchazeči" />
-        <e k="input_HP_TRANSPORT_TOGGLE" v="doprava toggle" />
+        <e k="input_HP_TRANSPORT_MANAGE" v="Spravovat dopravní úkoly" />
+        <e k="input_HP_SALARY_RAISE_MANAGE" v="Správa žádostí o zvýšení mzdy" />
         <e k="input_HP_SELECT_CANCEL" v="Zrušit výběr zaměstnance" />
         <e k="ui_openWorkerView" v="Zaměstnanci" />
         <e k="ui_openApplicantView" v="Uchazeči" />
@@ -84,16 +84,16 @@
         <e k="ui_noWorkersUpper" v="ŽÁDNÍ DOSTUPNÍ ZAMĚSTNANCI" />
         <e k="ui_noActiveWorkers" v="Zatím nebyli najati žádní zaměstnanci" />
         <e k="ui_activeWorkerStatusVehicle" v="Stav: zaměstnanci v práci (%s)" />
-        <e k="ui_activeWorkerStatusVehicleImplement" v="Stav: zaměstnanci v práci (%s) | Implement/trailer: %s" />
+        <e k="ui_activeWorkerStatusVehicleImplement" v="Stav: zaměstnanec pracuje (%s) | Nářadí/přívěs: %s" />
         <e k="ui_activeWorkerActivityField" v="Úkol: %s | Pole: %s" />
         <e k="ui_activeWorkerUnknownVehicle" v="Vozidlo" />
         <e k="ui_activeWorkerUnknownField" v="neznámé" />
-        <e k="ui_activeWorkerNoField" v="not field-bound" />
+        <e k="ui_activeWorkerNoField" v="bez vazby na pole" />
         <e k="ui_activityUnknown" v="neznámé" />
         <e k="ui_activityFieldWork" v="práce na poli" />
         <e k="ui_activityTransport" v="doprava" />
-        <e k="ui_activityFollowMeTransport" v="FollowMe with %s" />
-        <e k="ui_activityFollowMeWork" v="FollowMe: %s behind %s" />
+        <e k="ui_activityFollowMeTransport" v="FollowMe s %s" />
+        <e k="ui_activityFollowMeWork" v="FollowMe: %s za %s" />
         <e k="ui_activityCultivating" v="kultivace" />
         <e k="ui_activityPlowing" v="orba" />
         <e k="ui_activitySowing" v="setí" />
@@ -116,25 +116,26 @@
         <e k="ui_workersHeaderUpper" v="SPRÁVA ZAMĚSTNANCŮ" />
         <e k="ui_instructionApplicant" v="ENTER: Najmout. ESC: Zpět na přehled." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Propustit." />
-        <e k="ui_instructionWorkerTransport" v="Press T to assign transport duty, press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="G: Schválit zvýšení. N: Odmítnout žádost." />
-        <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
-        <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
-        <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
-        <e k="ui_training_worker_sick" v="The employee is sick and cannot attend training." />
-        <e k="ui_training_already_done" v="%s has already attended training this month." />
-        <e k="ui_training_completed" v="%s starts training for %s until month end: %d%% -&gt; %d%% (%s)." />
+        <e k="ui_instructionWorkerTransport" v="Pořadí pro dopravu spravujete tlačítkem dopravy, klávesou S zaměstnance školíte." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Otevřené žádosti o zvýšení mzdy se zpracovávají tlačítkem Správa žádostí o zvýšení mzdy." />
+        <e k="ui_instructionSwitchEntry" v="Kliknutím vyberte položku; kolečkem myši posouvejte seznam." />
+        <e k="ui_training_no_progress" v="Tento zaměstnanec zatím nemá vhodný směr rozvoje." />
+        <e k="ui_training_worker_busy" v="Zaměstnanec právě pracuje a nemůže se účastnit školení." />
+        <e k="ui_training_worker_sick" v="Zaměstnanec je nemocný a nemůže se účastnit školení." />
+        <e k="ui_training_already_done" v="%s se již tento měsíc zúčastnil(a) školení." />
+        <e k="ui_training_started" v="%s zahajuje školení v oblasti %s do konce měsíce (%s)." />
+        <e k="ui_training_completed" v="%s dokončil(a) školení v oblasti %s: %d%% až %d%%." />
         <e k="ui_noApplicantsDetail" v="Momentálně nejsou k dispozici žádní uchazeči" />
         <e k="ui_noWorkersDetail" v="Zatím nebyli najati žádní zaměstnanci" />
-        <e k="ui_entryZero" v="Záznam 0 von 0" />
+        <e k="ui_entryZero" v="Záznam 0 z 0" />
         <e k="ui_visibleRange" v="Viditelné %d-%d" />
         <e k="ui_allEntriesVisible" v="Všechny záznamy viditelné" />
-        <e k="ui_entryCounter" v="Záznam %d von %d" />
-        <e k="ui_monthlyLineStaff" v="Zaměstnanci v týmu: pomocník %d | specialista %d | expert %d" />
+        <e k="ui_entryCounter" v="Záznam %d z %d" />
+        <e k="ui_monthlyLineStaff" v="Zaměstnanci: pomocníci %d | kvalifikovaní %d | profesionálové %d" />
         <e k="ui_monthlyLineApplicantsReady" v="Uchazeči na trhu: %d" />
         <e k="ui_monthlyLineApplicantsEmpty" v="Momentálně nejsou k dispozici žádní uchazeči" />
         <e k="ui_monthlyLineNoWorkers" v="Zatím nebyli najati žádní zaměstnanci" />
-        <e k="ui_monthlyLineAvailableWorkers" v="Dostupní: %d von %d" />
+        <e k="ui_monthlyLineAvailableWorkers" v="Dostupní: %d z %d" />
         <e k="ui_monthlyLinePayroll" v="Měsíční mzda: %s" />
         <e k="ui_monthlyLineWorkStats" v="Pracovní čas: %d práce | %s | Měsíční mzda: %s" />
         <e k="ui_button_transport_assign" v="Přiřadit dopravu" />
@@ -145,94 +146,347 @@
         <e k="ui_transportNoDriverAssigned" v="doprava: zatím žádná." />
         <e k="ui_transportNoDriverAvailable" v="doprava: zaneprázdnění." />
         <e k="ui_transportAutoAssigned" v="doprava: přiřadit dopravu." />
-        <e k="ui_experienceGainSingle" v="%s: Zkušenost +1. Zkušenost: %d to %d" />
-        <e k="ui_experienceGainMultiple" v="%s: Zkušenost +%d. Zkušenost: %d to %d" />
-        <e k="ui_experienceMonthlyLimitReached" v="%s: Zkušenost monthly limit reached." />
-        <e k="ui_loyaltyChanged" v="%s: Loajalita %s. Loajalita: %d to %d" />
-        <e k="ui_loyaltyWarningLow" v="%s: Loajalita low." />
-        <e k="ui_loyaltyWarningVeryLow" v="%s: Loajalita very low." />
+        <e k="ui_experienceGainSingle" v="%s: zkušenost +1. Zkušenost: %d → %d" />
+        <e k="ui_experienceGainMultiple" v="%s: zkušenost +%d. Zkušenost: %d → %d" />
+        <e k="ui_experienceMonthlyLimitReached" v="%s: bylo dosaženo měsíčního limitu zkušeností." />
+        <e k="ui_loyaltyChanged" v="%s: loajalita %s. Loajalita: %d → %d" />
+        <e k="ui_loyaltyWarningLow" v="%s: nízká loajalita." />
+        <e k="ui_loyaltyWarningVeryLow" v="%s: velmi nízká loajalita." />
         <e k="ui_loyaltyWarningCritical" v="%s: odchází na konci měsíce." />
         <e k="ui_loyaltyResignationNotice" v="%s: odchází na konci měsíce." />
-        <e k="ui_sicknessNotice" v="%s: nemocný - cannot work today." />
-        <e k="ui_sicknessNoticeJobAborted" v="%s: nemocný - current job cancelled." />
+        <e k="ui_sicknessNotice" v="%s: nemocný(á), dnes nemůže pracovat." />
+        <e k="ui_sicknessNoticeJobAborted" v="%s: nemocný(á), aktuální úkol byl zrušen." />
         <e k="ui_button_raise_grant" v="Schválit zvýšení" />
         <e k="ui_button_raise_decline" v="Odmítnout žádost" />
-        <e k="ui_salaryRaisePendingLine" v="Zvýšení mzdy: %s statt %s" />
-        <e k="ui_salaryRaiseRequestNotification" v="%s requests zvýšení mzdy after reaching %s: %s." />
-        <e k="ui_salaryRaiseRequestHistory" v="Zvýšení mzdy: %s requests %s." />
+        <e k="ui_button_salary_manage_long" v="Správa žádostí o zvýšení mzdy" />
+        <e k="ui_salaryRequestsTitle" v="Správa žádostí o zvýšení mzdy" />
+        <e k="ui_salaryRequestsIntro" v="Zde jsou uvedeny všechny otevřené žádosti o zvýšení mzdy. Vyber zaměstnance a rozhodni, zda žádost schválíš, nebo zamítneš." />
+        <e k="ui_salaryRequestsHeaderEmployee" v="Zaměstnanec" />
+        <e k="ui_salaryRequestsHeaderCurrent" v="Současná mzda" />
+        <e k="ui_salaryRequestsHeaderRequested" v="Požadovaná mzda" />
+        <e k="ui_salaryRequestsNoRequests" v="Žádné otevřené žádosti o zvýšení mzdy." />
+        <e k="ui_salaryRequestsControls" v="Šipka nahoru/dolů: výběr | Enter: schválit | Mezerník: zamítnout" />
+        <e k="ui_salaryRaisePendingLine" v="Zvýšení mzdy: %s místo %s" />
+        <e k="ui_salaryRaiseRequestNotification" v="%s po dosažení úrovně %s žádá zvýšení mzdy na %s." />
+        <e k="ui_salaryRaiseRequestHistory" v="Zvýšení mzdy: %s žádá %s." />
         <e k="ui_salaryRaiseGranted" v="Schválit zvýšení: %s - %s." />
         <e k="ui_salaryRaiseDeclined" v="Odmítnout žádost: %s." />
-        <e k="ui_salaryRaisePendingPenalty" v="Open zvýšení mzdy: %s affects loajalita: %s." />
-        <e k="ui_salaryRaiseGrantedReputation" v="Fair zvýšení mzdy: %s Pověst zaměstnavatele" />
+        <e k="ui_salaryRaisePendingPenalty" v="Nevyřízené zvýšení mzdy: %s ovlivňuje loajalitu o %s." />
+        <e k="ui_salaryRaiseGrantedReputation" v="Spravedlivé zvýšení mzdy: pověst zaměstnavatele %s" />
         <e k="ui_hpIngameMenuPrev" v="Předchozí menu" />
         <e k="ui_hpIngameMenuNext" v="Další menu" />
-        <e k="ui_status_training" v="in training" />
-        <e k="ui_training_worker_in_training" v="The employee is already in training until the end of the month." />
-        <e k="ui_training_not_first_day" v="Training can only be started on the first day of a month." />
-        <e k="ui_training_not_single_day_deadline" v="With 1 day per month, training can only begin on the first day before 12:00." />
-        <e k="ui_training_line_single_day_deadline" v="Training: 1 day/month only until 12:00 · %s %s · last: %s" />
-        <e k="ui_training_already_done_year" v="%s has already attended training this year." />
+        <e k="ui_status_training" v="na školení" />
+        <e k="ui_training_worker_in_training" v="Zaměstnanec je již na školení do konce měsíce." />
+        <e k="ui_training_not_first_day" v="Školení lze zahájit pouze první den v měsíci." />
+        <e k="ui_training_not_single_day_deadline" v="Při 1 dni na měsíc lze školení zahájit pouze první den před 12:00." />
+        <e k="ui_training_line_single_day_deadline" v="Školení: při 1 dni/měsíc pouze do 12:00 · %s %s · naposledy: %s" />
+        <e k="ui_training_already_done_year" v="%s se již letos zúčastnil(a) školení." />
         <e k="ui_training_last_none" v="-" />
-        <e k="ui_training_unknown" v="unknown" />
-        <e k="ui_training_line_active" v="Training: %s until month end · last: %s" />
-        <e k="ui_training_line_no_direction" v="Training: no learning direction · last: %s" />
-        <e k="ui_training_line_year_blocked" v="Training: next year only · last: %s" />
-        <e k="ui_training_line_first_day" v="Training: first day only · %s %s · last: %s" />
-        <e k="ui_training_line_busy" v="Training: unavailable, working · %s %s · last: %s" />
-        <e k="ui_training_line_sick" v="Training: unavailable, sick · %s %s · last: %s" />
-        <e k="ui_training_line_possible" v="Training: available %s, %s · last: %s" />
-
-        <e k="ui_hpSetting_on" v="On"/>
-
-        <e k="ui_hpSetting_off" v="Off"/>
-
-        <e k="ui_hpSetting_section" v="PERSONNEL MANAGEMENT"/>
-
-        <e k="ui_hpSetting_gameplayEffects" v="Personnel Management: Gameplay effects"/>
-
-        <e k="ui_hpSetting_experienceEffects" v="Personnel Management: Experience effects"/>
-
-        <e k="ui_hpSetting_speedEffect" v="Personnel Management: Work speed"/>
-
-        <e k="ui_hpSetting_wearEffect" v="Personnel Management: Wear"/>
-
-        <e k="ui_hpSetting_consumablesEffect" v="Personnel Management: Materials"/>
-
-        <e k="ui_hpSetting_fuelEffect" v="Personnel Management: Fuel consumption"/>
-
-        <e k="ui_hpSetting_reliabilityEffects" v="Personnel Management: Reliability"/>
-
-        <e k="ui_hpSetting_personnelEffects" v="Personnel Management: Staff effects"/>
-
-        <e k="ui_hpSetting_loyaltyEffects" v="Personnel Management: Loyalty changes"/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personnel Management: Night work"/>
-
-        <e k="ui_hpSetting_economicEffects" v="Personnel Management: Economy"/>
-
-        <e k="ui_hpSetting_individualWages" v="Personnel Management: Individual wages"/>
-        <e k="ui_hpSetting_gameplayEffects_desc" v="Enables or disables all gameplay effects from Personnel Management. Displayed values, saved data and history remain available."/>
-
-        <e k="ui_hpSetting_experienceEffects_desc" v="Determines whether employee experience and specializations affect active helper work."/>
-
-        <e k="ui_hpSetting_speedEffect_desc" v="Determines whether experience and matching specializations affect work speed."/>
-
-        <e k="ui_hpSetting_wearEffect_desc" v="Determines whether experience and matching specializations affect additional vehicle and implement wear."/>
-
-        <e k="ui_hpSetting_consumablesEffect_desc" v="Determines whether experience and matching specializations affect the use of seeds, fertilizer, herbicide, slurry, digestate, manure and similar materials."/>
-
-        <e k="ui_hpSetting_fuelEffect_desc" v="Determines whether experience and matching specializations affect fuel consumption."/>
-
-        <e k="ui_hpSetting_reliabilityEffects_desc" v="Determines whether employee reliability can affect short performance drops and sick days."/>
-
-        <e k="ui_hpSetting_personnelEffects_desc" v="Enables or disables personnel-related effects such as loyalty development and night-work effects."/>
-
-        <e k="ui_hpSetting_loyaltyEffects_desc" v="Determines whether employee loyalty changes through events such as wage payments, night work or employer reputation."/>
-
-        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Determines whether night work affects loyalty and employer reputation."/>
-
-        <e k="ui_hpSetting_economicEffects_desc" v="Determines whether individual economic calculations are used. If disabled, neutral standard wage values are used."/>
-
-        <e k="ui_hpSetting_individualWages_desc" v="Determines whether employees receive individual wages based on their role, experience, reliability and specializations."/>
+        <e k="ui_training_unknown" v="neznámé" />
+        <e k="ui_training_line_active" v="Školení: %s do konce měsíce · naposledy: %s" />
+        <e k="ui_training_line_no_direction" v="Školení: žádný směr rozvoje · naposledy: %s" />
+        <e k="ui_training_line_year_blocked" v="Školení: možné až příští rok · naposledy: %s" />
+        <e k="ui_training_line_first_day" v="Školení: pouze první den · %s %s · naposledy: %s" />
+        <e k="ui_training_line_busy" v="Školení: nedostupné, zaměstnanec pracuje · %s %s · naposledy: %s" />
+        <e k="ui_training_line_sick" v="Školení: nedostupné, zaměstnanec je nemocný · %s %s · naposledy: %s" />
+        <e k="ui_training_line_possible" v="Školení: dostupné %s, %s · naposledy: %s" />
+        <e k="ui_hpSetting_on" v="Zapnuto" />
+        <e k="ui_hpSetting_off" v="Vypnuto" />
+        <e k="ui_hpSetting_section" v="PERSONÁLNÍ MANAGEMENT" />
+        <e k="ui_hpSetting_gameplayEffects" v="Personální management: herní efekty" />
+        <e k="ui_hpSetting_experienceEffects" v="Personální management: vliv zkušeností" />
+        <e k="ui_hpSetting_speedEffect" v="Personální management: rychlost práce" />
+        <e k="ui_hpSetting_wearEffect" v="Personální management: opotřebení" />
+        <e k="ui_hpSetting_consumablesEffect" v="Personální management: spotřební materiál" />
+        <e k="ui_hpSetting_fuelEffect" v="Personální management: spotřeba paliva" />
+        <e k="ui_hpSetting_reliabilityEffects" v="Personální management: spolehlivost" />
+        <e k="ui_hpSetting_personnelEffects" v="Personální management: personální efekty" />
+        <e k="ui_hpSetting_loyaltyEffects" v="Personální management: změny loajality" />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect" v="Personální management: noční práce" />
+        <e k="ui_hpSetting_economicEffects" v="Personální management: ekonomika" />
+        <e k="ui_hpSetting_individualWages" v="Personální management: individuální mzdy" />
+        <e k="ui_hpSetting_gameplayEffects_desc" v="Zapíná nebo vypíná všechny herní efekty personálního managementu. Zobrazené hodnoty, uložená data a historie zůstávají dostupné." />
+        <e k="ui_hpSetting_experienceEffects_desc" v="Určuje, zda zkušenosti a specializace zaměstnanců ovlivňují práci aktivních pomocníků." />
+        <e k="ui_hpSetting_speedEffect_desc" v="Určuje, zda zkušenosti a odpovídající specializace ovlivňují rychlost práce." />
+        <e k="ui_hpSetting_wearEffect_desc" v="Určuje, zda zkušenosti a odpovídající specializace ovlivňují dodatečné opotřebení vozidel a nářadí." />
+        <e k="ui_hpSetting_consumablesEffect_desc" v="Určuje, zda zkušenosti a odpovídající specializace ovlivňují spotřebu osiva, hnojiva, herbicidu, kejdy, digestátu, hnoje a podobných materiálů." />
+        <e k="ui_hpSetting_fuelEffect_desc" v="Určuje, zda zkušenosti a odpovídající specializace ovlivňují spotřebu paliva." />
+        <e k="ui_hpSetting_reliabilityEffects_desc" v="Určuje, zda spolehlivost zaměstnance může způsobit krátkodobé poklesy výkonu a dny pracovní neschopnosti." />
+        <e k="ui_hpSetting_personnelEffects_desc" v="Zapíná nebo vypíná personální efekty, jako je vývoj loajality a vliv noční práce." />
+        <e k="ui_hpSetting_loyaltyEffects_desc" v="Určuje, zda se loajalita zaměstnance mění v důsledku událostí, jako jsou výplaty, noční práce nebo pověst zaměstnavatele." />
+        <e k="ui_hpSetting_nightWorkLoyaltyEffect_desc" v="Určuje, zda noční práce ovlivňuje loajalitu a pověst zaměstnavatele." />
+        <e k="ui_hpSetting_economicEffects_desc" v="Určuje, zda se používají individuální ekonomické výpočty. Při vypnutí se použijí neutrální standardní mzdy." />
+        <e k="ui_hpSetting_individualWages_desc" v="Určuje, zda zaměstnanci dostávají individuální mzdu podle své role, zkušeností, spolehlivosti a specializací." />
+        <e k="ui_hpSetting_groupWork" v="PRACOVNÍ VÝKON" />
+        <e k="ui_hpSetting_groupPersonnel" v="ROZVOJ PERSONÁLU" />
+        <e k="ui_hpSetting_groupEconomy" v="EKONOMIKA A MZDY" />
+        <e k="ui_hpSetting_standardWage" v="Standardní měsíční mzda" />
+        <e k="ui_hpSetting_standardWage_desc" v="Nastavuje základní měsíční mzdu používanou při vypnutých individuálních mzdách. Hodnota se použije od příštího výpočtu mzdy." />
+        <e k="ui_hpSetting_standardWageInvalid" v="Zadejte hodnotu od %d do %d. Částka bude zaokrouhlena na nejbližších 10." />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Otevřít personální management" />
+        <e k="ui_pmMenuPageOverview" v="Přehled" />
+        <e k="ui_pmMenuPageApplicants" v="Uchazeči" />
+        <e k="ui_pmMenuPageEmployees" v="Zaměstnanci" />
+        <e k="ui_pmMenuPageTraining" v="Školení" />
+        <e k="ui_pmMenuPageAssignments" v="Přiřazení" />
+        <e k="ui_pmMenuPrevPerson" v="Předchozí osoba" />
+        <e k="ui_pmMenuNextPerson" v="Další osoba" />
+        <e k="ui_pmPersonCounter" v="%d z %d" />
+        <e k="ui_pmMenuNoPermission" v="Nemáte oprávnění provádět personální rozhodnutí pro tuto farmu." />
+        <e k="ui_pmConfirmHire" v="Opravdu přijmout %s?" />
+        <e k="ui_pmConfirmDismiss" v="Opravdu propustit %s?" />
+        <e k="ui_pmConfirmTraining" v="Zahájit školení pro %s?" />
+        <e k="ui_pmProfileHeader" v="PROFIL" />
+        <e k="ui_pmHistoryHeader" v="HISTORIE" />
+        <e k="ui_button_train" v="Školit" />
+        <e k="ui_pmStatusApplicant" v="Uchazeč" />
+        <e k="ui_pmBirthLine" v="Narozen(a): %s" />
+        <e k="ui_pmOriginLine" v="Profesní původ: %s" />
+        <e k="ui_pmStatsLine" v="Zkušenosti %d · Spolehlivost %d · Loajalita %d" />
+        <e k="ui_pmStatExperience" v="Zkušenosti" />
+        <e k="ui_pmStatReliability" v="Spolehlivost" />
+        <e k="ui_pmStatLoyalty" v="Loajalita" />
+        <e k="ui_pmWageLine" v="Mzda: %s" />
+        <e k="ui_pmStatusLine" v="Stav: %s" />
+        <e k="ui_pmOrigin1" v="venkovská rodinná farma" />
+        <e k="ui_pmOrigin2" v="malá mléčná farma" />
+        <e k="ui_pmOrigin3" v="podnik zemědělských služeb" />
+        <e k="ui_pmOrigin4" v="rostlinná farma" />
+        <e k="ui_pmOrigin5" v="smíšená farma" />
+        <e k="ui_pmStrengthReliable" v="klidný a spolehlivý pracovní styl" />
+        <e k="ui_pmStrengthTransport" v="organizovaná doprava a logistika na dvoře" />
+        <e k="ui_pmStrengthHarvest" v="pečlivá sklizeň" />
+        <e k="ui_pmStrengthSowing" v="přesné setí a příprava pole" />
+        <e k="ui_pmApplicantProfileText" v="%s se uchází o místo s profesními zkušenostmi v oblasti %s. Aktuální profil naznačuje %s. Tyto hodnoty představují okamžitý stav přihlášky." />
+        <e k="ui_pmWorkerProfileText" v="%s pracuje na farmě od %s. Dosavadní vývoj naznačuje %s. Další záznamy vznikají při zakázkách, školeních a personálních rozhodnutích." />
+        <e k="ui_pmHistoryJobs" v="Dokončené zakázky: %d." />
+        <e k="ui_pmHistoryWorkTime" v="Celková pracovní doba: %s." />
+        <e k="ui_pmHistoryTrainingActive" v="Aktuální školení: %s." />
+        <e k="ui_pmHistoryTrainingLast" v="Poslední školení: rok %d." />
+        <e k="ui_pmHistoryTrainingNone" v="Dosud nebylo zaznamenáno žádné školení." />
+        <e k="ui_pmHistoryTransportEnabled" v="Označen(a) pro dopravní úkoly." />
+        <e k="ui_pmHistoryTransportDisabled" v="Není označen(a) pro dopravní úkoly." />
+        <e k="ui_pmMenuPageSettings" v="Nastavení" />
+        <e k="ui_pmSettingsInfo" v="Tato nastavení platí pro každý uložený postup zvlášť." />
+        <e k="ui_pmSettingsHostOnly" v="V multiplayeru může tato nastavení měnit pouze server." />
+        <e k="ui_pmSettingsSectionGameplay" v="HERNÍ EFEKTY" />
+        <e k="ui_pmSettingsSectionPersonnel" v="PERSONÁL" />
+        <e k="ui_pmSettingsSectionEconomic" v="EKONOMIKA" />
+        <e k="ui_button_transport_assign_long" v="Přiřadit dopravní úkoly" />
+        <e k="ui_button_transport_manage_long" v="Spravovat dopravní úkoly" />
+        <e k="ui_transportPriorityTitle" v="Priorita dopravy" />
+        <e k="ui_transportPriorityIntro" v="Určete, kteří zaměstnanci mohou přebírat dopravní úkoly a v jakém pořadí se kontrolují." />
+        <e k="ui_transportPriorityHeaderPriority" v="Priorita" />
+        <e k="ui_transportPriorityHeaderEmployee" v="Zaměstnanec" />
+        <e k="ui_transportPriorityHeaderStatus" v="Stav" />
+        <e k="ui_transportPriorityHeaderEnabled" v="Doprava" />
+        <e k="ui_transportPriorityActive" v="Aktivní" />
+        <e k="ui_transportPriorityInactive" v="Nepřiřazen" />
+        <e k="ui_transportPriorityMoveUp" v="Posunout nahoru" />
+        <e k="ui_transportPriorityMoveDown" v="Posunout dolů" />
+        <e k="ui_transportPriorityToggle" v="Aktivovat/deaktivovat" />
+        <e k="ui_transportPriorityApply" v="Použít" />
+        <e k="ui_transportPriorityCancel" v="Zrušit" />
+        <e k="ui_transportPrioritySaved" v="Pořadí dopravy bylo uloženo." />
+        <e k="ui_transportPriorityNoWorkers" v="Nejsou k dispozici žádní zaměstnanci." />
+        <e k="ui_transportPriorityControls" v="↑/↓: výběr   A/D: přesun   Mezerník: zap./vyp.   Enter: použít" />
+        <e k="ui_button_transport_remove_long" v="Odebrat dopravní úkoly" />
+        <e k="ui_helperPersonnelMenuOverview" v="Přehled" />
+        <e k="ui_helperPersonnelMenuApplicants" v="Uchazeči" />
+        <e k="ui_helperPersonnelMenuEmployees" v="Zaměstnanci" />
+        <e k="ui_helperPersonnelMenuTraining" v="Školení" />
+        <e k="ui_helperPersonnelMenuSettings" v="NASTAVENÍ HRY" />
+        <e k="ui_pmBirthDateAge" v="%s (%d let)" />
+        <e k="ui_pmOrigin6" v="logistická společnost" />
+        <e k="ui_pmOrigin7" v="dílna zemědělské techniky" />
+        <e k="ui_pmOrigin8" v="kancelářské povolání" />
+        <e k="ui_status_retirementPending" v="odchod do důchodu na konci měsíce" />
+        <e k="ui_retirementNotice" v="%s odejde na konci měsíce do důchodu." />
+        <e k="ui_pmTrainingIntro" v="Specializace zlepšují výkon zaměstnance v příslušné kategorii učení. Školení trvá do konce aktuálního měsíce; během této doby není zaměstnanec k dispozici pro práci. Pokrok v učení se započítá až po dokončení školení. Školení není každý měsíc nabízeno pro všechny kategorie. Kurzy mohou být levnější nebo dražší než běžná cena. Každý zaměstnanec může absolvovat pouze jedno školení za hospodářský rok od března do února. Každý zaměstnanec může získat nejvýše dvě specializace. Vyberte požadovanou kategorii učení." />
+        <e k="ui_pmTrainingCategoryHeader" v="Oblast vzdělávání" />
+        <e k="ui_pmTrainingProgressHeader" v="Postup ke specializaci" />
+        <e k="ui_pmTrainingRunning" v="probíhá školení" />
+        <e k="ui_pmTrainingSelectCategory" v="Nejprve vyberte oblast školení" />
+        <e k="ui_pmTrainingConfirm" v="Zahájit školení pro %s v oblasti %s?" />
+        <e k="ui_training_line_no_capacity" v="Školení: dosaženy dvě specializace · naposledy: %s" />
+        <e k="ui_training_line_single_day_deadline_select" v="Školení: při 1 dni/měsíc pouze do 12:00 · vyberte oblast v nabídce školení · naposledy: %s" />
+        <e k="ui_training_line_first_day_select" v="Školení: pouze první den · vyberte oblast v nabídce školení · naposledy: %s" />
+        <e k="ui_training_line_busy_select" v="Školení: během práce není možné · naposledy: %s" />
+        <e k="ui_training_line_sick_select" v="Školení: během nemoci není možné · naposledy: %s" />
+        <e k="ui_training_line_select_category" v="Školení: vyberte oblast v nabídce školení · naposledy: %s" />
+        <e k="ui_pmTrainingCostHeader" v="Cena" />
+        <e k="ui_pmTrainingAdjustmentHeader" v="Sleva/příplatek" />
+        <e k="ui_pmTrainingNoPlaces" v="aktuálně nejsou volná místa" />
+        <e k="ui_pmTrainingNoPlacesMessage" v="Pro toto školení momentálně nejsou volná místa." />
+        <e k="ui_pmProfileIntro1" v="%s dříve pracoval(a) %s a na farmě působí %d měsíců." />
+        <e k="ui_pmProfileIntro2" v="%s přináší zkušenosti z dřívější práce %s a je součástí týmu %d měsíců." />
+        <e k="ui_pmProfileExperience1_1" v="%s má zatím velmi málo praktických zkušeností a musí si ještě upevnit mnoho pracovních postupů." />
+        <e k="ui_pmProfileExperience1_2" v="%s se v každodenní práci stále zřetelně nachází ve fázi zaučování." />
+        <e k="ui_pmProfileExperience2_1" v="%s získal(a) určité praktické zkušenosti, ale u náročnějších úkolů stále potřebuje podporu." />
+        <e k="ui_pmProfileExperience2_2" v="%s si stále lépe osvojuje základy, v několika oblastech však zatím chybí rutina." />
+        <e k="ui_pmProfileExperience3_1" v="%s má solidní zkušenosti a většinu běžných úkolů zvládá samostatně." />
+        <e k="ui_pmProfileExperience3_2" v="%s pracuje v každodenním provozu rutinně a dobře se přizpůsobuje měnícím se úkolům." />
+        <e k="ui_pmProfileExperience4_1" v="%s přináší rozsáhlé zkušenosti a jistě zvládá i náročné úkoly." />
+        <e k="ui_pmProfileExperience4_2" v="%s díky dlouholeté praxi ve většině případů bezpečně a samostatně zvládá složité práce." />
+        <e k="ui_pmProfileExperience5_1" v="%s patří k nejsilnějším odborníkům farmy a má mimořádné množství zkušeností." />
+        <e k="ui_pmProfileExperience5_2" v="%s je jedním z nejzkušenějších a nejvšestrannějších členů týmu farmy." />
+        <e k="ui_pmProfileReliability1_1" v="%s je nyní obtížné spolehlivě plánovat; dohody a pracovní postupy často nejsou dodržovány podle očekávání." />
+        <e k="ui_pmProfileReliability1_2" v="%s vykazuje zřetelné nedostatky v dochvilnosti, dodržování dohod a pečlivém provedení." />
+        <e k="ui_pmProfileReliability2_1" v="%s nepracuje trvale spolehlivě a při důležitých úkolech by měl(a) být pečlivě sledován(a)." />
+        <e k="ui_pmProfileReliability2_2" v="%s dohody většinou dodržuje, ale ve spolehlivosti stále vykazuje znatelné výkyvy." />
+        <e k="ui_pmProfileReliability3_1" v="%s celkově pracuje řádně a ve většině případů dodržuje dohody." />
+        <e k="ui_pmProfileReliability3_2" v="%s je v každodenním provozu obecně spolehlivý(á) a lze jej/ji dobře plánovat." />
+        <e k="ui_pmProfileReliability4_1" v="%s je spolehlivým a snadno plánovatelným členem týmu." />
+        <e k="ui_pmProfileReliability4_2" v="%s spolehlivě dodržuje dohody i při delších nebo náročnějších úkolech." />
+        <e k="ui_pmProfileReliability5_1" v="%s je mimořádně spolehlivý(á) a poskytuje farmě vysokou míru jistoty při plánování." />
+        <e k="ui_pmProfileReliability5_2" v="%s téměř bez výjimky dodržuje dohody a plní úkoly s velkou pečlivostí." />
+        <e k="ui_pmProfileLoyalty1_1" v="%s má nyní k farmě jen malý vztah; ke změně může dojít kdykoli." />
+        <e k="ui_pmProfileLoyalty1_2" v="%s působí jen slabě spjatě s farmou a při vhodné nabídce může rychle odejít." />
+        <e k="ui_pmProfileLoyalty2_1" v="%s má zatím k farmě pouze omezený vztah, takže budoucí vývoj zůstává nejistý." />
+        <e k="ui_pmProfileLoyalty2_2" v="%s projevuje poměrně malou oddanost a dosud si k farmě nevytvořil(a) pevný vztah." />
+        <e k="ui_pmProfileLoyalty3_1" v="%s je farmě obecně loajální, ale zatím k ní není zvlášť úzce připoután(a)." />
+        <e k="ui_pmProfileLoyalty3_2" v="%s si k farmě vytvořil(a) stabilní vztah a projevuje solidní oddanost." />
+        <e k="ui_pmProfileLoyalty4_1" v="%s se cítí s farmou zřetelně spjat(a) a projevuje silnou oddanost." />
+        <e k="ui_pmProfileLoyalty4_2" v="%s si k farmě vybudoval(a) pevné pouto a pravděpodobně zůstane dlouhodobě." />
+        <e k="ui_pmProfileLoyalty5_1" v="%s je s farmou mimořádně úzce spjat(a) a patří k jejím nejloajálnějším členům týmu." />
+        <e k="ui_pmProfileLoyalty5_2" v="%s projevuje velmi silné a pevně zakotvené dlouhodobé spojení s farmou." />
+        <e k="ui_pmProfileSpecializations" v="Profesní přednosti se projevují zejména v oblasti %s." />
+        <e k="ui_pmProfileLearningProgress" v="Největší pokrok v učení je nyní v oblasti %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization" v="Dosud se nevytvořila jasná profesní specializace." />
+        <e k="ui_pmProfileActivity" v="%s dosud dokončil(a) %d zakázek a %d školení." />
+        <e k="ui_pmProfileNoActivity" v="%s teprve získává první zkušenosti na farmě; zatím nebyly dokončeny žádné zakázky ani školení." />
+        <e k="ui_pmChronicleImportedEmployment" v="Stávající pracovní poměr byl přidán do osobní kroniky." />
+        <e k="ui_pmChronicleHired" v="Zaměstnanec byl přijat." />
+        <e k="ui_pmChronicleJobStarted" v="Zakázka zahájena." />
+        <e k="ui_pmChronicleJobCompleted" v="Zakázka dokončena." />
+        <e k="ui_pmChronicleSpecialization" v="Získána specializace." />
+        <e k="ui_pmChronicleTrainingStarted" v="Školení zahájeno." />
+        <e k="ui_pmChronicleTrainingCompleted" v="Školení dokončeno." />
+        <e k="ui_pmChronicleSickness" v="Nepřítomnost z důvodu nemoci." />
+        <e k="ui_pmChronicleDismissal" v="Výpověď ze strany farmy." />
+        <e k="ui_pmChronicleResignation" v="Odchod oznámen ke konci měsíce." />
+        <e k="ui_pmChronicleRetirement" v="Odchod do důchodu oznámen ke konci měsíce." />
+        <e k="ui_pmChronicleEmploymentEnded" v="Pracovní poměr skončil." />
+        <e k="ui_pmChronicleSalaryRequest" v="Požadováno zvýšení mzdy." />
+        <e k="ui_pmChronicleSalaryGranted" v="Zvýšení mzdy schváleno." />
+        <e k="ui_pmChronicleSalaryDeclined" v="Žádost o zvýšení mzdy zamítnuta." />
+        <e k="ui_pmProfileEmployeeMale" v="Zaměstnanec" />
+        <e k="ui_pmProfileEmployeeFemale" v="Zaměstnankyně" />
+        <e k="ui_pmProfilePronounMale" v="On" />
+        <e k="ui_pmProfilePronounFemale" v="Ona" />
+        <e k="ui_pmProfileBackgroundFamilyFarm" v="na venkovské rodinné farmě" />
+        <e k="ui_pmProfileBackgroundDairyFarm" v="na malé mléčné farmě" />
+        <e k="ui_pmProfileBackgroundContractor" v="pro podnik zemědělských služeb" />
+        <e k="ui_pmProfileBackgroundArableFarm" v="na rostlinné farmě" />
+        <e k="ui_pmProfileBackgroundMixedFarm" v="na smíšené farmě" />
+        <e k="ui_pmProfileBackgroundLogistics" v="v logistické společnosti" />
+        <e k="ui_pmProfileBackgroundWorkshop" v="v dílně zemědělské techniky" />
+        <e k="ui_pmProfileBackgroundOffice" v="v kancelářském povolání" />
+        <e k="ui_pmProfileIntro3" v="%s nyní pracuje na farmě %d měsíců a dříve byl(a) zaměstnán(a) %s." />
+        <e k="ui_pmProfileExperience1_3" v="%s rozumí základním postupům, ale u mnoha úkolů stále potřebuje vedení a praxi." />
+        <e k="ui_pmProfileExperience2_3" v="%s zvládá běžné úkoly stále lépe, ale složitější postupy si ještě musí prohloubit." />
+        <e k="ui_pmProfileExperience3_3" v="%s má spolehlivý odborný základ a lze jej/ji nasadit na různé druhy práce." />
+        <e k="ui_pmProfileExperience4_3" v="%s zná mnoho procesů na farmě z praktické zkušenosti a může převzít obtížnější úkoly." />
+        <e k="ui_pmProfileExperience5_3" v="%s má mimořádně široké odborné znalosti a jistě zvládá i velmi náročné úkoly." />
+        <e k="ui_pmProfileReliability1_3" v="%s opakovaně vnáší do plánování práce nejistotu kvůli nespolehlivému výkonu." />
+        <e k="ui_pmProfileReliability2_3" v="%s zvládá rutinní úkoly, ale při náročné práci zatím není trvale spolehlivý(á)." />
+        <e k="ui_pmProfileReliability3_3" v="%s plní většinu úkolů svědomitě, i když se stále objevují občasné výkyvy." />
+        <e k="ui_pmProfileReliability4_3" v="%s pracuje soustavně a pečlivě, pouze s několika absencemi nebo nepravidelnostmi." />
+        <e k="ui_pmProfileReliability5_3" v="%s zůstává mimořádně spolehlivý(á) a stálý(á) i při obtížných úkolech." />
+        <e k="ui_pmProfileLoyalty1_3" v="%s zřejmě vnímá tuto práci spíše jako krátkodobé řešení než jako trvalé místo." />
+        <e k="ui_pmProfileLoyalty2_3" v="%s na farmě zůstává, ale dlouhodobé setrvání zatím nelze považovat za samozřejmé." />
+        <e k="ui_pmProfileLoyalty3_3" v="%s se v týmu zřejmě cítí dobře, i když vztah k farmě se může ještě posílit." />
+        <e k="ui_pmProfileLoyalty4_3" v="%s se s farmou silně ztotožňuje a loajálně stojí za podnikem." />
+        <e k="ui_pmProfileLoyalty5_3" v="%s se s farmou ztotožňuje mimořádně silně a pravděpodobně zůstane trvale oddaný(á)." />
+        <e k="ui_pmProfileSpecializations2" v="%s se specializuje především na %s." />
+        <e k="ui_pmProfileSpecializations3" v="%s vykazuje zvláštní přednosti v oblasti %s." />
+        <e k="ui_pmProfileLearningProgress2" v="%s se nyní zvlášť dobře rozvíjí v oblasti %s (%d %%)." />
+        <e k="ui_pmProfileLearningProgress3" v="%s dosud dosáhl(a) největšího pokroku v učení v oblasti %s (%d %%)." />
+        <e k="ui_pmProfileNoSpecialization2" v="%s si dosud nevytvořil(a) pevnou specializaci." />
+        <e k="ui_pmProfileNoSpecialization3" v="Profesní zaměření osoby %s je stále otevřené." />
+        <e k="ui_pmProfileActivity2" v="Dosavadní působení na farmě zahrnuje %d dokončených zakázek a %d školení." />
+        <e k="ui_pmProfileActivity3" v="%s dosud dokončil(a) %d zakázek a %d školení." />
+        <e k="ui_pmProfileNoActivity2" v="Praktický rozvoj osoby %s na farmě teprve začíná." />
+        <e k="ui_pmProfileNoActivity3" v="%s dosud nedokončil(a) žádnou zakázku ani se nezúčastnil(a) školení." />
+        <e k="ui_hpSetting_toggle" v="Přepnout" />
+        <e k="ui_worker_status_line" v="Stav: %s" />
+        <e k="ui_pmApplicantProfileIntro" v="%s má předchozí pracovní zkušenost %s." />
+        <e k="ui_pmApplicantProfileMarketNew" v="Přihláška je na trhu od tohoto měsíce." />
+        <e k="ui_pmApplicantProfileMarketOneMonth" v="Přihláška je na trhu jeden měsíc." />
+        <e k="ui_pmApplicantProfileMarketMonths" v="Přihláška je na trhu již %d měsíce." />
+        <e k="ui_pmApplicantProfileAge1" v="Ve věku %d let je profesní dráha stále na začátku. Nabízí značný prostor pro rozvoj." />
+        <e k="ui_pmApplicantProfileAge2" v="Ve věku %d let se profesní vývoj stále utváří a může se ještě výrazně upevnit." />
+        <e k="ui_pmApplicantProfileAge3" v="Ve věku %d let je již patrná ustálená profesní dráha. Přínos těchto zkušeností pro zemědělství závisí na dosavadním zaměření." />
+        <e k="ui_pmApplicantProfileAge4" v="Ve věku %d let lze očekávat rozsáhlé obecné pracovní zkušenosti, které však automaticky neznamenají zemědělskou praxi." />
+        <e k="ui_pmApplicantProfileExperience1" v="Praktické zemědělské zkušenosti jsou zatím velmi malé. Bude nutné důkladné zaučení." />
+        <e k="ui_pmApplicantProfileExperience2" v="Základní zemědělské znalosti jsou přítomné, ale u náročnějších úkolů stále chybí rutina." />
+        <e k="ui_pmApplicantProfileExperience3" v="Dosavadní zkušenosti tvoří solidní základ pro běžné práce, i když ne všechny oblasti jsou zvládány jistě." />
+        <e k="ui_pmApplicantProfileExperience4" v="Zemědělské zkušenosti jsou výrazně rozvinuté a umožňují všestranné nasazení." />
+        <e k="ui_pmApplicantProfileExperience5" v="Zkušenosti dosahují mimořádné úrovně a umožňují zvládat i náročné úkoly." />
+        <e k="ui_pmApplicantProfileReliability1" v="Hodnota spolehlivosti ukazuje na výrazná rizika při plánování, dodržování dohod a pečlivém provedení." />
+        <e k="ui_pmApplicantProfileReliability2" v="Spolehlivost je zatím kolísavá. Důležité úkoly by měly být pozorně sledovány." />
+        <e k="ui_pmApplicantProfileReliability3" v="Spolehlivost je na dobré úrovni a obvykle umožňuje předvídatelné plánování." />
+        <e k="ui_pmApplicantProfileReliability4" v="Vysoká spolehlivost naznačuje stálou, pečlivou a dobře plánovatelnou práci." />
+        <e k="ui_pmApplicantProfileReliability5" v="Mimořádně vysoká spolehlivost nabízí velmi vysokou jistotu při plánování." />
+        <e k="ui_pmApplicantProfileLoyalty1" v="Nízká loajalita naznačuje jen slabou vazbu na budoucího zaměstnavatele." />
+        <e k="ui_pmApplicantProfileLoyalty2" v="Loajalita je zatím zdrženlivá. Dlouhodobější vazba se musí teprve vytvořit." />
+        <e k="ui_pmApplicantProfileLoyalty3" v="Loajalita se nachází ve stabilním středu a poskytuje dobrý základ pro dlouhodobější spolupráci." />
+        <e k="ui_pmApplicantProfileLoyalty4" v="Vysoká loajalita naznačuje silnou ochotu zůstat na farmě dlouhodobě." />
+        <e k="ui_pmApplicantProfileLoyalty5" v="Mimořádně vysoká loajalita ukazuje na obzvlášť silnou ochotu vytvořit trvalou vazbu." />
+        <e k="ui_pmHistoryColumnCareer" v="Dosavadní průběh" />
+        <e k="ui_pmHistoryColumnRecent" v="Poslední události" />
+        <e k="ui_pmHistoryColumnTotals" v="Součty" />
+        <e k="ui_pmHistoryNoRecord" v="bez záznamu" />
+        <e k="ui_pmHistoryDateFormat" v="Den %d · %d/%d" />
+        <e k="ui_pmHistorySalaryAccepted" v="přijata" />
+        <e k="ui_pmHistorySalaryDeclined" v="zamítnuta" />
+        <e k="ui_pmHistorySalaryPending" v="otevřená" />
+        <e k="ui_pmHistorySalaryUnresolved" v="bez zaznamenaného rozhodnutí" />
+        <e k="ui_pmHistoryAbortSickness" v="nemoc" />
+        <e k="ui_pmHistoryAbortUnreliability" v="nespolehlivost" />
+        <e k="ui_pmHistoryAbortOther" v="jiný důvod" />
+        <e k="ui_pmHistoryLastSickness" v="Poslední nemoc: %s" />
+        <e k="ui_pmHistoryLastSalaryRequest" v="Poslední požadavek na mzdu: %s · %s" />
+        <e k="ui_pmHistoryLastAbort" v="Poslední přerušená práce: %s · %s" />
+        <e k="ui_pmHistoryTotalSickness" v="Dny nemoci: %d" />
+        <e k="ui_pmHistoryTotalSalaryRequests" v="Požadavky na mzdu: %d" />
+        <e k="ui_pmHistoryTotalAborts" v="Přerušené práce: %d" />
+        <e k="ui_pmHistoryTotalSalaryPaid" v="Mzda celkem: %s" />
+        <e k="ui_pmHistoryTrainingYearCompact" v="Rok %d" />
+        <e k="ui_pmHistoryTrainingNoneCompact" v="žádné" />
+        <e k="ui_pmHistoryCareerJobs" v="Práce: %d" />
+        <e k="ui_pmHistoryCareerWorkTime" v="Pracovní doba: %s" />
+        <e k="ui_pmHistoryCareerTraining" v="Školení: %s" />
+        <e k="ui_pmHistoryCareerTransport" v="Doprava: %s" />
+        <e k="ui_pmHistoryValueActive" v="aktivní" />
+        <e k="ui_pmHistoryValueInactive" v="neaktivní" />
+        <e k="ui_monthlyRowApplicants" v="Uchazeči" />
+        <e k="ui_monthlyRowEmployees" v="Zaměstnanci" />
+        <e k="ui_monthlyRowAvailable" v="K dispozici" />
+        <e k="ui_monthlyRowJobs" v="Práce" />
+        <e k="ui_monthlyRowWorkTime" v="Pracovní doba" />
+        <e k="ui_monthlyRowWages" v="Měsíční mzdy" />
+        <e k="ui_monthlyRowPayroll" v="Poslední výplata" />
+        <e k="ui_pmOverviewOverallHeader" v="CELKEM" />
+        <e k="ui_pmOverviewTotalJobs" v="Celkem zakázek" />
+        <e k="ui_pmOverviewTotalWorkTime" v="Celková pracovní doba" />
+        <e k="ui_pmOverviewTotalPayroll" v="Celkem vyplacené mzdy" />
+        <e k="ui_pmOverviewEverHired" v="Celkem zaměstnáno" />
+        <e k="ui_pmOverviewDismissed" v="Propuštěni" />
+        <e k="ui_pmOverviewResigned" v="Vlastní výpovědi" />
+        <e k="ui_pmOverviewRetired" v="Odchody do důchodu" />
+        <e k="ui_pmChronicleJobAbortedSickness" v="Práce přerušena kvůli nemoci." />
+        <e k="ui_reliabilityJobAbortOtherTaskMale" v="%s přerušil probíhající práci, protože považoval jiný úkol za důležitější." />
+        <e k="ui_reliabilityJobAbortOtherTaskFemale" v="%s přerušila probíhající práci, protože považovala jiný úkol za důležitější." />
+        <e k="ui_reliabilityJobAbortBreakMale" v="%s přerušil probíhající práci. Chtěl si udělat přestávku." />
+        <e k="ui_reliabilityJobAbortBreakFemale" v="%s přerušila probíhající práci. Chtěla si udělat přestávku." />
+        <e k="ui_reliabilityJobAbortPrivateMale" v="%s přerušil probíhající práci. Musel se postarat o soukromé záležitosti." />
+        <e k="ui_reliabilityJobAbortPrivateFemale" v="%s přerušila probíhající práci. Musela se postarat o soukromé záležitosti." />
+        <e k="ui_reliabilityJobAbortStoveMale" v="%s přerušil probíhající práci, protože zapomněl doma vypnout sporák a odjel zpět." />
+        <e k="ui_reliabilityJobAbortStoveFemale" v="%s přerušila probíhající práci, protože zapomněla doma vypnout sporák a odjela zpět." />
+        <e k="ui_reliabilityJobAbortFriendsMale" v="%s přerušil probíhající práci, protože se spontánně rozhodl setkat s přáteli." />
+        <e k="ui_reliabilityJobAbortFriendsFemale" v="%s přerušila probíhající práci, protože se spontánně rozhodla setkat s přáteli." />
+        <e k="ui_reliabilityJobAbortPartnerMale" v="%s přerušil probíhající práci, aby se spontánně setkal se svou přítelkyní u kávy." />
+        <e k="ui_reliabilityJobAbortPartnerFemale" v="%s přerušila probíhající práci, aby se spontánně setkala se svým přítelem u kávy." />
     </elements>
 </l10n>
