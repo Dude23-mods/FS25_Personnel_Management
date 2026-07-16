@@ -33,6 +33,7 @@ Your support just helps me spending more time developing, testing and maintainin
   - [Gameplay Settings](#gameplay-settings)
   - [Savegame Support](#savegame-support)
   - [Multiplayer Synchronization](#multiplayer-synchronization)
+- [Planned Features](#planned-features)
 - [Development Status](#development-status)
 
 ## Compatibility Notice
@@ -180,6 +181,16 @@ Personnel Management uses farm-scoped multiplayer synchronization. Applicants, e
 Personnel actions are server-authoritative. Clients may display the interface and send requests, but the server validates the farm, target employee, current state and farm-manager permission before applying actions such as hiring, dismissing, training, salary decisions or transport-priority changes.
 
 This prevents players from modifying another farm's personnel and preserves consistent savegame state in multiplayer and dedicated-server environments.
+
+## Planned Features
+
+- AutoDrive and Courseplay support
+- Introduction of a new employee type: Apprentice
+- Salary negotiations
+- Job interviews, where applicant stats initially remain hidden and can be partially revealed through an interview
+- A more transparent employer reputation system
+
+This is deliberately not intended to be a roadmap, but rather a brainstorming list of possible future features. Whether and how any of these ideas will be implemented remains undecided.
 
 ## Development Status
 
