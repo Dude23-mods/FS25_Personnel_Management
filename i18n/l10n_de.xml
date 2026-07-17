@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Zurück" />
         <e k="ui_dismissalNoticeNextMonth" v="%s wurde zum nächsten Monatsende gekündigt." />
         <e k="ui_dismissalNotice" v="%s wurde zum Monatsende gekündigt." />
-        <e k="ui_fireDeniedPending" v="Der Mitarbeiter ist bereits gekündigt." />
+        <e k="ui_fireDeniedPending" v="%s wurde bereits gekündigt. Er wird den Betrieb nach Ende der Kündigungsfrist verlassen." />
         <e k="ui_fireDeniedBusy" v="Der Mitarbeiter ist aktuell im Einsatz und kann nicht entlassen werden." />
         <e k="ui_hireSuccess" v="%s wurde eingestellt." />
         <e k="ui_fireSuccess" v="%s wurde entlassen." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER stellt den markierten Bewerber ein. ESC kehrt zur Übersicht zurück." />
         <e k="ui_instructionWorkerDismiss" v="Mit ENTER entlässt du den angewählten Mitarbeiter." />
         <e k="ui_instructionWorkerTransport" v="Über den Transportbutton verwaltest du die Transportreihenfolge, mit S schulst du den Mitarbeiter." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Offene Gehaltsforderungen werden über den Button Gehaltsforderungen verwalten bearbeitet." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Offene Gehaltsforderungen werden über den Button Gehalt bearbeitet." />
         <e k="ui_instructionSwitchEntry" v="Per Mausklick wählst du einen Eintrag; mit dem Mausrad blätterst du." />
         <e k="ui_training_no_progress" v="Für diesen Mitarbeiter gibt es noch keine passende Lernrichtung." />
         <e k="ui_training_worker_busy" v="Der Mitarbeiter ist gerade im Einsatz und kann nicht geschult werden." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s ist krank und kann heute nicht arbeiten. Der laufende Einsatz wurde abgebrochen." />
         <e k="ui_button_raise_grant" v="Gehaltserhöhung gewähren" />
         <e k="ui_button_raise_decline" v="Forderung ablehnen" />
-        <e k="ui_button_salary_manage_long" v="Gehaltsforderungen verwalten" />
+        <e k="ui_button_salary_manage_long" v="Gehalt" />
         <e k="ui_salaryRequestsTitle" v="Gehaltsforderungen verwalten" />
         <e k="ui_salaryRequestsIntro" v="Hier werden alle offenen Gehaltsforderungen angezeigt. Wähle einen Mitarbeiter aus und entscheide, ob die Forderung angenommen oder abgelehnt wird." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Mitarbeiter" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONAL" />
         <e k="ui_pmSettingsSectionEconomic" v="WIRTSCHAFT" />
         <e k="ui_button_transport_assign_long" v="Transportaufträge zuweisen" />
-        <e k="ui_button_transport_manage_long" v="Transportaufgaben verwalten" />
+        <e k="ui_button_transport_manage_long" v="Transport" />
         <e k="ui_transportPriorityTitle" v="Transportpriorität" />
         <e k="ui_transportPriorityIntro" v="Lege fest, welche Mitarbeiter Transportaufgaben übernehmen und in welcher Reihenfolge sie geprüft werden." />
         <e k="ui_transportPriorityHeaderPriority" v="Priorität" />

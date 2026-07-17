@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Wstecz" />
         <e k="ui_dismissalNoticeNextMonth" v="%s został zwolniony z końcem następnego miesiąca." />
         <e k="ui_dismissalNotice" v="%s został zwolniony z końcem miesiąca." />
-        <e k="ui_fireDeniedPending" v="Ten pracownik jest już zwolniony." />
+        <e k="ui_fireDeniedPending" v="%s został już zwolniony. Opuści gospodarstwo po zakończeniu okresu wypowiedzenia." />
         <e k="ui_fireDeniedBusy" v="Pracownik jest zajęty i nie może zostać zwolniony." />
         <e k="ui_hireSuccess" v="%s - zatrudnij." />
         <e k="ui_fireSuccess" v="%s - zwolnij." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: Zatrudnij. ESC: Wróć do przeglądu." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Zwolnij." />
         <e k="ui_instructionWorkerTransport" v="Użyj przycisku transportu, aby zarządzać kolejnością, a klawisza S, aby szkolić pracownika." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Otwarte wnioski o podwyżkę obsługuje się przyciskiem Zarządzaj wnioskami o podwyżkę." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Otwarte wnioski o podwyżkę obsługuje się przyciskiem Płaca." />
         <e k="ui_instructionSwitchEntry" v="Kliknij wpis, aby go wybrać; użyj kółka myszy do przewijania." />
         <e k="ui_training_no_progress" v="Ten pracownik nie ma jeszcze odpowiedniego kierunku nauki." />
         <e k="ui_training_worker_busy" v="Pracownik obecnie pracuje i nie może uczestniczyć w szkoleniu." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: chory, bieżące zlecenie zostało anulowane." />
         <e k="ui_button_raise_grant" v="Przyznaj podwyżkę" />
         <e k="ui_button_raise_decline" v="Odrzuć wniosek" />
-        <e k="ui_button_salary_manage_long" v="Zarządzaj wnioskami o podwyżkę" />
+        <e k="ui_button_salary_manage_long" v="Płaca" />
         <e k="ui_salaryRequestsTitle" v="Zarządzaj wnioskami o podwyżkę" />
         <e k="ui_salaryRequestsIntro" v="Tutaj wyświetlane są wszystkie otwarte wnioski o podwyżkę. Wybierz pracownika i zdecyduj, czy przyznać podwyżkę, czy odrzucić wniosek." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Pracownik" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONEL" />
         <e k="ui_pmSettingsSectionEconomic" v="EKONOMIA" />
         <e k="ui_button_transport_assign_long" v="Przydziel zadania transportowe" />
-        <e k="ui_button_transport_manage_long" v="Zarządzaj zadaniami transportowymi" />
+        <e k="ui_button_transport_manage_long" v="Transport" />
         <e k="ui_transportPriorityTitle" v="Priorytet transportu" />
         <e k="ui_transportPriorityIntro" v="Wybierz pracowników do zadań transportowych i ustal kolejność sprawdzania ich dostępności." />
         <e k="ui_transportPriorityHeaderPriority" v="Priorytet" />

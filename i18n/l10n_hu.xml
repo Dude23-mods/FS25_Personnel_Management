@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Vissza" />
         <e k="ui_dismissalNoticeNextMonth" v="%s a következő hónap végére el lett bocsátva." />
         <e k="ui_dismissalNotice" v="%s el lett bocsátva a hónap végére." />
-        <e k="ui_fireDeniedPending" v="Ez az alkalmazott már el van bocsátva." />
+        <e k="ui_fireDeniedPending" v="%s már el lett bocsátva. A felmondási idő végén elhagyja a gazdaságot." />
         <e k="ui_fireDeniedBusy" v="A dolgozó éppen dolgozik, ezért nem bocsátható el." />
         <e k="ui_hireSuccess" v="%s - felvétel." />
         <e k="ui_fireSuccess" v="%s - elbocsátás." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: Felvétel. ESC: Vissza az áttekintéshez." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Elbocsátás." />
         <e k="ui_instructionWorkerTransport" v="A szállítási sorrendet a szállítás gombbal kezelheted, az S billentyűvel pedig képezheted a dolgozót." />
-        <e k="ui_instructionWorkerSalaryRaise" v="A nyitott béremelési kérelmek a Béremelési kérelmek kezelése gombbal intézhetők." />
+        <e k="ui_instructionWorkerSalaryRaise" v="A nyitott béremelési kérelmek a Fizetés gombbal intézhetők." />
         <e k="ui_instructionSwitchEntry" v="Kattints egy bejegyzésre a kijelöléshez; görgetéshez használd az egérgörgőt." />
         <e k="ui_training_no_progress" v="Ennek a dolgozónak még nincs megfelelő fejlődési iránya." />
         <e k="ui_training_worker_busy" v="A dolgozó jelenleg munkát végez, ezért nem vehet részt képzésen." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: beteg, az aktuális feladat megszakadt." />
         <e k="ui_button_raise_grant" v="Emelés megadása" />
         <e k="ui_button_raise_decline" v="Kérelem elutasítása" />
-        <e k="ui_button_salary_manage_long" v="Béremelési kérelmek kezelése" />
+        <e k="ui_button_salary_manage_long" v="Fizetés" />
         <e k="ui_salaryRequestsTitle" v="Béremelési kérelmek kezelése" />
         <e k="ui_salaryRequestsIntro" v="Itt látható minden nyitott béremelési kérelem. Válassz egy alkalmazottat, majd fogadd el vagy utasítsd el a kérelmet." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Alkalmazott" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="SZEMÉLYZET" />
         <e k="ui_pmSettingsSectionEconomic" v="GAZDASÁG" />
         <e k="ui_button_transport_assign_long" v="Szállítási feladatok hozzárendelése" />
-        <e k="ui_button_transport_manage_long" v="Szállítási feladatok kezelése" />
+        <e k="ui_button_transport_manage_long" v="Szállítás" />
         <e k="ui_transportPriorityTitle" v="Szállítási prioritás" />
         <e k="ui_transportPriorityIntro" v="Állítsd be, mely dolgozók vállalhatnak szállítási feladatokat, és milyen sorrendben ellenőrizze őket a rendszer." />
         <e k="ui_transportPriorityHeaderPriority" v="Prioritás" />

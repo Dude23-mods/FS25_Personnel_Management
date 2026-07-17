@@ -3512,12 +3512,14 @@ local function hpLayer_HelperPersonnelManager_dismissWorker_1(self, workerId)
         return false, nil
     end
 
+    local fullName = self:getFullName(worker)
+
     if worker.dismissalPending == true then
-        return false, self:getLocalizedText("ui_fireDeniedPending", "Der Mitarbeiter ist bereits zum Monatsende gekündigt.")
+        local template = self:getLocalizedText("ui_fireDeniedPending", "%s wurde bereits gekündigt. Er wird den Betrieb nach Ende der Kündigungsfrist verlassen.")
+        return false, string.format(template, fullName)
     end
 
     local period, year = self:getApplicantPeriodInfo()
-    local fullName = self:getFullName(worker)
     local reputationDelta, dismissalReason = self:calculateDismissalReputationDelta(worker)
     local effectivePeriod, effectiveYear, inTime, currentDay, currentMinute, deadlineDay, deadlineMinute = self:getDismissalEffectivePeriodInfo(period, year)
 

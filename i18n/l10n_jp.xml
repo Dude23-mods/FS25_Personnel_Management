@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="戻る" />
         <e k="ui_dismissalNoticeNextMonth" v="%s は翌月末で解雇予定です。" />
         <e k="ui_dismissalNotice" v="%s は月末に解雇予定です。" />
-        <e k="ui_fireDeniedPending" v="この従業員はすでに解雇予定です。" />
+        <e k="ui_fireDeniedPending" v="%s はすでに解雇されています。解雇予告期間の終了後に農場を離れます。" />
         <e k="ui_fireDeniedBusy" v="従業員は作業中のため解雇できません。" />
         <e k="ui_hireSuccess" v="%s - 雇用." />
         <e k="ui_fireSuccess" v="%s - 解雇." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: 雇用. ESC: 概要へ戻る." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: 解雇." />
         <e k="ui_instructionWorkerTransport" v="運搬ボタンで優先順位を管理し、Sキーで従業員を研修します。" />
-        <e k="ui_instructionWorkerSalaryRaise" v="未処理の昇給要求は「昇給要求を管理」ボタンから処理します。" />
+        <e k="ui_instructionWorkerSalaryRaise" v="未処理の昇給要求は「給与」ボタンから処理します。" />
         <e k="ui_instructionSwitchEntry" v="項目をクリックして選択し、マウスホイールでスクロールします。" />
         <e k="ui_training_no_progress" v="この従業員には、まだ適切な学習分野がありません。" />
         <e k="ui_training_worker_busy" v="従業員は現在作業中のため、研修に参加できません。" />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s：病気のため現在の作業を中止しました。" />
         <e k="ui_button_raise_grant" v="昇給を承認" />
         <e k="ui_button_raise_decline" v="申請を拒否" />
-        <e k="ui_button_salary_manage_long" v="昇給要求を管理" />
+        <e k="ui_button_salary_manage_long" v="給与" />
         <e k="ui_salaryRequestsTitle" v="昇給要求を管理" />
         <e k="ui_salaryRequestsIntro" v="未処理の昇給要求がすべて表示されます。従業員を選択し、要求を承認するか拒否するか決定してください。" />
         <e k="ui_salaryRequestsHeaderEmployee" v="従業員" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="人事" />
         <e k="ui_pmSettingsSectionEconomic" v="経済" />
         <e k="ui_button_transport_assign_long" v="運搬業務を割り当てる" />
-        <e k="ui_button_transport_manage_long" v="運搬業務を管理" />
+        <e k="ui_button_transport_manage_long" v="輸送" />
         <e k="ui_transportPriorityTitle" v="運搬の優先順位" />
         <e k="ui_transportPriorityIntro" v="運搬業務を担当する従業員と、空き状況を確認する順番を設定します。" />
         <e k="ui_transportPriorityHeaderPriority" v="優先度" />

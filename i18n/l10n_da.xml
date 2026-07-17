@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Tilbage" />
         <e k="ui_dismissalNoticeNextMonth" v="%s er opsagt til udgangen af næste måned." />
         <e k="ui_dismissalNotice" v="%s er opsagt til månedens udgang." />
-        <e k="ui_fireDeniedPending" v="Denne medarbejder er allerede opsagt." />
+        <e k="ui_fireDeniedPending" v="%s er allerede blevet opsagt. Medarbejderen forlader bedriften, når opsigelsesperioden er udløbet." />
         <e k="ui_fireDeniedBusy" v="Medarbejderen arbejder og kan ikke afskediges." />
         <e k="ui_hireSuccess" v="%s - ansæt." />
         <e k="ui_fireSuccess" v="%s - afskedig." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: Ansæt. ESC: Tilbage til oversigt." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Afskedig." />
         <e k="ui_instructionWorkerTransport" v="Brug transportknappen til at administrere transportrækkefølgen, og tryk S for at træne medarbejderen." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Åbne lønkrav behandles via knappen Administrer lønkrav." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Åbne lønkrav behandles via knappen Løn." />
         <e k="ui_instructionSwitchEntry" v="Klik på en post for at vælge den; brug musehjulet til at rulle." />
         <e k="ui_training_no_progress" v="Denne medarbejder har endnu ingen passende læringsretning." />
         <e k="ui_training_worker_busy" v="Medarbejderen arbejder i øjeblikket og kan ikke deltage i træning." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: syg, det aktuelle arbejde blev afbrudt." />
         <e k="ui_button_raise_grant" v="Giv lønforhøjelse" />
         <e k="ui_button_raise_decline" v="Afvis anmodning" />
-        <e k="ui_button_salary_manage_long" v="Administrer lønkrav" />
+        <e k="ui_button_salary_manage_long" v="Løn" />
         <e k="ui_salaryRequestsTitle" v="Administrer lønkrav" />
         <e k="ui_salaryRequestsIntro" v="Her vises alle åbne krav om lønforhøjelse. Vælg en medarbejder, og beslut om kravet skal godkendes eller afvises." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Medarbejder" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONALE" />
         <e k="ui_pmSettingsSectionEconomic" v="ØKONOMI" />
         <e k="ui_button_transport_assign_long" v="Tildel transportopgaver" />
-        <e k="ui_button_transport_manage_long" v="Administrer transportopgaver" />
+        <e k="ui_button_transport_manage_long" v="Transport" />
         <e k="ui_transportPriorityTitle" v="Transportprioritet" />
         <e k="ui_transportPriorityIntro" v="Vælg, hvilke medarbejdere der må overtage transportopgaver, og i hvilken rækkefølge de kontrolleres." />
         <e k="ui_transportPriorityHeaderPriority" v="Prioritet" />

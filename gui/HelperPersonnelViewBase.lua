@@ -2590,7 +2590,7 @@ function HelperPersonnelViewBase:drawDetail()
     else
         self:drawTextLine(0.22, 0.742, 0.0125, RenderText.ALIGN_LEFT, self:getText("ui_instructionWorkerDismiss", "Mit ENTER entlässt du den angewählten Mitarbeiter."), 0.61, 0.73, 0.07, 1, true)
         self:drawTextLine(0.22, 0.722, 0.0125, RenderText.ALIGN_LEFT, self:getText("ui_instructionWorkerTransport", "Über den Transportbutton verwaltest du die Transportreihenfolge, mit S schulst du den Mitarbeiter."), 0.61, 0.73, 0.07, 1, true)
-        self:drawTextLine(0.22, 0.702, 0.0125, RenderText.ALIGN_LEFT, self:getText("ui_instructionWorkerSalaryRaise", "Offene Gehaltsforderungen werden über den Button Gehaltsforderungen verwalten bearbeitet."), 0.61, 0.73, 0.07, 1, true)
+        self:drawTextLine(0.22, 0.702, 0.0125, RenderText.ALIGN_LEFT, self:getText("ui_instructionWorkerSalaryRaise", "Offene Gehaltsforderungen werden über den Button Gehalt bearbeitet."), 0.61, 0.73, 0.07, 1, true)
         detailTitleY = 0.674
         detailSeparatorY = 0.661
         listStartY = 0.526

@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="返回" />
         <e k="ui_dismissalNoticeNextMonth" v="%s 已安排在下月底解雇。" />
         <e k="ui_dismissalNotice" v="%s 已安排在月底解雇。" />
-        <e k="ui_fireDeniedPending" v="该员工已安排解雇。" />
+        <e k="ui_fireDeniedPending" v="%s 已经被解雇。该员工将在解雇通知期结束后离开农场。" />
         <e k="ui_fireDeniedBusy" v="该员工正在工作，无法解雇。" />
         <e k="ui_hireSuccess" v="%s - 雇用." />
         <e k="ui_fireSuccess" v="%s - 解雇." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: 雇用. ESC: 返回概览." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: 解雇." />
         <e k="ui_instructionWorkerTransport" v="使用运输按钮管理运输顺序，按 S 培训员工。" />
-        <e k="ui_instructionWorkerSalaryRaise" v="未处理的加薪要求可通过“工资要求管理”按钮处理。" />
+        <e k="ui_instructionWorkerSalaryRaise" v="未处理的加薪要求可通过“工资”按钮处理。" />
         <e k="ui_instructionSwitchEntry" v="单击条目进行选择；使用鼠标滚轮滚动。" />
         <e k="ui_training_no_progress" v="该员工目前还没有合适的学习方向。" />
         <e k="ui_training_worker_busy" v="该员工正在工作，无法参加培训。" />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s：生病，当前任务已取消。" />
         <e k="ui_button_raise_grant" v="批准加薪" />
         <e k="ui_button_raise_decline" v="拒绝请求" />
-        <e k="ui_button_salary_manage_long" v="工资要求管理" />
+        <e k="ui_button_salary_manage_long" v="工资" />
         <e k="ui_salaryRequestsTitle" v="工资要求管理" />
         <e k="ui_salaryRequestsIntro" v="此处列出所有未处理的加薪要求。选择一名员工，然后决定批准或拒绝该要求。" />
         <e k="ui_salaryRequestsHeaderEmployee" v="员工" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="人员" />
         <e k="ui_pmSettingsSectionEconomic" v="经济" />
         <e k="ui_button_transport_assign_long" v="分配运输任务" />
-        <e k="ui_button_transport_manage_long" v="管理运输任务" />
+        <e k="ui_button_transport_manage_long" v="运输" />
         <e k="ui_transportPriorityTitle" v="运输优先级" />
         <e k="ui_transportPriorityIntro" v="设置哪些员工可承担运输任务以及检查顺序。" />
         <e k="ui_transportPriorityHeaderPriority" v="优先级" />

@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Voltar" />
         <e k="ui_dismissalNoticeNextMonth" v="%s foi demitido para o fim do próximo mês." />
         <e k="ui_dismissalNotice" v="%s foi despedido para o fim do mês." />
-        <e k="ui_fireDeniedPending" v="Este funcionário já está demitido." />
+        <e k="ui_fireDeniedPending" v="%s já foi despedido. Deixará a exploração após o fim do período de aviso prévio." />
         <e k="ui_fireDeniedBusy" v="Este funcionário está a trabalhar e não pode ser despedido." />
         <e k="ui_hireSuccess" v="%s foi contratado." />
         <e k="ui_fireSuccess" v="%s foi despedido." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER contrata o candidato selecionado. ESC volta à visão geral." />
         <e k="ui_instructionWorkerDismiss" v="Prime ENTER para despedir o funcionário selecionado." />
         <e k="ui_instructionWorkerTransport" v="Use o botão de transporte para gerir a ordem e prima S para formar o funcionário." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Os pedidos de aumento em aberto são tratados com o botão Gerir pedidos de aumento." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Os pedidos de aumento em aberto são tratados com o botão Salário." />
         <e k="ui_instructionSwitchEntry" v="Clique em uma entrada para selecioná-la; use a roda do mouse para rolar." />
         <e k="ui_training_no_progress" v="Este funcionário ainda não possui uma direção de aprendizagem adequada." />
         <e k="ui_training_worker_busy" v="O funcionário está trabalhando e não pode participar de um treinamento." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s está doente e hoje não pode trabalhar. O trabalho atual foi cancelado." />
         <e k="ui_button_raise_grant" v="Conceder aumento" />
         <e k="ui_button_raise_decline" v="Recusar pedido" />
-        <e k="ui_button_salary_manage_long" v="Gerir pedidos de aumento" />
+        <e k="ui_button_salary_manage_long" v="Salário" />
         <e k="ui_salaryRequestsTitle" v="Gerir pedidos de aumento" />
         <e k="ui_salaryRequestsIntro" v="Todos os pedidos de aumento em aberto são apresentados aqui. Seleciona um funcionário e decide se aceitas ou recusas o pedido." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Funcionário" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PESSOAL" />
         <e k="ui_pmSettingsSectionEconomic" v="ECONOMIA" />
         <e k="ui_button_transport_assign_long" v="Atribuir trabalhos de transporte" />
-        <e k="ui_button_transport_manage_long" v="Gerir trabalhos de transporte" />
+        <e k="ui_button_transport_manage_long" v="Transporte" />
         <e k="ui_transportPriorityTitle" v="Prioridade de transporte" />
         <e k="ui_transportPriorityIntro" v="Escolha os funcionários que podem assumir trabalhos de transporte e a ordem em que são verificados." />
         <e k="ui_transportPriorityHeaderPriority" v="Prioridade" />

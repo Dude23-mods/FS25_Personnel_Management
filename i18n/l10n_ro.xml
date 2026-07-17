@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Înapoi" />
         <e k="ui_dismissalNoticeNextMonth" v="%s a fost concediat pentru sfârșitul lunii următoare." />
         <e k="ui_dismissalNotice" v="%s este concediat la sfârșitul lunii." />
-        <e k="ui_fireDeniedPending" v="Acest angajat este deja concediat." />
+        <e k="ui_fireDeniedPending" v="%s a fost deja concediat. Va părăsi ferma după încheierea perioadei de preaviz." />
         <e k="ui_fireDeniedBusy" v="Angajatul lucrează și nu poate fi concediat." />
         <e k="ui_hireSuccess" v="%s - angajează." />
         <e k="ui_fireSuccess" v="%s - concediază." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: Angajează. ESC: Înapoi la prezentare." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Concediază." />
         <e k="ui_instructionWorkerTransport" v="Folosește butonul de transport pentru a gestiona ordinea și apasă S pentru a instrui angajatul." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Cererile de mărire în așteptare sunt gestionate cu butonul Gestionează cererile de mărire." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Cererile de mărire în așteptare sunt gestionate cu butonul Salariu." />
         <e k="ui_instructionSwitchEntry" v="Fă clic pe o intrare pentru a o selecta; folosește rotița mouse-ului pentru derulare." />
         <e k="ui_training_no_progress" v="Acest angajat nu are încă o direcție de învățare potrivită." />
         <e k="ui_training_worker_busy" v="Angajatul lucrează în prezent și nu poate participa la instruire." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: bolnav, lucrarea curentă a fost anulată." />
         <e k="ui_button_raise_grant" v="Acordă mărire" />
         <e k="ui_button_raise_decline" v="Respinge cererea" />
-        <e k="ui_button_salary_manage_long" v="Gestionează cererile de mărire" />
+        <e k="ui_button_salary_manage_long" v="Salariu" />
         <e k="ui_salaryRequestsTitle" v="Gestionează cererile de mărire" />
         <e k="ui_salaryRequestsIntro" v="Aici sunt afișate toate cererile de mărire aflate în așteptare. Selectează un angajat și decide dacă accepți sau respingi cererea." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Angajat" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONAL" />
         <e k="ui_pmSettingsSectionEconomic" v="ECONOMIE" />
         <e k="ui_button_transport_assign_long" v="Atribuie sarcini de transport" />
-        <e k="ui_button_transport_manage_long" v="Gestionează sarcinile de transport" />
+        <e k="ui_button_transport_manage_long" v="Transport" />
         <e k="ui_transportPriorityTitle" v="Prioritate transport" />
         <e k="ui_transportPriorityIntro" v="Alege angajații care pot prelua sarcini de transport și ordinea în care sunt verificați." />
         <e k="ui_transportPriorityHeaderPriority" v="Prioritate" />
