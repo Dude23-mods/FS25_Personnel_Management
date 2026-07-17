@@ -1,4 +1,4 @@
-![Status](https://img.shields.io/badge/status-active%20development-orange) ![Version](https://img.shields.io/badge/version-1.1.0.0-blue) ![Game](https://img.shields.io/badge/Farming%20Simulator-25-green) ![Issues](https://img.shields.io/badge/issues-welcome-brightgreen)
+![Status](https://img.shields.io/badge/status-active%20development-orange) ![Version](https://img.shields.io/badge/version-1.1.0.1-blue) ![Game](https://img.shields.io/badge/Farming%20Simulator-25-green) ![Issues](https://img.shields.io/badge/issues-welcome-brightgreen)
 # FS25_Personnel_Management
 <p align="center"><img width="768" alt="personnel_management_picture" src="https://github.com/user-attachments/assets/0c5cb6b1-816c-4127-aa88-70e985e88fe1" /></p>
 
