@@ -620,118 +620,29 @@ end
 
 function HelperPersonnelApp:getFarmById(farmId)
     farmId = tonumber(farmId)
-    if farmId == nil or g_farmManager == nil then
+    local farmManager = g_farmManager or (g_currentMission ~= nil and g_currentMission.farmManager or nil)
+    if farmId == nil or farmManager == nil or farmManager.getFarmById == nil then
         return nil
     end
 
-    if g_farmManager.getFarmById ~= nil then
-        local ok, farm = pcall(function()
-            return g_farmManager:getFarmById(farmId)
-        end)
-        if ok then
-            return farm
-        end
-    end
-
-    if type(g_farmManager.farms) == "table" then
-        return g_farmManager.farms[farmId]
-    end
-
-    return nil
+    return farmManager:getFarmById(farmId)
 end
 
 function HelperPersonnelApp:getConnectionUserId(connection)
-    if connection == nil then
+    local userManager = g_currentMission ~= nil and g_currentMission.userManager or nil
+    if connection == nil or userManager == nil or userManager.getUserIdByConnection == nil then
         return nil
     end
 
-    local methodNames = {"getUserId", "getUniqueUserId", "getNetworkUserId"}
-    for _, methodName in ipairs(methodNames) do
-        if connection[methodName] ~= nil then
-            local ok, value = pcall(function()
-                return connection[methodName](connection)
-            end)
-            if ok and value ~= nil then
-                return value
-            end
-        end
-    end
-
-    if connection.player ~= nil then
-        local player = connection.player
-        for _, methodName in ipairs(methodNames) do
-            if player[methodName] ~= nil then
-                local ok, value = pcall(function()
-                    return player[methodName](player)
-                end)
-                if ok and value ~= nil then
-                    return value
-                end
-            end
-        end
-
-        if player.userId ~= nil then
-            return player.userId
-        end
-    end
-
-    return connection.userId or connection.uniqueUserId or connection.networkUserId
+    return userManager:getUserIdByConnection(connection)
 end
 
 function HelperPersonnelApp:farmHasManagerEntry(farm, userId)
-    if farm == nil or userId == nil then
+    if farm == nil or userId == nil or farm.isUserFarmManager == nil then
         return nil
     end
 
-    local methodNames = {"getIsUserFarmManager", "getUserIsFarmManager", "isUserFarmManager", "getUserFarmManager", "getIsUserManager"}
-    for _, methodName in ipairs(methodNames) do
-        if farm[methodName] ~= nil then
-            local ok, value = pcall(function()
-                return farm[methodName](farm, userId)
-            end)
-            if ok and value ~= nil then
-                return value == true
-            end
-        end
-    end
-
-    local tables = {"userIdToFarmManager", "userToFarmManager", "farmManagers", "managerUserIds"}
-    for _, key in ipairs(tables) do
-        local value = farm[key]
-        if type(value) == "table" and value[userId] ~= nil then
-            return value[userId] == true
-        end
-        if type(value) == "table" and value[tostring(userId)] ~= nil then
-            return value[tostring(userId)] == true
-        end
-    end
-
-    if farm.ownerUserId ~= nil and tostring(farm.ownerUserId) == tostring(userId) then
-        return true
-    end
-
-    if type(farm.users) == "table" then
-        local user = farm.users[userId] or farm.users[tostring(userId)]
-        if type(user) == "table" then
-            if user.isFarmManager ~= nil then
-                return user.isFarmManager == true
-            end
-            if user.farmManager ~= nil then
-                return user.farmManager == true
-            end
-            if user.role ~= nil then
-                local role = tostring(user.role)
-                if role == "farmManager" or role == "manager" or role == "1" then
-                    return true
-                end
-                return false
-            end
-        elseif user ~= nil then
-            return user == true
-        end
-    end
-
-    return nil
+    return farm:isUserFarmManager(userId) == true
 end
 
 function HelperPersonnelApp:isConnectionFarmManager(connection, farmId)
@@ -764,7 +675,7 @@ function HelperPersonnelApp:resolveAuthorizedFarmId(connection, requestedFarmId,
     if connection == nil then
         local authorizedFarmId = strictVehicleFarmId or requestFarmId or (self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1)
         if self.isConnectionFarmManager ~= nil and not self:isConnectionFarmManager(nil, authorizedFarmId) then
-            hpV1550Warn("Netzwerkanfrage '%s' abgelehnt: keine Hof-Manager-Berechtigung fuer Hof %s.", tostring(actionText or "?"), tostring(authorizedFarmId))
+            hpV1550Warn("Network request '%s' rejected: no farm manager permission for farm %s.", tostring(actionText or "?"), tostring(authorizedFarmId))
             return false, authorizedFarmId, nil
         end
 
@@ -773,22 +684,22 @@ function HelperPersonnelApp:resolveAuthorizedFarmId(connection, requestedFarmId,
 
     local connectionFarmId = self:getFarmIdFromConnection(connection)
     if connectionFarmId == nil then
-        hpV1550Warn("Netzwerkanfrage '%s' abgelehnt: Hof der Verbindung nicht ermittelbar.", tostring(actionText or "?"))
+        hpV1550Warn("Network request '%s' rejected: connection farm could not be resolved.", tostring(actionText or "?"))
         return false, nil, nil
     end
 
     if strictVehicleFarmId ~= nil and strictVehicleFarmId ~= connectionFarmId then
-        hpV1550Warn("Netzwerkanfrage '%s' abgelehnt: Fahrzeug gehoert Hof %s, Verbindung gehoert Hof %s.", tostring(actionText or "?"), tostring(strictVehicleFarmId), tostring(connectionFarmId))
+        hpV1550Warn("Network request '%s' rejected: vehicle belongs to farm %s, connection belongs to farm %s.", tostring(actionText or "?"), tostring(strictVehicleFarmId), tostring(connectionFarmId))
         return false, connectionFarmId, connectionFarmId
     end
 
     if requestFarmId ~= nil and requestFarmId ~= connectionFarmId then
-        hpV1550Warn("Netzwerkanfrage '%s' abgelehnt: angeforderter Hof %s, Verbindung gehoert Hof %s.", tostring(actionText or "?"), tostring(requestFarmId), tostring(connectionFarmId))
+        hpV1550Warn("Network request '%s' rejected: requested farm %s, connection belongs to farm %s.", tostring(actionText or "?"), tostring(requestFarmId), tostring(connectionFarmId))
         return false, connectionFarmId, connectionFarmId
     end
 
     if self.isConnectionFarmManager == nil or not self:isConnectionFarmManager(connection, connectionFarmId) then
-        hpV1550Warn("Netzwerkanfrage '%s' abgelehnt: keine Hof-Manager-Berechtigung fuer Hof %s.", tostring(actionText or "?"), tostring(connectionFarmId))
+        hpV1550Warn("Network request '%s' rejected: no farm manager permission for farm %s.", tostring(actionText or "?"), tostring(connectionFarmId))
         return false, connectionFarmId, connectionFarmId
     end
 
@@ -828,7 +739,7 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
     end
 
     if not self:validateNetworkActionTarget(actionName, targetId, authorizedFarmId) then
-        hpV1550Warn("Netzwerkanfrage '%s' abgelehnt: Ziel %s gehoert nicht zu Hof %s.", tostring(actionName), tostring(targetId), tostring(authorizedFarmId))
+        hpV1550Warn("Network request '%s' rejected: target %s does not belong to farm %s.", tostring(actionName), tostring(targetId), tostring(authorizedFarmId))
         if connection ~= nil then
             self:sendNetworkStateToConnection(connection)
         end
@@ -883,7 +794,7 @@ function HelperPersonnelApp:processNetworkSelection(workerId, farmId, vehicleKey
     if workerId > 0 then
         local workerFarmId = self.manager.getWorkerFarmId ~= nil and hpV1550NormalizeFarmId(self.manager:getWorkerFarmId(workerId)) or nil
         if workerFarmId == nil or workerFarmId ~= authorizedFarmId then
-            hpV1550Warn("Mitarbeiterauswahl abgelehnt: Mitarbeiter %s gehoert nicht zu Hof %s.", tostring(workerId), tostring(authorizedFarmId))
+            hpV1550Warn("Worker selection rejected: worker %s does not belong to farm %s.", tostring(workerId), tostring(authorizedFarmId))
             if connection ~= nil then
                 self:sendNetworkStateToConnection(connection)
             end
@@ -891,7 +802,7 @@ function HelperPersonnelApp:processNetworkSelection(workerId, farmId, vehicleKey
         end
 
         if self.manager.canSelectWorkerForFarm ~= nil and not self.manager:canSelectWorkerForFarm(workerId, authorizedFarmId) then
-            hpV1550Warn("Mitarbeiterauswahl abgelehnt: Mitarbeiter %s ist fuer Hof %s nicht verfuegbar.", tostring(workerId), tostring(authorizedFarmId))
+            hpV1550Warn("Worker selection rejected: worker %s is not available for farm %s.", tostring(workerId), tostring(authorizedFarmId))
             if connection ~= nil then
                 self:sendNetworkStateToConnection(connection)
             end
@@ -930,7 +841,7 @@ local function hpOverride_HelperPersonnelHelperBridge_canUseWorkerForJob_1(self,
     local vehicleFarmId = self.app.getStrictFarmIdForVehicle ~= nil and hpV1550NormalizeFarmId(self.app:getStrictFarmIdForVehicle(vehicle)) or nil
 
     if workerFarmId ~= nil and vehicleFarmId ~= nil and workerFarmId ~= vehicleFarmId then
-        hpV1550Warn("KI-Job mit Mitarbeiter %s abgelehnt: Fahrzeug gehoert Hof %s, Mitarbeiter gehoert Hof %s.", tostring(workerId), tostring(vehicleFarmId), tostring(workerFarmId))
+        hpV1550Warn("AI job with worker %s rejected: vehicle belongs to farm %s, worker belongs to farm %s.", tostring(workerId), tostring(vehicleFarmId), tostring(workerFarmId))
         return false
     end
 
@@ -950,7 +861,7 @@ if HelperPersonnelAIStartHooks ~= nil and HP_V1550_ORIGINAL_SEND_SELECTED_AI_JOB
                 if app.showPlayerMessage ~= nil then
                     app:showPlayerMessage("ui_selectionWorkerUnavailable")
                 end
-                hpV1550Warn("Lokale Mitarbeiterauswahl abgelehnt: Fahrzeug gehoert Hof %s, Mitarbeiter gehoert Hof %s.", tostring(vehicleFarmId), tostring(workerFarmId))
+                hpV1550Warn("Local worker selection rejected: vehicle belongs to farm %s, worker belongs to farm %s.", tostring(vehicleFarmId), tostring(workerFarmId))
                 return false
             end
         end
@@ -991,63 +902,18 @@ function HelperPersonnelApp:getStrictFarmIdForVehicle(vehicle)
 end
 
 function HelperPersonnelApp:getFarmIdFromConnection(connection)
-    if connection == nil then
+    if connection == nil or self.getConnectionUserId == nil then
         return nil
     end
 
-    local candidates = {
-        connection.farmId,
-        connection.playerFarmId,
-        connection.currentFarmId,
-        connection.ownerFarmId
-    }
-
-    local function addPlayerLike(object)
-        if object == nil then
-            return
-        end
-        table.insert(candidates, object.farmId)
-        table.insert(candidates, object.ownerFarmId)
-        table.insert(candidates, hpV1550SafeCall(object, "getFarmId"))
-        table.insert(candidates, hpV1550SafeCall(object, "getOwnerFarmId"))
+    local userId = self:getConnectionUserId(connection)
+    local farmManager = g_farmManager or (g_currentMission ~= nil and g_currentMission.farmManager or nil)
+    if userId == nil or farmManager == nil or farmManager.getFarmByUserId == nil then
+        return nil
     end
 
-    addPlayerLike(connection.player)
-    addPlayerLike(connection.user)
-    addPlayerLike(hpV1550SafeCall(connection, "getPlayer"))
-    addPlayerLike(hpV1550SafeCall(connection, "getUser"))
-
-    table.insert(candidates, hpV1550SafeCall(connection, "getFarmId"))
-    table.insert(candidates, hpV1550SafeCall(connection, "getPlayerFarmId"))
-    table.insert(candidates, hpV1550SafeCall(connection, "getCurrentFarmId"))
-    table.insert(candidates, hpV1550SafeCall(connection, "getOwnerFarmId"))
-
-    local userId = connection.userId or connection.playerUserId or hpV1550SafeCall(connection, "getUserId") or hpV1550SafeCall(connection, "getPlayerUserId")
-    local userManager = g_currentMission ~= nil and g_currentMission.userManager or nil
-    if userManager ~= nil then
-        addPlayerLike(hpV1550SafeCall(userManager, "getUserByConnection", connection))
-        if userId ~= nil then
-            addPlayerLike(hpV1550SafeCall(userManager, "getUserByUserId", userId))
-            addPlayerLike(hpV1550SafeCall(userManager, "getUserById", userId))
-        end
-
-        if userId ~= nil and userManager.users ~= nil then
-            for _, user in pairs(userManager.users) do
-                if user ~= nil and (user.id == userId or user.userId == userId or tostring(user.id) == tostring(userId) or tostring(user.userId) == tostring(userId)) then
-                    addPlayerLike(user)
-                end
-            end
-        end
-    end
-
-    for _, candidate in ipairs(candidates) do
-        local farmId = hpV1550NormalizeFarmId(candidate)
-        if farmId ~= nil then
-            return farmId
-        end
-    end
-
-    return nil
+    local farm = farmManager:getFarmByUserId(userId)
+    return farm ~= nil and hpV1550NormalizeFarmId(farm.farmId) or nil
 end
 
 local HP_V1560_CLIENT_REQUEST_INTERVAL_MS = 1000
@@ -2006,7 +1872,7 @@ local function hpOverride_HelperPersonnelAIJobHooks_onAISystemStartJob_1(aiSyste
                 HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
             else
                 hpV1564ClearPendingStart(app, job)
-                HelperPersonnel.debugInfo("FS25_HelperPersonnel: KI-Start wurde nicht als aktiver Einsatz uebernommen, weil der Job sofort wieder beendet wurde")
+                HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI start was not registered as an active assignment because the job ended immediately")
             end
         end
 
@@ -2024,7 +1890,7 @@ local function hpOverride_HelperPersonnelAIJobHooks_onAISystemStartJob_1(aiSyste
                 HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
             else
                 hpV1564ClearPendingStart(app, job)
-                HelperPersonnel.debugInfo("FS25_HelperPersonnel: KI-Start wurde nicht als aktiver Einsatz uebernommen, weil der Job sofort wieder beendet wurde")
+                HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI start was not registered as an active assignment because the job ended immediately")
             end
         end
     end
@@ -2325,7 +2191,7 @@ function HelperPersonnelApp:hp1565ClearFailedRestoreJob(job, workerId, assignmen
     end
 
     if reason ~= nil and reason ~= "" then
-        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Restore-Start fuer Mitarbeiter-ID %s bereinigt: %s", tostring(workerId), tostring(reason))
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Restore start for worker ID %s was cleared: %s", tostring(workerId), tostring(reason))
     end
 end
 
@@ -2369,7 +2235,7 @@ if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.onAIJobStop ~=
 
         if job ~= nil and workerId ~= nil and job.hpHelperPersonnelFinalized ~= true then
             if app ~= nil and app.hp1565ClearFailedRestoreJob ~= nil then
-                app:hp1565ClearFailedRestoreJob(job, workerId, job.hp1565RestoreAssignment, "Job wurde nicht als aktiver Einsatz bestaetigt")
+                app:hp1565ClearFailedRestoreJob(job, workerId, job.hp1565RestoreAssignment, "job was not confirmed as an active assignment")
             end
             return
         end
@@ -2379,7 +2245,7 @@ if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.onAIJobStop ~=
             local protectUntil = job.hp1565RestoreProtectUntil or 0
             if now <= protectUntil then
                 if app ~= nil and app.hp1565ClearFailedRestoreJob ~= nil then
-                    app:hp1565ClearFailedRestoreJob(job, workerId, job.hp1565RestoreAssignment, "Restore-Job endete waehrend der Schutzfrist")
+                    app:hp1565ClearFailedRestoreJob(job, workerId, job.hp1565RestoreAssignment, "restore job ended during the grace period")
                 end
                 return
             end
@@ -2430,7 +2296,7 @@ function HelperPersonnelApp:hp1565VerifyPendingRestoreRestarts()
                 self.hp1565PendingRestoreRestartJobs[job] = nil
                 changed = true
             elseif now >= (record.failAt or 0) then
-                self:hp1565ClearFailedRestoreJob(job, record.workerId, record.assignment, "neu gestarteter Job blieb nicht aktiv")
+                self:hp1565ClearFailedRestoreJob(job, record.workerId, record.assignment, "restarted job did not remain active")
                 self.hp1565PendingRestoreRestartJobs[job] = nil
                 changed = true
             else
@@ -2481,9 +2347,9 @@ function HelperPersonnelApp:hp1564TryRestartRestoredAssignment(assignment)
     if vehicle.getStartableAIJob == nil then
         assignment.hp1564RestartFailed = true
         if self.hp1565ClearFailedRestoreJob ~= nil then
-            self:hp1565ClearFailedRestoreJob(nil, assignment.workerId, assignment, "Fahrzeug hat keinen startbaren KI-Job")
+            self:hp1565ClearFailedRestoreJob(nil, assignment.workerId, assignment, "vehicle has no startable AI job")
         end
-        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Gespeicherter KI-Job fuer Mitarbeiter-ID %s konnte nicht neu gestartet werden: Fahrzeug hat keinen startbaren KI-Job", tostring(assignment.workerId))
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Saved AI job for worker ID %s could not be restarted: vehicle has no startable AI job", tostring(assignment.workerId))
         return false, true
     end
 
@@ -2491,9 +2357,9 @@ function HelperPersonnelApp:hp1564TryRestartRestoredAssignment(assignment)
     if not okJob or aiJob == nil then
         assignment.hp1564RestartFailed = true
         if self.hp1565ClearFailedRestoreJob ~= nil then
-            self:hp1565ClearFailedRestoreJob(nil, assignment.workerId, assignment, "kein startbarer KI-Job am Fahrzeug")
+            self:hp1565ClearFailedRestoreJob(nil, assignment.workerId, assignment, "no startable AI job on vehicle")
         end
-        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Gespeicherter KI-Job fuer Mitarbeiter-ID %s konnte nicht neu gestartet werden: kein startbarer KI-Job am Fahrzeug", tostring(assignment.workerId))
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Saved AI job for worker ID %s could not be restarted: no startable AI job on vehicle", tostring(assignment.workerId))
         return false, true
     end
 
@@ -2514,12 +2380,12 @@ function HelperPersonnelApp:hp1564TryRestartRestoredAssignment(assignment)
         hpV1564ClearPendingStart(self, aiJob)
         assignment.hp1564RestartFailed = true
         if self.hp1565ClearFailedRestoreJob ~= nil then
-            self:hp1565ClearFailedRestoreJob(aiJob, assignment.workerId, assignment, okStart and "AISystem.startJob lieferte false" or tostring(result))
+            self:hp1565ClearFailedRestoreJob(aiJob, assignment.workerId, assignment, okStart and "AISystem.startJob returned false" or tostring(result))
         end
         if not okStart then
-            Logging.warning("FS25_HelperPersonnel: Gespeicherter KI-Job fuer Mitarbeiter-ID %s konnte nicht neu gestartet werden: %s", tostring(assignment.workerId), tostring(result))
+            Logging.warning("FS25_HelperPersonnel: Saved AI job for worker ID %s could not be restarted: %s", tostring(assignment.workerId), tostring(result))
         else
-            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Gespeicherter KI-Job fuer Mitarbeiter-ID %s konnte nicht neu gestartet werden: AISystem.startJob lieferte false", tostring(assignment.workerId))
+            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Saved AI job for worker ID %s could not be restarted: AISystem.startJob returned false", tostring(assignment.workerId))
         end
         return false, true
     end
@@ -2536,7 +2402,7 @@ function HelperPersonnelApp:hp1564TryRestartRestoredAssignment(assignment)
         failAt = hpV1565GetTimeMs() + 6000
     }
 
-    HelperPersonnel.debugInfo("FS25_HelperPersonnel: Gespeicherter KI-Job fuer Mitarbeiter-ID %s wurde zum Wiederanlauf angemeldet", tostring(assignment.workerId))
+    HelperPersonnel.debugInfo("FS25_HelperPersonnel: Saved AI job for worker ID %s was queued for restart", tostring(assignment.workerId))
     return true, true
 end
 
@@ -2845,7 +2711,7 @@ function HelperPersonnelApp:hp15611UpdateFinishedJobAudit(dt)
         if self.syncNetworkStateToClients ~= nil then
             self:syncNetworkStateToClients()
         end
-        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Beendete oder veraltete Mitarbeitereinsaetze wurden bereinigt")
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Ended or stale worker assignments were cleared")
     end
 end
 
@@ -2891,13 +2757,29 @@ if HelperPersonnelHelperBridge ~= nil and HelperPersonnelHelperBridge.onJobStopp
     HelperPersonnelHelperBridge.onJobStopped = hpOverride_HelperPersonnelHelperBridge_onJobStopped_1
 end
 
+local function hpMP101GetFarmManager()
+    return g_farmManager or (g_currentMission ~= nil and g_currentMission.farmManager or nil)
+end
+
+local function hpMP101GetMaximumFarmId()
+    local bits = FarmManager ~= nil and tonumber(FarmManager.FARM_ID_SEND_NUM_BITS) or 8
+    bits = math.floor(bits or 8)
+    if bits < 1 or bits > 30 then
+        bits = 8
+    end
+    return (2 ^ bits) - 1
+end
+
 local function hpMP101NormalizeFarmId(farmId)
-    farmId = tonumber(farmId)
-    if farmId == nil or farmId <= 0 then
+    local numericFarmId = tonumber(farmId)
+    if numericFarmId == nil or numericFarmId <= 0 then
         return nil
     end
 
-    farmId = math.floor(farmId + 0.5)
+    farmId = math.floor(numericFarmId)
+    if farmId ~= numericFarmId or farmId > hpMP101GetMaximumFarmId() then
+        return nil
+    end
     if FarmManager ~= nil and FarmManager.SPECTATOR_FARM_ID ~= nil and farmId == FarmManager.SPECTATOR_FARM_ID then
         return nil
     end
@@ -2922,51 +2804,13 @@ end
 
 local function hpMP101CollectKnownFarmIds()
     local result = { ids = {}, lookup = {} }
-
-    if FarmManager ~= nil and FarmManager.SINGLEPLAYER_FARM_ID ~= nil then
-        hpMP101AddFarmId(result, FarmManager.SINGLEPLAYER_FARM_ID)
-    end
-
-    local managers = {}
-    if g_farmManager ~= nil then
-        table.insert(managers, g_farmManager)
-    end
-    if g_currentMission ~= nil and g_currentMission.farmManager ~= nil and g_currentMission.farmManager ~= g_farmManager then
-        table.insert(managers, g_currentMission.farmManager)
-    end
-
-    local function scanFarmTable(farms)
-        if type(farms) ~= "table" then
-            return
-        end
-
-        for key, farm in pairs(farms) do
-            hpMP101AddFarmId(result, key)
-            if type(farm) == "table" then
-                hpMP101AddFarmId(result, farm.farmId)
-                hpMP101AddFarmId(result, farm.id)
-            end
-        end
-    end
-
-    for _, manager in ipairs(managers) do
-        scanFarmTable(manager.farms)
-        scanFarmTable(manager.farmsById)
-        scanFarmTable(manager.farmIdToFarm)
-
-        if type(manager.farmIds) == "table" then
-            for _, farmId in pairs(manager.farmIds) do
+    local farmManager = hpMP101GetFarmManager()
+    if farmManager ~= nil and farmManager.getFarms ~= nil and farmManager.getFarmById ~= nil then
+        for _, farm in ipairs(farmManager:getFarms() or {}) do
+            local farmId = type(farm) == "table" and hpMP101NormalizeFarmId(farm.farmId) or nil
+            if farmId ~= nil and farmManager:getFarmById(farmId) == farm then
                 hpMP101AddFarmId(result, farmId)
             end
-        end
-    end
-
-    if g_currentMission ~= nil then
-        if g_currentMission.player ~= nil then
-            hpMP101AddFarmId(result, g_currentMission.player.farmId)
-        end
-        if g_currentMission.controlPlayer ~= nil then
-            hpMP101AddFarmId(result, g_currentMission.controlPlayer.farmId)
         end
     end
 
@@ -2974,9 +2818,141 @@ local function hpMP101CollectKnownFarmIds()
     return result.ids
 end
 
+local function hpMP101IsRegisteredFarmId(farmId)
+    farmId = hpMP101NormalizeFarmId(farmId)
+    local farmManager = hpMP101GetFarmManager()
+    if farmId == nil or farmManager == nil or farmManager.getFarmById == nil then
+        return false
+    end
+
+    local farm = farmManager:getFarmById(farmId)
+    return farm ~= nil and hpMP101NormalizeFarmId(farm.farmId) == farmId
+end
+
+local function hpMP101HasTableEntries(value)
+    return type(value) == "table" and next(value) ~= nil
+end
+
+local function hpMP101HasMeaningfulFarmData(data)
+    if type(data) ~= "table" then
+        return false
+    end
+
+    if hpMP101HasTableEntries(data.workers)
+        or hpMP101HasTableEntries(data.reputationHistory)
+        or hpMP101HasTableEntries(data.actionHistory)
+        or hpMP101HasTableEntries(data.personChronicles)
+        or hpMP101HasTableEntries(data.activeAssignments)
+        or hpMP101HasTableEntries(data.saveActiveJobSnapshot)
+        or hpMP101HasTableEntries(data.saveBusyWorkerLookup) then
+        return true
+    end
+
+    if tonumber(data.selectedWorkerId) ~= nil and tonumber(data.selectedWorkerId) > 0 then
+        return true
+    end
+    if (tonumber(data.totalPayrollPaid) or 0) ~= 0
+        or (tonumber(data.lastPayrollAmount) or 0) ~= 0
+        or (tonumber(data.monthlyDismissals) or 0) ~= 0
+        or (tonumber(data.pendingPayrollLoyaltyDelta) or 0) ~= 0
+        or (tonumber(data.historySequence) or 0) ~= 0 then
+        return true
+    end
+    if (tonumber(data.employerReputation) or HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50) ~= (HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50) then
+        return true
+    end
+    return false
+end
+
+local function hpMP101WarnOnce(manager, key, message, ...)
+    manager.hpMP101Warnings = manager.hpMP101Warnings or {}
+    if manager.hpMP101Warnings[key] == true then
+        return
+    end
+
+    manager.hpMP101Warnings[key] = true
+    if Logging ~= nil and Logging.warning ~= nil then
+        Logging.warning(message, ...)
+    end
+end
+
+local function hpMP101SanitizeLegacyFarmData(manager)
+    if type(manager.farms) ~= "table" then
+        return false
+    end
+
+    local knownFarmIds = hpMP101CollectKnownFarmIds()
+    local knownLookup = {}
+    for _, farmId in ipairs(knownFarmIds) do
+        knownLookup[farmId] = true
+    end
+
+    local changed = false
+    for farmKey, data in pairs(manager.farms) do
+        local numericFarmKey = tonumber(farmKey)
+        if numericFarmKey ~= nil and numericFarmKey == math.floor(numericFarmKey) and knownLookup[numericFarmKey] == true then
+            if type(data) == "table" then
+                data.farmId = numericFarmKey
+            end
+        elseif numericFarmKey ~= nil and hpMP101NormalizeFarmId(numericFarmKey) == nil and not hpMP101HasMeaningfulFarmData(data) then
+            manager.farms[farmKey] = nil
+            if manager.currentFarmData == data then
+                manager.currentFarmData = nil
+                manager.activeFarmId = nil
+            end
+            changed = true
+            hpMP101WarnOnce(manager, "removed:" .. tostring(numericFarmKey), "FS25_PersonnelManagement: Stale phantom farm data %s was removed.", tostring(numericFarmKey))
+        else
+            hpMP101WarnOnce(manager, "preserved:" .. tostring(farmKey), "FS25_PersonnelManagement: Unregistered farm data %s may contain persistent data and will not be synchronized or deleted automatically.", tostring(farmKey))
+        end
+    end
+
+    return changed
+end
+
+local function hpMP101FilterNetworkStateToRegisteredFarms(manager, state)
+    if type(state) ~= "table" or type(state.farms) ~= "table" then
+        return nil
+    end
+
+    local allowed = {}
+    for _, farmId in ipairs(hpMP101CollectKnownFarmIds()) do
+        allowed[farmId] = true
+    end
+
+    local filtered = {}
+    local seen = {}
+    for _, farmState in ipairs(state.farms) do
+        local farmId = type(farmState) == "table" and hpMP101NormalizeFarmId(farmState.farmId) or nil
+        if farmId ~= nil and allowed[farmId] == true then
+            if seen[farmId] == true then
+                hpMP101WarnOnce(manager, "duplicateNetworkFarm:" .. tostring(farmId), "FS25_PersonnelManagement: Network state discarded because farm %s is duplicated.", tostring(farmId))
+                return nil
+            end
+            seen[farmId] = true
+            farmState.farmId = farmId
+            table.insert(filtered, farmState)
+        end
+    end
+
+    local maximumFarms = HelperPersonnelNetwork ~= nil and tonumber(HelperPersonnelNetwork.MAX_NETWORK_FARMS) or 64
+    if #filtered == 0 or #filtered > maximumFarms then
+        hpMP101WarnOnce(manager, "invalidNetworkFarmCount", "FS25_PersonnelManagement: Network state discarded because the registered farm count is invalid (%s).", tostring(#filtered))
+        return nil
+    end
+
+    state.farms = filtered
+    local activeFarmId = hpMP101NormalizeFarmId(state.activeFarmId)
+    if activeFarmId == nil or seen[activeFarmId] ~= true then
+        state.activeFarmId = filtered[1].farmId
+    end
+
+    return state
+end
+
 function HelperPersonnelManager:hpMP101EnsureFarmDataForFarm(farmId)
     farmId = hpMP101NormalizeFarmId(farmId)
-    if farmId == nil then
+    if farmId == nil or not hpMP101IsRegisteredFarmId(farmId) then
         return false
     end
 
@@ -2990,6 +2966,7 @@ function HelperPersonnelManager:hpMP101EnsureFarmDataForFarm(farmId)
     self.forcedFarmId = farmId
     local data = self:getOrCreateFarmData(farmId, true)
     if data ~= nil then
+        data.farmId = farmId
         if self.ensureInitialApplicantMarketForFarmData ~= nil then
             self:ensureInitialApplicantMarketForFarmData(data)
         end
@@ -3016,17 +2993,21 @@ function HelperPersonnelManager:hpMP101EnsureFarmDataForKnownFarms()
     end
 
     local previousData = self.currentFarmData
-    local changed = false
+    local previousFarmId = type(previousData) == "table" and tonumber(previousData.farmId) or nil
+    local changed = hpMP101SanitizeLegacyFarmData(self)
+    local knownFarmIds = hpMP101CollectKnownFarmIds()
 
-    for _, farmId in ipairs(hpMP101CollectKnownFarmIds()) do
+    for _, farmId in ipairs(knownFarmIds) do
         local hadData = self.farms[farmId] ~= nil
         if self:hpMP101EnsureFarmDataForFarm(farmId) then
             changed = changed or not hadData
         end
     end
 
-    if previousData ~= nil and self.bindFarmData ~= nil then
+    if previousFarmId ~= nil and self.farms[previousFarmId] == previousData and self.bindFarmData ~= nil then
         self:bindFarmData(previousData)
+    elseif knownFarmIds[1] ~= nil and self.farms[knownFarmIds[1]] ~= nil and self.bindFarmData ~= nil then
+        self:bindFarmData(self.farms[knownFarmIds[1]])
     elseif self.refreshFarmContext ~= nil then
         self:refreshFarmContext()
     end
@@ -3043,7 +3024,8 @@ local function hpOverride_HelperPersonnelManager_getNetworkState_1(self)
     end
 
     if HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE ~= nil then
-        return HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE(self)
+        local state = HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE(self)
+        return hpMP101FilterNetworkStateToRegisteredFarms(self, state)
     end
 
     return nil
@@ -3479,7 +3461,7 @@ local function hpOverride_HelperPersonnelApp_processNetworkAction_1(self, action
                 end
             end
 
-            Logging.warning("FS25_HelperPersonnel: Netzwerkanfrage 'hire' Diagnose: Ziel=%s angefragterHof=%s gefundenerHof=%s", tostring(targetId), tostring(requestedFarmId), tostring(foundFarmId))
+            Logging.warning("FS25_HelperPersonnel: Network request 'hire' diagnostics: Target=%s RequestedFarm=%s FoundFarm=%s", tostring(targetId), tostring(requestedFarmId), tostring(foundFarmId))
         end
     end
 

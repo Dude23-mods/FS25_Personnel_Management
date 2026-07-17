@@ -999,12 +999,12 @@ function HelperPersonnelManager:logConfigState(sourceName)
 
     local config = self.config
     if config == nil then
-        Logging.info("FS25_HelperPersonnel: Konfiguration-Test | Quelle=%s | Konfiguration=nicht verfuegbar", tostring(sourceName or "unbekannt"))
+        Logging.info("FS25_HelperPersonnel: Configuration test | Source=%s | Configuration=not available", tostring(sourceName or "unknown"))
         return
     end
 
-    Logging.info("FS25_HelperPersonnel: Konfiguration-Test | Quelle=%s | Gameplay=%s | Erfahrung=%s | Geschwindigkeit=%s | Verschleiss=%s | Verbrauch=%s | Kraftstoff=%s | Zuverlaessigkeit=%s | Personal=%s | Loyalitaet=%s | Nachtarbeit=%s | Wirtschaft=%s | IndividuelleGehaelter=%s | StandardGrundgehalt=%.2f",
-        tostring(sourceName or "unbekannt"),
+    Logging.info("FS25_HelperPersonnel: Configuration test | Source=%s | Gameplay=%s | Experience=%s | Speed=%s | Wear=%s | Consumption=%s | Fuel=%s | Reliability=%s | Personnel=%s | Loyalty=%s | NightWork=%s | Economy=%s | IndividualWages=%s | DefaultBaseWage=%.2f",
+        tostring(sourceName or "unknown"),
         tostring(config.gameplayEffectsEnabled == true),
         tostring(config.experienceEffectsEnabled == true),
         tostring(config.speedEffectEnabled == true),
@@ -1024,22 +1024,22 @@ end
 function HelperPersonnelManager:loadConfig()
     if self.config ~= nil and self.config.load ~= nil then
         local result = self.config:load()
-        self:logConfigState("Laden")
+        self:logConfigState("Load")
         return result
     end
 
-    self:logConfigState("Laden")
+    self:logConfigState("Load")
     return false
 end
 
 function HelperPersonnelManager:saveConfig()
     if self.config ~= nil and self.config.save ~= nil then
         local result = self.config:save()
-        self:logConfigState("Speichern")
+        self:logConfigState("Save")
         return result
     end
 
-    self:logConfigState("Speichern")
+    self:logConfigState("Save")
     return false
 end
 
@@ -2125,9 +2125,9 @@ function HelperPersonnelManager:logWageIfNeeded(person, baseWage, currentWage, u
     local economyFactor = self:getSalaryEconomyCostMultiplier()
     local totalFactor = self:getSalaryTotalMultiplier()
 
-    Logging.info("FS25_HelperPersonnel: Gehalt-Test | Quelle=%s | Mitarbeiter=%s | Individuell=%s | Erfahrung=%d | Zuverlaessigkeit=%d | Grundgehalt=%.2f | StandardGrundgehalt=%.2f | TageProMonatFaktor=%.2f | WirtschaftsFaktor=%.2f | GesamtFaktor=%.2f | Monatsgehalt=%.2f",
-        tostring(sourceName or "Berechnung"),
-        fullName ~= "" and fullName or "unbekannt",
+    Logging.info("FS25_HelperPersonnel: Wage test | Source=%s | Worker=%s | Individual=%s | Experience=%d | Reliability=%d | BaseWage=%.2f | DefaultBaseWage=%.2f | DaysPerMonthFactor=%.2f | EconomyFactor=%.2f | TotalFactor=%.2f | MonthlyWage=%.2f",
+        tostring(sourceName or "Calculation"),
+        fullName ~= "" and fullName or "unknown",
         tostring(useIndividual == true),
         self:clampPersonStat(person.experience or 0),
         self:clampPersonStat(person.reliability or 0),
@@ -2149,7 +2149,7 @@ function HelperPersonnelManager:getCurrentMonthlyWage(person)
         local standardBaseWage = self:getStandardBaseMonthlyWage()
         local wage = self:calculateCurrentMonthlyWageFromBase(standardBaseWage)
         person.wage = wage
-        self:logWageIfNeeded(person, standardBaseWage, wage, false, "Standardgehalt")
+        self:logWageIfNeeded(person, standardBaseWage, wage, false, "DefaultWage")
         return wage
     end
 
@@ -2161,7 +2161,7 @@ function HelperPersonnelManager:getCurrentMonthlyWage(person)
 
     local wage = self:calculateCurrentMonthlyWageFromBase(baseWage)
     person.wage = wage
-    self:logWageIfNeeded(person, baseWage, wage, true, "Individuell")
+    self:logWageIfNeeded(person, baseWage, wage, true, "Individual")
 
     return wage
 end
@@ -2295,7 +2295,7 @@ function HelperPersonnelManager:repairApplicantGendersFromHelperProfiles()
 
     if changed then
         if Logging ~= nil and Logging.info ~= nil then
-            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Bewerber-Geschlechter anhand der live erkannten Helferprofile korrigiert")
+            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Applicant genders corrected using the live detected helper profiles")
         end
 
         if type(self.notifyDataChanged) == "function" then
@@ -3029,7 +3029,7 @@ function HelperPersonnelManager:loadRestoredActiveJobsFromVehiclesXML(savePath)
     xmlFile:delete()
 
     if loadedAssignments > 0 then
-        HelperPersonnel.debugInfo("FS25_HelperPersonnel: %d aktive Mitarbeiterzuordnung(en) aus vehicles.xml vorgemerkt", loadedAssignments)
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Queued %d active worker assignment(s) from vehicles.xml", loadedAssignments)
     end
 end
 
@@ -3113,7 +3113,7 @@ function HelperPersonnelManager:saveToSavegameSafe()
     end)
 
     if not ok then
-        Logging.warning("HelperPersonnel: Speichern wurde uebersprungen: %s", tostring(err))
+        Logging.warning("HelperPersonnel: Saving was skipped: %s", tostring(err))
     end
 end
 
@@ -3555,7 +3555,7 @@ function HelperPersonnelManager:rebuildHelperProfilesSafe()
     end)
 
     if not ok then
-        Logging.warning("HelperPersonnel: Helferprofil-Abgleich wurde übersprungen: %s", tostring(err))
+        Logging.warning("HelperPersonnel: Helper profile reconciliation was skipped: %s", tostring(err))
     end
 end
 
@@ -4323,7 +4323,7 @@ function HelperPersonnelManager:processMonthlyPayroll()
     if not booked then
         self.lastPayrollText = string.format("Gehaltsabrechnung konnte nicht gebucht werden: %s.", amountText)
         if Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("HelperPersonnel: Monatsgehaelter konnten nicht gebucht werden (%s).", amountText)
+            Logging.warning("HelperPersonnel: Monthly wages could not be posted (%s).", amountText)
         end
         return amount, 0
     end
@@ -7537,6 +7537,9 @@ function HelperPersonnelManager:saveToXMLFile(xmlFile)
         return
     end
 
+    if self.hpMP101EnsureFarmDataForKnownFarms ~= nil then
+        self:hpMP101EnsureFarmDataForKnownFarms()
+    end
     self:storeCurrentFarmData()
     self:refreshFarmContext()
 
@@ -7569,7 +7572,7 @@ function HelperPersonnelManager:saveToSavegame()
 
     local xmlFile = XMLFile.create("helperPersonnel", savePath, "helperPersonnel", HelperPersonnelManager.xmlSchema)
     if xmlFile == nil then
-        Logging.error("HelperPersonnel: Konnte Savegame-XML nicht erstellen: %s", savePath)
+        Logging.error("HelperPersonnel: Could not create savegame XML: %s", savePath)
         return
     end
 

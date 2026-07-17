@@ -195,7 +195,7 @@ end
 
 function HelperPersonnelExperienceEffects.getFillTypeName(fillType)
     if fillType == nil then
-        return "unbekannt"
+        return "unknown"
     end
 
     if g_fillTypeManager ~= nil and g_fillTypeManager.getFillTypeNameByIndex ~= nil then
@@ -323,7 +323,7 @@ end
 
 function HelperPersonnelExperienceEffects.getVehicleLogName(vehicle)
     if vehicle == nil then
-        return "Fahrzeug"
+        return "Vehicle"
     end
 
     if vehicle.getName ~= nil then
@@ -344,12 +344,12 @@ function HelperPersonnelExperienceEffects.getVehicleLogName(vehicle)
         return tostring(vehicle.configFileName)
     end
 
-    return "Fahrzeug"
+    return "Vehicle"
 end
 
 function HelperPersonnelExperienceEffects.getWorkerLogName(worker)
     if type(worker) ~= "table" then
-        return "unbekannt"
+        return "unknown"
     end
 
     if g_helperPersonnelApp ~= nil and g_helperPersonnelApp.manager ~= nil and g_helperPersonnelApp.manager.getFullName ~= nil then
@@ -472,7 +472,7 @@ end
 
 function HelperPersonnelExperienceEffects.getPrecisionFarmingVehicleDetails(vehicle)
     if vehicle == nil then
-        return "Fahrzeug=nil"
+        return "Vehicle=nil"
     end
 
     local specNames = {
@@ -537,7 +537,7 @@ function HelperPersonnelExperienceEffects.getPrecisionFarmingVehicleDetails(vehi
         return table.concat(hits, ",")
     end
 
-    return "keine_PF_Spezialisierung_erkannt"
+    return "no_PF_specialization_detected"
 end
 
 function HelperPersonnelExperienceEffects.getRootVehiclePrecisionFarmingDetails(vehicle)
@@ -556,7 +556,7 @@ function HelperPersonnelExperienceEffects.getRootVehiclePrecisionFarmingDetails(
     end
 
     if rootVehicle == vehicle then
-        return "Root=gleiches_Fahrzeug"
+        return "Root=same_vehicle"
     end
 
     return HelperPersonnelExperienceEffects.getPrecisionFarmingVehicleDetails(rootVehicle)
@@ -574,7 +574,7 @@ function HelperPersonnelExperienceEffects.logPrecisionFarmingDiagnosticsStart()
     HelperPersonnelExperienceEffects._precisionFarmingStartupLogged = true
 
     if Logging ~= nil and Logging.info ~= nil then
-        Logging.info("FS25_HelperPersonnel: Precision-Farming-Diagnose aktiv | Version=1.0.3.0 | PrecisionFarming=%s | Hinweis=BasisVerbrauch ist die Rueckgabe der vorherigen Spiel-/Mod-Funktionskette vor unserem Zusatzfaktor", HelperPersonnelExperienceEffects.getPrecisionFarmingDetectionText())
+        Logging.info("FS25_HelperPersonnel: Precision Farming diagnostics enabled | Version=1.0.3.0 | PrecisionFarming=%s | Note=BaseConsumption is the return value of the preceding game/mod function chain before our additional factor", HelperPersonnelExperienceEffects.getPrecisionFarmingDetectionText())
     end
 end
 
@@ -614,7 +614,7 @@ function HelperPersonnelExperienceEffects.logWearIfNeeded(vehicle, worker, baseC
     local workerName = HelperPersonnelExperienceEffects.getWorkerLogName(worker)
     local experience = type(worker) == "table" and (tonumber(worker.experience) or 0) or 0
 
-    Logging.info("FS25_HelperPersonnel: Verschleiss-Test | Mitarbeiter=%s | Erfahrung=%d | Fahrzeug/Geraet=%s | Zusatzfaktor=%.2f%% | BasisAenderung=%.8f | ZusatzAenderung=%.8f | GesamtAenderung=%.8f | Samples=%d",
+    Logging.info("FS25_HelperPersonnel: Wear test | Worker=%s | Experience=%d | Vehicle/Implement=%s | AdditionalFactor=%.2f%% | BaseChange=%.8f | AdditionalChange=%.8f | TotalChange=%.8f | Samples=%d",
         workerName,
         math.floor(experience + 0.5),
         vehicleName,
@@ -654,7 +654,7 @@ function HelperPersonnelExperienceEffects.logConsumptionIfNeeded(vehicle, worker
     end
 
     local fillTypeName = HelperPersonnelExperienceEffects.getFillTypeName(fillType)
-    key = key .. ":" .. fillTypeName .. ":" .. tostring(sourceName or "Verbrauch")
+    key = key .. ":" .. fillTypeName .. ":" .. tostring(sourceName or "Consumption")
 
     local now = HelperPersonnelExperienceEffects.getCurrentTimeMs()
     local state = HelperPersonnelExperienceEffects._consumptionLogStateByVehicle[key]
@@ -678,8 +678,8 @@ function HelperPersonnelExperienceEffects.logConsumptionIfNeeded(vehicle, worker
     local workerName = HelperPersonnelExperienceEffects.getWorkerLogName(worker)
     local experience = type(worker) == "table" and (tonumber(worker.experience) or 0) or 0
 
-    Logging.info("FS25_HelperPersonnel: Precision-Farming-Verbrauchstest | Quelle=%s | Mitarbeiter=%s | Erfahrung=%d | Fahrzeug/Geraet=%s | Fuelltyp=%s | Zusatzfaktor=%.2f%% | BasisVerbrauch=%.4f l | ZusatzVerbrauch=%.4f l | GesamtVerbrauch=%.4f l | Samples=%d | PrecisionFarming=%s | Details=%s",
-        tostring(sourceName or "Verbrauch"),
+    Logging.info("FS25_HelperPersonnel: Precision Farming consumption test | Source=%s | Worker=%s | Experience=%d | Vehicle/Implement=%s | FillType=%s | AdditionalFactor=%.2f%% | BaseConsumption=%.4f l | AdditionalConsumption=%.4f l | TotalConsumption=%.4f l | Samples=%d | PrecisionFarming=%s | Details=%s",
+        tostring(sourceName or "Consumption"),
         workerName,
         math.floor(experience + 0.5),
         vehicleName,
@@ -701,7 +701,7 @@ end
 
 function HelperPersonnelExperienceEffects.getVehicleAIActiveText(vehicle)
     if vehicle == nil then
-        return "Fahrzeug=nil"
+        return "Vehicle=nil"
     end
 
     if vehicle.getIsAIActive ~= nil then
@@ -718,22 +718,22 @@ end
 
 function HelperPersonnelExperienceEffects.getConsumptionDiagnosticFactorForVehicle(vehicle, fillType)
     if g_helperPersonnelApp == nil or g_helperPersonnelApp.manager == nil then
-        return 0, nil, nil, "Personalmanagement_nicht_bereit"
+        return 0, nil, nil, "personnel_management_not_ready"
     end
 
     local workerId = HelperPersonnelExperienceEffects.getAssignedWorkerIdForVehicle(vehicle)
     if workerId == nil then
-        return 0, nil, nil, "kein_Mitarbeiter_zugeordnet"
+        return 0, nil, nil, "no_worker_assigned"
     end
 
     local manager = g_helperPersonnelApp.manager
     local worker = manager.getWorkerById ~= nil and manager:getWorkerById(workerId) or nil
     if worker == nil then
-        return 0, workerId, nil, "Mitarbeiter_nicht_gefunden"
+        return 0, workerId, nil, "worker_not_found"
     end
 
     if manager.isGameplayExperienceEffectEnabled ~= nil and not manager:isGameplayExperienceEffectEnabled("consumables") then
-        return 0, workerId, worker, "Verbrauchseffekt_in_Config_deaktiviert"
+        return 0, workerId, worker, "consumption_effect_disabled_in_config"
     end
 
     local experience = HelperPersonnelExperienceEffects.getEffectiveExperienceForWorker(manager, worker, "consumables", vehicle, fillType)
@@ -742,7 +742,7 @@ function HelperPersonnelExperienceEffects.getConsumptionDiagnosticFactorForVehic
     local factor = math.max(0, baseFactor * economyMultiplier)
 
     if factor <= 0 then
-        return 0, workerId, worker, "Zusatzfaktor_0"
+        return 0, workerId, worker, "additional_factor_0"
     end
 
     return factor, workerId, worker, "ok"
@@ -757,7 +757,7 @@ function HelperPersonnelExperienceEffects.logConsumptionDiagnosticIfNeeded(hookN
         return
     end
 
-    local vehicleKey = HelperPersonnelExperienceEffects.getVehicleLogKey(vehicle) or "Fahrzeug=nil"
+    local vehicleKey = HelperPersonnelExperienceEffects.getVehicleLogKey(vehicle) or "Vehicle=nil"
     local fillTypeName = HelperPersonnelExperienceEffects.getFillTypeName(fillType)
     local key = tostring(vehicleKey) .. ":diagnose:" .. tostring(hookName or "?") .. ":" .. tostring(fillTypeName) .. ":" .. tostring(reason or "?")
     local now = HelperPersonnelExperienceEffects.getCurrentTimeMs()
@@ -781,9 +781,9 @@ function HelperPersonnelExperienceEffects.logConsumptionDiagnosticIfNeeded(hookN
     local workerName = HelperPersonnelExperienceEffects.getWorkerLogName(worker)
     local experience = type(worker) == "table" and (tonumber(worker.experience) or 0) or 0
 
-    Logging.info("FS25_HelperPersonnel: Precision-Farming-Verbrauchsdiagnose | Haken=%s | Ergebnis=kein_Zusatzverbrauch | Grund=%s | Mitarbeiter=%s | WorkerId=%s | Erfahrung=%d | Fahrzeug/Geraet=%s | Fuelltyp=%s | BasisVerbrauch=%.4f l | Zusatzfaktor=%.2f%% | Server=%s | KIaktiv=%s | FuelltypUnterstuetzt=%s | PrecisionFarming=%s | Details=%s | Wiederholungen=%d",
+    Logging.info("FS25_HelperPersonnel: Precision Farming consumption diagnostics | Hook=%s | Result=no_additional_consumption | Reason=%s | Worker=%s | WorkerId=%s | Experience=%d | Vehicle/Implement=%s | FillType=%s | BaseConsumption=%.4f l | AdditionalFactor=%.2f%% | Server=%s | AIActive=%s | FillTypeSupported=%s | PrecisionFarming=%s | Details=%s | Repetitions=%d",
         tostring(hookName or "?"),
-        tostring(reason or "unbekannt"),
+        tostring(reason or "unknown"),
         workerName,
         tostring(workerId or "nil"),
         math.floor(experience + 0.5),
@@ -811,7 +811,7 @@ function HelperPersonnelExperienceEffects.logPrecisionFarmingHookStatus(wearable
         return
     end
 
-    Logging.info("FS25_HelperPersonnel: Precision-Farming-Diagnose Hooks | Wearable.updateDamageAmount=%s | SowingMachine.onEndWorkAreaProcessing=%s | Sprayer.getSprayerUsage=%s | Motorized.updateConsumers=%s | SowingMachineVorhanden=%s | SprayerVorhanden=%s | PrecisionFarming=%s",
+    Logging.info("FS25_HelperPersonnel: Precision Farming diagnostic hooks | Wearable.updateDamageAmount=%s | SowingMachine.onEndWorkAreaProcessing=%s | Sprayer.getSprayerUsage=%s | Motorized.updateConsumers=%s | SowingMachinePresent=%s | SprayerPresent=%s | PrecisionFarming=%s",
         tostring(wearableHookInstalled == true),
         tostring(sowingHookInstalled == true),
         tostring(sprayerHookInstalled == true),
@@ -845,7 +845,7 @@ function HelperPersonnelExperienceEffects.logFuelIfNeeded(vehicle, worker, fillT
     end
 
     local fillTypeName = HelperPersonnelExperienceEffects.getFillTypeName(fillType)
-    key = key .. ":" .. fillTypeName .. ":Kraftstoff"
+    key = key .. ":" .. fillTypeName .. ":Fuel"
 
     local now = HelperPersonnelExperienceEffects.getCurrentTimeMs()
     local state = HelperPersonnelExperienceEffects._fuelLogStateByVehicle[key]
@@ -869,7 +869,7 @@ function HelperPersonnelExperienceEffects.logFuelIfNeeded(vehicle, worker, fillT
     local workerName = HelperPersonnelExperienceEffects.getWorkerLogName(worker)
     local experience = type(worker) == "table" and (tonumber(worker.experience) or 0) or 0
 
-    Logging.info("FS25_HelperPersonnel: Kraftstoff-Test | Mitarbeiter=%s | Erfahrung=%d | Fahrzeug=%s | Fuelltyp=%s | Zusatzfaktor=%.2f%% | BasisVerbrauch=%.4f l | ZusatzVerbrauch=%.4f l | GesamtVerbrauch=%.4f l | Samples=%d",
+    Logging.info("FS25_HelperPersonnel: Fuel test | Worker=%s | Experience=%d | Vehicle=%s | FillType=%s | AdditionalFactor=%.2f%% | BaseConsumption=%.4f l | AdditionalConsumption=%.4f l | TotalConsumption=%.4f l | Samples=%d",
         workerName,
         math.floor(experience + 0.5),
         vehicleName,
@@ -946,7 +946,7 @@ end
 
 function HelperPersonnelExperienceEffects.onSowingMachineEndWorkAreaProcessing(vehicle, superFunc, dt, hasProcessed, ...)
     if vehicle == nil then
-        HelperPersonnelExperienceEffects.logConsumptionDiagnosticIfNeeded("SowingMachine.onEndWorkAreaProcessing", vehicle, FillType ~= nil and FillType.SEEDS or nil, "Fahrzeug_nil", "dt=" .. tostring(dt) .. "; hasProcessed=" .. tostring(hasProcessed), 0, 0, nil, nil)
+        HelperPersonnelExperienceEffects.logConsumptionDiagnosticIfNeeded("SowingMachine.onEndWorkAreaProcessing", vehicle, FillType ~= nil and FillType.SEEDS or nil, "vehicle_nil", "dt=" .. tostring(dt) .. "; hasProcessed=" .. tostring(hasProcessed), 0, 0, nil, nil)
         return superFunc(vehicle, dt, hasProcessed, ...)
     end
 
@@ -963,7 +963,7 @@ function HelperPersonnelExperienceEffects.onSowingMachineEndWorkAreaProcessing(v
 
     local factor, workerId, worker, factorReason = HelperPersonnelExperienceEffects.getConsumptionDiagnosticFactorForVehicle(vehicle, spec.seedFillType or (FillType ~= nil and FillType.SEEDS or nil))
     if factor <= 0 then
-        HelperPersonnelExperienceEffects.logConsumptionDiagnosticIfNeeded("SowingMachine.onEndWorkAreaProcessing", vehicle, spec.seedFillType or (FillType ~= nil and FillType.SEEDS or nil), factorReason or "Zusatzfaktor_0", "dt=" .. tostring(dt) .. "; hasProcessed=" .. tostring(hasProcessed) .. "; PFVehicleSpecs=" .. HelperPersonnelExperienceEffects.getPrecisionFarmingVehicleDetails(vehicle) .. "; RootPFVehicleSpecs=" .. HelperPersonnelExperienceEffects.getRootVehiclePrecisionFarmingDetails(vehicle), 0, factor, workerId, worker)
+        HelperPersonnelExperienceEffects.logConsumptionDiagnosticIfNeeded("SowingMachine.onEndWorkAreaProcessing", vehicle, spec.seedFillType or (FillType ~= nil and FillType.SEEDS or nil), factorReason or "additional_factor_0", "dt=" .. tostring(dt) .. "; hasProcessed=" .. tostring(hasProcessed) .. "; PFVehicleSpecs=" .. HelperPersonnelExperienceEffects.getPrecisionFarmingVehicleDetails(vehicle) .. "; RootPFVehicleSpecs=" .. HelperPersonnelExperienceEffects.getRootVehiclePrecisionFarmingDetails(vehicle), 0, factor, workerId, worker)
         return superFunc(vehicle, dt, hasProcessed, ...)
     end
 
@@ -1008,7 +1008,7 @@ function HelperPersonnelExperienceEffects.onSprayerGetUsage(vehicle, superFunc, 
 
     local factor, workerId, worker, factorReason = HelperPersonnelExperienceEffects.getConsumptionDiagnosticFactorForVehicle(vehicle, fillType)
     if factor <= 0 then
-        HelperPersonnelExperienceEffects.logConsumptionDiagnosticIfNeeded("Sprayer.getSprayerUsage", vehicle, fillType, factorReason or "Zusatzfaktor_0", "dt=" .. tostring(dt) .. "; PFVehicleSpecs=" .. HelperPersonnelExperienceEffects.getPrecisionFarmingVehicleDetails(vehicle) .. "; RootPFVehicleSpecs=" .. HelperPersonnelExperienceEffects.getRootVehiclePrecisionFarmingDetails(vehicle), numericBaseUsage, factor, workerId, worker)
+        HelperPersonnelExperienceEffects.logConsumptionDiagnosticIfNeeded("Sprayer.getSprayerUsage", vehicle, fillType, factorReason or "additional_factor_0", "dt=" .. tostring(dt) .. "; PFVehicleSpecs=" .. HelperPersonnelExperienceEffects.getPrecisionFarmingVehicleDetails(vehicle) .. "; RootPFVehicleSpecs=" .. HelperPersonnelExperienceEffects.getRootVehiclePrecisionFarmingDetails(vehicle), numericBaseUsage, factor, workerId, worker)
         return baseUsage
     end
 
@@ -1188,7 +1188,7 @@ function HelperPersonnelExperienceEffects.logReliabilityCheck(vehicle, worker, r
     local vehicleName = HelperPersonnelExperienceEffects.getVehicleLogName(vehicle)
     local workerName = HelperPersonnelExperienceEffects.getWorkerLogName(worker)
 
-    Logging.info("FS25_HelperPersonnel: Zuverlaessigkeit-Test | Mitarbeiter=%s | Zuverlaessigkeit=%d | wirksameZuverlaessigkeit=%d | Fahrzeug=%s | Chance=%.2f%% | Ausgeloest=%s | Einbruch=%.2f%% | Dauer=%.0fs | Grund=%s",
+    Logging.info("FS25_HelperPersonnel: Reliability test | Worker=%s | Reliability=%d | EffectiveReliability=%d | Vehicle=%s | Chance=%.2f%% | Triggered=%s | Drop=%.2f%% | Duration=%.0fs | Reason=%s",
         workerName,
         math.floor((tonumber(reliability) or 0) + 0.5),
         math.floor((tonumber(effectiveReliability) or 0) + 0.5),
@@ -1197,7 +1197,7 @@ function HelperPersonnelExperienceEffects.logReliabilityCheck(vehicle, worker, r
         tostring(triggered == true),
         (tonumber(penalty) or 0) * 100,
         (tonumber(durationMs) or 0) / 1000,
-        tostring(reason or "Pruefung")
+        tostring(reason or "check")
     )
 end
 
@@ -1267,7 +1267,7 @@ function HelperPersonnelExperienceEffects.getReliabilitySlowdownFactorForVehicle
     local penalty = HelperPersonnelExperienceEffects.RELIABILITY_SLOWDOWN_MIN_PENALTY + ((HelperPersonnelExperienceEffects.RELIABILITY_SLOWDOWN_MAX_PENALTY - HelperPersonnelExperienceEffects.RELIABILITY_SLOWDOWN_MIN_PENALTY) * unreliability)
     local triggered = math.random() < chance
 
-    HelperPersonnelExperienceEffects.logReliabilityCheck(vehicle, worker, reliability, effectiveReliability, chance, triggered, penalty, durationMs, "Pruefung")
+    HelperPersonnelExperienceEffects.logReliabilityCheck(vehicle, worker, reliability, effectiveReliability, chance, triggered, penalty, durationMs, "check")
 
     if triggered then
         if manager ~= nil and manager.recordWorkerReliabilityIncident ~= nil then
@@ -1332,7 +1332,7 @@ function HelperPersonnelExperienceEffects.logSpeedIfNeeded(vehicle, worker, expe
         end
     end
 
-    Logging.info("FS25_HelperPersonnel: Geschwindigkeit-Test | Mitarbeiter=%s | Erfahrung=%d | wirksameErfahrung=%d | Zuverlaessigkeit=%d | wirksameZuverlaessigkeit=%d | Fahrzeug=%s | Erfahrungsfaktor=%.2f%% | Zuverlaessigkeitsfaktor=%.2f%% | Gesamtfaktor=%.2f%% | ConfigGeschwindigkeit=%s | ConfigZuverlaessigkeit=%s",
+    Logging.info("FS25_HelperPersonnel: Speed test | Worker=%s | Experience=%d | EffectiveExperience=%d | Reliability=%d | EffectiveReliability=%d | Vehicle=%s | ExperienceFactor=%.2f%% | ReliabilityFactor=%.2f%% | TotalFactor=%.2f%% | ConfigSpeed=%s | ConfigReliability=%s",
         HelperPersonnelExperienceEffects.getWorkerLogName(worker),
         math.floor((tonumber(experience) or 0) + 0.5),
         math.floor((tonumber(effectiveExperience) or 0) + 0.5),

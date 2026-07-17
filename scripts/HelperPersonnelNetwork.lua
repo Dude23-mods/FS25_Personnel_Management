@@ -316,7 +316,7 @@ end
 
 function HelperPersonnelNetwork.invalidateNetworkRead(label, count, limit)
     if HelperPersonnelNetwork.networkReadInvalid ~= true and Logging ~= nil and Logging.warning ~= nil then
-        Logging.warning("FS25_PersonnelManagement: Ungueltige Netzwerkanzahl fuer %s (%s, Maximum %s). Zustand wird verworfen.", tostring(label or "?"), tostring(count), tostring(limit))
+        Logging.warning("FS25_PersonnelManagement: Invalid network count for %s (%s, maximum %s). State will be discarded.", tostring(label or "?"), tostring(count), tostring(limit))
     end
 
     HelperPersonnelNetwork.networkReadInvalid = true
@@ -725,8 +725,16 @@ function HelperPersonnelNetwork.readState(streamId)
         end
 
         local farmCount = HelperPersonnelNetwork.readBoundedCount(streamId, HelperPersonnelNetwork.MAX_NETWORK_FARMS, "farms")
+        local farmIds = {}
         for _ = 1, farmCount do
-            table.insert(state.farms, HelperPersonnelNetwork.readFarmState(streamId, version))
+            local farmState = HelperPersonnelNetwork.readFarmState(streamId, version)
+            local farmId = farmState ~= nil and tonumber(farmState.farmId) or nil
+            if farmId == nil or farmId <= 0 or farmIds[farmId] == true then
+                HelperPersonnelNetwork.invalidateNetworkRead("farmId", farmId or -1, 1)
+                break
+            end
+            farmIds[farmId] = true
+            table.insert(state.farms, farmState)
             if HelperPersonnelNetwork.networkReadInvalid == true then
                 break
             end

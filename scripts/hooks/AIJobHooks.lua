@@ -138,7 +138,7 @@ end
 function HelperPersonnelAIJobHooks.install(stageName)
     stageName = stageName or "initial"
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose AIJobHooks aktiv | Phase=%s | AIJob.start=%s | AISystem.startJob=%s | AIJobStartRequestEvent.new=%s | writeStream=%s | readStream=%s | run=%s",
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics AIJobHooks enabled | Phase=%s | AIJob.start=%s | AISystem.startJob=%s | AIJobStartRequestEvent.new=%s | writeStream=%s | readStream=%s | run=%s",
         tostring(stageName),
         tostring(AIJob ~= nil and AIJob.start ~= nil),
         tostring(AISystem ~= nil and AISystem.startJob ~= nil),
@@ -519,7 +519,7 @@ function HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, job)
         app:consumePendingWorkerForVehicle(HelperPersonnelAIJobHooks.getVehicleFromJob(job))
     end
 
-    Logging.warning("FS25_HelperPersonnel: Mitarbeiter-ID %s ist nicht verfuegbar; KI-Start abgebrochen", tostring(workerId))
+    Logging.warning("FS25_HelperPersonnel: Worker ID %s is not available; AI start aborted", tostring(workerId))
 end
 
 function HelperPersonnelAIJobHooks.callWithForcedHelper(job, workerId, callback)
@@ -568,11 +568,11 @@ function HelperPersonnelAIJobHooks.onAIJobStart(job, superFunc, farmId, ...)
     local workerId = HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
     local result = nil
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJob.start | Job=%s | Farm=%s | Mitarbeiter=%s | App=%s",
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.start | Job=%s | Farm=%s | Worker=%s | App=%s",
         hpJobDebugJobName(job), tostring(farmId), tostring(workerId), tostring(app ~= nil))
 
     if workerId ~= nil and not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job) then
-        hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJob.start abgebrochen | Grund=MitarbeiterNichtVerfuegbar | Job=%s | Mitarbeiter=%s", hpJobDebugJobName(job), tostring(workerId))
+        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.start aborted | Reason=workerNotAvailable | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
         HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, job)
         return false
     end
@@ -585,7 +585,7 @@ function HelperPersonnelAIJobHooks.onAIJobStart(job, superFunc, farmId, ...)
         result = superFunc(job, farmId, unpack(args))
     end
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJob.start Ergebnis | Job=%s | Mitarbeiter=%s | Ergebnis=%s", hpJobDebugJobName(job), tostring(workerId), tostring(result))
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.start result | Job=%s | Worker=%s | Result=%s", hpJobDebugJobName(job), tostring(workerId), tostring(result))
 
     if result ~= false and app ~= nil and app.helperBridge ~= nil and job ~= nil then
         if workerId == nil then
@@ -593,7 +593,7 @@ function HelperPersonnelAIJobHooks.onAIJobStart(job, superFunc, farmId, ...)
         end
 
         if workerId ~= nil then
-            hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJob.start finalisiert | Job=%s | Mitarbeiter=%s", hpJobDebugJobName(job), tostring(workerId))
+            hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.start finalized | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
             HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
         end
     end
@@ -629,7 +629,7 @@ function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, 
         followVehicle = HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
     end
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob | Job=%s | FollowMe=%s | Fahrzeug=%s | Ziel=%s | Farm=%s | Mitarbeiter=%s | Restore=%s | SelectedSend=%s | EventRun=%s | SollteAuswahl=%s",
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob | Job=%s | FollowMe=%s | Vehicle=%s | Target=%s | Farm=%s | Worker=%s | Restore=%s | SelectedSend=%s | EventRun=%s | ShouldSelect=%s",
         hpJobDebugJobName(job),
         tostring(isFollowMe),
         hpJobDebugVehicleName(HelperPersonnelAIJobHooks.getVehicleFromJob(job)),
@@ -649,10 +649,10 @@ function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, 
             queued = HelperPersonnelAIStartHooks.openSelectionForAIJob(job, farmId)
         end
 
-        hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob Auswahl vorgeschaltet | Job=%s | Queued=%s", hpJobDebugJobName(job), tostring(queued))
+        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob selection inserted | Job=%s | Queued=%s", hpJobDebugJobName(job), tostring(queued))
 
         if not queued then
-            hpJobStartDebug("FS25_HelperPersonnel: Direkter KI-Auftrag ohne Mitarbeiter wurde blockiert")
+            hpJobStartDebug("FS25_HelperPersonnel: Direct AI job without a worker was blocked")
         end
 
         return false
@@ -660,7 +660,7 @@ function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, 
 
     if workerId ~= nil then
         if not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job) then
-            hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob abgebrochen | Grund=MitarbeiterNichtVerfuegbar | Job=%s | Mitarbeiter=%s", hpJobDebugJobName(job), tostring(workerId))
+            hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob aborted | Reason=workerNotAvailable | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
             HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, job)
             return false
         end
@@ -669,7 +669,7 @@ function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, 
             return superFunc(aiSystem, job, farmId, unpack(args))
         end)
 
-        hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob Ergebnis mit Mitarbeiter | Job=%s | Mitarbeiter=%s | Ergebnis=%s", hpJobDebugJobName(job), tostring(workerId), tostring(result))
+        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob result with worker | Job=%s | Worker=%s | Result=%s", hpJobDebugJobName(job), tostring(workerId), tostring(result))
 
         if result ~= false then
             HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
@@ -679,12 +679,12 @@ function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, 
     end
 
     local result = superFunc(aiSystem, job, farmId, unpack(args))
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob Ergebnis ohne Mitarbeiter | Job=%s | Ergebnis=%s", hpJobDebugJobName(job), tostring(result))
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob result without worker | Job=%s | Result=%s", hpJobDebugJobName(job), tostring(result))
 
     if result ~= false and app ~= nil and app.helperBridge ~= nil and job ~= nil then
         workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
         if workerId ~= nil then
-            hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISystem.startJob nachtraeglich finalisiert | Job=%s | Mitarbeiter=%s", hpJobDebugJobName(job), tostring(workerId))
+            hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob finalized afterward | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
             HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
         end
     end
@@ -701,7 +701,7 @@ function HelperPersonnelAIJobHooks.onAIJobStop(job, aiMessage)
         followVehicle = HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
     end
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJob.stop | Job=%s | FollowMe=%s | Fahrzeug=%s | Ziel=%s | Mitarbeiter=%s | MissionDelete=%s | Message=%s",
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.stop | Job=%s | FollowMe=%s | Vehicle=%s | Target=%s | Worker=%s | MissionDelete=%s | Message=%s",
         hpJobDebugJobName(job),
         tostring(isFollowMe),
         hpJobDebugVehicleName(HelperPersonnelAIJobHooks.getVehicleFromJob(job)),
@@ -718,7 +718,7 @@ function HelperPersonnelAIJobHooks.onAIJobStop(job, aiMessage)
     end
 
     if isFollowMe and workerId == nil then
-        hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJob.stop ignoriert | Grund=FollowMeOhnePersonalzuordnung | Job=%s", hpJobDebugJobName(job))
+        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.stop ignored | Reason=FollowMeWithoutPersonnelAssignment | Job=%s", hpJobDebugJobName(job))
         return
     end
 
@@ -760,7 +760,7 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew(job, farmId, ...)
     local event = originalNew(job, farmId, ...)
 
     if event == nil then
-        hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.new | Ergebnis=nil | Job=%s | Farm=%s", hpJobDebugJobName(job), tostring(farmId))
+        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.new | Result=nil | Job=%s | Farm=%s", hpJobDebugJobName(job), tostring(farmId))
         return event
     end
 
@@ -770,7 +770,7 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew(job, farmId, ...)
     local isRestorePhase = app ~= nil
         and app.activeJobsRestoreDone ~= true
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.new | Job=%s | Fahrzeug=%s | Farm=%s | Mitarbeiter=%s | Restore=%s | SelectedSend=%s",
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.new | Job=%s | Vehicle=%s | Farm=%s | Worker=%s | Restore=%s | SelectedSend=%s",
         hpJobDebugJobName(job),
         hpJobDebugVehicleName(HelperPersonnelAIJobHooks.getVehicleFromJob(job)),
         tostring(farmId),
@@ -782,9 +782,9 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew(job, farmId, ...)
         workerId = app.helperBridge:resolveRestoredWorkerIdForJob(job)
         if workerId ~= nil then
             HelperPersonnelAIJobHooks.applyWorkerToJob(job, workerId)
-            hpJobStartDebug("FS25_HelperPersonnel: Gespeicherte Mitarbeiterzuordnung fuer wiederhergestellten KI-Job uebernommen")
+            hpJobStartDebug("FS25_HelperPersonnel: Saved worker assignment applied to restored AI job")
         else
-            hpJobStartDebug("FS25_HelperPersonnel: Savegame-KI-Start ohne gespeicherte Mitarbeiterzuordnung - keine Mitarbeiterauswahl geoeffnet")
+            hpJobStartDebug("FS25_HelperPersonnel: Savegame AI start without a saved worker assignment - worker selection was not opened")
         end
     end
 
@@ -796,7 +796,7 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew(job, farmId, ...)
         and HelperPersonnelAIStartHooks.shouldHandleAIJobStart ~= nil
         and HelperPersonnelAIStartHooks.shouldHandleAIJobStart(job)
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.new Entscheidung | Job=%s | SollteAuswahl=%s | Mitarbeiter=%s", hpJobDebugJobName(job), tostring(shouldOpenSelection), tostring(workerId))
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.new decision | Job=%s | ShouldSelect=%s | Worker=%s", hpJobDebugJobName(job), tostring(shouldOpenSelection), tostring(workerId))
 
     if shouldOpenSelection then
         event.helperPersonnelCancelStart = true
@@ -807,15 +807,15 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew(job, farmId, ...)
             queued = HelperPersonnelAIStartHooks.queueSelectionForAIJob(job, farmId)
         end
 
-        hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.new Standardstart geblockt | Job=%s | Queued=%s", hpJobDebugJobName(job), tostring(queued))
+        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.new standard start blocked | Job=%s | Queued=%s", hpJobDebugJobName(job), tostring(queued))
 
         if not queued then
-            hpJobStartDebug("FS25_HelperPersonnel: KI-Start ohne Mitarbeiter wurde blockiert")
+            hpJobStartDebug("FS25_HelperPersonnel: AI start without a worker was blocked")
         end
     else
         event.helperPersonnelCancelStart = false
         event.helperPersonnelWorkerId = workerId
-        hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.new Start zugelassen | Job=%s | Mitarbeiter=%s", hpJobDebugJobName(job), tostring(workerId))
+        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.new start allowed | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
     end
 
     return event
@@ -824,7 +824,7 @@ end
 function HelperPersonnelAIJobHooks.onAIJobStartRequestEventWriteStream(event, superFunc, streamId, connection)
     superFunc(event, streamId, connection)
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.writeStream | Cancel=%s | EventMitarbeiter=%s | Job=%s",
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.writeStream | Cancel=%s | EventWorker=%s | Job=%s",
         tostring(event.helperPersonnelCancelStart == true),
         tostring(event.helperPersonnelWorkerId),
         hpJobDebugJobName(event.job))
@@ -869,7 +869,7 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventReadStream(event, str
         event.helperPersonnelWorkerId = nil
     end
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.readStream | Cancel=%s | Mitarbeiter=%s | Job=%s | ConnectionIsServer=%s",
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.readStream | Cancel=%s | Worker=%s | Job=%s | ConnectionIsServer=%s",
         tostring(event.helperPersonnelCancelStart == true),
         tostring(event.helperPersonnelWorkerId),
         hpJobDebugJobName(event.job),
@@ -879,21 +879,21 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventReadStream(event, str
 end
 
 function HelperPersonnelAIJobHooks.onAIJobStartRequestEventRun(event, superFunc, connection)
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.run | Cancel=%s | Mitarbeiter=%s | Job=%s | Connection=%s",
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.run | Cancel=%s | Worker=%s | Job=%s | Connection=%s",
         tostring(event.helperPersonnelCancelStart == true),
         tostring(event.helperPersonnelWorkerId),
         hpJobDebugJobName(event.job),
         tostring(connection))
 
     if event.helperPersonnelCancelStart == true then
-        hpJobStartDebug("FS25_HelperPersonnel: Geblockte Standard-KI-Startanfrage verworfen")
+        hpJobStartDebug("FS25_HelperPersonnel: Blocked standard AI start request discarded")
         return
     end
 
     local workerId = event.helperPersonnelWorkerId
     if workerId ~= nil and event.job ~= nil then
         if not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, event.job) then
-            hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.run abgebrochen | Grund=MitarbeiterNichtVerfuegbar | Job=%s | Mitarbeiter=%s", hpJobDebugJobName(event.job), tostring(workerId))
+            hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.run aborted | Reason=workerNotAvailable | Job=%s | Worker=%s", hpJobDebugJobName(event.job), tostring(workerId))
             HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, event.job)
             return
         end
@@ -905,7 +905,7 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventRun(event, superFunc,
     local success, result = pcall(superFunc, event, connection)
     HelperPersonnelAIJobHooks.isRunningStartRequestEvent = false
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIJobStartRequestEvent.run Ergebnis | Success=%s | Result=%s | Job=%s | Mitarbeiter=%s", tostring(success), tostring(result), hpJobDebugJobName(event.job), tostring(workerId))
+    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.run result | Success=%s | Result=%s | Job=%s | Worker=%s", tostring(success), tostring(result), hpJobDebugJobName(event.job), tostring(workerId))
 
     if not success then
         error(result)

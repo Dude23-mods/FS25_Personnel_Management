@@ -50,7 +50,7 @@ function HelperPersonnelApp:tryRegisterStandaloneMenu()
         self.standaloneMenu = nil
         self.standaloneMenuPages = nil
         if Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("%s: Eigenes Personalmanagement-Menü konnte nicht geladen werden (%s).", tostring(self.modName or "FS25_PersonnelManagement"), tostring(message))
+            Logging.warning("%s: Standalone personnel management menu could not be loaded (%s).", tostring(self.modName or "FS25_PersonnelManagement"), tostring(message))
         end
         return false
     end
@@ -137,7 +137,7 @@ function HelperPersonnelApp:registerStandaloneMenuAction()
             g_inputBinding:setActionEventActive(actionEventId, true)
         end
     elseif Logging ~= nil and Logging.warning ~= nil then
-        Logging.warning("%s: Tastenkürzel für eigenes Personalmanagement-Menü konnte nicht als ActionEvent registriert werden.", tostring(self.modName or "FS25_PersonnelManagement"))
+        Logging.warning("%s: Keyboard shortcut for the standalone personnel management menu could not be registered as an action event.", tostring(self.modName or "FS25_PersonnelManagement"))
     end
 
     if modificationStarted and g_inputBinding.endActionEventsModification ~= nil then
@@ -227,4 +227,3 @@ end
 function HelperPersonnelApp:canManageCurrentFarm()
     return self:isLocalPlayerFarmManager(self:getCurrentFarmId()) == true
 end
-

@@ -1954,7 +1954,7 @@ function HelperPersonnelMenuPage:getProfileTemplate(person, isApplicant)
                 return dynamicText
             end
             if not ok and Logging ~= nil and Logging.warning ~= nil then
-                Logging.warning("FS25_PersonnelManagement: Bewerberprofil konnte nicht erzeugt werden: %s", tostring(dynamicText))
+                Logging.warning("FS25_PersonnelManagement: Could not generate applicant profile: %s", tostring(dynamicText))
             end
         end
         return self:formatText("ui_pmApplicantProfileText", "%s bewirbt sich mit Erfahrung aus einem %s. Die bisherigen Angaben sprechen für %s. Die Werte sind eine Momentaufnahme des Bewerberprofils.", name, origin, strength)
@@ -1966,7 +1966,7 @@ function HelperPersonnelMenuPage:getProfileTemplate(person, isApplicant)
             return dynamicText
         end
         if not ok and Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("FS25_PersonnelManagement: Profiltext konnte nicht erzeugt werden: %s", tostring(dynamicText))
+            Logging.warning("FS25_PersonnelManagement: Could not generate profile text: %s", tostring(dynamicText))
         end
     end
 
@@ -2077,4 +2077,3 @@ function HelperPersonnelMenuPage:drawWorkerHistoryTable(person)
         end
     end
 end
-

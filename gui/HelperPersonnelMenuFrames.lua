@@ -478,7 +478,7 @@ function HelperPersonnelSettingsFrame:buildNativeSettings()
     local sectionHeaderTemplate, binaryOptionTemplate = HelperPersonnelGameSettings.findTemplates(sourceLayout)
     if sectionHeaderTemplate == nil or binaryOptionTemplate == nil then
         if Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("%s: Native Vorlagen für die Personalmanagement-Einstellungen wurden nicht gefunden.", tostring(self.app ~= nil and self.app.modName or "FS25_PersonnelManagement"))
+            Logging.warning("%s: Native templates for the personnel management settings were not found.", tostring(self.app ~= nil and self.app.modName or "FS25_PersonnelManagement"))
         end
         return false
     end
