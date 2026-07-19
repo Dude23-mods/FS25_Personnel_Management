@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Назад" />
         <e k="ui_dismissalNoticeNextMonth" v="%s уволен с конца следующего месяца." />
         <e k="ui_dismissalNotice" v="%s уволен с конца месяца." />
-        <e k="ui_fireDeniedPending" v="Этот сотрудник уже уволен." />
+        <e k="ui_fireDeniedPending" v="%s уже уволен. Сотрудник покинет хозяйство после окончания срока уведомления." />
         <e k="ui_fireDeniedBusy" v="Сотрудник работает и не может быть уволен." />
         <e k="ui_hireSuccess" v="%s - нанять." />
         <e k="ui_fireSuccess" v="%s - уволить." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: Нанять. ESC: Назад к обзору." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Уволить." />
         <e k="ui_instructionWorkerTransport" v="Используйте кнопку транспорта для настройки очередности, а клавишу S — для обучения сотрудника." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Открытые запросы на повышение обрабатываются кнопкой Управление запросами на повышение." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Открытые запросы на повышение обрабатываются кнопкой «Зарплата»." />
         <e k="ui_instructionSwitchEntry" v="Щёлкните запись, чтобы выбрать её; используйте колёсико мыши для прокрутки." />
         <e k="ui_training_no_progress" v="У этого сотрудника пока нет подходящего направления обучения." />
         <e k="ui_training_worker_busy" v="Сотрудник сейчас работает и не может пройти обучение." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: болен, текущее задание отменено." />
         <e k="ui_button_raise_grant" v="Одобрить повышение" />
         <e k="ui_button_raise_decline" v="Отклонить запрос" />
-        <e k="ui_button_salary_manage_long" v="Управление запросами на повышение" />
+        <e k="ui_button_salary_manage_long" v="Зарплата" />
         <e k="ui_salaryRequestsTitle" v="Управление запросами на повышение" />
         <e k="ui_salaryRequestsIntro" v="Здесь отображаются все открытые запросы на повышение зарплаты. Выберите сотрудника и примите или отклоните запрос." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Сотрудник" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="ПЕРСОНАЛ" />
         <e k="ui_pmSettingsSectionEconomic" v="ЭКОНОМИКА" />
         <e k="ui_button_transport_assign_long" v="Назначить транспортные работы" />
-        <e k="ui_button_transport_manage_long" v="Управление транспортными работами" />
+        <e k="ui_button_transport_manage_long" v="Транспорт" />
         <e k="ui_transportPriorityTitle" v="Приоритет транспорта" />
         <e k="ui_transportPriorityIntro" v="Выберите сотрудников для транспортных работ и задайте порядок проверки их доступности." />
         <e k="ui_transportPriorityHeaderPriority" v="Приоритет" />
@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s прервала текущую работу, потому что спонтанно решила встретиться с друзьями." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s прервал текущую работу, чтобы спонтанно встретиться с девушкой за чашкой кофе." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s прервала текущую работу, чтобы спонтанно встретиться с парнем за чашкой кофе." />
+        <e k="ui_pmMonth01" v="март" />
+        <e k="ui_pmMonth02" v="апрель" />
+        <e k="ui_pmMonth03" v="май" />
+        <e k="ui_pmMonth04" v="июнь" />
+        <e k="ui_pmMonth05" v="июль" />
+        <e k="ui_pmMonth06" v="август" />
+        <e k="ui_pmMonth07" v="сентябрь" />
+        <e k="ui_pmMonth08" v="октябрь" />
+        <e k="ui_pmMonth09" v="ноябрь" />
+        <e k="ui_pmMonth10" v="декабрь" />
+        <e k="ui_pmMonth11" v="январь" />
+        <e k="ui_pmMonth12" v="февраль" />
+        <e k="ui_pmPeriodMonthYear" v="%s, год %d" />
+        <e k="ui_pmPeriodYear" v="Год %d" />
+        <e k="ui_pmOverviewChangesHeader" v="ИЗМЕНЕНИЯ ЗА %s" />
+        <e k="ui_pmOverviewNoChanges" v="В этом месяце изменений нет." />
+        <e k="ui_pmOverviewRange" v="%d-%d из %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Влияние: репутация %s." />
+        <e k="ui_pmPayrollNone" v="Расчёта зарплаты ещё не было." />
+        <e k="ui_pmPayrollBookingFailed" v="Не удалось провести расчёт зарплаты: %s." />
+        <e k="ui_pmPayrollBooked" v="Расчёт зарплаты проведён: %s." />
+        <e k="ui_reliabilityChanged" v="%s: надёжность %s%s. Надёжность: с %d до %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="недовольство" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="отклонённое требование повышения зарплаты" />
+        <e k="ui_reliabilityReasonSalaryPending" v="открытое требование повышения зарплаты" />
+        <e k="ui_reliabilityReasonLowReputation" v="низкая репутация работодателя" />
+        <e k="ui_reliabilityReasonNightWork" v="высокая нагрузка ночной работой" />
+        <e k="ui_reliabilityReasonGoodWork" v="хороший рабочий месяц" />
+        <e k="ui_waitingForServerData" v="Ожидание данных сервера" />
     </elements>
 </l10n>

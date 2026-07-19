@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Back" />
         <e k="ui_dismissalNoticeNextMonth" v="%s has been dismissed for the end of next month." />
         <e k="ui_dismissalNotice" v="%s has been dismissed for the end of the month." />
-        <e k="ui_fireDeniedPending" v="This employee is already dismissed." />
+        <e k="ui_fireDeniedPending" v="%s has already been dismissed. They will leave the farm after the notice period ends." />
         <e k="ui_fireDeniedBusy" v="This employee is currently working and cannot be dismissed." />
         <e k="ui_hireSuccess" v="%s has been hired." />
         <e k="ui_fireSuccess" v="%s has been dismissed." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER hires the selected applicant. ESC returns to the overview." />
         <e k="ui_instructionWorkerDismiss" v="Press ENTER to dismiss the selected employee." />
         <e k="ui_instructionWorkerTransport" v="Use the transport button to manage the transport order; press S to train the employee." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Open salary requests are handled with the Manage salary requests button." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Open salary requests are handled with the Salary button." />
         <e k="ui_instructionSwitchEntry" v="Click an entry to select it; use the mouse wheel to scroll." />
         <e k="ui_training_no_progress" v="This employee does not have a suitable learning direction yet." />
         <e k="ui_training_worker_busy" v="The employee is currently working and cannot attend training." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s is sick and cannot work today. The current job was cancelled." />
         <e k="ui_button_raise_grant" v="Grant raise" />
         <e k="ui_button_raise_decline" v="Decline request" />
-        <e k="ui_button_salary_manage_long" v="Manage salary requests" />
+        <e k="ui_button_salary_manage_long" v="Salary" />
         <e k="ui_salaryRequestsTitle" v="Manage salary requests" />
         <e k="ui_salaryRequestsIntro" v="All open salary requests are listed here. Select an employee and decide whether to grant or decline the request." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Employee" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONNEL" />
         <e k="ui_pmSettingsSectionEconomic" v="ECONOMY" />
         <e k="ui_button_transport_assign_long" v="Assign transport jobs" />
-        <e k="ui_button_transport_manage_long" v="Manage transport jobs" />
+        <e k="ui_button_transport_manage_long" v="Transport" />
         <e k="ui_transportPriorityTitle" v="Transport priority" />
         <e k="ui_transportPriorityIntro" v="Choose which employees may take transport jobs and the order in which they are checked." />
         <e k="ui_transportPriorityHeaderPriority" v="Priority" />
@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s stopped the current job because she spontaneously decided to meet friends." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s stopped the current job to spontaneously meet his girlfriend for coffee." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s stopped the current job to spontaneously meet her boyfriend for coffee." />
+        <e k="ui_pmMonth01" v="March" />
+        <e k="ui_pmMonth02" v="April" />
+        <e k="ui_pmMonth03" v="May" />
+        <e k="ui_pmMonth04" v="June" />
+        <e k="ui_pmMonth05" v="July" />
+        <e k="ui_pmMonth06" v="August" />
+        <e k="ui_pmMonth07" v="September" />
+        <e k="ui_pmMonth08" v="October" />
+        <e k="ui_pmMonth09" v="November" />
+        <e k="ui_pmMonth10" v="December" />
+        <e k="ui_pmMonth11" v="January" />
+        <e k="ui_pmMonth12" v="February" />
+        <e k="ui_pmPeriodMonthYear" v="%s, Year %d" />
+        <e k="ui_pmPeriodYear" v="Year %d" />
+        <e k="ui_pmOverviewChangesHeader" v="CHANGES IN %s" />
+        <e k="ui_pmOverviewNoChanges" v="No changes this month." />
+        <e k="ui_pmOverviewRange" v="%d-%d of %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Effect: %s reputation." />
+        <e k="ui_pmPayrollNone" v="No payroll yet." />
+        <e k="ui_pmPayrollBookingFailed" v="Could not post payroll: %s." />
+        <e k="ui_pmPayrollBooked" v="Payroll posted: %s." />
+        <e k="ui_reliabilityChanged" v="%s: Reliability %s%s. Reliability: %d to %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="dissatisfaction" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="declined raise request" />
+        <e k="ui_reliabilityReasonSalaryPending" v="open raise request" />
+        <e k="ui_reliabilityReasonLowReputation" v="low employer reputation" />
+        <e k="ui_reliabilityReasonNightWork" v="heavy night-work load" />
+        <e k="ui_reliabilityReasonGoodWork" v="good work month" />
+        <e k="ui_waitingForServerData" v="Waiting for server data" />
     </elements>
 </l10n>

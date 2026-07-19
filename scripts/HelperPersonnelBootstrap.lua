@@ -25,6 +25,8 @@ source(g_currentModDirectory .. "scripts/HelperPersonnelTransportAssignments.lua
 source(g_currentModDirectory .. "scripts/HelperPersonnelSalaryRaiseRequests.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelExperienceEffects.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelCompatibility.lua")
+source(g_currentModDirectory .. "scripts/HelperPersonnelCourseplayCompatibility.lua")
+source(g_currentModDirectory .. "scripts/HelperPersonnelAutoDriveCompatibility.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelStandaloneMenu.lua")
 
 HelperPersonnelBootstrap = {}
@@ -46,6 +48,8 @@ function HelperPersonnelBootstrap.install()
     HelperPersonnelAIStartHooks.install("bootstrap")
     HelperPersonnelAIJobHooks.install("bootstrap")
     HelperPersonnelExperienceEffects.install()
+    HelperPersonnelCourseplayCompatibility.install("bootstrap")
+    HelperPersonnelAutoDriveCompatibility.install("bootstrap")
 
     FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, HelperPersonnelBootstrap.onBeforeLoadMapFinished)
     FSBaseMission.loadMapFinished = Utils.appendedFunction(FSBaseMission.loadMapFinished, HelperPersonnelBootstrap.onLoadMapFinished)
@@ -122,6 +126,8 @@ function HelperPersonnelBootstrap.onLoadMapFinished(mission)
     if HelperPersonnelCompatibility ~= nil and HelperPersonnelCompatibility.installFollowMeHooks ~= nil then
         HelperPersonnelCompatibility.installFollowMeHooks("loadMapFinished")
     end
+    HelperPersonnelCourseplayCompatibility.install("loadMapFinished")
+    HelperPersonnelAutoDriveCompatibility.install("loadMapFinished")
 
     HelperPersonnelBootstrap.ensureAppLoaded()
 
@@ -160,6 +166,8 @@ function HelperPersonnelBootstrap.onMissionLoaded(mission)
     if HelperPersonnelCompatibility ~= nil and HelperPersonnelCompatibility.installFollowMeHooks ~= nil then
         HelperPersonnelCompatibility.installFollowMeHooks("mission00Loaded")
     end
+    HelperPersonnelCourseplayCompatibility.install("mission00Loaded")
+    HelperPersonnelAutoDriveCompatibility.install("mission00Loaded")
 
     HelperPersonnelBootstrap.ensureAppLoaded()
 
@@ -178,6 +186,9 @@ function HelperPersonnelBootstrap.onMissionDelete(mission)
     if g_helperPersonnelApp ~= nil then
         g_helperPersonnelApp:delete()
         g_helperPersonnelApp = nil
+    end
+    if HelperPersonnelAutoDriveCompatibility ~= nil and HelperPersonnelAutoDriveCompatibility.resetState ~= nil then
+        HelperPersonnelAutoDriveCompatibility.resetState()
     end
 end
 

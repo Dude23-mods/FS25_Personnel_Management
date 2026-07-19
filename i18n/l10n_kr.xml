@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="뒤로" />
         <e k="ui_dismissalNoticeNextMonth" v="%s님은 다음 달 말 해고 예정입니다." />
         <e k="ui_dismissalNotice" v="%s 님은 월말 해고 예정입니다." />
-        <e k="ui_fireDeniedPending" v="이 직원은 이미 해고 예정입니다." />
+        <e k="ui_fireDeniedPending" v="%s님은 이미 해고되었습니다. 해고 예고 기간이 끝나면 농장을 떠납니다." />
         <e k="ui_fireDeniedBusy" v="직원이 작업 중이므로 해고할 수 없습니다." />
         <e k="ui_hireSuccess" v="%s - 고용." />
         <e k="ui_fireSuccess" v="%s - 해고." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: 고용. ESC: 개요로 돌아가기." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: 해고." />
         <e k="ui_instructionWorkerTransport" v="운송 버튼으로 우선순위를 관리하고 S를 눌러 직원을 교육하세요." />
-        <e k="ui_instructionWorkerSalaryRaise" v="처리되지 않은 급여 인상 요청은 급여 인상 요청 관리 버튼에서 처리합니다." />
+        <e k="ui_instructionWorkerSalaryRaise" v="처리되지 않은 급여 인상 요청은 급여 버튼에서 처리합니다." />
         <e k="ui_instructionSwitchEntry" v="항목을 클릭해 선택하고 마우스 휠로 스크롤하세요." />
         <e k="ui_training_no_progress" v="이 직원에게는 아직 적합한 학습 방향이 없습니다." />
         <e k="ui_training_worker_busy" v="직원이 현재 작업 중이므로 교육에 참여할 수 없습니다." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: 아파서 현재 작업을 취소했습니다." />
         <e k="ui_button_raise_grant" v="인상 승인" />
         <e k="ui_button_raise_decline" v="요청 거절" />
-        <e k="ui_button_salary_manage_long" v="급여 인상 요청 관리" />
+        <e k="ui_button_salary_manage_long" v="급여" />
         <e k="ui_salaryRequestsTitle" v="급여 인상 요청 관리" />
         <e k="ui_salaryRequestsIntro" v="처리되지 않은 모든 급여 인상 요청이 여기에 표시됩니다. 직원을 선택하고 요청을 승인하거나 거절하세요." />
         <e k="ui_salaryRequestsHeaderEmployee" v="직원" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="인사" />
         <e k="ui_pmSettingsSectionEconomic" v="경제" />
         <e k="ui_button_transport_assign_long" v="운송 업무 배정" />
-        <e k="ui_button_transport_manage_long" v="운송 업무 관리" />
+        <e k="ui_button_transport_manage_long" v="운송" />
         <e k="ui_transportPriorityTitle" v="운송 우선순위" />
         <e k="ui_transportPriorityIntro" v="운송 업무를 맡을 직원과 가용 여부를 확인할 순서를 설정하세요." />
         <e k="ui_transportPriorityHeaderPriority" v="우선순위" />
@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s은(는) 갑자기 친구들을 만나기로 해 진행 중인 작업을 중단했습니다." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s은(는) 여자친구와 갑자기 커피를 마시러 가기 위해 진행 중인 작업을 중단했습니다." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s은(는) 남자친구와 갑자기 커피를 마시러 가기 위해 진행 중인 작업을 중단했습니다." />
+        <e k="ui_pmMonth01" v="3월" />
+        <e k="ui_pmMonth02" v="4월" />
+        <e k="ui_pmMonth03" v="5월" />
+        <e k="ui_pmMonth04" v="6월" />
+        <e k="ui_pmMonth05" v="7월" />
+        <e k="ui_pmMonth06" v="8월" />
+        <e k="ui_pmMonth07" v="9월" />
+        <e k="ui_pmMonth08" v="10월" />
+        <e k="ui_pmMonth09" v="11월" />
+        <e k="ui_pmMonth10" v="12월" />
+        <e k="ui_pmMonth11" v="1월" />
+        <e k="ui_pmMonth12" v="2월" />
+        <e k="ui_pmPeriodMonthYear" v="%s, %d년" />
+        <e k="ui_pmPeriodYear" v="%d년" />
+        <e k="ui_pmOverviewChangesHeader" v="%s 변경 사항" />
+        <e k="ui_pmOverviewNoChanges" v="이번 달에는 변경 사항이 없습니다." />
+        <e k="ui_pmOverviewRange" v="%d-%d / %d" />
+        <e k="ui_pmHistoryReputationEffect" v="영향: 평판 %s." />
+        <e k="ui_pmPayrollNone" v="아직 급여 정산 내역이 없습니다." />
+        <e k="ui_pmPayrollBookingFailed" v="급여를 반영하지 못했습니다: %s." />
+        <e k="ui_pmPayrollBooked" v="급여 반영 완료: %s." />
+        <e k="ui_reliabilityChanged" v="%s: 신뢰도 %s%s. 신뢰도: %d에서 %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="불만" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="급여 인상 요구 거절" />
+        <e k="ui_reliabilityReasonSalaryPending" v="처리되지 않은 급여 인상 요구" />
+        <e k="ui_reliabilityReasonLowReputation" v="낮은 고용주 평판" />
+        <e k="ui_reliabilityReasonNightWork" v="과도한 야간 작업 부담" />
+        <e k="ui_reliabilityReasonGoodWork" v="좋은 근무 실적" />
+        <e k="ui_waitingForServerData" v="서버 데이터 대기 중" />
     </elements>
 </l10n>

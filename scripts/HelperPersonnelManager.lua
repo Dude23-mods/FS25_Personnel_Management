@@ -999,12 +999,12 @@ function HelperPersonnelManager:logConfigState(sourceName)
 
     local config = self.config
     if config == nil then
-        Logging.info("FS25_HelperPersonnel: Konfiguration-Test | Quelle=%s | Konfiguration=nicht verfuegbar", tostring(sourceName or "unbekannt"))
+        Logging.info("FS25_HelperPersonnel: Configuration test | Source=%s | Configuration=not available", tostring(sourceName or "unknown"))
         return
     end
 
-    Logging.info("FS25_HelperPersonnel: Konfiguration-Test | Quelle=%s | Gameplay=%s | Erfahrung=%s | Geschwindigkeit=%s | Verschleiss=%s | Verbrauch=%s | Kraftstoff=%s | Zuverlaessigkeit=%s | Personal=%s | Loyalitaet=%s | Nachtarbeit=%s | Wirtschaft=%s | IndividuelleGehaelter=%s | StandardGrundgehalt=%.2f",
-        tostring(sourceName or "unbekannt"),
+    Logging.info("FS25_HelperPersonnel: Configuration test | Source=%s | Gameplay=%s | Experience=%s | Speed=%s | Wear=%s | Consumption=%s | Fuel=%s | Reliability=%s | Personnel=%s | Loyalty=%s | NightWork=%s | Economy=%s | IndividualWages=%s | DefaultBaseWage=%.2f",
+        tostring(sourceName or "unknown"),
         tostring(config.gameplayEffectsEnabled == true),
         tostring(config.experienceEffectsEnabled == true),
         tostring(config.speedEffectEnabled == true),
@@ -1024,22 +1024,22 @@ end
 function HelperPersonnelManager:loadConfig()
     if self.config ~= nil and self.config.load ~= nil then
         local result = self.config:load()
-        self:logConfigState("Laden")
+        self:logConfigState("Load")
         return result
     end
 
-    self:logConfigState("Laden")
+    self:logConfigState("Load")
     return false
 end
 
 function HelperPersonnelManager:saveConfig()
     if self.config ~= nil and self.config.save ~= nil then
         local result = self.config:save()
-        self:logConfigState("Speichern")
+        self:logConfigState("Save")
         return result
     end
 
-    self:logConfigState("Speichern")
+    self:logConfigState("Save")
     return false
 end
 
@@ -1815,9 +1815,9 @@ function HelperPersonnelManager:getShortPeriodLabel(period, year)
     local monthName = self:getMonthName(period)
     year = math.floor((tonumber(year) or 0) + 0.5)
     if monthName ~= nil and year > 0 then
-        return string.format("%s J%d", monthName, year)
+        return string.format(self:getLocalizedText("ui_pmPeriodMonthYear", "%s, Year %d"), monthName, year)
     elseif year > 0 then
-        return string.format("Jahr %d", year)
+        return string.format(self:getLocalizedText("ui_pmPeriodYear", "Year %d"), year)
     end
     return "-"
 end
@@ -2125,9 +2125,9 @@ function HelperPersonnelManager:logWageIfNeeded(person, baseWage, currentWage, u
     local economyFactor = self:getSalaryEconomyCostMultiplier()
     local totalFactor = self:getSalaryTotalMultiplier()
 
-    Logging.info("FS25_HelperPersonnel: Gehalt-Test | Quelle=%s | Mitarbeiter=%s | Individuell=%s | Erfahrung=%d | Zuverlaessigkeit=%d | Grundgehalt=%.2f | StandardGrundgehalt=%.2f | TageProMonatFaktor=%.2f | WirtschaftsFaktor=%.2f | GesamtFaktor=%.2f | Monatsgehalt=%.2f",
-        tostring(sourceName or "Berechnung"),
-        fullName ~= "" and fullName or "unbekannt",
+    Logging.info("FS25_HelperPersonnel: Wage test | Source=%s | Worker=%s | Individual=%s | Experience=%d | Reliability=%d | BaseWage=%.2f | DefaultBaseWage=%.2f | DaysPerMonthFactor=%.2f | EconomyFactor=%.2f | TotalFactor=%.2f | MonthlyWage=%.2f",
+        tostring(sourceName or "Calculation"),
+        fullName ~= "" and fullName or "unknown",
         tostring(useIndividual == true),
         self:clampPersonStat(person.experience or 0),
         self:clampPersonStat(person.reliability or 0),
@@ -2149,7 +2149,7 @@ function HelperPersonnelManager:getCurrentMonthlyWage(person)
         local standardBaseWage = self:getStandardBaseMonthlyWage()
         local wage = self:calculateCurrentMonthlyWageFromBase(standardBaseWage)
         person.wage = wage
-        self:logWageIfNeeded(person, standardBaseWage, wage, false, "Standardgehalt")
+        self:logWageIfNeeded(person, standardBaseWage, wage, false, "DefaultWage")
         return wage
     end
 
@@ -2161,7 +2161,7 @@ function HelperPersonnelManager:getCurrentMonthlyWage(person)
 
     local wage = self:calculateCurrentMonthlyWageFromBase(baseWage)
     person.wage = wage
-    self:logWageIfNeeded(person, baseWage, wage, true, "Individuell")
+    self:logWageIfNeeded(person, baseWage, wage, true, "Individual")
 
     return wage
 end
@@ -2295,7 +2295,7 @@ function HelperPersonnelManager:repairApplicantGendersFromHelperProfiles()
 
     if changed then
         if Logging ~= nil and Logging.info ~= nil then
-            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Bewerber-Geschlechter anhand der live erkannten Helferprofile korrigiert")
+            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Applicant genders corrected using the live detected helper profiles")
         end
 
         if type(self.notifyDataChanged) == "function" then
@@ -3029,7 +3029,7 @@ function HelperPersonnelManager:loadRestoredActiveJobsFromVehiclesXML(savePath)
     xmlFile:delete()
 
     if loadedAssignments > 0 then
-        HelperPersonnel.debugInfo("FS25_HelperPersonnel: %d aktive Mitarbeiterzuordnung(en) aus vehicles.xml vorgemerkt", loadedAssignments)
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Queued %d active worker assignment(s) from vehicles.xml", loadedAssignments)
     end
 end
 
@@ -3113,7 +3113,7 @@ function HelperPersonnelManager:saveToSavegameSafe()
     end)
 
     if not ok then
-        Logging.warning("HelperPersonnel: Speichern wurde uebersprungen: %s", tostring(err))
+        Logging.warning("HelperPersonnel: Saving was skipped: %s", tostring(err))
     end
 end
 
@@ -3129,10 +3129,10 @@ end
 
 function HelperPersonnelManager:getLastActionText()
     if self.lastActionText ~= nil and self.lastActionText ~= "" then
-        return self.lastActionText
+        return self:getLocalizedHistoryText(self.lastActionText)
     end
 
-    return g_i18n:getText("ui_summary_lastActionNone")
+    return self:getLocalizedText("ui_summary_lastActionNone", "None yet")
 end
 
 function HelperPersonnelManager:getWorkersSorted()
@@ -3512,12 +3512,14 @@ local function hpLayer_HelperPersonnelManager_dismissWorker_1(self, workerId)
         return false, nil
     end
 
+    local fullName = self:getFullName(worker)
+
     if worker.dismissalPending == true then
-        return false, self:getLocalizedText("ui_fireDeniedPending", "Der Mitarbeiter ist bereits zum Monatsende gekündigt.")
+        local template = self:getLocalizedText("ui_fireDeniedPending", "%s wurde bereits gekündigt. Er wird den Betrieb nach Ende der Kündigungsfrist verlassen.")
+        return false, string.format(template, fullName)
     end
 
     local period, year = self:getApplicantPeriodInfo()
-    local fullName = self:getFullName(worker)
     local reputationDelta, dismissalReason = self:calculateDismissalReputationDelta(worker)
     local effectivePeriod, effectiveYear, inTime, currentDay, currentMinute, deadlineDay, deadlineMinute = self:getDismissalEffectivePeriodInfo(period, year)
 
@@ -3555,7 +3557,7 @@ function HelperPersonnelManager:rebuildHelperProfilesSafe()
     end)
 
     if not ok then
-        Logging.warning("HelperPersonnel: Helferprofil-Abgleich wurde übersprungen: %s", tostring(err))
+        Logging.warning("HelperPersonnel: Helper profile reconciliation was skipped: %s", tostring(err))
     end
 end
 
@@ -3701,10 +3703,10 @@ function HelperPersonnelManager:getPeriodLabel(period, year)
     year = math.floor((tonumber(year) or 1) + 0.5)
 
     if period >= 1 and period <= 12 then
-        return string.format("%s Jahr %d", self:getMonthName(period), year)
+        return string.format(self:getLocalizedText("ui_pmPeriodMonthYear", "%s, Year %d"), self:getMonthName(period), year)
     end
 
-    return string.format("Jahr %d", year)
+    return string.format(self:getLocalizedText("ui_pmPeriodYear", "Year %d"), year)
 end
 
 function HelperPersonnelManager:normalizeHistoryText(text)
@@ -3722,6 +3724,169 @@ function HelperPersonnelManager:normalizeHistoryText(text)
     local dismissedName = text:match("^(.+) has been dismissed%.$")
     if dismissedName ~= nil then
         return string.format("%s wurde entlassen.", dismissedName)
+    end
+
+    return text
+end
+
+function HelperPersonnelManager:getLocalizedHistoryText(text)
+    text = self:normalizeHistoryText(text)
+    if text == "" then
+        return ""
+    end
+
+    local function formatNamedEvent(name, key, fallback)
+        return string.format("%s: %s", name, self:getLocalizedText(key, fallback))
+    end
+
+    local name = text:match("^(.+) wurde eingestellt%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_hireSuccess", "%s has been hired."), name)
+    end
+
+    name = text:match("^(.+) wurde entlassen%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_fireSuccess", "%s has been dismissed."), name)
+    end
+
+    name = text:match("^(.+) hat einen Einsatz beendet")
+    if name ~= nil then
+        return formatNamedEvent(name, "ui_pmChronicleJobCompleted", "Assignment completed.")
+    end
+
+    name = text:match("^(.+) hat eine Spezialisierung entwickelt:")
+    if name ~= nil then
+        return formatNamedEvent(name, "ui_pmChronicleSpecialization", "Specialization acquired.")
+    end
+
+    name = text:match("^(.+) wurde zum nächsten Monatsende gekündigt")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_dismissalNoticeNextMonth", "%s has been dismissed for the end of next month."), name)
+    end
+
+    name = text:match("^(.+) wurde zum Monatsende gekündigt")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_dismissalNotice", "%s has been dismissed for the end of the month."), name)
+    end
+
+    name = text:match("^(.+) hat zum Monatsende gekündigt%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_loyaltyResignationNotice", "%s has resigned for the end of the month."), name)
+    end
+
+    name = text:match("^(.+) geht zum Monatsende in den Ruhestand%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_retirementNotice", "%s will retire at the end of the month."), name)
+    end
+
+    name = text:match("^(.+) wurde .-zum Monatswechsel entlassen%.$") or text:match("^(.+) hat den Hof .- verlassen%.$") or text:match("^(.+) ist .- in den Ruhestand gegangen%.$")
+    if name ~= nil then
+        return formatNamedEvent(name, "ui_pmChronicleEmploymentEnded", "Employment ended.")
+    end
+
+    local salaryName, salaryTarget = text:match("^Gehaltserhöhung für (.-) gewährt: (.+)%.$")
+    if salaryName == nil then
+        salaryName, salaryTarget = text:match("^Gehaltserhoehung fuer (.-) gewaehrt: (.+)%.$")
+    end
+    if salaryName ~= nil then
+        return string.format(self:getLocalizedText("ui_salaryRaiseGranted", "Raise granted for %s: %s."), salaryName, salaryTarget)
+    end
+
+    salaryName, salaryTarget = text:match("^Gehaltsforderung: (.-) fordert (.+)%.$")
+    if salaryName ~= nil then
+        return string.format(self:getLocalizedText("ui_salaryRaiseRequestHistory", "Raise request: %s requests %s."), salaryName, salaryTarget)
+    end
+
+    salaryName = text:match("^Gehaltsforderung von (.-) abgelehnt%.$")
+    if salaryName ~= nil then
+        return string.format(self:getLocalizedText("ui_salaryRaiseDeclined", "Raise request from %s declined."), salaryName)
+    end
+
+    local pendingName, pendingDelta = text:match("^Offene Gehaltsforderung von (.-) belastet die Loyalität: (.+)%.$")
+    if pendingName ~= nil then
+        return string.format(self:getLocalizedText("ui_salaryRaisePendingPenalty", "Open raise request from %s affects loyalty: %s."), pendingName, pendingDelta)
+    end
+
+    name = text:match("^(.+) denkt über einen Wechsel nach%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_loyaltyWarningCritical", "%s is considering leaving."), name)
+    end
+
+    name = text:match("^(.+) ist sehr unzufrieden%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_loyaltyWarningVeryLow", "%s is very dissatisfied."), name)
+    end
+
+    name = text:match("^(.+) wirkt unzufrieden%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_loyaltyWarningLow", "%s seems dissatisfied."), name)
+    end
+
+    name = text:match("^(.+) ist krank%. Der laufende Einsatz wurde abgebrochen%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_sicknessNoticeJobAborted", "%s is sick and cannot work today. The current job was cancelled."), name)
+    end
+
+    name = text:match("^(.+) ist krank und heute nicht verfügbar%.$")
+    if name ~= nil then
+        return string.format(self:getLocalizedText("ui_sicknessNotice", "%s is sick and cannot work today."), name)
+    end
+
+    if text == "Transportreihenfolge gespeichert." then
+        return self:getLocalizedText("ui_transportPrioritySaved", "Transport order saved.")
+    end
+
+    local expired, added = text:match("^Bewerbermarkt aktualisiert: (%d+) Bewerber abgelaufen, (%d+) neue Bewerber%.$")
+    if expired == nil then
+        added = text:match("^Bewerbermarkt aktualisiert: (%d+) neue?r? Bewerber%.$")
+        expired = text:match("^Bewerbermarkt aktualisiert: (%d+) Bewerber abgelaufen%.$")
+    end
+    if added ~= nil or expired ~= nil then
+        return string.format("%s: +%d / -%d", self:getLocalizedText("ui_monthlyRowApplicants", "Applicants"), tonumber(added) or 0, tonumber(expired) or 0)
+    end
+
+    local payrollAmount = text:match("^Gehaltsabrechnung: ([^%(]+)")
+    if payrollAmount ~= nil then
+        payrollAmount = string.gsub(payrollAmount, "%s+$", "")
+        return string.format("%s: %s", self:getLocalizedText("ui_monthlyRowPayroll", "Last payroll"), payrollAmount)
+    end
+
+    local loyaltyName, loyaltyDelta, oldLoyalty, newLoyalty = text:match("^(.+): Loyalität ([%+%-]?%d+) %((%d+) auf (%d+)%)")
+    if loyaltyName ~= nil then
+        return string.format("%s: %s %s (%s -> %s)", loyaltyName, self:getLocalizedText("ui_pmStatLoyalty", "Loyalty"), loyaltyDelta, oldLoyalty, newLoyalty)
+    end
+
+    local count = text:match("^(%d+) gekündigte Mitarbeiter wurden zum Monatswechsel entlassen%.$")
+    if count ~= nil or text == "1 gekündigter Mitarbeiter wurde zum Monatswechsel entlassen." then
+        return string.format("%s: %d", self:getLocalizedText("ui_pmOverviewDismissed", "Dismissed"), tonumber(count) or 1)
+    end
+
+    count = text:match("^(%d+) Mitarbeiter haben den Hof zum Monatswechsel verlassen%.$")
+    if count ~= nil or text == "1 Mitarbeiter hat den Hof zum Monatswechsel verlassen." then
+        return string.format("%s: %d", self:getLocalizedText("ui_pmOverviewResigned", "Resignations"), tonumber(count) or 1)
+    end
+
+    count = text:match("^(%d+) Mitarbeiter sind zum Monatswechsel in den Ruhestand gegangen%.$")
+    if count ~= nil then
+        return string.format("%s: %d", self:getLocalizedText("ui_pmOverviewRetired", "Retirements"), tonumber(count) or 0)
+    end
+
+    local reliabilityDelta = text:match("Zuverlässigkeit:%s*([%+%-]?%d+)")
+    if reliabilityDelta ~= nil then
+        return string.format("%s: %s", self:getLocalizedText("ui_pmStatReliability", "Reliability"), reliabilityDelta)
+    end
+
+    local loyaltyDelta = text:match("Loyalität:%s*([%+%-]?%d+)") or text:match("Loyalität%s+([%+%-]?%d+)")
+    if loyaltyDelta == nil then
+        loyaltyDelta = text:match("^Tägliche Loyalitätsauswertung:.-%(([%+%-]?%d+)")
+    end
+    if loyaltyDelta ~= nil then
+        return string.format("%s: %s", self:getLocalizedText("ui_pmStatLoyalty", "Loyalty"), loyaltyDelta)
+    end
+
+    local reputationDelta = text:match("([%+%-]?%d+) Ansehen")
+    if reputationDelta ~= nil then
+        return string.format(self:getLocalizedText("ui_pmHistoryReputationEffect", "Effect: %s reputation."), reputationDelta)
     end
 
     return text
@@ -3786,7 +3951,7 @@ function HelperPersonnelManager:getFormattedHistoryLines(history, emptyText)
         for i = 1, math.min(#history, HelperPersonnelManager.MAX_HISTORY_ENTRIES or 3) do
             local entry = history[i]
             if type(entry) == "table" and type(entry.text) == "string" and entry.text ~= "" then
-                table.insert(lines, string.format("%s: %s", self:getPeriodLabel(entry.period, entry.year), self:normalizeHistoryText(entry.text)))
+                table.insert(lines, string.format("%s: %s", self:getPeriodLabel(entry.period, entry.year), self:getLocalizedHistoryText(entry.text)))
             end
         end
     end
@@ -3929,24 +4094,22 @@ function HelperPersonnelManager:getMonthlyHistoryEffectText(info)
     if info.kind == "hire" then
         local delta = tostring(info.effectText or ""):match(": ([%+%-]?%d+) Ansehen")
         if delta ~= nil then
-            return string.format("Auswirkung: %s Ansehen.", delta)
+            return string.format(self:getLocalizedText("ui_pmHistoryReputationEffect", "Effect: %s reputation."), delta)
         end
     elseif info.kind == "salaryRaiseGranted" then
         local delta = info.reputationDelta or tostring(info.effectText or ""):match(": ([%+%-]?%d+) Ansehen")
         if delta ~= nil then
-            return string.format("Auswirkung: %s Ansehen.", delta)
+            return string.format(self:getLocalizedText("ui_pmHistoryReputationEffect", "Effect: %s reputation."), delta)
         end
     elseif info.kind == "dismissalNotice" then
         local delta = info.reputationDelta or tostring(info.effectText or ""):match(": ([%+%-]?%d+) Ansehen")
-        if delta ~= nil and info.reason ~= nil and info.reason ~= "" then
-            return string.format("Auswirkung: %s Ansehen (%s).", delta, info.reason)
-        elseif delta ~= nil then
-            return string.format("Auswirkung: %s Ansehen.", delta)
+        if delta ~= nil then
+            return string.format(self:getLocalizedText("ui_pmHistoryReputationEffect", "Effect: %s reputation."), delta)
         end
     elseif info.kind == "resignation" then
         local delta = info.reputationDelta or tostring(info.effectText or ""):match(": ([%+%-]?%d+) Ansehen")
         if delta ~= nil then
-            return string.format("Auswirkung: %s Ansehen.", delta)
+            return string.format(self:getLocalizedText("ui_pmHistoryReputationEffect", "Effect: %s reputation."), delta)
         end
     end
 
@@ -3998,6 +4161,7 @@ function HelperPersonnelManager:buildMonthlyHistoryLines(entries)
         if usedEntries[index] ~= true then
             local text = tostring(entry.text or "")
             local info = self:getMonthlyHistoryEntryInfo(entry)
+            text = self:getLocalizedHistoryText(text)
 
             if info ~= nil and info.role == "action" then
                 local effectIndex, effectInfo = self:findMatchingMonthlyHistoryEffect(entries, usedEntries, index, info)
@@ -4026,7 +4190,7 @@ function HelperPersonnelManager:getMonthlyHistoryLines(period, year)
     local lines = self:buildMonthlyHistoryLines(entries)
 
     if #lines == 0 then
-        table.insert(lines, "Noch keine Änderungen in diesem Monat.")
+        table.insert(lines, self:getLocalizedText("ui_pmOverviewNoChanges", "No changes this month."))
     end
 
     return lines, period, year
@@ -4057,10 +4221,10 @@ end
 
 function HelperPersonnelManager:getLastReputationChangeText()
     if self.lastReputationChangeText == nil or self.lastReputationChangeText == "" then
-        return "noch keine"
+        return self:getLocalizedText("ui_noReputationChange", "none yet")
     end
 
-    return self.lastReputationChangeText
+    return self:getLocalizedHistoryText(self.lastReputationChangeText)
 end
 
 function HelperPersonnelManager:getEmployerReputation()
@@ -4300,7 +4464,21 @@ end
 
 function HelperPersonnelManager:getLastPayrollText()
     if self.lastPayrollText == nil or self.lastPayrollText == "" then
-        return "noch keine Gehaltsabrechnung"
+        return self:getLocalizedText("ui_pmPayrollNone", "No payroll yet.")
+    end
+
+    if self.lastPayrollText == "noch keine Gehaltsabrechnung" or self.lastPayrollText == "Keine Gehaltszahlung fällig." then
+        return self:getLocalizedText("ui_pmPayrollNone", "No payroll yet.")
+    end
+
+    local amount = self.lastPayrollText:match("^Gehaltsabrechnung konnte nicht gebucht werden: (.+)%.$")
+    if amount ~= nil then
+        return string.format(self:getLocalizedText("ui_pmPayrollBookingFailed", "Could not post payroll: %s."), amount)
+    end
+
+    amount = self.lastPayrollText:match("^Monatsgehälter gebucht: (.-)%. Hof") or self.lastPayrollText:match("^Monatsgehälter pünktlich gezahlt: (.+)%.$")
+    if amount ~= nil then
+        return string.format(self:getLocalizedText("ui_pmPayrollBooked", "Payroll posted: %s."), amount)
     end
 
     return self.lastPayrollText
@@ -4323,7 +4501,7 @@ function HelperPersonnelManager:processMonthlyPayroll()
     if not booked then
         self.lastPayrollText = string.format("Gehaltsabrechnung konnte nicht gebucht werden: %s.", amountText)
         if Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("HelperPersonnel: Monatsgehaelter konnten nicht gebucht werden (%s).", amountText)
+            Logging.warning("HelperPersonnel: Monthly wages could not be posted (%s).", amountText)
         end
         return amount, 0
     end
@@ -4768,9 +4946,20 @@ function HelperPersonnelManager:showReliabilityChangeNotification(worker, applie
     previousReliability = self:clampPersonStat(previousReliability or worker.reliability or 0)
     newReliability = self:clampPersonStat(newReliability or worker.reliability or previousReliability)
 
+    local reasonKeys = {
+        ["Unzufriedenheit"] = "ui_reliabilityReasonDissatisfaction",
+        ["abgelehnte Gehaltsforderung"] = "ui_reliabilityReasonSalaryDeclined",
+        ["offene Gehaltsforderung"] = "ui_reliabilityReasonSalaryPending",
+        ["schlechtes Arbeitgeberansehen"] = "ui_reliabilityReasonLowReputation",
+        ["starke Nachtbelastung"] = "ui_reliabilityReasonNightWork",
+        ["guter Arbeitsmonat"] = "ui_reliabilityReasonGoodWork"
+    }
+    local reasonKey = reasonKeys[reason]
+    local localizedReason = reasonKey ~= nil and self:getLocalizedText(reasonKey, reason) or reason
     local fullName = self:getFullName(worker)
-    local reasonText = reason ~= nil and reason ~= "" and string.format(" (%s)", reason) or ""
-    local text = string.format("%s: Zuverlässigkeit %s%s. Zuverlässigkeit: %d auf %d", fullName, self:formatSignedDelta(appliedDelta), reasonText, previousReliability, newReliability)
+    local reasonText = localizedReason ~= nil and localizedReason ~= "" and string.format(" (%s)", localizedReason) or ""
+    local template = self:getLocalizedText("ui_reliabilityChanged", "%s: Reliability %s%s. Reliability: %d to %d")
+    local text = string.format(template, fullName, self:formatSignedDelta(appliedDelta), reasonText, previousReliability, newReliability)
     self:showIngameNotification(text, self:getInfoNotificationType())
 end
 
@@ -5010,18 +5199,12 @@ function HelperPersonnelManager:formatWorkMinutes(minutes)
 end
 
 function HelperPersonnelManager:getMonthName(period)
-
-    local monthNamesByPeriod = {
-        "März", "April", "Mai", "Juni", "Juli", "August",
-        "September", "Oktober", "November", "Dezember", "Januar", "Februar"
-    }
-
     period = math.floor((tonumber(period) or 0) + 0.5)
-    if period < 1 or period > #monthNamesByPeriod then
+    if period < 1 or period > 12 then
         return nil
     end
 
-    return monthNamesByPeriod[period]
+    return self:getLocalizedText(string.format("ui_pmMonth%02d", period), string.format("%02d", period))
 end
 
 function HelperPersonnelManager:getWorkerHiredLine(person)
@@ -7537,6 +7720,9 @@ function HelperPersonnelManager:saveToXMLFile(xmlFile)
         return
     end
 
+    if self.hpMP101EnsureFarmDataForKnownFarms ~= nil then
+        self:hpMP101EnsureFarmDataForKnownFarms()
+    end
     self:storeCurrentFarmData()
     self:refreshFarmContext()
 
@@ -7569,7 +7755,7 @@ function HelperPersonnelManager:saveToSavegame()
 
     local xmlFile = XMLFile.create("helperPersonnel", savePath, "helperPersonnel", HelperPersonnelManager.xmlSchema)
     if xmlFile == nil then
-        Logging.error("HelperPersonnel: Konnte Savegame-XML nicht erstellen: %s", savePath)
+        Logging.error("HelperPersonnel: Could not create savegame XML: %s", savePath)
         return
     end
 

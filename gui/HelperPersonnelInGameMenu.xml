@@ -40,6 +40,9 @@
         <Button profile="buttonBack" onClick="onClickBack" id="menuButton[7]">
             <Bitmap profile="fs25_buttonBoxSeparator" name="separator" />
         </Button>
+        <Button profile="buttonBack" onClick="onClickBack" id="menuButton[8]">
+            <Bitmap profile="fs25_buttonBoxSeparator" name="separator" />
+        </Button>
     </BoxLayout>
     <GUIProfiles>
     </GUIProfiles>

@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Wstecz" />
         <e k="ui_dismissalNoticeNextMonth" v="%s został zwolniony z końcem następnego miesiąca." />
         <e k="ui_dismissalNotice" v="%s został zwolniony z końcem miesiąca." />
-        <e k="ui_fireDeniedPending" v="Ten pracownik jest już zwolniony." />
+        <e k="ui_fireDeniedPending" v="%s został już zwolniony. Opuści gospodarstwo po zakończeniu okresu wypowiedzenia." />
         <e k="ui_fireDeniedBusy" v="Pracownik jest zajęty i nie może zostać zwolniony." />
         <e k="ui_hireSuccess" v="%s - zatrudnij." />
         <e k="ui_fireSuccess" v="%s - zwolnij." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: Zatrudnij. ESC: Wróć do przeglądu." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Zwolnij." />
         <e k="ui_instructionWorkerTransport" v="Użyj przycisku transportu, aby zarządzać kolejnością, a klawisza S, aby szkolić pracownika." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Otwarte wnioski o podwyżkę obsługuje się przyciskiem Zarządzaj wnioskami o podwyżkę." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Otwarte wnioski o podwyżkę obsługuje się przyciskiem Płaca." />
         <e k="ui_instructionSwitchEntry" v="Kliknij wpis, aby go wybrać; użyj kółka myszy do przewijania." />
         <e k="ui_training_no_progress" v="Ten pracownik nie ma jeszcze odpowiedniego kierunku nauki." />
         <e k="ui_training_worker_busy" v="Pracownik obecnie pracuje i nie może uczestniczyć w szkoleniu." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: chory, bieżące zlecenie zostało anulowane." />
         <e k="ui_button_raise_grant" v="Przyznaj podwyżkę" />
         <e k="ui_button_raise_decline" v="Odrzuć wniosek" />
-        <e k="ui_button_salary_manage_long" v="Zarządzaj wnioskami o podwyżkę" />
+        <e k="ui_button_salary_manage_long" v="Płaca" />
         <e k="ui_salaryRequestsTitle" v="Zarządzaj wnioskami o podwyżkę" />
         <e k="ui_salaryRequestsIntro" v="Tutaj wyświetlane są wszystkie otwarte wnioski o podwyżkę. Wybierz pracownika i zdecyduj, czy przyznać podwyżkę, czy odrzucić wniosek." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Pracownik" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONEL" />
         <e k="ui_pmSettingsSectionEconomic" v="EKONOMIA" />
         <e k="ui_button_transport_assign_long" v="Przydziel zadania transportowe" />
-        <e k="ui_button_transport_manage_long" v="Zarządzaj zadaniami transportowymi" />
+        <e k="ui_button_transport_manage_long" v="Transport" />
         <e k="ui_transportPriorityTitle" v="Priorytet transportu" />
         <e k="ui_transportPriorityIntro" v="Wybierz pracowników do zadań transportowych i ustal kolejność sprawdzania ich dostępności." />
         <e k="ui_transportPriorityHeaderPriority" v="Priorytet" />
@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s przerwała trwające zadanie, ponieważ spontanicznie postanowiła spotkać się ze znajomymi." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s przerwał trwające zadanie, aby spontanicznie spotkać się z dziewczyną na kawę." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s przerwała trwające zadanie, aby spontanicznie spotkać się z chłopakiem na kawę." />
+        <e k="ui_pmMonth01" v="marzec" />
+        <e k="ui_pmMonth02" v="kwiecień" />
+        <e k="ui_pmMonth03" v="maj" />
+        <e k="ui_pmMonth04" v="czerwiec" />
+        <e k="ui_pmMonth05" v="lipiec" />
+        <e k="ui_pmMonth06" v="sierpień" />
+        <e k="ui_pmMonth07" v="wrzesień" />
+        <e k="ui_pmMonth08" v="październik" />
+        <e k="ui_pmMonth09" v="listopad" />
+        <e k="ui_pmMonth10" v="grudzień" />
+        <e k="ui_pmMonth11" v="styczeń" />
+        <e k="ui_pmMonth12" v="luty" />
+        <e k="ui_pmPeriodMonthYear" v="%s, rok %d" />
+        <e k="ui_pmPeriodYear" v="Rok %d" />
+        <e k="ui_pmOverviewChangesHeader" v="ZMIANY W OKRESIE %s" />
+        <e k="ui_pmOverviewNoChanges" v="Brak zmian w tym miesiącu." />
+        <e k="ui_pmOverviewRange" v="%d-%d z %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Wpływ: reputacja %s." />
+        <e k="ui_pmPayrollNone" v="Brak dotychczasowego rozliczenia płac." />
+        <e k="ui_pmPayrollBookingFailed" v="Nie udało się zaksięgować płac: %s." />
+        <e k="ui_pmPayrollBooked" v="Płace zaksięgowano: %s." />
+        <e k="ui_reliabilityChanged" v="%s: niezawodność %s%s. Niezawodność: %d na %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="niezadowolenie" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="odrzucone żądanie podwyżki" />
+        <e k="ui_reliabilityReasonSalaryPending" v="otwarte żądanie podwyżki" />
+        <e k="ui_reliabilityReasonLowReputation" v="niska reputacja pracodawcy" />
+        <e k="ui_reliabilityReasonNightWork" v="duże obciążenie pracą nocną" />
+        <e k="ui_reliabilityReasonGoodWork" v="dobry miesiąc pracy" />
+        <e k="ui_waitingForServerData" v="Oczekiwanie na dane serwera" />
     </elements>
 </l10n>

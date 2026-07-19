@@ -1445,7 +1445,7 @@ function HelperPersonnelViewBase:debugFieldDetection(worker, message)
         return
     end
 
-    local workerName = "Mitarbeiter"
+    local workerName = "Worker"
     local manager = self:getManager()
     if manager ~= nil and manager.getFullName ~= nil and worker ~= nil then
         local ok, fullName = pcall(function()
@@ -1456,7 +1456,7 @@ function HelperPersonnelViewBase:debugFieldDetection(worker, message)
         end
     end
 
-    local text = string.format("FS25_HelperPersonnel: Feldsuche %s - %s", workerName, tostring(message or ""))
+    local text = string.format("FS25_HelperPersonnel: Field detection %s - %s", workerName, tostring(message or ""))
     if Logging ~= nil and Logging.info ~= nil then
         Logging.info(text)
     else
@@ -1612,16 +1612,16 @@ function HelperPersonnelViewBase:collectWorkPositionSamples(job, vehicle)
 
     local rootVehicle = self:getRootVehicle(vehicle)
     if rootVehicle ~= nil then
-        self:addObjectPositionSamples(rootVehicle, samples, "Fahrzeug")
+        self:addObjectPositionSamples(rootVehicle, samples, "Vehicle")
         local attachedObjects = self:collectAttachedObjects(rootVehicle, {}, {}, 0)
         for index, object in ipairs(attachedObjects) do
-            self:addObjectPositionSamples(object, samples, "Gerät" .. tostring(index))
+            self:addObjectPositionSamples(object, samples, "Implement" .. tostring(index))
             if #samples >= 16 then
                 break
             end
         end
     elseif vehicle ~= nil then
-        self:addObjectPositionSamples(vehicle, samples, "Fahrzeug")
+        self:addObjectPositionSamples(vehicle, samples, "Vehicle")
     end
 
     return samples
@@ -1630,7 +1630,7 @@ end
 function HelperPersonnelViewBase:getVehicleWorldPosition(vehicle)
     local rootVehicle = self:getRootVehicle(vehicle)
     local samples = {}
-    self:addObjectPositionSamples(rootVehicle or vehicle, samples, "Fahrzeug")
+    self:addObjectPositionSamples(rootVehicle or vehicle, samples, "Vehicle")
 
     if samples[1] ~= nil then
         return samples[1].x, samples[1].z
@@ -1880,7 +1880,7 @@ end
 
 function HelperPersonnelViewBase:getFieldIdAtPositionDetailed(x, z)
     if x == nil or z == nil or g_fieldManager == nil then
-        return nil, "keine Position oder kein FieldManager"
+        return nil, "no position or FieldManager"
     end
 
     local directGetterNames = {"getFieldAtWorldPosition", "getFieldByPosition", "getFieldAtPosition"}
@@ -1902,7 +1902,7 @@ function HelperPersonnelViewBase:getFieldIdAtPositionDetailed(x, z)
             if self:getFieldContainsPosition(field, x, z) then
                 local fieldId = self:getFieldIdFromFieldObject(field)
                 if fieldId ~= nil then
-                    return fieldId, "Feldobjekt enthält Position"
+                    return fieldId, "field object contains position"
                 end
             end
         end
@@ -1915,25 +1915,25 @@ function HelperPersonnelViewBase:getFieldIdAtPositionDetailed(x, z)
         if #mappedFields == 1 then
             local fieldId = self:getFieldIdFromFieldObject(mappedFields[1])
             if fieldId ~= nil then
-                return fieldId, string.format("Farmland %d mit genau einem Feld%s", farmlandId, isFieldGround == false and " (Feldboden nicht bestätigt)" or "")
+                return fieldId, string.format("farmland %d with exactly one field%s", farmlandId, isFieldGround == false and " (field ground not confirmed)" or "")
             end
         elseif #mappedFields > 1 then
             for _, field in ipairs(mappedFields) do
                 if self:getFieldContainsPosition(field, x, z) then
                     local fieldId = self:getFieldIdFromFieldObject(field)
                     if fieldId ~= nil then
-                        return fieldId, string.format("Farmland %d, passendes Feldobjekt", farmlandId)
+                        return fieldId, string.format("farmland %d, matching field object", farmlandId)
                     end
                 end
             end
 
-            return nil, string.format("Farmland %d hat %d mögliche Felder, aber keines passte exakt", farmlandId, #mappedFields)
+            return nil, string.format("farmland %d has %d possible fields, but none matched exactly", farmlandId, #mappedFields)
         else
-            return nil, string.format("Farmland %d gefunden, aber ohne Feldzuordnung", farmlandId)
+            return nil, string.format("farmland %d found, but without field assignment", farmlandId)
         end
     end
 
-    return nil, isFieldGround == true and "Feldboden erkannt, aber keine Feldnummer" or "keine Feldzuordnung an Position"
+    return nil, isFieldGround == true and "field ground detected, but no field number" or "no field assignment at position"
 end
 
 function HelperPersonnelViewBase:getFieldIdAtPosition(x, z)
@@ -1944,15 +1944,15 @@ end
 function HelperPersonnelViewBase:getFieldIdFromWorkPositions(worker, job, vehicle)
     local samples = self:collectWorkPositionSamples(job, vehicle)
     if #samples == 0 then
-        return nil, "keine Fahrzeug-/Geräteposition gefunden"
+        return nil, "no vehicle/implement position found"
     end
 
     local notes = {}
     for index, sample in ipairs(samples) do
         local fieldId, reason = self:getFieldIdAtPositionDetailed(sample.x, sample.z)
-        table.insert(notes, string.format("%s %.1f/%.1f: %s", sample.source or tostring(index), sample.x or 0, sample.z or 0, reason or "unbekannt"))
+        table.insert(notes, string.format("%s %.1f/%.1f: %s", sample.source or tostring(index), sample.x or 0, sample.z or 0, reason or "unknown"))
         if fieldId ~= nil then
-            return fieldId, string.format("%s %.1f/%.1f -> Feld %s (%s)", sample.source or tostring(index), sample.x or 0, sample.z or 0, tostring(fieldId), tostring(reason or ""))
+            return fieldId, string.format("%s %.1f/%.1f -> field %s (%s)", sample.source or tostring(index), sample.x or 0, sample.z or 0, tostring(fieldId), tostring(reason or ""))
         end
     end
 
@@ -1972,7 +1972,7 @@ function HelperPersonnelViewBase:getFieldIdFromActiveContext(context)
 
     local samples = {}
     self:addObjectPositionSamples(context.vehicle, samples, "FollowMe")
-    self:addObjectPositionSamples(context.leaderVehicle, samples, "FollowMeZiel")
+    self:addObjectPositionSamples(context.leaderVehicle, samples, "FollowMeTarget")
 
     for _, sample in ipairs(samples) do
         local detectedFieldId = self:getFieldIdAtPosition(sample.x, sample.z)
@@ -2005,7 +2005,7 @@ function HelperPersonnelViewBase:getCachedFieldIdForActiveWorker(worker, job, ve
     local fieldId = self:getFieldIdFromJob(job)
     local reason = nil
     if fieldId ~= nil then
-        reason = "direkt aus AI-Job gelesen"
+        reason = "read directly from AI job"
     else
         fieldId, reason = self:getFieldIdFromWorkPositions(worker, job, vehicle)
     end
@@ -2016,9 +2016,9 @@ function HelperPersonnelViewBase:getCachedFieldIdForActiveWorker(worker, job, ve
     }
 
     if fieldId ~= nil then
-        self:debugFieldDetection(worker, string.format("Feld %s erkannt: %s", tostring(fieldId), tostring(reason or "")))
+        self:debugFieldDetection(worker, string.format("field %s detected: %s", tostring(fieldId), tostring(reason or "")))
     else
-        self:debugFieldDetection(worker, "kein Feld erkannt: " .. tostring(reason or "unbekannt"))
+        self:debugFieldDetection(worker, "no field detected: " .. tostring(reason or "unknown"))
     end
 
     return fieldId
@@ -2590,7 +2590,7 @@ function HelperPersonnelViewBase:drawDetail()
     else
         self:drawTextLine(0.22, 0.742, 0.0125, RenderText.ALIGN_LEFT, self:getText("ui_instructionWorkerDismiss", "Mit ENTER entlässt du den angewählten Mitarbeiter."), 0.61, 0.73, 0.07, 1, true)
         self:drawTextLine(0.22, 0.722, 0.0125, RenderText.ALIGN_LEFT, self:getText("ui_instructionWorkerTransport", "Über den Transportbutton verwaltest du die Transportreihenfolge, mit S schulst du den Mitarbeiter."), 0.61, 0.73, 0.07, 1, true)
-        self:drawTextLine(0.22, 0.702, 0.0125, RenderText.ALIGN_LEFT, self:getText("ui_instructionWorkerSalaryRaise", "Offene Gehaltsforderungen werden über den Button Gehaltsforderungen verwalten bearbeitet."), 0.61, 0.73, 0.07, 1, true)
+        self:drawTextLine(0.22, 0.702, 0.0125, RenderText.ALIGN_LEFT, self:getText("ui_instructionWorkerSalaryRaise", "Offene Gehaltsforderungen werden über den Button Gehalt bearbeitet."), 0.61, 0.73, 0.07, 1, true)
         detailTitleY = 0.674
         detailSeparatorY = 0.661
         listStartY = 0.526
@@ -3306,10 +3306,10 @@ function HelperPersonnelViewBase:getOverviewHistoryHeader(manager, period, year)
     end
 
     if label ~= nil and label ~= "" then
-        return string.format("ÄNDERUNGEN IM %s", string.upper(label))
+        return string.format(self:getText("ui_pmOverviewChangesHeader", "CHANGES IN %s"), label)
     end
 
-    return "ÄNDERUNGEN DIESES MONATS"
+    return self:getText("ui_changeHistoryHeader", "OTHER CHANGES")
 end
 
 function HelperPersonnelViewBase:buildOverviewHistoryRows(lines, textSize, maxWidth)
@@ -3329,7 +3329,7 @@ function HelperPersonnelViewBase:buildOverviewHistoryRows(lines, textSize, maxWi
     end
 
     if #rows == 0 then
-        table.insert(rows, "- Noch keine Änderungen in diesem Monat.")
+        table.insert(rows, string.format("- %s", self:getText("ui_pmOverviewNoChanges", "No changes this month.")))
     end
 
     return rows
@@ -3342,7 +3342,7 @@ function HelperPersonnelViewBase:drawMonthlyChangeHistory(manager, x, y, width, 
     if manager ~= nil and manager.getMonthlyHistoryLines ~= nil then
         lines, period, year = manager:getMonthlyHistoryLines()
     else
-        lines = { self:getText("ui_summary_lastActionNone", "Noch keine Änderung") }
+        lines = { self:getText("ui_pmOverviewNoChanges", "No changes this month.") }
     end
 
     local textSize = 0.0096
@@ -3377,7 +3377,8 @@ function HelperPersonnelViewBase:drawMonthlyChangeHistory(manager, x, y, width, 
         local scrollbarHeight = math.max(0.030, (visibleRows * lineHeight) + 0.002)
         self.overviewHistoryScrollbarMouseArea = { x = scrollbarX - 0.010, y = scrollbarY, width = 0.028, height = scrollbarHeight }
         self:drawDetailScrollbar(scrollbarX, scrollbarY, 0.006, scrollbarHeight, firstRow, visibleRows, #rows)
-        self:drawTextLine(x + width, y, 0.0105, RenderText.ALIGN_RIGHT, string.format("%d-%d von %d", firstRow, lastRow, #rows), 0.61, 0.73, 0.07, 0.80, false)
+        local rangeTemplate = self:getText("ui_pmOverviewRange", "%d-%d of %d")
+        self:drawTextLine(x + width, y, 0.0105, RenderText.ALIGN_RIGHT, string.format(rangeTemplate, firstRow, lastRow, #rows), 0.61, 0.73, 0.07, 0.80, false)
     end
 
     return contentTop - (visibleRows * lineHeight)

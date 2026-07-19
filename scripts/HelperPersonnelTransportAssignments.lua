@@ -232,7 +232,7 @@ local function hp1570ClearTransportStartResidues(app, job, vehicle, keepWorkerId
     hp1570ClearPendingWorkerForTransport(app, vehicle)
 
     if type(job) == "table" and job.helperPersonnelWorkerId ~= nil and tonumber(job.helperPersonnelWorkerId) ~= keepWorkerId then
-        hp1570Debug("FS25_HelperPersonnel: Transport-Diagnose | alte Job-Mitarbeiter-ID am Transportjob geloescht | Alt=%s | Behalten=%s", tostring(job.helperPersonnelWorkerId), tostring(keepWorkerId))
+        hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | stale job worker ID removed from transport job | Old=%s | Retained=%s", tostring(job.helperPersonnelWorkerId), tostring(keepWorkerId))
         job.helperPersonnelWorkerId = nil
     end
 
@@ -244,7 +244,7 @@ local function hp1570ClearTransportStartResidues(app, job, vehicle, keepWorkerId
     if type(bridge.jobWorkerIds) == "table" and job ~= nil then
         local mappedWorkerId = tonumber(bridge.jobWorkerIds[job])
         if mappedWorkerId ~= nil and mappedWorkerId ~= keepWorkerId then
-            hp1570Debug("FS25_HelperPersonnel: Transport-Diagnose | alte Bridge-Jobzuordnung geloescht | Alt=%s | Behalten=%s", tostring(mappedWorkerId), tostring(keepWorkerId))
+            hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | stale bridge job assignment removed | Old=%s | Retained=%s", tostring(mappedWorkerId), tostring(keepWorkerId))
             bridge.jobWorkerIds[job] = nil
         end
     end
@@ -266,7 +266,7 @@ local function hp1570ClearTransportStartResidues(app, job, vehicle, keepWorkerId
     if vehicleKey ~= nil and type(bridge.vehicleWorkerIds) == "table" then
         local mappedWorkerId = tonumber(bridge.vehicleWorkerIds[vehicleKey])
         if mappedWorkerId ~= nil and mappedWorkerId ~= keepWorkerId then
-            hp1570Debug("FS25_HelperPersonnel: Transport-Diagnose | alte Fahrzeugzuordnung fuer Transportfahrzeug geloescht | Fahrzeug=%s | Alt=%s | Behalten=%s", tostring(vehicleKey), tostring(mappedWorkerId), tostring(keepWorkerId))
+            hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | stale vehicle assignment removed from transport vehicle | Vehicle=%s | Old=%s | Retained=%s", tostring(vehicleKey), tostring(mappedWorkerId), tostring(keepWorkerId))
             bridge.vehicleWorkerIds[vehicleKey] = nil
         end
     end
@@ -477,7 +477,7 @@ if HelperPersonnelManager ~= nil then
         end
 
         local hasActiveJob = self.app ~= nil and hp1570WorkerHasActiveAIJob(self.app, workerId, worker) == true
-        hp1570Debug("FS25_HelperPersonnel: Transport-Diagnose | pruefe Fahrer | ID=%s | Name=%s %s | Busy=%s | Restore=%s | AktiverJob=%s | Cleanup=%s",
+        hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | checking driver | ID=%s | Name=%s %s | Busy=%s | Restore=%s | ActiveJob=%s | Cleanup=%s",
             tostring(workerId),
             tostring(worker.firstName or ""),
             tostring(worker.lastName or ""),
@@ -824,7 +824,7 @@ if HelperPersonnelAIStartHooks ~= nil then
                         app:showPlayerMessage("ui_transportNoDriverAssigned")
                     end
                 end
-                HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transportauftrag ohne freien Transportmitarbeiter wurde blockiert")
+                HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job without an available transport worker was blocked")
                 return false
             end
 
@@ -832,8 +832,8 @@ if HelperPersonnelAIStartHooks ~= nil then
 
             for _, worker in ipairs(drivers) do
                 if worker ~= nil and worker.id ~= nil then
-                    HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transportauftrag wird automatisch von Mitarbeiter-ID %s vorbereitet", tostring(worker.id))
-                    hp1570Debug("FS25_HelperPersonnel: Transport-Diagnose | Startversuch mit Fahrer | ID=%s | Name=%s", tostring(worker.id), hp1570GetWorkerName(app.manager, worker))
+                    HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job will be prepared automatically with worker ID %s", tostring(worker.id))
+                    hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | start attempt with driver | ID=%s | Name=%s", tostring(worker.id), hp1570GetWorkerName(app.manager, worker))
                     hp1570ClearStaleBridgeAssignment(app, worker)
                     hp1570ClearTransportStartResidues(app, job, vehicle, worker.id)
                     if type(job) == "table" then
@@ -861,7 +861,7 @@ if HelperPersonnelAIStartHooks ~= nil then
             if app.showPlayerMessage ~= nil then
                 app:showPlayerMessage("ui_transportNoDriverAvailable")
             end
-            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transportauftrag konnte mit keinem eingeteilten freien Mitarbeiter gestartet werden")
+            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job could not be started with any assigned available worker")
             return false
         end
 
@@ -925,7 +925,7 @@ if HelperPersonnelAIJobHooks ~= nil then
 
             local vehicle = HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.getVehicleFromAIJob ~= nil and HelperPersonnelAIStartHooks.getVehicleFromAIJob(job) or nil
             hp1570ClearTransportStartResidues(app, job, vehicle, nil)
-            hp1570Debug("FS25_HelperPersonnel: Transport-Diagnose | normale Mitarbeiterzuordnung fuer Transportstart ignoriert, freie Transportfahrer-Auswahl wird erzwungen")
+            hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | regular worker assignment ignored for transport start; available transport driver selection is enforced")
             return nil
         end
 
@@ -946,7 +946,7 @@ if HelperPersonnelAIJobHooks ~= nil then
             and not (type(job) == "table" and (job.hpTransportAllowWorkerId ~= nil or job.helperPersonnelTransportStarted == true)) then
 
             if type(job) == "table" and job.helperPersonnelWorkerId ~= nil then
-                hp1570Debug("FS25_HelperPersonnel: Transport-Diagnose | alte Mitarbeiter-ID am Transportjob vor Start ignoriert | ID=%s", tostring(job.helperPersonnelWorkerId))
+                hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | stale worker ID on transport job ignored before start | ID=%s", tostring(job.helperPersonnelWorkerId))
                 job.helperPersonnelWorkerId = nil
             end
             return nil
@@ -990,7 +990,7 @@ if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.sendSelect
                 fallbackJob.helperPersonnelTransportStarted = true
             end
 
-            hp1570Debug("FS25_HelperPersonnel: Transport-Diagnose | sendSelectedAIJob Transport Ergebnis | Mitarbeiter=%s | Ergebnis=%s", tostring(workerId), tostring(result == true))
+            hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | sendSelectedAIJob transport result | Worker=%s | Result=%s", tostring(workerId), tostring(result == true))
             return result
         end
 

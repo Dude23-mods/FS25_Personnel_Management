@@ -107,7 +107,7 @@ function HelperPersonnelConfig:save()
     local xmlFile = XMLFile.create("helperPersonnelConfig", path, "helperPersonnelConfig", HelperPersonnelConfig.xmlSchema)
     if xmlFile == nil then
         if Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("HelperPersonnel: Konnte Konfigurationsdatei nicht erstellen: %s", path)
+            Logging.warning("HelperPersonnel: Could not create configuration file: %s", path)
         end
         return false
     end

@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Înapoi" />
         <e k="ui_dismissalNoticeNextMonth" v="%s a fost concediat pentru sfârșitul lunii următoare." />
         <e k="ui_dismissalNotice" v="%s este concediat la sfârșitul lunii." />
-        <e k="ui_fireDeniedPending" v="Acest angajat este deja concediat." />
+        <e k="ui_fireDeniedPending" v="%s a fost deja concediat. Va părăsi ferma după încheierea perioadei de preaviz." />
         <e k="ui_fireDeniedBusy" v="Angajatul lucrează și nu poate fi concediat." />
         <e k="ui_hireSuccess" v="%s - angajează." />
         <e k="ui_fireSuccess" v="%s - concediază." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: Angajează. ESC: Înapoi la prezentare." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Concediază." />
         <e k="ui_instructionWorkerTransport" v="Folosește butonul de transport pentru a gestiona ordinea și apasă S pentru a instrui angajatul." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Cererile de mărire în așteptare sunt gestionate cu butonul Gestionează cererile de mărire." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Cererile de mărire în așteptare sunt gestionate cu butonul Salariu." />
         <e k="ui_instructionSwitchEntry" v="Fă clic pe o intrare pentru a o selecta; folosește rotița mouse-ului pentru derulare." />
         <e k="ui_training_no_progress" v="Acest angajat nu are încă o direcție de învățare potrivită." />
         <e k="ui_training_worker_busy" v="Angajatul lucrează în prezent și nu poate participa la instruire." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: bolnav, lucrarea curentă a fost anulată." />
         <e k="ui_button_raise_grant" v="Acordă mărire" />
         <e k="ui_button_raise_decline" v="Respinge cererea" />
-        <e k="ui_button_salary_manage_long" v="Gestionează cererile de mărire" />
+        <e k="ui_button_salary_manage_long" v="Salariu" />
         <e k="ui_salaryRequestsTitle" v="Gestionează cererile de mărire" />
         <e k="ui_salaryRequestsIntro" v="Aici sunt afișate toate cererile de mărire aflate în așteptare. Selectează un angajat și decide dacă accepți sau respingi cererea." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Angajat" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONAL" />
         <e k="ui_pmSettingsSectionEconomic" v="ECONOMIE" />
         <e k="ui_button_transport_assign_long" v="Atribuie sarcini de transport" />
-        <e k="ui_button_transport_manage_long" v="Gestionează sarcinile de transport" />
+        <e k="ui_button_transport_manage_long" v="Transport" />
         <e k="ui_transportPriorityTitle" v="Prioritate transport" />
         <e k="ui_transportPriorityIntro" v="Alege angajații care pot prelua sarcini de transport și ordinea în care sunt verificați." />
         <e k="ui_transportPriorityHeaderPriority" v="Prioritate" />
@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s a întrerupt sarcina în desfășurare deoarece a decis spontan să se întâlnească cu prietenii." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s a întrerupt sarcina în desfășurare pentru a ieși spontan la o cafea cu prietena lui." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s a întrerupt sarcina în desfășurare pentru a ieși spontan la o cafea cu prietenul ei." />
+        <e k="ui_pmMonth01" v="martie" />
+        <e k="ui_pmMonth02" v="aprilie" />
+        <e k="ui_pmMonth03" v="mai" />
+        <e k="ui_pmMonth04" v="iunie" />
+        <e k="ui_pmMonth05" v="iulie" />
+        <e k="ui_pmMonth06" v="august" />
+        <e k="ui_pmMonth07" v="septembrie" />
+        <e k="ui_pmMonth08" v="octombrie" />
+        <e k="ui_pmMonth09" v="noiembrie" />
+        <e k="ui_pmMonth10" v="decembrie" />
+        <e k="ui_pmMonth11" v="ianuarie" />
+        <e k="ui_pmMonth12" v="februarie" />
+        <e k="ui_pmPeriodMonthYear" v="%s, anul %d" />
+        <e k="ui_pmPeriodYear" v="Anul %d" />
+        <e k="ui_pmOverviewChangesHeader" v="MODIFICĂRI ÎN %s" />
+        <e k="ui_pmOverviewNoChanges" v="Nicio modificare în această lună." />
+        <e k="ui_pmOverviewRange" v="%d-%d din %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Efect: reputație %s." />
+        <e k="ui_pmPayrollNone" v="Nu există încă un stat de plată." />
+        <e k="ui_pmPayrollBookingFailed" v="Statul de plată nu a putut fi înregistrat: %s." />
+        <e k="ui_pmPayrollBooked" v="Stat de plată înregistrat: %s." />
+        <e k="ui_reliabilityChanged" v="%s: fiabilitate %s%s. Fiabilitate: de la %d la %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="nemulțumire" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="cerere de mărire respinsă" />
+        <e k="ui_reliabilityReasonSalaryPending" v="cerere de mărire în așteptare" />
+        <e k="ui_reliabilityReasonLowReputation" v="reputație scăzută a angajatorului" />
+        <e k="ui_reliabilityReasonNightWork" v="volum mare de muncă pe timp de noapte" />
+        <e k="ui_reliabilityReasonGoodWork" v="lună de lucru bună" />
+        <e k="ui_waitingForServerData" v="Se așteaptă datele serverului" />
     </elements>
 </l10n>

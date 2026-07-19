@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Zpět" />
         <e k="ui_dismissalNoticeNextMonth" v="%s byl propuštěn ke konci příštího měsíce." />
         <e k="ui_dismissalNotice" v="%s je propuštěn ke konci měsíce." />
-        <e k="ui_fireDeniedPending" v="Tento zaměstnanec je již propuštěn." />
+        <e k="ui_fireDeniedPending" v="%s již dostal výpověď. Po uplynutí výpovědní lhůty farmu opustí." />
         <e k="ui_fireDeniedBusy" v="Zaměstnanec právě pracuje a nelze ho propustit." />
         <e k="ui_hireSuccess" v="%s - najmout." />
         <e k="ui_fireSuccess" v="%s - propustit." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: Najmout. ESC: Zpět na přehled." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: Propustit." />
         <e k="ui_instructionWorkerTransport" v="Pořadí pro dopravu spravujete tlačítkem dopravy, klávesou S zaměstnance školíte." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Otevřené žádosti o zvýšení mzdy se zpracovávají tlačítkem Správa žádostí o zvýšení mzdy." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Otevřené žádosti o zvýšení mzdy se zpracovávají tlačítkem Mzda." />
         <e k="ui_instructionSwitchEntry" v="Kliknutím vyberte položku; kolečkem myši posouvejte seznam." />
         <e k="ui_training_no_progress" v="Tento zaměstnanec zatím nemá vhodný směr rozvoje." />
         <e k="ui_training_worker_busy" v="Zaměstnanec právě pracuje a nemůže se účastnit školení." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: nemocný(á), aktuální úkol byl zrušen." />
         <e k="ui_button_raise_grant" v="Schválit zvýšení" />
         <e k="ui_button_raise_decline" v="Odmítnout žádost" />
-        <e k="ui_button_salary_manage_long" v="Správa žádostí o zvýšení mzdy" />
+        <e k="ui_button_salary_manage_long" v="Mzda" />
         <e k="ui_salaryRequestsTitle" v="Správa žádostí o zvýšení mzdy" />
         <e k="ui_salaryRequestsIntro" v="Zde jsou uvedeny všechny otevřené žádosti o zvýšení mzdy. Vyber zaměstnance a rozhodni, zda žádost schválíš, nebo zamítneš." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Zaměstnanec" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONÁL" />
         <e k="ui_pmSettingsSectionEconomic" v="EKONOMIKA" />
         <e k="ui_button_transport_assign_long" v="Přiřadit dopravní úkoly" />
-        <e k="ui_button_transport_manage_long" v="Spravovat dopravní úkoly" />
+        <e k="ui_button_transport_manage_long" v="Doprava" />
         <e k="ui_transportPriorityTitle" v="Priorita dopravy" />
         <e k="ui_transportPriorityIntro" v="Určete, kteří zaměstnanci mohou přebírat dopravní úkoly a v jakém pořadí se kontrolují." />
         <e k="ui_transportPriorityHeaderPriority" v="Priorita" />
@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s přerušila probíhající práci, protože se spontánně rozhodla setkat s přáteli." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s přerušil probíhající práci, aby se spontánně setkal se svou přítelkyní u kávy." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s přerušila probíhající práci, aby se spontánně setkala se svým přítelem u kávy." />
+        <e k="ui_pmMonth01" v="březen" />
+        <e k="ui_pmMonth02" v="duben" />
+        <e k="ui_pmMonth03" v="květen" />
+        <e k="ui_pmMonth04" v="červen" />
+        <e k="ui_pmMonth05" v="červenec" />
+        <e k="ui_pmMonth06" v="srpen" />
+        <e k="ui_pmMonth07" v="září" />
+        <e k="ui_pmMonth08" v="říjen" />
+        <e k="ui_pmMonth09" v="listopad" />
+        <e k="ui_pmMonth10" v="prosinec" />
+        <e k="ui_pmMonth11" v="leden" />
+        <e k="ui_pmMonth12" v="únor" />
+        <e k="ui_pmPeriodMonthYear" v="%s, rok %d" />
+        <e k="ui_pmPeriodYear" v="Rok %d" />
+        <e k="ui_pmOverviewChangesHeader" v="ZMĚNY V OBDOBÍ %s" />
+        <e k="ui_pmOverviewNoChanges" v="Tento měsíc zatím žádné změny." />
+        <e k="ui_pmOverviewRange" v="%d-%d z %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Dopad: reputace %s." />
+        <e k="ui_pmPayrollNone" v="Zatím žádné vyúčtování mezd." />
+        <e k="ui_pmPayrollBookingFailed" v="Mzdy se nepodařilo zaúčtovat: %s." />
+        <e k="ui_pmPayrollBooked" v="Mzdy zaúčtovány: %s." />
+        <e k="ui_reliabilityChanged" v="%s: spolehlivost %s%s. Spolehlivost: %d na %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="nespokojenost" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="zamítnutá žádost o zvýšení mzdy" />
+        <e k="ui_reliabilityReasonSalaryPending" v="nevyřízená žádost o zvýšení mzdy" />
+        <e k="ui_reliabilityReasonLowReputation" v="nízká pověst zaměstnavatele" />
+        <e k="ui_reliabilityReasonNightWork" v="vysoká zátěž noční prací" />
+        <e k="ui_reliabilityReasonGoodWork" v="dobrý pracovní měsíc" />
+        <e k="ui_waitingForServerData" v="Čekání na data ze serveru" />
     </elements>
 </l10n>

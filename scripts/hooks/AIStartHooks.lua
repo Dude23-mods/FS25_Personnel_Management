@@ -107,7 +107,7 @@ function HelperPersonnelAIStartHooks.install(stageName)
 
     if HelperPersonnelAIStartHooks.isInstalled ~= true then
         HelperPersonnelAIStartHooks.isInstalled = true
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose aktiv | Version=1.0.3.0")
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics enabled | Version=1.0.3.0")
     end
 
     local aivehicleAvailable = AIVehicle ~= nil and AIVehicle.startAIVehicle ~= nil
@@ -124,7 +124,7 @@ function HelperPersonnelAIStartHooks.install(stageName)
     local hookAIModeSettingsChanged = hpInstallStartHook(AIModeSelection, "aiModeSettingsChanged", HelperPersonnelAIStartHooks.onAIModeSettingsChanged, "AIModeSelection.aiModeSettingsChanged")
     local hookAISettingsDialogShow = hpInstallStartHook(AISettingsDialog, "show", HelperPersonnelAIStartHooks.onAISettingsDialogShow, "AISettingsDialog.show")
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose Hooks | Phase=%s | AIVehicle.startAIVehicle=%s/%s | AIFieldWorker.onClickActivate=%s/%s | AIJobVehicle.startAIJob=%s/%s | AIJobVehicle.toggleAIVehicle=%s/%s | AIModeSelection.aiModeSettingsChanged=%s/%s | AISettingsDialog.show=%s/%s | AIJobStartRequestEvent=%s | AISystem.startJob=%s",
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostic hooks | Phase=%s | AIVehicle.startAIVehicle=%s/%s | AIFieldWorker.onClickActivate=%s/%s | AIJobVehicle.startAIJob=%s/%s | AIJobVehicle.toggleAIVehicle=%s/%s | AIModeSelection.aiModeSettingsChanged=%s/%s | AISettingsDialog.show=%s/%s | AIJobStartRequestEvent=%s | AISystem.startJob=%s",
         tostring(stageName),
         tostring(aivehicleAvailable), tostring(hookAIVehicle),
         tostring(aiFieldWorkerAvailable), tostring(hookAIFieldWorker),
@@ -175,31 +175,31 @@ end
 function HelperPersonnelAIStartHooks.shouldHandleVehicleStart(vehicle)
     local app = g_helperPersonnelApp
     if app == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleVehicleStart=false | Grund=keineApp | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleVehicleStart=false | Reason=noApp | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
         return false
     end
 
     if vehicle == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleVehicleStart=false | Grund=keinFahrzeug")
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleVehicleStart=false | Reason=noVehicle")
         return false
     end
 
     if vehicle.getIsAIActive ~= nil and vehicle:getIsAIActive() then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleVehicleStart=false | Grund=bereitsAktiv | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleVehicleStart=false | Reason=alreadyActive | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
         return false
     end
 
     if vehicle.getStartableAIJob == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleVehicleStart=false | Grund=keinGetStartableAIJob | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleVehicleStart=false | Reason=noGetStartableAIJob | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
         return false
     end
 
     if g_currentMission ~= nil and g_currentMission.disableAIVehicle then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleVehicleStart=false | Grund=disableAIVehicle | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleVehicleStart=false | Reason=disableAIVehicle | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
         return false
     end
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleVehicleStart=true | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleVehicleStart=true | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
     return true
 end
 
@@ -248,32 +248,32 @@ end
 function HelperPersonnelAIStartHooks.shouldHandleAIJobStart(job)
     local app = g_helperPersonnelApp
     if app == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleAIJobStart=false | Grund=keineApp | Job=%s", HelperPersonnelAIStartHooks.getDebugJobName(job))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleAIJobStart=false | Reason=noApp | Job=%s", HelperPersonnelAIStartHooks.getDebugJobName(job))
         return false
     end
 
     if job == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleAIJobStart=false | Grund=keinJob")
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleAIJobStart=false | Reason=noJob")
         return false
     end
 
     local vehicle = HelperPersonnelAIStartHooks.getVehicleFromAIJob(job)
     if vehicle == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleAIJobStart=false | Grund=keinFahrzeug | Job=%s", HelperPersonnelAIStartHooks.getDebugJobName(job))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleAIJobStart=false | Reason=noVehicle | Job=%s", HelperPersonnelAIStartHooks.getDebugJobName(job))
         return false
     end
 
     if vehicle.getIsAIActive ~= nil and vehicle:getIsAIActive() then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleAIJobStart=false | Grund=FahrzeugBereitsAktiv | Job=%s | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleAIJobStart=false | Reason=vehicleAlreadyActive | Job=%s | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
         return false
     end
 
     if g_currentMission ~= nil and g_currentMission.disableAIVehicle then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleAIJobStart=false | Grund=disableAIVehicle | Job=%s | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleAIJobStart=false | Reason=disableAIVehicle | Job=%s | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
         return false
     end
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | shouldHandleAIJobStart=true | Job=%s | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | shouldHandleAIJobStart=true | Job=%s | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
     return true
 end
 
@@ -330,7 +330,7 @@ end
 
 function HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, fallbackJob, fallbackFarmId, reason, delayFrames)
     if vehicle == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | queueSelectionForVehicle=false | Grund=keinFahrzeug | Job=%s | Farm=%s | GrundPfad=%s",
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | queueSelectionForVehicle=false | Reason=noVehicle | Job=%s | Farm=%s | ReasonPath=%s",
             HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob),
             tostring(fallbackFarmId),
             tostring(reason))
@@ -343,7 +343,7 @@ function HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, fallbackJ
     end
 
     if aiJob == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | queueSelectionForVehicle=false | Grund=keinStartableJob | Fahrzeug=%s | Farm=%s | GrundPfad=%s",
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | queueSelectionForVehicle=false | Reason=noStartableJob | Vehicle=%s | Farm=%s | ReasonPath=%s",
             HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
             tostring(fallbackFarmId),
             tostring(reason))
@@ -358,7 +358,7 @@ function HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, fallbackJ
         reason = reason
     }
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | queueSelectionForVehicle=true | Job=%s | Fahrzeug=%s | Farm=%s | DelayFrames=%s | GrundPfad=%s",
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | queueSelectionForVehicle=true | Job=%s | Vehicle=%s | Farm=%s | DelayFrames=%s | ReasonPath=%s",
         HelperPersonnelAIStartHooks.getDebugJobName(aiJob),
         HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
         tostring(fallbackFarmId),
@@ -379,7 +379,7 @@ function HelperPersonnelAIStartHooks.queueSelectionForAIJob(job, fallbackFarmId)
         end
     end
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | queueSelectionForAIJob ENTER | Job=%s | Fahrzeug=%s | Ziel=%s | Farm=%s | FollowMe=%s | Excluded=%s",
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | queueSelectionForAIJob ENTER | Job=%s | Vehicle=%s | Target=%s | Farm=%s | FollowMe=%s | Excluded=%s",
         HelperPersonnelAIStartHooks.getDebugJobName(job),
         HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
         HelperPersonnelAIStartHooks.getDebugVehicleName(followVehicle),
@@ -388,7 +388,7 @@ function HelperPersonnelAIStartHooks.queueSelectionForAIJob(job, fallbackFarmId)
         tostring(excludedCount))
 
     if vehicle == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | queueSelectionForAIJob=false | Grund=keinFahrzeug | Job=%s | Farm=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), tostring(fallbackFarmId))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | queueSelectionForAIJob=false | Reason=noVehicle | Job=%s | Farm=%s", HelperPersonnelAIStartHooks.getDebugJobName(job), tostring(fallbackFarmId))
         return false
     end
 
@@ -407,14 +407,14 @@ function HelperPersonnelAIStartHooks.updatePendingSelection(dt)
     end
 
     HelperPersonnelAIStartHooks.pendingSelection = nil
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | pendingSelection wird verarbeitet | Job=%s | Fahrzeug=%s | Farm=%s | GrundPfad=%s",
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | pendingSelection is being processed | Job=%s | Vehicle=%s | Farm=%s | ReasonPath=%s",
         HelperPersonnelAIStartHooks.getDebugJobName(pending.job),
         HelperPersonnelAIStartHooks.getDebugVehicleName(pending.vehicle),
         tostring(pending.farmId),
         tostring(pending.reason))
 
     if pending.job == nil or pending.vehicle == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | pendingSelection abgebrochen | Grund=JobOderFahrzeugFehlt | Job=%s | Fahrzeug=%s",
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | pendingSelection aborted | Reason=jobOrVehicleMissing | Job=%s | Vehicle=%s",
             HelperPersonnelAIStartHooks.getDebugJobName(pending.job),
             HelperPersonnelAIStartHooks.getDebugVehicleName(pending.vehicle))
         return
@@ -422,22 +422,22 @@ function HelperPersonnelAIStartHooks.updatePendingSelection(dt)
 
     local opened = HelperPersonnelAIStartHooks.openSelectionForVehicle(pending.vehicle, pending.job, pending.farmId)
     if opened then
-        hpStartDebug("FS25_HelperPersonnel: KI-Auftrag aus erweitertem Helfermenue abgefangen, Mitarbeiterauswahl geoeffnet")
+        hpStartDebug("FS25_HelperPersonnel: AI job from the advanced helper menu intercepted; worker selection opened")
     else
-        hpStartDebug("FS25_HelperPersonnel: KI-Auftrag aus erweitertem Helfermenue konnte keine Mitarbeiterauswahl oeffnen")
+        hpStartDebug("FS25_HelperPersonnel: AI job from the advanced helper menu could not open worker selection")
     end
 end
 
 function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallbackJob, fallbackFarmId)
     local app = g_helperPersonnelApp
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob aufgerufen | Mitarbeiter=%s | Fahrzeug=%s | FallbackJob=%s | Farm=%s",
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob called | Worker=%s | Vehicle=%s | FallbackJob=%s | Farm=%s",
         tostring(workerId),
         HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
         HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob),
         tostring(fallbackFarmId))
 
     if app == nil or vehicle == nil or workerId == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob=false | Grund=AppFahrzeugOderMitarbeiterFehlt")
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob=false | Reason=appVehicleOrWorkerMissing")
         return false
     end
 
@@ -447,24 +447,24 @@ function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallba
     end
 
     if aiJob == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob=false | Grund=keinAIJob | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob=false | Reason=noAIJob | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
         return false
     end
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob Job ermittelt | Job=%s | Fahrzeug=%s", HelperPersonnelAIStartHooks.getDebugJobName(aiJob), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob job resolved | Job=%s | Vehicle=%s", HelperPersonnelAIStartHooks.getDebugJobName(aiJob), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle))
 
     if app.helperBridge ~= nil and app.helperBridge.canUseWorkerForJob ~= nil and not app.helperBridge:canUseWorkerForJob(workerId, aiJob) then
         if app.showPlayerMessage ~= nil then
             app:showPlayerMessage("ui_selectionWorkerUnavailable")
         end
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob=false | Grund=MitarbeiterNichtVerfuegbar | Mitarbeiter=%s | Job=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob=false | Reason=workerNotAvailable | Worker=%s | Job=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob))
         return false
     end
 
     app:prepareAIJobForWorker(aiJob, vehicle, workerId)
 
     local farmId = getOwnerFarmId(vehicle, fallbackFarmId)
-    HelperPersonnel.debugInfo("FS25_HelperPersonnel: KI-Auftrag wird mit Mitarbeiter-ID %s vorbereitet", tostring(workerId))
+    HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI job is being prepared with worker ID %s", tostring(workerId))
 
     if g_client ~= nil and g_client.getServerConnection ~= nil and g_client:getServerConnection() ~= nil and AIJobStartRequestEvent ~= nil then
         HelperPersonnelAIStartHooks.isSendingSelectedAIJob = true
@@ -472,25 +472,25 @@ function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallba
         HelperPersonnelAIStartHooks.isSendingSelectedAIJob = false
 
         g_client:getServerConnection():sendEvent(event)
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob=true | Pfad=ClientEvent | Mitarbeiter=%s | Job=%s | Farm=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob), tostring(farmId))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob=true | Path=ClientEvent | Worker=%s | Job=%s | Farm=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob), tostring(farmId))
         return true
     end
 
     if g_currentMission ~= nil and g_currentMission.aiSystem ~= nil and g_currentMission.aiSystem.startJob ~= nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob startet AISystem | Mitarbeiter=%s | Job=%s | Farm=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob), tostring(farmId))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob starts AISystem | Worker=%s | Job=%s | Farm=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob), tostring(farmId))
         local result = g_currentMission.aiSystem:startJob(aiJob, farmId)
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob Ergebnis | Pfad=AISystem | Ergebnis=%s | Mitarbeiter=%s | Job=%s", tostring(result), tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob result | Path=AISystem | Result=%s | Worker=%s | Job=%s", tostring(result), tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob))
         return result ~= false
     end
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | sendSelectedAIJob=false | Grund=keinStartpfad | Mitarbeiter=%s | Job=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob))
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob=false | Reason=noStartPath | Worker=%s | Job=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob))
     return false
 end
 
 function HelperPersonnelAIStartHooks.openSelectionForVehicle(vehicle, fallbackJob, fallbackFarmId)
     local app = g_helperPersonnelApp
     if app == nil or vehicle == nil then
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | openSelectionForVehicle=false | Grund=AppOderFahrzeugFehlt | Fahrzeug=%s | Job=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | openSelectionForVehicle=false | Reason=appOrVehicleMissing | Vehicle=%s | Job=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob))
         return false
     end
 
@@ -502,7 +502,7 @@ function HelperPersonnelAIStartHooks.openSelectionForVehicle(vehicle, fallbackJo
         end
     end
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | openSelectionForVehicle aufgerufen | Fahrzeug=%s | Job=%s | Farm=%s | Overlay=%s | VerfuegbareMitarbeiter=%s",
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | openSelectionForVehicle called | Vehicle=%s | Job=%s | Farm=%s | Overlay=%s | AvailableWorkers=%s",
         HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
         HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob),
         tostring(fallbackFarmId),
@@ -515,14 +515,14 @@ function HelperPersonnelAIStartHooks.openSelectionForVehicle(vehicle, fallbackJo
             return
         end
 
-        hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | Mitarbeiterauswahl bestaetigt | Mitarbeiter=%s | Fahrzeug=%s | Job=%s", tostring(selectedWorker.id), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob))
+        hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | worker selection confirmed | Worker=%s | Vehicle=%s | Job=%s", tostring(selectedWorker.id), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob))
         HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, selectedWorker.id, fallbackJob, fallbackFarmId)
     end, excludedWorkerIds)
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | openSelectionForVehicle Ergebnis | Geoeffnet=%s | Fahrzeug=%s | Job=%s", tostring(opened), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob))
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | openSelectionForVehicle result | Opened=%s | Vehicle=%s | Job=%s", tostring(opened), HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob))
 
     if opened then
-        hpStartDebug("FS25_HelperPersonnel: Normale KI-Startanfrage abgefangen, Mitarbeiterauswahl geoeffnet")
+        hpStartDebug("FS25_HelperPersonnel: Standard AI start request intercepted; worker selection opened")
     end
 
     return opened
@@ -536,14 +536,14 @@ function HelperPersonnelAIStartHooks.openSelectionForAIJob(job, fallbackFarmId)
 
     local opened = HelperPersonnelAIStartHooks.openSelectionForVehicle(vehicle, job, fallbackFarmId)
     if opened then
-        HelperPersonnel.debugInfo("FS25_HelperPersonnel: KI-Auftrag aus Job-Menue abgefangen, Mitarbeiterauswahl geoeffnet")
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI job from the job menu intercepted; worker selection opened")
     end
 
     return opened
 end
 
 function HelperPersonnelAIStartHooks.handleVehicleStart(vehicle, superFunc, ...)
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | handleVehicleStart aufgerufen | Fahrzeug=%s | SuperFunc=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), tostring(superFunc ~= nil))
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | handleVehicleStart called | Vehicle=%s | SuperFunc=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), tostring(superFunc ~= nil))
 
     if not HelperPersonnelAIStartHooks.shouldHandleVehicleStart(vehicle) then
         if superFunc ~= nil then
@@ -554,7 +554,7 @@ function HelperPersonnelAIStartHooks.handleVehicleStart(vehicle, superFunc, ...)
     end
 
     local startableJob = vehicle:getStartableAIJob()
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | handleVehicleStart startableJob | Fahrzeug=%s | Job=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(startableJob))
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | handleVehicleStart startableJob | Vehicle=%s | Job=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), HelperPersonnelAIStartHooks.getDebugJobName(startableJob))
     if startableJob == nil then
         if superFunc ~= nil then
             return superFunc(vehicle, ...)
@@ -579,9 +579,9 @@ function HelperPersonnelAIStartHooks.handleVehicleStart(vehicle, superFunc, ...)
         if workerId ~= nil then
             app:prepareAIJobForWorker(startableJob, vehicle, workerId)
             app.helperBridge:attachRestoredJob(startableJob, workerId)
-            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Gespeicherte Mitarbeiterzuordnung fuer wiederhergestellten Fahrzeug-KI-Start uebernommen")
+            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Saved worker assignment applied to restored vehicle AI start")
         else
-            Logging.warning("FS25_HelperPersonnel: Wiederhergestellter Fahrzeug-KI-Start konnte keinem gespeicherten Mitarbeiter zugeordnet werden")
+            Logging.warning("FS25_HelperPersonnel: Restored vehicle AI start could not be matched to a saved worker")
         end
 
         if superFunc ~= nil then
@@ -600,7 +600,7 @@ function HelperPersonnelAIStartHooks.handleVehicleStart(vehicle, superFunc, ...)
 end
 
 function HelperPersonnelAIStartHooks.onAIModeSettingsChanged(vehicle, superFunc, aiMode, fieldCourseSettings, ...)
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AIModeSelection.aiModeSettingsChanged | Fahrzeug=%s | Modus=%s | HatSettings=%s",
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIModeSelection.aiModeSettingsChanged | Vehicle=%s | Mode=%s | HasSettings=%s",
         HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
         HelperPersonnelAIStartHooks.getAIModeDebugName(aiMode),
         tostring(fieldCourseSettings ~= nil))
@@ -611,7 +611,7 @@ end
 function HelperPersonnelAIStartHooks.onAISettingsDialogShow(userSettings, superFunc, fieldCourseSettings, target, currentMode, fieldX, fieldZ, callbackFunc, callbackSelf, ...)
     local vehicle = HelperPersonnelAIStartHooks.getVehicleFromAISettingsTarget(target)
 
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISettingsDialog.show | Ziel=%s | Fahrzeug=%s | Modus=%s | HatCallback=%s | HatSettings=%s",
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISettingsDialog.show | Target=%s | Vehicle=%s | Mode=%s | HasCallback=%s | HasSettings=%s",
         hpGetDebugClassName(target),
         HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
         HelperPersonnelAIStartHooks.getAIModeDebugName(currentMode),
@@ -633,7 +633,7 @@ function HelperPersonnelAIStartHooks.onAISettingsDialogShow(userSettings, superF
                 callbackSettings = callbackArgs[2]
             end
 
-            hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISettingsDialog.Callback | Fahrzeug=%s | Modus=%s | HatSettings=%s",
+            hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISettingsDialog.Callback | Vehicle=%s | Mode=%s | HasSettings=%s",
                 HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
                 HelperPersonnelAIStartHooks.getAIModeDebugName(aiMode),
                 tostring(callbackSettings ~= nil))
@@ -644,7 +644,7 @@ function HelperPersonnelAIStartHooks.onAISettingsDialogShow(userSettings, superF
                 and HelperPersonnelAIStartHooks.shouldHandleVehicleStart(vehicle) then
                 local farmId = getOwnerFarmId(vehicle, nil)
                 local queued = HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, nil, farmId, "AISettingsDialogCallback", 10)
-                hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | AISettingsDialog.Callback Auswahl nach Start | Fahrzeug=%s | Queued=%s",
+                hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISettingsDialog.Callback selection after start | Vehicle=%s | Queued=%s",
                     HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
                     tostring(queued))
             end
@@ -661,7 +661,7 @@ function HelperPersonnelAIStartHooks.onStartAIVehicle(vehicle, superFunc, ...)
 end
 
 function HelperPersonnelAIStartHooks.onFieldWorkerActivate(worker, superFunc, ...)
-    hpStartDebug("FS25_HelperPersonnel: Helferstart-Diagnose | onFieldWorkerActivate | Worker=%s | WorkerVehicle=%s | HatGetStartableAIJob=%s", hpGetDebugClassName(worker), HelperPersonnelAIStartHooks.getDebugVehicleName(worker ~= nil and worker.vehicle or nil), tostring(worker ~= nil and worker.getStartableAIJob ~= nil))
+    hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | onFieldWorkerActivate | Worker=%s | WorkerVehicle=%s | HasGetStartableAIJob=%s", hpGetDebugClassName(worker), HelperPersonnelAIStartHooks.getDebugVehicleName(worker ~= nil and worker.vehicle or nil), tostring(worker ~= nil and worker.getStartableAIJob ~= nil))
 
     if worker ~= nil and worker.getStartableAIJob == nil and worker.vehicle ~= nil then
         if superFunc ~= nil then

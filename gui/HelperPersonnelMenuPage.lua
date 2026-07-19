@@ -418,11 +418,11 @@ function HelperPersonnelMenuPage:getPrimaryButtonText()
 end
 
 function HelperPersonnelMenuPage:getTransportButtonText()
-    return self:getText("ui_button_transport_manage_long", "Transportaufgaben verwalten")
+    return self:getText("ui_button_transport_manage_long", "Transport")
 end
 
 function HelperPersonnelMenuPage:getSalaryButtonText()
-    return self:getText("ui_button_salary_manage_long", "Gehaltsforderungen verwalten")
+    return self:getText("ui_button_salary_manage_long", "Gehalt")
 end
 
 function HelperPersonnelMenuPage:updateButtons()
@@ -1002,6 +1002,12 @@ function HelperPersonnelMenuPage:onClickPrimaryAction()
         return self:showConfirmDialog(text, self.onConfirmTraining, {person = person, specializationKey = specializationKey})
     elseif self.pageKind == "settings" then
         return false
+    end
+
+    if person.dismissalPending == true then
+        local message = self:formatText("ui_fireDeniedPending", "%s wurde bereits gekündigt. Er wird den Betrieb nach Ende der Kündigungsfrist verlassen.", self:getPersonName(person))
+        self:showTrainingInfoText(message)
+        return true
     end
 
     local text = self:formatText("ui_pmConfirmDismiss", "%s wirklich kündigen?", self:getPersonName(person))
@@ -1954,7 +1960,7 @@ function HelperPersonnelMenuPage:getProfileTemplate(person, isApplicant)
                 return dynamicText
             end
             if not ok and Logging ~= nil and Logging.warning ~= nil then
-                Logging.warning("FS25_PersonnelManagement: Bewerberprofil konnte nicht erzeugt werden: %s", tostring(dynamicText))
+                Logging.warning("FS25_PersonnelManagement: Could not generate applicant profile: %s", tostring(dynamicText))
             end
         end
         return self:formatText("ui_pmApplicantProfileText", "%s bewirbt sich mit Erfahrung aus einem %s. Die bisherigen Angaben sprechen für %s. Die Werte sind eine Momentaufnahme des Bewerberprofils.", name, origin, strength)
@@ -1966,7 +1972,7 @@ function HelperPersonnelMenuPage:getProfileTemplate(person, isApplicant)
             return dynamicText
         end
         if not ok and Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("FS25_PersonnelManagement: Profiltext konnte nicht erzeugt werden: %s", tostring(dynamicText))
+            Logging.warning("FS25_PersonnelManagement: Could not generate profile text: %s", tostring(dynamicText))
         end
     end
 
@@ -2077,4 +2083,3 @@ function HelperPersonnelMenuPage:drawWorkerHistoryTable(person)
         end
     end
 end
-

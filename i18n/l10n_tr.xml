@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Geri" />
         <e k="ui_dismissalNoticeNextMonth" v="%s gelecek ayın sonu için işten çıkarıldı." />
         <e k="ui_dismissalNotice" v="%s ay sonunda işten çıkarılacak." />
-        <e k="ui_fireDeniedPending" v="Bu çalışan zaten işten çıkarıldı." />
+        <e k="ui_fireDeniedPending" v="%s zaten işten çıkarıldı. İhbar süresi sona erdiğinde çiftlikten ayrılacak." />
         <e k="ui_fireDeniedBusy" v="Çalışan görevde olduğu için işten çıkarılamaz." />
         <e k="ui_hireSuccess" v="%s - i̇şe al." />
         <e k="ui_fireSuccess" v="%s - i̇şten çıkar." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="ENTER: İşe al. ESC: Genel bakışa dön." />
         <e k="ui_instructionWorkerDismiss" v="ENTER: İşten çıkar." />
         <e k="ui_instructionWorkerTransport" v="Taşıma sırasını taşıma düğmesiyle yönetin, çalışanı eğitmek için S’ye basın." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Bekleyen zam talepleri Zam taleplerini yönet düğmesiyle işlenir." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Bekleyen zam talepleri Maaş düğmesiyle işlenir." />
         <e k="ui_instructionSwitchEntry" v="Seçmek için bir kayda tıklayın; kaydırmak için fare tekerleğini kullanın." />
         <e k="ui_training_no_progress" v="Bu çalışanın henüz uygun bir öğrenme yönü yok." />
         <e k="ui_training_worker_busy" v="Çalışan şu anda görevde ve eğitime katılamaz." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s: hasta, mevcut görev iptal edildi." />
         <e k="ui_button_raise_grant" v="Zammı onayla" />
         <e k="ui_button_raise_decline" v="Talebi reddet" />
-        <e k="ui_button_salary_manage_long" v="Zam taleplerini yönet" />
+        <e k="ui_button_salary_manage_long" v="Maaş" />
         <e k="ui_salaryRequestsTitle" v="Zam taleplerini yönet" />
         <e k="ui_salaryRequestsIntro" v="Bekleyen tüm zam talepleri burada gösterilir. Bir çalışan seç ve talebi kabul etmeye veya reddetmeye karar ver." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Çalışan" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONEL" />
         <e k="ui_pmSettingsSectionEconomic" v="EKONOMİ" />
         <e k="ui_button_transport_assign_long" v="Taşıma görevleri ata" />
-        <e k="ui_button_transport_manage_long" v="Taşıma görevlerini yönet" />
+        <e k="ui_button_transport_manage_long" v="Taşıma" />
         <e k="ui_transportPriorityTitle" v="Taşıma önceliği" />
         <e k="ui_transportPriorityIntro" v="Taşıma görevlerini üstlenebilecek çalışanları ve kontrol sıralarını belirleyin." />
         <e k="ui_transportPriorityHeaderPriority" v="Öncelik" />
@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s arkadaşlarıyla aniden buluşmaya karar verdiği için devam eden görevi yarıda bıraktı." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s kız arkadaşıyla aniden kahve içmeye gitmek için devam eden görevi yarıda bıraktı." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s erkek arkadaşıyla aniden kahve içmeye gitmek için devam eden görevi yarıda bıraktı." />
+        <e k="ui_pmMonth01" v="Mart" />
+        <e k="ui_pmMonth02" v="Nisan" />
+        <e k="ui_pmMonth03" v="Mayıs" />
+        <e k="ui_pmMonth04" v="Haziran" />
+        <e k="ui_pmMonth05" v="Temmuz" />
+        <e k="ui_pmMonth06" v="Ağustos" />
+        <e k="ui_pmMonth07" v="Eylül" />
+        <e k="ui_pmMonth08" v="Ekim" />
+        <e k="ui_pmMonth09" v="Kasım" />
+        <e k="ui_pmMonth10" v="Aralık" />
+        <e k="ui_pmMonth11" v="Ocak" />
+        <e k="ui_pmMonth12" v="Şubat" />
+        <e k="ui_pmPeriodMonthYear" v="%s, %d. yıl" />
+        <e k="ui_pmPeriodYear" v="%d. yıl" />
+        <e k="ui_pmOverviewChangesHeader" v="%s DÖNEMİNDEKİ DEĞİŞİKLİKLER" />
+        <e k="ui_pmOverviewNoChanges" v="Bu ay değişiklik yok." />
+        <e k="ui_pmOverviewRange" v="%d-%d / %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Etki: %s itibar." />
+        <e k="ui_pmPayrollNone" v="Henüz maaş ödemesi yok." />
+        <e k="ui_pmPayrollBookingFailed" v="Maaş ödemesi kaydedilemedi: %s." />
+        <e k="ui_pmPayrollBooked" v="Maaş ödemesi kaydedildi: %s." />
+        <e k="ui_reliabilityChanged" v="%s: güvenilirlik %s%s. Güvenilirlik: %d -&gt; %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="memnuniyetsizlik" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="reddedilen maaş artışı talebi" />
+        <e k="ui_reliabilityReasonSalaryPending" v="bekleyen maaş artışı talebi" />
+        <e k="ui_reliabilityReasonLowReputation" v="düşük işveren itibarı" />
+        <e k="ui_reliabilityReasonNightWork" v="yüksek gece çalışması yükü" />
+        <e k="ui_reliabilityReasonGoodWork" v="iyi bir çalışma ayı" />
+        <e k="ui_waitingForServerData" v="Sunucu verileri bekleniyor" />
     </elements>
 </l10n>

@@ -870,7 +870,7 @@ function HelperPersonnelHelperBridge:getVehicleFromJob(job)
         end
     end
 
-    if job.getNamedParameter ~= nil then
+    if job.getNamedParameter ~= nil and type(job.namedParameters) == "table" then
         local vehicleParameter = job:getNamedParameter("VEHICLE") or job:getNamedParameter("vehicle")
         if vehicleParameter ~= nil then
             if vehicleParameter.getVehicle ~= nil then
@@ -1313,6 +1313,16 @@ end
 function HelperPersonnelHelperBridge:tryStopAIJob(job)
     if job == nil then
         return false
+    end
+
+    if job.helperPersonnelExternalStop ~= nil then
+        local ok, result = pcall(job.helperPersonnelExternalStop, job)
+        if ok and result ~= false then
+            return true
+        end
+        if not ok and Logging ~= nil and Logging.warning ~= nil then
+            Logging.warning("FS25_HelperPersonnel: External AI stop failed: %s", tostring(result))
+        end
     end
 
     local aiSystem = g_currentMission ~= nil and g_currentMission.aiSystem or nil

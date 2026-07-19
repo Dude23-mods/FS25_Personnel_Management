@@ -47,7 +47,7 @@
         <e k="ui_button_back" v="Indietro" />
         <e k="ui_dismissalNoticeNextMonth" v="%s è stato licenziato per la fine del prossimo mese." />
         <e k="ui_dismissalNotice" v="%s è stato licenziato per la fine del mese." />
-        <e k="ui_fireDeniedPending" v="Questo dipendente è già licenziato." />
+        <e k="ui_fireDeniedPending" v="%s è già stato licenziato. Lascerà l'azienda agricola al termine del periodo di preavviso." />
         <e k="ui_fireDeniedBusy" v="Questo dipendente sta lavorando e non può essere licenziato." />
         <e k="ui_hireSuccess" v="%s è stato assunto." />
         <e k="ui_fireSuccess" v="%s è stato licenziato." />
@@ -117,7 +117,7 @@
         <e k="ui_instructionApplicant" v="INVIO assume il candidato selezionato. ESC torna alla panoramica." />
         <e k="ui_instructionWorkerDismiss" v="Premi INVIO per licenziare il dipendente selezionato." />
         <e k="ui_instructionWorkerTransport" v="Usa il pulsante Trasporto per gestire l’ordine e premi S per formare il dipendente." />
-        <e k="ui_instructionWorkerSalaryRaise" v="Le richieste di aumento aperte si gestiscono con il pulsante Gestisci richieste di aumento." />
+        <e k="ui_instructionWorkerSalaryRaise" v="Le richieste di aumento aperte si gestiscono con il pulsante Stipendio." />
         <e k="ui_instructionSwitchEntry" v="Fai clic su una voce per selezionarla; usa la rotella del mouse per scorrere." />
         <e k="ui_training_no_progress" v="Questo dipendente non ha ancora una direzione di apprendimento adatta." />
         <e k="ui_training_worker_busy" v="Il dipendente sta lavorando e non può partecipare alla formazione." />
@@ -158,7 +158,7 @@
         <e k="ui_sicknessNoticeJobAborted" v="%s è malato e oggi non può lavorare. L'incarico in corso è stato annullato." />
         <e k="ui_button_raise_grant" v="Concedi aumento" />
         <e k="ui_button_raise_decline" v="Rifiuta richiesta" />
-        <e k="ui_button_salary_manage_long" v="Gestisci richieste di aumento" />
+        <e k="ui_button_salary_manage_long" v="Stipendio" />
         <e k="ui_salaryRequestsTitle" v="Gestisci richieste di aumento" />
         <e k="ui_salaryRequestsIntro" v="Qui sono elencate tutte le richieste di aumento aperte. Seleziona un dipendente e decidi se accettare o rifiutare la richiesta." />
         <e k="ui_salaryRequestsHeaderEmployee" v="Dipendente" />
@@ -273,7 +273,7 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONALE" />
         <e k="ui_pmSettingsSectionEconomic" v="ECONOMIA" />
         <e k="ui_button_transport_assign_long" v="Assegna lavori di trasporto" />
-        <e k="ui_button_transport_manage_long" v="Gestisci lavori di trasporto" />
+        <e k="ui_button_transport_manage_long" v="Trasporto" />
         <e k="ui_transportPriorityTitle" v="Priorità di trasporto" />
         <e k="ui_transportPriorityIntro" v="Scegli quali dipendenti possono svolgere lavori di trasporto e l’ordine in cui vengono controllati." />
         <e k="ui_transportPriorityHeaderPriority" v="Priorità" />
@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s ha interrotto il lavoro in corso perché ha deciso spontaneamente di incontrare degli amici." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s ha interrotto il lavoro in corso per andare spontaneamente a prendere un caffè con la sua ragazza." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s ha interrotto il lavoro in corso per andare spontaneamente a prendere un caffè con il suo ragazzo." />
+        <e k="ui_pmMonth01" v="marzo" />
+        <e k="ui_pmMonth02" v="aprile" />
+        <e k="ui_pmMonth03" v="maggio" />
+        <e k="ui_pmMonth04" v="giugno" />
+        <e k="ui_pmMonth05" v="luglio" />
+        <e k="ui_pmMonth06" v="agosto" />
+        <e k="ui_pmMonth07" v="settembre" />
+        <e k="ui_pmMonth08" v="ottobre" />
+        <e k="ui_pmMonth09" v="novembre" />
+        <e k="ui_pmMonth10" v="dicembre" />
+        <e k="ui_pmMonth11" v="gennaio" />
+        <e k="ui_pmMonth12" v="febbraio" />
+        <e k="ui_pmPeriodMonthYear" v="%s, anno %d" />
+        <e k="ui_pmPeriodYear" v="Anno %d" />
+        <e k="ui_pmOverviewChangesHeader" v="CAMBIAMENTI IN %s" />
+        <e k="ui_pmOverviewNoChanges" v="Nessuna modifica questo mese." />
+        <e k="ui_pmOverviewRange" v="%d-%d di %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Effetto: reputazione %s." />
+        <e k="ui_pmPayrollNone" v="Nessun pagamento degli stipendi registrato." />
+        <e k="ui_pmPayrollBookingFailed" v="Impossibile registrare gli stipendi: %s." />
+        <e k="ui_pmPayrollBooked" v="Stipendi registrati: %s." />
+        <e k="ui_reliabilityChanged" v="%s: affidabilità %s%s. Affidabilità: da %d a %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="insoddisfazione" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="richiesta di aumento rifiutata" />
+        <e k="ui_reliabilityReasonSalaryPending" v="richiesta di aumento in sospeso" />
+        <e k="ui_reliabilityReasonLowReputation" v="bassa reputazione del datore di lavoro" />
+        <e k="ui_reliabilityReasonNightWork" v="elevato carico di lavoro notturno" />
+        <e k="ui_reliabilityReasonGoodWork" v="buon mese di lavoro" />
+        <e k="ui_waitingForServerData" v="In attesa dei dati del server" />
     </elements>
 </l10n>
