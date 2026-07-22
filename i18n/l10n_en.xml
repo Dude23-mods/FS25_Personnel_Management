@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s stopped the current job because she spontaneously decided to meet friends." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s stopped the current job to spontaneously meet his girlfriend for coffee." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s stopped the current job to spontaneously meet her boyfriend for coffee." />
+        <e k="ui_pmMonth01" v="March" />
+        <e k="ui_pmMonth02" v="April" />
+        <e k="ui_pmMonth03" v="May" />
+        <e k="ui_pmMonth04" v="June" />
+        <e k="ui_pmMonth05" v="July" />
+        <e k="ui_pmMonth06" v="August" />
+        <e k="ui_pmMonth07" v="September" />
+        <e k="ui_pmMonth08" v="October" />
+        <e k="ui_pmMonth09" v="November" />
+        <e k="ui_pmMonth10" v="December" />
+        <e k="ui_pmMonth11" v="January" />
+        <e k="ui_pmMonth12" v="February" />
+        <e k="ui_pmPeriodMonthYear" v="%s, Year %d" />
+        <e k="ui_pmPeriodYear" v="Year %d" />
+        <e k="ui_pmOverviewChangesHeader" v="CHANGES IN %s" />
+        <e k="ui_pmOverviewNoChanges" v="No changes this month." />
+        <e k="ui_pmOverviewRange" v="%d-%d of %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Effect: %s reputation." />
+        <e k="ui_pmPayrollNone" v="No payroll yet." />
+        <e k="ui_pmPayrollBookingFailed" v="Could not post payroll: %s." />
+        <e k="ui_pmPayrollBooked" v="Payroll posted: %s." />
+        <e k="ui_reliabilityChanged" v="%s: Reliability %s%s. Reliability: %d to %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="dissatisfaction" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="declined raise request" />
+        <e k="ui_reliabilityReasonSalaryPending" v="open raise request" />
+        <e k="ui_reliabilityReasonLowReputation" v="low employer reputation" />
+        <e k="ui_reliabilityReasonNightWork" v="heavy night-work load" />
+        <e k="ui_reliabilityReasonGoodWork" v="good work month" />
+        <e k="ui_waitingForServerData" v="Waiting for server data" />
     </elements>
 </l10n>

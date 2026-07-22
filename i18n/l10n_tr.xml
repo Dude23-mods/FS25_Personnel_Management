@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s arkadaşlarıyla aniden buluşmaya karar verdiği için devam eden görevi yarıda bıraktı." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s kız arkadaşıyla aniden kahve içmeye gitmek için devam eden görevi yarıda bıraktı." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s erkek arkadaşıyla aniden kahve içmeye gitmek için devam eden görevi yarıda bıraktı." />
+        <e k="ui_pmMonth01" v="Mart" />
+        <e k="ui_pmMonth02" v="Nisan" />
+        <e k="ui_pmMonth03" v="Mayıs" />
+        <e k="ui_pmMonth04" v="Haziran" />
+        <e k="ui_pmMonth05" v="Temmuz" />
+        <e k="ui_pmMonth06" v="Ağustos" />
+        <e k="ui_pmMonth07" v="Eylül" />
+        <e k="ui_pmMonth08" v="Ekim" />
+        <e k="ui_pmMonth09" v="Kasım" />
+        <e k="ui_pmMonth10" v="Aralık" />
+        <e k="ui_pmMonth11" v="Ocak" />
+        <e k="ui_pmMonth12" v="Şubat" />
+        <e k="ui_pmPeriodMonthYear" v="%s, %d. yıl" />
+        <e k="ui_pmPeriodYear" v="%d. yıl" />
+        <e k="ui_pmOverviewChangesHeader" v="%s DÖNEMİNDEKİ DEĞİŞİKLİKLER" />
+        <e k="ui_pmOverviewNoChanges" v="Bu ay değişiklik yok." />
+        <e k="ui_pmOverviewRange" v="%d-%d / %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Etki: %s itibar." />
+        <e k="ui_pmPayrollNone" v="Henüz maaş ödemesi yok." />
+        <e k="ui_pmPayrollBookingFailed" v="Maaş ödemesi kaydedilemedi: %s." />
+        <e k="ui_pmPayrollBooked" v="Maaş ödemesi kaydedildi: %s." />
+        <e k="ui_reliabilityChanged" v="%s: güvenilirlik %s%s. Güvenilirlik: %d -&gt; %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="memnuniyetsizlik" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="reddedilen maaş artışı talebi" />
+        <e k="ui_reliabilityReasonSalaryPending" v="bekleyen maaş artışı talebi" />
+        <e k="ui_reliabilityReasonLowReputation" v="düşük işveren itibarı" />
+        <e k="ui_reliabilityReasonNightWork" v="yüksek gece çalışması yükü" />
+        <e k="ui_reliabilityReasonGoodWork" v="iyi bir çalışma ayı" />
+        <e k="ui_waitingForServerData" v="Sunucu verileri bekleniyor" />
     </elements>
 </l10n>

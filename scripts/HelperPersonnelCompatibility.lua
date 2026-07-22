@@ -151,7 +151,7 @@ function HelperPersonnelCompatibility.reserveFollowMeWorker(vehicle, workerId)
     HelperPersonnelCompatibility.followMeReservedWorkerIdsByVehicleKey = HelperPersonnelCompatibility.followMeReservedWorkerIdsByVehicleKey or {}
     local key = hpCompatGetVehicleKey(vehicle)
     HelperPersonnelCompatibility.followMeReservedWorkerIdsByVehicleKey[key] = workerId
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | reserveWorker | Fahrzeug=%s | Key=%s | Mitarbeiter=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(workerId))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | reserveWorker | Vehicle=%s | Key=%s | Worker=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(workerId))
     return true
 end
 
@@ -167,7 +167,7 @@ function HelperPersonnelCompatibility.consumeReservedFollowMeWorker(vehicle)
         reservations[key] = nil
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | consumeReservedWorker | Fahrzeug=%s | Key=%s | Mitarbeiter=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(workerId))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | consumeReservedWorker | Vehicle=%s | Key=%s | Worker=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(workerId))
     return workerId
 end
 
@@ -210,7 +210,7 @@ function HelperPersonnelCompatibility.reserveFollowMeTrailDrop(vehicle, vehicleT
         leaderDropper = leaderDropper
     }
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | reserveTrailDrop | Fahrzeug=%s | Ziel=%s | Key=%s | Pcall=%s | Index=%s | LeaderDropper=%s", hpCompatDescribeVehicle(vehicle), hpCompatDescribeVehicle(vehicleToFollow), tostring(key), tostring(ok), tostring(index), tostring(leaderDropper))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | reserveTrailDrop | Vehicle=%s | Target=%s | Key=%s | Pcall=%s | Index=%s | LeaderDropper=%s", hpCompatDescribeVehicle(vehicle), hpCompatDescribeVehicle(vehicleToFollow), tostring(key), tostring(ok), tostring(index), tostring(leaderDropper))
     return index
 end
 
@@ -228,7 +228,7 @@ function HelperPersonnelCompatibility.consumeReservedFollowMeTrailDrop(vehicle)
 
     local index = reservation ~= nil and reservation.index or nil
     local leaderDropper = reservation ~= nil and reservation.leaderDropper or nil
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | consumeTrailDrop | Fahrzeug=%s | Key=%s | Index=%s | LeaderDropper=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(index), tostring(leaderDropper))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | consumeTrailDrop | Vehicle=%s | Key=%s | Index=%s | LeaderDropper=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(index), tostring(leaderDropper))
     return index, leaderDropper
 end
 
@@ -240,7 +240,7 @@ function HelperPersonnelCompatibility.applyReservedFollowMeTrailDrop(vehicle)
     local reservedIndex, leaderDropperAtReserve = HelperPersonnelCompatibility.consumeReservedFollowMeTrailDrop(vehicle)
     local spec = HelperPersonnelCompatibility.getFollowMeSpec(vehicle)
     if spec == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | applyTrailDrop=false | Grund=SpecFehlt | Fahrzeug=%s | Index=%s", hpCompatDescribeVehicle(vehicle), tostring(reservedIndex))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | applyTrailDrop=false | Reason=specMissing | Vehicle=%s | Index=%s", hpCompatDescribeVehicle(vehicle), tostring(reservedIndex))
         return false
     end
 
@@ -269,13 +269,13 @@ function HelperPersonnelCompatibility.applyReservedFollowMeTrailDrop(vehicle)
     end
 
     if index == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | applyTrailDrop=false | Grund=IndexFehlt | Fahrzeug=%s | Reserviert=%s | Recalc=%s | LeaderNow=%s", hpCompatDescribeVehicle(vehicle), tostring(reservedIndex), tostring(recalculatedIndex), tostring(leaderDropperNow))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | applyTrailDrop=false | Reason=indexMissing | Vehicle=%s | Reserved=%s | Recalc=%s | LeaderNow=%s", hpCompatDescribeVehicle(vehicle), tostring(reservedIndex), tostring(recalculatedIndex), tostring(leaderDropperNow))
         return false
     end
 
     local oldIndex = spec.followingCurrentCount
     spec.followingCurrentCount = index
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | applyTrailDrop | Fahrzeug=%s | Alt=%s | Neu=%s | Reserviert=%s | Recalc=%s | RecalcOk=%s | LeaderDropperAtReserve=%s | LeaderDropperNow=%s | DirectStart=%s | Active=%s", hpCompatDescribeVehicle(vehicle), tostring(oldIndex), tostring(index), tostring(reservedIndex), tostring(recalculatedIndex), tostring(recalculatedOk), tostring(leaderDropperAtReserve), tostring(leaderDropperNow), tostring(directStart), tostring(spec.isActive))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | applyTrailDrop | Vehicle=%s | Old=%s | New=%s | Reserved=%s | Recalc=%s | RecalcOk=%s | LeaderDropperAtReserve=%s | LeaderDropperNow=%s | DirectStart=%s | Active=%s", hpCompatDescribeVehicle(vehicle), tostring(oldIndex), tostring(index), tostring(reservedIndex), tostring(recalculatedIndex), tostring(recalculatedOk), tostring(leaderDropperAtReserve), tostring(leaderDropperNow), tostring(directStart), tostring(spec.isActive))
     return true
 end
 
@@ -326,7 +326,7 @@ function HelperPersonnelCompatibility.setActiveFollowMeWorker(vehicle, workerId)
         HelperPersonnelCompatibility.applyFollowMeWorkerContext(workerId, vehicle, leader)
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | activeWorkerStart | Fahrzeug=%s | Key=%s | Mitarbeiter=%s | Started=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(workerId), tostring(started))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | activeWorkerStart | Vehicle=%s | Key=%s | Worker=%s | Started=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(workerId), tostring(started))
     return started
 end
 
@@ -365,7 +365,7 @@ function HelperPersonnelCompatibility.finishActiveFollowMeWorker(vehicle)
         end
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | activeWorkerStop | Fahrzeug=%s | Key=%s | Mitarbeiter=%s | Finished=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(workerId), tostring(finished))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | activeWorkerStop | Vehicle=%s | Key=%s | Worker=%s | Finished=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(workerId), tostring(finished))
     return finished
 end
 
@@ -694,7 +694,7 @@ function HelperPersonnelCompatibility.applyFollowMeWorkerContext(workerId, vehic
         end
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | workerContext | Fahrzeug=%s | Ziel=%s | Mitarbeiter=%s | WorkerGefunden=%s | Tätigkeit=%s | FeldText=%s | Spez=%s", hpCompatDescribeVehicle(vehicle), hpCompatDescribeVehicle(vehicleToFollow), tostring(workerId), tostring(worker ~= nil), tostring(context.activityText), tostring(context.fieldText), tostring(context.specializationKey))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | workerContext | Vehicle=%s | Target=%s | Worker=%s | WorkerFound=%s | Activity=%s | FieldText=%s | Specialization=%s", hpCompatDescribeVehicle(vehicle), hpCompatDescribeVehicle(vehicleToFollow), tostring(workerId), tostring(worker ~= nil), tostring(context.activityText), tostring(context.fieldText), tostring(context.specializationKey))
     return context
 end
 
@@ -911,7 +911,7 @@ function HelperPersonnelCompatibility.getFollowMeFarmId(vehicle, fallbackFarmId)
 end
 
 function HelperPersonnelCompatibility.createFollowMeJob(vehicle, vehicleToFollow)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | createFollowMeJob | Fahrzeug=%s | Ziel=%s | Mission=%s | AIJobTypeManager=%s | MOD_FOLLOW_VEHICLE=%s",
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | createFollowMeJob | Vehicle=%s | Target=%s | Mission=%s | AIJobTypeManager=%s | MOD_FOLLOW_VEHICLE=%s",
         hpCompatDescribeVehicle(vehicle),
         hpCompatDescribeVehicle(vehicleToFollow),
         tostring(g_currentMission ~= nil),
@@ -919,22 +919,22 @@ function HelperPersonnelCompatibility.createFollowMeJob(vehicle, vehicleToFollow
         tostring(AIJobType ~= nil and AIJobType.MOD_FOLLOW_VEHICLE ~= nil))
 
     if g_currentMission == nil or g_currentMission.aiJobTypeManager == nil or g_currentMission.aiJobTypeManager.createJob == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | createFollowMeJob=false | Grund=keinAIJobTypeManager")
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | createFollowMeJob=false | Reason=noAIJobTypeManager")
         return nil
     end
 
     if AIJobType == nil or AIJobType.MOD_FOLLOW_VEHICLE == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | createFollowMeJob=false | Grund=keinAIJobType")
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | createFollowMeJob=false | Reason=noAIJobType")
         return nil
     end
 
     local job = g_currentMission.aiJobTypeManager:createJob(AIJobType.MOD_FOLLOW_VEHICLE)
     if job == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | createFollowMeJob=false | Grund=createJobNil")
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | createFollowMeJob=false | Reason=createJobNil")
         return nil
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | createFollowMeJob erstellt | Job=%s | vehicleParameter=%s | followVehicleParameter=%s",
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | createFollowMeJob created | Job=%s | vehicleParameter=%s | followVehicleParameter=%s",
         hpCompatDescribeJob(job),
         tostring(job.vehicleParameter ~= nil),
         tostring(job.followVehicleParameter ~= nil))
@@ -951,7 +951,7 @@ function HelperPersonnelCompatibility.createFollowMeJob(vehicle, vehicleToFollow
         job:setValues()
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | createFollowMeJob fertig | Job=%s | Fahrzeug=%s | Ziel=%s | IstFollowMe=%s",
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | createFollowMeJob complete | Job=%s | Vehicle=%s | Target=%s | IsFollowMe=%s",
         hpCompatDescribeJob(job),
         hpCompatDescribeVehicle(HelperPersonnelCompatibility.getVehicleFromJob(job)),
         hpCompatDescribeVehicle(HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow ~= nil and HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job) or nil),
@@ -966,12 +966,12 @@ function HelperPersonnelCompatibility.getExcludedWorkerIdsForFollowMe(job)
         excludedWorkerIds = HelperPersonnelAIStartHooks.getExcludedWorkerIdsForJob(job)
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | getExcludedWorkerIdsForFollowMe | Job=%s | Anzahl=%s", hpCompatDescribeJob(job), tostring(hpCompatCountKeys(excludedWorkerIds)))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | getExcludedWorkerIdsForFollowMe | Job=%s | Count=%s", hpCompatDescribeJob(job), tostring(hpCompatCountKeys(excludedWorkerIds)))
     return excludedWorkerIds
 end
 
 function HelperPersonnelCompatibility.startFollowMeWithWorker(vehicle, vehicleToFollow, workerId, farmId)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | startFollowMeWithWorker ENTER | Mitarbeiter=%s | Fahrzeug=%s | Ziel=%s | Farm=%s",
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | startFollowMeWithWorker ENTER | Worker=%s | Vehicle=%s | Target=%s | Farm=%s",
         tostring(workerId),
         hpCompatDescribeVehicle(vehicle),
         hpCompatDescribeVehicle(vehicleToFollow),
@@ -979,13 +979,13 @@ function HelperPersonnelCompatibility.startFollowMeWithWorker(vehicle, vehicleTo
 
     local job = HelperPersonnelCompatibility.createFollowMeJob(vehicle, vehicleToFollow)
     if job == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | startFollowMeWithWorker=false | Grund=keinJob | Mitarbeiter=%s", tostring(workerId))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | startFollowMeWithWorker=false | Reason=noJob | Worker=%s", tostring(workerId))
         return false
     end
 
     if job.validate ~= nil then
         local ok, success, errorMessage = pcall(job.validate, job, farmId)
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | startFollowMeWithWorker validate | Pcall=%s | Success=%s | Error=%s | Mitarbeiter=%s | Job=%s",
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | startFollowMeWithWorker validate | Pcall=%s | Success=%s | Error=%s | Worker=%s | Job=%s",
             tostring(ok),
             tostring(success),
             tostring(errorMessage),
@@ -997,22 +997,22 @@ function HelperPersonnelCompatibility.startFollowMeWithWorker(vehicle, vehicleTo
     end
 
     if vehicle ~= nil and vehicle.setAIModeSelection ~= nil and AIModeSelection ~= nil and AIModeSelection.MODE ~= nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | startFollowMeWithWorker setAIModeSelection | Fahrzeug=%s", hpCompatDescribeVehicle(vehicle))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | startFollowMeWithWorker setAIModeSelection | Vehicle=%s", hpCompatDescribeVehicle(vehicle))
         vehicle:setAIModeSelection(AIModeSelection.MODE.WORKER)
     end
 
     if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.sendSelectedAIJob ~= nil then
         local result = HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, job, farmId) == true
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | startFollowMeWithWorker Ergebnis | Result=%s | Mitarbeiter=%s | Job=%s", tostring(result), tostring(workerId), hpCompatDescribeJob(job))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | startFollowMeWithWorker result | Result=%s | Worker=%s | Job=%s", tostring(result), tostring(workerId), hpCompatDescribeJob(job))
         return result
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | startFollowMeWithWorker=false | Grund=keinSendSelectedAIJob")
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | startFollowMeWithWorker=false | Reason=noSendSelectedAIJob")
     return false
 end
 
 function HelperPersonnelCompatibility.onFollowMeInitiate(vehicle, superFunc, vehicleToFollow, ...)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | initiate ENTER | Fahrzeug=%s | Ziel=%s | SuperFunc=%s | App=%s | Overlay=%s | ShowSelection=%s | AuswahlSichtbar=%s",
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | initiate ENTER | Vehicle=%s | Target=%s | SuperFunc=%s | App=%s | Overlay=%s | ShowSelection=%s | SelectionVisible=%s",
         hpCompatDescribeVehicle(vehicle),
         hpCompatDescribeVehicle(vehicleToFollow),
         tostring(superFunc ~= nil),
@@ -1023,25 +1023,25 @@ function HelperPersonnelCompatibility.onFollowMeInitiate(vehicle, superFunc, veh
 
     local app = g_helperPersonnelApp
     if app == nil or app.selectionOverlay == nil or app.showWorkerSelectionForVehicle == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | initiate FallbackOriginal | Grund=AppOderOverlayFehlt")
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | initiate FallbackOriginal | Reason=appOrOverlayMissing")
         return superFunc(vehicle, vehicleToFollow, ...)
     end
 
     if g_currentMission ~= nil and g_currentMission.getHasPlayerPermission ~= nil and not g_currentMission:getHasPlayerPermission("hireAssistant") then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | initiate=false | Grund=keineHireAssistantPermission")
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | initiate=false | Reason=noHireAssistantPermission")
         return nil
     end
 
     local farmId = HelperPersonnelCompatibility.getFollowMeFarmId(vehicle, nil)
     local job = HelperPersonnelCompatibility.createFollowMeJob(vehicle, vehicleToFollow)
     if job == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | initiate FallbackOriginal | Grund=JobNichtErstellbar")
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | initiate FallbackOriginal | Reason=jobCouldNotBeCreated")
         return superFunc(vehicle, vehicleToFollow, ...)
     end
 
     if job.validate ~= nil then
         local ok, success, errorMessage = pcall(job.validate, job, farmId)
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | initiate validate | Pcall=%s | Success=%s | Error=%s | Farm=%s | Job=%s",
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | initiate validate | Pcall=%s | Success=%s | Error=%s | Farm=%s | Job=%s",
             tostring(ok),
             tostring(success),
             tostring(errorMessage),
@@ -1056,28 +1056,28 @@ function HelperPersonnelCompatibility.onFollowMeInitiate(vehicle, superFunc, veh
     local trailDropIndex = HelperPersonnelCompatibility.reserveFollowMeTrailDrop(vehicle, vehicleToFollow)
     local excludedWorkerIds = HelperPersonnelCompatibility.getExcludedWorkerIdsForFollowMe(job)
     local opened = app:showWorkerSelectionForVehicle(vehicle, function(selectedWorker)
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AuswahlCallback | Selected=%s | Mitarbeiter=%s | Fahrzeug=%s | Ziel=%s",
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | selectionCallback | Selected=%s | Worker=%s | Vehicle=%s | Target=%s",
             tostring(selectedWorker ~= nil),
             tostring(selectedWorker ~= nil and selectedWorker.id or nil),
             hpCompatDescribeVehicle(vehicle),
             hpCompatDescribeVehicle(vehicleToFollow))
 
         if selectedWorker == nil or selectedWorker.id == nil then
-            hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AuswahlCallback abgebrochen | Grund=keinMitarbeiter")
+            hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | selectionCallback aborted | Reason=noWorker")
             HelperPersonnelCompatibility.consumeReservedFollowMeTrailDrop(vehicle)
             return
         end
 
         HelperPersonnelCompatibility.reserveFollowMeWorker(vehicle, selectedWorker.id)
 
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AuswahlCallback OriginalStart | Mitarbeiter=%s | Fahrzeug=%s | Ziel=%s | Farm=%s",
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | selectionCallback original start | Worker=%s | Vehicle=%s | Target=%s | Farm=%s",
             tostring(selectedWorker.id),
             hpCompatDescribeVehicle(vehicle),
             hpCompatDescribeVehicle(vehicleToFollow),
             tostring(farmId))
 
         local ok, result = pcall(superFunc, vehicle, vehicleToFollow, unpack(initiateArgs))
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AuswahlCallback OriginalStart Ergebnis | Pcall=%s | Result=%s | Mitarbeiter=%s | Fahrzeug=%s",
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | selectionCallback original start result | Pcall=%s | Result=%s | Worker=%s | Vehicle=%s",
             tostring(ok),
             tostring(result),
             tostring(selectedWorker.id),
@@ -1090,7 +1090,7 @@ function HelperPersonnelCompatibility.onFollowMeInitiate(vehicle, superFunc, veh
         end
     end, excludedWorkerIds)
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | initiate Auswahl | Geoeffnet=%s | Fahrzeug=%s | Ziel=%s | Excluded=%s | Farm=%s | TrailDrop=%s",
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | initiate Selection | Opened=%s | Vehicle=%s | Target=%s | Excluded=%s | Farm=%s | TrailDrop=%s",
         tostring(opened),
         hpCompatDescribeVehicle(vehicle),
         hpCompatDescribeVehicle(vehicleToFollow),
@@ -1102,7 +1102,7 @@ function HelperPersonnelCompatibility.onFollowMeInitiate(vehicle, superFunc, veh
         return nil
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | initiate blockiert | Grund=AuswahlNichtGeoeffnet")
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | initiate blocked | Reason=selectionNotOpened")
     HelperPersonnelCompatibility.consumeReservedFollowMeTrailDrop(vehicle)
     return nil
 end
@@ -1133,7 +1133,7 @@ function HelperPersonnelCompatibility.getFollowMeSpec(vehicle)
     for _, name in ipairs(directNames) do
         local spec = vehicle[name]
         if type(spec) == "table" then
-            hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | getSpec direkt | Fahrzeug=%s | Key=%s | DriveStrategies=%s | Active=%s", hpCompatDescribeVehicle(vehicle), tostring(name), tostring(type(spec.driveStrategies) == "table" and #spec.driveStrategies or nil), tostring(spec.isActive))
+            hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | getSpec direct | Vehicle=%s | Key=%s | DriveStrategies=%s | Active=%s", hpCompatDescribeVehicle(vehicle), tostring(name), tostring(type(spec.driveStrategies) == "table" and #spec.driveStrategies or nil), tostring(spec.isActive))
             return spec
         end
     end
@@ -1143,7 +1143,7 @@ function HelperPersonnelCompatibility.getFollowMeSpec(vehicle)
             local lowerKey = hpCompatToLower(key)
             if string.find(lowerKey, "followvehicle", 1, true) ~= nil then
                 if spec.driveStrategies ~= nil or spec.vehicleToFollow ~= nil or spec.followJob ~= nil or spec.didNotMoveTimer ~= nil or spec.nearbyVehicles_timeout ~= nil then
-                    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | getSpec scan | Fahrzeug=%s | Key=%s | DriveStrategies=%s | Active=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(type(spec.driveStrategies) == "table" and #spec.driveStrategies or nil), tostring(spec.isActive))
+                    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | getSpec scan | Vehicle=%s | Key=%s | DriveStrategies=%s | Active=%s", hpCompatDescribeVehicle(vehicle), tostring(key), tostring(type(spec.driveStrategies) == "table" and #spec.driveStrategies or nil), tostring(spec.isActive))
                     return spec
                 end
             end
@@ -1153,12 +1153,12 @@ function HelperPersonnelCompatibility.getFollowMeSpec(vehicle)
     if getSpec ~= nil then
         local ok, spec = pcall(getSpec, vehicle)
         if ok and type(spec) == "table" then
-            hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | getSpec global | Fahrzeug=%s | DriveStrategies=%s | Active=%s", hpCompatDescribeVehicle(vehicle), tostring(type(spec.driveStrategies) == "table" and #spec.driveStrategies or nil), tostring(spec.isActive))
+            hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | getSpec global | Vehicle=%s | DriveStrategies=%s | Active=%s", hpCompatDescribeVehicle(vehicle), tostring(type(spec.driveStrategies) == "table" and #spec.driveStrategies or nil), tostring(spec.isActive))
             return spec
         end
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | getSpec=false | Fahrzeug=%s", hpCompatDescribeVehicle(vehicle))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | getSpec=false | Vehicle=%s", hpCompatDescribeVehicle(vehicle))
     return nil
 end
 
@@ -1176,7 +1176,7 @@ end
 function HelperPersonnelCompatibility.resyncFollowMeTrailTarget(vehicle, reason)
     local spec = HelperPersonnelCompatibility.getFollowMeSpec(vehicle)
     if spec == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | resyncTrail=false | Grund=SpecFehlt | Fahrzeug=%s | Reason=%s", hpCompatDescribeVehicle(vehicle), tostring(reason))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | resyncTrail=false | Reason=specMissing | Vehicle=%s | Reason=%s", hpCompatDescribeVehicle(vehicle), tostring(reason))
         return false
     end
 
@@ -1184,7 +1184,7 @@ function HelperPersonnelCompatibility.resyncFollowMeTrailTarget(vehicle, reason)
     local leaderSpec = HelperPersonnelCompatibility.getFollowMeSpec(leader)
     local leaderDropper = leaderSpec ~= nil and leaderSpec.dropperCurrentCount or nil
     if leaderDropper == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | resyncTrail=false | Grund=LeaderFehlt | Fahrzeug=%s | Reason=%s", hpCompatDescribeVehicle(vehicle), tostring(reason))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | resyncTrail=false | Reason=leaderMissing | Vehicle=%s | Reason=%s", hpCompatDescribeVehicle(vehicle), tostring(reason))
         return false
     end
 
@@ -1193,7 +1193,7 @@ function HelperPersonnelCompatibility.resyncFollowMeTrailTarget(vehicle, reason)
     if type(spec.aiDriveParams) == "table" then
         spec.aiDriveParams.valid = false
     end
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | resyncTrail | Fahrzeug=%s | Alt=%s | Neu=%s | LeaderDropper=%s | Reason=%s", hpCompatDescribeVehicle(vehicle), tostring(oldIndex), tostring(spec.followingCurrentCount), tostring(leaderDropper), tostring(reason))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | resyncTrail | Vehicle=%s | Old=%s | New=%s | LeaderDropper=%s | Reason=%s", hpCompatDescribeVehicle(vehicle), tostring(oldIndex), tostring(spec.followingCurrentCount), tostring(leaderDropper), tostring(reason))
     return true
 end
 
@@ -1211,10 +1211,10 @@ function HelperPersonnelCompatibility.wrapFollowMeDriveStrategy(vehicle, strateg
             local untilTime = HelperPersonnelCompatibility.followMeStartupGraceUntilByVehicleKey ~= nil and HelperPersonnelCompatibility.followMeStartupGraceUntilByVehicleKey[key] or nil
             local now = HelperPersonnelCompatibility.getFollowMeTimeMs()
             local classText = hpCompatGetClassText(driveStrategy)
-            hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | driveStrategy negative | Fahrzeug=%s | Index=%s | Strategie=%s | MaxSpeed=%s | Dist=%s | GraceUntil=%s | Now=%s | tX=%s | tZ=%s", hpCompatDescribeVehicle(vehicle), tostring(index), tostring(classText), tostring(maxSpeed), tostring(distanceToStop), tostring(untilTime), tostring(now), tostring(tX), tostring(tZ))
+            hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | driveStrategy negative | Vehicle=%s | Index=%s | Strategy=%s | MaxSpeed=%s | Dist=%s | GraceUntil=%s | Now=%s | tX=%s | tZ=%s", hpCompatDescribeVehicle(vehicle), tostring(index), tostring(classText), tostring(maxSpeed), tostring(distanceToStop), tostring(untilTime), tostring(now), tostring(tX), tostring(tZ))
             if HelperPersonnelCompatibility.resyncFollowMeTrailTarget(vehicle, "negativeDriveStrategy") == true then
                 local rtX, rtZ, rMoveForwards, rMaxSpeed, rDistanceToStop = originalGetDriveData(driveStrategy, dt, vX, vY, vZ, ...)
-                hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | driveStrategy resync Ergebnis | Fahrzeug=%s | Index=%s | MaxSpeed=%s | Dist=%s | tX=%s | tZ=%s", hpCompatDescribeVehicle(vehicle), tostring(index), tostring(rMaxSpeed), tostring(rDistanceToStop), tostring(rtX), tostring(rtZ))
+                hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | driveStrategy resync result | Vehicle=%s | Index=%s | MaxSpeed=%s | Dist=%s | tX=%s | tZ=%s", hpCompatDescribeVehicle(vehicle), tostring(index), tostring(rMaxSpeed), tostring(rDistanceToStop), tostring(rtX), tostring(rtZ))
                 if rMaxSpeed == nil or rMaxSpeed >= 0 then
                     return rtX, rtZ, rMoveForwards, rMaxSpeed, rDistanceToStop
                 end
@@ -1224,7 +1224,7 @@ function HelperPersonnelCompatibility.wrapFollowMeDriveStrategy(vehicle, strateg
         return tX, tZ, moveForwards, maxSpeed, distanceToStop
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | driveStrategy wrapped | Fahrzeug=%s | Index=%s | Strategie=%s", hpCompatDescribeVehicle(vehicle), tostring(index), hpCompatGetClassText(strategy))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | driveStrategy wrapped | Vehicle=%s | Index=%s | Strategy=%s", hpCompatDescribeVehicle(vehicle), tostring(index), hpCompatGetClassText(strategy))
     return true
 end
 
@@ -1239,7 +1239,7 @@ function HelperPersonnelCompatibility.wrapFollowMeDriveStrategies(vehicle)
         end
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | driveStrategies wrapped | Fahrzeug=%s | Anzahl=%s", hpCompatDescribeVehicle(vehicle), tostring(count))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | driveStrategies wrapped | Vehicle=%s | Count=%s", hpCompatDescribeVehicle(vehicle), tostring(count))
     return count
 end
 
@@ -1325,18 +1325,18 @@ function HelperPersonnelCompatibility.cleanupFollowMeVehicleAfterStop(vehicle, s
     local afterActive = vehicle.getIsFollowVehicleActive ~= nil and vehicle:getIsFollowVehicleActive() or nil
     local afterAIActive = vehicle.getIsAIActive ~= nil and vehicle:getIsAIActive() or nil
     local canStart = vehicle.getCanStartFollowVehicle ~= nil and vehicle:getCanStartFollowVehicle() or nil
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | cleanupAfterStop | Phase=%s | Fahrzeug=%s | VorActive=%s | NachActive=%s | VorAI=%s | NachAI=%s | CanStart=%s", tostring(stageName), hpCompatDescribeVehicle(vehicle), tostring(beforeActive), tostring(afterActive), tostring(beforeAIActive), tostring(afterAIActive), tostring(canStart))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | cleanupAfterStop | Phase=%s | Vehicle=%s | BeforeActive=%s | AfterActive=%s | BeforeAI=%s | AfterAI=%s | CanStart=%s", tostring(stageName), hpCompatDescribeVehicle(vehicle), tostring(beforeActive), tostring(afterActive), tostring(beforeAIActive), tostring(afterAIActive), tostring(canStart))
     return true
 end
 
 function HelperPersonnelCompatibility.onFollowMeStartFollowVehicle(vehicle, superFunc, vehicleToFollow, ...)
     local reservedWorkerId = HelperPersonnelCompatibility.peekReservedFollowMeWorker(vehicle)
     HelperPersonnelCompatibility.rememberFollowMeLeader(vehicle, vehicleToFollow)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | startFollowVehicle ENTER | Fahrzeug=%s | Ziel=%s | Reserviert=%s", hpCompatDescribeVehicle(vehicle), hpCompatDescribeVehicle(vehicleToFollow), tostring(reservedWorkerId))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | startFollowVehicle ENTER | Vehicle=%s | Target=%s | Reserved=%s", hpCompatDescribeVehicle(vehicle), hpCompatDescribeVehicle(vehicleToFollow), tostring(reservedWorkerId))
 
     local ok, result = pcall(superFunc, vehicle, vehicleToFollow, ...)
     local active = vehicle ~= nil and vehicle.getIsFollowVehicleActive ~= nil and vehicle:getIsFollowVehicleActive() or nil
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | startFollowVehicle OriginalErgebnis | Pcall=%s | Result=%s | Reserviert=%s | Active=%s", tostring(ok), tostring(result), tostring(reservedWorkerId), tostring(active))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | startFollowVehicle original result | Pcall=%s | Result=%s | Reserved=%s | Active=%s", tostring(ok), tostring(result), tostring(reservedWorkerId), tostring(active))
 
     if not ok then
         HelperPersonnelCompatibility.consumeReservedFollowMeWorker(vehicle)
@@ -1366,10 +1366,10 @@ end
 
 function HelperPersonnelCompatibility.onFollowMeStopFollowVehicle(vehicle, superFunc, ...)
     local activeWorkerId = HelperPersonnelCompatibility.getActiveFollowMeWorker(vehicle)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | stopFollowVehicle ENTER | Fahrzeug=%s | Mitarbeiter=%s", hpCompatDescribeVehicle(vehicle), tostring(activeWorkerId))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | stopFollowVehicle ENTER | Vehicle=%s | Worker=%s", hpCompatDescribeVehicle(vehicle), tostring(activeWorkerId))
 
     local ok, result = pcall(superFunc, vehicle, ...)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | stopFollowVehicle OriginalErgebnis | Pcall=%s | Result=%s | Mitarbeiter=%s", tostring(ok), tostring(result), tostring(activeWorkerId))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | stopFollowVehicle original result | Pcall=%s | Result=%s | Worker=%s", tostring(ok), tostring(result), tostring(activeWorkerId))
 
     if not ok then
         error(result)
@@ -1400,7 +1400,7 @@ function HelperPersonnelCompatibility.onFollowMeStopCurrentAIJob(vehicle, superF
         messageToUse, replacementText = HelperPersonnelCompatibility.createFollowMeWorkerAIMessage(activeWorkerId, aiMessage)
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | stopCurrentAIJob | Fahrzeug=%s | Active=%s | Mitarbeiter=%s | Message=%s | Ersatz=%s", hpCompatDescribeVehicle(vehicle), tostring(active), tostring(activeWorkerId), hpCompatDescribeMessage(aiMessage), tostring(replacementText))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | stopCurrentAIJob | Vehicle=%s | Active=%s | Worker=%s | Message=%s | Replacement=%s", hpCompatDescribeVehicle(vehicle), tostring(active), tostring(activeWorkerId), hpCompatDescribeMessage(aiMessage), tostring(replacementText))
     return superFunc(vehicle, messageToUse, ...)
 end
 
@@ -1412,12 +1412,12 @@ function HelperPersonnelCompatibility.onFollowMeAIJobStart(job, superFunc, farmI
         workerId = HelperPersonnelCompatibility.consumeReservedFollowMeWorker(vehicle)
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AIJobFollowVehicle.start ENTER | Job=%s | Fahrzeug=%s | Farm=%s | Mitarbeiter=%s", hpCompatDescribeJob(job), hpCompatDescribeVehicle(vehicle), tostring(farmId), tostring(workerId))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | AIJobFollowVehicle.start ENTER | Job=%s | Vehicle=%s | Farm=%s | Worker=%s", hpCompatDescribeJob(job), hpCompatDescribeVehicle(vehicle), tostring(farmId), tostring(workerId))
 
     local app = g_helperPersonnelApp
     if workerId ~= nil and HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.canUseWorkerForJob ~= nil then
         if not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job) then
-            hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AIJobFollowVehicle.start blockiert | Grund=MitarbeiterNichtVerfuegbar | Mitarbeiter=%s | Job=%s", tostring(workerId), hpCompatDescribeJob(job))
+            hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | AIJobFollowVehicle.start blocked | Reason=workerNotAvailable | Worker=%s | Job=%s", tostring(workerId), hpCompatDescribeJob(job))
             if HelperPersonnelAIJobHooks.rejectUnavailableWorker ~= nil then
                 HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, job)
             end
@@ -1442,7 +1442,7 @@ function HelperPersonnelCompatibility.onFollowMeAIJobStart(job, superFunc, farmI
         ok, result = pcall(superFunc, job, farmId, unpack(startArgs))
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AIJobFollowVehicle.start Ergebnis | Pcall=%s | Result=%s | Mitarbeiter=%s | HelperIndex=%s", tostring(ok), tostring(result), tostring(workerId), tostring(job ~= nil and job.helperIndex or nil))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | AIJobFollowVehicle.start result | Pcall=%s | Result=%s | Worker=%s | HelperIndex=%s", tostring(ok), tostring(result), tostring(workerId), tostring(job ~= nil and job.helperIndex or nil))
 
     if not ok then
         if workerId ~= nil then
@@ -1462,7 +1462,7 @@ function HelperPersonnelCompatibility.onFollowMeAIJobStart(job, superFunc, farmI
         end
         HelperPersonnelCompatibility.followMeActiveWorkerIdsByVehicleKey = HelperPersonnelCompatibility.followMeActiveWorkerIdsByVehicleKey or {}
         HelperPersonnelCompatibility.followMeActiveWorkerIdsByVehicleKey[hpCompatGetVehicleKey(vehicle)] = workerId
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AIJobFollowVehicle.start finalisiert | Job=%s | Fahrzeug=%s | Mitarbeiter=%s | BereitsZuordnung=%s", hpCompatDescribeJob(job), hpCompatDescribeVehicle(vehicle), tostring(workerId), tostring(alreadyMapped))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | AIJobFollowVehicle.start finalized | Job=%s | Vehicle=%s | Worker=%s | AlreadyMapped=%s", hpCompatDescribeJob(job), hpCompatDescribeVehicle(vehicle), tostring(workerId), tostring(alreadyMapped))
     end
 
     return result
@@ -1478,10 +1478,10 @@ function HelperPersonnelCompatibility.onFollowMeAIJobStop(job, superFunc, aiMess
         workerId = g_helperPersonnelApp.helperBridge.jobWorkerIds[job]
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AIJobFollowVehicle.stop ENTER | Job=%s | Fahrzeug=%s | Mitarbeiter=%s | Message=%s", hpCompatDescribeJob(job), hpCompatDescribeVehicle(vehicle), tostring(workerId), hpCompatDescribeMessage(aiMessage))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | AIJobFollowVehicle.stop ENTER | Job=%s | Vehicle=%s | Worker=%s | Message=%s", hpCompatDescribeJob(job), hpCompatDescribeVehicle(vehicle), tostring(workerId), hpCompatDescribeMessage(aiMessage))
 
     local ok, result = pcall(superFunc, job, aiMessage, ...)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AIJobFollowVehicle.stop Ergebnis | Pcall=%s | Result=%s | Mitarbeiter=%s", tostring(ok), tostring(result), tostring(workerId))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | AIJobFollowVehicle.stop result | Pcall=%s | Result=%s | Worker=%s", tostring(ok), tostring(result), tostring(workerId))
 
     if workerId ~= nil and g_helperPersonnelApp ~= nil and g_helperPersonnelApp.helperBridge ~= nil and g_helperPersonnelApp.helperBridge.jobWorkerIds ~= nil and g_helperPersonnelApp.helperBridge.jobWorkerIds[job] == workerId then
         g_helperPersonnelApp.helperBridge:onJobStopped(job)
@@ -1502,7 +1502,7 @@ function HelperPersonnelCompatibility.onFollowMeAIJobStop(job, superFunc, aiMess
 end
 
 function HelperPersonnelCompatibility.onFollowMeActionEventInitiate(vehicle, superFunc, actionName, inputValue, callbackState, isAnalog)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | actionEventInitiate | Fahrzeug=%s | Action=%s | Input=%s | CallbackState=%s | Analog=%s | CanStart=%s | Active=%s",
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | actionEventInitiate | Vehicle=%s | Action=%s | Input=%s | CallbackState=%s | Analog=%s | CanStart=%s | Active=%s",
         hpCompatDescribeVehicle(vehicle),
         tostring(actionName),
         tostring(inputValue),
@@ -1529,7 +1529,7 @@ function HelperPersonnelCompatibility.onFollowMeUpdateTick(vehicle, superFunc, d
     end
 
     if timeout ~= nil and timeout > 0 then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | onUpdateTick vor Super | Fahrzeug=%s | Timeout=%s | Nearby=%s | ActiveInput=%s | Selected=%s",
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | onUpdateTick before super | Vehicle=%s | Timeout=%s | Nearby=%s | ActiveInput=%s | Selected=%s",
             hpCompatDescribeVehicle(vehicle),
             tostring(timeout),
             tostring(nearbyCount),
@@ -1542,7 +1542,7 @@ end
 
 function HelperPersonnelCompatibility.installFollowMeJobClassHooks(stageName)
     if AIJobFollowVehicle == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AIJobFollowVehicleHook=false | Phase=%s | Grund=KlasseFehlt", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | AIJobFollowVehicleHook=false | Phase=%s | Reason=classMissing", tostring(stageName))
         return false
     end
 
@@ -1565,7 +1565,7 @@ function HelperPersonnelCompatibility.installFollowMeJobClassHooks(stageName)
     end
 
     HelperPersonnelCompatibility.followMeAIJobClassHookInstalled = true
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | AIJobFollowVehicleHook=true | Phase=%s | Start=%s | Stop=%s", tostring(stageName), tostring(AIJobFollowVehicle.start ~= nil), tostring(AIJobFollowVehicle.stop ~= nil))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | AIJobFollowVehicleHook=true | Phase=%s | Start=%s | Stop=%s", tostring(stageName), tostring(AIJobFollowVehicle.start ~= nil), tostring(AIJobFollowVehicle.stop ~= nil))
     return true
 end
 
@@ -1591,25 +1591,25 @@ function HelperPersonnelCompatibility.installStopCurrentAIJobDiagnosticHook(stag
                     if activeWorkerId ~= nil then
                         messageToUse, replacementText = HelperPersonnelCompatibility.createFollowMeWorkerAIMessage(activeWorkerId, aiMessage)
                     end
-                    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | stopCurrentAIJob global | Fahrzeug=%s | Active=%s | Mitarbeiter=%s | Ersatz=%s", hpCompatDescribeVehicle(vehicle), tostring(vehicle:getIsFollowVehicleActive()), tostring(activeWorkerId), tostring(replacementText))
-                    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | stopCurrentAIJob OriginalMessage | Fahrzeug=%s | Message=%s", hpCompatDescribeVehicle(vehicle), hpCompatDescribeMessage(aiMessage))
+                    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | stopCurrentAIJob global | Vehicle=%s | Active=%s | Worker=%s | Replacement=%s", hpCompatDescribeVehicle(vehicle), tostring(vehicle:getIsFollowVehicleActive()), tostring(activeWorkerId), tostring(replacementText))
+                    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | stopCurrentAIJob original message | Vehicle=%s | Message=%s", hpCompatDescribeVehicle(vehicle), hpCompatDescribeMessage(aiMessage))
                     return originalStopCurrentAIJob(vehicle, messageToUse, ...)
                 end
                 return originalStopCurrentAIJob(vehicle, aiMessage, ...)
             end
             HelperPersonnelCompatibility.stopCurrentAIJobDiagnosticHookInstalled = true
-            hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | stopCurrentAIJobHook=true | Phase=%s | Target=%s", tostring(stageName), hpCompatGetClassText(target))
+            hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | stopCurrentAIJobHook=true | Phase=%s | Target=%s", tostring(stageName), hpCompatGetClassText(target))
             return true
         end
     end
 
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | stopCurrentAIJobHook=false | Phase=%s", tostring(stageName))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | stopCurrentAIJobHook=false | Phase=%s", tostring(stageName))
     return false
 end
 
 function HelperPersonnelCompatibility.installFollowMeVehicleTypeHooks(vehicleType, stageName)
     if vehicleType == nil or SpecializationUtil == nil or SpecializationUtil.registerOverwrittenFunction == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | installVehicleTypeHook=false | Phase=%s | Grund=keinVehicleTypeOderSpecializationUtil", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | installVehicleTypeHook=false | Phase=%s | Reason=noVehicleTypeOrSpecializationUtil", tostring(stageName))
         return false
     end
 
@@ -1621,7 +1621,7 @@ function HelperPersonnelCompatibility.installFollowMeVehicleTypeHooks(vehicleTyp
 
     SpecializationUtil.registerOverwrittenFunction(vehicleType, "initiateFollowVehicle", HelperPersonnelCompatibility.onFollowMeInitiate)
     HelperPersonnelCompatibility.followMeVehicleTypeHooks[key] = true
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | installVehicleTypeHook=true | Phase=%s | VehicleType=%s", tostring(stageName), key)
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | installVehicleTypeHook=true | Phase=%s | VehicleType=%s", tostring(stageName), key)
     return true
 end
 
@@ -1631,7 +1631,7 @@ function HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, stage
     end
 
     if funcName == "initiateFollowVehicle" then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | wrapFunction | Phase=%s | Funktion=%s", tostring(stageName), tostring(funcName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | wrapFunction | Phase=%s | Function=%s", tostring(stageName), tostring(funcName))
         local originalFunc = func
         return function(vehicle, vehicleToFollow, ...)
             return HelperPersonnelCompatibility.onFollowMeInitiate(vehicle, function(innerVehicle, innerVehicleToFollow, ...)
@@ -1641,7 +1641,7 @@ function HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, stage
     end
 
     if funcName == "actionEventInitiate" then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | wrapFunction | Phase=%s | Funktion=%s", tostring(stageName), tostring(funcName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | wrapFunction | Phase=%s | Function=%s", tostring(stageName), tostring(funcName))
         local originalFunc = func
         return function(vehicle, actionName, inputValue, callbackState, isAnalog, ...)
             return HelperPersonnelCompatibility.onFollowMeActionEventInitiate(vehicle, function(innerVehicle, innerActionName, innerInputValue, innerCallbackState, innerIsAnalog, ...)
@@ -1651,7 +1651,7 @@ function HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, stage
     end
 
     if funcName == "onUpdateTick" then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | wrapFunction | Phase=%s | Funktion=%s", tostring(stageName), tostring(funcName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | wrapFunction | Phase=%s | Function=%s", tostring(stageName), tostring(funcName))
         local originalFunc = func
         return function(vehicle, dt, isActiveForInput, isSelected, ...)
             return HelperPersonnelCompatibility.onFollowMeUpdateTick(vehicle, function(innerVehicle, innerDt, innerIsActiveForInput, innerIsSelected, ...)
@@ -1661,7 +1661,7 @@ function HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, stage
     end
 
     if funcName == "startFollowVehicle" then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | wrapFunction | Phase=%s | Funktion=%s", tostring(stageName), tostring(funcName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | wrapFunction | Phase=%s | Function=%s", tostring(stageName), tostring(funcName))
         local originalFunc = func
         return function(vehicle, vehicleToFollow, ...)
             return HelperPersonnelCompatibility.onFollowMeStartFollowVehicle(vehicle, function(innerVehicle, innerVehicleToFollow, ...)
@@ -1671,7 +1671,7 @@ function HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, stage
     end
 
     if funcName == "stopFollowVehicle" then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | wrapFunction | Phase=%s | Funktion=%s", tostring(stageName), tostring(funcName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | wrapFunction | Phase=%s | Function=%s", tostring(stageName), tostring(funcName))
         local originalFunc = func
         return function(vehicle, ...)
             return HelperPersonnelCompatibility.onFollowMeStopFollowVehicle(vehicle, function(innerVehicle, ...)
@@ -1681,7 +1681,7 @@ function HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, stage
     end
 
     if funcName == "stopCurrentAIJob" then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | wrapFunction | Phase=%s | Funktion=%s", tostring(stageName), tostring(funcName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | wrapFunction | Phase=%s | Function=%s", tostring(stageName), tostring(funcName))
         local originalFunc = func
         return function(vehicle, aiMessage, ...)
             return HelperPersonnelCompatibility.onFollowMeStopCurrentAIJob(vehicle, function(innerVehicle, innerMessage, ...)
@@ -1692,7 +1692,7 @@ function HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, stage
 
 
     if funcName == "getCanStartFollowVehicle" then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | wrapFunction | Phase=%s | Funktion=%s", tostring(stageName), tostring(funcName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | wrapFunction | Phase=%s | Function=%s", tostring(stageName), tostring(funcName))
         local originalFunc = func
         return function(vehicle, ...)
             local result = originalFunc(vehicle, ...)
@@ -1702,7 +1702,7 @@ function HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, stage
                 local aiActive = vehicle ~= nil and vehicle.getIsAIActive ~= nil and vehicle:getIsAIActive() or nil
                 local aiFieldActive = vehicle ~= nil and vehicle.spec_aiFieldWorker ~= nil and vehicle.spec_aiFieldWorker.isActive or nil
                 local aiDrivableRunning = vehicle ~= nil and vehicle.spec_aiDrivable ~= nil and vehicle.spec_aiDrivable.isRunning or nil
-                hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | getCanStartFollowVehicle=false | Fahrzeug=%s | FollowActive=%s | AIActive=%s | AIField=%s | AIDrivable=%s | SpecActive=%s", hpCompatDescribeVehicle(vehicle), tostring(followActive), tostring(aiActive), tostring(aiFieldActive), tostring(aiDrivableRunning), tostring(spec ~= nil and spec.isActive or nil))
+                hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | getCanStartFollowVehicle=false | Vehicle=%s | FollowActive=%s | AIActive=%s | AIField=%s | AIDrivable=%s | SpecActive=%s", hpCompatDescribeVehicle(vehicle), tostring(followActive), tostring(aiActive), tostring(aiFieldActive), tostring(aiDrivableRunning), tostring(spec ~= nil and spec.isActive or nil))
             end
             return result
         end
@@ -1713,12 +1713,12 @@ end
 
 function HelperPersonnelCompatibility.installSpecializationRegisterHook(stageName)
     if SpecializationUtil == nil or SpecializationUtil.registerFunction == nil then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | registerFunctionHook=false | Phase=%s | Grund=keinSpecializationUtil", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | registerFunctionHook=false | Phase=%s | Reason=noSpecializationUtil", tostring(stageName))
         return false
     end
 
     if HelperPersonnelCompatibility.specializationRegisterFunctionHookInstalled == true then
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | registerFunctionHook=bereitsInstalliert | Phase=%s", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | registerFunctionHook=alreadyInstalled | Phase=%s", tostring(stageName))
         return true
     end
 
@@ -1726,7 +1726,7 @@ function HelperPersonnelCompatibility.installSpecializationRegisterHook(stageNam
     SpecializationUtil.registerFunction = function(vehicleType, funcName, func, ...)
         local wrappedFunc = func
         if funcName == "initiateFollowVehicle" or funcName == "startFollowVehicle" or funcName == "stopFollowVehicle" or funcName == "getCanStartFollowVehicle" then
-            hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | registerFunction abgefangen | Funktion=%s | VehicleType=%s | Func=%s", tostring(funcName), tostring(vehicleType), tostring(func ~= nil))
+            hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | registerFunction intercepted | Function=%s | VehicleType=%s | Func=%s", tostring(funcName), tostring(vehicleType), tostring(func ~= nil))
             wrappedFunc = HelperPersonnelCompatibility.wrapFollowMeFunction(funcName, func, "SpecializationUtil.registerFunction")
             HelperPersonnelCompatibility.installFollowMeJobClassHooks("SpecializationUtil.registerFunction")
             HelperPersonnelCompatibility.installStopCurrentAIJobDiagnosticHook("SpecializationUtil.registerFunction")
@@ -1736,12 +1736,12 @@ function HelperPersonnelCompatibility.installSpecializationRegisterHook(stageNam
     end
 
     HelperPersonnelCompatibility.specializationRegisterFunctionHookInstalled = true
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | registerFunctionHook=true | Phase=%s", tostring(stageName))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | registerFunctionHook=true | Phase=%s", tostring(stageName))
     return true
 end
 
 function HelperPersonnelCompatibility.installFollowMeHooks(stageName)
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | installFollowMeHooks | Phase=%s | FollowVehicle=%s | initiate=%s | registerFunctions=%s | actionEventInitiate=%s | Utils=%s | SpecializationUtil=%s | registerFunctionHook=%s",
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | installFollowMeHooks | Phase=%s | FollowVehicle=%s | initiate=%s | registerFunctions=%s | actionEventInitiate=%s | Utils=%s | SpecializationUtil=%s | registerFunctionHook=%s",
         tostring(stageName),
         tostring(FollowVehicle ~= nil),
         tostring(FollowVehicle ~= nil and FollowVehicle.initiateFollowVehicle ~= nil),
@@ -1758,25 +1758,25 @@ function HelperPersonnelCompatibility.installFollowMeHooks(stageName)
     if FollowVehicle ~= nil and FollowVehicle.actionEventInitiate ~= nil and HelperPersonnelCompatibility.followMeActionHookInstalled ~= true then
         FollowVehicle.actionEventInitiate = HelperPersonnelCompatibility.wrapFollowMeFunction("actionEventInitiate", FollowVehicle.actionEventInitiate, stageName)
         HelperPersonnelCompatibility.followMeActionHookInstalled = true
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | actionEventInitiateHook=true | Phase=%s", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | actionEventInitiateHook=true | Phase=%s", tostring(stageName))
     end
 
     if FollowVehicle ~= nil and FollowVehicle.initiateFollowVehicle ~= nil and HelperPersonnelCompatibility.followMeInitiateHookInstalled ~= true then
         FollowVehicle.initiateFollowVehicle = HelperPersonnelCompatibility.wrapFollowMeFunction("initiateFollowVehicle", FollowVehicle.initiateFollowVehicle, stageName)
         HelperPersonnelCompatibility.followMeInitiateHookInstalled = true
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | initiateClassHook=true | Phase=%s", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | initiateClassHook=true | Phase=%s", tostring(stageName))
     end
 
     if FollowVehicle ~= nil and FollowVehicle.onUpdateTick ~= nil and HelperPersonnelCompatibility.followMeUpdateTickHookInstalled ~= true then
         FollowVehicle.onUpdateTick = HelperPersonnelCompatibility.wrapFollowMeFunction("onUpdateTick", FollowVehicle.onUpdateTick, stageName)
         HelperPersonnelCompatibility.followMeUpdateTickHookInstalled = true
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | updateTickClassHook=true | Phase=%s", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | updateTickClassHook=true | Phase=%s", tostring(stageName))
     end
 
     if AIVehicle ~= nil and AIVehicle.stopCurrentAIJob ~= nil and HelperPersonnelCompatibility.followMeStopCurrentAIJobHookInstalled ~= true then
         AIVehicle.stopCurrentAIJob = HelperPersonnelCompatibility.wrapFollowMeFunction("stopCurrentAIJob", AIVehicle.stopCurrentAIJob, stageName)
         HelperPersonnelCompatibility.followMeStopCurrentAIJobHookInstalled = true
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | stopCurrentAIJobHook=true | Phase=%s", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | stopCurrentAIJobHook=true | Phase=%s", tostring(stageName))
     end
 
     if FollowVehicle ~= nil and FollowVehicle.registerFunctions ~= nil and HelperPersonnelCompatibility.followMeRegisterFunctionsHookInstalled ~= true then
@@ -1784,12 +1784,12 @@ function HelperPersonnelCompatibility.installFollowMeHooks(stageName)
             HelperPersonnelCompatibility.installFollowMeVehicleTypeHooks(vehicleType, "FollowVehicle.registerFunctions")
         end)
         HelperPersonnelCompatibility.followMeRegisterFunctionsHookInstalled = true
-        hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | registerFunctionsHook=true | Phase=%s", tostring(stageName))
+        hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | registerFunctionsHook=true | Phase=%s", tostring(stageName))
     end
 end
 
 function HelperPersonnelCompatibility.install()
-    hpCompatLog("FS25_HelperPersonnel: FollowMe-Diagnose | compatibility.install ENTER | BereitsInstalliert=%s", tostring(HelperPersonnelCompatibility.isInstalled == true))
+    hpCompatLog("FS25_HelperPersonnel: FollowMe diagnostics | compatibility.install ENTER | AlreadyInstalled=%s", tostring(HelperPersonnelCompatibility.isInstalled == true))
 
     if HelperPersonnelCompatibility.isInstalled == true then
         if HelperPersonnelCompatibility.installFollowMeHooks ~= nil then
@@ -1805,4 +1805,3 @@ function HelperPersonnelCompatibility.install()
     end
 
 end
-

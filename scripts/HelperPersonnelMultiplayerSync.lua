@@ -2618,6 +2618,10 @@ function HelperPersonnelApp:hp15611BuildActiveAssignmentLookup()
 
     self:hp15611AddActiveVehiclesToLookup(lookup)
 
+    if HelperPersonnelAutoDriveCompatibility ~= nil and HelperPersonnelAutoDriveCompatibility.addActiveAssignmentsToLookup ~= nil then
+        HelperPersonnelAutoDriveCompatibility.addActiveAssignmentsToLookup(self, lookup)
+    end
+
     lookup.hasIdentifiers = hpV15611HasTableEntries(lookup.workerIds)
         or hpV15611HasTableEntries(lookup.vehicleKeys)
         or hpV15611HasTableEntries(lookup.vehicleNames)
@@ -2721,6 +2725,10 @@ local function hpOverride_HelperPersonnelApp_update_1(self, dt)
         HP_V15611_ORIGINAL_APP_UPDATE(self, dt)
     end
 
+    if HelperPersonnelAutoDriveCompatibility ~= nil and HelperPersonnelAutoDriveCompatibility.update ~= nil then
+        HelperPersonnelAutoDriveCompatibility.update(dt)
+    end
+
     if self.hp15611UpdateFinishedJobAudit ~= nil then
         self:hp15611UpdateFinishedJobAudit(dt)
     end
@@ -2745,7 +2753,21 @@ if HelperPersonnelHelperBridge ~= nil and HelperPersonnelHelperBridge.onJobStopp
             workerId = job.helperPersonnelWorkerId
         end
 
+
+        if HelperPersonnelAutoDriveCompatibility ~= nil
+            and HelperPersonnelAutoDriveCompatibility.beforeBridgeJobStopped ~= nil
+            and HelperPersonnelAutoDriveCompatibility.beforeBridgeJobStopped(self, job, workerId) == true then
+            return
+        end
+
+        local assignedJob = workerId ~= nil and self.workerJobById[workerId] or nil
+        local vehicleKey = self.getVehicleKeyFromJob ~= nil and self:getVehicleKeyFromJob(job) or nil
+
         local result = HP_V15182_ORIGINAL_BRIDGE_ON_JOB_STOPPED(self, job)
+
+        if HelperPersonnelAutoDriveCompatibility ~= nil and HelperPersonnelAutoDriveCompatibility.afterBridgeJobStopped ~= nil then
+            HelperPersonnelAutoDriveCompatibility.afterBridgeJobStopped(self, job, workerId, assignedJob, vehicleKey)
+        end
 
         if workerId ~= nil then
             job.helperPersonnelWorkerId = workerId

@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%sは友人と急に会うことになり、進行中の作業を中断しました。" />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%sは彼女と急にコーヒーを飲みに行くため、進行中の作業を中断しました。" />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%sは彼氏と急にコーヒーを飲みに行くため、進行中の作業を中断しました。" />
+        <e k="ui_pmMonth01" v="3月" />
+        <e k="ui_pmMonth02" v="4月" />
+        <e k="ui_pmMonth03" v="5月" />
+        <e k="ui_pmMonth04" v="6月" />
+        <e k="ui_pmMonth05" v="7月" />
+        <e k="ui_pmMonth06" v="8月" />
+        <e k="ui_pmMonth07" v="9月" />
+        <e k="ui_pmMonth08" v="10月" />
+        <e k="ui_pmMonth09" v="11月" />
+        <e k="ui_pmMonth10" v="12月" />
+        <e k="ui_pmMonth11" v="1月" />
+        <e k="ui_pmMonth12" v="2月" />
+        <e k="ui_pmPeriodMonthYear" v="%s・%d年目" />
+        <e k="ui_pmPeriodYear" v="%d年目" />
+        <e k="ui_pmOverviewChangesHeader" v="%sの変更" />
+        <e k="ui_pmOverviewNoChanges" v="今月の変更はありません。" />
+        <e k="ui_pmOverviewRange" v="%d-%d / %d" />
+        <e k="ui_pmHistoryReputationEffect" v="影響：評判 %s。" />
+        <e k="ui_pmPayrollNone" v="給与計算はまだありません。" />
+        <e k="ui_pmPayrollBookingFailed" v="給与計算を計上できませんでした：%s。" />
+        <e k="ui_pmPayrollBooked" v="給与計算を計上しました：%s。" />
+        <e k="ui_reliabilityChanged" v="%s：信頼性 %s%s。信頼性：%d から %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="不満" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="昇給要求の却下" />
+        <e k="ui_reliabilityReasonSalaryPending" v="未処理の昇給要求" />
+        <e k="ui_reliabilityReasonLowReputation" v="雇用主の評判が低い" />
+        <e k="ui_reliabilityReasonNightWork" v="夜間作業の負担が大きい" />
+        <e k="ui_reliabilityReasonGoodWork" v="良好な勤務月" />
+        <e k="ui_waitingForServerData" v="サーバーデータを待機中" />
     </elements>
 </l10n>

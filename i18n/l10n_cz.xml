@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s přerušila probíhající práci, protože se spontánně rozhodla setkat s přáteli." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s přerušil probíhající práci, aby se spontánně setkal se svou přítelkyní u kávy." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s přerušila probíhající práci, aby se spontánně setkala se svým přítelem u kávy." />
+        <e k="ui_pmMonth01" v="březen" />
+        <e k="ui_pmMonth02" v="duben" />
+        <e k="ui_pmMonth03" v="květen" />
+        <e k="ui_pmMonth04" v="červen" />
+        <e k="ui_pmMonth05" v="červenec" />
+        <e k="ui_pmMonth06" v="srpen" />
+        <e k="ui_pmMonth07" v="září" />
+        <e k="ui_pmMonth08" v="říjen" />
+        <e k="ui_pmMonth09" v="listopad" />
+        <e k="ui_pmMonth10" v="prosinec" />
+        <e k="ui_pmMonth11" v="leden" />
+        <e k="ui_pmMonth12" v="únor" />
+        <e k="ui_pmPeriodMonthYear" v="%s, rok %d" />
+        <e k="ui_pmPeriodYear" v="Rok %d" />
+        <e k="ui_pmOverviewChangesHeader" v="ZMĚNY V OBDOBÍ %s" />
+        <e k="ui_pmOverviewNoChanges" v="Tento měsíc zatím žádné změny." />
+        <e k="ui_pmOverviewRange" v="%d-%d z %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Dopad: reputace %s." />
+        <e k="ui_pmPayrollNone" v="Zatím žádné vyúčtování mezd." />
+        <e k="ui_pmPayrollBookingFailed" v="Mzdy se nepodařilo zaúčtovat: %s." />
+        <e k="ui_pmPayrollBooked" v="Mzdy zaúčtovány: %s." />
+        <e k="ui_reliabilityChanged" v="%s: spolehlivost %s%s. Spolehlivost: %d na %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="nespokojenost" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="zamítnutá žádost o zvýšení mzdy" />
+        <e k="ui_reliabilityReasonSalaryPending" v="nevyřízená žádost o zvýšení mzdy" />
+        <e k="ui_reliabilityReasonLowReputation" v="nízká pověst zaměstnavatele" />
+        <e k="ui_reliabilityReasonNightWork" v="vysoká zátěž noční prací" />
+        <e k="ui_reliabilityReasonGoodWork" v="dobrý pracovní měsíc" />
+        <e k="ui_waitingForServerData" v="Čekání na data ze serveru" />
     </elements>
 </l10n>

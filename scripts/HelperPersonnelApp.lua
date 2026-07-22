@@ -38,7 +38,7 @@ function HelperPersonnelApp:load()
         self:restoreActiveAIJobs()
         self.lastNetworkSyncCounter = -1
     else
-        self.manager.lastActionText = "Warte auf Serverdaten"
+        self.manager.lastActionText = self.manager:getLocalizedText("ui_waitingForServerData", "Waiting for server data")
         self:requestNetworkState()
     end
 

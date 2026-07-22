@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s avbrøt det pågående oppdraget fordi hun spontant bestemte seg for å møte venner." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s avbrøt det pågående oppdraget for spontant å ta en kaffe med kjæresten sin." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s avbrøt det pågående oppdraget for spontant å ta en kaffe med kjæresten sin." />
+        <e k="ui_pmMonth01" v="mars" />
+        <e k="ui_pmMonth02" v="april" />
+        <e k="ui_pmMonth03" v="mai" />
+        <e k="ui_pmMonth04" v="juni" />
+        <e k="ui_pmMonth05" v="juli" />
+        <e k="ui_pmMonth06" v="august" />
+        <e k="ui_pmMonth07" v="september" />
+        <e k="ui_pmMonth08" v="oktober" />
+        <e k="ui_pmMonth09" v="november" />
+        <e k="ui_pmMonth10" v="desember" />
+        <e k="ui_pmMonth11" v="januar" />
+        <e k="ui_pmMonth12" v="februar" />
+        <e k="ui_pmPeriodMonthYear" v="%s, år %d" />
+        <e k="ui_pmPeriodYear" v="År %d" />
+        <e k="ui_pmOverviewChangesHeader" v="ENDRINGER I %s" />
+        <e k="ui_pmOverviewNoChanges" v="Ingen endringer denne måneden." />
+        <e k="ui_pmOverviewRange" v="%d-%d av %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Effekt: %s omdømme." />
+        <e k="ui_pmPayrollNone" v="Ingen lønnsavregning ennå." />
+        <e k="ui_pmPayrollBookingFailed" v="Lønnsavregningen kunne ikke bokføres: %s." />
+        <e k="ui_pmPayrollBooked" v="Lønnsavregning bokført: %s." />
+        <e k="ui_reliabilityChanged" v="%s: pålitelighet %s%s. Pålitelighet: %d til %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="misnøye" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="avvist lønnskrav" />
+        <e k="ui_reliabilityReasonSalaryPending" v="åpent lønnskrav" />
+        <e k="ui_reliabilityReasonLowReputation" v="lavt arbeidsgiveromdømme" />
+        <e k="ui_reliabilityReasonNightWork" v="stor belastning fra nattarbeid" />
+        <e k="ui_reliabilityReasonGoodWork" v="god arbeidsmåned" />
+        <e k="ui_waitingForServerData" v="Venter på serverdata" />
     </elements>
 </l10n>

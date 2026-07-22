@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s đã dừng công việc đang thực hiện vì cô ấy đột nhiên quyết định gặp bạn bè." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s đã dừng công việc đang thực hiện để bất chợt đi uống cà phê với bạn gái." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s đã dừng công việc đang thực hiện để bất chợt đi uống cà phê với bạn trai." />
+        <e k="ui_pmMonth01" v="tháng 3" />
+        <e k="ui_pmMonth02" v="tháng 4" />
+        <e k="ui_pmMonth03" v="tháng 5" />
+        <e k="ui_pmMonth04" v="tháng 6" />
+        <e k="ui_pmMonth05" v="tháng 7" />
+        <e k="ui_pmMonth06" v="tháng 8" />
+        <e k="ui_pmMonth07" v="tháng 9" />
+        <e k="ui_pmMonth08" v="tháng 10" />
+        <e k="ui_pmMonth09" v="tháng 11" />
+        <e k="ui_pmMonth10" v="tháng 12" />
+        <e k="ui_pmMonth11" v="tháng 1" />
+        <e k="ui_pmMonth12" v="tháng 2" />
+        <e k="ui_pmPeriodMonthYear" v="%s, năm %d" />
+        <e k="ui_pmPeriodYear" v="Năm %d" />
+        <e k="ui_pmOverviewChangesHeader" v="THAY ĐỔI TRONG %s" />
+        <e k="ui_pmOverviewNoChanges" v="Không có thay đổi nào trong tháng này." />
+        <e k="ui_pmOverviewRange" v="%d-%d / %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Ảnh hưởng: %s danh tiếng." />
+        <e k="ui_pmPayrollNone" v="Chưa có kỳ trả lương nào." />
+        <e k="ui_pmPayrollBookingFailed" v="Không thể ghi nhận kỳ trả lương: %s." />
+        <e k="ui_pmPayrollBooked" v="Đã ghi nhận kỳ trả lương: %s." />
+        <e k="ui_reliabilityChanged" v="%s: độ tin cậy %s%s. Độ tin cậy: từ %d đến %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="không hài lòng" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="yêu cầu tăng lương bị từ chối" />
+        <e k="ui_reliabilityReasonSalaryPending" v="yêu cầu tăng lương đang chờ" />
+        <e k="ui_reliabilityReasonLowReputation" v="danh tiếng nhà tuyển dụng thấp" />
+        <e k="ui_reliabilityReasonNightWork" v="khối lượng công việc ban đêm cao" />
+        <e k="ui_reliabilityReasonGoodWork" v="tháng làm việc tốt" />
+        <e k="ui_waitingForServerData" v="Đang chờ dữ liệu máy chủ" />
     </elements>
 </l10n>

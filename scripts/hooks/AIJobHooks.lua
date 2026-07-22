@@ -91,12 +91,13 @@ function HelperPersonnelAIJobHooks.onAIJobLoadFromXMLFile(job, superFunc, xmlFil
     end
 end
 
-function HelperPersonnelAIJobHooks.installJobClassHooks(className)
-    local classObject = _G[className]
+function HelperPersonnelAIJobHooks.installJobClassHooks(className, classObject, hookOptions)
+    classObject = classObject or _G[className]
     if classObject == nil or classObject.helperPersonnelJobHooksInstalled == true then
         return
     end
 
+    hookOptions = hookOptions or {}
     classObject.helperPersonnelJobHooksInstalled = true
 
     local saveToXMLFile = rawget(classObject, "saveToXMLFile")
@@ -115,7 +116,7 @@ function HelperPersonnelAIJobHooks.installJobClassHooks(className)
     end
 
     local readStream = rawget(classObject, "readStream")
-    if readStream ~= nil then
+    if readStream ~= nil and hookOptions.skipReadStream ~= true then
         classObject.readStream = Utils.overwrittenFunction(readStream, HelperPersonnelAIJobHooks.onAIJobReadStream)
     end
 
@@ -525,6 +526,7 @@ end
 function HelperPersonnelAIJobHooks.callWithForcedHelper(job, workerId, callback)
     local forcedHelper = HelperPersonnelAIJobHooks.applyWorkerToJob(job, workerId)
     local originalGetRandomHelper = nil
+    local originalGetRandomIndex = nil
 
     if forcedHelper ~= nil and g_helperManager ~= nil and g_helperManager.getRandomHelper ~= nil then
         originalGetRandomHelper = g_helperManager.getRandomHelper
@@ -533,10 +535,21 @@ function HelperPersonnelAIJobHooks.callWithForcedHelper(job, workerId, callback)
         end
     end
 
+    if forcedHelper ~= nil and g_helperManager ~= nil and g_helperManager.getRandomIndex ~= nil then
+        originalGetRandomIndex = g_helperManager.getRandomIndex
+        g_helperManager.getRandomIndex = function(helperManager, ...)
+            return forcedHelper.index
+        end
+    end
+
     local success, result = pcall(callback)
 
     if originalGetRandomHelper ~= nil then
         g_helperManager.getRandomHelper = originalGetRandomHelper
+    end
+
+    if originalGetRandomIndex ~= nil then
+        g_helperManager.getRandomIndex = originalGetRandomIndex
     end
 
     if not success then
@@ -915,6 +928,10 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventRun(event, superFunc,
 end
 
 function HelperPersonnelAIJobHooks.onGetPricePerMs(job, superFunc, ...)
+    if job == nil or type(job.namedParameters) ~= "table" then
+        return superFunc(job, ...)
+    end
+
     local workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
     if workerId ~= nil then
         return 0

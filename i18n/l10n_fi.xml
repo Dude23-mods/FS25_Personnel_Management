@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s keskeytti käynnissä olevan tehtävän, koska hän päätti spontaanisti tavata ystäviä." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s keskeytti käynnissä olevan tehtävän mennäkseen spontaanisti kahville tyttöystävänsä kanssa." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s keskeytti käynnissä olevan tehtävän mennäkseen spontaanisti kahville poikaystävänsä kanssa." />
+        <e k="ui_pmMonth01" v="maaliskuu" />
+        <e k="ui_pmMonth02" v="huhtikuu" />
+        <e k="ui_pmMonth03" v="toukokuu" />
+        <e k="ui_pmMonth04" v="kesäkuu" />
+        <e k="ui_pmMonth05" v="heinäkuu" />
+        <e k="ui_pmMonth06" v="elokuu" />
+        <e k="ui_pmMonth07" v="syyskuu" />
+        <e k="ui_pmMonth08" v="lokakuu" />
+        <e k="ui_pmMonth09" v="marraskuu" />
+        <e k="ui_pmMonth10" v="joulukuu" />
+        <e k="ui_pmMonth11" v="tammikuu" />
+        <e k="ui_pmMonth12" v="helmikuu" />
+        <e k="ui_pmPeriodMonthYear" v="%s, vuosi %d" />
+        <e k="ui_pmPeriodYear" v="Vuosi %d" />
+        <e k="ui_pmOverviewChangesHeader" v="MUUTOKSET: %s" />
+        <e k="ui_pmOverviewNoChanges" v="Ei muutoksia tässä kuussa." />
+        <e k="ui_pmOverviewRange" v="%d-%d / %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Vaikutus: maine %s." />
+        <e k="ui_pmPayrollNone" v="Ei vielä palkanmaksua." />
+        <e k="ui_pmPayrollBookingFailed" v="Palkanmaksua ei voitu kirjata: %s." />
+        <e k="ui_pmPayrollBooked" v="Palkanmaksu kirjattu: %s." />
+        <e k="ui_reliabilityChanged" v="%s: luotettavuus %s%s. Luotettavuus: %d -&gt; %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="tyytymättömyys" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="hylätty palkankorotuspyyntö" />
+        <e k="ui_reliabilityReasonSalaryPending" v="avoin palkankorotuspyyntö" />
+        <e k="ui_reliabilityReasonLowReputation" v="heikko työnantajamaine" />
+        <e k="ui_reliabilityReasonNightWork" v="raskas yötyökuormitus" />
+        <e k="ui_reliabilityReasonGoodWork" v="hyvä työkuukausi" />
+        <e k="ui_waitingForServerData" v="Odotetaan palvelimen tietoja" />
     </elements>
 </l10n>

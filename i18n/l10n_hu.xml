@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s megszakította a folyamatban lévő munkát, mert spontán úgy döntött, hogy találkozik a barátaival." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s megszakította a folyamatban lévő munkát, hogy spontán kávézzon a barátnőjével." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s megszakította a folyamatban lévő munkát, hogy spontán kávézzon a barátjával." />
+        <e k="ui_pmMonth01" v="március" />
+        <e k="ui_pmMonth02" v="április" />
+        <e k="ui_pmMonth03" v="május" />
+        <e k="ui_pmMonth04" v="június" />
+        <e k="ui_pmMonth05" v="július" />
+        <e k="ui_pmMonth06" v="augusztus" />
+        <e k="ui_pmMonth07" v="szeptember" />
+        <e k="ui_pmMonth08" v="október" />
+        <e k="ui_pmMonth09" v="november" />
+        <e k="ui_pmMonth10" v="december" />
+        <e k="ui_pmMonth11" v="január" />
+        <e k="ui_pmMonth12" v="február" />
+        <e k="ui_pmPeriodMonthYear" v="%s, %d. év" />
+        <e k="ui_pmPeriodYear" v="%d. év" />
+        <e k="ui_pmOverviewChangesHeader" v="VÁLTOZÁSOK: %s" />
+        <e k="ui_pmOverviewNoChanges" v="Ebben a hónapban még nincs változás." />
+        <e k="ui_pmOverviewRange" v="%d-%d / %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Hatás: %s hírnév." />
+        <e k="ui_pmPayrollNone" v="Még nincs bérszámfejtés." />
+        <e k="ui_pmPayrollBookingFailed" v="A bérszámfejtés nem könyvelhető: %s." />
+        <e k="ui_pmPayrollBooked" v="Bérszámfejtés könyvelve: %s." />
+        <e k="ui_reliabilityChanged" v="%s: megbízhatóság %s%s. Megbízhatóság: %d-ról %d-ra" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="elégedetlenség" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="elutasított fizetésemelési kérelem" />
+        <e k="ui_reliabilityReasonSalaryPending" v="függőben lévő fizetésemelési kérelem" />
+        <e k="ui_reliabilityReasonLowReputation" v="alacsony munkáltatói hírnév" />
+        <e k="ui_reliabilityReasonNightWork" v="nagy éjszakai munkaterhelés" />
+        <e k="ui_reliabilityReasonGoodWork" v="jó munkahónap" />
+        <e k="ui_waitingForServerData" v="Várakozás a szerveradatokra" />
     </elements>
 </l10n>

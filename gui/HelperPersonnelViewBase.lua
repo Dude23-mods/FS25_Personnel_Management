@@ -3306,10 +3306,10 @@ function HelperPersonnelViewBase:getOverviewHistoryHeader(manager, period, year)
     end
 
     if label ~= nil and label ~= "" then
-        return string.format("ÄNDERUNGEN IM %s", string.upper(label))
+        return string.format(self:getText("ui_pmOverviewChangesHeader", "CHANGES IN %s"), label)
     end
 
-    return "ÄNDERUNGEN DIESES MONATS"
+    return self:getText("ui_changeHistoryHeader", "OTHER CHANGES")
 end
 
 function HelperPersonnelViewBase:buildOverviewHistoryRows(lines, textSize, maxWidth)
@@ -3329,7 +3329,7 @@ function HelperPersonnelViewBase:buildOverviewHistoryRows(lines, textSize, maxWi
     end
 
     if #rows == 0 then
-        table.insert(rows, "- Noch keine Änderungen in diesem Monat.")
+        table.insert(rows, string.format("- %s", self:getText("ui_pmOverviewNoChanges", "No changes this month.")))
     end
 
     return rows
@@ -3342,7 +3342,7 @@ function HelperPersonnelViewBase:drawMonthlyChangeHistory(manager, x, y, width, 
     if manager ~= nil and manager.getMonthlyHistoryLines ~= nil then
         lines, period, year = manager:getMonthlyHistoryLines()
     else
-        lines = { self:getText("ui_summary_lastActionNone", "Noch keine Änderung") }
+        lines = { self:getText("ui_pmOverviewNoChanges", "No changes this month.") }
     end
 
     local textSize = 0.0096
@@ -3377,7 +3377,8 @@ function HelperPersonnelViewBase:drawMonthlyChangeHistory(manager, x, y, width, 
         local scrollbarHeight = math.max(0.030, (visibleRows * lineHeight) + 0.002)
         self.overviewHistoryScrollbarMouseArea = { x = scrollbarX - 0.010, y = scrollbarY, width = 0.028, height = scrollbarHeight }
         self:drawDetailScrollbar(scrollbarX, scrollbarY, 0.006, scrollbarHeight, firstRow, visibleRows, #rows)
-        self:drawTextLine(x + width, y, 0.0105, RenderText.ALIGN_RIGHT, string.format("%d-%d von %d", firstRow, lastRow, #rows), 0.61, 0.73, 0.07, 0.80, false)
+        local rangeTemplate = self:getText("ui_pmOverviewRange", "%d-%d of %d")
+        self:drawTextLine(x + width, y, 0.0105, RenderText.ALIGN_RIGHT, string.format(rangeTemplate, firstRow, lastRow, #rows), 0.61, 0.73, 0.07, 0.80, false)
     end
 
     return contentTop - (visibleRows * lineHeight)

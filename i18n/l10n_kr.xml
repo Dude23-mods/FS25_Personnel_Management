@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s은(는) 갑자기 친구들을 만나기로 해 진행 중인 작업을 중단했습니다." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s은(는) 여자친구와 갑자기 커피를 마시러 가기 위해 진행 중인 작업을 중단했습니다." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s은(는) 남자친구와 갑자기 커피를 마시러 가기 위해 진행 중인 작업을 중단했습니다." />
+        <e k="ui_pmMonth01" v="3월" />
+        <e k="ui_pmMonth02" v="4월" />
+        <e k="ui_pmMonth03" v="5월" />
+        <e k="ui_pmMonth04" v="6월" />
+        <e k="ui_pmMonth05" v="7월" />
+        <e k="ui_pmMonth06" v="8월" />
+        <e k="ui_pmMonth07" v="9월" />
+        <e k="ui_pmMonth08" v="10월" />
+        <e k="ui_pmMonth09" v="11월" />
+        <e k="ui_pmMonth10" v="12월" />
+        <e k="ui_pmMonth11" v="1월" />
+        <e k="ui_pmMonth12" v="2월" />
+        <e k="ui_pmPeriodMonthYear" v="%s, %d년" />
+        <e k="ui_pmPeriodYear" v="%d년" />
+        <e k="ui_pmOverviewChangesHeader" v="%s 변경 사항" />
+        <e k="ui_pmOverviewNoChanges" v="이번 달에는 변경 사항이 없습니다." />
+        <e k="ui_pmOverviewRange" v="%d-%d / %d" />
+        <e k="ui_pmHistoryReputationEffect" v="영향: 평판 %s." />
+        <e k="ui_pmPayrollNone" v="아직 급여 정산 내역이 없습니다." />
+        <e k="ui_pmPayrollBookingFailed" v="급여를 반영하지 못했습니다: %s." />
+        <e k="ui_pmPayrollBooked" v="급여 반영 완료: %s." />
+        <e k="ui_reliabilityChanged" v="%s: 신뢰도 %s%s. 신뢰도: %d에서 %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="불만" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="급여 인상 요구 거절" />
+        <e k="ui_reliabilityReasonSalaryPending" v="처리되지 않은 급여 인상 요구" />
+        <e k="ui_reliabilityReasonLowReputation" v="낮은 고용주 평판" />
+        <e k="ui_reliabilityReasonNightWork" v="과도한 야간 작업 부담" />
+        <e k="ui_reliabilityReasonGoodWork" v="좋은 근무 실적" />
+        <e k="ui_waitingForServerData" v="서버 데이터 대기 중" />
     </elements>
 </l10n>

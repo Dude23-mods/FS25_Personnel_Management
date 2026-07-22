@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s中止了正在进行的任务，因为她临时决定去见朋友。" />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s中止了正在进行的任务，临时去和女朋友喝咖啡。" />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s中止了正在进行的任务，临时去和男朋友喝咖啡。" />
+        <e k="ui_pmMonth01" v="三月" />
+        <e k="ui_pmMonth02" v="四月" />
+        <e k="ui_pmMonth03" v="五月" />
+        <e k="ui_pmMonth04" v="六月" />
+        <e k="ui_pmMonth05" v="七月" />
+        <e k="ui_pmMonth06" v="八月" />
+        <e k="ui_pmMonth07" v="九月" />
+        <e k="ui_pmMonth08" v="十月" />
+        <e k="ui_pmMonth09" v="十一月" />
+        <e k="ui_pmMonth10" v="十二月" />
+        <e k="ui_pmMonth11" v="一月" />
+        <e k="ui_pmMonth12" v="二月" />
+        <e k="ui_pmPeriodMonthYear" v="%s，第 %d 年" />
+        <e k="ui_pmPeriodYear" v="第 %d 年" />
+        <e k="ui_pmOverviewChangesHeader" v="%s的变更" />
+        <e k="ui_pmOverviewNoChanges" v="本月暂无变更。" />
+        <e k="ui_pmOverviewRange" v="第 %d-%d 项，共 %d 项" />
+        <e k="ui_pmHistoryReputationEffect" v="影响：声望 %s。" />
+        <e k="ui_pmPayrollNone" v="尚无工资结算。" />
+        <e k="ui_pmPayrollBookingFailed" v="无法记账工资结算：%s。" />
+        <e k="ui_pmPayrollBooked" v="工资结算已记账：%s。" />
+        <e k="ui_reliabilityChanged" v="%s：可靠性 %s%s。可靠性：%d 到 %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="不满意" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="加薪请求被拒绝" />
+        <e k="ui_reliabilityReasonSalaryPending" v="加薪请求尚未处理" />
+        <e k="ui_reliabilityReasonLowReputation" v="雇主声望较低" />
+        <e k="ui_reliabilityReasonNightWork" v="夜间工作负担过重" />
+        <e k="ui_reliabilityReasonGoodWork" v="工作表现良好的月份" />
+        <e k="ui_waitingForServerData" v="等待服务器数据" />
     </elements>
 </l10n>

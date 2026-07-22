@@ -1375,6 +1375,11 @@ function HelperPersonnelExperienceEffects.onDriveAlongCurvature(vehicle, superFu
     return superFunc(vehicle, dt, curvature, maxSpeed, ...)
 end
 
+function HelperPersonnelExperienceEffects.onDriveInDirection(vehicle, superFunc, dt, steeringAngleLimit, acceleration, slowAcceleration, slowAngleLimit, allowedToDrive, moveForwards, lx, lz, maxSpeed, ...)
+    maxSpeed = HelperPersonnelExperienceEffects.adjustMaxSpeed(vehicle, maxSpeed)
+    return superFunc(vehicle, dt, steeringAngleLimit, acceleration, slowAcceleration, slowAngleLimit, allowedToDrive, moveForwards, lx, lz, maxSpeed, ...)
+end
+
 function HelperPersonnelExperienceEffects.install()
     if HelperPersonnelExperienceEffects.isInstalled then
         return
@@ -1391,6 +1396,11 @@ function HelperPersonnelExperienceEffects.install()
 
         if AIVehicleUtil.driveAlongCurvature ~= nil then
             AIVehicleUtil.driveAlongCurvature = Utils.overwrittenFunction(AIVehicleUtil.driveAlongCurvature, HelperPersonnelExperienceEffects.onDriveAlongCurvature)
+        end
+
+
+        if AIVehicleUtil.driveInDirection ~= nil then
+            AIVehicleUtil.driveInDirection = Utils.overwrittenFunction(AIVehicleUtil.driveInDirection, HelperPersonnelExperienceEffects.onDriveInDirection)
         end
     end
 

@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s перервала поточну роботу, бо спонтанно вирішила зустрітися з друзями." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s перервав поточну роботу, щоб спонтанно зустрітися з дівчиною за кавою." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s перервала поточну роботу, щоб спонтанно зустрітися з хлопцем за кавою." />
+        <e k="ui_pmMonth01" v="березень" />
+        <e k="ui_pmMonth02" v="квітень" />
+        <e k="ui_pmMonth03" v="травень" />
+        <e k="ui_pmMonth04" v="червень" />
+        <e k="ui_pmMonth05" v="липень" />
+        <e k="ui_pmMonth06" v="серпень" />
+        <e k="ui_pmMonth07" v="вересень" />
+        <e k="ui_pmMonth08" v="жовтень" />
+        <e k="ui_pmMonth09" v="листопад" />
+        <e k="ui_pmMonth10" v="грудень" />
+        <e k="ui_pmMonth11" v="січень" />
+        <e k="ui_pmMonth12" v="лютий" />
+        <e k="ui_pmPeriodMonthYear" v="%s, рік %d" />
+        <e k="ui_pmPeriodYear" v="Рік %d" />
+        <e k="ui_pmOverviewChangesHeader" v="ЗМІНИ ЗА %s" />
+        <e k="ui_pmOverviewNoChanges" v="Цього місяця змін немає." />
+        <e k="ui_pmOverviewRange" v="%d-%d з %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Вплив: репутація %s." />
+        <e k="ui_pmPayrollNone" v="Розрахунку зарплати ще не було." />
+        <e k="ui_pmPayrollBookingFailed" v="Не вдалося провести розрахунок зарплати: %s." />
+        <e k="ui_pmPayrollBooked" v="Розрахунок зарплати проведено: %s." />
+        <e k="ui_reliabilityChanged" v="%s: надійність %s%s. Надійність: з %d до %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="невдоволення" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="відхилена вимога підвищення зарплати" />
+        <e k="ui_reliabilityReasonSalaryPending" v="відкрита вимога підвищення зарплати" />
+        <e k="ui_reliabilityReasonLowReputation" v="низька репутація роботодавця" />
+        <e k="ui_reliabilityReasonNightWork" v="велике навантаження нічною роботою" />
+        <e k="ui_reliabilityReasonGoodWork" v="хороший робочий місяць" />
+        <e k="ui_waitingForServerData" v="Очікування даних сервера" />
     </elements>
 </l10n>

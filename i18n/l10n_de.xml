@@ -488,5 +488,34 @@
         <e k="ui_reliabilityJobAbortFriendsFemale" v="%s hat den laufenden Einsatz abgebrochen, weil sie sich spontan mit Freunden treffen wollte." />
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s hat den laufenden Einsatz abgebrochen, um sich spontan mit seiner Freundin zum Kaffeetrinken zu treffen." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s hat den laufenden Einsatz abgebrochen, um sich spontan mit ihrem Freund zum Kaffeetrinken zu treffen." />
+        <e k="ui_pmMonth01" v="März" />
+        <e k="ui_pmMonth02" v="April" />
+        <e k="ui_pmMonth03" v="Mai" />
+        <e k="ui_pmMonth04" v="Juni" />
+        <e k="ui_pmMonth05" v="Juli" />
+        <e k="ui_pmMonth06" v="August" />
+        <e k="ui_pmMonth07" v="September" />
+        <e k="ui_pmMonth08" v="Oktober" />
+        <e k="ui_pmMonth09" v="November" />
+        <e k="ui_pmMonth10" v="Dezember" />
+        <e k="ui_pmMonth11" v="Januar" />
+        <e k="ui_pmMonth12" v="Februar" />
+        <e k="ui_pmPeriodMonthYear" v="%s, Jahr %d" />
+        <e k="ui_pmPeriodYear" v="Jahr %d" />
+        <e k="ui_pmOverviewChangesHeader" v="ÄNDERUNGEN IM %s" />
+        <e k="ui_pmOverviewNoChanges" v="Noch keine Änderungen in diesem Monat." />
+        <e k="ui_pmOverviewRange" v="%d-%d von %d" />
+        <e k="ui_pmHistoryReputationEffect" v="Auswirkung: %s Ansehen." />
+        <e k="ui_pmPayrollNone" v="Noch keine Gehaltsabrechnung." />
+        <e k="ui_pmPayrollBookingFailed" v="Gehaltsabrechnung konnte nicht gebucht werden: %s." />
+        <e k="ui_pmPayrollBooked" v="Gehaltsabrechnung gebucht: %s." />
+        <e k="ui_reliabilityChanged" v="%s: Zuverlässigkeit %s%s. Zuverlässigkeit: %d auf %d" />
+        <e k="ui_reliabilityReasonDissatisfaction" v="Unzufriedenheit" />
+        <e k="ui_reliabilityReasonSalaryDeclined" v="abgelehnte Gehaltsforderung" />
+        <e k="ui_reliabilityReasonSalaryPending" v="offene Gehaltsforderung" />
+        <e k="ui_reliabilityReasonLowReputation" v="schlechtes Arbeitgeberansehen" />
+        <e k="ui_reliabilityReasonNightWork" v="starke Nachtbelastung" />
+        <e k="ui_reliabilityReasonGoodWork" v="guter Arbeitsmonat" />
+        <e k="ui_waitingForServerData" v="Warte auf Serverdaten" />
     </elements>
 </l10n>
