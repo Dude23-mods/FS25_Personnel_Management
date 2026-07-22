@@ -41,10 +41,14 @@ Your support just helps me spending more time developing, testing and maintainin
 ## Compatibility Notice
 
 ### AutoDrive and Courseplay
-![AutoDrive](https://img.shields.io/badge/AutoDrive-not%20supported-red)
-![Courseplay](https://img.shields.io/badge/Courseplay-not%20supported-red)
+![AutoDrive](https://img.shields.io/badge/AutoDrive-supported-brightgreen)
+![Courseplay](https://img.shields.io/badge/Courseplay-supported-brightgreen)
 
-AutoDrive and Courseplay are currently not supported by Personnel Management. These mods use their own AI and automation systems, which are not fully compatible with the way Personnel Management assigns and manages employees for helper jobs. Using AutoDrive or Courseplay together with this mod may lead to incorrect helper assignment, native GIANTS helpers being used instead of employees, Lua errors or performance issues. For stable gameplay, it is recommended to disable AutoDrive and Courseplay when using Personnel Management.
+AutoDrive and Courseplay are supported by Personnel Management as of version 1.1.1.0. Employees can be assigned to jobs started by either mod, while Personnel Management tracks their availability, working time, wages and job status.
+
+AutoDrive does not provide direct employee selection. Instead, it automatically assigns available employees who have been designated for transport tasks in the Personnel Management menu. Courseplay supports direct employee selection when starting a job.
+
+Handoffs between AutoDrive and Courseplay are handled to prevent duplicate assignments and employees remaining incorrectly marked as busy. The integration is designed for AutoDrive 3.0.1.2 and Courseplay 8.1.0.3. If unexpected behavior occurs, please include the relevant log file and exact mod versions when reporting the issue.
 
 ### FollowMe
 ![FollowMe Supported](https://img.shields.io/badge/FollowMe-supported-brightgreen)
@@ -186,7 +190,6 @@ This prevents players from modifying another farm's personnel and preserves cons
 
 ## Planned Features
 
-- AutoDrive and Courseplay support
 - Introduction of a new employee type: Apprentice
 - Salary negotiations
 - Job interviews, where applicant stats initially remain hidden and can be partially revealed through an interview
