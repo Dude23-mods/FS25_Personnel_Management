@@ -194,6 +194,7 @@ This prevents players from modifying another farm's personnel and preserves cons
 - Salary negotiations
 - Job interviews, where applicant stats initially remain hidden and can be partially revealed through an interview
 - A more transparent employer reputation system
+- Ingame ReadMe
 
 This is deliberately not intended to be a roadmap, but rather a brainstorming list of possible future features. Whether and how any of these ideas will be implemented remains undecided.
 
