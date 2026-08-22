@@ -7,6 +7,7 @@
         <FrameReference ref="helperPersonnelMenuEmployees" name="helperPersonnelMenuEmployees" id="pageEmployees" />
         <FrameReference ref="helperPersonnelMenuTraining" name="helperPersonnelMenuTraining" id="pageTraining" />
         <FrameReference ref="helperPersonnelMenuSettings" name="helperPersonnelMenuSettings" id="pageSettings" />
+        <FrameReference ref="helperPersonnelMenuHelp" name="helperPersonnelMenuHelp" id="pageHelp" />
     </Paging>
     <Bitmap profile="fs25_tabListContainer" id="header">
         <MultiTextOption profile="uiInGameMenuHeaderSelector" onClick="onClickPageSelection" id="pageSelector" soundDisabled="true" />

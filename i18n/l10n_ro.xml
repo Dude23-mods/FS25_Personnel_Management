@@ -517,5 +517,16 @@
         <e k="ui_reliabilityReasonNightWork" v="volum mare de muncă pe timp de noapte" />
         <e k="ui_reliabilityReasonGoodWork" v="lună de lucru bună" />
         <e k="ui_waitingForServerData" v="Se așteaptă datele serverului" />
+        <e k="ui_pmMenuPageHelp" v="Ajutor" />
+        <e k="ui_pmHelpIntro" v="Ghid detaliat în joc pentru Personnel Management 1.1.3.0. Fișierul ReadMe.pdf inclus conține reguli și calcule suplimentare." />
+        <e k="ui_pmHelpSectionQuickStart" v="Pornire rapidă și comenzi|Deschide meniul cu Ctrl + M. Schimbă filele cu comenzile de pagină ale meniului. Folosește A/D sau Stânga/Dreapta pentru persoană, Spațiu pentru confirmare, Esc pentru revenire, T pentru prioritățile de transport și G pentru cererile salariale." />
+        <e k="ui_pmHelpSectionPeople" v="Candidați și angajați|Un joc nou începe cu patru candidați; cel mult opt pot fi disponibili. Angajează din profiluri. Experiența, fiabilitatea și loialitatea sunt între 0 și 100. Starea, salariul, specializările, cronica și totalurile sunt pe pagina angajaților." />
+        <e k="ui_pmHelpSectionStats" v="Angajați și atribute|Experiența influențează viteza, uzura și consumul; fiabilitatea întreruperile, boala și abandonul; loialitatea cererile salariale și demisiile. Pagina arată și starea, salariul, specializările, statisticile și cronica personală." />
+        <e k="ui_pmHelpSectionWork" v="Muncă și dezvoltare|Pornirea unei lucrări normale cu ajutor IA deschide selecția angajatului. Pot fi aleși doar angajații disponibili și nimeni nu poate face mai multe lucrări simultan. Timpul de lucru crește experiența și specializarea. Experiența afectează viteza, uzura și consumul; fiabilitatea încetinirile, boala și abandonul; loialitatea conflictele salariale și demisiile." />
+        <e k="ui_pmHelpSectionSalary" v="Salarii|Salariile sunt debitate la schimbarea lunii și depind de zilele pe lună, dificultatea economică și setările modului. Angajații pot cere o mărire; cererea trebuie acceptată sau respinsă la timp și poate influența loialitatea." />
+        <e k="ui_pmHelpSectionTraining" v="Instruire|Instruirea începe doar la începutul lunii, costă bani și blochează angajatul până la sfârșitul lunii. Finalizarea îmbunătățește specializarea aleasă. Ofertele și istoricul apar în zonele Instruire și Angajați." />
+        <e k="ui_pmHelpSectionEmploymentEnd" v="Demisie, concediere și pensionare|Acestea nu au întotdeauna efect imediat, ci la schimbarea lunii conform termenelor. Un angajat aflat la lucru nu poate fi concediat imediat. Schimbările viitoare apar în stare și cronică." />
+        <e k="ui_pmHelpSectionIntegrations" v="AutoDrive și Courseplay|Atribuie șoferii în Angajați / Transport și stabilește prioritatea. AutoDrive folosește primul disponibil și blochează pornirea dacă nu există unul. Pornirea normală Courseplay deschide selecția. După AutoDrive, fiecare vehicul își păstrează automat propriul șofer fără o selecție nouă." />
+        <e k="ui_pmHelpSectionMultiplayer" v="Multiplayer și salvări|Datele și setările sunt separate pe ferme. Serverul validează schimbările; numai managerii autorizați își pot administra ferma. Angajații, atribuirile active și setările sunt sincronizate. Datele se află în helperPersonnel.xml din salvare." />
     </elements>
 </l10n>

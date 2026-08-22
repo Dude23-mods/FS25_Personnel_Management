@@ -9,5 +9,6 @@
         <slice id="employees" uvs="256px 0px 128px 128px"/>
         <slice id="training" uvs="384px 0px 128px 128px"/>
         <slice id="settings" uvs="512px 0px 128px 128px"/>
+        <slice id="help" uvs="640px 0px 128px 128px"/>
     </slices>
 </texture>

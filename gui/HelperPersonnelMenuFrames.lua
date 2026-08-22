@@ -26,6 +26,260 @@ function HelperPersonnelTrainingFrame.new(target, customMt)
     return HelperPersonnelMenuPage.new("training", customMt or HelperPersonnelTrainingFrame_mt)
 end
 
+HelperPersonnelHelpFrame = {}
+local HelperPersonnelHelpFrame_mt = Class(HelperPersonnelHelpFrame, HelperPersonnelMenuPage)
+local HP_HELP_CONTENT_X = 0.22
+local HP_HELP_CONTENT_Y = 0.755
+local HP_HELP_CONTENT_WIDTH = 0.62
+local HP_HELP_CONTENT_HEIGHT = 0.545
+local HP_HELP_SCROLLBAR_X = 0.852
+local HP_HELP_SCROLLBAR_WIDTH = 0.005
+local HP_HELP_LINE_HEIGHT = 0.0205
+local HP_HELP_TEXT_SIZE = 0.0118
+
+local function hpHelpGetInputConstant(name)
+    if Input ~= nil and Input[name] ~= nil then
+        return Input[name]
+    end
+
+    if _G ~= nil and _G[name] ~= nil then
+        return _G[name]
+    end
+
+    return nil
+end
+
+local function hpHelpSplitSection(value)
+    value = tostring(value or "")
+    local separator = string.find(value, "|", 1, true)
+    if separator == nil then
+        return value, ""
+    end
+
+    return string.sub(value, 1, separator - 1), string.sub(value, separator + 1)
+end
+
+function HelperPersonnelHelpFrame.new(target, customMt)
+    local self = HelperPersonnelMenuPage.new("help", customMt or HelperPersonnelHelpFrame_mt)
+
+    self.helpRows = {}
+    self.helpFirstRow = 1
+    self.helpVisibleRows = 1
+    self.helpScrollArea = nil
+    self.helpScrollbarArea = nil
+    self.helpScrollbarDragging = false
+
+    return self
+end
+
+function HelperPersonnelHelpFrame:applyPageKind()
+    self.mode = HelperPersonnelViewBase.MODE_OVERVIEW
+    self.pageTitleKey = "ui_pmMenuPageHelp"
+    self.pageTitleFallback = "ui_pmMenuPageHelp"
+end
+
+function HelperPersonnelHelpFrame:updateButtons()
+    if self.btnClose == nil then
+        self:createButtonInfo()
+    end
+
+    self.btnClose.text = self:getText("ui_button_back", "ui_button_back")
+    self.btnPrevTab.text = self:getText("ui_hpIngameMenuPrev", "ui_hpIngameMenuPrev")
+    self.btnNextTab.text = self:getText("ui_hpIngameMenuNext", "ui_hpIngameMenuNext")
+    self:applyMenuButtons({self.btnClose, self.btnPrevTab, self.btnNextTab})
+end
+
+function HelperPersonnelHelpFrame:getHelpRows()
+    local rows = {}
+    local maxWidth = HP_HELP_CONTENT_WIDTH - 0.025
+    local intro = self:getText("ui_pmHelpIntro", "ui_pmHelpIntro")
+
+    for _, line in ipairs(self:getWrappedHistoryLines(intro, HP_HELP_TEXT_SIZE, maxWidth, 92)) do
+        table.insert(rows, { kind = "intro", text = line })
+    end
+    table.insert(rows, { kind = "spacer", text = "" })
+
+    local sectionKeys = {
+        "ui_pmHelpSectionQuickStart",
+        "ui_pmHelpSectionPeople",
+        "ui_pmHelpSectionStats",
+        "ui_pmHelpSectionWork",
+        "ui_pmHelpSectionSalary",
+        "ui_pmHelpSectionTraining",
+        "ui_pmHelpSectionEmploymentEnd",
+        "ui_pmHelpSectionIntegrations",
+        "ui_pmHelpSectionMultiplayer"
+    }
+
+    for _, key in ipairs(sectionKeys) do
+        local title, body = hpHelpSplitSection(self:getText(key, key))
+        table.insert(rows, { kind = "title", text = title })
+        for _, line in ipairs(self:getWrappedHistoryLines(body, HP_HELP_TEXT_SIZE, maxWidth, 92)) do
+            table.insert(rows, { kind = "body", text = line })
+        end
+        table.insert(rows, { kind = "spacer", text = "" })
+    end
+
+    return rows
+end
+
+function HelperPersonnelHelpFrame:getHelpScrollState()
+    self.helpRows = self:getHelpRows()
+    local visibleRows = math.max(1, math.floor(HP_HELP_CONTENT_HEIGHT / HP_HELP_LINE_HEIGHT))
+    local maxFirstRow = math.max(1, #self.helpRows - visibleRows + 1)
+    self.helpFirstRow = math.max(1, math.min(math.floor((tonumber(self.helpFirstRow) or 1) + 0.5), maxFirstRow))
+    self.helpVisibleRows = visibleRows
+
+    return {
+        rows = self.helpRows,
+        visibleRows = visibleRows,
+        maxFirstRow = maxFirstRow,
+        firstRow = self.helpFirstRow
+    }
+end
+
+function HelperPersonnelHelpFrame:scrollHelp(delta)
+    local state = self:getHelpScrollState()
+    local nextRow = math.max(1, math.min(state.firstRow + (tonumber(delta) or 0), state.maxFirstRow))
+    if nextRow == self.helpFirstRow then
+        return false
+    end
+
+    self.helpFirstRow = nextRow
+    self.requestRender = true
+    return true
+end
+
+function HelperPersonnelHelpFrame:setHelpScrollFromMouseY(posY)
+    local state = self:getHelpScrollState()
+    local area = self.helpScrollbarArea
+    if area == nil or area.height <= 0 or state.maxFirstRow <= 1 then
+        return false
+    end
+
+    local localY = math.max(0, math.min((posY - area.y) / area.height, 1))
+    self.helpFirstRow = 1 + math.floor((1 - localY) * (state.maxFirstRow - 1) + 0.5)
+    self.requestRender = true
+    return true
+end
+
+function HelperPersonnelHelpFrame:keyEvent(unicode, sym, modifier, isDown)
+    if not self:isCurrentMenuPage() or not isDown then
+        return false
+    end
+
+    if sym == hpHelpGetInputConstant("KEY_up") or sym == hpHelpGetInputConstant("KEY_upArrow") or sym == hpHelpGetInputConstant("KEY_w") then
+        return self:scrollHelp(-1)
+    elseif sym == hpHelpGetInputConstant("KEY_down") or sym == hpHelpGetInputConstant("KEY_downArrow") or sym == hpHelpGetInputConstant("KEY_s") then
+        return self:scrollHelp(1)
+    elseif sym == hpHelpGetInputConstant("KEY_pageup") or sym == hpHelpGetInputConstant("KEY_pageUp") then
+        return self:scrollHelp(-math.max(1, self.helpVisibleRows - 2))
+    elseif sym == hpHelpGetInputConstant("KEY_pagedown") or sym == hpHelpGetInputConstant("KEY_pageDown") then
+        return self:scrollHelp(math.max(1, self.helpVisibleRows - 2))
+    elseif sym == hpHelpGetInputConstant("KEY_home") then
+        self.helpFirstRow = 1
+        return true
+    elseif sym == hpHelpGetInputConstant("KEY_end") then
+        local state = self:getHelpScrollState()
+        self.helpFirstRow = state.maxFirstRow
+        return true
+    elseif sym == hpHelpGetInputConstant("KEY_left") or sym == hpHelpGetInputConstant("KEY_leftArrow") or sym == hpHelpGetInputConstant("KEY_a")
+        or sym == hpHelpGetInputConstant("KEY_right") or sym == hpHelpGetInputConstant("KEY_rightArrow") or sym == hpHelpGetInputConstant("KEY_d") then
+        return true
+    end
+
+    return HelperPersonnelHelpFrame:superClass().keyEvent(self, unicode, sym, modifier, isDown)
+end
+
+function HelperPersonnelHelpFrame:mouseEvent(posX, posY, isDown, isUp, button, eventUsed)
+    if eventUsed ~= true then
+        local insideContent = self:isPointInClickArea(posX, posY, self.helpScrollArea)
+        local insideScrollbar = self:isPointInClickArea(posX, posY, self.helpScrollbarArea)
+
+        if insideContent or insideScrollbar then
+            if self:isMouseWheelUp(button) then
+                return self:scrollHelp(-2)
+            elseif self:isMouseWheelDown(button) then
+                return self:scrollHelp(2)
+            end
+        end
+
+        if isDown and insideScrollbar then
+            self.helpScrollbarDragging = true
+            self:setHelpScrollFromMouseY(posY)
+            return true
+        end
+
+        if self.helpScrollbarDragging == true then
+            self:setHelpScrollFromMouseY(posY)
+            if isUp then
+                self.helpScrollbarDragging = false
+            end
+            return true
+        end
+    elseif isUp then
+        self.helpScrollbarDragging = false
+    end
+
+    return HelperPersonnelHelpFrame:superClass().mouseEvent(self, posX, posY, isDown, isUp, button, eventUsed)
+end
+
+function HelperPersonnelHelpFrame:onFrameClose()
+    self.helpScrollbarDragging = false
+    HelperPersonnelHelpFrame:superClass().onFrameClose(self)
+end
+
+function HelperPersonnelHelpFrame:draw()
+    HelperPersonnelViewBase:superClass().draw(self)
+    self:resetClickAreas()
+
+    local title = self:getText(self.pageTitleKey, self.pageTitleFallback)
+    self:drawTextLine(0.22, 0.850, 0.030, RenderText.ALIGN_LEFT, title, 1, 1, 1, 1, true)
+    self:drawSeparator(0.22, 0.815, 0.62)
+
+    local state = self:getHelpScrollState()
+    local lastRow = math.min(#state.rows, state.firstRow + state.visibleRows - 1)
+    local y = HP_HELP_CONTENT_Y
+
+    for rowIndex = state.firstRow, lastRow do
+        local row = state.rows[rowIndex]
+        if row.kind == "title" then
+            self:drawTextLine(HP_HELP_CONTENT_X, y, 0.0146, RenderText.ALIGN_LEFT, row.text, 0.61, 0.73, 0.07, 1, true)
+        elseif row.kind == "intro" then
+            self:drawTextLine(HP_HELP_CONTENT_X, y, HP_HELP_TEXT_SIZE, RenderText.ALIGN_LEFT, row.text, 0.93, 0.93, 0.93, 1, true)
+        elseif row.kind == "body" then
+            self:drawTextLine(HP_HELP_CONTENT_X, y, HP_HELP_TEXT_SIZE, RenderText.ALIGN_LEFT, row.text, 0.88, 0.88, 0.88, 1, false)
+        end
+        y = y - HP_HELP_LINE_HEIGHT
+    end
+
+    self.helpScrollArea = {
+        x = HP_HELP_CONTENT_X,
+        y = HP_HELP_CONTENT_Y - HP_HELP_CONTENT_HEIGHT,
+        width = HP_HELP_CONTENT_WIDTH,
+        height = HP_HELP_CONTENT_HEIGHT
+    }
+    self.helpScrollbarArea = nil
+    if #state.rows > state.visibleRows then
+        self.helpScrollbarArea = {
+            x = HP_HELP_SCROLLBAR_X - 0.012,
+            y = HP_HELP_CONTENT_Y - HP_HELP_CONTENT_HEIGHT,
+            width = HP_HELP_SCROLLBAR_WIDTH + 0.024,
+            height = HP_HELP_CONTENT_HEIGHT
+        }
+        self:drawDetailScrollbar(
+            HP_HELP_SCROLLBAR_X,
+            HP_HELP_CONTENT_Y - HP_HELP_CONTENT_HEIGHT,
+            HP_HELP_SCROLLBAR_WIDTH,
+            HP_HELP_CONTENT_HEIGHT,
+            state.firstRow,
+            state.visibleRows,
+            #state.rows
+        )
+    end
+
+end
+
 HelperPersonnelSettingsFrame = {}
 local HelperPersonnelSettingsFrame_mt = Class(HelperPersonnelSettingsFrame, HelperPersonnelMenuPage)
 local HP_SETTINGS_VISIBLE_ITEMS = 11

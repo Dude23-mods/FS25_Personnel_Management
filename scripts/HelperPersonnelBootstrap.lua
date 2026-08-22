@@ -82,8 +82,8 @@ function HelperPersonnelBootstrap.isMissionReadyForApp()
         return true
     end
 
-    if missionInfo.savegameIndex ~= nil then
-        return false
+    if missionInfo.savegameIndex ~= nil and getUserProfileAppPath ~= nil then
+        return true
     end
 
     if missionInfo.isValid ~= false then

@@ -517,5 +517,16 @@
         <e k="ui_reliabilityReasonNightWork" v="yüksek gece çalışması yükü" />
         <e k="ui_reliabilityReasonGoodWork" v="iyi bir çalışma ayı" />
         <e k="ui_waitingForServerData" v="Sunucu verileri bekleniyor" />
+        <e k="ui_pmMenuPageHelp" v="Yardım" />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.3.0 için ayrıntılı oyun içi rehber. Paketteki ReadMe.pdf ek kuralları ve hesaplamaları içerir." />
+        <e k="ui_pmHelpSectionQuickStart" v="Hızlı başlangıç ve kontroller|Menüyü Ctrl + M ile açın. Menü sayfası kontrolleriyle sekme değiştirin. Kişi değiştirmek için A/D veya Sol/Sağ, onay için Boşluk, geri dönmek için Esc, taşıma öncelikleri için T ve maaş talepleri için G kullanın." />
+        <e k="ui_pmHelpSectionPeople" v="Adaylar ve çalışanlar|Yeni kayıt dört adayla başlar; en fazla sekiz aday bulunabilir. Profillerinden işe alın. Deneyim, güvenilirlik ve bağlılık 0-100 arasındadır. Durum, maaş, uzmanlıklar, günlük ve toplamlar çalışan sayfasında gösterilir." />
+        <e k="ui_pmHelpSectionStats" v="Çalışanlar ve özellikler|Deneyim hız, aşınma ve tüketimi; güvenilirlik kesintileri, hastalığı ve erken iş bırakmayı; bağlılık maaş taleplerini ve istifaları etkiler. Çalışan sayfası durum, maaş, uzmanlık, istatistik ve kişisel geçmişi de gösterir." />
+        <e k="ui_pmHelpSectionWork" v="Çalışma ve gelişim|Normal bir YZ yardımcı işi başlatıldığında çalışan seçimi açılır. Yalnızca uygun çalışanlar seçilebilir ve bir kişi aynı anda birden fazla iş yapamaz. Çalışma süresi deneyimi ve uzmanlığı artırır. Deneyim hız, aşınma ve tüketimi; güvenilirlik yavaşlama, hastalık ve iş bırakmayı; bağlılık maaş anlaşmazlığı ve istifayı etkiler." />
+        <e k="ui_pmHelpSectionSalary" v="Maaşlar|Maaşlar ay değişiminde kesilir ve ay başına gün, ekonomik zorluk ve mod ayarlarına bağlıdır. Çalışan zam isteyebilir; talep süresinde kabul veya reddedilmeli ve bağlılığı etkileyebilir." />
+        <e k="ui_pmHelpSectionTraining" v="Eğitim|Eğitim yalnızca ay başında başlar, para harcar ve çalışanı ay sonuna kadar kullanılamaz yapar. Tamamlanınca seçilen uzmanlık gelişir. Teklifler ve geçmiş eğitimler Eğitim ve Çalışanlar bölümlerinde görünür." />
+        <e k="ui_pmHelpSectionEmploymentEnd" v="İstifa, işten çıkarma ve emeklilik|Bunlar her zaman hemen gerçekleşmez; sürelere göre ay değişiminde tamamlanır. Çalışmakta olan biri hemen çıkarılamaz. Yaklaşan değişiklikler durum ve günlükte görünür." />
+        <e k="ui_pmHelpSectionIntegrations" v="AutoDrive ve Courseplay|Çalışanlar / Taşıma altında sürücüleri atayın ve öncelik belirleyin. AutoDrive ilk uygun sürücüyü kullanır, kimse yoksa başlamaz. Normal Courseplay başlangıcı seçimi açar. AutoDrive sonrası otomatik başlangıçta her araç yeni seçim olmadan kendi sürücüsünü korur." />
+        <e k="ui_pmHelpSectionMultiplayer" v="Çok oyunculu ve kayıtlar|Personel verileri ve ayarlar çiftlik bazında ayrılır. Sunucu değişiklikleri doğrular; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini yönetebilir. Çalışanlar, etkin atamalar ve ayarlar eşitlenir. Veriler kayıttaki helperPersonnel.xml dosyasında tutulur." />
     </elements>
 </l10n>

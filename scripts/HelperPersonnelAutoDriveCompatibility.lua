@@ -206,11 +206,30 @@ end
 
 function HelperPersonnelAutoDriveCompatibility.reserveWorker(vehicle, workerId, source)
     local key = HelperPersonnelAutoDriveCompatibility.getVehicleKey(vehicle)
-    if key == nil then
+    workerId = tonumber(workerId)
+    if key == nil or workerId == nil then
         return false
     end
+
+    for otherKey, assignment in pairs(HelperPersonnelAutoDriveCompatibility.assignmentsByVehicleKey) do
+        if otherKey ~= key and assignment ~= nil and tonumber(assignment.workerId) == workerId then
+            return false
+        end
+    end
+    for otherKey, reservation in pairs(HelperPersonnelAutoDriveCompatibility.reservationsByVehicleKey) do
+        if otherKey ~= key and reservation ~= nil and tonumber(reservation.workerId) == workerId then
+            return false
+        end
+    end
+    for otherKey, transfer in pairs(HelperPersonnelAutoDriveCompatibility.transfersByVehicleKey) do
+        local record = transfer ~= nil and transfer.record or nil
+        if otherKey ~= key and record ~= nil and tonumber(record.workerId) == workerId then
+            return false
+        end
+    end
+
     HelperPersonnelAutoDriveCompatibility.reservationsByVehicleKey[key] = {
-        workerId = tonumber(workerId),
+        workerId = workerId,
         source = source,
         vehicle = vehicle
     }
@@ -235,6 +254,55 @@ function HelperPersonnelAutoDriveCompatibility.resolveWorkerForStart(vehicle)
     end
 
     return nil, nil
+end
+
+function HelperPersonnelAutoDriveCompatibility.resolveCourseplayHandoffWorker(job)
+    local app = HelperPersonnelAutoDriveCompatibility.getApp()
+    if app == nil or job == nil or not HelperPersonnelAutoDriveCompatibility.isCourseplayJob(job) then
+        return nil
+    end
+
+    local vehicle = app.helperBridge ~= nil and app.helperBridge:getVehicleFromJob(job) or nil
+    local key = HelperPersonnelAutoDriveCompatibility.getVehicleKey(vehicle)
+    if vehicle == nil or key == nil then
+        return nil
+    end
+
+    local transfer = HelperPersonnelAutoDriveCompatibility.transfersByVehicleKey[key]
+    local reservation = HelperPersonnelAutoDriveCompatibility.reservationsByVehicleKey[key]
+    local record = transfer ~= nil and transfer.record or nil
+    if transfer == nil or transfer.kind ~= "Courseplay" or record == nil or reservation == nil then
+        return nil
+    end
+
+    local workerId = tonumber(record.workerId)
+    if workerId == nil or tonumber(reservation.workerId) ~= workerId then
+        return nil
+    end
+
+    if reservation ~= nil and reservation.vehicle ~= nil
+        and HelperPersonnelAutoDriveCompatibility.getVehicleKey(reservation.vehicle) ~= key then
+        return nil
+    end
+
+    if not HelperPersonnelAutoDriveCompatibility.canUseWorker(vehicle, workerId, true) then
+        return nil
+    end
+
+    for otherKey, otherReservation in pairs(HelperPersonnelAutoDriveCompatibility.reservationsByVehicleKey) do
+        if otherKey ~= key and otherReservation ~= nil and tonumber(otherReservation.workerId) == workerId then
+            return nil
+        end
+    end
+    for otherKey, otherTransfer in pairs(HelperPersonnelAutoDriveCompatibility.transfersByVehicleKey) do
+        local otherRecord = otherTransfer ~= nil and otherTransfer.record or nil
+        if otherKey ~= key and otherRecord ~= nil and tonumber(otherRecord.workerId) == workerId then
+            return nil
+        end
+    end
+
+    job.helperPersonnelWorkerId = workerId
+    return workerId
 end
 
 function HelperPersonnelAutoDriveCompatibility.applyWorkerContext(workerId)
@@ -431,7 +499,12 @@ function HelperPersonnelAutoDriveCompatibility.beginTransfer(record, kind)
     record.job.helperPersonnelWorkerId = nil
     HelperPersonnelAutoDriveCompatibility.assignmentsByVehicleKey[key] = nil
     HelperPersonnelAutoDriveCompatibility.clearWorkerContext(workerId)
-    HelperPersonnelAutoDriveCompatibility.reserveWorker(record.vehicle, workerId, kind)
+    if not HelperPersonnelAutoDriveCompatibility.reserveWorker(record.vehicle, workerId, kind) then
+        HelperPersonnelAutoDriveCompatibility.assignmentsByVehicleKey[key] = record
+        HelperPersonnelAutoDriveCompatibility.ensureAssignmentMapping(record)
+        HelperPersonnelAutoDriveCompatibility.applyWorkerContext(workerId)
+        return false
+    end
     HelperPersonnelAutoDriveCompatibility.transfersByVehicleKey[key] = {
         record = record,
         kind = kind,
@@ -452,6 +525,9 @@ function HelperPersonnelAutoDriveCompatibility.captureCourseplayHandoff(vehicle)
     if workerId == nil or not HelperPersonnelAutoDriveCompatibility.isCourseplayJob(sourceJob) then
         return
     end
+    if not HelperPersonnelAutoDriveCompatibility.reserveWorker(vehicle, workerId, "Courseplay") then
+        return
+    end
     HelperPersonnelAutoDriveCompatibility.courseplayHandoffsByVehicleKey[key] = {
         workerId = tonumber(workerId),
         vehicle = vehicle,
@@ -460,7 +536,6 @@ function HelperPersonnelAutoDriveCompatibility.captureCourseplayHandoff(vehicle)
         started = false,
         sourceStopped = false
     }
-    HelperPersonnelAutoDriveCompatibility.reserveWorker(vehicle, workerId, "Courseplay")
 end
 
 function HelperPersonnelAutoDriveCompatibility.handleCourseplaySourceStopped(bridge, job, workerId, key, handoff)
@@ -1024,7 +1099,10 @@ function HelperPersonnelAutoDriveCompatibility.processStartRequest(vehicle, farm
         return false
     end
 
-    HelperPersonnelAutoDriveCompatibility.reserveWorker(vehicle, workerId, "transport")
+    if not HelperPersonnelAutoDriveCompatibility.reserveWorker(vehicle, workerId, "transport") then
+        HelperPersonnelAutoDriveCompatibility.notifyRequester(app, connection, "ui_transportNoDriverAvailable")
+        return false
+    end
     vehicle.ad.currentHelper = helper
     vehicle.ad.stateModule:setCurrentHelperIndex(helper.index)
     HelperPersonnelAutoDriveCompatibility.replayingInput = true

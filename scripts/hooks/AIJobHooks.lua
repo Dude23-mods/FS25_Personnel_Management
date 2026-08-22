@@ -454,6 +454,14 @@ function HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
         return job.helperPersonnelWorkerId
     end
 
+    if HelperPersonnelAutoDriveCompatibility ~= nil
+        and HelperPersonnelAutoDriveCompatibility.resolveCourseplayHandoffWorker ~= nil then
+        local handoffWorkerId = HelperPersonnelAutoDriveCompatibility.resolveCourseplayHandoffWorker(job)
+        if handoffWorkerId ~= nil then
+            return handoffWorkerId
+        end
+    end
+
     if app.helperBridge ~= nil
         and app.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
         local restoredWorkerId = app.helperBridge:resolveRestoredWorkerIdForJob(job)

@@ -517,5 +517,16 @@
         <e k="ui_reliabilityReasonNightWork" v="vysoká zátěž noční prací" />
         <e k="ui_reliabilityReasonGoodWork" v="dobrý pracovní měsíc" />
         <e k="ui_waitingForServerData" v="Čekání na data ze serveru" />
+        <e k="ui_pmMenuPageHelp" v="Nápověda" />
+        <e k="ui_pmHelpIntro" v="Podrobná herní nápověda pro Personnel Management 1.1.3.0. Přiložený ReadMe.pdf obsahuje další pravidla a výpočty." />
+        <e k="ui_pmHelpSectionQuickStart" v="Rychlý start a ovládání|Menu otevřete pomocí Ctrl + M. Karty přepínejte ovládáním stránek menu. Osobu změníte A/D nebo Vlevo/Vpravo, Mezerník potvrzuje, Esc se vrací, T otevírá priority dopravy a G požadavky na mzdu." />
+        <e k="ui_pmHelpSectionPeople" v="Uchazeči a zaměstnanci|Nová hra začíná se čtyřmi uchazeči; současně jich může být nejvýše osm. Uchazeče najímáte z jejich profilů. Zkušenost, spolehlivost a loajalita jsou od 0 do 100. Stav, mzda, specializace, kronika a celkové údaje jsou na stránce zaměstnanců." />
+        <e k="ui_pmHelpSectionStats" v="Zaměstnanci a vlastnosti|Zkušenost ovlivňuje rychlost, opotřebení a spotřebu; spolehlivost přerušení, nemoc a předčasné ukončení práce; loajalita požadavky na mzdu a výpovědi. Stránka zaměstnance zobrazuje také stav, mzdu, specializace, statistiky a osobní kroniku." />
+        <e k="ui_pmHelpSectionWork" v="Práce a rozvoj|Při spuštění běžné práce AI pomocníka se otevře výběr zaměstnance. Vybrat lze jen dostupné zaměstnance a nikdo nemůže dělat více úloh současně. Pracovní čas zvyšuje zkušenost a pokrok specializace. Zkušenost ovlivňuje rychlost, opotřebení a spotřebu; spolehlivost zpomalení, nemoc a přerušení; loajalita mzdové spory a výpovědi." />
+        <e k="ui_pmHelpSectionSalary" v="Mzdy|Mzdy se účtují při změně měsíce podle dnů v měsíci, ekonomické obtížnosti a nastavení modu. Zaměstnanci mohou žádat zvýšení; žádost je nutné včas přijmout nebo odmítnout a může ovlivnit loajalitu." />
+        <e k="ui_pmHelpSectionTraining" v="Školení|Školení začíná pouze na začátku měsíce, stojí peníze a blokuje zaměstnance do konce měsíce. Dokončení zlepší vybranou specializaci. Nabídky a historie jsou v oblastech Školení a Zaměstnanci." />
+        <e k="ui_pmHelpSectionEmploymentEnd" v="Výpověď, propuštění a důchod|Ukončení nemusí být okamžité a proběhne při změně měsíce podle lhůt. Pracujícího zaměstnance nelze propustit ihned. Budoucí změny jsou vidět ve stavu a kronice." />
+        <e k="ui_pmHelpSectionIntegrations" v="AutoDrive a Courseplay|Přiřaďte řidiče k dopravě v Zaměstnanci / Doprava a nastavte prioritu. AutoDrive použije prvního dostupného a bez řidiče start zablokuje. Běžný start Courseplay otevře výběr. Při automatickém startu po AutoDrive si každé vozidlo ponechá vlastního řidiče bez nového výběru." />
+        <e k="ui_pmHelpSectionMultiplayer" v="Multiplayer a uložené hry|Data a nastavení jsou oddělena podle farem. Server ověřuje změny; farmu spravují jen oprávnění manažeři. Zaměstnanci, aktivní přiřazení a nastavení se synchronizují. Data jsou v helperPersonnel.xml v uložené hře." />
     </elements>
 </l10n>

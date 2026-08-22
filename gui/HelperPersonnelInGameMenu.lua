@@ -26,7 +26,8 @@ function HelperPersonnelInGameMenu:initializePages()
         applicants = self.pageApplicants,
         employees = self.pageEmployees,
         training = self.pageTraining,
-        settings = self.pageSettings
+        settings = self.pageSettings,
+        help = self.pageHelp
     }
 
     for pageName, page in pairs(pages) do
@@ -45,7 +46,8 @@ function HelperPersonnelInGameMenu:setupMenuPages()
         {self.pageApplicants, "applicants", "hpUiPm20260710c.applicants"},
         {self.pageEmployees, "employees", "hpUiPm20260710c.employees"},
         {self.pageTraining, "training", "hpUiPm20260710c.training"},
-        {self.pageSettings, "settings", "hpUiPm20260710c.settings"}
+        {self.pageSettings, "settings", "hpUiPm20260710c.settings"},
+        {self.pageHelp, "help", "hpUiPm20260710c.help"}
     }
 
     for index, pageDef in ipairs(pageDefs) do

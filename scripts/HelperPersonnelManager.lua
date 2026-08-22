@@ -612,6 +612,7 @@ function HelperPersonnelManager.new(app, customMt)
     self.restoredActiveJobs = {}
     self.restoredActiveJobByVehicleKey = {}
     self.restoredActiveJobByVehicleName = {}
+    self.savegameLoadState = "notAttempted"
     self.employerReputation = HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION
     self.lastReputationChangeText = ""
     self.lastPayrollText = "noch keine Gehaltsabrechnung"
@@ -2612,7 +2613,7 @@ local function hpLayer_HelperPersonnelManager_loadFromSavegame_1(self)
     self.applicants = {}
     self:resetRestoredActiveJobs()
 
-    local savePath = self.app:getSavegamePath()
+    local savePath = self:getSavegamePath()
     if savePath == nil or savePath == "" or not fileExists(savePath) then
         self:initializeNewApplicantMarket()
         return
@@ -6746,7 +6747,10 @@ local HP_ORIGINAL_MANAGER_INITIALIZE_APPLICANT_MARKET = HelperPersonnelManager.i
 
 function HelperPersonnelManager:getSavegamePath()
     if self.app ~= nil and self.app.getSavegamePath ~= nil then
-        return self.app:getSavegamePath()
+        local savePath = self.app:getSavegamePath()
+        if savePath ~= nil and savePath ~= "" then
+            return savePath
+        end
     end
 
     if g_currentMission ~= nil and g_currentMission.missionInfo ~= nil then
@@ -7731,25 +7735,66 @@ local function hpLayer_HelperPersonnelManager_writeFarmDataToXML_1(self, xmlFile
     end
 end
 
+local function hpOpenPersonnelSaveFile(path)
+    if path == nil or path == "" or fileExists == nil or not fileExists(path) then
+        return nil
+    end
+
+    local xmlFile = XMLFile.loadIfExists("helperPersonnel", path, HelperPersonnelManager.xmlSchema)
+    if xmlFile == nil then
+        return nil
+    end
+
+    local saveVersion = xmlFile:getInt("helperPersonnel#saveVersion", 0) or 0
+    if saveVersion >= 2 and not xmlFile:hasProperty("helperPersonnel.farms.farm(0)") then
+        xmlFile:delete()
+        return nil
+    end
+
+    return xmlFile
+end
+
 local function hpLayer_HelperPersonnelManager_loadFromSavegame_2(self)
     self:loadConfig()
     self.farms = {}
     self.currentFarmData = nil
     self.activeFarmId = nil
+    self.savegameLoadState = "notAttempted"
 
     local savePath = self:getSavegamePath()
-    if savePath == nil then
+    if savePath == nil or savePath == "" then
+        self.savegameLoadState = "pathUnavailable"
         self:refreshFarmContext()
         return
     end
 
-    local xmlFile = XMLFile.loadIfExists("helperPersonnel", savePath, HelperPersonnelManager.xmlSchema)
+    local backupPath = savePath .. ".backup"
+    local saveFileExists = fileExists ~= nil and fileExists(savePath)
+    local backupFileExists = fileExists ~= nil and fileExists(backupPath)
+    local xmlFile = hpOpenPersonnelSaveFile(savePath)
+    local loadedFromBackup = false
+    if xmlFile == nil and backupFileExists then
+        xmlFile = hpOpenPersonnelSaveFile(backupPath)
+        if xmlFile ~= nil and not xmlFile:hasProperty("helperPersonnel.farms.farm(0)") then
+            xmlFile:delete()
+            xmlFile = nil
+        end
+        loadedFromBackup = xmlFile ~= nil
+        if loadedFromBackup and Logging ~= nil and Logging.warning ~= nil then
+            Logging.warning("[FS25_PersonnelManagement] Primary personnel data could not be loaded; using verified backup: %s", backupPath)
+        end
+    end
     if xmlFile == nil then
+        self.savegameLoadState = (saveFileExists or backupFileExists) and "failed" or "missing"
+        if (saveFileExists or backupFileExists) and Logging ~= nil and Logging.error ~= nil then
+            Logging.error("[FS25_PersonnelManagement] Unable to load personnel data from existing file: %s", savePath)
+        end
         self:refreshFarmContext()
         return
     end
 
     if xmlFile:hasProperty("helperPersonnel.farms.farm(0)") then
+        self.savegameLoadState = loadedFromBackup and "loadedBackup" or "loaded"
         self.nextPersonId = xmlFile:getInt("helperPersonnel#nextPersonId", 1)
         self.changeCounter = xmlFile:getInt("helperPersonnel#changeCounter", 0)
 
@@ -7790,6 +7835,7 @@ local function hpLayer_HelperPersonnelManager_loadFromSavegame_2(self)
         HP_ORIGINAL_MANAGER_LOAD_FROM_SAVEGAME(self)
     end
 
+    self.savegameLoadState = "loaded"
     self:adoptFlatStateAsFarm(self:getCurrentFarmId())
     self:refreshFarmContext()
 end
@@ -7818,29 +7864,179 @@ function HelperPersonnelManager:saveToXMLFile(xmlFile)
     end
 end
 
+local function hpGetExpectedPersonnelSaveState(manager)
+    local expected = {}
+    for _, farmId in ipairs(manager:getSortedFarmIds()) do
+        local data = manager.farms ~= nil and manager.farms[farmId] or nil
+        if data ~= nil then
+            expected[tonumber(farmId)] = {
+                workers = #(data.workers or {}),
+                applicants = #(data.applicants or {})
+            }
+        end
+    end
+    return expected
+end
+
+local function hpValidatePersonnelSaveFile(path, expected)
+    local xmlFile = hpOpenPersonnelSaveFile(path)
+    if xmlFile == nil then
+        return false, "file could not be opened"
+    end
+
+    local actual = {}
+    local index = 0
+    local valid = true
+    local reason = nil
+    while true do
+        local farmPath = string.format("helperPersonnel.farms.farm(%d)", index)
+        if not xmlFile:hasProperty(farmPath) then
+            break
+        end
+
+        local farmId = tonumber(xmlFile:getInt(farmPath .. "#farmId"))
+        if farmId == nil or actual[farmId] ~= nil then
+            valid = false
+            reason = "invalid or duplicate farm"
+            break
+        end
+
+        local workerCount = 0
+        while xmlFile:hasProperty(string.format("%s.workers.worker(%d)", farmPath, workerCount)) do
+            workerCount = workerCount + 1
+        end
+        local applicantCount = 0
+        while xmlFile:hasProperty(string.format("%s.applicants.applicant(%d)", farmPath, applicantCount)) do
+            applicantCount = applicantCount + 1
+        end
+        actual[farmId] = { workers = workerCount, applicants = applicantCount }
+        index = index + 1
+    end
+
+    if valid then
+        for farmId, expectedCounts in pairs(expected or {}) do
+            local actualCounts = actual[farmId]
+            if actualCounts == nil
+                or actualCounts.workers ~= expectedCounts.workers
+                or actualCounts.applicants ~= expectedCounts.applicants then
+                valid = false
+                reason = "person counts do not match"
+                break
+            end
+        end
+    end
+    if valid then
+        for farmId, _ in pairs(actual) do
+            if expected == nil or expected[farmId] == nil then
+                valid = false
+                reason = "unexpected farm data"
+                break
+            end
+        end
+    end
+
+    xmlFile:delete()
+    return valid, reason
+end
+
+local function hpWriteValidatedPersonnelSave(manager, path, expectedState)
+    local xmlFile = XMLFile.create("helperPersonnel", path, "helperPersonnel", HelperPersonnelManager.xmlSchema)
+    if xmlFile == nil then
+        return false, "file could not be created"
+    end
+
+    local saveOk, saveError = pcall(function()
+        manager:saveToXMLFile(xmlFile)
+        xmlFile:save()
+    end)
+    xmlFile:delete()
+    if not saveOk then
+        return false, tostring(saveError)
+    end
+
+    return hpValidatePersonnelSaveFile(path, expectedState)
+end
+
 function HelperPersonnelManager:saveToSavegame()
     self:saveConfig()
     local savePath = self:getSavegamePath()
     if savePath == nil or savePath == "" then
+        if Logging ~= nil and Logging.warning ~= nil then
+            Logging.warning(
+                "[FS25_PersonnelManagement] Unable to save personnel data: savegame path is unavailable (server=%s, farmId=%s, workers=%d)",
+                tostring(g_server ~= nil),
+                tostring(self.activeFarmId or self:getCurrentFarmId()),
+                #(self.workers or {})
+            )
+        end
+        return
+    end
+
+    if self.savegameLoadState == "failed"
+        or ((self.savegameLoadState == "pathUnavailable" or self.savegameLoadState == "notAttempted")
+            and fileExists ~= nil and fileExists(savePath)) then
+        if Logging ~= nil and Logging.error ~= nil then
+            Logging.error(
+                "[FS25_PersonnelManagement] Unable to save personnel data: an existing personnel file was not loaded successfully (path=%s, farmId=%s, workers=%d)",
+                savePath,
+                tostring(self.activeFarmId or self:getCurrentFarmId()),
+                #(self.workers or {})
+            )
+        end
         return
     end
 
     if createFolder ~= nil then
-        local directory = savePath:match("^(.+)/helperPersonnel%.xml$")
+        local directory = savePath:match("^(.+)[/\\][^/\\]+$")
         if directory ~= nil and directory ~= "" then
-            pcall(createFolder, directory)
+            local createOk, createError = pcall(createFolder, directory)
+            if not createOk then
+                if Logging ~= nil and Logging.error ~= nil then
+                    Logging.error("[FS25_PersonnelManagement] Unable to prepare personnel save directory %s: %s", directory, tostring(createError))
+                end
+                return
+            end
         end
     end
 
-    local xmlFile = XMLFile.create("helperPersonnel", savePath, "helperPersonnel", HelperPersonnelManager.xmlSchema)
-    if xmlFile == nil then
-        Logging.error("HelperPersonnel: Could not create savegame XML: %s", savePath)
+    local backupPath = savePath .. ".backup"
+    local expectedState = hpGetExpectedPersonnelSaveState(self)
+    local backupValid, backupError = hpWriteValidatedPersonnelSave(self, backupPath, expectedState)
+    if not backupValid and Logging ~= nil and Logging.warning ~= nil then
+        Logging.warning(
+            "[FS25_PersonnelManagement] Personnel backup XML could not be written or validated (%s): %s",
+            tostring(backupError),
+            backupPath
+        )
+    end
+
+    local primaryValid, primaryError = hpWriteValidatedPersonnelSave(self, savePath, expectedState)
+    if not primaryValid then
+        if Logging ~= nil and Logging.error ~= nil then
+            Logging.error(
+                "[FS25_PersonnelManagement] Personnel XML could not be written or validated (%s); backupAvailable=%s: %s",
+                tostring(primaryError),
+                tostring(backupValid),
+                savePath
+            )
+        end
         return
     end
 
-    self:saveToXMLFile(xmlFile)
-    xmlFile:save()
-    xmlFile:delete()
+    local workerCount = 0
+    local farmCount = 0
+    for _, data in pairs(self.farms or {}) do
+        farmCount = farmCount + 1
+        workerCount = workerCount + #(data.workers or {})
+    end
+    self.savegameLoadState = "loaded"
+    HelperPersonnel.debugInfo(
+        "[FS25_PersonnelManagement] Saved %d workers across %d farms (activeFarmId=%s) to %s",
+        workerCount,
+        farmCount,
+        tostring(self.activeFarmId or self:getCurrentFarmId()),
+        savePath
+    )
 
     self.saveBusyWorkerLookup = nil
     self.saveActiveJobSnapshot = nil

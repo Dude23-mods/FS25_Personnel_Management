@@ -517,5 +517,16 @@
         <e k="ui_reliabilityReasonNightWork" v="nagy éjszakai munkaterhelés" />
         <e k="ui_reliabilityReasonGoodWork" v="jó munkahónap" />
         <e k="ui_waitingForServerData" v="Várakozás a szerveradatokra" />
+        <e k="ui_pmMenuPageHelp" v="Súgó" />
+        <e k="ui_pmHelpIntro" v="A Personnel Management 1.1.3.0 részletes játékon belüli útmutatója. A mellékelt ReadMe.pdf további szabályokat és számításokat tartalmaz." />
+        <e k="ui_pmHelpSectionQuickStart" v="Gyors kezdés és vezérlés|A menüt a Ctrl + M nyitja meg. A fülek között a menü lapvezérlőivel válthatsz. Személyváltás: A/D vagy Bal/Jobb; megerősítés: Szóköz; vissza: Esc; szállítási prioritás: T; béremelési kérelmek: G." />
+        <e k="ui_pmHelpSectionPeople" v="Jelentkezők és dolgozók|Egy új mentés négy jelentkezővel indul; legfeljebb nyolc lehet elérhető. A profiljukból veheted fel őket. A tapasztalat, megbízhatóság és hűség 0-100 közötti. Az állapot, bér, szakosodások, krónika és összesítések a dolgozói oldalon láthatók." />
+        <e k="ui_pmHelpSectionStats" v="Dolgozók és tulajdonságok|A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a megszakítást, betegséget és korai leállást; a hűség a béremelési kérelmeket és felmondást befolyásolja. Az oldal állapotot, bért, szakosodást, statisztikát és személyes krónikát is mutat." />
+        <e k="ui_pmHelpSectionWork" v="Munka és fejlődés|Normál MI-segítő munka indításakor megjelenik a dolgozóválasztás. Csak elérhető dolgozó választható, és senki sem végezhet több munkát egyszerre. A munkaidő növeli a tapasztalatot és a szakosodást. A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a lassulást, betegséget és megszakítást; a hűség a bérvitát és felmondást befolyásolja." />
+        <e k="ui_pmHelpSectionSalary" v="Bérek|A bérek hónapváltáskor kerülnek levonásra, és a havi napoktól, gazdasági nehézségtől és modbeállításoktól függenek. A dolgozó emelést kérhet; ezt határidőn belül el kell fogadni vagy utasítani, és befolyásolhatja a hűséget." />
+        <e k="ui_pmHelpSectionTraining" v="Képzés|Képzés csak hónap elején indulhat, pénzbe kerül, és hónap végéig lefoglalja a dolgozót. A teljesítés javítja a választott szakosodást. Az ajánlatok és előzmények a Képzés és Dolgozók részen láthatók." />
+        <e k="ui_pmHelpSectionEmploymentEnd" v="Felmondás, elbocsátás és nyugdíj|Ezek nem mindig azonnaliak, hanem a határidők szerint hónapváltáskor lépnek életbe. Dolgozó alkalmazott nem bocsátható el azonnal. A közelgő változások az állapotban és krónikában láthatók." />
+        <e k="ui_pmHelpSectionIntegrations" v="AutoDrive és Courseplay|A Dolgozók / Szállítás alatt jelöld ki a vezetőket és állíts prioritást. Az AutoDrive az első elérhetőt használja, nélküle nem indul. A normál Courseplay-indítás választást nyit. AutoDrive utáni automatikus indításkor minden jármű új választás nélkül megtartja saját vezetőjét." />
+        <e k="ui_pmHelpSectionMultiplayer" v="Többjátékos mód és mentések|A személyzeti adatok és beállítások gazdaságonként külön vannak. A szerver ellenőrzi a változtatásokat; csak jogosult gazdaságvezetők kezelhetik a gazdaságukat. A dolgozók, aktív kijelölések és beállítások szinkronizálódnak. Az adatok a mentés helperPersonnel.xml fájljában vannak." />
     </elements>
 </l10n>

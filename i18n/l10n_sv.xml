@@ -517,5 +517,16 @@
         <e k="ui_reliabilityReasonNightWork" v="stor belastning från nattarbete" />
         <e k="ui_reliabilityReasonGoodWork" v="bra arbetsmånad" />
         <e k="ui_waitingForServerData" v="Väntar på serverdata" />
+        <e k="ui_pmMenuPageHelp" v="Hjälp" />
+        <e k="ui_pmHelpIntro" v="Detaljerad hjälp i spelet för Personnel Management 1.1.3.0. Den medföljande ReadMe.pdf innehåller fler regler och beräkningar." />
+        <e k="ui_pmHelpSectionQuickStart" v="Snabbstart och styrning|Öppna menyn med Ctrl + M. Byt flik med menyns sidkontroller. Använd A/D eller Vänster/Höger för att byta person, Mellanslag för att bekräfta, Esc för att gå tillbaka, T för transportprioritet och G för lönekrav." />
+        <e k="ui_pmHelpSectionPeople" v="Sökande och medarbetare|Ett nytt sparat spel börjar med fyra sökande; högst åtta kan vara tillgängliga. Anställ från profilerna. Erfarenhet, pålitlighet och lojalitet går från 0 till 100. Status, lön, specialiseringar, krönika och totaler visas på medarbetarsidan." />
+        <e k="ui_pmHelpSectionStats" v="Medarbetare och egenskaper|Erfarenhet påverkar fart, slitage och förbrukning; pålitlighet påverkar avbrott, sjukdom och avbrutna jobb; lojalitet påverkar lönekrav och uppsägningar. Medarbetarsidan visar också status, lön, specialiseringar, statistik och personlig krönika." />
+        <e k="ui_pmHelpSectionWork" v="Arbete och utveckling|När ett vanligt AI-hjälparjobb startas öppnas medarbetarvalet. Bara tillgängliga medarbetare kan väljas och ingen kan utföra flera jobb samtidigt. Arbetstid bygger erfarenhet och specialisering. Erfarenhet påverkar fart, slitage och förbrukning; pålitlighet påverkar sänkningar, sjukdom och avbrott; lojalitet påverkar lönekonflikter och uppsägningar." />
+        <e k="ui_pmHelpSectionSalary" v="Löner|Löner bokförs vid månadsskiftet och beror på dagar per månad, ekonomisk svårighet och modinställningar. Medarbetare kan begära högre lön; kravet måste godkännas eller avslås i tid och kan påverka lojaliteten." />
+        <e k="ui_pmHelpSectionTraining" v="Utbildning|Utbildning börjar bara i början av månaden, kostar pengar och blockerar medarbetaren till månadsslut. Slutförd utbildning förbättrar vald specialisering. Erbjudanden och tidigare utbildning visas under Utbildning och Medarbetare." />
+        <e k="ui_pmHelpSectionEmploymentEnd" v="Uppsägning, avsked och pension|Dessa avslut sker inte alltid genast utan slutförs vid månadsskiftet enligt tidsfristerna. En arbetande medarbetare kan inte avskedas direkt. Kommande ändringar visas i status och krönika." />
+        <e k="ui_pmHelpSectionIntegrations" v="AutoDrive och Courseplay|Aktivera förare under Medarbetare / Transport och sortera prioriteten. AutoDrive använder den första lediga och blockerar start om ingen är ledig. En normal Courseplay-start öppnar valet. Startar Courseplay automatiskt efter AutoDrive behåller fordonet sin förare utan nytt val. Varje fordon måste behålla sin egen medarbetare." />
+        <e k="ui_pmHelpSectionMultiplayer" v="Flera spelare och sparade spel|Personaldata och inställningar är separerade per gård. Servern validerar ändringar; bara behöriga gårdschefer får hantera sin gård. Medarbetare, aktiva tilldelningar och inställningar synkroniseras. Data sparas i helperPersonnel.xml i sparfilen." />
     </elements>
 </l10n>

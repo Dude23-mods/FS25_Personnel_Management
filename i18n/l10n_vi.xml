@@ -517,5 +517,16 @@
         <e k="ui_reliabilityReasonNightWork" v="khối lượng công việc ban đêm cao" />
         <e k="ui_reliabilityReasonGoodWork" v="tháng làm việc tốt" />
         <e k="ui_waitingForServerData" v="Đang chờ dữ liệu máy chủ" />
+        <e k="ui_pmMenuPageHelp" v="Trợ giúp" />
+        <e k="ui_pmHelpIntro" v="Hướng dẫn chi tiết trong trò chơi cho Personnel Management 1.1.3.0. Tệp ReadMe.pdf đi kèm chứa thêm các quy tắc và phép tính." />
+        <e k="ui_pmHelpSectionQuickStart" v="Bắt đầu nhanh và điều khiển|Mở menu bằng Ctrl + M. Đổi thẻ bằng điều khiển trang của menu. Dùng A/D hoặc Trái/Phải để đổi người, Space để xác nhận, Esc để quay lại, T cho ưu tiên vận chuyển và G cho yêu cầu lương." />
+        <e k="ui_pmHelpSectionPeople" v="Ứng viên và nhân viên|Bản lưu mới bắt đầu với bốn ứng viên; tối đa tám người có thể xuất hiện. Tuyển từ hồ sơ của họ. Kinh nghiệm, độ tin cậy và lòng trung thành từ 0 đến 100. Trạng thái, lương, chuyên môn, biên niên và tổng số nằm trên trang nhân viên." />
+        <e k="ui_pmHelpSectionStats" v="Nhân viên và thuộc tính|Kinh nghiệm ảnh hưởng tốc độ, hao mòn và tiêu thụ; độ tin cậy ảnh hưởng gián đoạn, bệnh và kết thúc sớm; lòng trung thành ảnh hưởng yêu cầu lương và nghỉ việc. Trang nhân viên cũng hiển thị trạng thái, lương, chuyên môn, thống kê và lịch sử cá nhân." />
+        <e k="ui_pmHelpSectionWork" v="Công việc và phát triển|Khi bắt đầu công việc trợ lý AI thông thường, lựa chọn nhân viên sẽ mở ra. Chỉ nhân viên sẵn sàng mới được chọn và một người không thể làm nhiều việc cùng lúc. Thời gian làm việc tăng kinh nghiệm và chuyên môn. Kinh nghiệm ảnh hưởng tốc độ, hao mòn và tiêu thụ; độ tin cậy ảnh hưởng giảm hiệu suất, bệnh và bỏ việc; lòng trung thành ảnh hưởng tranh chấp lương và nghỉ việc." />
+        <e k="ui_pmHelpSectionSalary" v="Lương|Lương được tính khi đổi tháng và phụ thuộc số ngày mỗi tháng, độ khó kinh tế và cài đặt mod. Nhân viên có thể yêu cầu tăng lương; yêu cầu phải được chấp nhận hoặc từ chối đúng hạn và có thể ảnh hưởng lòng trung thành." />
+        <e k="ui_pmHelpSectionTraining" v="Đào tạo|Đào tạo chỉ bắt đầu đầu tháng, tốn tiền và khóa nhân viên đến cuối tháng. Hoàn tất sẽ cải thiện chuyên môn đã chọn. Đề nghị và lịch sử xuất hiện trong mục Đào tạo và Nhân viên." />
+        <e k="ui_pmHelpSectionEmploymentEnd" v="Nghỉ việc, sa thải và nghỉ hưu|Các thay đổi này không phải lúc nào cũng có hiệu lực ngay mà hoàn tất khi đổi tháng theo thời hạn. Không thể sa thải ngay nhân viên đang làm việc. Thay đổi sắp tới hiện trong trạng thái và lịch sử." />
+        <e k="ui_pmHelpSectionIntegrations" v="AutoDrive và Courseplay|Giao tài xế trong Nhân viên / Vận chuyển và đặt ưu tiên. AutoDrive dùng người sẵn sàng đầu tiên và không khởi động nếu không có ai. Courseplay khởi động thông thường sẽ mở lựa chọn. Sau AutoDrive, mỗi xe tự giữ tài xế riêng mà không cần chọn lại." />
+        <e k="ui_pmHelpSectionMultiplayer" v="Nhiều người chơi và bản lưu|Dữ liệu và cài đặt nhân sự được tách theo nông trại. Máy chủ xác thực thay đổi; chỉ quản lý được ủy quyền mới quản lý nông trại của mình. Nhân viên, phân công đang hoạt động và cài đặt được đồng bộ. Dữ liệu nằm trong helperPersonnel.xml của bản lưu." />
     </elements>
 </l10n>

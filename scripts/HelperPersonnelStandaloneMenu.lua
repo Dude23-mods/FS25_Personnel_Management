@@ -11,7 +11,7 @@ function HelperPersonnelApp:tryRegisterStandaloneMenu()
         return true
     end
 
-    if g_gui == nil or HelperPersonnelInGameMenu == nil or HelperPersonnelOverviewFrame == nil or HelperPersonnelApplicantsFrame == nil or HelperPersonnelEmployeesFrame == nil or HelperPersonnelTrainingFrame == nil or HelperPersonnelSettingsFrame == nil or self.modDir == nil then
+    if g_gui == nil or HelperPersonnelInGameMenu == nil or HelperPersonnelOverviewFrame == nil or HelperPersonnelApplicantsFrame == nil or HelperPersonnelEmployeesFrame == nil or HelperPersonnelTrainingFrame == nil or HelperPersonnelSettingsFrame == nil or HelperPersonnelHelpFrame == nil or self.modDir == nil then
         return false
     end
 
@@ -26,7 +26,8 @@ function HelperPersonnelApp:tryRegisterStandaloneMenu()
             applicants = HelperPersonnelApplicantsFrame.new(),
             employees = HelperPersonnelEmployeesFrame.new(),
             training = HelperPersonnelTrainingFrame.new(),
-            settings = HelperPersonnelSettingsFrame.new()
+            settings = HelperPersonnelSettingsFrame.new(),
+            help = HelperPersonnelHelpFrame.new()
         }
 
         self.standaloneMenuPages.overview:setContext(self)
@@ -34,12 +35,14 @@ function HelperPersonnelApp:tryRegisterStandaloneMenu()
         self.standaloneMenuPages.employees:setContext(self)
         self.standaloneMenuPages.training:setContext(self)
         self.standaloneMenuPages.settings:setContext(self)
+        self.standaloneMenuPages.help:setContext(self)
 
         g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuOverview.xml", self.modDir), "HelperPersonnelMenuOverview", self.standaloneMenuPages.overview, true)
         g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuApplicants.xml", self.modDir), "HelperPersonnelMenuApplicants", self.standaloneMenuPages.applicants, true)
         g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuEmployees.xml", self.modDir), "HelperPersonnelMenuEmployees", self.standaloneMenuPages.employees, true)
         g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuTraining.xml", self.modDir), "HelperPersonnelMenuTraining", self.standaloneMenuPages.training, true)
         g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuSettings.xml", self.modDir), "HelperPersonnelMenuSettings", self.standaloneMenuPages.settings, true)
+        g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuHelp.xml", self.modDir), "HelperPersonnelMenuHelp", self.standaloneMenuPages.help, true)
 
         self.standaloneMenu = HelperPersonnelInGameMenu.new(nil, nil, self, g_messageCenter, g_i18n, g_inputBinding)
         g_gui:loadGui(Utils.getFilename("gui/HelperPersonnelInGameMenu.xml", self.modDir), "HelperPersonnelInGameMenu", self.standaloneMenu)

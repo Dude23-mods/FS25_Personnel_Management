@@ -517,5 +517,16 @@
         <e k="ui_reliabilityReasonNightWork" v="夜间工作负担过重" />
         <e k="ui_reliabilityReasonGoodWork" v="工作表现良好的月份" />
         <e k="ui_waitingForServerData" v="等待服务器数据" />
+        <e k="ui_pmMenuPageHelp" v="帮助" />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.3.0 的详细游戏内指南。 随模组提供的 ReadMe.pdf 包含更多规则和计算公式。" />
+        <e k="ui_pmHelpSectionQuickStart" v="快速开始与操作|按 Ctrl + M 打开菜单。 使用菜单翻页控制切换标签页。 按 A/D 或左/右方向键切换人员，空格键确认，Esc 返回，T 设置运输优先级，G 处理加薪请求。" />
+        <e k="ui_pmHelpSectionPeople" v="申请人与员工|新存档以四名申请人开始；最多可同时有八名。 可在个人资料中雇用申请人。 经验、可靠性和忠诚度范围为 0 到 100。 员工页面显示状态、工资、专长、履历和累计数据。" />
+        <e k="ui_pmHelpSectionStats" v="员工与属性|经验影响速度、磨损和消耗；可靠性影响中断、生病和提前终止任务；忠诚度影响加薪要求和辞职。员工页面还显示状态、工资、专长、统计数据和个人履历。" />
+        <e k="ui_pmHelpSectionWork" v="工作与发展|开始普通 AI 帮工任务时会打开员工选择。 只能选择可用员工，并且同一员工不能同时执行多个任务。 工作时间会提升经验和专长进度。 经验影响速度、磨损和消耗；可靠性影响减速、生病和任务中止；忠诚度影响工资冲突和辞职。" />
+        <e k="ui_pmHelpSectionSalary" v="工资|工资在月份变更时扣除，并取决于每月天数、经济难度和模组设置。员工可能要求加薪；必须在期限内接受或拒绝，这可能影响忠诚度。" />
+        <e k="ui_pmHelpSectionTraining" v="培训|培训只能在月初开始，需要付费，并使员工到月底前不可用。完成培训会提高所选专长。培训选项和历史记录显示在培训与员工区域。" />
+        <e k="ui_pmHelpSectionEmploymentEnd" v="辞职、解雇与退休|这些变更不一定立即生效，而会按期限在月份变更时完成。正在工作的员工不能立即被解雇。即将发生的变更显示在状态和履历中。" />
+        <e k="ui_pmHelpSectionIntegrations" v="AutoDrive 与 Courseplay|先在员工 / 运输中分配司机并设置优先级。AutoDrive 使用第一名可用司机，没有司机时阻止启动。普通 Courseplay 启动会打开选择。AutoDrive 后自动启动 Courseplay 时，每辆车都会保留自己的司机，不再重新选择。" />
+        <e k="ui_pmHelpSectionMultiplayer" v="多人游戏与存档|人员数据和设置按农场分开。 服务器验证所有更改；只有获授权的农场管理员可以管理自己的农场。 员工、活动分配和设置会同步。 人员数据保存在存档内的 helperPersonnel.xml 中。" />
     </elements>
 </l10n>
