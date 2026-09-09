@@ -28,14 +28,19 @@ end
 
 HelperPersonnelHelpFrame = {}
 local HelperPersonnelHelpFrame_mt = Class(HelperPersonnelHelpFrame, HelperPersonnelMenuPage)
-local HP_HELP_CONTENT_X = 0.22
-local HP_HELP_CONTENT_Y = 0.755
-local HP_HELP_CONTENT_WIDTH = 0.62
-local HP_HELP_CONTENT_HEIGHT = 0.545
-local HP_HELP_SCROLLBAR_X = 0.852
+local HP_HELP_TOC_X = 0.080
+local HP_HELP_TOC_WIDTH = 0.170
+local HP_HELP_CONTENT_X = 0.330
+local HP_HELP_CONTENT_Y = 0.775
+local HP_HELP_CONTENT_WIDTH = 0.620
+local HP_HELP_CONTENT_HEIGHT = 0.650
+local HP_HELP_SCROLLBAR_X = 0.972
 local HP_HELP_SCROLLBAR_WIDTH = 0.005
-local HP_HELP_LINE_HEIGHT = 0.0205
-local HP_HELP_TEXT_SIZE = 0.0118
+local HP_HELP_LINE_HEIGHT = 0.027
+local HP_HELP_TEXT_SIZE = 0.015
+local HP_HELP_VISIBLE_TOPICS = 10
+local HP_HELP_TOPIC_HEIGHT = 0.067
+local HP_HELP_TOPIC_GAP = 0.006
 
 local function hpHelpGetInputConstant(name)
     if Input ~= nil and Input[name] ~= nil then
@@ -49,14 +54,29 @@ local function hpHelpGetInputConstant(name)
     return nil
 end
 
-local function hpHelpSplitSection(value)
+local function hpHelpGetParagraphs(value)
     value = tostring(value or "")
-    local separator = string.find(value, "|", 1, true)
-    if separator == nil then
-        return value, ""
+    local paragraphs = {}
+    for sourceLine in string.gmatch(value .. "\n", "(.-)\n") do
+        local startIndex = 1
+        while startIndex <= #sourceLine do
+            local punctuationStart, punctuationEnd = string.find(sourceLine, "[%.%!%?]%s+", startIndex)
+            local paragraph
+            if punctuationStart == nil then
+                paragraph = string.sub(sourceLine, startIndex)
+                startIndex = #sourceLine + 1
+            else
+                paragraph = string.sub(sourceLine, startIndex, punctuationStart)
+                startIndex = punctuationEnd + 1
+            end
+            paragraph = string.gsub(paragraph, "^%s+", "")
+            paragraph = string.gsub(paragraph, "%s+$", "")
+            if paragraph ~= "" then
+                table.insert(paragraphs, paragraph)
+            end
+        end
     end
-
-    return string.sub(value, 1, separator - 1), string.sub(value, separator + 1)
+    return paragraphs
 end
 
 function HelperPersonnelHelpFrame.new(target, customMt)
@@ -68,6 +88,18 @@ function HelperPersonnelHelpFrame.new(target, customMt)
     self.helpScrollArea = nil
     self.helpScrollbarArea = nil
     self.helpScrollbarDragging = false
+    self.helpTocScrollbarArea = nil
+    self.helpTocScrollbarDragging = false
+    self.helpSelectedTopic = 1
+    self.helpFirstTopic = 1
+    self.helpTopicAreas = {}
+    self.helpTocArea = nil
+    self.helpFocus = "toc"
+    self.helpCachedTopics = nil
+    self.helpCachedLanguageCode = nil
+    self.helpCachedTexts = nil
+    self.helpCachedRows = nil
+    self.helpCachedTopicIndex = nil
 
     return self
 end
@@ -89,38 +121,126 @@ function HelperPersonnelHelpFrame:updateButtons()
     self:applyMenuButtons({self.btnClose, self.btnPrevTab, self.btnNextTab})
 end
 
+function HelperPersonnelHelpFrame:getHelpLanguageCode()
+    local candidates = {g_languageShort, g_languageSuffix}
+    if g_i18n ~= nil then
+        table.insert(candidates, g_i18n.languageCode)
+        table.insert(candidates, g_i18n.currentLanguage)
+        table.insert(candidates, g_i18n.languageShort)
+        if g_i18n.getLanguageCode ~= nil then
+            local success, languageCode = pcall(g_i18n.getLanguageCode, g_i18n)
+            if success then
+                table.insert(candidates, languageCode)
+            end
+        end
+    end
+
+    for _, candidate in ipairs(candidates) do
+        local languageCode = string.lower(tostring(candidate or ""))
+        if string.sub(languageCode, 1, 2) == "de" then
+            return "de"
+        elseif string.sub(languageCode, 1, 2) == "fr" then
+            return "fr"
+        end
+    end
+
+    return "en"
+end
+
+function HelperPersonnelHelpFrame:getHelpTexts(languageCode)
+    if self.helpCachedTexts ~= nil and self.helpCachedLanguageCode == languageCode then
+        return self.helpCachedTexts
+    end
+
+    local texts = {}
+    local modDir = self.app ~= nil and self.app.modDir or g_currentModDirectory
+    local filename = modDir ~= nil and Utils.getFilename("i18n/l10n_" .. languageCode .. ".xml", modDir) or nil
+    local xmlFile = filename ~= nil and fileExists(filename) and XMLFile.loadIfExists("helperPersonnelHelp", filename) or nil
+    if xmlFile ~= nil then
+        local index = 0
+        while true do
+            local entryKey = string.format("l10n.elements.e(%d)", index)
+            if not xmlFile:hasProperty(entryKey) then
+                break
+            end
+            local key = xmlFile:getString(entryKey .. "#k")
+            if key == "ui_pmMenuPageHelp" or key == "ui_pmHelpContents" or key == "ui_pmHelpNavigation" or string.find(key or "", "ui_pmHelpTopic", 1, true) == 1 then
+                texts[key] = xmlFile:getString(entryKey .. "#v", "")
+            end
+            index = index + 1
+        end
+        xmlFile:delete()
+    end
+
+    self.helpCachedTexts = texts
+    self.helpCachedLanguageCode = languageCode
+    return texts
+end
+
+function HelperPersonnelHelpFrame:getHelpText(key, fallback)
+    local texts = self:getHelpTexts(self:getHelpLanguageCode())
+    return texts[key] or self:getText(key, fallback)
+end
+
+function HelperPersonnelHelpFrame:getHelpTopics()
+    local languageCode = self:getHelpLanguageCode()
+    if self.helpCachedTopics ~= nil and self.helpCachedLanguageCode == languageCode then
+        return self.helpCachedTopics
+    end
+
+    local texts = self:getHelpTexts(languageCode)
+    local topics = {}
+    for index = 1, 14 do
+        local suffix = string.format("%02d", index)
+        topics[#topics + 1] = {
+            title = texts["ui_pmHelpTopic" .. suffix .. "Title"] or self:getText("ui_pmHelpTopic" .. suffix .. "Title", "ui_pmHelpTopic" .. suffix .. "Title"),
+            body = texts["ui_pmHelpTopic" .. suffix .. "Body"] or self:getText("ui_pmHelpTopic" .. suffix .. "Body", "ui_pmHelpTopic" .. suffix .. "Body")
+        }
+    end
+    self.helpCachedTopics = topics
+    self.helpCachedLanguageCode = languageCode
+    self.helpCachedRows = nil
+    self.helpCachedTopicIndex = nil
+    return topics
+end
+
 function HelperPersonnelHelpFrame:getHelpRows()
+    if self.helpCachedRows ~= nil and self.helpCachedTopicIndex == self.helpSelectedTopic then
+        return self.helpCachedRows
+    end
+
     local rows = {}
     local maxWidth = HP_HELP_CONTENT_WIDTH - 0.025
-    local intro = self:getText("ui_pmHelpIntro", "ui_pmHelpIntro")
-
-    for _, line in ipairs(self:getWrappedHistoryLines(intro, HP_HELP_TEXT_SIZE, maxWidth, 92)) do
-        table.insert(rows, { kind = "intro", text = line })
-    end
-    table.insert(rows, { kind = "spacer", text = "" })
-
-    local sectionKeys = {
-        "ui_pmHelpSectionQuickStart",
-        "ui_pmHelpSectionPeople",
-        "ui_pmHelpSectionStats",
-        "ui_pmHelpSectionWork",
-        "ui_pmHelpSectionSalary",
-        "ui_pmHelpSectionTraining",
-        "ui_pmHelpSectionEmploymentEnd",
-        "ui_pmHelpSectionIntegrations",
-        "ui_pmHelpSectionMultiplayer"
-    }
-
-    for _, key in ipairs(sectionKeys) do
-        local title, body = hpHelpSplitSection(self:getText(key, key))
-        table.insert(rows, { kind = "title", text = title })
-        for _, line in ipairs(self:getWrappedHistoryLines(body, HP_HELP_TEXT_SIZE, maxWidth, 92)) do
-            table.insert(rows, { kind = "body", text = line })
+    local topics = self:getHelpTopics()
+    self.helpSelectedTopic = math.max(1, math.min(self.helpSelectedTopic or 1, #topics))
+    local topic = topics[self.helpSelectedTopic]
+    for _, paragraph in ipairs(hpHelpGetParagraphs(topic.body)) do
+        for _, line in ipairs(self:getWrappedHistoryLines(paragraph, HP_HELP_TEXT_SIZE, maxWidth, 72)) do
+            table.insert(rows, {kind = "body", text = line})
         end
-        table.insert(rows, { kind = "spacer", text = "" })
+        table.insert(rows, {kind = "spacer", text = ""})
     end
 
+    self.helpCachedRows = rows
+    self.helpCachedTopicIndex = self.helpSelectedTopic
     return rows
+end
+
+function HelperPersonnelHelpFrame:selectHelpTopic(delta)
+    local topics = self:getHelpTopics()
+    local nextTopic = math.max(1, math.min((self.helpSelectedTopic or 1) + delta, #topics))
+    if nextTopic == self.helpSelectedTopic then
+        return false
+    end
+    self.helpSelectedTopic = nextTopic
+    if self.helpSelectedTopic < self.helpFirstTopic then
+        self.helpFirstTopic = self.helpSelectedTopic
+    elseif self.helpSelectedTopic >= self.helpFirstTopic + HP_HELP_VISIBLE_TOPICS then
+        self.helpFirstTopic = self.helpSelectedTopic - HP_HELP_VISIBLE_TOPICS + 1
+    end
+    self.helpFirstRow = 1
+    self.requestRender = true
+    return true
 end
 
 function HelperPersonnelHelpFrame:getHelpScrollState()
@@ -150,6 +270,33 @@ function HelperPersonnelHelpFrame:scrollHelp(delta)
     return true
 end
 
+function HelperPersonnelHelpFrame:scrollHelpTopics(delta)
+    local topics = self:getHelpTopics()
+    local maxFirstTopic = math.max(1, #topics - HP_HELP_VISIBLE_TOPICS + 1)
+    local nextTopic = math.max(1, math.min((self.helpFirstTopic or 1) + (tonumber(delta) or 0), maxFirstTopic))
+    if nextTopic == self.helpFirstTopic then
+        return false
+    end
+
+    self.helpFirstTopic = nextTopic
+    self.requestRender = true
+    return true
+end
+
+function HelperPersonnelHelpFrame:setHelpTopicScrollFromMouseY(posY)
+    local topics = self:getHelpTopics()
+    local area = self.helpTocScrollbarArea
+    local maxFirstTopic = math.max(1, #topics - HP_HELP_VISIBLE_TOPICS + 1)
+    if area == nil or area.height <= 0 or maxFirstTopic <= 1 then
+        return false
+    end
+
+    local localY = math.max(0, math.min((posY - area.y) / area.height, 1))
+    self.helpFirstTopic = 1 + math.floor((1 - localY) * (maxFirstTopic - 1) + 0.5)
+    self.requestRender = true
+    return true
+end
+
 function HelperPersonnelHelpFrame:setHelpScrollFromMouseY(posY)
     local state = self:getHelpScrollState()
     local area = self.helpScrollbarArea
@@ -168,10 +315,16 @@ function HelperPersonnelHelpFrame:keyEvent(unicode, sym, modifier, isDown)
         return false
     end
 
-    if sym == hpHelpGetInputConstant("KEY_up") or sym == hpHelpGetInputConstant("KEY_upArrow") or sym == hpHelpGetInputConstant("KEY_w") then
-        return self:scrollHelp(-1)
+    if sym == hpHelpGetInputConstant("KEY_left") or sym == hpHelpGetInputConstant("KEY_leftArrow") or sym == hpHelpGetInputConstant("KEY_a") then
+        self.helpFocus = "toc"
+        return true
+    elseif sym == hpHelpGetInputConstant("KEY_right") or sym == hpHelpGetInputConstant("KEY_rightArrow") or sym == hpHelpGetInputConstant("KEY_d") then
+        self.helpFocus = "article"
+        return true
+    elseif sym == hpHelpGetInputConstant("KEY_up") or sym == hpHelpGetInputConstant("KEY_upArrow") or sym == hpHelpGetInputConstant("KEY_w") then
+        return self.helpFocus == "toc" and self:selectHelpTopic(-1) or self:scrollHelp(-1)
     elseif sym == hpHelpGetInputConstant("KEY_down") or sym == hpHelpGetInputConstant("KEY_downArrow") or sym == hpHelpGetInputConstant("KEY_s") then
-        return self:scrollHelp(1)
+        return self.helpFocus == "toc" and self:selectHelpTopic(1) or self:scrollHelp(1)
     elseif sym == hpHelpGetInputConstant("KEY_pageup") or sym == hpHelpGetInputConstant("KEY_pageUp") then
         return self:scrollHelp(-math.max(1, self.helpVisibleRows - 2))
     elseif sym == hpHelpGetInputConstant("KEY_pagedown") or sym == hpHelpGetInputConstant("KEY_pageDown") then
@@ -183,18 +336,52 @@ function HelperPersonnelHelpFrame:keyEvent(unicode, sym, modifier, isDown)
         local state = self:getHelpScrollState()
         self.helpFirstRow = state.maxFirstRow
         return true
-    elseif sym == hpHelpGetInputConstant("KEY_left") or sym == hpHelpGetInputConstant("KEY_leftArrow") or sym == hpHelpGetInputConstant("KEY_a")
-        or sym == hpHelpGetInputConstant("KEY_right") or sym == hpHelpGetInputConstant("KEY_rightArrow") or sym == hpHelpGetInputConstant("KEY_d") then
-        return true
     end
 
     return HelperPersonnelHelpFrame:superClass().keyEvent(self, unicode, sym, modifier, isDown)
 end
 
 function HelperPersonnelHelpFrame:mouseEvent(posX, posY, isDown, isUp, button, eventUsed)
+    if self.helpTocScrollbarDragging == true then
+        self:setHelpTopicScrollFromMouseY(posY)
+        if isUp then
+            self.helpTocScrollbarDragging = false
+        end
+        return true
+    end
+
+    if self.helpScrollbarDragging == true then
+        self:setHelpScrollFromMouseY(posY)
+        if isUp then
+            self.helpScrollbarDragging = false
+        end
+        return true
+    end
+
     if eventUsed ~= true then
+        if isUp then
+            for _, area in ipairs(self.helpTopicAreas or {}) do
+                if self:isPointInClickArea(posX, posY, area) then
+                    self.helpSelectedTopic = area.topicIndex
+                    self.helpFirstRow = 1
+                    self.helpFocus = "toc"
+                    self.requestRender = true
+                    return true
+                end
+            end
+        end
         local insideContent = self:isPointInClickArea(posX, posY, self.helpScrollArea)
         local insideScrollbar = self:isPointInClickArea(posX, posY, self.helpScrollbarArea)
+        local insideToc = self:isPointInClickArea(posX, posY, self.helpTocArea)
+        local insideTocScrollbar = self:isPointInClickArea(posX, posY, self.helpTocScrollbarArea)
+
+        if insideToc or insideTocScrollbar then
+            if self:isMouseWheelUp(button) then
+                return self:scrollHelpTopics(-1)
+            elseif self:isMouseWheelDown(button) then
+                return self:scrollHelpTopics(1)
+            end
+        end
 
         if insideContent or insideScrollbar then
             if self:isMouseWheelUp(button) then
@@ -210,15 +397,14 @@ function HelperPersonnelHelpFrame:mouseEvent(posX, posY, isDown, isUp, button, e
             return true
         end
 
-        if self.helpScrollbarDragging == true then
-            self:setHelpScrollFromMouseY(posY)
-            if isUp then
-                self.helpScrollbarDragging = false
-            end
+        if isDown and insideTocScrollbar then
+            self.helpTocScrollbarDragging = true
+            self:setHelpTopicScrollFromMouseY(posY)
             return true
         end
     elseif isUp then
         self.helpScrollbarDragging = false
+        self.helpTocScrollbarDragging = false
     end
 
     return HelperPersonnelHelpFrame:superClass().mouseEvent(self, posX, posY, isDown, isUp, button, eventUsed)
@@ -226,6 +412,7 @@ end
 
 function HelperPersonnelHelpFrame:onFrameClose()
     self.helpScrollbarDragging = false
+    self.helpTocScrollbarDragging = false
     HelperPersonnelHelpFrame:superClass().onFrameClose(self)
 end
 
@@ -233,22 +420,55 @@ function HelperPersonnelHelpFrame:draw()
     HelperPersonnelViewBase:superClass().draw(self)
     self:resetClickAreas()
 
-    local title = self:getText(self.pageTitleKey, self.pageTitleFallback)
-    self:drawTextLine(0.22, 0.850, 0.030, RenderText.ALIGN_LEFT, title, 1, 1, 1, 1, true)
-    self:drawSeparator(0.22, 0.815, 0.62)
-
     local state = self:getHelpScrollState()
+    local topics = self:getHelpTopics()
+    self.helpTopicAreas = {}
+    self:drawSolidRect(0.065, 0.045, 0.216, 0.910, 0.020, 0.026, 0.019, 1)
+    self:drawTextLine(HP_HELP_TOC_X, 0.898, 0.025, RenderText.ALIGN_LEFT, self:getHelpText("ui_pmMenuPageHelp", "Hilfe"), 1, 1, 1, 1, true)
+    self:drawTextLine(HP_HELP_TOC_X, 0.824, 0.014, RenderText.ALIGN_LEFT, self:getHelpText("ui_pmHelpContents", "INHALT"), 1, 1, 1, 1, true)
+
+    local maxFirstTopic = math.max(1, #topics - HP_HELP_VISIBLE_TOPICS + 1)
+    self.helpFirstTopic = math.max(1, math.min(self.helpFirstTopic or 1, maxFirstTopic))
+    local tocTop = 0.800
+    local tocBottom = tocTop - HP_HELP_VISIBLE_TOPICS * HP_HELP_TOPIC_HEIGHT - (HP_HELP_VISIBLE_TOPICS - 1) * HP_HELP_TOPIC_GAP
+    self.helpTocArea = {x = HP_HELP_TOC_X, y = tocBottom, width = HP_HELP_TOC_WIDTH, height = tocTop - tocBottom}
+    local lastTopic = math.min(#topics, self.helpFirstTopic + HP_HELP_VISIBLE_TOPICS - 1)
+    for index = self.helpFirstTopic, lastTopic do
+        local topic = topics[index]
+        local visibleIndex = index - self.helpFirstTopic
+        local rowY = tocTop - (visibleIndex + 1) * HP_HELP_TOPIC_HEIGHT - visibleIndex * HP_HELP_TOPIC_GAP
+        local selected = index == self.helpSelectedTopic
+        if selected then
+            self:drawSolidRect(HP_HELP_TOC_X, rowY, HP_HELP_TOC_WIDTH, HP_HELP_TOPIC_HEIGHT, 0.300, 0.570, 0, 1)
+        else
+            self:drawSolidRect(HP_HELP_TOC_X, rowY, HP_HELP_TOC_WIDTH, HP_HELP_TOPIC_HEIGHT, 0.030, 0.030, 0.030, 1)
+        end
+        local iconX = HP_HELP_TOC_X
+        local iconY = rowY
+        self:drawSolidRect(iconX, iconY, 0.040, HP_HELP_TOPIC_HEIGHT, selected and 0.18 or 0.07, selected and 0.30 or 0.07, selected and 0 or 0.07, 1)
+        self:drawTextLine(iconX + 0.020, iconY + 0.024, 0.013, RenderText.ALIGN_CENTER, string.format("%02d", index), selected and 0.01 or 0.80, selected and 0.01 or 0.80, selected and 0.01 or 0.80, 1, true)
+        local titleLines = self:getWrappedHistoryLines(string.upper(topic.title), 0.0145, HP_HELP_TOC_WIDTH - 0.052, 24)
+        self:drawTextLine(HP_HELP_TOC_X + 0.050, rowY + 0.039, 0.0145, RenderText.ALIGN_LEFT, titleLines[1] or string.upper(topic.title), selected and 0.01 or 0.80, selected and 0.01 or 0.80, selected and 0.01 or 0.80, 1, true)
+        if titleLines[2] ~= nil then
+            self:drawTextLine(HP_HELP_TOC_X + 0.050, rowY + 0.017, 0.0145, RenderText.ALIGN_LEFT, titleLines[2], selected and 0.01 or 0.80, selected and 0.01 or 0.80, selected and 0.01 or 0.80, 1, true)
+        end
+        table.insert(self.helpTopicAreas, {x = HP_HELP_TOC_X, y = rowY, width = HP_HELP_TOC_WIDTH, height = HP_HELP_TOPIC_HEIGHT, topicIndex = index})
+    end
+    self:drawDetailScrollbar(0.264, tocBottom, 0.0035, tocTop - tocBottom, self.helpFirstTopic, HP_HELP_VISIBLE_TOPICS, #topics)
+    self.helpTocScrollbarArea = {x = 0.252, y = tocBottom, width = 0.026, height = tocTop - tocBottom}
+    self:drawSolidRect(0.077, tocBottom - 0.004, 0.177, 0.002, 0.60, 0.60, 0.60, 1)
+    local selectedTopic = topics[self.helpSelectedTopic]
+    self:drawTextLine(HP_HELP_CONTENT_X, 0.842, 0.034, RenderText.ALIGN_LEFT, string.upper(selectedTopic.title), 1, 1, 1, 1, false)
+
     local lastRow = math.min(#state.rows, state.firstRow + state.visibleRows - 1)
     local y = HP_HELP_CONTENT_Y
 
     for rowIndex = state.firstRow, lastRow do
         local row = state.rows[rowIndex]
-        if row.kind == "title" then
-            self:drawTextLine(HP_HELP_CONTENT_X, y, 0.0146, RenderText.ALIGN_LEFT, row.text, 0.61, 0.73, 0.07, 1, true)
-        elseif row.kind == "intro" then
-            self:drawTextLine(HP_HELP_CONTENT_X, y, HP_HELP_TEXT_SIZE, RenderText.ALIGN_LEFT, row.text, 0.93, 0.93, 0.93, 1, true)
+        if row.kind == "intro" then
+            self:drawTextLine(HP_HELP_CONTENT_X, y, HP_HELP_TEXT_SIZE, RenderText.ALIGN_LEFT, row.text, 1, 1, 1, 1, true)
         elseif row.kind == "body" then
-            self:drawTextLine(HP_HELP_CONTENT_X, y, HP_HELP_TEXT_SIZE, RenderText.ALIGN_LEFT, row.text, 0.88, 0.88, 0.88, 1, false)
+            self:drawTextLine(HP_HELP_CONTENT_X, y, HP_HELP_TEXT_SIZE, RenderText.ALIGN_LEFT, row.text, 1, 1, 1, 1, false)
         end
         y = y - HP_HELP_LINE_HEIGHT
     end

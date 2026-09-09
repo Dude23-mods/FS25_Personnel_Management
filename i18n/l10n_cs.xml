@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="办公室职业" />
         <e k="ui_status_retirementPending" v="将在月底退休" />
         <e k="ui_retirementNotice" v="%s 将在月底退休。" />
-        <e k="ui_pmTrainingIntro" v="专长会提升员工在相应学习类别中的表现。培训持续到本月底，期间该员工无法参加工作。学习进度只会在培训完成后计入。并非每个月都会为所有类别提供培训。课程价格可能低于或高于正常价格。每名员工在每个从三月到次年二月的农业年度中只能完成一次培训。每名员工最多可获得两项专长。请选择所需的学习类别。" />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="学习类别" />
         <e k="ui_pmTrainingProgressHeader" v="专业化进度" />
         <e k="ui_pmTrainingRunning" v="培训进行中" />
         <e k="ui_pmTrainingSelectCategory" v="请先选择培训类别" />
         <e k="ui_pmTrainingConfirm" v="为 %s 开始 %s 类别的培训吗？" />
-        <e k="ui_training_line_no_capacity" v="培训：已获得两项专长 · 上次：%s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="培训：每月 1 天时仅限 12:00 前 · 请在培训菜单中选择类别 · 上次：%s" />
         <e k="ui_training_line_first_day_select" v="培训：仅限第一天 · 请在培训菜单中选择类别 · 上次：%s" />
         <e k="ui_training_line_busy_select" v="培训：工作期间无法参加 · 上次：%s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="工作表现良好的月份" />
         <e k="ui_waitingForServerData" v="等待服务器数据" />
         <e k="ui_pmMenuPageHelp" v="帮助" />
-        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.3.0 的详细游戏内指南。 随模组提供的 ReadMe.pdf 包含更多规则和计算公式。" />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.4.0 的详细游戏内指南。 随模组提供的 ReadMe.pdf 包含更多规则和计算公式。" />
         <e k="ui_pmHelpSectionQuickStart" v="快速开始与操作|按 Ctrl + M 打开菜单。 使用菜单翻页控制切换标签页。 按 A/D 或左/右方向键切换人员，空格键确认，Esc 返回，T 设置运输优先级，G 处理加薪请求。" />
         <e k="ui_pmHelpSectionPeople" v="申请人与员工|新存档以四名申请人开始；最多可同时有八名。 可在个人资料中雇用申请人。 经验、可靠性和忠诚度范围为 0 到 100。 员工页面显示状态、工资、专长、履历和累计数据。" />
         <e k="ui_pmHelpSectionStats" v="员工与属性|经验影响速度、磨损和消耗；可靠性影响中断、生病和提前终止任务；忠诚度影响加薪要求和辞职。员工页面还显示状态、工资、专长、统计数据和个人履历。" />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="辞职、解雇与退休|这些变更不一定立即生效，而会按期限在月份变更时完成。正在工作的员工不能立即被解雇。即将发生的变更显示在状态和履历中。" />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive 与 Courseplay|先在员工 / 运输中分配司机并设置优先级。AutoDrive 使用第一名可用司机，没有司机时阻止启动。普通 Courseplay 启动会打开选择。AutoDrive 后自动启动 Courseplay 时，每辆车都会保留自己的司机，不再重新选择。" />
         <e k="ui_pmHelpSectionMultiplayer" v="多人游戏与存档|人员数据和设置按农场分开。 服务器验证所有更改；只有获授权的农场管理员可以管理自己的农场。 员工、活动分配和设置会同步。 人员数据保存在存档内的 helperPersonnel.xml 中。" />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="专业发展" />
+        <e k="ui_selectionNoSpecializationProgress" v="尚无专业发展进度" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="快速开始与操作" />
+        <e k="ui_pmHelpTopic01Body" v="按 Ctrl + M 打开菜单。 使用菜单翻页控制切换标签页。 按 A/D 或左/右方向键切换人员，空格键确认，Esc 返回，T 设置运输优先级，G 处理加薪请求。" />
+        <e k="ui_pmHelpTopic02Title" v="申请人与员工" />
+        <e k="ui_pmHelpTopic02Body" v="新存档以四名申请人开始；最多可同时有八名。 可在个人资料中雇用申请人。 经验、可靠性和忠诚度范围为 0 到 100。 员工页面显示状态、工资、专长、履历和累计数据。 Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="员工与属性" />
+        <e k="ui_pmHelpTopic03Body" v="经验影响速度、磨损和消耗；可靠性影响中断、生病和提前终止任务；忠诚度影响加薪要求和辞职。员工页面还显示状态、工资、专长、统计数据和个人履历。" />
+        <e k="ui_pmHelpTopic04Title" v="工作与发展" />
+        <e k="ui_pmHelpTopic04Body" v="开始普通 AI 帮工任务时会打开员工选择。 只能选择可用员工，并且同一员工不能同时执行多个任务。 工作时间会提升经验和专长进度。 经验影响速度、磨损和消耗；可靠性影响减速、生病和任务中止；忠诚度影响工资冲突和辞职。 The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="经验影响速度、磨损和消耗；可靠性影响中断、生病和提前终止任务；忠诚度影响加薪要求和辞职。员工页面还显示状态、工资、专长、统计数据和个人履历。" />
+        <e k="ui_pmHelpTopic06Title" v="工资" />
+        <e k="ui_pmHelpTopic06Body" v="工资在月份变更时扣除，并取决于每月天数、经济难度和模组设置。员工可能要求加薪；必须在期限内接受或拒绝，这可能影响忠诚度。" />
+        <e k="ui_pmHelpTopic07Title" v="培训" />
+        <e k="ui_pmHelpTopic07Body" v="培训只能在月初开始，需要付费，并使员工到月底前不可用。完成培训会提高所选专长。培训选项和历史记录显示在培训与员工区域。 Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic08Title" v="专精" />
+        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic09Title" v="辞职、解雇与退休" />
+        <e k="ui_pmHelpTopic09Body" v="这些变更不一定立即生效，而会按期限在月份变更时完成。正在工作的员工不能立即被解雇。即将发生的变更显示在状态和履历中。" />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive 与 Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="先在员工 / 运输中分配司机并设置优先级。AutoDrive 使用第一名可用司机，没有司机时阻止启动。普通 Courseplay 启动会打开选择。AutoDrive 后自动启动 Courseplay 时，每辆车都会保留自己的司机，不再重新选择。" />
+        <e k="ui_pmHelpTopic11Title" v="多人游戏与存档" />
+        <e k="ui_pmHelpTopic11Body" v="人员数据和设置按农场分开。 服务器验证所有更改；只有获授权的农场管理员可以管理自己的农场。 员工、活动分配和设置会同步。 人员数据保存在存档内的 helperPersonnel.xml 中。" />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="人员数据和设置按农场分开。 服务器验证所有更改；只有获授权的农场管理员可以管理自己的农场。 员工、活动分配和设置会同步。 人员数据保存在存档内的 helperPersonnel.xml 中。" />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="按 Ctrl + M 打开菜单。 使用菜单翻页控制切换标签页。 按 A/D 或左/右方向键切换人员，空格键确认，Esc 返回，T 设置运输优先级，G 处理加薪请求。 If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

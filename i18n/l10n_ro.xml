@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="profesie de birou" />
         <e k="ui_status_retirementPending" v="se pensionează la sfârșitul lunii" />
         <e k="ui_retirementNotice" v="%s se va pensiona la sfârșitul lunii." />
-        <e k="ui_pmTrainingIntro" v="Specializările îmbunătățesc performanța unui angajat în categoria de învățare respectivă. Un curs durează până la sfârșitul lunii curente, iar angajatul nu este disponibil pentru muncă în această perioadă. Progresul este acordat numai după finalizarea cursului. Nu toate categoriile au cursuri disponibile în fiecare lună. Cursurile pot fi mai ieftine sau mai scumpe decât prețul obișnuit. Fiecare angajat poate urma un singur curs pe an agricol, din martie până în februarie. Un angajat poate obține cel mult două specializări. Selectează categoria de învățare dorită." />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Categorie de învățare" />
         <e k="ui_pmTrainingProgressHeader" v="Progres către specializare" />
         <e k="ui_pmTrainingRunning" v="instruire în desfășurare" />
         <e k="ui_pmTrainingSelectCategory" v="Selectează mai întâi o categorie de instruire" />
         <e k="ui_pmTrainingConfirm" v="Începi instruirea pentru %s în categoria %s?" />
-        <e k="ui_training_line_no_capacity" v="Instruire: două specializări atinse · ultima: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Instruire: cu 1 zi/lună doar până la 12:00 · alege o categorie în meniul de instruire · ultima: %s" />
         <e k="ui_training_line_first_day_select" v="Instruire: doar în prima zi · alege o categorie în meniul de instruire · ultima: %s" />
         <e k="ui_training_line_busy_select" v="Instruire: imposibilă în timpul lucrului · ultima: %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="lună de lucru bună" />
         <e k="ui_waitingForServerData" v="Se așteaptă datele serverului" />
         <e k="ui_pmMenuPageHelp" v="Ajutor" />
-        <e k="ui_pmHelpIntro" v="Ghid detaliat în joc pentru Personnel Management 1.1.3.0. Fișierul ReadMe.pdf inclus conține reguli și calcule suplimentare." />
+        <e k="ui_pmHelpIntro" v="Ghid detaliat în joc pentru Personnel Management 1.1.4.0. Fișierul ReadMe.pdf inclus conține reguli și calcule suplimentare." />
         <e k="ui_pmHelpSectionQuickStart" v="Pornire rapidă și comenzi|Deschide meniul cu Ctrl + M. Schimbă filele cu comenzile de pagină ale meniului. Folosește A/D sau Stânga/Dreapta pentru persoană, Spațiu pentru confirmare, Esc pentru revenire, T pentru prioritățile de transport și G pentru cererile salariale." />
         <e k="ui_pmHelpSectionPeople" v="Candidați și angajați|Un joc nou începe cu patru candidați; cel mult opt pot fi disponibili. Angajează din profiluri. Experiența, fiabilitatea și loialitatea sunt între 0 și 100. Starea, salariul, specializările, cronica și totalurile sunt pe pagina angajaților." />
         <e k="ui_pmHelpSectionStats" v="Angajați și atribute|Experiența influențează viteza, uzura și consumul; fiabilitatea întreruperile, boala și abandonul; loialitatea cererile salariale și demisiile. Pagina arată și starea, salariul, specializările, statisticile și cronica personală." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Demisie, concediere și pensionare|Acestea nu au întotdeauna efect imediat, ci la schimbarea lunii conform termenelor. Un angajat aflat la lucru nu poate fi concediat imediat. Schimbările viitoare apar în stare și cronică." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive și Courseplay|Atribuie șoferii în Angajați / Transport și stabilește prioritatea. AutoDrive folosește primul disponibil și blochează pornirea dacă nu există unul. Pornirea normală Courseplay deschide selecția. După AutoDrive, fiecare vehicul își păstrează automat propriul șofer fără o selecție nouă." />
         <e k="ui_pmHelpSectionMultiplayer" v="Multiplayer și salvări|Datele și setările sunt separate pe ferme. Serverul validează schimbările; numai managerii autorizați își pot administra ferma. Angajații, atribuirile active și setările sunt sincronizate. Datele se află în helperPersonnel.xml din salvare." />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="Dezvoltare profesională" />
+        <e k="ui_selectionNoSpecializationProgress" v="Încă nu există progres de specializare" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="Pornire rapidă și comenzi" />
+        <e k="ui_pmHelpTopic01Body" v="Deschide meniul cu Ctrl + M. Schimbă filele cu comenzile de pagină ale meniului. Folosește A/D sau Stânga/Dreapta pentru persoană, Spațiu pentru confirmare, Esc pentru revenire, T pentru prioritățile de transport și G pentru cererile salariale." />
+        <e k="ui_pmHelpTopic02Title" v="Candidați și angajați" />
+        <e k="ui_pmHelpTopic02Body" v="Un joc nou începe cu patru candidați; cel mult opt pot fi disponibili. Angajează din profiluri. Experiența, fiabilitatea și loialitatea sunt între 0 și 100. Starea, salariul, specializările, cronica și totalurile sunt pe pagina angajaților. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="Angajați și atribute" />
+        <e k="ui_pmHelpTopic03Body" v="Experiența influențează viteza, uzura și consumul; fiabilitatea întreruperile, boala și abandonul; loialitatea cererile salariale și demisiile. Pagina arată și starea, salariul, specializările, statisticile și cronica personală." />
+        <e k="ui_pmHelpTopic04Title" v="Muncă și dezvoltare" />
+        <e k="ui_pmHelpTopic04Body" v="Pornirea unei lucrări normale cu ajutor IA deschide selecția angajatului. Pot fi aleși doar angajații disponibili și nimeni nu poate face mai multe lucrări simultan. Timpul de lucru crește experiența și specializarea. Experiența afectează viteza, uzura și consumul; fiabilitatea încetinirile, boala și abandonul; loialitatea conflictele salariale și demisiile. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="Experiența influențează viteza, uzura și consumul; fiabilitatea întreruperile, boala și abandonul; loialitatea cererile salariale și demisiile. Pagina arată și starea, salariul, specializările, statisticile și cronica personală." />
+        <e k="ui_pmHelpTopic06Title" v="Salarii" />
+        <e k="ui_pmHelpTopic06Body" v="Salariile sunt debitate la schimbarea lunii și depind de zilele pe lună, dificultatea economică și setările modului. Angajații pot cere o mărire; cererea trebuie acceptată sau respinsă la timp și poate influența loialitatea." />
+        <e k="ui_pmHelpTopic07Title" v="Instruire" />
+        <e k="ui_pmHelpTopic07Body" v="Instruirea începe doar la începutul lunii, costă bani și blochează angajatul până la sfârșitul lunii. Finalizarea îmbunătățește specializarea aleasă. Ofertele și istoricul apar în zonele Instruire și Angajați. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic08Title" v="Specializare" />
+        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic09Title" v="Demisie, concediere și pensionare" />
+        <e k="ui_pmHelpTopic09Body" v="Acestea nu au întotdeauna efect imediat, ci la schimbarea lunii conform termenelor. Un angajat aflat la lucru nu poate fi concediat imediat. Schimbările viitoare apar în stare și cronică." />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive și Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="Atribuie șoferii în Angajați / Transport și stabilește prioritatea. AutoDrive folosește primul disponibil și blochează pornirea dacă nu există unul. Pornirea normală Courseplay deschide selecția. După AutoDrive, fiecare vehicul își păstrează automat propriul șofer fără o selecție nouă." />
+        <e k="ui_pmHelpTopic11Title" v="Multiplayer și salvări" />
+        <e k="ui_pmHelpTopic11Body" v="Datele și setările sunt separate pe ferme. Serverul validează schimbările; numai managerii autorizați își pot administra ferma. Angajații, atribuirile active și setările sunt sincronizate. Datele se află în helperPersonnel.xml din salvare." />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="Datele și setările sunt separate pe ferme. Serverul validează schimbările; numai managerii autorizați își pot administra ferma. Angajații, atribuirile active și setările sunt sincronizate. Datele se află în helperPersonnel.xml din salvare." />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="Deschide meniul cu Ctrl + M. Schimbă filele cu comenzile de pagină ale meniului. Folosește A/D sau Stânga/Dreapta pentru persoană, Spațiu pentru confirmare, Esc pentru revenire, T pentru prioritățile de transport și G pentru cererile salariale. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

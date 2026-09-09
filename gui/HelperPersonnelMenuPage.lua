@@ -409,6 +409,17 @@ function HelperPersonnelMenuPage:getPrimaryButtonText()
     if self.pageKind == "applicants" then
         return self:getText("ui_button_hire", "Einstellen")
     elseif self.pageKind == "training" then
+        local person = self:getCurrentPerson()
+        local manager = self:getManager()
+        local specializationKey = self.selectedTrainingCategoryKey
+        if person ~= nil and manager ~= nil and specializationKey ~= nil then
+            if manager.workerHasSpecialization ~= nil and manager:workerHasSpecialization(person, specializationKey) then
+                return self:getText("ui_button_specializationDeactivate", "Ruhen lassen")
+            end
+            if manager.workerHasLearnedSpecialization ~= nil and manager:workerHasLearnedSpecialization(person, specializationKey) then
+                return self:getText("ui_button_specializationActivate", "Einloggen")
+            end
+        end
         return self:getText("ui_button_train", "Schulen")
     elseif self.pageKind == "settings" then
         return self:getText("ui_hpSetting_toggle", "Umschalten")
@@ -962,30 +973,48 @@ function HelperPersonnelMenuPage:onClickPrimaryAction()
         return self:showConfirmDialog(text, self.onConfirmHire, person)
     elseif self.pageKind == "training" then
         local manager = self:getManager()
-        if manager ~= nil and manager.canTrainWorkerThisYear ~= nil and not manager:canTrainWorkerThisYear(person) then
-            local message = self:formatText("ui_training_already_done_year", "%s wurde in diesem Jahr bereits geschult.", self:getPersonName(person))
-            self:showTrainingInfoText(message)
+        local specializationKey = self.selectedTrainingCategoryKey
+        if specializationKey == nil or specializationKey == "" then
+            self:showTrainingCategoryRequiredMessage()
             return true
         end
+
+        local specializationName = manager ~= nil and manager.getSpecializationDisplayName ~= nil and manager:getSpecializationDisplayName(specializationKey) or tostring(specializationKey)
+        local isActive = manager ~= nil and manager.workerHasSpecialization ~= nil and manager:workerHasSpecialization(person, specializationKey) == true
+        local isLearned = manager ~= nil and manager.workerHasLearnedSpecialization ~= nil and manager:workerHasLearnedSpecialization(person, specializationKey) == true
 
         if person.busy == true then
-            self:showTrainingInfoMessage("ui_training_worker_busy", "Der Mitarbeiter ist gerade im Einsatz und kann nicht geschult werden.")
+            self:showTrainingInfoMessage("ui_training_worker_busy", "Der Mitarbeiter ist gerade im Einsatz und kann nicht geändert werden.")
             return true
         end
-
         if manager ~= nil and manager.isWorkerSick ~= nil and manager:isWorkerSick(person) then
-            self:showTrainingInfoMessage("ui_training_worker_sick", "Der Mitarbeiter ist krank und kann nicht geschult werden.")
+            self:showTrainingInfoMessage("ui_training_worker_sick", "Der Mitarbeiter ist krank und kann nicht geändert werden.")
             return true
         end
-
         if manager ~= nil and manager.isWorkerInTraining ~= nil and manager:isWorkerInTraining(person) then
             self:showTrainingInfoMessage("ui_training_worker_in_training", "Der Mitarbeiter ist bereits bis Monatsende in Schulung.")
             return true
         end
 
-        local specializationKey = self.selectedTrainingCategoryKey
-        if specializationKey == nil or specializationKey == "" then
-            self:showTrainingCategoryRequiredMessage()
+        if isActive then
+            local text = self:formatText("ui_pmSpecializationDeactivateConfirm", "Spezialisierung %s bei %s ruhen lassen?", specializationName, self:getPersonName(person))
+            return self:showConfirmDialog(text, self.onConfirmSpecializationState, {person = person, specializationKey = specializationKey, active = false})
+        elseif isLearned then
+            if manager.canActivateWorkerSpecializationThisYear ~= nil and not manager:canActivateWorkerSpecializationThisYear(person) then
+                self:showTrainingInfoMessage("ui_pmSpecializationActivationUsed", "Eine neue Spezialisierung kann pro Landwirtschaftsjahr und Mitarbeiter nur einmal eingeloggt werden.")
+                return true
+            end
+            if person.specializationPrimary ~= nil and person.specializationPrimary ~= "" and person.specializationSecondary ~= nil and person.specializationSecondary ~= "" then
+                self:showTrainingInfoMessage("ui_pmSpecializationSlotsFull", "Vor dem Einloggen muss mindestens eine aktive Spezialisierung ruhen.")
+                return true
+            end
+            local text = self:formatText("ui_pmSpecializationActivateConfirm", "Spezialisierung %s bei %s einloggen?", specializationName, self:getPersonName(person))
+            return self:showConfirmDialog(text, self.onConfirmSpecializationState, {person = person, specializationKey = specializationKey, active = true})
+        end
+
+        if manager ~= nil and manager.canTrainWorkerThisYear ~= nil and not manager:canTrainWorkerThisYear(person) then
+            local message = self:formatText("ui_training_already_done_year", "%s wurde in diesem Jahr bereits geschult.", self:getPersonName(person))
+            self:showTrainingInfoText(message)
             return true
         end
 
@@ -997,7 +1026,6 @@ function HelperPersonnelMenuPage:onClickPrimaryAction()
             end
         end
 
-        local specializationName = manager ~= nil and manager.getSpecializationDisplayName ~= nil and manager:getSpecializationDisplayName(specializationKey) or tostring(specializationKey)
         local text = self:formatText("ui_pmTrainingConfirm", "Schulung für %s in der Kategorie %s starten?", self:getPersonName(person), specializationName)
         return self:showConfirmDialog(text, self.onConfirmTraining, {person = person, specializationKey = specializationKey})
     elseif self.pageKind == "settings" then
@@ -1042,6 +1070,20 @@ function HelperPersonnelMenuPage:onConfirmTraining(trainingData)
     end
 
     local changed = self.app:requestTrainWorker(person.id, specializationKey) == true
+    if changed then
+        self.selectedTrainingCategoryKey = nil
+    end
+    self:refresh()
+    return changed
+end
+
+function HelperPersonnelMenuPage:onConfirmSpecializationState(actionData)
+    local person = actionData ~= nil and actionData.person or nil
+    local specializationKey = actionData ~= nil and actionData.specializationKey or nil
+    if person == nil or specializationKey == nil or self.app == nil or self.app.requestSpecializationState == nil then
+        return false
+    end
+    local changed = self.app:requestSpecializationState(person.id, specializationKey, actionData.active == true) == true
     if changed then
         self.selectedTrainingCategoryKey = nil
     end
@@ -1453,8 +1495,9 @@ function HelperPersonnelMenuPage:getTrainingCategoryRows(person)
         local specializationKey = manager.normalizeSpecializationKey ~= nil and manager:normalizeSpecializationKey(key) or key
         if specializationKey ~= nil then
             local acquired = manager.workerHasSpecialization ~= nil and manager:workerHasSpecialization(person, specializationKey) == true
+            local learned = manager.workerHasLearnedSpecialization ~= nil and manager:workerHasLearnedSpecialization(person, specializationKey) == true
             local progressPercent = 100
-            if not acquired then
+            if not learned then
                 local minutes = manager.getSpecializationProgressMinutes ~= nil and manager:getSpecializationProgressMinutes(person, specializationKey) or 0
                 progressPercent = manager.getSpecializationProgressPercentForMinutes ~= nil and manager:getSpecializationProgressPercentForMinutes(person, minutes) or 0
             end
@@ -1471,6 +1514,7 @@ function HelperPersonnelMenuPage:getTrainingCategoryRows(person)
                 name = manager.getSpecializationDisplayName ~= nil and manager:getSpecializationDisplayName(specializationKey) or tostring(specializationKey),
                 progress = math.max(0, math.min(100, tonumber(progressPercent) or 0)),
                 acquired = acquired,
+                learned = learned,
                 trainingActive = trainingActive,
                 cost = math.max(0, tonumber(finalCost) or 0),
                 baseCost = math.max(0, tonumber(baseCost) or 0),
@@ -1504,21 +1548,14 @@ function HelperPersonnelMenuPage:selectTrainingCategory(specializationKey)
         return true
     end
 
-    if manager.getWorkerTrainingCostDetails ~= nil then
+    local active = manager.workerHasSpecialization ~= nil and manager:workerHasSpecialization(person, specializationKey) == true
+    local learned = manager.workerHasLearnedSpecialization ~= nil and manager:workerHasLearnedSpecialization(person, specializationKey) == true
+
+    if not active and not learned and manager.getWorkerTrainingCostDetails ~= nil then
         local _, _, _, available = manager:getWorkerTrainingCostDetails(person, specializationKey)
         if not available then
             return true
         end
-    end
-
-    if manager.workerHasSpecialization ~= nil and manager:workerHasSpecialization(person, specializationKey) then
-        return true
-    end
-
-    local primary = manager.normalizeSpecializationKey ~= nil and manager:normalizeSpecializationKey(person.specializationPrimary) or person.specializationPrimary
-    local secondary = manager.normalizeSpecializationKey ~= nil and manager:normalizeSpecializationKey(person.specializationSecondary) or person.specializationSecondary
-    if primary ~= nil and secondary ~= nil then
-        return true
     end
 
     local isKnown = false
@@ -1535,6 +1572,7 @@ function HelperPersonnelMenuPage:selectTrainingCategory(specializationKey)
 
     self.selectedTrainingWorkerId = person.id
     self.selectedTrainingCategoryKey = specializationKey
+    self:updateButtons()
     self.requestRender = true
     return true
 end
@@ -1568,7 +1606,7 @@ function HelperPersonnelMenuPage:drawTrainingPage()
 
     self:drawSeparator(0.22, 0.500, 0.62)
 
-    local intro = self:getText("ui_pmTrainingIntro", "Spezialisierungen verbessern die Leistung eines Mitarbeiters in der jeweiligen Lernkategorie. Eine Schulung dauert bis zum Ende des aktuellen Monats; während dieser Zeit steht der Mitarbeiter nicht für Einsätze zur Verfügung. Der Lernfortschritt wird erst nach Abschluss der Schulung gutgeschrieben. Nicht für jede Kategorie wird in jedem Monat eine Schulung angeboten. Schulungen können gegenüber dem regulären Preis günstiger oder teurer sein. Pro Landwirtschaftsjahr von März bis Februar kann jeder Mitarbeiter nur eine Schulung absolvieren. Jeder Mitarbeiter kann maximal zwei Spezialisierungen erwerben. Wähle die gewünschte Lernkategorie aus.")
+    local intro = self:getText("ui_pmTrainingIntro", "Spezialisierungen verbessern die Leistung in der passenden Lernkategorie. Schulungen beginnen nur am Monatsanfang, kosten Geld und machen den Mitarbeiter bis Monatsende nicht verfügbar. Fortschritt wird nach Abschluss gutgeschrieben. Pro Landwirtschaftsjahr von März bis Februar ist nur eine Schulung möglich. Gelernte Spezialisierungen bleiben erhalten, aber höchstens zwei Boni sind aktiv. Beide Plätze können ruhen. Eine gelernte inaktive Spezialisierung kann je Mitarbeiter nur einmal pro Landwirtschaftsjahr eingeloggt werden.")
     local introLines = self:getWrappedHistoryLines(intro, 0.0107, 0.62, 116)
     local introY = 0.475
     for i = 1, math.min(#introLines, 6) do
@@ -1598,13 +1636,12 @@ function HelperPersonnelMenuPage:drawTrainingPage()
     local firstRowYPixels = math.floor((screenHeight * 0.330) + 0.5)
     local rowHeight = rowHeightPixels / screenHeight
     local workerInTraining = manager ~= nil and manager.isWorkerInTraining ~= nil and manager:isWorkerInTraining(person)
-    local hasTwoSpecializations = person.specializationPrimary ~= nil and person.specializationPrimary ~= "" and person.specializationSecondary ~= nil and person.specializationSecondary ~= ""
 
     for index, row in ipairs(rows) do
         local yPixels = firstRowYPixels - ((index - 1) * (rowHeightPixels + rowGapPixels))
         local y = yPixels / screenHeight
         local selected = self.selectedTrainingCategoryKey == row.key
-        local selectable = not row.acquired and not hasTwoSpecializations and not workerInTraining and row.available == true
+        local selectable = not workerInTraining and (row.acquired or row.learned or row.available == true)
         local background = selected and 0.27 or (index % 2 == 0 and 0.145 or 0.115)
         local alpha = selected and 0.90 or 0.66
         local r, g, b = background, background, background
@@ -1638,7 +1675,11 @@ function HelperPersonnelMenuPage:drawTrainingPage()
 
         local costText = ""
         local adjustmentText = ""
-        if row.available == true then
+        if row.acquired then
+            costText = self:getText("ui_pmSpecializationActive", "aktiv")
+        elseif row.learned then
+            costText = self:getText("ui_pmSpecializationInactive", "gelernt, inaktiv")
+        elseif row.available == true then
             costText = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(row.cost) or string.format("%d €", math.floor(row.cost + 0.5))
             if row.costDifference > 0 then
                 local amount = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(row.costDifference) or string.format("%d €", math.floor(row.costDifference + 0.5))

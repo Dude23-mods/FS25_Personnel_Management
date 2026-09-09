@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="profession de bureau" />
         <e k="ui_status_retirementPending" v="départ à la retraite à la fin du mois" />
         <e k="ui_retirementNotice" v="%s prendra sa retraite à la fin du mois." />
-        <e k="ui_pmTrainingIntro" v="Les spécialisations améliorent les performances d’un employé dans la catégorie d’apprentissage concernée. Une formation dure jusqu’à la fin du mois en cours et l’employé n’est pas disponible pendant cette période. La progression n’est créditée qu’à la fin de la formation. Une formation n’est pas proposée chaque mois pour toutes les catégories. Son prix peut être inférieur ou supérieur au tarif habituel. Chaque employé ne peut suivre qu’une formation par année agricole, de mars à février. Chaque employé peut obtenir au maximum deux spécialisations. Sélectionnez la catégorie souhaitée." />
+        <e k="ui_pmTrainingIntro" v="Les spécialisations améliorent les performances dans la catégorie adaptée. Une formation commence uniquement au début du mois, coûte de l’argent et rend l’employé indisponible jusqu’à la fin du mois. La progression est créditée à la fin. Les offres et prix changent chaque mois ; une seule formation est possible par année agricole de mars à février. Les spécialisations apprises restent acquises, mais seuls deux bonus sont actifs. Les deux emplacements peuvent être désactivés. Une spécialisation inactive ne peut être réactivée qu’une fois par employé et par année agricole." />
         <e k="ui_pmTrainingCategoryHeader" v="Catégorie d'apprentissage" />
         <e k="ui_pmTrainingProgressHeader" v="Progression vers la spécialisation" />
         <e k="ui_pmTrainingRunning" v="formation en cours" />
         <e k="ui_pmTrainingSelectCategory" v="Sélectionnez d'abord une catégorie de formation" />
         <e k="ui_pmTrainingConfirm" v="Commencer une formation pour %s dans la catégorie %s ?" />
-        <e k="ui_training_line_no_capacity" v="Formation : deux spécialisations atteintes · dernière : %s" />
+        <e k="ui_training_line_no_capacity" v="Spécialisation : deux emplacements actifs occupés · dernière apprise : %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Formation : avec 1 jour/mois, uniquement jusqu'à 12 h 00 · choisir une catégorie dans le menu de formation · dernière : %s" />
         <e k="ui_training_line_first_day_select" v="Formation : uniquement le premier jour · choisir une catégorie dans le menu de formation · dernière : %s" />
         <e k="ui_training_line_busy_select" v="Formation : impossible pendant le travail · dernière : %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="bon mois de travail" />
         <e k="ui_waitingForServerData" v="En attente des données du serveur" />
         <e k="ui_pmMenuPageHelp" v="Aide" />
-        <e k="ui_pmHelpIntro" v="Guide en jeu détaillé de Personnel Management 1.1.3.0. Le fichier ReadMe.pdf fourni contient des règles et calculs supplémentaires." />
+        <e k="ui_pmHelpIntro" v="Guide en jeu détaillé de Personnel Management 1.1.4.0. Le fichier ReadMe.pdf fourni contient des règles et calculs supplémentaires." />
         <e k="ui_pmHelpSectionQuickStart" v="Démarrage rapide et commandes|Ouvrez le menu avec Ctrl + M. Changez d'onglet avec les commandes de page du menu. Utilisez A/D ou Gauche/Droite pour changer de personne, Espace pour confirmer, Échap pour revenir, T pour les priorités de transport et G pour les demandes salariales." />
         <e k="ui_pmHelpSectionPeople" v="Candidats et recrutement|Une nouvelle sauvegarde commence avec quatre candidats; huit au maximum peuvent être disponibles. Chaque candidat possède expérience, fiabilité, loyauté, demande salariale et parfois des spécialisations. Ouvrez son profil pour confirmer le recrutement. L'employé appartient ensuite durablement à la ferme qui l'a recruté." />
         <e k="ui_pmHelpSectionStats" v="Employés et caractéristiques|Expérience, fiabilité et loyauté vont de 0 à 100. L'expérience agit sur vitesse, consommation et usure; la fiabilité sur interruptions, maladie et abandons; la loyauté sur demandes salariales et démissions. La page employé affiche aussi statut, salaire, spécialisations, statistiques et chronique personnelle." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Démission, licenciement et retraite|Ces fins d'emploi ne prennent pas toujours effet immédiatement. Elles sont appliquées au changement de mois selon leur préavis. Un employé actuellement au travail ne peut pas être licencié immédiatement. Les changements à venir apparaissent dans son statut et sa chronique." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive et Courseplay|Pour AutoDrive, activez les employés comme conducteurs dans Employés / Transport et triez leur priorité. AutoDrive choisit le premier disponible et bloque le démarrage si aucun ne l'est. Un démarrage Courseplay normal ouvre la sélection. Si Courseplay démarre automatiquement après AutoDrive, le véhicule conserve son conducteur AutoDrive sans nouvelle sélection. Plusieurs véhicules doivent conserver chacun leur propre employé." />
         <e k="ui_pmHelpSectionMultiplayer" v="Multijoueur et sauvegardes|Personnel, candidats, réglages et affectations sont séparés par ferme. Le serveur valide chaque changement; seuls les responsables autorisés gèrent leur personnel. Les données sont synchronisées et enregistrées dans helperPersonnel.xml. Les employés et affectations actives sont restaurés au chargement lorsque possible." />
+        <e k="ui_selectionKicker" v="Gestion du personnel · Choisir une mission" />
+        <e k="ui_selectionPerformanceProfile" v="PROFIL DE PERFORMANCE" />
+        <e k="ui_selectionAvailable" v="Disponible" />
+        <e k="ui_selectionUnavailableSick" v="Malade" />
+        <e k="ui_selectionUnavailableTraining" v="En formation" />
+        <e k="ui_selectionUnavailableReserved" v="Réservé" />
+        <e k="ui_selectionUnavailableAutoDrive" v="Mission AutoDrive" />
+        <e k="ui_selectionUnavailableCourseplay" v="Mission Courseplay" />
+        <e k="ui_selectionUnavailableFieldwork" v="Travail au champ" />
+        <e k="ui_selectionUnavailableOther" v="Indisponible" />
+        <e k="ui_selectionShowAll" v="Afficher tous les employés" />
+        <e k="ui_selectionShowAvailable" v="Afficher les disponibles" />
+        <e k="ui_selectionFooterControls" v="A/D Changer · Espace Choisir · Tab Tous · Esc Retour" />
+        <e k="ui_selectionJobUnknown" v="Mission inconnue" />
+        <e k="ui_selectionAgeLabel" v="Âge" />
+        <e k="ui_selectionWageLabel" v="Salaire mensuel" />
+        <e k="ui_selectionJobsLabel" v="Missions" />
+        <e k="ui_selectionSpeedLabel" v="Vitesse de travail" />
+        <e k="ui_selectionAgeValue" v="%d ans" />
+        <e k="ui_selectionProfessionalDevelopment" v="Développement professionnel" />
+        <e k="ui_selectionNoSpecializationProgress" v="Pas encore de progression de spécialisation" />
+        <e k="ui_selectionNoSpecialization" v="Aucune spécialisation" />
+        <e k="ui_selectionVehicleLine" v="Véhicule : %s" />
+        <e k="ui_selectionActivityLine" v="Mission : %s" />
+        <e k="ui_selectionFieldLine" v="Champ : %s" />
+        <e k="ui_selectionTargetLine" v="Destination : %s" />
+        <e k="ui_selectionCourseplayLine" v="Type CP : %s" />
+        <e k="ui_selectionStatusLine" v="Statut : %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Afficher tous les employés" />
+        <e k="ui_button_specializationDeactivate" v="Désactiver" />
+        <e k="ui_button_specializationActivate" v="Activer" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Désactiver %s pour %s ?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activer %s pour %s ?" />
+        <e k="ui_pmSpecializationActivationUsed" v="Une nouvelle spécialisation ne peut être activée qu’une fois par employé et par année agricole." />
+        <e k="ui_pmSpecializationSlotsFull" v="Désactivez au moins une spécialisation avant l’activation." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="apprise, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s utilise de nouveau la spécialisation %s." />
+        <e k="ui_specializationDeactivatedNotice" v="%s désactive la spécialisation %s." />
+        <e k="ui_pmHelpContents" v="SOMMAIRE" />
+        <e k="ui_pmHelpNavigation" v="Gauche/Droite : zone · Haut/Bas : sélectionner ou défiler · Page : défiler" />
+        <e k="ui_pmHelpTopic01Title" v="Démarrage rapide et commandes" />
+        <e k="ui_pmHelpTopic01Body" v="Gestion du personnel remplace les aides anonymes par des candidats et employés nommés. Ouvrir : Ctrl + M. Pages : Vue d’ensemble, Candidats, Employés, Formation, Paramètres et Aide. Changer de personne : A/D ou Gauche/Droite. Confirmer : Espace ou clic. Retour : Échap. Priorités transport : T. Demandes de salaire : G. Dans l’aide, Gauche/Droite change de zone, Haut/Bas sélectionne ou défile et Page haut/bas change de page." />
+        <e k="ui_pmHelpTopic02Title" v="Candidats et recrutement" />
+        <e k="ui_pmHelpTopic02Body" v="Une nouvelle sauvegarde commence avec quatre candidats ; huit au maximum sont présents. Départ du marché : mois de création 0 %, après un mois 10–30 %, deux mois 30–50 %, trois mois 100 %. Âges pondérés : 18–29 ans 30 %, 30–39 30 %, 40–49 22 %, 50–59 13 %, 60–65 5 %. Le profil affiche parcours, valeurs, salaire demandé et spécialisations. La personne recrutée appartient durablement à l’exploitation." />
+        <e k="ui_pmHelpTopic03Title" v="Valeurs, rangs et statut" />
+        <e k="ui_pmHelpTopic03Body" v="Expérience, fiabilité et loyauté vont de 0 à 100. Rang selon l’expérience : Aide 0–44, Ouvrier qualifié 45–74, Professionnel 75–100. L’expérience agit sur vitesse, usure et consommation ; la fiabilité sur ralentissements, maladie et abandon ; la loyauté sur conflits salariaux et démissions. Le profil affiche statut, salaire, spécialisations, missions et chronique." />
+        <e k="ui_pmHelpTopic04Title" v="Aides IA, sélection et transport" />
+        <e k="ui_pmHelpTopic04Body" v="Le démarrage d’un travail IA ou Courseplay ouvre la sélection conforme au profil approuvé : vrais portraits, rang, motif de disponibilité, âge, salaire, trois valeurs, missions, vitesse, spécialisations et contexte détecté. Par défaut seuls les disponibles sont visibles ; Tab affiche tout le personnel. Les indisponibles sont grisés avec le motif champ, Courseplay, AutoDrive, maladie, formation, réservation ou autre. La spécialisation adaptée est verte ; une mission inconnue reste neutre. Une mission compte après 10 secondes et la progression pratique après 3 minutes." />
+        <e k="ui_pmHelpTopic05Title" v="Expérience et effets" />
+        <e k="ui_pmHelpTopic05Body" v="Minutes par point : expérience 0–24 : 25 ; 25–49 : 50 ; 50–69 : 100 ; 70–84 : 220 ; 85–94 : 540 ; 95–100 : 1080. Maximum 2 points par mission. Limite mensuelle selon jours/mois : 1→1 ; 2→2 ; 3–4→3 ; 5–6→4 ; 7–9→5 ; 10–12→6 ; 13–15→7 ; 16–18→8 ; 19–21→9 ; 22–24→10 ; 25–27→11 ; 28→12. Ajustement par niveau : +1, 0, −1, −2, −3, −4 ; minimum réel 1." />
+        <e k="ui_pmHelpTopic06Title" v="Fiabilité et maladie" />
+        <e k="ui_pmHelpTopic06Body" v="Sous 85, contrôle de ralentissement chaque minute : jusqu’à 15 %, durée 30–90 secondes, perte 4–15 %, délai 3 minutes. Maladie contrôlée chaque jour, arrêt du travail ; maximum mensuel plafond(jours/mois ÷ 3). Sous 50, contrôle unique d’abandon après 60 secondes. Repères maladie/abandon : 0–20 : 10 %/20 % ; 21–29 : 8 %/15 % ; 30–40 : 8 %/10 % ; 41–49 : 6 %/5 % ; 50–60 : 6 %/0 % ; 61–80 : 4 %/0 % ; 81–100 : 2 %/0 %." />
+        <e k="ui_pmHelpTopic07Title" v="Loyauté et réputation" />
+        <e k="ui_pmHelpTopic07Body" v="Loyauté initiale proche de 65. Salaire payé avec réputation ≥40 : +1 ; paiement sous zéro : −2 ; ferme déjà négative : −4 ; ancienneté 3/6/12/24 mois : +1/+1/+2/+3 ; demande acceptée +3 ; refusée −5, ou −7 sous 40 ; ouverte après délai −2 par mois. Démission : loyauté 0–5 : 35 %, 6–9 : 20 %, 10–14 : 10 %. Travail de nuit 22–06 h : jusqu’à −4 loyauté et −1/−2 réputation après 120 minutes. Réputation 0–100, départ 60." />
+        <e k="ui_pmHelpTopic08Title" v="Salaires et demandes" />
+        <e k="ui_pmHelpTopic08Body" v="Salaire de base à 3 jours/mois : expérience 0–44 : 1 800–2 200 ; 45–74 : 2 200–2 700 ; 75–100 : 2 700–3 300. Facteur fiabilité 0,94–1,06 ; hasard candidat 96–106 %, réputation et primes +5 % principale/+3 % secondaire. Salaire mensuel = base × facteur de durée × difficulté économique, arrondi à 10. Facteurs 1–28 jours : 0,58 ; 0,82 ; 1,00 ; 1,15 ; 1,29 ; 1,41 ; 1,53 ; 1,63 ; 1,73 ; 1,83 ; 1,91 ; 2,00 ; 2,08 ; 2,16 ; 2,24 ; 2,31 ; 2,38 ; 2,45 ; 2,52 ; 2,58 ; 2,65 ; 2,71 ; 2,77 ; 2,83 ; 2,89 ; 2,94 ; 3,00 ; 3,06." />
+        <e k="ui_pmHelpTopic09Title" v="Spécialisations" />
+        <e k="ui_pmHelpTopic09Body" v="Huit catégories : Travail du sol, Semis, Fertilisation, Protection des cultures, Récolte, Transport, Entretien des machines et Économie des ressources. Facteur = 1 + (expérience−50)/250 + (fiabilité−50)/300, limité à 0,75–1,30. Seuils : 240, 420, 600, 780 minutes puis +180. Les spécialisations apprises restent acquises. Deux bonus actifs maximum : principal +12 expérience effective et +5 % salaire de base, secondaire +6 et +3 %. Les deux emplacements peuvent être inactifs. Activation d’une spécialisation apprise inactive : une fois par employé et année agricole mars–février ; désactiver ne consomme pas ce droit." />
+        <e k="ui_pmHelpTopic10Title" v="Formation" />
+        <e k="ui_pmHelpTopic10Body" v="Début uniquement le premier jour du mois ; à un jour/mois jusqu’à 12:00 inclus. Une formation par employé et année agricole mars–février. Employé indisponible jusqu’à la fin du mois, progression créditée à la fin. Offres parfois absentes, prix mensuel ±20 %. Coût = salaire mensuel × facteur × modificateur. Facteurs : Travail du sol 75 %, Semis 90 %, Fertilisation 90 %, Protection 100 %, Récolte 110 %, Transport 65 %, Entretien 120 %, Économie 120 %. L’apprentissage n’est pas limité à deux ; seuls les bonus actifs le sont." />
+        <e k="ui_pmHelpTopic11Title" v="Licenciement, démission et retraite" />
+        <e k="ui_pmHelpTopic11Body" v="Licenciement confirmé. À 1 jour/mois : jour 1 avant 12:00 ; sinon fin de plafond(jours/mois ÷ 2). Après l’échéance : un mois supplémentaire. Effets immédiats : loyauté −40, fiabilité −25. Employé normalement utilisable jusqu’à la fin effective. Chaque licenciement supplémentaire du mois : −4 réputation. Démission mensuelle à loyauté 0–14 ; demande refusée +5 points possibles, effet fin de mois, réputation −10. Retraite contrôlée dès 55 ans jusqu’à 100 % à 70 ans, fin de contrat au mois." />
+        <e k="ui_pmHelpTopic12Title" v="Statistiques et chronique" />
+        <e k="ui_pmHelpTopic12Body" v="La chronique enregistre recrutement, missions, expérience, fiabilité, loyauté, maladie, spécialisation, formation, salaire, transport, licenciement, démission et retraite. Le profil affiche missions terminées, temps total et salaires cumulés. La vue d’ensemble additionne recrutements, licenciements, démissions et retraites de l’exploitation. Les données jamais stockées par une ancienne version ne peuvent pas toujours être reconstruites." />
+        <e k="ui_pmHelpTopic13Title" v="Paramètres" />
+        <e k="ui_pmHelpTopic13Body" v="Paramètres par sauvegarde. Performance : expérience, vitesse, usure, consommables, carburant et fiabilité. Personnel : effets, loyauté et nuit. Économie : effets économiques, salaires individuels et base mensuelle 100–100 000 par pas de 10. Désactiver un effet ne réécrit pas rétroactivement les valeurs enregistrées. Les touches sont modifiables dans les paramètres du jeu." />
+        <e k="ui_pmHelpTopic14Title" v="Multijoueur et sauvegardes" />
+        <e k="ui_pmHelpTopic14Body" v="Personnel, candidats, affectations, salaires, formations, paramètres et chroniques sont séparés par exploitation. Le serveur décide ; seuls les responsables autorisés modifient leur ferme. Données dans helperPersonnel.xml, synchronisées et restaurées autant que possible. La version 1.1.4.0 stocke les spécialisations apprises et la dernière année d’activation. Les anciennes sauvegardes considèrent automatiquement les spécialisations actives comme apprises." />
     </elements>
 </l10n>

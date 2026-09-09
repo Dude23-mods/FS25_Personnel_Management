@@ -261,6 +261,8 @@ HelperPersonnelManager.SPECIALIZATION_SECONDARY_WAGE_MULTIPLIER = 1.03
 
 HelperPersonnelManager.SPECIALIZATION_PRIMARY_LEARN_MINUTES = 240
 HelperPersonnelManager.SPECIALIZATION_SECONDARY_LEARN_MINUTES = 420
+HelperPersonnelManager.SPECIALIZATION_LEARN_BASE_MINUTES = 240
+HelperPersonnelManager.SPECIALIZATION_LEARN_INCREMENT_MINUTES = 180
 HelperPersonnelManager.SPECIALIZATION_MIN_PRACTICE_JOB_MINUTES = 3
 HelperPersonnelManager.SPECIALIZATION_LEARNING_MIN_FACTOR = 0.75
 HelperPersonnelManager.SPECIALIZATION_LEARNING_MAX_FACTOR = 1.30
@@ -557,6 +559,9 @@ HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.wor
 HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.workers.worker(?)#experienceProgressMinutes", "Stored helper work minutes toward the next experience point", 0)
 HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.workers.worker(?)#specializationPrimary", "Primary worker specialization", "")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.workers.worker(?)#specializationSecondary", "Secondary worker specialization", "")
+HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.workers.worker(?).learnedSpecialization(?)#key", "Learned worker specialization", "")
+HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.workers.worker(?)#specializationActivationYear", "Last year in which a specialization was activated", 0)
+HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.workers.worker(?)#specializationActivationLastKey", "Last activated worker specialization", "")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.workers.worker(?)#specializationProgressKey", "Specialization currently being learned", "")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.workers.worker(?)#specializationProgressMinutes", "Minutes toward next specialization", 0)
 HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.workers.worker(?)#trainingLastPeriod", "Last period with a training course", 0)
@@ -592,6 +597,7 @@ HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, "helperPersonnel.a
 HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.applicants.applicant(?)#monthsAvailable", "Applicant market age in months")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.applicants.applicant(?)#specializationPrimary", "Primary applicant specialization", "")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.applicants.applicant(?)#specializationSecondary", "Secondary applicant specialization", "")
+HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.applicants.applicant(?).learnedSpecialization(?)#key", "Learned applicant specialization", "")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.activeJobs.job(?)#workerId", "Active helper personnel worker id")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.activeJobs.job(?)#vehicleKey", "Active helper personnel vehicle key")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.activeJobs.job(?)#vehicleName", "Active helper personnel vehicle name")
@@ -1201,13 +1207,74 @@ function HelperPersonnelManager:getDirectPersonSpecializationExperienceBonus(per
     return 0
 end
 
-function HelperPersonnelManager:getSpecializationRequiredMinutes(person)
-    local primary = type(person) == "table" and self:normalizeSpecializationKey(person.specializationPrimary) or nil
-    if primary == nil then
-        return HelperPersonnelManager.SPECIALIZATION_PRIMARY_LEARN_MINUTES or 240
+function HelperPersonnelManager:getLearnedSpecializationTable(person)
+    if type(person) ~= "table" then
+        return {}
     end
 
-    return HelperPersonnelManager.SPECIALIZATION_SECONDARY_LEARN_MINUTES or 420
+    if type(person.learnedSpecializations) ~= "table" then
+        person.learnedSpecializations = {}
+    end
+
+    return person.learnedSpecializations
+end
+
+function HelperPersonnelManager:workerHasLearnedSpecialization(worker, specializationKey)
+    specializationKey = self:normalizeSpecializationKey(specializationKey)
+    if type(worker) ~= "table" or specializationKey == nil then
+        return false
+    end
+
+    if self:workerHasSpecialization(worker, specializationKey) then
+        return true
+    end
+
+    return type(worker.learnedSpecializations) == "table" and worker.learnedSpecializations[specializationKey] == true
+end
+
+function HelperPersonnelManager:normalizeLearnedSpecializations(person)
+    if type(person) ~= "table" then
+        return {}
+    end
+
+    local normalized = {}
+    if type(person.learnedSpecializations) == "table" then
+        for key, value in pairs(person.learnedSpecializations) do
+            local specializationKey = self:normalizeSpecializationKey(key)
+            if specializationKey ~= nil and value == true then
+                normalized[specializationKey] = true
+            end
+        end
+    end
+
+    local primary = self:normalizeSpecializationKey(person.specializationPrimary)
+    local secondary = self:normalizeSpecializationKey(person.specializationSecondary)
+    if primary ~= nil then
+        normalized[primary] = true
+    end
+    if secondary ~= nil then
+        normalized[secondary] = true
+    end
+
+    person.learnedSpecializations = normalized
+    return normalized
+end
+
+function HelperPersonnelManager:getLearnedSpecializationCount(person)
+    local learned = self:normalizeLearnedSpecializations(person)
+    local count = 0
+    for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
+        if learned[key] == true then
+            count = count + 1
+        end
+    end
+    return count
+end
+
+function HelperPersonnelManager:getSpecializationRequiredMinutes(person)
+    local learnedCount = self:getLearnedSpecializationCount(person)
+    return (HelperPersonnelManager.SPECIALIZATION_LEARN_BASE_MINUTES or 240)
+        + learnedCount * (HelperPersonnelManager.SPECIALIZATION_LEARN_INCREMENT_MINUTES or 180)
 end
 
 function HelperPersonnelManager:getSpecializationProgressTable(person)
@@ -1262,7 +1329,7 @@ function HelperPersonnelManager:getBestSpecializationProgress(person)
     for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
         local specializationKey = self:normalizeSpecializationKey(key)
         local minutes = self:getSpecializationProgressMinutes(person, specializationKey)
-        if specializationKey ~= nil and minutes > 0 and not self:workerHasSpecialization(person, specializationKey) then
+        if specializationKey ~= nil and minutes > 0 and not self:workerHasLearnedSpecialization(person, specializationKey) then
             local isTask = self:isTaskSpecializationKey(specializationKey)
             if bestKey == nil or minutes > bestMinutes or (minutes == bestMinutes and isTask and not bestIsTask) then
                 bestKey = specializationKey
@@ -1295,7 +1362,7 @@ function HelperPersonnelManager:normalizeSpecializationProgresses(person)
         for key, value in pairs(existing) do
             local specializationKey = self:normalizeSpecializationKey(key)
             local minutes = math.max(0, math.floor((tonumber(value) or 0) + 0.5))
-            if specializationKey ~= nil and minutes > 0 and not self:workerHasSpecialization(person, specializationKey) then
+            if specializationKey ~= nil and minutes > 0 and not self:workerHasLearnedSpecialization(person, specializationKey) then
                 normalized[specializationKey] = math.max(normalized[specializationKey] or 0, minutes)
             end
         end
@@ -1303,7 +1370,7 @@ function HelperPersonnelManager:normalizeSpecializationProgresses(person)
 
     local legacyKey = self:normalizeSpecializationKey(person.specializationProgressKey)
     local legacyMinutes = math.max(0, math.floor((tonumber(person.specializationProgressMinutes) or 0) + 0.5))
-    if legacyKey ~= nil and legacyMinutes > 0 and not self:workerHasSpecialization(person, legacyKey) then
+    if legacyKey ~= nil and legacyMinutes > 0 and not self:workerHasLearnedSpecialization(person, legacyKey) then
         normalized[legacyKey] = math.max(normalized[legacyKey] or 0, legacyMinutes)
     end
 
@@ -1324,7 +1391,7 @@ function HelperPersonnelManager:copySpecializationProgresses(person)
     for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
         local specializationKey = self:normalizeSpecializationKey(key)
         local minutes = self:getSpecializationProgressMinutes(person, specializationKey)
-        if specializationKey ~= nil and minutes > 0 and not self:workerHasSpecialization(person, specializationKey) then
+        if specializationKey ~= nil and minutes > 0 and not self:workerHasLearnedSpecialization(person, specializationKey) then
             result[specializationKey] = minutes
         end
     end
@@ -1378,6 +1445,54 @@ function HelperPersonnelManager:writeSpecializationProgressesToXML(xmlFile, base
     local bestKey, bestMinutes = self:getBestSpecializationProgress(person)
     person.specializationProgressKey = bestKey
     person.specializationProgressMinutes = bestMinutes or 0
+end
+
+function HelperPersonnelManager:readLearnedSpecializationsFromXML(xmlFile, basePath)
+    local learned = {}
+    if xmlFile == nil or basePath == nil then
+        return learned
+    end
+
+    local index = 0
+    while true do
+        local learnedPath = string.format("%s.learnedSpecialization(%d)", basePath, index)
+        if not xmlFile:hasProperty(learnedPath) then
+            break
+        end
+        local specializationKey = self:normalizeSpecializationKey(xmlFile:getString(learnedPath .. "#key"))
+        if specializationKey ~= nil then
+            learned[specializationKey] = true
+        end
+        index = index + 1
+    end
+    return learned
+end
+
+function HelperPersonnelManager:writeLearnedSpecializationsToXML(xmlFile, basePath, person)
+    if xmlFile == nil or basePath == nil or type(person) ~= "table" then
+        return
+    end
+
+    local learned = self:normalizeLearnedSpecializations(person)
+    local index = 0
+    for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
+        if learned[key] == true then
+            local learnedPath = string.format("%s.learnedSpecialization(%d)", basePath, index)
+            xmlFile:setString(learnedPath .. "#key", key)
+            index = index + 1
+        end
+    end
+end
+
+function HelperPersonnelManager:copyLearnedSpecializations(person)
+    local copy = {}
+    local learned = self:normalizeLearnedSpecializations(person)
+    for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
+        if learned[key] == true then
+            copy[key] = true
+        end
+    end
+    return copy
 end
 
 function HelperPersonnelManager:getPersonSpecializationText(person)
@@ -1576,17 +1691,13 @@ function HelperPersonnelManager:getWorkerSpecializationPracticeKey(worker)
 
     local primary = self:normalizeSpecializationKey(worker.specializationPrimary)
     local secondary = self:normalizeSpecializationKey(worker.specializationSecondary)
-    if primary ~= nil and secondary ~= nil then
-        return nil
-    end
-
     local practice = worker.currentJobSpecializationPractice
     if type(practice) ~= "table" then
         return self:normalizeSpecializationKey(worker.currentJobSpecializationKey)
     end
 
     local activeProgressKey = self:normalizeSpecializationKey(worker.specializationProgressKey)
-    if activeProgressKey ~= nil and not self:workerHasSpecialization(worker, activeProgressKey) and tonumber(practice[activeProgressKey]) ~= nil then
+    if activeProgressKey ~= nil and not self:workerHasLearnedSpecialization(worker, activeProgressKey) and tonumber(practice[activeProgressKey]) ~= nil then
         return activeProgressKey
     end
 
@@ -1598,7 +1709,7 @@ function HelperPersonnelManager:getWorkerSpecializationPracticeKey(worker)
     for key, value in pairs(practice) do
         local specializationKey = self:normalizeSpecializationKey(key)
         local numericValue = tonumber(value) or 0
-        if specializationKey ~= nil and numericValue > 0 and not self:workerHasSpecialization(worker, specializationKey) then
+        if specializationKey ~= nil and numericValue > 0 and not self:workerHasLearnedSpecialization(worker, specializationKey) then
             if self:isGeneralSpecializationKey(specializationKey) then
                 if numericValue > bestGeneralWeight then
                     bestGeneralKey = specializationKey
@@ -1660,13 +1771,7 @@ function HelperPersonnelManager:addWorkerSpecializationProgress(worker, speciali
         return false
     end
 
-    if self:workerHasSpecialization(worker, specializationKey) then
-        return false
-    end
-
-    local primary = self:normalizeSpecializationKey(worker.specializationPrimary)
-    local secondary = self:normalizeSpecializationKey(worker.specializationSecondary)
-    if primary ~= nil and secondary ~= nil then
+    if self:workerHasLearnedSpecialization(worker, specializationKey) then
         return false
     end
 
@@ -1684,18 +1789,12 @@ local function hpLayer_HelperPersonnelManager_applyWorkerSpecializationIfReady_1
     preferredKey = self:normalizeSpecializationKey(preferredKey)
     local primary = self:normalizeSpecializationKey(worker.specializationPrimary)
     local secondary = self:normalizeSpecializationKey(worker.specializationSecondary)
-    if primary ~= nil and secondary ~= nil then
-        worker.specializationProgresses = {}
-        worker.specializationProgressKey = nil
-        worker.specializationProgressMinutes = 0
-        return nil
-    end
 
     local requiredMinutes = self:getSpecializationRequiredMinutes(worker)
     local learnedKey = nil
     local learnedMinutes = 0
 
-    if preferredKey ~= nil and not self:workerHasSpecialization(worker, preferredKey) then
+    if preferredKey ~= nil and not self:workerHasLearnedSpecialization(worker, preferredKey) then
         local preferredMinutes = self:getSpecializationProgressMinutes(worker, preferredKey)
         if preferredMinutes >= requiredMinutes then
             learnedKey = preferredKey
@@ -1708,7 +1807,7 @@ local function hpLayer_HelperPersonnelManager_applyWorkerSpecializationIfReady_1
         for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
             local specializationKey = self:normalizeSpecializationKey(key)
             local minutes = self:getSpecializationProgressMinutes(worker, specializationKey)
-            if specializationKey ~= nil and minutes >= requiredMinutes and not self:workerHasSpecialization(worker, specializationKey) then
+            if specializationKey ~= nil and minutes >= requiredMinutes and not self:workerHasLearnedSpecialization(worker, specializationKey) then
                 local isTask = self:isTaskSpecializationKey(specializationKey)
                 if learnedKey == nil or minutes > learnedMinutes or (minutes == learnedMinutes and isTask and not learnedIsTask) then
                     learnedKey = specializationKey
@@ -1724,14 +1823,14 @@ local function hpLayer_HelperPersonnelManager_applyWorkerSpecializationIfReady_1
         return nil
     end
 
-    if primary == nil then
-        worker.specializationPrimary = learnedKey
-    else
-        worker.specializationSecondary = learnedKey
-    end
-
-    if type(worker.specializationProgresses) == "table" then
-        worker.specializationProgresses[learnedKey] = nil
+    local learnedBefore = self:getLearnedSpecializationCount(worker)
+    self:getLearnedSpecializationTable(worker)[learnedKey] = true
+    if learnedBefore < 2 then
+        if primary == nil then
+            worker.specializationPrimary = learnedKey
+        elseif secondary == nil then
+            worker.specializationSecondary = learnedKey
+        end
     end
     self:normalizeSpecializationProgresses(worker)
 
@@ -1770,7 +1869,7 @@ function HelperPersonnelManager:recordWorkerSpecializationPracticeFromCurrentJob
         for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
             local specializationKey = self:normalizeSpecializationKey(key)
             local weight = specializationKey ~= nil and tonumber(practice[specializationKey]) or nil
-            if specializationKey ~= nil and weight ~= nil and weight > 0 and not self:workerHasSpecialization(worker, specializationKey) then
+            if specializationKey ~= nil and weight ~= nil and weight > 0 and not self:workerHasLearnedSpecialization(worker, specializationKey) then
                 local learningMinutes = self:getWorkerSpecializationLearningMinutes(worker, specializationKey, workMinutes)
                 local weightFactor = math.min(1, weight / 2)
                 if self:isGeneralSpecializationKey(specializationKey) and not hasTaskPractice then
@@ -2097,6 +2196,93 @@ function HelperPersonnelManager:trainWorkerForFarm(workerId, farmId, specializat
     return self:trainWorker(workerId, specializationKey)
 end
 
+function HelperPersonnelManager:canActivateWorkerSpecializationThisYear(worker, period, year)
+    if type(worker) ~= "table" then
+        return false
+    end
+    period, year = self:getApplicantPeriodInfo(period, year)
+    if year == nil or year <= 0 then
+        return true
+    end
+    return (tonumber(worker.specializationActivationYear) or 0) ~= year
+end
+
+function HelperPersonnelManager:deactivateWorkerSpecialization(workerId, specializationKey)
+    local worker = self:getWorkerById(workerId)
+    specializationKey = self:normalizeSpecializationKey(specializationKey)
+    if worker == nil or specializationKey == nil or worker.busy == true or self:isWorkerSick(worker) or self:isWorkerInTraining(worker) then
+        return false
+    end
+
+    local changed = false
+    if self:normalizeSpecializationKey(worker.specializationPrimary) == specializationKey then
+        worker.specializationPrimary = nil
+        changed = true
+    elseif self:normalizeSpecializationKey(worker.specializationSecondary) == specializationKey then
+        worker.specializationSecondary = nil
+        changed = true
+    end
+    if not changed then
+        return false
+    end
+
+    self:getLearnedSpecializationTable(worker)[specializationKey] = true
+    local text = string.format(self:getLocalizedText("ui_specializationDeactivatedNotice", "%s lässt die Spezialisierung %s ruhen."), self:getFullName(worker), self:getSpecializationDisplayName(specializationKey))
+    self.lastActionText = text
+    self:addActionHistoryEntry(text)
+    self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_DEACTIVATED or "specializationDeactivated", {category = specializationKey, text = text})
+    self.changeCounter = (self.changeCounter or 0) + 1
+    self:showIngameNotification(text, self:getInfoNotificationType())
+    return true
+end
+
+function HelperPersonnelManager:activateWorkerSpecialization(workerId, specializationKey)
+    local worker = self:getWorkerById(workerId)
+    specializationKey = self:normalizeSpecializationKey(specializationKey)
+    if worker == nil or specializationKey == nil or worker.busy == true or self:isWorkerSick(worker) or self:isWorkerInTraining(worker) then
+        return false
+    end
+    if not self:workerHasLearnedSpecialization(worker, specializationKey) or self:workerHasSpecialization(worker, specializationKey) then
+        return false
+    end
+    if self:normalizeSpecializationKey(worker.specializationPrimary) ~= nil and self:normalizeSpecializationKey(worker.specializationSecondary) ~= nil then
+        return false
+    end
+
+    local period, year = self:getApplicantPeriodInfo()
+    if not self:canActivateWorkerSpecializationThisYear(worker, period, year) then
+        return false
+    end
+
+    if self:normalizeSpecializationKey(worker.specializationPrimary) == nil then
+        worker.specializationPrimary = specializationKey
+    else
+        worker.specializationSecondary = specializationKey
+    end
+    worker.specializationActivationYear = year or 0
+    worker.specializationActivationLastKey = specializationKey
+
+    local text = string.format(self:getLocalizedText("ui_specializationActivatedNotice", "%s nutzt wieder die Spezialisierung %s."), self:getFullName(worker), self:getSpecializationDisplayName(specializationKey))
+    self.lastActionText = text
+    self:addActionHistoryEntry(text, period, year)
+    self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_ACTIVATED or "specializationActivated", {category = specializationKey, text = text})
+    self.changeCounter = (self.changeCounter or 0) + 1
+    self:showIngameNotification(text, self:getInfoNotificationType())
+    return true
+end
+
+function HelperPersonnelManager:deactivateWorkerSpecializationForFarm(workerId, farmId, specializationKey)
+    return self:executeWithFarmContext(farmId, function()
+        return self:deactivateWorkerSpecialization(workerId, specializationKey)
+    end, true)
+end
+
+function HelperPersonnelManager:activateWorkerSpecializationForFarm(workerId, farmId, specializationKey)
+    return self:executeWithFarmContext(farmId, function()
+        return self:activateWorkerSpecialization(workerId, specializationKey)
+    end, true)
+end
+
 
 
 
@@ -2264,7 +2450,10 @@ local function hpLayer_HelperPersonnelManager_normalizePersonRuntimeData_1(self,
     if person.specializationSecondary == person.specializationPrimary then
         person.specializationSecondary = nil
     end
+    self:normalizeLearnedSpecializations(person)
     self:normalizeSpecializationProgresses(person)
+    person.specializationActivationYear = math.max(0, math.floor((tonumber(person.specializationActivationYear) or 0) + 0.5))
+    person.specializationActivationLastKey = self:normalizeSpecializationKey(person.specializationActivationLastKey)
     self:getCurrentMonthlyWage(person)
 
     local portraitCount = HelperPersonnelManager.PORTRAIT_COUNT or 1
@@ -2750,6 +2939,9 @@ local function hpLayer_HelperPersonnelManager_loadFromSavegame_1(self)
             specializationProgressKey = xmlFile:getString(key .. "#specializationProgressKey"),
             specializationProgressMinutes = xmlFile:getInt(key .. "#specializationProgressMinutes", 0) or 0,
             specializationProgresses = self:readSpecializationProgressesFromXML(xmlFile, key),
+            learnedSpecializations = self:readLearnedSpecializationsFromXML(xmlFile, key),
+            specializationActivationYear = xmlFile:getInt(key .. "#specializationActivationYear", 0) or 0,
+            specializationActivationLastKey = xmlFile:getString(key .. "#specializationActivationLastKey"),
             trainingLastPeriod = xmlFile:getInt(key .. "#trainingLastPeriod", 0) or 0,
             trainingLastYear = xmlFile:getInt(key .. "#trainingLastYear", 0) or 0,
             trainingLastSpecialization = xmlFile:getString(key .. "#trainingLastSpecialization"),
@@ -2803,6 +2995,7 @@ local function hpLayer_HelperPersonnelManager_loadFromSavegame_1(self)
             monthsAvailable = xmlFile:getInt(key .. "#monthsAvailable", 0),
             specializationPrimary = xmlFile:getString(key .. "#specializationPrimary"),
             specializationSecondary = xmlFile:getString(key .. "#specializationSecondary"),
+            learnedSpecializations = self:readLearnedSpecializationsFromXML(xmlFile, key),
             busy = false,
             vehicleName = "",
             jobsCompleted = 0,
@@ -5525,6 +5718,9 @@ local function hpLayer_HelperPersonnelManager_copyPersonForNetwork_1(self, perso
         specializationProgressKey = person.specializationProgressKey,
         specializationProgressMinutes = person.specializationProgressMinutes,
         specializationProgresses = self:copySpecializationProgresses(person),
+        learnedSpecializations = self:copyLearnedSpecializations(person),
+        specializationActivationYear = person.specializationActivationYear,
+        specializationActivationLastKey = person.specializationActivationLastKey,
         trainingLastPeriod = person.trainingLastPeriod,
         trainingLastYear = person.trainingLastYear,
         trainingLastSpecialization = person.trainingLastSpecialization,
@@ -7349,6 +7545,9 @@ local function hpLayer_HelperPersonnelManager_readPersonFromXML_1(self, xmlFile,
         specializationProgressKey = xmlFile:getString(key .. "#specializationProgressKey"),
         specializationProgressMinutes = xmlFile:getInt(key .. "#specializationProgressMinutes", 0),
         specializationProgresses = self:readSpecializationProgressesFromXML(xmlFile, key),
+        learnedSpecializations = self:readLearnedSpecializationsFromXML(xmlFile, key),
+        specializationActivationYear = xmlFile:getInt(key .. "#specializationActivationYear", 0),
+        specializationActivationLastKey = xmlFile:getString(key .. "#specializationActivationLastKey"),
         trainingLastPeriod = xmlFile:getInt(key .. "#trainingLastPeriod", 0),
         trainingLastYear = xmlFile:getInt(key .. "#trainingLastYear", 0),
         trainingLastSpecialization = xmlFile:getString(key .. "#trainingLastSpecialization"),
@@ -7447,6 +7646,11 @@ local function hpLayer_HelperPersonnelManager_writePersonToXML_1(self, xmlFile, 
     end
     if person.specializationSecondary ~= nil then
         xmlFile:setString(key .. "#specializationSecondary", person.specializationSecondary)
+    end
+    self:writeLearnedSpecializationsToXML(xmlFile, key, person)
+    xmlFile:setInt(key .. "#specializationActivationYear", person.specializationActivationYear or 0)
+    if person.specializationActivationLastKey ~= nil then
+        xmlFile:setString(key .. "#specializationActivationLastKey", person.specializationActivationLastKey)
     end
     self:writeSpecializationProgressesToXML(xmlFile, key, person)
     if person.specializationProgressKey ~= nil then
@@ -8948,7 +9152,7 @@ function HelperPersonnelManager:assignRandomApplicantSpecializations(person)
             excluded[specializationKey] = true
             local percent = 10 + math.floor((person.experience or 0) * 0.55 + 0.5) + (tonumber(config.progressBonus) or 0) + math.random(-10, 15)
             percent = math.max(8, math.min(85, percent))
-            local requiredMinutes = person.specializationPrimary == nil and (HelperPersonnelManager.SPECIALIZATION_PRIMARY_LEARN_MINUTES or 240) or (HelperPersonnelManager.SPECIALIZATION_SECONDARY_LEARN_MINUTES or 420)
+            local requiredMinutes = self:getSpecializationRequiredMinutes(person)
             person.specializationProgresses[specializationKey] = math.max(1, math.floor((requiredMinutes * percent / 100) + 0.5))
         end
     end
@@ -8956,11 +9160,27 @@ function HelperPersonnelManager:assignRandomApplicantSpecializations(person)
     self:normalizeSpecializationProgresses(person)
 end
 
+function HelperPersonnelManager:getRandomApplicantAge()
+    local roll = math.random()
+    local minimumAge = HelperPersonnelManager.MIN_APPLICANT_AGE or 18
+    local maximumAge = HelperPersonnelManager.MAX_APPLICANT_AGE or 65
+    if roll < 0.30 then
+        return math.random(math.max(minimumAge, 18), math.min(maximumAge, 29))
+    elseif roll < 0.60 then
+        return math.random(math.max(minimumAge, 30), math.min(maximumAge, 39))
+    elseif roll < 0.82 then
+        return math.random(math.max(minimumAge, 40), math.min(maximumAge, 49))
+    elseif roll < 0.95 then
+        return math.random(math.max(minimumAge, 50), math.min(maximumAge, 59))
+    end
+    return math.random(math.max(minimumAge, 60), math.min(maximumAge, 65))
+end
+
 function HelperPersonnelManager:createRandomApplicant(preferredGender)
     local _, reliabilityBonus, wageMultiplier = self:getApplicantReputationModifiers()
     local reputation = self:getEmployerReputation()
     local loyaltyBonus = math.floor(((reputation - 50) / 5) + 0.5)
-    local age = math.random(HelperPersonnelManager.MIN_APPLICANT_AGE or 18, HelperPersonnelManager.MAX_APPLICANT_AGE or 65)
+    local age = self:getRandomApplicantAge()
     local backgroundKey = self:getRandomBackgroundKey(age)
     local avatarIndex, gender = self:getNextApplicantAppearance(preferredGender)
 
@@ -9368,6 +9588,10 @@ if HelperPersonnelManager.xmlSchema ~= nil then
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.applicants.applicant(?).specializationProgress(?)#minutes", "Bewerber-Spezialisierungsminuten")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.farms.farm(?).applicants.applicant(?).specializationProgress(?)#key", "Bewerber-Spezialisierungsfortschritt")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.farms.farm(?).applicants.applicant(?).specializationProgress(?)#minutes", "Bewerber-Spezialisierungsminuten")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.farms.farm(?).workers.worker(?).learnedSpecialization(?)#key", "Gelernte Mitarbeiterspezialisierung")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.farms.farm(?).workers.worker(?)#specializationActivationYear", "Letztes Aktivierungsjahr einer Spezialisierung")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.farms.farm(?).workers.worker(?)#specializationActivationLastKey", "Zuletzt aktivierte Mitarbeiterspezialisierung")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.farms.farm(?).applicants.applicant(?).learnedSpecialization(?)#key", "Gelernte Bewerberspezialisierung")
 end
 
 HelperPersonnelManager.TRAINING_MONTHLY_MODIFIER_MIN = -20
@@ -9626,6 +9850,8 @@ HelperPersonnelManager.CHRONICLE_EVENT_JOB_STARTED = "jobStarted"
 HelperPersonnelManager.CHRONICLE_EVENT_JOB_COMPLETED = "jobCompleted"
 HelperPersonnelManager.CHRONICLE_EVENT_JOB_ABORTED = "jobAborted"
 HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_ACQUIRED = "specializationAcquired"
+HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_ACTIVATED = "specializationActivated"
+HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_DEACTIVATED = "specializationDeactivated"
 HelperPersonnelManager.CHRONICLE_EVENT_TRAINING_STARTED = "trainingStarted"
 HelperPersonnelManager.CHRONICLE_EVENT_TRAINING_COMPLETED = "trainingCompleted"
 HelperPersonnelManager.CHRONICLE_EVENT_SICKNESS = "sickness"

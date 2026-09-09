@@ -1467,10 +1467,37 @@ end
 
 if HelperPersonnelNetwork ~= nil then
     HelperPersonnelNetwork.ACTION_TRAIN_WORKER = HelperPersonnelNetwork.ACTION_TRAIN_WORKER or "trainWorker"
+    HelperPersonnelNetwork.ACTION_ACTIVATE_SPECIALIZATION = HelperPersonnelNetwork.ACTION_ACTIVATE_SPECIALIZATION or "activateSpecialization"
+    HelperPersonnelNetwork.ACTION_DEACTIVATE_SPECIALIZATION = HelperPersonnelNetwork.ACTION_DEACTIVATE_SPECIALIZATION or "deactivateSpecialization"
 end
 
 local HP_TRAIN_ORIGINAL_APP_REQUEST_TRAIN_WORKER = HelperPersonnelApp ~= nil and HelperPersonnelApp.requestTrainWorker or nil
 if HelperPersonnelApp ~= nil then
+    function HelperPersonnelApp:requestSpecializationState(workerId, specializationKey, active)
+        local farmId = self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1
+        local actionName = active == true and HelperPersonnelNetwork.ACTION_ACTIVATE_SPECIALIZATION or HelperPersonnelNetwork.ACTION_DEACTIVATE_SPECIALIZATION
+        local methodName = active == true and "activateWorkerSpecializationForFarm" or "deactivateWorkerSpecializationForFarm"
+
+        if self.isServerAuthority ~= nil and self:isServerAuthority() then
+            local method = self.manager ~= nil and self.manager[methodName] or nil
+            local changed = method ~= nil and method(self.manager, workerId, farmId, specializationKey) == true
+            if changed and self.syncNetworkStateToClients ~= nil then
+                self:syncNetworkStateToClients()
+            end
+            return changed
+        end
+
+        if self.isMultiplayerClient ~= nil and self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
+            local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
+            if connection ~= nil and connection.sendEvent ~= nil then
+                connection:sendEvent(HelperPersonnelNetworkActionEvent.new(actionName, workerId, nil, farmId, specializationKey))
+                return true
+            end
+        end
+
+        return false
+    end
+
     function HelperPersonnelApp:requestTrainWorker(workerId, specializationKey)
         local farmId = self.getCurrentFarmId ~= nil and self:getCurrentFarmId() or 1
 
@@ -1499,7 +1526,10 @@ if HelperPersonnelApp ~= nil then
 
     local HP_TRAIN_ORIGINAL_APP_PROCESS_NETWORK_ACTION = HelperPersonnelApp.processNetworkAction
     local function hpOverride_HelperPersonnelApp_processNetworkAction_4(self, actionName, targetId, connection, farmId, actionData)
-        if HelperPersonnelNetwork ~= nil and actionName == HelperPersonnelNetwork.ACTION_TRAIN_WORKER then
+        local isTrainingAction = HelperPersonnelNetwork ~= nil and actionName == HelperPersonnelNetwork.ACTION_TRAIN_WORKER
+        local isActivationAction = HelperPersonnelNetwork ~= nil and actionName == HelperPersonnelNetwork.ACTION_ACTIVATE_SPECIALIZATION
+        local isDeactivationAction = HelperPersonnelNetwork ~= nil and actionName == HelperPersonnelNetwork.ACTION_DEACTIVATE_SPECIALIZATION
+        if isTrainingAction or isActivationAction or isDeactivationAction then
             if self.isServerAuthority == nil or not self:isServerAuthority() or self.manager == nil then
                 return false
             end
@@ -1526,7 +1556,14 @@ if HelperPersonnelApp ~= nil then
                 return false
             end
 
-            local changed = self.manager.trainWorkerForFarm ~= nil and self.manager:trainWorkerForFarm(targetId, authorizedFarmId, actionData) == true
+            local changed = false
+            if isTrainingAction then
+                changed = self.manager.trainWorkerForFarm ~= nil and self.manager:trainWorkerForFarm(targetId, authorizedFarmId, actionData) == true
+            elseif isActivationAction then
+                changed = self.manager.activateWorkerSpecializationForFarm ~= nil and self.manager:activateWorkerSpecializationForFarm(targetId, authorizedFarmId, actionData) == true
+            else
+                changed = self.manager.deactivateWorkerSpecializationForFarm ~= nil and self.manager:deactivateWorkerSpecializationForFarm(targetId, authorizedFarmId, actionData) == true
+            end
             if changed then
                 if self.syncNetworkStateToClients ~= nil then
                     self:syncNetworkStateToClients()

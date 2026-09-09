@@ -83,7 +83,8 @@ function HelperPersonnelConfig:load()
         self.nightWorkLoyaltyEffectEnabled = xmlFile:getBool("helperPersonnelConfig.personnelEffects.loyalty.nightWork#enabled", true) == true
         self.economicEffectsEnabled = xmlFile:getBool("helperPersonnelConfig.economicEffects#enabled", true) == true
         self.individualWagesEnabled = xmlFile:getBool("helperPersonnelConfig.economicEffects.individualWages#enabled", true) == true
-        self.standardBaseMonthlyWage = xmlFile:getFloat("helperPersonnelConfig.economicEffects.standardWage#baseMonthlyWage", HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE)
+        local loadedStandardBaseMonthlyWage = xmlFile:getFloat("helperPersonnelConfig.economicEffects.standardWage#baseMonthlyWage", HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE)
+        self.standardBaseMonthlyWage = HelperPersonnelConfig.normalizeStandardBaseMonthlyWage(loadedStandardBaseMonthlyWage) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
         xmlFile:delete()
     end
 
@@ -181,7 +182,7 @@ end
 
 function HelperPersonnelConfig.normalizeStandardBaseMonthlyWage(value)
     local numericValue = tonumber(value)
-    if numericValue == nil then
+    if numericValue == nil or numericValue ~= numericValue or numericValue == math.huge or numericValue == -math.huge then
         return nil
     end
 

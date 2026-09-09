@@ -33,6 +33,8 @@ HelperPersonnelBootstrap = {}
 HelperPersonnelBootstrap.modName = g_currentModName
 HelperPersonnelBootstrap.modDir = g_currentModDirectory
 HelperPersonnelBootstrap.mission00Loaded = false
+HelperPersonnelBootstrap.menuHookInstalled = false
+HelperPersonnelBootstrap.guiHooksInstalled = false
 
 function HelperPersonnelBootstrap.install()
     if HelperPersonnelBootstrap.isInstalled then
@@ -59,13 +61,59 @@ function HelperPersonnelBootstrap.install()
     BaseMission.delete = Utils.appendedFunction(BaseMission.delete, HelperPersonnelBootstrap.onMissionDelete)
 
     if BaseMission ~= nil and BaseMission.mouseEvent ~= nil then
-        BaseMission.mouseEvent = Utils.appendedFunction(BaseMission.mouseEvent, HelperPersonnelBootstrap.onMouseEvent)
+        BaseMission.mouseEvent = Utils.overwrittenFunction(BaseMission.mouseEvent, HelperPersonnelBootstrap.onMouseEvent)
+    end
+
+    HelperPersonnelBootstrap.ensureMenuHook()
+    HelperPersonnelBootstrap.ensureGuiHooks()
+
+    if PlayerCamera ~= nil and PlayerCamera.updateRotation ~= nil then
+        PlayerCamera.updateRotation = Utils.overwrittenFunction(PlayerCamera.updateRotation, HelperPersonnelBootstrap.onPlayerCameraUpdateRotation)
+    end
+
+    if g_inputBinding ~= nil and g_inputBinding.setShowMouseCursor ~= nil then
+        g_inputBinding.setShowMouseCursor = Utils.overwrittenFunction(g_inputBinding.setShowMouseCursor, HelperPersonnelBootstrap.onSetShowMouseCursor)
     end
 
 
     if Mission00 ~= nil and Mission00.loadMission00Finished ~= nil then
         Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, HelperPersonnelBootstrap.onMissionLoaded)
     end
+end
+
+function HelperPersonnelBootstrap.ensureGuiHooks()
+    if HelperPersonnelBootstrap.guiHooksInstalled == true then
+        return true
+    end
+
+    if g_gui == nil or g_gui.showGui == nil or g_gui.changeScreen == nil then
+        return false
+    end
+
+    g_gui.showGui = Utils.overwrittenFunction(g_gui.showGui, HelperPersonnelBootstrap.onShowGui)
+    g_gui.changeScreen = Utils.overwrittenFunction(g_gui.changeScreen, HelperPersonnelBootstrap.onChangeScreen)
+    HelperPersonnelBootstrap.guiHooksInstalled = true
+    if Logging ~= nil and Logging.info ~= nil then
+        Logging.info("FS25_HelperPersonnel: Native GUI open guards installed=true.")
+    end
+    return true
+end
+
+function HelperPersonnelBootstrap.ensureMenuHook()
+    if HelperPersonnelBootstrap.menuHookInstalled == true then
+        return true
+    end
+
+    if GameInfoDisplayMobile == nil or GameInfoDisplayMobile.onOpenMenu == nil then
+        return false
+    end
+
+    GameInfoDisplayMobile.onOpenMenu = Utils.overwrittenFunction(GameInfoDisplayMobile.onOpenMenu, HelperPersonnelBootstrap.onOpenMenu)
+    HelperPersonnelBootstrap.menuHookInstalled = true
+    if Logging ~= nil and Logging.info ~= nil then
+        Logging.info("FS25_HelperPersonnel: GameInfoDisplayMobile onOpenMenu hook installed=true.")
+    end
+    return true
 end
 
 function HelperPersonnelBootstrap.isMissionReadyForApp()
@@ -97,6 +145,9 @@ function HelperPersonnelBootstrap.ensureAppLoaded()
     if g_currentMission == nil then
         return false
     end
+
+    HelperPersonnelBootstrap.ensureMenuHook()
+    HelperPersonnelBootstrap.ensureGuiHooks()
 
     if g_helperPersonnelApp ~= nil then
         return true
@@ -192,9 +243,106 @@ function HelperPersonnelBootstrap.onMissionDelete(mission)
     end
 end
 
-function HelperPersonnelBootstrap.onMouseEvent(mission, posX, posY, isDown, isUp, button)
-    if g_helperPersonnelApp ~= nil and g_helperPersonnelApp.mouseEvent ~= nil then
-        g_helperPersonnelApp:mouseEvent(posX, posY, isDown, isUp, button)
+function HelperPersonnelBootstrap.onMouseEvent(mission, superFunc, posX, posY, isDown, isUp, button)
+    local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
+    if selectionOverlay ~= nil and selectionOverlay.isVisible == true and g_helperPersonnelApp.mouseEvent ~= nil then
+        return g_helperPersonnelApp:mouseEvent(posX, posY, isDown, isUp, button)
+    end
+
+    if superFunc ~= nil then
+        return superFunc(mission, posX, posY, isDown, isUp, button)
+    end
+
+    return false
+end
+
+function HelperPersonnelBootstrap.onOpenMenu(display, superFunc, ...)
+    local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
+    if selectionOverlay ~= nil then
+        if selectionOverlay.isVisible == true then
+            selectionOverlay:beginCancelSuppression()
+            selectionOverlay:close(false)
+            return true
+        end
+        if selectionOverlay:isNativeMenuSuppressed() then
+            return true
+        end
+    end
+
+    if superFunc ~= nil then
+        return superFunc(display, ...)
+    end
+end
+
+function HelperPersonnelBootstrap.shouldSuppressNativeGuiOpen()
+    local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
+    if selectionOverlay == nil then
+        return false
+    end
+
+    if selectionOverlay.isVisible == true then
+        selectionOverlay:beginCancelSuppression()
+        selectionOverlay:close(false)
+        return true
+    end
+
+    return selectionOverlay:isNativeMenuSuppressed()
+end
+
+function HelperPersonnelBootstrap.finishSuppressedGuiOpen()
+    if g_inputBinding ~= nil and g_inputBinding.setShowMouseCursor ~= nil then
+        g_inputBinding:setShowMouseCursor(false)
+    end
+    if Logging ~= nil and Logging.info ~= nil then
+        Logging.info("FS25_HelperPersonnel: Suppressed native GUI opening after employee selection ESC.")
+    end
+end
+
+function HelperPersonnelBootstrap.onShowGui(gui, superFunc, ...)
+    if HelperPersonnelBootstrap.shouldSuppressNativeGuiOpen() then
+        HelperPersonnelBootstrap.finishSuppressedGuiOpen()
+        return false
+    end
+
+    if superFunc ~= nil then
+        return superFunc(gui, ...)
+    end
+end
+
+function HelperPersonnelBootstrap.onChangeScreen(gui, superFunc, ...)
+    if HelperPersonnelBootstrap.shouldSuppressNativeGuiOpen() then
+        HelperPersonnelBootstrap.finishSuppressedGuiOpen()
+        return false
+    end
+
+    if superFunc ~= nil then
+        return superFunc(gui, ...)
+    end
+end
+
+function HelperPersonnelBootstrap.onPlayerCameraUpdateRotation(camera, superFunc, dt)
+    local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
+    if selectionOverlay ~= nil and selectionOverlay.isVisible == true then
+        return
+    end
+
+    if superFunc ~= nil then
+        return superFunc(camera, dt)
+    end
+end
+
+function HelperPersonnelBootstrap.onSetShowMouseCursor(inputBinding, superFunc, showMouseCursor, ...)
+    local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
+    if selectionOverlay ~= nil then
+        if selectionOverlay.isVisible == true then
+            showMouseCursor = true
+        elseif selectionOverlay:isCursorReleasePending() then
+            showMouseCursor = false
+        end
+    end
+
+    if superFunc ~= nil then
+        return superFunc(inputBinding, showMouseCursor, ...)
     end
 end
 

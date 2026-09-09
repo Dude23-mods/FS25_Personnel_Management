@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="profissão de escritório" />
         <e k="ui_status_retirementPending" v="aposentadoria no fim do mês" />
         <e k="ui_retirementNotice" v="%s se aposentará no fim do mês." />
-        <e k="ui_pmTrainingIntro" v="As especializações melhoram o desempenho de um funcionário na respetiva categoria de aprendizagem. Uma formação dura até ao fim do mês atual e, durante esse período, o funcionário não está disponível para trabalhar. O progresso só é creditado após a conclusão da formação. Nem todas as categorias têm formação disponível todos os meses. As formações podem ser mais baratas ou mais caras do que o preço normal. Cada funcionário só pode realizar uma formação por ano agrícola, de março a fevereiro. Cada funcionário pode obter no máximo duas especializações. Seleciona a categoria de aprendizagem pretendida." />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Categoria de aprendizagem" />
         <e k="ui_pmTrainingProgressHeader" v="Progresso até a especialização" />
         <e k="ui_pmTrainingRunning" v="treinamento em andamento" />
         <e k="ui_pmTrainingSelectCategory" v="Selecione primeiro uma categoria de treinamento" />
         <e k="ui_pmTrainingConfirm" v="Iniciar treinamento para %s na categoria %s?" />
-        <e k="ui_training_line_no_capacity" v="Treinamento: duas especializações alcançadas · último: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Treinamento: com 1 dia/mês somente até as 12:00 · escolha uma categoria no menu de treinamento · último: %s" />
         <e k="ui_training_line_first_day_select" v="Treinamento: somente no primeiro dia · escolha uma categoria no menu de treinamento · último: %s" />
         <e k="ui_training_line_busy_select" v="Treinamento: impossível durante o trabalho · último: %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="bom mês de trabalho" />
         <e k="ui_waitingForServerData" v="A aguardar dados do servidor" />
         <e k="ui_pmMenuPageHelp" v="Ajuda" />
-        <e k="ui_pmHelpIntro" v="Guia detalhado no jogo para Personnel Management 1.1.3.0. O ReadMe.pdf incluído contém regras e cálculos adicionais." />
+        <e k="ui_pmHelpIntro" v="Guia detalhado no jogo para Personnel Management 1.1.4.0. O ReadMe.pdf incluído contém regras e cálculos adicionais." />
         <e k="ui_pmHelpSectionQuickStart" v="Início rápido e controles|Abra o menu com Ctrl + M. Troque de aba com os controles de página do menu. Use A/D ou Esquerda/Direita para mudar de pessoa, Espaço para confirmar, Esc para voltar, T para prioridades de transporte e G para pedidos salariais." />
         <e k="ui_pmHelpSectionPeople" v="Candidatos e funcionários|Um novo jogo começa com quatro candidatos; no máximo oito podem estar disponíveis. Contrate pelos perfis. Experiência, confiabilidade e lealdade vão de 0 a 100. Estado, salário, especializações, histórico e totais aparecem na página de funcionários." />
         <e k="ui_pmHelpSectionStats" v="Funcionários e atributos|Experiência afeta velocidade, desgaste e consumo; confiabilidade afeta interrupções, doença e abandono; lealdade afeta pedidos salariais e demissões voluntárias. A página também mostra estado, salário, especializações, estatísticas e histórico pessoal." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Saída, demissão e aposentadoria|Esses encerramentos nem sempre são imediatos e ocorrem na mudança do mês conforme os prazos. Um funcionário em serviço não pode ser demitido imediatamente. Mudanças futuras aparecem no estado e histórico." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive e Courseplay|Ative motoristas em Funcionários / Transporte e ordene a prioridade. O AutoDrive usa o primeiro disponível e bloqueia o início quando não há nenhum. Um início normal do Courseplay abre a seleção. Se o Courseplay iniciar automaticamente após o AutoDrive, o veículo mantém seu motorista sem nova seleção. Cada veículo deve manter seu próprio funcionário." />
         <e k="ui_pmHelpSectionMultiplayer" v="Multijogador e jogos salvos|Dados e configurações são separados por fazenda. O servidor valida alterações; só gerentes autorizados administram sua fazenda. Funcionários, atribuições ativas e configurações são sincronizados. Os dados ficam em helperPersonnel.xml dentro do jogo salvo." />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="Desenvolvimento profissional" />
+        <e k="ui_selectionNoSpecializationProgress" v="Ainda não há progresso de especialização" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="Início rápido e controles" />
+        <e k="ui_pmHelpTopic01Body" v="Abra o menu com Ctrl + M. Troque de aba com os controles de página do menu. Use A/D ou Esquerda/Direita para mudar de pessoa, Espaço para confirmar, Esc para voltar, T para prioridades de transporte e G para pedidos salariais." />
+        <e k="ui_pmHelpTopic02Title" v="Candidatos e funcionários" />
+        <e k="ui_pmHelpTopic02Body" v="Um novo jogo começa com quatro candidatos; no máximo oito podem estar disponíveis. Contrate pelos perfis. Experiência, confiabilidade e lealdade vão de 0 a 100. Estado, salário, especializações, histórico e totais aparecem na página de funcionários. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="Funcionários e atributos" />
+        <e k="ui_pmHelpTopic03Body" v="Experiência afeta velocidade, desgaste e consumo; confiabilidade afeta interrupções, doença e abandono; lealdade afeta pedidos salariais e demissões voluntárias. A página também mostra estado, salário, especializações, estatísticas e histórico pessoal." />
+        <e k="ui_pmHelpTopic04Title" v="Trabalho e desenvolvimento" />
+        <e k="ui_pmHelpTopic04Body" v="Ao iniciar um trabalho normal de ajudante de IA, a seleção de funcionário é aberta. Só funcionários disponíveis podem ser escolhidos e ninguém executa vários trabalhos ao mesmo tempo. O tempo de trabalho aumenta experiência e especializações. Experiência afeta velocidade, desgaste e consumo; confiabilidade afeta lentidão, doença e abandono; lealdade afeta conflitos salariais e demissões voluntárias. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="Experiência afeta velocidade, desgaste e consumo; confiabilidade afeta interrupções, doença e abandono; lealdade afeta pedidos salariais e demissões voluntárias. A página também mostra estado, salário, especializações, estatísticas e histórico pessoal." />
+        <e k="ui_pmHelpTopic06Title" v="Salários" />
+        <e k="ui_pmHelpTopic06Body" v="Os salários são cobrados na mudança do mês conforme dias por mês, dificuldade econômica e configurações do mod. Funcionários podem pedir aumento; o pedido deve ser aceito ou recusado no prazo e pode afetar a lealdade." />
+        <e k="ui_pmHelpTopic07Title" v="Treinamento" />
+        <e k="ui_pmHelpTopic07Body" v="O treinamento só começa no início do mês, custa dinheiro e bloqueia o funcionário até o fim do mês. A conclusão melhora a especialização escolhida. Ofertas e treinamentos anteriores aparecem nas áreas de Treinamento e Funcionários. As especializações aprendidas permanecem disponíveis. No máximo dois bónus ficam ativos e ambos os espaços podem ser desativados. Ativar uma especialização aprendida e inativa só é possível uma vez por funcionário e ano agrícola (março a fevereiro). Desativar não consome esse direito anual. Os limites são 240, 420, 600 e 780 minutos e depois aumentam 180 minutos." />
+        <e k="ui_pmHelpTopic08Title" v="Especialização" />
+        <e k="ui_pmHelpTopic08Body" v="As especializações aprendidas permanecem disponíveis. No máximo dois bónus ficam ativos e ambos os espaços podem ser desativados. Ativar uma especialização aprendida e inativa só é possível uma vez por funcionário e ano agrícola (março a fevereiro). Desativar não consome esse direito anual. Os limites são 240, 420, 600 e 780 minutos e depois aumentam 180 minutos." />
+        <e k="ui_pmHelpTopic09Title" v="Saída, demissão e aposentadoria" />
+        <e k="ui_pmHelpTopic09Body" v="Esses encerramentos nem sempre são imediatos e ocorrem na mudança do mês conforme os prazos. Um funcionário em serviço não pode ser demitido imediatamente. Mudanças futuras aparecem no estado e histórico." />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive e Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="Ative motoristas em Funcionários / Transporte e ordene a prioridade. O AutoDrive usa o primeiro disponível e bloqueia o início quando não há nenhum. Um início normal do Courseplay abre a seleção. Se o Courseplay iniciar automaticamente após o AutoDrive, o veículo mantém seu motorista sem nova seleção. Cada veículo deve manter seu próprio funcionário." />
+        <e k="ui_pmHelpTopic11Title" v="Multijogador e jogos salvos" />
+        <e k="ui_pmHelpTopic11Body" v="Dados e configurações são separados por fazenda. O servidor valida alterações; só gerentes autorizados administram sua fazenda. Funcionários, atribuições ativas e configurações são sincronizados. Os dados ficam em helperPersonnel.xml dentro do jogo salvo." />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="Dados e configurações são separados por fazenda. O servidor valida alterações; só gerentes autorizados administram sua fazenda. Funcionários, atribuições ativas e configurações são sincronizados. Os dados ficam em helperPersonnel.xml dentro do jogo salvo." />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="Abra o menu com Ctrl + M. Troque de aba com os controles de página do menu. Use A/D ou Esquerda/Direita para mudar de pessoa, Espaço para confirmar, Esc para voltar, T para prioridades de transporte e G para pedidos salariais. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

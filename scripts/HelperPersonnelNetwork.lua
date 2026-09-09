@@ -59,6 +59,33 @@ function HelperPersonnelNetwork.readSpecializationProgresses(streamId)
     return progresses
 end
 
+function HelperPersonnelNetwork.writeLearnedSpecializations(streamId, learnedSpecializations)
+    local keys = {}
+    for key, learned in pairs(type(learnedSpecializations) == "table" and learnedSpecializations or {}) do
+        if learned == true then
+            table.insert(keys, tostring(key))
+        end
+    end
+    table.sort(keys)
+    local count = math.min(#keys, 255)
+    streamWriteUInt8(streamId, count)
+    for index = 1, count do
+        HelperPersonnelNetwork.writeString(streamId, keys[index])
+    end
+end
+
+function HelperPersonnelNetwork.readLearnedSpecializations(streamId)
+    local learnedSpecializations = {}
+    local count = math.max(0, streamReadUInt8(streamId) or 0)
+    for _ = 1, count do
+        local key = HelperPersonnelNetwork.readString(streamId)
+        if key ~= nil then
+            learnedSpecializations[key] = true
+        end
+    end
+    return learnedSpecializations
+end
+
 
 
 function HelperPersonnelNetwork.writePerson(streamId, person)
@@ -130,6 +157,9 @@ function HelperPersonnelNetwork.writePerson(streamId, person)
     streamWriteInt32(streamId, tonumber(person.retirementNoticeYear) or 0)
     streamWriteBool(streamId, person.transportDriver == true)
     streamWriteInt32(streamId, person.transportDriver == true and (tonumber(person.transportPriority) or 0) or 0)
+    HelperPersonnelNetwork.writeLearnedSpecializations(streamId, person.learnedSpecializations)
+    streamWriteInt32(streamId, tonumber(person.specializationActivationYear) or 0)
+    HelperPersonnelNetwork.writeString(streamId, person.specializationActivationLastKey)
 end
 
 function HelperPersonnelNetwork.readPerson(streamId, version)
@@ -266,6 +296,22 @@ function HelperPersonnelNetwork.readPerson(streamId, version)
         person.transportPriority = 0
     end
 
+    if (version or 0) >= 19 then
+        person.learnedSpecializations = HelperPersonnelNetwork.readLearnedSpecializations(streamId)
+        person.specializationActivationYear = streamReadInt32(streamId) or 0
+        person.specializationActivationLastKey = HelperPersonnelNetwork.readString(streamId)
+    else
+        person.learnedSpecializations = {}
+        if person.specializationPrimary ~= nil then
+            person.learnedSpecializations[person.specializationPrimary] = true
+        end
+        if person.specializationSecondary ~= nil then
+            person.learnedSpecializations[person.specializationSecondary] = true
+        end
+        person.specializationActivationYear = 0
+        person.specializationActivationLastKey = nil
+    end
+
     return person
 end
 
@@ -299,7 +345,7 @@ function HelperPersonnelNetwork.readHistory(streamId)
 end
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
-HelperPersonnelNetwork.STATE_VERSION = 18
+HelperPersonnelNetwork.STATE_VERSION = 19
 HelperPersonnelNetwork.ACTION_SELECT_WORKER = "selectWorker"
 HelperPersonnelNetwork.MAX_NETWORK_FARMS = 64
 HelperPersonnelNetwork.MAX_NETWORK_PEOPLE = 1024

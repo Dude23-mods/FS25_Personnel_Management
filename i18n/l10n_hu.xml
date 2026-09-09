@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="irodai foglalkozás" />
         <e k="ui_status_retirementPending" v="a hónap végén nyugdíjba vonul" />
         <e k="ui_retirementNotice" v="%s a hónap végén nyugdíjba vonul." />
-        <e k="ui_pmTrainingIntro" v="A specializációk javítják a dolgozó teljesítményét az adott tanulási kategóriában. A képzés az aktuális hónap végéig tart, és ezalatt a dolgozó nem áll rendelkezésre munkára. A tanulási előrehaladás csak a képzés befejezése után kerül jóváírásra. Nem minden kategóriához érhető el képzés minden hónapban. A képzés a szokásos árnál olcsóbb vagy drágább is lehet. Egy dolgozó mezőgazdasági évenként, márciustól februárig csak egy képzésen vehet részt. Egy dolgozó legfeljebb két specializációt szerezhet. Válaszd ki a kívánt tanulási kategóriát." />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Fejlődési terület" />
         <e k="ui_pmTrainingProgressHeader" v="Haladás a szakosodás felé" />
         <e k="ui_pmTrainingRunning" v="képzés folyamatban" />
         <e k="ui_pmTrainingSelectCategory" v="Először válassz képzési területet" />
         <e k="ui_pmTrainingConfirm" v="Elindítod %s képzését a(z) %s területen?" />
-        <e k="ui_training_line_no_capacity" v="Képzés: két szakosodás elérve · legutóbb: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Képzés: havi 1 napnál csak 12:00-ig · válassz területet a képzési menüben · legutóbb: %s" />
         <e k="ui_training_line_first_day_select" v="Képzés: csak az első napon · válassz területet a képzési menüben · legutóbb: %s" />
         <e k="ui_training_line_busy_select" v="Képzés: munka közben nem lehetséges · legutóbb: %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="jó munkahónap" />
         <e k="ui_waitingForServerData" v="Várakozás a szerveradatokra" />
         <e k="ui_pmMenuPageHelp" v="Súgó" />
-        <e k="ui_pmHelpIntro" v="A Personnel Management 1.1.3.0 részletes játékon belüli útmutatója. A mellékelt ReadMe.pdf további szabályokat és számításokat tartalmaz." />
+        <e k="ui_pmHelpIntro" v="A Personnel Management 1.1.4.0 részletes játékon belüli útmutatója. A mellékelt ReadMe.pdf további szabályokat és számításokat tartalmaz." />
         <e k="ui_pmHelpSectionQuickStart" v="Gyors kezdés és vezérlés|A menüt a Ctrl + M nyitja meg. A fülek között a menü lapvezérlőivel válthatsz. Személyváltás: A/D vagy Bal/Jobb; megerősítés: Szóköz; vissza: Esc; szállítási prioritás: T; béremelési kérelmek: G." />
         <e k="ui_pmHelpSectionPeople" v="Jelentkezők és dolgozók|Egy új mentés négy jelentkezővel indul; legfeljebb nyolc lehet elérhető. A profiljukból veheted fel őket. A tapasztalat, megbízhatóság és hűség 0-100 közötti. Az állapot, bér, szakosodások, krónika és összesítések a dolgozói oldalon láthatók." />
         <e k="ui_pmHelpSectionStats" v="Dolgozók és tulajdonságok|A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a megszakítást, betegséget és korai leállást; a hűség a béremelési kérelmeket és felmondást befolyásolja. Az oldal állapotot, bért, szakosodást, statisztikát és személyes krónikát is mutat." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Felmondás, elbocsátás és nyugdíj|Ezek nem mindig azonnaliak, hanem a határidők szerint hónapváltáskor lépnek életbe. Dolgozó alkalmazott nem bocsátható el azonnal. A közelgő változások az állapotban és krónikában láthatók." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive és Courseplay|A Dolgozók / Szállítás alatt jelöld ki a vezetőket és állíts prioritást. Az AutoDrive az első elérhetőt használja, nélküle nem indul. A normál Courseplay-indítás választást nyit. AutoDrive utáni automatikus indításkor minden jármű új választás nélkül megtartja saját vezetőjét." />
         <e k="ui_pmHelpSectionMultiplayer" v="Többjátékos mód és mentések|A személyzeti adatok és beállítások gazdaságonként külön vannak. A szerver ellenőrzi a változtatásokat; csak jogosult gazdaságvezetők kezelhetik a gazdaságukat. A dolgozók, aktív kijelölések és beállítások szinkronizálódnak. Az adatok a mentés helperPersonnel.xml fájljában vannak." />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="Szakmai fejlődés" />
+        <e k="ui_selectionNoSpecializationProgress" v="Még nincs specializációs előrehaladás" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="Gyors kezdés és vezérlés" />
+        <e k="ui_pmHelpTopic01Body" v="A menüt a Ctrl + M nyitja meg. A fülek között a menü lapvezérlőivel válthatsz. Személyváltás: A/D vagy Bal/Jobb; megerősítés: Szóköz; vissza: Esc; szállítási prioritás: T; béremelési kérelmek: G." />
+        <e k="ui_pmHelpTopic02Title" v="Jelentkezők és dolgozók" />
+        <e k="ui_pmHelpTopic02Body" v="Egy új mentés négy jelentkezővel indul; legfeljebb nyolc lehet elérhető. A profiljukból veheted fel őket. A tapasztalat, megbízhatóság és hűség 0-100 közötti. Az állapot, bér, szakosodások, krónika és összesítések a dolgozói oldalon láthatók. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="Dolgozók és tulajdonságok" />
+        <e k="ui_pmHelpTopic03Body" v="A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a megszakítást, betegséget és korai leállást; a hűség a béremelési kérelmeket és felmondást befolyásolja. Az oldal állapotot, bért, szakosodást, statisztikát és személyes krónikát is mutat." />
+        <e k="ui_pmHelpTopic04Title" v="Munka és fejlődés" />
+        <e k="ui_pmHelpTopic04Body" v="Normál MI-segítő munka indításakor megjelenik a dolgozóválasztás. Csak elérhető dolgozó választható, és senki sem végezhet több munkát egyszerre. A munkaidő növeli a tapasztalatot és a szakosodást. A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a lassulást, betegséget és megszakítást; a hűség a bérvitát és felmondást befolyásolja. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a megszakítást, betegséget és korai leállást; a hűség a béremelési kérelmeket és felmondást befolyásolja. Az oldal állapotot, bért, szakosodást, statisztikát és személyes krónikát is mutat." />
+        <e k="ui_pmHelpTopic06Title" v="Bérek" />
+        <e k="ui_pmHelpTopic06Body" v="A bérek hónapváltáskor kerülnek levonásra, és a havi napoktól, gazdasági nehézségtől és modbeállításoktól függenek. A dolgozó emelést kérhet; ezt határidőn belül el kell fogadni vagy utasítani, és befolyásolhatja a hűséget." />
+        <e k="ui_pmHelpTopic07Title" v="Képzés" />
+        <e k="ui_pmHelpTopic07Body" v="Képzés csak hónap elején indulhat, pénzbe kerül, és hónap végéig lefoglalja a dolgozót. A teljesítés javítja a választott szakosodást. Az ajánlatok és előzmények a Képzés és Dolgozók részen láthatók. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic08Title" v="Szakosodás" />
+        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic09Title" v="Felmondás, elbocsátás és nyugdíj" />
+        <e k="ui_pmHelpTopic09Body" v="Ezek nem mindig azonnaliak, hanem a határidők szerint hónapváltáskor lépnek életbe. Dolgozó alkalmazott nem bocsátható el azonnal. A közelgő változások az állapotban és krónikában láthatók." />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive és Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="A Dolgozók / Szállítás alatt jelöld ki a vezetőket és állíts prioritást. Az AutoDrive az első elérhetőt használja, nélküle nem indul. A normál Courseplay-indítás választást nyit. AutoDrive utáni automatikus indításkor minden jármű új választás nélkül megtartja saját vezetőjét." />
+        <e k="ui_pmHelpTopic11Title" v="Többjátékos mód és mentések" />
+        <e k="ui_pmHelpTopic11Body" v="A személyzeti adatok és beállítások gazdaságonként külön vannak. A szerver ellenőrzi a változtatásokat; csak jogosult gazdaságvezetők kezelhetik a gazdaságukat. A dolgozók, aktív kijelölések és beállítások szinkronizálódnak. Az adatok a mentés helperPersonnel.xml fájljában vannak." />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="A személyzeti adatok és beállítások gazdaságonként külön vannak. A szerver ellenőrzi a változtatásokat; csak jogosult gazdaságvezetők kezelhetik a gazdaságukat. A dolgozók, aktív kijelölések és beállítások szinkronizálódnak. Az adatok a mentés helperPersonnel.xml fájljában vannak." />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="A menüt a Ctrl + M nyitja meg. A fülek között a menü lapvezérlőivel válthatsz. Személyváltás: A/D vagy Bal/Jobb; megerősítés: Szóköz; vissza: Esc; szállítási prioritás: T; béremelési kérelmek: G. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

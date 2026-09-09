@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="ofis mesleği" />
         <e k="ui_status_retirementPending" v="ay sonunda emekli olacak" />
         <e k="ui_retirementNotice" v="%s ay sonunda emekli olacak." />
-        <e k="ui_pmTrainingIntro" v="Uzmanlıklar, çalışanın ilgili öğrenme kategorisindeki performansını artırır. Eğitim mevcut ayın sonuna kadar sürer ve bu süre boyunca çalışan görevlerde kullanılamaz. Öğrenme ilerlemesi yalnızca eğitim tamamlandıktan sonra eklenir. Her kategori için her ay eğitim sunulmaz. Eğitimler normal fiyattan daha ucuz veya daha pahalı olabilir. Her çalışan marttan şubata kadar olan tarım yılı başına yalnızca bir eğitim alabilir. Bir çalışan en fazla iki uzmanlık kazanabilir. İstenen öğrenme kategorisini seçin." />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Öğrenme kategorisi" />
         <e k="ui_pmTrainingProgressHeader" v="Uzmanlığa doğru ilerleme" />
         <e k="ui_pmTrainingRunning" v="eğitim devam ediyor" />
         <e k="ui_pmTrainingSelectCategory" v="Önce bir eğitim kategorisi seçin" />
         <e k="ui_pmTrainingConfirm" v="%s için %s kategorisinde eğitim başlatılsın mı?" />
-        <e k="ui_training_line_no_capacity" v="Eğitim: iki uzmanlığa ulaşıldı · son: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Eğitim: ayda 1 gün ise yalnızca 12.00'ye kadar · eğitim menüsünden kategori seçin · son: %s" />
         <e k="ui_training_line_first_day_select" v="Eğitim: yalnızca ilk gün · eğitim menüsünden kategori seçin · son: %s" />
         <e k="ui_training_line_busy_select" v="Eğitim: çalışırken mümkün değil · son: %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="iyi bir çalışma ayı" />
         <e k="ui_waitingForServerData" v="Sunucu verileri bekleniyor" />
         <e k="ui_pmMenuPageHelp" v="Yardım" />
-        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.3.0 için ayrıntılı oyun içi rehber. Paketteki ReadMe.pdf ek kuralları ve hesaplamaları içerir." />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.4.0 için ayrıntılı oyun içi rehber. Paketteki ReadMe.pdf ek kuralları ve hesaplamaları içerir." />
         <e k="ui_pmHelpSectionQuickStart" v="Hızlı başlangıç ve kontroller|Menüyü Ctrl + M ile açın. Menü sayfası kontrolleriyle sekme değiştirin. Kişi değiştirmek için A/D veya Sol/Sağ, onay için Boşluk, geri dönmek için Esc, taşıma öncelikleri için T ve maaş talepleri için G kullanın." />
         <e k="ui_pmHelpSectionPeople" v="Adaylar ve çalışanlar|Yeni kayıt dört adayla başlar; en fazla sekiz aday bulunabilir. Profillerinden işe alın. Deneyim, güvenilirlik ve bağlılık 0-100 arasındadır. Durum, maaş, uzmanlıklar, günlük ve toplamlar çalışan sayfasında gösterilir." />
         <e k="ui_pmHelpSectionStats" v="Çalışanlar ve özellikler|Deneyim hız, aşınma ve tüketimi; güvenilirlik kesintileri, hastalığı ve erken iş bırakmayı; bağlılık maaş taleplerini ve istifaları etkiler. Çalışan sayfası durum, maaş, uzmanlık, istatistik ve kişisel geçmişi de gösterir." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="İstifa, işten çıkarma ve emeklilik|Bunlar her zaman hemen gerçekleşmez; sürelere göre ay değişiminde tamamlanır. Çalışmakta olan biri hemen çıkarılamaz. Yaklaşan değişiklikler durum ve günlükte görünür." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive ve Courseplay|Çalışanlar / Taşıma altında sürücüleri atayın ve öncelik belirleyin. AutoDrive ilk uygun sürücüyü kullanır, kimse yoksa başlamaz. Normal Courseplay başlangıcı seçimi açar. AutoDrive sonrası otomatik başlangıçta her araç yeni seçim olmadan kendi sürücüsünü korur." />
         <e k="ui_pmHelpSectionMultiplayer" v="Çok oyunculu ve kayıtlar|Personel verileri ve ayarlar çiftlik bazında ayrılır. Sunucu değişiklikleri doğrular; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini yönetebilir. Çalışanlar, etkin atamalar ve ayarlar eşitlenir. Veriler kayıttaki helperPersonnel.xml dosyasında tutulur." />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="Mesleki gelişim" />
+        <e k="ui_selectionNoSpecializationProgress" v="Henüz uzmanlaşma ilerlemesi yok" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="Hızlı başlangıç ve kontroller" />
+        <e k="ui_pmHelpTopic01Body" v="Menüyü Ctrl + M ile açın. Menü sayfası kontrolleriyle sekme değiştirin. Kişi değiştirmek için A/D veya Sol/Sağ, onay için Boşluk, geri dönmek için Esc, taşıma öncelikleri için T ve maaş talepleri için G kullanın." />
+        <e k="ui_pmHelpTopic02Title" v="Adaylar ve çalışanlar" />
+        <e k="ui_pmHelpTopic02Body" v="Yeni kayıt dört adayla başlar; en fazla sekiz aday bulunabilir. Profillerinden işe alın. Deneyim, güvenilirlik ve bağlılık 0-100 arasındadır. Durum, maaş, uzmanlıklar, günlük ve toplamlar çalışan sayfasında gösterilir. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="Çalışanlar ve özellikler" />
+        <e k="ui_pmHelpTopic03Body" v="Deneyim hız, aşınma ve tüketimi; güvenilirlik kesintileri, hastalığı ve erken iş bırakmayı; bağlılık maaş taleplerini ve istifaları etkiler. Çalışan sayfası durum, maaş, uzmanlık, istatistik ve kişisel geçmişi de gösterir." />
+        <e k="ui_pmHelpTopic04Title" v="Çalışma ve gelişim" />
+        <e k="ui_pmHelpTopic04Body" v="Normal bir YZ yardımcı işi başlatıldığında çalışan seçimi açılır. Yalnızca uygun çalışanlar seçilebilir ve bir kişi aynı anda birden fazla iş yapamaz. Çalışma süresi deneyimi ve uzmanlığı artırır. Deneyim hız, aşınma ve tüketimi; güvenilirlik yavaşlama, hastalık ve iş bırakmayı; bağlılık maaş anlaşmazlığı ve istifayı etkiler. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="Deneyim hız, aşınma ve tüketimi; güvenilirlik kesintileri, hastalığı ve erken iş bırakmayı; bağlılık maaş taleplerini ve istifaları etkiler. Çalışan sayfası durum, maaş, uzmanlık, istatistik ve kişisel geçmişi de gösterir." />
+        <e k="ui_pmHelpTopic06Title" v="Maaşlar" />
+        <e k="ui_pmHelpTopic06Body" v="Maaşlar ay değişiminde kesilir ve ay başına gün, ekonomik zorluk ve mod ayarlarına bağlıdır. Çalışan zam isteyebilir; talep süresinde kabul veya reddedilmeli ve bağlılığı etkileyebilir." />
+        <e k="ui_pmHelpTopic07Title" v="Eğitim" />
+        <e k="ui_pmHelpTopic07Body" v="Eğitim yalnızca ay başında başlar, para harcar ve çalışanı ay sonuna kadar kullanılamaz yapar. Tamamlanınca seçilen uzmanlık gelişir. Teklifler ve geçmiş eğitimler Eğitim ve Çalışanlar bölümlerinde görünür. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic08Title" v="Uzmanlık" />
+        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic09Title" v="İstifa, işten çıkarma ve emeklilik" />
+        <e k="ui_pmHelpTopic09Body" v="Bunlar her zaman hemen gerçekleşmez; sürelere göre ay değişiminde tamamlanır. Çalışmakta olan biri hemen çıkarılamaz. Yaklaşan değişiklikler durum ve günlükte görünür." />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive ve Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="Çalışanlar / Taşıma altında sürücüleri atayın ve öncelik belirleyin. AutoDrive ilk uygun sürücüyü kullanır, kimse yoksa başlamaz. Normal Courseplay başlangıcı seçimi açar. AutoDrive sonrası otomatik başlangıçta her araç yeni seçim olmadan kendi sürücüsünü korur." />
+        <e k="ui_pmHelpTopic11Title" v="Çok oyunculu ve kayıtlar" />
+        <e k="ui_pmHelpTopic11Body" v="Personel verileri ve ayarlar çiftlik bazında ayrılır. Sunucu değişiklikleri doğrular; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini yönetebilir. Çalışanlar, etkin atamalar ve ayarlar eşitlenir. Veriler kayıttaki helperPersonnel.xml dosyasında tutulur." />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="Personel verileri ve ayarlar çiftlik bazında ayrılır. Sunucu değişiklikleri doğrular; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini yönetebilir. Çalışanlar, etkin atamalar ve ayarlar eşitlenir. Veriler kayıttaki helperPersonnel.xml dosyasında tutulur." />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="Menüyü Ctrl + M ile açın. Menü sayfası kontrolleriyle sekme değiştirin. Kişi değiştirmek için A/D veya Sol/Sağ, onay için Boşluk, geri dönmek için Esc, taşıma öncelikleri için T ve maaş talepleri için G kullanın. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

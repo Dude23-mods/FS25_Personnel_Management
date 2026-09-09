@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="kontorarbejde" />
         <e k="ui_status_retirementPending" v="går på pension ved månedens udgang" />
         <e k="ui_retirementNotice" v="%s går på pension ved månedens udgang." />
-        <e k="ui_pmTrainingIntro" v="Specialiseringer forbedrer en medarbejders præstation i den relevante læringskategori. Et kursus varer til udgangen af den aktuelle måned, og medarbejderen er ikke tilgængelig for arbejde i denne periode. Læringsfremskridtet tilskrives først, når kurset er afsluttet. Der tilbydes ikke undervisning i alle kategorier hver måned. Kurser kan være billigere eller dyrere end normalprisen. Hver medarbejder kan kun gennemføre ét kursus pr. landbrugsår fra marts til februar. Hver medarbejder kan højst opnå to specialiseringer. Vælg den ønskede læringskategori." />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Læringskategori" />
         <e k="ui_pmTrainingProgressHeader" v="Fremskridt mod specialisering" />
         <e k="ui_pmTrainingRunning" v="træning i gang" />
         <e k="ui_pmTrainingSelectCategory" v="Vælg først en træningskategori" />
         <e k="ui_pmTrainingConfirm" v="Start træning for %s i kategorien %s?" />
-        <e k="ui_training_line_no_capacity" v="Træning: to specialiseringer opnået · senest: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Træning: ved 1 dag/måned kun indtil kl. 12.00 · vælg en kategori i træningsmenuen · senest: %s" />
         <e k="ui_training_line_first_day_select" v="Træning: kun på den første dag · vælg en kategori i træningsmenuen · senest: %s" />
         <e k="ui_training_line_busy_select" v="Træning: ikke mulig under arbejde · senest: %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="god arbejdsmåned" />
         <e k="ui_waitingForServerData" v="Venter på serverdata" />
         <e k="ui_pmMenuPageHelp" v="Hjælp" />
-        <e k="ui_pmHelpIntro" v="Detaljeret hjælp i spillet til Personnel Management 1.1.3.0. Den medfølgende ReadMe.pdf indeholder flere regler og beregninger." />
+        <e k="ui_pmHelpIntro" v="Detaljeret hjælp i spillet til Personnel Management 1.1.4.0. Den medfølgende ReadMe.pdf indeholder flere regler og beregninger." />
         <e k="ui_pmHelpSectionQuickStart" v="Hurtig start og styring|Åbn menuen med Ctrl + M. Skift faner med menustyringen. Brug A/D eller Venstre/Højre til at skifte person, Mellemrum til at bekræfte, Esc til at gå tilbage, T til transportprioriteter og G til lønkrav." />
         <e k="ui_pmHelpSectionPeople" v="Ansøgere og medarbejdere|Et nyt spil starter med fire ansøgere; højst otte kan være tilgængelige. Ansæt fra deres profiler. Erfaring, pålidelighed og loyalitet går fra 0 til 100. Status, løn, specialiseringer, krønike og totaler vises på medarbejdersiden." />
         <e k="ui_pmHelpSectionStats" v="Medarbejdere og egenskaber|Erfaring påvirker fart, slid og forbrug; pålidelighed påvirker afbrydelser, sygdom og afbrudte job; loyalitet påvirker lønkrav og opsigelser. Medarbejdersiden viser også status, løn, specialiseringer, statistik og personlig krønike." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Opsigelse, afskedigelse og pension|Disse ophør sker ikke altid straks, men afsluttes ved månedsskiftet efter fristerne. En medarbejder i arbejde kan ikke afskediges med det samme. Kommende ændringer vises i status og krønike." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive og Courseplay|Aktivér chauffører under Medarbejdere / Transport og sortér prioriteten. AutoDrive bruger den første ledige og blokerer start, hvis ingen er ledig. En normal Courseplay-start åbner valget. Starter Courseplay automatisk efter AutoDrive, beholder køretøjet sin chauffør uden nyt valg. Hvert køretøj skal beholde sin egen medarbejder." />
         <e k="ui_pmHelpSectionMultiplayer" v="Multiplayer og gemte spil|Personaledata og indstillinger er adskilt pr. gård. Serveren validerer ændringer; kun godkendte gårdledere må administrere deres gård. Medarbejdere, aktive tildelinger og indstillinger synkroniseres. Data gemmes i helperPersonnel.xml i spillets gemning." />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="Faglig udvikling" />
+        <e k="ui_selectionNoSpecializationProgress" v="Endnu ingen fremskridt i specialisering" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="Hurtig start og styring" />
+        <e k="ui_pmHelpTopic01Body" v="Åbn menuen med Ctrl + M. Skift faner med menustyringen. Brug A/D eller Venstre/Højre til at skifte person, Mellemrum til at bekræfte, Esc til at gå tilbage, T til transportprioriteter og G til lønkrav." />
+        <e k="ui_pmHelpTopic02Title" v="Ansøgere og medarbejdere" />
+        <e k="ui_pmHelpTopic02Body" v="Et nyt spil starter med fire ansøgere; højst otte kan være tilgængelige. Ansæt fra deres profiler. Erfaring, pålidelighed og loyalitet går fra 0 til 100. Status, løn, specialiseringer, krønike og totaler vises på medarbejdersiden. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="Medarbejdere og egenskaber" />
+        <e k="ui_pmHelpTopic03Body" v="Erfaring påvirker fart, slid og forbrug; pålidelighed påvirker afbrydelser, sygdom og afbrudte job; loyalitet påvirker lønkrav og opsigelser. Medarbejdersiden viser også status, løn, specialiseringer, statistik og personlig krønike." />
+        <e k="ui_pmHelpTopic04Title" v="Arbejde og udvikling" />
+        <e k="ui_pmHelpTopic04Body" v="Når et normalt AI-hjælperjob startes, åbnes medarbejdervalget. Kun ledige medarbejdere kan vælges, og ingen kan udføre flere job samtidigt. Arbejdstid øger erfaring og specialisering. Erfaring påvirker fart, slid og forbrug; pålidelighed påvirker nedsættelser, sygdom og afbrudte job; loyalitet påvirker lønkonflikter og opsigelser. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="Erfaring påvirker fart, slid og forbrug; pålidelighed påvirker afbrydelser, sygdom og afbrudte job; loyalitet påvirker lønkrav og opsigelser. Medarbejdersiden viser også status, løn, specialiseringer, statistik og personlig krønike." />
+        <e k="ui_pmHelpTopic06Title" v="Løn" />
+        <e k="ui_pmHelpTopic06Body" v="Løn bogføres ved månedsskiftet og afhænger af dage pr. måned, økonomisk sværhedsgrad og modindstillinger. Medarbejdere kan kræve lønforhøjelse; kravet skal accepteres eller afvises inden fristen og kan påvirke loyaliteten." />
+        <e k="ui_pmHelpTopic07Title" v="Træning" />
+        <e k="ui_pmHelpTopic07Body" v="Træning starter kun ved månedens begyndelse, koster penge og spærrer medarbejderen til månedens udgang. Gennemført træning forbedrer den valgte specialisering. Tilbud og tidligere træning vises under Træning og Medarbejdere. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic08Title" v="Speciale" />
+        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic09Title" v="Opsigelse, afskedigelse og pension" />
+        <e k="ui_pmHelpTopic09Body" v="Disse ophør sker ikke altid straks, men afsluttes ved månedsskiftet efter fristerne. En medarbejder i arbejde kan ikke afskediges med det samme. Kommende ændringer vises i status og krønike." />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive og Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="Aktivér chauffører under Medarbejdere / Transport og sortér prioriteten. AutoDrive bruger den første ledige og blokerer start, hvis ingen er ledig. En normal Courseplay-start åbner valget. Starter Courseplay automatisk efter AutoDrive, beholder køretøjet sin chauffør uden nyt valg. Hvert køretøj skal beholde sin egen medarbejder." />
+        <e k="ui_pmHelpTopic11Title" v="Multiplayer og gemte spil" />
+        <e k="ui_pmHelpTopic11Body" v="Personaledata og indstillinger er adskilt pr. gård. Serveren validerer ændringer; kun godkendte gårdledere må administrere deres gård. Medarbejdere, aktive tildelinger og indstillinger synkroniseres. Data gemmes i helperPersonnel.xml i spillets gemning." />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="Personaledata og indstillinger er adskilt pr. gård. Serveren validerer ændringer; kun godkendte gårdledere må administrere deres gård. Medarbejdere, aktive tildelinger og indstillinger synkroniseres. Data gemmes i helperPersonnel.xml i spillets gemning." />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="Åbn menuen med Ctrl + M. Skift faner med menustyringen. Brug A/D eller Venstre/Højre til at skifte person, Mellemrum til at bekræfte, Esc til at gå tilbage, T til transportprioriteter og G til lønkrav. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

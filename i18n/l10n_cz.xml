@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="kancelářské povolání" />
         <e k="ui_status_retirementPending" v="odchod do důchodu na konci měsíce" />
         <e k="ui_retirementNotice" v="%s odejde na konci měsíce do důchodu." />
-        <e k="ui_pmTrainingIntro" v="Specializace zlepšují výkon zaměstnance v příslušné kategorii učení. Školení trvá do konce aktuálního měsíce; během této doby není zaměstnanec k dispozici pro práci. Pokrok v učení se započítá až po dokončení školení. Školení není každý měsíc nabízeno pro všechny kategorie. Kurzy mohou být levnější nebo dražší než běžná cena. Každý zaměstnanec může absolvovat pouze jedno školení za hospodářský rok od března do února. Každý zaměstnanec může získat nejvýše dvě specializace. Vyberte požadovanou kategorii učení." />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Oblast vzdělávání" />
         <e k="ui_pmTrainingProgressHeader" v="Postup ke specializaci" />
         <e k="ui_pmTrainingRunning" v="probíhá školení" />
         <e k="ui_pmTrainingSelectCategory" v="Nejprve vyberte oblast školení" />
         <e k="ui_pmTrainingConfirm" v="Zahájit školení pro %s v oblasti %s?" />
-        <e k="ui_training_line_no_capacity" v="Školení: dosaženy dvě specializace · naposledy: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Školení: při 1 dni/měsíc pouze do 12:00 · vyberte oblast v nabídce školení · naposledy: %s" />
         <e k="ui_training_line_first_day_select" v="Školení: pouze první den · vyberte oblast v nabídce školení · naposledy: %s" />
         <e k="ui_training_line_busy_select" v="Školení: během práce není možné · naposledy: %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="dobrý pracovní měsíc" />
         <e k="ui_waitingForServerData" v="Čekání na data ze serveru" />
         <e k="ui_pmMenuPageHelp" v="Nápověda" />
-        <e k="ui_pmHelpIntro" v="Podrobná herní nápověda pro Personnel Management 1.1.3.0. Přiložený ReadMe.pdf obsahuje další pravidla a výpočty." />
+        <e k="ui_pmHelpIntro" v="Podrobná herní nápověda pro Personnel Management 1.1.4.0. Přiložený ReadMe.pdf obsahuje další pravidla a výpočty." />
         <e k="ui_pmHelpSectionQuickStart" v="Rychlý start a ovládání|Menu otevřete pomocí Ctrl + M. Karty přepínejte ovládáním stránek menu. Osobu změníte A/D nebo Vlevo/Vpravo, Mezerník potvrzuje, Esc se vrací, T otevírá priority dopravy a G požadavky na mzdu." />
         <e k="ui_pmHelpSectionPeople" v="Uchazeči a zaměstnanci|Nová hra začíná se čtyřmi uchazeči; současně jich může být nejvýše osm. Uchazeče najímáte z jejich profilů. Zkušenost, spolehlivost a loajalita jsou od 0 do 100. Stav, mzda, specializace, kronika a celkové údaje jsou na stránce zaměstnanců." />
         <e k="ui_pmHelpSectionStats" v="Zaměstnanci a vlastnosti|Zkušenost ovlivňuje rychlost, opotřebení a spotřebu; spolehlivost přerušení, nemoc a předčasné ukončení práce; loajalita požadavky na mzdu a výpovědi. Stránka zaměstnance zobrazuje také stav, mzdu, specializace, statistiky a osobní kroniku." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Výpověď, propuštění a důchod|Ukončení nemusí být okamžité a proběhne při změně měsíce podle lhůt. Pracujícího zaměstnance nelze propustit ihned. Budoucí změny jsou vidět ve stavu a kronice." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive a Courseplay|Přiřaďte řidiče k dopravě v Zaměstnanci / Doprava a nastavte prioritu. AutoDrive použije prvního dostupného a bez řidiče start zablokuje. Běžný start Courseplay otevře výběr. Při automatickém startu po AutoDrive si každé vozidlo ponechá vlastního řidiče bez nového výběru." />
         <e k="ui_pmHelpSectionMultiplayer" v="Multiplayer a uložené hry|Data a nastavení jsou oddělena podle farem. Server ověřuje změny; farmu spravují jen oprávnění manažeři. Zaměstnanci, aktivní přiřazení a nastavení se synchronizují. Data jsou v helperPersonnel.xml v uložené hře." />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="Profesní rozvoj" />
+        <e k="ui_selectionNoSpecializationProgress" v="Zatím žádný postup specializace" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="Rychlý start a ovládání" />
+        <e k="ui_pmHelpTopic01Body" v="Menu otevřete pomocí Ctrl + M. Karty přepínejte ovládáním stránek menu. Osobu změníte A/D nebo Vlevo/Vpravo, Mezerník potvrzuje, Esc se vrací, T otevírá priority dopravy a G požadavky na mzdu." />
+        <e k="ui_pmHelpTopic02Title" v="Uchazeči a zaměstnanci" />
+        <e k="ui_pmHelpTopic02Body" v="Nová hra začíná se čtyřmi uchazeči; současně jich může být nejvýše osm. Uchazeče najímáte z jejich profilů. Zkušenost, spolehlivost a loajalita jsou od 0 do 100. Stav, mzda, specializace, kronika a celkové údaje jsou na stránce zaměstnanců. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="Zaměstnanci a vlastnosti" />
+        <e k="ui_pmHelpTopic03Body" v="Zkušenost ovlivňuje rychlost, opotřebení a spotřebu; spolehlivost přerušení, nemoc a předčasné ukončení práce; loajalita požadavky na mzdu a výpovědi. Stránka zaměstnance zobrazuje také stav, mzdu, specializace, statistiky a osobní kroniku." />
+        <e k="ui_pmHelpTopic04Title" v="Práce a rozvoj" />
+        <e k="ui_pmHelpTopic04Body" v="Při spuštění běžné práce AI pomocníka se otevře výběr zaměstnance. Vybrat lze jen dostupné zaměstnance a nikdo nemůže dělat více úloh současně. Pracovní čas zvyšuje zkušenost a pokrok specializace. Zkušenost ovlivňuje rychlost, opotřebení a spotřebu; spolehlivost zpomalení, nemoc a přerušení; loajalita mzdové spory a výpovědi. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="Zkušenost ovlivňuje rychlost, opotřebení a spotřebu; spolehlivost přerušení, nemoc a předčasné ukončení práce; loajalita požadavky na mzdu a výpovědi. Stránka zaměstnance zobrazuje také stav, mzdu, specializace, statistiky a osobní kroniku." />
+        <e k="ui_pmHelpTopic06Title" v="Mzdy" />
+        <e k="ui_pmHelpTopic06Body" v="Mzdy se účtují při změně měsíce podle dnů v měsíci, ekonomické obtížnosti a nastavení modu. Zaměstnanci mohou žádat zvýšení; žádost je nutné včas přijmout nebo odmítnout a může ovlivnit loajalitu." />
+        <e k="ui_pmHelpTopic07Title" v="Školení" />
+        <e k="ui_pmHelpTopic07Body" v="Školení začíná pouze na začátku měsíce, stojí peníze a blokuje zaměstnance do konce měsíce. Dokončení zlepší vybranou specializaci. Nabídky a historie jsou v oblastech Školení a Zaměstnanci. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic08Title" v="Specializace" />
+        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic09Title" v="Výpověď, propuštění a důchod" />
+        <e k="ui_pmHelpTopic09Body" v="Ukončení nemusí být okamžité a proběhne při změně měsíce podle lhůt. Pracujícího zaměstnance nelze propustit ihned. Budoucí změny jsou vidět ve stavu a kronice." />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive a Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="Přiřaďte řidiče k dopravě v Zaměstnanci / Doprava a nastavte prioritu. AutoDrive použije prvního dostupného a bez řidiče start zablokuje. Běžný start Courseplay otevře výběr. Při automatickém startu po AutoDrive si každé vozidlo ponechá vlastního řidiče bez nového výběru." />
+        <e k="ui_pmHelpTopic11Title" v="Multiplayer a uložené hry" />
+        <e k="ui_pmHelpTopic11Body" v="Data a nastavení jsou oddělena podle farem. Server ověřuje změny; farmu spravují jen oprávnění manažeři. Zaměstnanci, aktivní přiřazení a nastavení se synchronizují. Data jsou v helperPersonnel.xml v uložené hře." />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="Data a nastavení jsou oddělena podle farem. Server ověřuje změny; farmu spravují jen oprávnění manažeři. Zaměstnanci, aktivní přiřazení a nastavení se synchronizují. Data jsou v helperPersonnel.xml v uložené hře." />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="Menu otevřete pomocí Ctrl + M. Karty přepínejte ovládáním stránek menu. Osobu změníte A/D nebo Vlevo/Vpravo, Mezerník potvrzuje, Esc se vrací, T otevírá priority dopravy a G požadavky na mzdu. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

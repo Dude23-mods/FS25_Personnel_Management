@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="toimistotyö" />
         <e k="ui_status_retirementPending" v="jää eläkkeelle kuukauden lopussa" />
         <e k="ui_retirementNotice" v="%s jää eläkkeelle kuukauden lopussa." />
-        <e k="ui_pmTrainingIntro" v="Erikoistumiset parantavat työntekijän suorituskykyä kyseisessä oppimiskategoriassa. Koulutus kestää kuluvan kuukauden loppuun, eikä työntekijä ole sinä aikana käytettävissä töihin. Oppimisen edistyminen lisätään vasta koulutuksen päätyttyä. Kaikissa kategorioissa ei ole koulutusta tarjolla joka kuukausi. Koulutus voi olla tavallista hintaa edullisempi tai kalliimpi. Kukin työntekijä voi osallistua vain yhteen koulutukseen maatalousvuodessa maaliskuusta helmikuuhun. Työntekijä voi saada enintään kaksi erikoistumista. Valitse haluttu oppimiskategoria." />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Oppimiskategoria" />
         <e k="ui_pmTrainingProgressHeader" v="Edistyminen kohti erikoistumista" />
         <e k="ui_pmTrainingRunning" v="koulutus käynnissä" />
         <e k="ui_pmTrainingSelectCategory" v="Valitse ensin koulutuskategoria" />
         <e k="ui_pmTrainingConfirm" v="Aloitetaanko henkilölle %s koulutus kategoriassa %s?" />
-        <e k="ui_training_line_no_capacity" v="Koulutus: kaksi erikoistumista saavutettu · viimeksi: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Koulutus: 1 päivä/kuukausi vain klo 12.00 asti · valitse kategoria koulutusvalikossa · viimeksi: %s" />
         <e k="ui_training_line_first_day_select" v="Koulutus: vain ensimmäisenä päivänä · valitse kategoria koulutusvalikossa · viimeksi: %s" />
         <e k="ui_training_line_busy_select" v="Koulutus: ei mahdollinen työskentelyn aikana · viimeksi: %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="hyvä työkuukausi" />
         <e k="ui_waitingForServerData" v="Odotetaan palvelimen tietoja" />
         <e k="ui_pmMenuPageHelp" v="Ohje" />
-        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.3.0:n yksityiskohtainen pelinsisäinen ohje. Mukana oleva ReadMe.pdf sisältää lisää sääntöjä ja laskelmia." />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.4.0:n yksityiskohtainen pelinsisäinen ohje. Mukana oleva ReadMe.pdf sisältää lisää sääntöjä ja laskelmia." />
         <e k="ui_pmHelpSectionQuickStart" v="Pika-aloitus ja ohjaus|Avaa valikko Ctrl + M:llä. Vaihda välilehtiä valikon sivuohjaimilla. Vaihda henkilöä A/D:llä tai Vasen/Oikea-näppäimillä, vahvista Välilyönnillä, palaa Escillä, avaa kuljetusprioriteetit T:llä ja palkkatoiveet G:llä." />
         <e k="ui_pmHelpSectionPeople" v="Hakijat ja työntekijät|Uusi tallennus alkaa neljällä hakijalla; enintään kahdeksan voi olla tarjolla. Palkkaa hakijan profiilista. Kokemus, luotettavuus ja uskollisuus ovat 0-100. Tila, palkka, erikoistumiset, tapahtumat ja kokonaisluvut näkyvät työntekijäsivulla." />
         <e k="ui_pmHelpSectionStats" v="Työntekijät ja ominaisuudet|Kokemus vaikuttaa nopeuteen, kulumiseen ja kulutukseen; luotettavuus keskeytyksiin, sairauteen ja työn lopettamiseen; uskollisuus palkkatoiveisiin ja irtisanoutumiseen. Työntekijäsivu näyttää myös tilan, palkan, erikoistumiset, tilastot ja henkilökohtaiset tapahtumat." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Irtisanoutuminen, irtisanominen ja eläke|Nämä eivät aina tule voimaan heti, vaan toteutuvat kuukauden vaihtuessa määräaikojen mukaan. Työssä olevaa työntekijää ei voi irtisanoa heti. Tulevat muutokset näkyvät tilassa ja tapahtumissa." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive ja Courseplay|Ota kuljettajat käyttöön kohdassa Työntekijät / Kuljetus ja järjestä prioriteetti. AutoDrive käyttää ensimmäistä vapaata ja estää käynnistyksen, jos ketään ei ole. Tavallinen Courseplay-käynnistys avaa valinnan. Jos Courseplay käynnistyy automaattisesti AutoDriven jälkeen, ajoneuvo säilyttää oman kuljettajansa ilman uutta valintaa. Jokaisen ajoneuvon on säilytettävä oma työntekijänsä." />
         <e k="ui_pmHelpSectionMultiplayer" v="Moninpeli ja tallennukset|Henkilöstötiedot ja asetukset erotellaan maatiloittain. Palvelin vahvistaa muutokset; vain valtuutetut tilanhoitajat hallitsevat tilaansa. Työntekijät, aktiiviset määritykset ja asetukset synkronoidaan. Tiedot tallennetaan tiedostoon helperPersonnel.xml." />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="Ammatillinen kehitys" />
+        <e k="ui_selectionNoSpecializationProgress" v="Ei vielä erikoistumisen edistymistä" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="Pika-aloitus ja ohjaus" />
+        <e k="ui_pmHelpTopic01Body" v="Avaa valikko Ctrl + M:llä. Vaihda välilehtiä valikon sivuohjaimilla. Vaihda henkilöä A/D:llä tai Vasen/Oikea-näppäimillä, vahvista Välilyönnillä, palaa Escillä, avaa kuljetusprioriteetit T:llä ja palkkatoiveet G:llä." />
+        <e k="ui_pmHelpTopic02Title" v="Hakijat ja työntekijät" />
+        <e k="ui_pmHelpTopic02Body" v="Uusi tallennus alkaa neljällä hakijalla; enintään kahdeksan voi olla tarjolla. Palkkaa hakijan profiilista. Kokemus, luotettavuus ja uskollisuus ovat 0-100. Tila, palkka, erikoistumiset, tapahtumat ja kokonaisluvut näkyvät työntekijäsivulla. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="Työntekijät ja ominaisuudet" />
+        <e k="ui_pmHelpTopic03Body" v="Kokemus vaikuttaa nopeuteen, kulumiseen ja kulutukseen; luotettavuus keskeytyksiin, sairauteen ja työn lopettamiseen; uskollisuus palkkatoiveisiin ja irtisanoutumiseen. Työntekijäsivu näyttää myös tilan, palkan, erikoistumiset, tilastot ja henkilökohtaiset tapahtumat." />
+        <e k="ui_pmHelpTopic04Title" v="Työ ja kehitys" />
+        <e k="ui_pmHelpTopic04Body" v="Tavallisen tekoälyapulaisen työn aloitus avaa työntekijävalinnan. Vain vapaat työntekijät voidaan valita, eikä sama henkilö voi tehdä useita töitä yhtä aikaa. Työaika kasvattaa kokemusta ja erikoistumista. Kokemus vaikuttaa nopeuteen, kulumiseen ja kulutukseen; luotettavuus hidastumisiin, sairauteen ja keskeytyksiin; uskollisuus palkkariitoihin ja irtisanoutumiseen. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="Kokemus vaikuttaa nopeuteen, kulumiseen ja kulutukseen; luotettavuus keskeytyksiin, sairauteen ja työn lopettamiseen; uskollisuus palkkatoiveisiin ja irtisanoutumiseen. Työntekijäsivu näyttää myös tilan, palkan, erikoistumiset, tilastot ja henkilökohtaiset tapahtumat." />
+        <e k="ui_pmHelpTopic06Title" v="Palkat" />
+        <e k="ui_pmHelpTopic06Body" v="Palkat veloitetaan kuukauden vaihtuessa ja ne riippuvat kuukauden päivistä, talousvaikeudesta ja modin asetuksista. Työntekijä voi pyytää korotusta; pyyntö on hyväksyttävä tai hylättävä määräajassa ja se voi vaikuttaa uskollisuuteen." />
+        <e k="ui_pmHelpTopic07Title" v="Koulutus" />
+        <e k="ui_pmHelpTopic07Body" v="Koulutus alkaa vain kuun alussa, maksaa ja estää työntekijän käytön kuun loppuun. Suoritettu koulutus parantaa valittua erikoistumista. Tarjoukset ja aiemmat koulutukset näkyvät Koulutus- ja Työntekijät-alueilla. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic08Title" v="Erikoistuminen" />
+        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic09Title" v="Irtisanoutuminen, irtisanominen ja eläke" />
+        <e k="ui_pmHelpTopic09Body" v="Nämä eivät aina tule voimaan heti, vaan toteutuvat kuukauden vaihtuessa määräaikojen mukaan. Työssä olevaa työntekijää ei voi irtisanoa heti. Tulevat muutokset näkyvät tilassa ja tapahtumissa." />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive ja Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="Ota kuljettajat käyttöön kohdassa Työntekijät / Kuljetus ja järjestä prioriteetti. AutoDrive käyttää ensimmäistä vapaata ja estää käynnistyksen, jos ketään ei ole. Tavallinen Courseplay-käynnistys avaa valinnan. Jos Courseplay käynnistyy automaattisesti AutoDriven jälkeen, ajoneuvo säilyttää oman kuljettajansa ilman uutta valintaa. Jokaisen ajoneuvon on säilytettävä oma työntekijänsä." />
+        <e k="ui_pmHelpTopic11Title" v="Moninpeli ja tallennukset" />
+        <e k="ui_pmHelpTopic11Body" v="Henkilöstötiedot ja asetukset erotellaan maatiloittain. Palvelin vahvistaa muutokset; vain valtuutetut tilanhoitajat hallitsevat tilaansa. Työntekijät, aktiiviset määritykset ja asetukset synkronoidaan. Tiedot tallennetaan tiedostoon helperPersonnel.xml." />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="Henkilöstötiedot ja asetukset erotellaan maatiloittain. Palvelin vahvistaa muutokset; vain valtuutetut tilanhoitajat hallitsevat tilaansa. Työntekijät, aktiiviset määritykset ja asetukset synkronoidaan. Tiedot tallennetaan tiedostoon helperPersonnel.xml." />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="Avaa valikko Ctrl + M:llä. Vaihda välilehtiä valikon sivuohjaimilla. Vaihda henkilöä A/D:llä tai Vasen/Oikea-näppäimillä, vahvista Välilyönnillä, palaa Escillä, avaa kuljetusprioriteetit T:llä ja palkkatoiveet G:llä. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

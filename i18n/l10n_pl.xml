@@ -302,13 +302,13 @@
         <e k="ui_pmOrigin8" v="praca biurowa" />
         <e k="ui_status_retirementPending" v="odejście na emeryturę pod koniec miesiąca" />
         <e k="ui_retirementNotice" v="%s przejdzie na emeryturę pod koniec miesiąca." />
-        <e k="ui_pmTrainingIntro" v="Specjalizacje poprawiają wydajność pracownika w danej kategorii nauki. Szkolenie trwa do końca bieżącego miesiąca, a w tym czasie pracownik nie jest dostępny do pracy. Postęp nauki jest naliczany dopiero po zakończeniu szkolenia. Nie każda kategoria jest dostępna co miesiąc. Szkolenie może być tańsze lub droższe od ceny standardowej. Każdy pracownik może odbyć tylko jedno szkolenie w roku gospodarczym od marca do lutego. Pracownik może zdobyć maksymalnie dwie specjalizacje. Wybierz żądaną kategorię nauki." />
+        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Kierunek nauki" />
         <e k="ui_pmTrainingProgressHeader" v="Postęp do specjalizacji" />
         <e k="ui_pmTrainingRunning" v="szkolenie w toku" />
         <e k="ui_pmTrainingSelectCategory" v="Najpierw wybierz kategorię szkolenia" />
         <e k="ui_pmTrainingConfirm" v="Rozpocząć szkolenie dla %s w kategorii %s?" />
-        <e k="ui_training_line_no_capacity" v="Szkolenie: osiągnięto dwie specjalizacje · ostatnie: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Szkolenie: przy 1 dniu/miesiąc tylko do 12:00 · wybierz kategorię w menu szkolenia · ostatnie: %s" />
         <e k="ui_training_line_first_day_select" v="Szkolenie: tylko pierwszego dnia · wybierz kategorię w menu szkolenia · ostatnie: %s" />
         <e k="ui_training_line_busy_select" v="Szkolenie: niemożliwe podczas pracy · ostatnie: %s" />
@@ -518,7 +518,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="dobry miesiąc pracy" />
         <e k="ui_waitingForServerData" v="Oczekiwanie na dane serwera" />
         <e k="ui_pmMenuPageHelp" v="Pomoc" />
-        <e k="ui_pmHelpIntro" v="Szczegółowa pomoc w grze dla Personnel Management 1.1.3.0. Dołączony ReadMe.pdf zawiera dodatkowe zasady i obliczenia." />
+        <e k="ui_pmHelpIntro" v="Szczegółowa pomoc w grze dla Personnel Management 1.1.4.0. Dołączony ReadMe.pdf zawiera dodatkowe zasady i obliczenia." />
         <e k="ui_pmHelpSectionQuickStart" v="Szybki start i sterowanie|Otwórz menu przez Ctrl + M. Zmieniaj karty sterowaniem stron menu. Użyj A/D lub Lewo/Prawo, aby zmienić osobę, Spacji do potwierdzenia, Esc do powrotu, T do priorytetów transportu i G do żądań płacowych." />
         <e k="ui_pmHelpSectionPeople" v="Kandydaci i pracownicy|Nowy zapis zaczyna się z czterema kandydatami; maksymalnie może być dostępnych ośmiu. Zatrudniaj z profili. Doświadczenie, niezawodność i lojalność mają zakres 0-100. Status, płaca, specjalizacje, kronika i sumy są na stronie pracowników." />
         <e k="ui_pmHelpSectionStats" v="Pracownicy i cechy|Doświadczenie wpływa na prędkość, zużycie i spalanie; niezawodność na przerwy, choroby i przerwanie pracy; lojalność na żądania płacowe i odejścia. Strona pracownika pokazuje też status, płacę, specjalizacje, statystyki i osobistą kronikę." />
@@ -528,5 +528,74 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Rezygnacja, zwolnienie i emerytura|Te zakończenia nie zawsze działają natychmiast; są realizowane przy zmianie miesiąca według terminów. Pracownika wykonującego pracę nie można od razu zwolnić. Nadchodzące zmiany widać w statusie i kronice." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive i Courseplay|Przypisz kierowców do transportu w Pracownicy / Transport i ustaw priorytet. AutoDrive używa pierwszego dostępnego i blokuje start, jeśli nikogo nie ma. Zwykły start Courseplay otwiera wybór. Gdy Courseplay uruchamia się automatycznie po AutoDrive, każdy pojazd zachowuje własnego kierowcę bez nowego wyboru." />
         <e k="ui_pmHelpSectionMultiplayer" v="Gra wieloosobowa i zapisy|Dane personelu i ustawienia są oddzielne dla każdej farmy. Serwer sprawdza zmiany; tylko uprawnieni menedżerowie zarządzają swoją farmą. Pracownicy, aktywne przydziały i ustawienia są synchronizowane. Dane zapisuje helperPersonnel.xml w zapisie gry." />
+        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
+        <e k="ui_selectionAvailable" v="Available" />
+        <e k="ui_selectionUnavailableSick" v="Sick" />
+        <e k="ui_selectionUnavailableTraining" v="In training" />
+        <e k="ui_selectionUnavailableReserved" v="Reserved" />
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
+        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
+        <e k="ui_selectionUnavailableOther" v="Unavailable" />
+        <e k="ui_selectionShowAll" v="Show all employees" />
+        <e k="ui_selectionShowAvailable" v="Show available only" />
+        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
+        <e k="ui_selectionJobUnknown" v="Unknown job" />
+        <e k="ui_selectionAgeLabel" v="Age" />
+        <e k="ui_selectionWageLabel" v="Monthly wage" />
+        <e k="ui_selectionJobsLabel" v="Jobs" />
+        <e k="ui_selectionSpeedLabel" v="Work speed" />
+        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionProfessionalDevelopment" v="Rozwój zawodowy" />
+        <e k="ui_selectionNoSpecializationProgress" v="Brak postępów specjalizacji" />
+        <e k="ui_selectionNoSpecialization" v="No specialization" />
+        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
+        <e k="ui_selectionActivityLine" v="Job: %s" />
+        <e k="ui_selectionFieldLine" v="Field: %s" />
+        <e k="ui_selectionTargetLine" v="Transport target: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
+        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
+        <e k="ui_button_specializationDeactivate" v="Deactivate" />
+        <e k="ui_button_specializationActivate" v="Activate" />
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
+        <e k="ui_pmSpecializationActive" v="active" />
+        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
+        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
+        <e k="ui_pmHelpContents" v="CONTENTS" />
+        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
+        <e k="ui_pmHelpTopic01Title" v="Szybki start i sterowanie" />
+        <e k="ui_pmHelpTopic01Body" v="Otwórz menu przez Ctrl + M. Zmieniaj karty sterowaniem stron menu. Użyj A/D lub Lewo/Prawo, aby zmienić osobę, Spacji do potwierdzenia, Esc do powrotu, T do priorytetów transportu i G do żądań płacowych." />
+        <e k="ui_pmHelpTopic02Title" v="Kandydaci i pracownicy" />
+        <e k="ui_pmHelpTopic02Body" v="Nowy zapis zaczyna się z czterema kandydatami; maksymalnie może być dostępnych ośmiu. Zatrudniaj z profili. Doświadczenie, niezawodność i lojalność mają zakres 0-100. Status, płaca, specjalizacje, kronika i sumy są na stronie pracowników. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
+        <e k="ui_pmHelpTopic03Title" v="Pracownicy i cechy" />
+        <e k="ui_pmHelpTopic03Body" v="Doświadczenie wpływa na prędkość, zużycie i spalanie; niezawodność na przerwy, choroby i przerwanie pracy; lojalność na żądania płacowe i odejścia. Strona pracownika pokazuje też status, płacę, specjalizacje, statystyki i osobistą kronikę." />
+        <e k="ui_pmHelpTopic04Title" v="Praca i rozwój" />
+        <e k="ui_pmHelpTopic04Body" v="Rozpoczęcie zwykłej pracy pomocnika SI otwiera wybór pracownika. Wybrać można tylko dostępnych, a jedna osoba nie może wykonywać kilku prac jednocześnie. Czas pracy zwiększa doświadczenie i specjalizację. Doświadczenie wpływa na prędkość, zużycie i spalanie; niezawodność na spowolnienia, choroby i przerwania; lojalność na spory płacowe i odejścia. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
+        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
+        <e k="ui_pmHelpTopic05Body" v="Doświadczenie wpływa na prędkość, zużycie i spalanie; niezawodność na przerwy, choroby i przerwanie pracy; lojalność na żądania płacowe i odejścia. Strona pracownika pokazuje też status, płacę, specjalizacje, statystyki i osobistą kronikę." />
+        <e k="ui_pmHelpTopic06Title" v="Płace" />
+        <e k="ui_pmHelpTopic06Body" v="Płace są księgowane przy zmianie miesiąca i zależą od dni w miesiącu, trudności ekonomicznej oraz ustawień moda. Pracownicy mogą żądać podwyżki; wniosek trzeba przyjąć lub odrzucić w terminie i może on wpłynąć na lojalność." />
+        <e k="ui_pmHelpTopic07Title" v="Szkolenie" />
+        <e k="ui_pmHelpTopic07Body" v="Szkolenie zaczyna się tylko na początku miesiąca, kosztuje i blokuje pracownika do końca miesiąca. Ukończenie poprawia wybraną specjalizację. Oferty i wcześniejsze szkolenia są widoczne w działach Szkolenie i Pracownicy. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic08Title" v="Specjalizacja" />
+        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
+        <e k="ui_pmHelpTopic09Title" v="Rezygnacja, zwolnienie i emerytura" />
+        <e k="ui_pmHelpTopic09Body" v="Te zakończenia nie zawsze działają natychmiast; są realizowane przy zmianie miesiąca według terminów. Pracownika wykonującego pracę nie można od razu zwolnić. Nadchodzące zmiany widać w statusie i kronice." />
+        <e k="ui_pmHelpTopic10Title" v="AutoDrive i Courseplay" />
+        <e k="ui_pmHelpTopic10Body" v="Przypisz kierowców do transportu w Pracownicy / Transport i ustaw priorytet. AutoDrive używa pierwszego dostępnego i blokuje start, jeśli nikogo nie ma. Zwykły start Courseplay otwiera wybór. Gdy Courseplay uruchamia się automatycznie po AutoDrive, każdy pojazd zachowuje własnego kierowcę bez nowego wyboru." />
+        <e k="ui_pmHelpTopic11Title" v="Gra wieloosobowa i zapisy" />
+        <e k="ui_pmHelpTopic11Body" v="Dane personelu i ustawienia są oddzielne dla każdej farmy. Serwer sprawdza zmiany; tylko uprawnieni menedżerowie zarządzają swoją farmą. Pracownicy, aktywne przydziały i ustawienia są synchronizowane. Dane zapisuje helperPersonnel.xml w zapisie gry." />
+        <e k="ui_pmHelpTopic12Title" v="Settings" />
+        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
+        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
+        <e k="ui_pmHelpTopic13Body" v="Dane personelu i ustawienia są oddzielne dla każdej farmy. Serwer sprawdza zmiany; tylko uprawnieni menedżerowie zarządzają swoją farmą. Pracownicy, aktywne przydziały i ustawienia są synchronizowane. Dane zapisuje helperPersonnel.xml w zapisie gry." />
+        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
+        <e k="ui_pmHelpTopic14Body" v="Otwórz menu przez Ctrl + M. Zmieniaj karty sterowaniem stron menu. Użyj A/D lub Lewo/Prawo, aby zmienić osobę, Spacji do potwierdzenia, Esc do powrotu, T do priorytetów transportu i G do żądań płacowych. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
     </elements>
 </l10n>

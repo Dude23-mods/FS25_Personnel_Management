@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <modDesc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" descVersion="109" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>Dude23</author>
-    <version>1.1.3.0</version>
+    <version>1.1.4.0</version>
     <title>
         <en>Personnel Management</en>
         <de>Personalmanagement</de>
@@ -23,6 +23,7 @@
         <action name="HP_SELECT_RIGHT" category="VEHICLE" axisType="HALF" />
         <action name="HP_SELECT_CONFIRM" category="VEHICLE" axisType="HALF" />
         <action name="HP_SELECT_CANCEL" category="VEHICLE" axisType="HALF" />
+        <action name="HP_SELECT_TOGGLE_ALL" category="VEHICLE" axisType="HALF" />
         <action name="HP_TRANSPORT_MANAGE" category="VEHICLE" axisType="HALF" />
         <action name="HP_SALARY_RAISE_MANAGE" category="VEHICLE" axisType="HALF" />
         <action name="HP_OPEN_PERSONNEL_MENU" />
@@ -42,6 +43,9 @@
         <actionBinding action="HP_SELECT_CANCEL">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_esc" />
             <binding device="KB_MOUSE_DEFAULT" input="KEY_escape" />
+        </actionBinding>
+        <actionBinding action="HP_SELECT_TOGGLE_ALL">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_tab" />
         </actionBinding>
         <actionBinding action="HP_TRANSPORT_MANAGE">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_t" />
