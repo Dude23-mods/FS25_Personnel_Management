@@ -71,6 +71,10 @@ Version 1.1.0.0 adds a standalone Personnel Management menu that can be opened w
 
 The menu includes detailed profile views, progress bars, career histories, status information and context-sensitive action buttons. Confirmation dialogs protect important actions such as dismissals and training starts, while page-specific input handling prevents hidden menu pages from reacting to the same key press.
 
+### Employee Selection
+
+When assigning a helper job, Personnel Management opens a dedicated employee selection window. It shows the employee portrait, performance profile, key statistics, learned specializations and professional development. 
+
 ### Applicant Market
 
 Each farm has its own persistent applicant market. Applicants remain available across save and load cycles and have individual:
@@ -83,6 +87,8 @@ Each farm has its own persistent applicant market. Applicants remain available a
 - specialization progress.
 
 Professional backgrounds influence starting experience and create more believable profiles. Applicants stay on the market for a limited period and may leave after later monthly transitions, so recruitment decisions cannot always be postponed indefinitely.
+
+Applicant ages use a weighted distribution: 30% aged 18-29, 30% aged 30-39, 22% aged 40-49, 13% aged 50-59 and 5% aged 60-65.
 
 ### Employee Profiles and Career Histories
 
@@ -118,7 +124,7 @@ Low loyalty can contribute to an employee deciding to leave the farm, while fair
 
 ### Specializations
 
-Employees learn specializations through the work they actually perform. Progress can develop in several activity categories at the same time, and an employee can ultimately acquire up to two specializations.
+Employees learn specializations through the work they actually perform. They can learn more than two specializations over time, but no more than two specialization bonuses can be active simultaneously. Either active slot can be disabled without losing the learned specialization. A deactivated specialization can only be reactivated once per employee and agricultural year.
 
 Recognized activities include field work, harvesting, transport and other supported helper tasks. Progress and completed specializations are shown in the personnel menu.
 
@@ -127,6 +133,8 @@ Recognized activities include field work, harvesting, transport and other suppor
 Employees can attend training to improve selected attributes and specialization progress. The training menu shows available categories, current progress, costs and temporary price adjustments.
 
 Training offers can change from month to month. Individual categories may temporarily have no available places, and an employee can complete only one training course per agricultural year from March to February. Training begins at the start of a month and the employee remains unavailable until the training period is complete.
+
+Training availability and specialization activation are separate rules. An employee can complete only one training course per agricultural year. A learned deactivated specialization can also be reactivated only once per agricultural year.
 
 ### Resignations, Dismissals and Retirement
 
@@ -166,19 +174,13 @@ The settings page groups options for work performance, personnel development, ec
 
 Settings are farm-specific where required and are synchronized through the multiplayer workflow.
 
+### In-game Help
+
+Personnel Management includes a complete in-game Help section with the same subject matter as the ReadMe. The Help uses a topic list and article view inspired by the Precision Farming layout. German is used for the German game language, French for French, and English for all other languages.
+
 ### Savegame Support
 
-Personnel data is stored with the savegame and restored when the game is loaded. Version 1.1.0.0 persists substantially more information, including:
-
-- farm-specific applicant markets,
-- employee profiles and career histories,
-- birthdays, age and retirement data,
-- salaries and open salary requests,
-- specialization and training progress,
-- transport-driver status and priority,
-- long-term personnel statistics and settings.
-
-Existing savegames from earlier mod versions are migrated where necessary. Missing values are initialized without replacing established employees or applicant data.
+Version 1.1.4.0 persists and migrates the complete personnel state, including applicant markets, employee profiles, career histories, salaries, training, specialization progress, active specialization slots, specialization activation years, transport priorities, statistics and farm-specific settings.
 
 ### Multiplayer Synchronization
 
@@ -194,7 +196,6 @@ This prevents players from modifying another farm's personnel and preserves cons
 - Salary negotiations
 - Job interviews, where applicant stats initially remain hidden and can be partially revealed through an interview
 - A more transparent employer reputation system
-- Ingame ReadMe
 
 This is deliberately not intended to be a roadmap, but rather a brainstorming list of possible future features. Whether and how any of these ideas will be implemented remains undecided.
 
