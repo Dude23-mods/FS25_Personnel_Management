@@ -120,8 +120,10 @@ function HelperPersonnelSelectionOverlay:delete()
         self.solidOverlay:delete()
         self.solidOverlay = nil
     end
-    for _, overlay in pairs(self.portraitOverlays or {}) do
-        overlay:delete()
+    for _, cached in pairs(self.portraitOverlays or {}) do
+        if cached ~= nil and cached.overlay ~= nil then
+            cached.overlay:delete()
+        end
     end
     self.portraitOverlays = {}
 end
