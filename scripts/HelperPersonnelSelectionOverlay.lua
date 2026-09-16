@@ -64,8 +64,6 @@ function HelperPersonnelSelectionOverlay.new(app, customMt)
     self.playerFrozenBackup = nil
     self.playerFrozenBackupWasSet = false
     self.inputBlockActive = false
-    self.cursorReleaseFrames = 0
-    self.cursorReleaseUntil = 0
     self.cameraStateBackups = {}
     self.keyConstantCache = {}
     self.showAllWorkers = false
@@ -505,8 +503,6 @@ end
 
 function HelperPersonnelSelectionOverlay:suspendGameplayInput()
     self:restoreGameplayInput()
-    self.cursorReleaseFrames = 0
-    self.cursorReleaseUntil = 0
     self.consumeCancelUntilReleased = false
     self.nativeMenuSuppressionUntil = 0
 
@@ -559,8 +555,6 @@ function HelperPersonnelSelectionOverlay:restoreGameplayInput()
 
     if self.inputBlockActive and g_inputBinding ~= nil and g_inputBinding.setShowMouseCursor ~= nil then
         g_inputBinding:setShowMouseCursor(false)
-        self.cursorReleaseFrames = 12
-        self.cursorReleaseUntil = (tonumber(g_time) or 0) + 500
     end
 
     self.playerFrozenBackup = nil
@@ -682,11 +676,6 @@ function HelperPersonnelSelectionOverlay:beginCancelSuppression()
     self.nativeMenuSuppressionUntil = (tonumber(g_time) or 0) + 500
 end
 
-function HelperPersonnelSelectionOverlay:isCursorReleasePending()
-    local now = tonumber(g_time) or 0
-    return (self.cursorReleaseFrames or 0) > 0 or now < (self.cursorReleaseUntil or 0)
-end
-
 function HelperPersonnelSelectionOverlay:onActionToggleAll(actionName, inputValue)
     if self.isVisible and self:isActionPressed(inputValue) then
         local selectedWorker = self.availableWorkers[self.selectedIndex]
@@ -804,12 +793,6 @@ function HelperPersonnelSelectionOverlay:update(dt)
             and not self:isAnyKeyPressed(HelperPersonnelSelectionOverlay.KEYS_CANCEL)
             and now >= (self.nativeMenuSuppressionUntil or 0) then
             self.consumeCancelUntilReleased = false
-        end
-        if self:isCursorReleasePending() then
-            if g_inputBinding ~= nil and g_inputBinding.setShowMouseCursor ~= nil then
-                g_inputBinding:setShowMouseCursor(false)
-            end
-            self.cursorReleaseFrames = math.max((self.cursorReleaseFrames or 0) - 1, 0)
         end
         return
     end

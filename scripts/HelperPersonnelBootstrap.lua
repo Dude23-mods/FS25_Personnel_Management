@@ -71,11 +71,6 @@ function HelperPersonnelBootstrap.install()
         PlayerCamera.updateRotation = Utils.overwrittenFunction(PlayerCamera.updateRotation, HelperPersonnelBootstrap.onPlayerCameraUpdateRotation)
     end
 
-    if g_inputBinding ~= nil and g_inputBinding.setShowMouseCursor ~= nil then
-        g_inputBinding.setShowMouseCursor = Utils.overwrittenFunction(g_inputBinding.setShowMouseCursor, HelperPersonnelBootstrap.onSetShowMouseCursor)
-    end
-
-
     if Mission00 ~= nil and Mission00.loadMission00Finished ~= nil then
         Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, HelperPersonnelBootstrap.onMissionLoaded)
     end
@@ -328,21 +323,6 @@ function HelperPersonnelBootstrap.onPlayerCameraUpdateRotation(camera, superFunc
 
     if superFunc ~= nil then
         return superFunc(camera, dt)
-    end
-end
-
-function HelperPersonnelBootstrap.onSetShowMouseCursor(inputBinding, superFunc, showMouseCursor, ...)
-    local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
-    if selectionOverlay ~= nil then
-        if selectionOverlay.isVisible == true then
-            showMouseCursor = true
-        elseif selectionOverlay:isCursorReleasePending() then
-            showMouseCursor = false
-        end
-    end
-
-    if superFunc ~= nil then
-        return superFunc(inputBinding, showMouseCursor, ...)
     end
 end
 
