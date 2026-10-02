@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="人员数据和设置按农场分开。 服务器验证所有更改；只有获授权的农场管理员可以管理自己的农场。 员工、活动分配和设置会同步。 人员数据保存在存档内的 helperPersonnel.xml 中。" />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="按 Ctrl + M 打开菜单。 使用菜单翻页控制切换标签页。 按 A/D 或左/右方向键切换人员，空格键确认，Esc 返回，T 设置运输优先级，G 处理加薪请求。 If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="释放" />
+        <e k="ui_pmConfirmReleaseWorker" v="释放 %s？仅当服务器未检测到活动任务时才可执行。" />
+        <e k="ui_workerReleaseSuccess" v="员工已释放。" />
+        <e k="ui_workerReleaseDeniedActive" v="无法释放：员工仍有活动任务。" />
+        <e k="ui_workerReleaseDeniedAvailable" v="无需释放：员工已可用。" />
+        <e k="ui_workerReleaseDeniedCheck" v="无法释放：无法安全验证任务状态。" />
+        <e k="ui_workerReleaseDeniedPermission" v="无法释放：没有权限或员工无效。" />
     </elements>
 </l10n>

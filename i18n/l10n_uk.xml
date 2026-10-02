@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Дані й налаштування персоналу розділені за фермами. Сервер перевіряє зміни; лише уповноважені менеджери керують своєю фермою. Працівники, активні призначення й налаштування синхронізуються. Дані зберігаються у helperPersonnel.xml всередині збереження." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Відкрийте меню через Ctrl + M. Перемикайте вкладки елементами сторінок меню. A/D або Ліворуч/Праворуч змінюють особу, Пробіл підтверджує, Esc повертає, T відкриває пріоритети транспорту, G — запити зарплати. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Звільнити" />
+        <e k="ui_pmConfirmReleaseWorker" v="Звільнити працівника %s? Це можливо, лише якщо сервер не виявив активного завдання." />
+        <e k="ui_workerReleaseSuccess" v="Працівника звільнено." />
+        <e k="ui_workerReleaseDeniedActive" v="Звільнення неможливе: працівник все ще має активне завдання." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Звільнення не потрібне: працівник уже доступний." />
+        <e k="ui_workerReleaseDeniedCheck" v="Звільнення неможливе: стан завдання не вдалося безпечно перевірити." />
+        <e k="ui_workerReleaseDeniedPermission" v="Звільнення неможливе: немає дозволу або працівник недійсний." />
     </elements>
 </l10n>

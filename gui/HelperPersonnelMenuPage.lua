@@ -57,6 +57,7 @@ function HelperPersonnelMenuPage.new(pageKind, customMt)
     self.btnPrimary = nil
     self.btnTransport = nil
     self.btnSalary = nil
+    self.btnRelease = nil
     self.navArrowLeftOverlay = nil
     self.navArrowRightOverlay = nil
     self.navDotActiveOverlay = nil
@@ -347,6 +348,13 @@ function HelperPersonnelMenuPage:createButtonInfo()
             return self:onClickSalaryAction()
         end
     }
+    self.btnRelease = {
+        inputAction = hpMenuGetInputAction("HP_RELEASE_STALE_WORKER", nil),
+        text = self:getText("ui_button_release_worker", "Freigeben"),
+        callback = function()
+            return self:onClickReleaseWorker()
+        end
+    }
     self.btnTransportDialogCancel = {
         inputAction = InputAction.MENU_BACK,
         text = self:getText("ui_transportPriorityCancel", "Abbrechen"),
@@ -482,6 +490,7 @@ function HelperPersonnelMenuPage:updateButtons()
     self.btnPrimary.text = self:getPrimaryButtonText()
     self.btnTransport.text = self:getTransportButtonText()
     self.btnSalary.text = self:getSalaryButtonText()
+    self.btnRelease.text = self:getText("ui_button_release_worker", "Freigeben")
     self.btnPrevPerson.disabled = not hasEntries
     self.btnNextPerson.disabled = not hasEntries
     local currentPerson = self:getCurrentPerson()
@@ -491,11 +500,13 @@ function HelperPersonnelMenuPage:updateButtons()
     self.btnPrimary.disabled = not hasEntries or not canManage or self.pageKind == "overview" or self.pageKind == "settings" or trainingActive
     self.btnTransport.disabled = self.pageKind ~= "employees" or not hasEntries or not canManage
     self.btnSalary.disabled = self.pageKind ~= "employees" or not hasEntries or not canManage
+    self.btnRelease.disabled = self.pageKind ~= "employees" or not hasEntries or not canManage or currentPerson == nil or currentPerson.busy ~= true
 
     if self.pageKind ~= "overview" and self.pageKind ~= "settings" then
         if self.pageKind == "employees" then
             table.insert(buttons, self.btnTransport)
             table.insert(buttons, self.btnSalary)
+            table.insert(buttons, self.btnRelease)
         end
         table.insert(buttons, self.btnPrevPerson)
         table.insert(buttons, self.btnNextPerson)
@@ -1042,6 +1053,20 @@ function HelperPersonnelMenuPage:onClickPrimaryAction()
     return self:showConfirmDialog(text, self.onConfirmDismiss, person)
 end
 
+function HelperPersonnelMenuPage:onClickReleaseWorker()
+    if not self:canManageCurrentFarm() then
+        return false
+    end
+
+    local person = self:getCurrentPerson()
+    if person == nil or person.busy ~= true or self.app == nil or self.app.requestReleaseStaleWorker == nil then
+        return false
+    end
+
+    local text = self:formatText("ui_pmConfirmReleaseWorker", "%s freigeben? Dies ist nur möglich, wenn der Server keinen aktiven Auftrag erkennt.", self:getPersonName(person))
+    return self:showConfirmDialog(text, self.onConfirmReleaseWorker, person)
+end
+
 function HelperPersonnelMenuPage:onConfirmHire(person)
     if person == nil or self.app == nil or self.app.requestHireApplicant == nil then
         return false
@@ -1058,6 +1083,16 @@ function HelperPersonnelMenuPage:onConfirmDismiss(person)
     end
 
     local changed = self.app:requestDismissWorker(person.id) == true
+    self:refresh()
+    return changed
+end
+
+function HelperPersonnelMenuPage:onConfirmReleaseWorker(person)
+    if person == nil or self.app == nil or self.app.requestReleaseStaleWorker == nil then
+        return false
+    end
+
+    local changed = self.app:requestReleaseStaleWorker(person.id) == true
     self:refresh()
     return changed
 end

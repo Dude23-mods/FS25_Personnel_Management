@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Данные и настройки персонала разделены по фермам. Сервер проверяет изменения; управлять фермой могут только уполномоченные менеджеры. Сотрудники, активные назначения и настройки синхронизируются. Данные хранятся в helperPersonnel.xml внутри сохранения." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Откройте меню сочетанием Ctrl + M. Переключайте вкладки кнопками страниц меню. A/D или Влево/Вправо меняют человека, Пробел подтверждает, Esc возвращает, T открывает приоритеты транспорта, G — запросы зарплаты. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Освободить" />
+        <e k="ui_pmConfirmReleaseWorker" v="Освободить сотрудника %s? Это возможно, только если сервер не обнаружил активную задачу." />
+        <e k="ui_workerReleaseSuccess" v="Сотрудник освобождён." />
+        <e k="ui_workerReleaseDeniedActive" v="Освобождение невозможно: у сотрудника ещё есть активная задача." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Освобождение не требуется: сотрудник уже доступен." />
+        <e k="ui_workerReleaseDeniedCheck" v="Освобождение невозможно: состояние задачи нельзя безопасно проверить." />
+        <e k="ui_workerReleaseDeniedPermission" v="Освобождение невозможно: нет прав или сотрудник недействителен." />
     </elements>
 </l10n>

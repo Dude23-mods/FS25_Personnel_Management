@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Personelldata og innstillinger er atskilt per gård. Serveren validerer endringer; bare autoriserte gårdsledere kan styre gården. Ansatte, aktive tildelinger og innstillinger synkroniseres. Data lagres i helperPersonnel.xml i spillagringen." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Åpne menyen med Ctrl + M. Bytt fane med menyens sidekontroller. Bruk A/D eller Venstre/Høyre for å bytte person, Mellomrom for å bekrefte, Esc for å gå tilbake, T for transportprioriteter og G for lønnskrav. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Frigi" />
+        <e k="ui_pmConfirmReleaseWorker" v="Frigi %s? Dette er bare mulig når serveren ikke finner en aktiv jobb." />
+        <e k="ui_workerReleaseSuccess" v="Medarbeideren er frigitt." />
+        <e k="ui_workerReleaseDeniedActive" v="Frigivelse er ikke mulig: Medarbeideren har fortsatt en aktiv jobb." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Frigivelse er ikke nødvendig: Medarbeideren er allerede tilgjengelig." />
+        <e k="ui_workerReleaseDeniedCheck" v="Frigivelse er ikke mulig: Jobbstatusen kunne ikke kontrolleres trygt." />
+        <e k="ui_workerReleaseDeniedPermission" v="Frigivelse er ikke mulig: Ingen tillatelse eller ugyldig medarbeider." />
     </elements>
 </l10n>

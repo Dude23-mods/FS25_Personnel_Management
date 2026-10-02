@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Settings apply per savegame. Work performance: experience, speed, wear, consumables, fuel and reliability. Personnel development: personnel effects, loyalty and night work. Economy: economic effects, individual wages and standard monthly base wage from 100 to 100,000 in steps of 10. Disabling an effect does not retroactively rewrite saved personnel values. Key bindings can be changed in game settings." />
         <e k="ui_pmHelpTopic14Title" v="Multiplayer and savegames" />
         <e k="ui_pmHelpTopic14Body" v="Personnel, applicants, active assignments, wages, training, settings and chronicles are farm-specific. The server decides in multiplayer; only authorized farm managers may change their own farm. Data is stored in helperPersonnel.xml, synchronized to clients and restored with active assignments where possible. Version 1.1.4.0 stores learned specializations and the last activation year. Older saves automatically treat their previously active specializations as learned." />
+        <e k="ui_button_release_worker" v="Release" />
+        <e k="ui_pmConfirmReleaseWorker" v="Release %s? This is only possible when the server detects no active job." />
+        <e k="ui_workerReleaseSuccess" v="Employee released." />
+        <e k="ui_workerReleaseDeniedActive" v="Release not possible: The employee still has an active job." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Release not required: The employee is already available." />
+        <e k="ui_workerReleaseDeniedCheck" v="Release not possible: The job status could not be verified safely." />
+        <e k="ui_workerReleaseDeniedPermission" v="Release not possible: No permission or invalid employee." />
     </elements>
 </l10n>

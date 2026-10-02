@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="A személyzeti adatok és beállítások gazdaságonként külön vannak. A szerver ellenőrzi a változtatásokat; csak jogosult gazdaságvezetők kezelhetik a gazdaságukat. A dolgozók, aktív kijelölések és beállítások szinkronizálódnak. Az adatok a mentés helperPersonnel.xml fájljában vannak." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="A menüt a Ctrl + M nyitja meg. A fülek között a menü lapvezérlőivel válthatsz. Személyváltás: A/D vagy Bal/Jobb; megerősítés: Szóköz; vissza: Esc; szállítási prioritás: T; béremelési kérelmek: G. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Felszabadítás" />
+        <e k="ui_pmConfirmReleaseWorker" v="Felszabadítja %s alkalmazottat? Ez csak akkor lehetséges, ha a szerver nem észlel aktív munkát." />
+        <e k="ui_workerReleaseSuccess" v="Az alkalmazott felszabadítva." />
+        <e k="ui_workerReleaseDeniedActive" v="Felszabadítás nem lehetséges: az alkalmazottnak még aktív munkája van." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Felszabadítás nem szükséges: az alkalmazott már elérhető." />
+        <e k="ui_workerReleaseDeniedCheck" v="Felszabadítás nem lehetséges: a munka állapotát nem lehetett biztonságosan ellenőrizni." />
+        <e k="ui_workerReleaseDeniedPermission" v="Felszabadítás nem lehetséges: nincs jogosultság vagy az alkalmazott érvénytelen." />
     </elements>
 </l10n>

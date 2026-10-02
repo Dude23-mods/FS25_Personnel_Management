@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Paramètres par sauvegarde. Performance : expérience, vitesse, usure, consommables, carburant et fiabilité. Personnel : effets, loyauté et nuit. Économie : effets économiques, salaires individuels et base mensuelle 100–100 000 par pas de 10. Désactiver un effet ne réécrit pas rétroactivement les valeurs enregistrées. Les touches sont modifiables dans les paramètres du jeu." />
         <e k="ui_pmHelpTopic14Title" v="Multijoueur et sauvegardes" />
         <e k="ui_pmHelpTopic14Body" v="Personnel, candidats, affectations, salaires, formations, paramètres et chroniques sont séparés par exploitation. Le serveur décide ; seuls les responsables autorisés modifient leur ferme. Données dans helperPersonnel.xml, synchronisées et restaurées autant que possible. La version 1.1.4.0 stocke les spécialisations apprises et la dernière année d’activation. Les anciennes sauvegardes considèrent automatiquement les spécialisations actives comme apprises." />
+        <e k="ui_button_release_worker" v="Libérer" />
+        <e k="ui_pmConfirmReleaseWorker" v="Libérer %s ? Cela n’est possible que si le serveur ne détecte aucune tâche active." />
+        <e k="ui_workerReleaseSuccess" v="Employé libéré." />
+        <e k="ui_workerReleaseDeniedActive" v="Libération impossible : l’employé a encore une tâche active." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Libération inutile : l’employé est déjà disponible." />
+        <e k="ui_workerReleaseDeniedCheck" v="Libération impossible : l’état de la tâche n’a pas pu être vérifié de manière sûre." />
+        <e k="ui_workerReleaseDeniedPermission" v="Libération impossible : autorisation manquante ou employé invalide." />
     </elements>
 </l10n>

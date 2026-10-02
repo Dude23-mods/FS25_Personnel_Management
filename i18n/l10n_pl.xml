@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Dane personelu i ustawienia są oddzielne dla każdej farmy. Serwer sprawdza zmiany; tylko uprawnieni menedżerowie zarządzają swoją farmą. Pracownicy, aktywne przydziały i ustawienia są synchronizowane. Dane zapisuje helperPersonnel.xml w zapisie gry." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Otwórz menu przez Ctrl + M. Zmieniaj karty sterowaniem stron menu. Użyj A/D lub Lewo/Prawo, aby zmienić osobę, Spacji do potwierdzenia, Esc do powrotu, T do priorytetów transportu i G do żądań płacowych. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Zwolnij" />
+        <e k="ui_pmConfirmReleaseWorker" v="Zwolnić %s? Jest to możliwe tylko wtedy, gdy serwer nie wykrywa aktywnego zadania." />
+        <e k="ui_workerReleaseSuccess" v="Pracownik zwolniony." />
+        <e k="ui_workerReleaseDeniedActive" v="Nie można zwolnić: pracownik nadal ma aktywne zadanie." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Zwolnienie nie jest potrzebne: pracownik jest już dostępny." />
+        <e k="ui_workerReleaseDeniedCheck" v="Nie można zwolnić: stan zadania nie mógł zostać bezpiecznie sprawdzony." />
+        <e k="ui_workerReleaseDeniedPermission" v="Nie można zwolnić: brak uprawnień lub nieprawidłowy pracownik." />
     </elements>
 </l10n>

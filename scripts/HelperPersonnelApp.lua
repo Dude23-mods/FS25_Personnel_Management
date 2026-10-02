@@ -465,6 +465,18 @@ function HelperPersonnelApp:showIngameNotification(textKeyOrText, notificationTy
     end
 end
 
+function HelperPersonnelApp:sendNotificationToConnection(connection, textKeyOrText, notificationType)
+    notificationType = notificationType or self:getDefaultNotificationType()
+
+    if connection ~= nil and connection.sendEvent ~= nil and HelperPersonnelNotificationEvent ~= nil then
+        connection:sendEvent(HelperPersonnelNotificationEvent.new(textKeyOrText, notificationType))
+        return true
+    end
+
+    self:showIngameNotificationLocal(textKeyOrText, notificationType)
+    return true
+end
+
 function HelperPersonnelApp:prepareAIJobForWorker(aiJob, vehicle, workerId)
     if workerId == nil then
         return
@@ -622,17 +634,24 @@ function HelperPersonnelApp:processNetworkAction(actionName, targetId, connectio
 
     farmId = tonumber(farmId) or self:getCurrentFarmId()
     local changed = false
+    local releaseFeedback = nil
 
     if actionName == HelperPersonnelNetwork.ACTION_HIRE and self.manager.hireApplicantForFarm ~= nil then
         changed = self.manager:hireApplicantForFarm(targetId, farmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS and self.manager.dismissWorkerForFarm ~= nil then
         changed = self.manager:dismissWorkerForFarm(targetId, farmId) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER and self.releaseStaleWorkerForFarm ~= nil then
+        changed, releaseFeedback = self:releaseStaleWorkerForFarm(targetId, farmId)
     end
 
     if changed then
         self:syncNetworkStateToClients()
     elseif connection ~= nil then
         self:sendNetworkStateToConnection(connection)
+    end
+
+    if actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER and releaseFeedback ~= nil then
+        self:sendNotificationToConnection(connection, releaseFeedback)
     end
 
     return changed
@@ -675,6 +694,31 @@ function HelperPersonnelApp:requestDismissWorker(workerId)
         local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
         if connection ~= nil and connection.sendEvent ~= nil then
             connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_DISMISS, workerId, nil, farmId))
+            return true
+        end
+    end
+
+    return false
+end
+
+function HelperPersonnelApp:requestReleaseStaleWorker(workerId)
+    local farmId = self:getCurrentFarmId()
+
+    if self:isServerAuthority() then
+        local changed, feedback = self:releaseStaleWorkerForFarm(workerId, farmId)
+        if changed then
+            self:syncNetworkStateToClients()
+        end
+        if feedback ~= nil then
+            self:showIngameNotificationLocal(feedback)
+        end
+        return changed
+    end
+
+    if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
+        local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
+        if connection ~= nil and connection.sendEvent ~= nil then
+            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER, workerId, nil, farmId))
             return true
         end
     end

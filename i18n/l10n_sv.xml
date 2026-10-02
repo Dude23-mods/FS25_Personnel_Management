@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Personaldata och inställningar är separerade per gård. Servern validerar ändringar; bara behöriga gårdschefer får hantera sin gård. Medarbetare, aktiva tilldelningar och inställningar synkroniseras. Data sparas i helperPersonnel.xml i sparfilen." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Öppna menyn med Ctrl + M. Byt flik med menyns sidkontroller. Använd A/D eller Vänster/Höger för att byta person, Mellanslag för att bekräfta, Esc för att gå tillbaka, T för transportprioritet och G för lönekrav. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Frigör" />
+        <e k="ui_pmConfirmReleaseWorker" v="Frigör %s? Det är endast möjligt när servern inte hittar något aktivt arbete." />
+        <e k="ui_workerReleaseSuccess" v="Medarbetaren har frigjorts." />
+        <e k="ui_workerReleaseDeniedActive" v="Frigöring är inte möjlig: medarbetaren har fortfarande ett aktivt arbete." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Frigöring behövs inte: medarbetaren är redan tillgänglig." />
+        <e k="ui_workerReleaseDeniedCheck" v="Frigöring är inte möjlig: arbetsstatusen kunde inte kontrolleras säkert." />
+        <e k="ui_workerReleaseDeniedPermission" v="Frigöring är inte möjlig: saknar behörighet eller ogiltig medarbetare." />
     </elements>
 </l10n>

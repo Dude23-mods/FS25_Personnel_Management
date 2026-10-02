@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Henkilöstötiedot ja asetukset erotellaan maatiloittain. Palvelin vahvistaa muutokset; vain valtuutetut tilanhoitajat hallitsevat tilaansa. Työntekijät, aktiiviset määritykset ja asetukset synkronoidaan. Tiedot tallennetaan tiedostoon helperPersonnel.xml." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Avaa valikko Ctrl + M:llä. Vaihda välilehtiä valikon sivuohjaimilla. Vaihda henkilöä A/D:llä tai Vasen/Oikea-näppäimillä, vahvista Välilyönnillä, palaa Escillä, avaa kuljetusprioriteetit T:llä ja palkkatoiveet G:llä. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Vapauta" />
+        <e k="ui_pmConfirmReleaseWorker" v="Vapautetaanko %s? Tämä on mahdollista vain, jos palvelin ei havaitse aktiivista työtä." />
+        <e k="ui_workerReleaseSuccess" v="Työntekijä vapautettu." />
+        <e k="ui_workerReleaseDeniedActive" v="Vapautus ei ole mahdollista: työntekijällä on yhä aktiivinen työ." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Vapautusta ei tarvita: työntekijä on jo käytettävissä." />
+        <e k="ui_workerReleaseDeniedCheck" v="Vapautus ei ole mahdollista: työn tilaa ei voitu tarkistaa turvallisesti." />
+        <e k="ui_workerReleaseDeniedPermission" v="Vapautus ei ole mahdollista: ei oikeutta tai työntekijä on virheellinen." />
     </elements>
 </l10n>

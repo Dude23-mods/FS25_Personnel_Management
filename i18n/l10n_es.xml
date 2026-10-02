@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Los datos y ajustes de personal se separan por granja. El servidor valida los cambios; solo los administradores autorizados gestionan su granja. Empleados, asignaciones activas y ajustes se sincronizan. Los datos se guardan en helperPersonnel.xml dentro de la partida." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Abre el menú con Ctrl + M. Cambia de pestaña con los controles de página del menú. Usa A/D o Izquierda/Derecha para cambiar de persona, Espacio para confirmar, Esc para volver, T para prioridades de transporte y G para solicitudes salariales. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Liberar" />
+        <e k="ui_pmConfirmReleaseWorker" v="¿Liberar a %s? Solo es posible si el servidor no detecta ningún trabajo activo." />
+        <e k="ui_workerReleaseSuccess" v="Empleado liberado." />
+        <e k="ui_workerReleaseDeniedActive" v="No se puede liberar: el empleado todavía tiene un trabajo activo." />
+        <e k="ui_workerReleaseDeniedAvailable" v="No es necesario liberar: el empleado ya está disponible." />
+        <e k="ui_workerReleaseDeniedCheck" v="No se puede liberar: el estado del trabajo no pudo verificarse con seguridad." />
+        <e k="ui_workerReleaseDeniedPermission" v="No se puede liberar: sin permiso o empleado no válido." />
     </elements>
 </l10n>

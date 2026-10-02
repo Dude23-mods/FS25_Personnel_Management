@@ -713,7 +713,7 @@ function HelperPersonnelApp:validateNetworkActionTarget(actionName, targetId, fa
 
     if actionName == HelperPersonnelNetwork.ACTION_HIRE then
         return self.manager.hasApplicantInFarm ~= nil and self.manager:hasApplicantInFarm(targetId, farmId) == true
-    elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS then
+    elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS or actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER then
         return self.manager.hasWorkerInFarm ~= nil and self.manager:hasWorkerInFarm(targetId, farmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_SET_TRANSPORT_PRIORITY then
         return true
@@ -732,6 +732,9 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
 
     local allowed, authorizedFarmId = self:resolveAuthorizedFarmId(connection, farmId, nil, actionName)
     if not allowed then
+        if actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER and self.sendNotificationToConnection ~= nil then
+            self:sendNotificationToConnection(connection, "ui_workerReleaseDeniedPermission")
+        end
         if connection ~= nil then
             self:sendNetworkStateToConnection(connection)
         end
@@ -740,6 +743,9 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
 
     if not self:validateNetworkActionTarget(actionName, targetId, authorizedFarmId) then
         hpV1550Warn("Network request '%s' rejected: target %s does not belong to farm %s.", tostring(actionName), tostring(targetId), tostring(authorizedFarmId))
+        if actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER and self.sendNotificationToConnection ~= nil then
+            self:sendNotificationToConnection(connection, "ui_workerReleaseDeniedPermission")
+        end
         if connection ~= nil then
             self:sendNetworkStateToConnection(connection)
         end
@@ -747,6 +753,7 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
     end
 
     local changed = false
+    local releaseFeedback = nil
     if actionName == HelperPersonnelNetwork.ACTION_HIRE and self.manager.hireApplicantForFarm ~= nil then
         changed = self.manager:hireApplicantForFarm(targetId, authorizedFarmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS and self.manager.dismissWorkerForFarm ~= nil then
@@ -758,6 +765,8 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
         changed = self.manager:grantSalaryRaiseForFarm(targetId, authorizedFarmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE and self.manager.declineSalaryRaiseForFarm ~= nil then
         changed = self.manager:declineSalaryRaiseForFarm(targetId, authorizedFarmId) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER and self.releaseStaleWorkerForFarm ~= nil then
+        changed, releaseFeedback = self:releaseStaleWorkerForFarm(targetId, authorizedFarmId)
     elseif HP_V1550_ORIGINAL_APP_PROCESS_NETWORK_ACTION ~= nil then
         changed = HP_V1550_ORIGINAL_APP_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, authorizedFarmId, actionData) == true
     end
@@ -766,6 +775,10 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
         self:syncNetworkStateToClients()
     elseif connection ~= nil then
         self:sendNetworkStateToConnection(connection)
+    end
+
+    if actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER and releaseFeedback ~= nil and self.sendNotificationToConnection ~= nil then
+        self:sendNotificationToConnection(connection, releaseFeedback)
     end
 
     return changed
@@ -1562,11 +1575,6 @@ function HelperPersonnelManager:hp1563WorkerHasRealActiveJob(worker, activeLooku
         return true
     end
 
-    local vehicleName = hpV1563NormalizeText((worker.vehicleName ~= nil and worker.vehicleName ~= "") and worker.vehicleName or worker.restoreVehicleName)
-    if vehicleName ~= nil and type(activeLookup.vehicleNames) == "table" and activeLookup.vehicleNames[vehicleName] == true then
-        return true
-    end
-
     return false
 end
 
@@ -1588,8 +1596,85 @@ function HelperPersonnelManager:hp1563ClearWorkerActiveState(worker)
     worker.restoreVehicleKey = nil
     worker.currentJobStartedAt = 0
     worker.currentJobElapsedMs = 0
+    worker.reliabilityJobAbortChecked = false
+    worker.reliabilityJobAbortCheckAt = 0
+    self:clearWorkerSpecializationRuntimeContext(worker)
 
     return wasActive
+end
+
+function HelperPersonnelApp:releaseStaleWorkerForFarm(workerId, farmId)
+    if not self:isServerAuthority() or self.manager == nil then
+        return false, "ui_workerReleaseDeniedCheck"
+    end
+
+    workerId = tonumber(workerId)
+    farmId = tonumber(farmId)
+    if workerId == nil or farmId == nil or self.manager.findWorkerFarmData == nil then
+        return false, "ui_workerReleaseDeniedPermission"
+    end
+
+    local data, workerFarmId = self.manager:findWorkerFarmData(workerId)
+    if data == nil or tonumber(workerFarmId) ~= farmId then
+        return false, "ui_workerReleaseDeniedPermission"
+    end
+
+    local worker = nil
+    for _, candidate in ipairs(data.workers or {}) do
+        if tonumber(candidate.id) == workerId then
+            worker = candidate
+            break
+        end
+    end
+
+    local activeLookup = self.hp15611BuildActiveAssignmentLookup ~= nil and self:hp15611BuildActiveAssignmentLookup() or nil
+    if worker == nil or activeLookup == nil or ((activeLookup.count or 0) > 0 and activeLookup.hasIdentifiers ~= true) then
+        return false, "ui_workerReleaseDeniedCheck"
+    end
+
+    if self.manager.hp1563WorkerHasRealActiveJob == nil or self.manager:hp1563WorkerHasRealActiveJob(worker, activeLookup) then
+        return false, "ui_workerReleaseDeniedActive"
+    end
+
+    if self.manager.hp1563ClearWorkerActiveState == nil or self.manager:hp1563ClearWorkerActiveState(worker) ~= true then
+        return false, "ui_workerReleaseDeniedAvailable"
+    end
+
+    if self.helperBridge ~= nil then
+        self.helperBridge.workerJobById = self.helperBridge.workerJobById or {}
+        self.helperBridge.jobWorkerIds = self.helperBridge.jobWorkerIds or {}
+        self.helperBridge.vehicleWorkerIds = self.helperBridge.vehicleWorkerIds or {}
+
+        local job = self.helperBridge.workerJobById[workerId]
+        self.helperBridge.workerJobById[workerId] = nil
+        if job ~= nil then
+            self.helperBridge.jobWorkerIds[job] = nil
+            if job.helperPersonnelWorkerId == workerId then
+                job.helperPersonnelWorkerId = nil
+            end
+        end
+        for mappedJob, mappedWorkerId in pairs(self.helperBridge.jobWorkerIds) do
+            if tonumber(mappedWorkerId) == workerId then
+                self.helperBridge.jobWorkerIds[mappedJob] = nil
+                if mappedJob ~= nil and mappedJob.helperPersonnelWorkerId == workerId then
+                    mappedJob.helperPersonnelWorkerId = nil
+                end
+            end
+        end
+        for vehicleKey, mappedWorkerId in pairs(self.helperBridge.vehicleWorkerIds) do
+            if tonumber(mappedWorkerId) == workerId then
+                self.helperBridge.vehicleWorkerIds[vehicleKey] = nil
+            end
+        end
+    end
+
+    self.manager:storeCurrentFarmData()
+    self.manager.changeCounter = (self.manager.changeCounter or 0) + 1
+    if self.manager.notifyDataChanged ~= nil then
+        self.manager:notifyDataChanged()
+    end
+    HelperPersonnel.debugInfo("FS25_HelperPersonnel: Released stale assignment for worker ID %s.", tostring(workerId))
+    return true, "ui_workerReleaseSuccess"
 end
 
 function HelperPersonnelManager:hp1563FilterAssignments(assignments, activeLookup)
@@ -1600,13 +1685,9 @@ function HelperPersonnelManager:hp1563FilterAssignments(assignments, activeLooku
         local keep = false
         local workerId = tonumber(assignment.workerId)
         local vehicleKey = hpV1562NormalizeVehicleKey(assignment.vehicleKey)
-        local vehicleName = hpV1563NormalizeText(assignment.vehicleName)
-
         if workerId ~= nil and type(activeLookup.workerIds) == "table" and activeLookup.workerIds[workerId] == true then
             keep = true
         elseif vehicleKey ~= nil and type(activeLookup.vehicleKeys) == "table" and activeLookup.vehicleKeys[vehicleKey] == true then
-            keep = true
-        elseif vehicleName ~= nil and type(activeLookup.vehicleNames) == "table" and activeLookup.vehicleNames[vehicleName] == true then
             keep = true
         end
 

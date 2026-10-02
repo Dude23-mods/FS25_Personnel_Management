@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Dữ liệu và cài đặt nhân sự được tách theo nông trại. Máy chủ xác thực thay đổi; chỉ quản lý được ủy quyền mới quản lý nông trại của mình. Nhân viên, phân công đang hoạt động và cài đặt được đồng bộ. Dữ liệu nằm trong helperPersonnel.xml của bản lưu." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Mở menu bằng Ctrl + M. Đổi thẻ bằng điều khiển trang của menu. Dùng A/D hoặc Trái/Phải để đổi người, Space để xác nhận, Esc để quay lại, T cho ưu tiên vận chuyển và G cho yêu cầu lương. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Giải phóng" />
+        <e k="ui_pmConfirmReleaseWorker" v="Giải phóng %s? Chỉ có thể thực hiện khi máy chủ không phát hiện công việc đang hoạt động." />
+        <e k="ui_workerReleaseSuccess" v="Đã giải phóng nhân viên." />
+        <e k="ui_workerReleaseDeniedActive" v="Không thể giải phóng: nhân viên vẫn có công việc đang hoạt động." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Không cần giải phóng: nhân viên đã sẵn sàng." />
+        <e k="ui_workerReleaseDeniedCheck" v="Không thể giải phóng: không thể xác minh an toàn trạng thái công việc." />
+        <e k="ui_workerReleaseDeniedPermission" v="Không thể giải phóng: không có quyền hoặc nhân viên không hợp lệ." />
     </elements>
 </l10n>

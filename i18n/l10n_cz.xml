@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Data a nastavení jsou oddělena podle farem. Server ověřuje změny; farmu spravují jen oprávnění manažeři. Zaměstnanci, aktivní přiřazení a nastavení se synchronizují. Data jsou v helperPersonnel.xml v uložené hře." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Menu otevřete pomocí Ctrl + M. Karty přepínejte ovládáním stránek menu. Osobu změníte A/D nebo Vlevo/Vpravo, Mezerník potvrzuje, Esc se vrací, T otevírá priority dopravy a G požadavky na mzdu. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Uvolnit" />
+        <e k="ui_pmConfirmReleaseWorker" v="Uvolnit %s? Je to možné pouze tehdy, když server nezjistí žádnou aktivní úlohu." />
+        <e k="ui_workerReleaseSuccess" v="Zaměstnanec uvolněn." />
+        <e k="ui_workerReleaseDeniedActive" v="Uvolnění není možné: zaměstnanec má stále aktivní úlohu." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Uvolnění není nutné: zaměstnanec je již k dispozici." />
+        <e k="ui_workerReleaseDeniedCheck" v="Uvolnění není možné: stav úlohy nelze bezpečně ověřit." />
+        <e k="ui_workerReleaseDeniedPermission" v="Uvolnění není možné: chybí oprávnění nebo je zaměstnanec neplatný." />
     </elements>
 </l10n>

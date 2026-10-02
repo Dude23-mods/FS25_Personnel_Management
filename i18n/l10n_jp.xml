@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="人事データと設定は農場ごとに分かれます。 サーバーが変更を検証し、権限のある農場管理者だけが自分の農場を管理できます。 従業員、実行中の割り当て、設定は同期されます。 データはセーブ内の helperPersonnel.xml に保存されます。" />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Ctrl + M でメニューを開きます。 メニューのページ操作でタブを切り替えます。 A/D または左右キーで人物を変更し、スペースで決定、Esc で戻り、T で輸送優先順位、G で昇給要求を開きます。 If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="解放" />
+        <e k="ui_pmConfirmReleaseWorker" v="%sを解放しますか？ サーバーが有効な作業を検出しない場合のみ可能です。" />
+        <e k="ui_workerReleaseSuccess" v="従業員を解放しました。" />
+        <e k="ui_workerReleaseDeniedActive" v="解放できません：従業員にはまだ有効な作業があります。" />
+        <e k="ui_workerReleaseDeniedAvailable" v="解放は不要です：従業員はすでに利用可能です。" />
+        <e k="ui_workerReleaseDeniedCheck" v="解放できません：作業状態を安全に確認できませんでした。" />
+        <e k="ui_workerReleaseDeniedPermission" v="解放できません：権限がないか、従業員が無効です。" />
     </elements>
 </l10n>

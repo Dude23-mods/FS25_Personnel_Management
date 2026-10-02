@@ -6,6 +6,7 @@ HelperPersonnelNetwork.ACTION_DISMISS = "dismiss"
 HelperPersonnelNetwork.ACTION_TRAIN_WORKER = "trainWorker"
 HelperPersonnelNetwork.ACTION_GRANT_SALARY_RAISE = "grantSalaryRaise"
 HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE = "declineSalaryRaise"
+HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER = "releaseStaleWorker"
 
 function HelperPersonnelNetwork.writeString(streamId, value)
     streamWriteString(streamId, value ~= nil and tostring(value) or "")

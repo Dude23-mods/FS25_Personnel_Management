@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Personel verileri ve ayarlar çiftlik bazında ayrılır. Sunucu değişiklikleri doğrular; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini yönetebilir. Çalışanlar, etkin atamalar ve ayarlar eşitlenir. Veriler kayıttaki helperPersonnel.xml dosyasında tutulur." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Menüyü Ctrl + M ile açın. Menü sayfası kontrolleriyle sekme değiştirin. Kişi değiştirmek için A/D veya Sol/Sağ, onay için Boşluk, geri dönmek için Esc, taşıma öncelikleri için T ve maaş talepleri için G kullanın. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Serbest bırak" />
+        <e k="ui_pmConfirmReleaseWorker" v="%s serbest bırakılsın mı? Bu yalnızca sunucu etkin bir iş algılamadığında mümkündür." />
+        <e k="ui_workerReleaseSuccess" v="Çalışan serbest bırakıldı." />
+        <e k="ui_workerReleaseDeniedActive" v="Serbest bırakma mümkün değil: çalışanın hâlâ etkin bir işi var." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Serbest bırakma gerekli değil: çalışan zaten kullanılabilir." />
+        <e k="ui_workerReleaseDeniedCheck" v="Serbest bırakma mümkün değil: iş durumu güvenli şekilde doğrulanamadı." />
+        <e k="ui_workerReleaseDeniedPermission" v="Serbest bırakma mümkün değil: izin yok veya çalışan geçersiz." />
     </elements>
 </l10n>

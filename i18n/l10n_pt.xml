@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Dados e configurações são separados por fazenda. O servidor valida alterações; só gerentes autorizados administram sua fazenda. Funcionários, atribuições ativas e configurações são sincronizados. Os dados ficam em helperPersonnel.xml dentro do jogo salvo." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Abra o menu com Ctrl + M. Troque de aba com os controles de página do menu. Use A/D ou Esquerda/Direita para mudar de pessoa, Espaço para confirmar, Esc para voltar, T para prioridades de transporte e G para pedidos salariais. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Liberar" />
+        <e k="ui_pmConfirmReleaseWorker" v="Liberar %s? Isto só é possível quando o servidor não deteta nenhum trabalho ativo." />
+        <e k="ui_workerReleaseSuccess" v="Funcionário libertado." />
+        <e k="ui_workerReleaseDeniedActive" v="Não é possível libertar: o funcionário ainda tem um trabalho ativo." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Não é necessário libertar: o funcionário já está disponível." />
+        <e k="ui_workerReleaseDeniedCheck" v="Não é possível libertar: o estado do trabalho não pôde ser verificado com segurança." />
+        <e k="ui_workerReleaseDeniedPermission" v="Não é possível libertar: sem permissão ou funcionário inválido." />
     </elements>
 </l10n>

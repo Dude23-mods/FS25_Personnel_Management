@@ -597,5 +597,12 @@
         <e k="ui_pmHelpTopic13Body" v="Dati e impostazioni sono separati per azienda. Il server convalida le modifiche; solo i gestori autorizzati amministrano la propria azienda. Dipendenti, assegnazioni attive e impostazioni vengono sincronizzati. I dati sono salvati in helperPersonnel.xml nel salvataggio." />
         <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
         <e k="ui_pmHelpTopic14Body" v="Apri il menu con Ctrl + M. Cambia scheda con i comandi pagina del menu. Usa A/D o Sinistra/Destra per cambiare persona, Spazio per confermare, Esc per tornare, T per le priorità di trasporto e G per le richieste salariali. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
+        <e k="ui_button_release_worker" v="Libera" />
+        <e k="ui_pmConfirmReleaseWorker" v="Liberare %s? È possibile solo se il server non rileva alcun lavoro attivo." />
+        <e k="ui_workerReleaseSuccess" v="Dipendente liberato." />
+        <e k="ui_workerReleaseDeniedActive" v="Liberazione non possibile: il dipendente ha ancora un lavoro attivo." />
+        <e k="ui_workerReleaseDeniedAvailable" v="Liberazione non necessaria: il dipendente è già disponibile." />
+        <e k="ui_workerReleaseDeniedCheck" v="Liberazione non possibile: lo stato del lavoro non può essere verificato con sicurezza." />
+        <e k="ui_workerReleaseDeniedPermission" v="Liberazione non possibile: nessun permesso o dipendente non valido." />
     </elements>
 </l10n>
