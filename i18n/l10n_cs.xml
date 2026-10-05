@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="管理运输任务" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="工资要求管理" />
         <e k="input_HP_SELECT_CANCEL" v="取消员工选择" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="释放被阻塞的员工" />
         <e k="ui_openWorkerView" v="员工" />
         <e k="ui_openApplicantView" v="申请人" />
         <e k="ui_backToOverview" v="返回概览" />

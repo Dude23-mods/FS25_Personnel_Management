@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="운송 업무 관리" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="급여 인상 요청 관리" />
         <e k="input_HP_SELECT_CANCEL" v="직원 선택 취소" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="차단된 직원 해제" />
         <e k="ui_openWorkerView" v="직원" />
         <e k="ui_openApplicantView" v="지원자" />
         <e k="ui_backToOverview" v="개요로 돌아가기" />

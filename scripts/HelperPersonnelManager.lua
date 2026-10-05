@@ -5525,6 +5525,11 @@ function HelperPersonnelManager:getTotalWorkStats()
 end
 
 function HelperPersonnelManager:getLifetimePersonnelStats()
+    local networkStats = type(self.currentFarmData) == "table" and self.currentFarmData.networkLifetimePersonnelStats or nil
+    if type(networkStats) == "table" then
+        return networkStats
+    end
+
     local stats = {
         jobs = 0,
         workMinutes = 0,
@@ -6286,7 +6291,7 @@ function HelperPersonnelManager:updateLoyaltyRuntimeForAllFarms(dt)
         return
     end
 
-    self:forEachFarm(function()
+    self:forEachRuntimeFarm(function()
         self:updateLoyaltyRuntimeForCurrentFarm(dt)
     end)
 end
@@ -7527,6 +7532,24 @@ function HelperPersonnelManager:forEachFarm(callback)
     self:refreshFarmContext()
 end
 
+function HelperPersonnelManager:forEachRuntimeFarm(callback)
+    if callback == nil then
+        return
+    end
+
+    self:refreshFarmContext()
+    local farmIds = self.getRuntimeFarmIds ~= nil and self:getRuntimeFarmIds() or self:getSortedFarmIds()
+    for _, farmId in ipairs(farmIds or {}) do
+        local data = self.farms[farmId]
+        if data ~= nil then
+            self:bindFarmData(data)
+            callback(data, farmId)
+            self:storeCurrentFarmData()
+        end
+    end
+    self:refreshFarmContext()
+end
+
 local function hpLayer_HelperPersonnelManager_readPersonFromXML_1(self, xmlFile, key)
     local person = {
         id = xmlFile:getInt(key .. "#id"),
@@ -8494,7 +8517,7 @@ function HelperPersonnelManager:onPeriodChanged(period, year)
     self:storeCurrentFarmData()
 
     local processed = false
-    self:forEachFarm(function(_, farmId)
+    self:forEachRuntimeFarm(function(_, farmId)
         local changed = self:processPeriodChangeForFarm(farmId, period, year, true)
         processed = processed or changed == true
     end)
@@ -8513,7 +8536,7 @@ function HelperPersonnelManager:update(dt)
         self.loyaltyRuntimeTimerMs = 0
         self:storeCurrentFarmData()
 
-        self:forEachFarm(function()
+        self:forEachRuntimeFarm(function()
             self:updateLoyaltyRuntimeForCurrentFarm(elapsedLoyaltyMs)
         end)
         processed = true
@@ -8525,7 +8548,7 @@ function HelperPersonnelManager:update(dt)
         self.periodCheckTimerMs = 0
         self:storeCurrentFarmData()
 
-        self:forEachFarm(function(_, farmId)
+        self:forEachRuntimeFarm(function(_, farmId)
             local changed = self:processPeriodChangeForFarm(farmId, nil, nil, false)
             processed = processed or changed == true
         end)
@@ -9964,14 +9987,14 @@ function HelperPersonnelManager:getPersonChronicleStore(person)
     end
 
     if data ~= nil then
-        data.personChronicles = self:normalizePersonChronicles(data.personChronicles)
+        data.personChronicles = type(data.personChronicles) == "table" and data.personChronicles or {}
         if data == self.currentFarmData then
             self.personChronicles = data.personChronicles
         end
         return data.personChronicles, data
     end
 
-    self.personChronicles = self:normalizePersonChronicles(self.personChronicles)
+    self.personChronicles = type(self.personChronicles) == "table" and self.personChronicles or {}
     return self.personChronicles, nil
 end
 
@@ -9997,8 +10020,10 @@ function HelperPersonnelManager:getPersonChronicleRecord(personOrId, createIfMis
         }, personId)
         records[personId] = record
     elseif record ~= nil then
-        record = self:normalizePersonChronicleRecord(record, personId)
-        records[personId] = record
+        if createIfMissing == true then
+            record = self:normalizePersonChronicleRecord(record, personId)
+            records[personId] = record
+        end
         if person ~= nil then
             record.firstName = tostring(person.firstName or record.firstName or "")
             record.lastName = tostring(person.lastName or record.lastName or "")
@@ -10046,6 +10071,11 @@ function HelperPersonnelManager:addPersonChronicleEntry(person, eventType, data)
     record.firstName = tostring(person.firstName or record.firstName or "")
     record.lastName = tostring(person.lastName or record.lastName or "")
     record.departed = data.departed == true or record.departed == true
+    local farmId = tonumber(person.farmId)
+    local farmData = farmId ~= nil and type(self.farms) == "table" and self.farms[farmId] or self.currentFarmData
+    if type(farmData) == "table" and type(farmData.chronicleWorkerHistoryOverviews) == "table" then
+        farmData.chronicleWorkerHistoryOverviews[math.floor((tonumber(person.id) or 0) + 0.5)] = nil
+    end
     self.changeCounter = (self.changeCounter or 0) + 1
     return entry
 end
@@ -10078,6 +10108,21 @@ function HelperPersonnelManager:getWorkerHistoryOverview(worker)
 
     if type(worker) ~= "table" then
         return result
+    end
+
+    local farmId = tonumber(worker.farmId)
+    local farmData = farmId ~= nil and type(self.farms) == "table" and self.farms[farmId] or self.currentFarmData
+    local networkOverviews = type(farmData) == "table" and farmData.networkWorkerHistoryOverviews or nil
+    local networkOverview = type(networkOverviews) == "table" and networkOverviews[tonumber(worker.id)] or nil
+    if type(networkOverview) == "table" then
+        return networkOverview
+    end
+
+    local workerId = tonumber(worker.id)
+    local cachedOverviews = type(farmData) == "table" and farmData.chronicleWorkerHistoryOverviews or nil
+    local cachedOverview = workerId ~= nil and type(cachedOverviews) == "table" and cachedOverviews[math.floor(workerId + 0.5)] or nil
+    if type(cachedOverview) == "table" then
+        return cachedOverview
     end
 
     local entries = self:getPersonChronicleEntries(worker)
@@ -10128,51 +10173,9 @@ function HelperPersonnelManager:getWorkerHistoryOverview(worker)
         end
     end
 
-    return result
-end
-
-function HelperPersonnelManager:copyPersonChroniclesForNetwork(records)
-    local result = {}
-    records = self:normalizePersonChronicles(records)
-    local ids = {}
-
-    for personId, _ in pairs(records) do
-        table.insert(ids, personId)
-    end
-    table.sort(ids)
-
-    for _, personId in ipairs(ids) do
-        local source = records[personId]
-        local copy = {
-            personId = source.personId,
-            firstName = source.firstName,
-            lastName = source.lastName,
-            departed = source.departed == true,
-            sequence = source.sequence or 0,
-            entries = {}
-        }
-        for _, entry in ipairs(source.entries or {}) do
-            table.insert(copy.entries, {
-                sequence = entry.sequence,
-                eventType = entry.eventType,
-                period = entry.period,
-                gameYear = entry.gameYear,
-                calendarMonth = entry.calendarMonth,
-                calendarYear = entry.calendarYear,
-                day = entry.day,
-                category = entry.category,
-                reason = entry.reason,
-                text = entry.text,
-                valueName = entry.valueName,
-                oldValue = entry.oldValue,
-                newValue = entry.newValue,
-                delta = entry.delta,
-                amount = entry.amount,
-                minutes = entry.minutes,
-                vehicleName = entry.vehicleName
-            })
-        end
-        table.insert(result, copy)
+    if workerId ~= nil and type(farmData) == "table" then
+        farmData.chronicleWorkerHistoryOverviews = farmData.chronicleWorkerHistoryOverviews or {}
+        farmData.chronicleWorkerHistoryOverviews[math.floor(workerId + 0.5)] = result
     end
 
     return result
@@ -10604,9 +10607,15 @@ function HelperPersonnelManager:readPersonChroniclesFromXML(xmlFile, basePath)
 end
 
 function HelperPersonnelManager:writePersonChroniclesToXML(xmlFile, basePath, records)
-    local copies = self:copyPersonChroniclesForNetwork(records)
+    records = self:normalizePersonChronicles(records)
+    local personIds = {}
+    for personId, _ in pairs(records) do
+        table.insert(personIds, personId)
+    end
+    table.sort(personIds)
 
-    for recordIndex, record in ipairs(copies) do
+    for recordIndex, personId in ipairs(personIds) do
+        local record = records[personId]
         local recordPath = string.format("%s.person(%d)", basePath, recordIndex - 1)
         xmlFile:setInt(recordPath .. "#personId", record.personId)
         xmlFile:setString(recordPath .. "#firstName", record.firstName or "")
@@ -10647,7 +10656,7 @@ end
 local hpChronicleOriginalBindFarmData = hpLayer_HelperPersonnelManager_bindFarmData_2
 function HelperPersonnelManager:bindFarmData(data)
     if data ~= nil then
-        data.personChronicles = self:normalizePersonChronicles(data.personChronicles)
+        data.personChronicles = type(data.personChronicles) == "table" and data.personChronicles or {}
     end
     local result = hpChronicleOriginalBindFarmData(self, data)
     if data ~= nil then
@@ -10660,7 +10669,7 @@ local hpChronicleOriginalStoreCurrentFarmData = hpLayer_HelperPersonnelManager_s
 function HelperPersonnelManager:storeCurrentFarmData()
     local data = hpChronicleOriginalStoreCurrentFarmData(self)
     if data ~= nil then
-        data.personChronicles = self:normalizePersonChronicles(self.personChronicles or data.personChronicles)
+        data.personChronicles = type(self.personChronicles) == "table" and self.personChronicles or (type(data.personChronicles) == "table" and data.personChronicles or {})
         self.personChronicles = data.personChronicles
     end
     return data
@@ -10706,8 +10715,13 @@ function HelperPersonnelManager:applyNetworkState(state)
         for _, farmState in ipairs(state.farms) do
             local farmId = tonumber(farmState.farmId)
             local data = farmId ~= nil and type(self.farms) == "table" and self.farms[farmId] or nil
-            if data ~= nil then
+            if data ~= nil and farmState.personChronicles ~= nil then
                 data.personChronicles = self:normalizePersonChronicles(farmState.personChronicles)
+            end
+            if data ~= nil then
+                data.networkLifetimePersonnelStats = farmState.lifetimePersonnelStats
+                data.networkWorkerHistoryOverviews = farmState.workerHistoryOverviews
+                data.chronicleWorkerHistoryOverviews = nil
             end
         end
     end

@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Hantera transportuppdrag" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Hantera lönekrav" />
         <e k="input_HP_SELECT_CANCEL" v="Avbryt val av anställd" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Frigör blockerad medarbetare" />
         <e k="ui_openWorkerView" v="Arbetare" />
         <e k="ui_openApplicantView" v="Sökande" />
         <e k="ui_backToOverview" v="Tillbaka till översikt" />

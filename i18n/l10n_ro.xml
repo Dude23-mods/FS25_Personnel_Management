@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Gestionează sarcinile de transport" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Gestionează cererile de mărire" />
         <e k="input_HP_SELECT_CANCEL" v="Anulează selecția angajatului" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Eliberează angajat blocat" />
         <e k="ui_openWorkerView" v="Lucrători" />
         <e k="ui_openApplicantView" v="Candidați" />
         <e k="ui_backToOverview" v="Înapoi la prezentare" />

@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Spravovat dopravní úkoly" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Správa žádostí o zvýšení mzdy" />
         <e k="input_HP_SELECT_CANCEL" v="Zrušit výběr zaměstnance" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Uvolnit zablokovaného zaměstnance" />
         <e k="ui_openWorkerView" v="Zaměstnanci" />
         <e k="ui_openApplicantView" v="Uchazeči" />
         <e k="ui_backToOverview" v="Zpět na přehled" />

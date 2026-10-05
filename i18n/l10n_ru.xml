@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Управление транспортными работами" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Управление запросами на повышение" />
         <e k="input_HP_SELECT_CANCEL" v="Отменить выбор сотрудника" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Освободить заблокированного сотрудника" />
         <e k="ui_openWorkerView" v="Работники" />
         <e k="ui_openApplicantView" v="Кандидаты" />
         <e k="ui_backToOverview" v="Назад к обзору" />

@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Zarządzaj zadaniami transportowymi" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Zarządzaj wnioskami o podwyżkę" />
         <e k="input_HP_SELECT_CANCEL" v="Anuluj wybór pracownika" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Zwolnij zablokowanego pracownika" />
         <e k="ui_openWorkerView" v="Pracownicy" />
         <e k="ui_openApplicantView" v="Kandydaci" />
         <e k="ui_backToOverview" v="Wróć do przeglądu" />

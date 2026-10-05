@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Taşıma görevlerini yönet" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Zam taleplerini yönet" />
         <e k="input_HP_SELECT_CANCEL" v="Çalışan seçimini iptal et" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Engellenen çalışanı serbest bırak" />
         <e k="ui_openWorkerView" v="Çalışanlar" />
         <e k="ui_openApplicantView" v="Adaylar" />
         <e k="ui_backToOverview" v="Genel bakışa dön" />

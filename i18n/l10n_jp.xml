@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="運搬業務を管理" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="昇給要求を管理" />
         <e k="input_HP_SELECT_CANCEL" v="従業員選択を取消" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="ブロックされた従業員を解放" />
         <e k="ui_openWorkerView" v="従業員" />
         <e k="ui_openApplicantView" v="応募者" />
         <e k="ui_backToOverview" v="概要へ戻る" />

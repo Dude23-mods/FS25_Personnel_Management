@@ -346,7 +346,7 @@ function HelperPersonnelNetwork.readHistory(streamId)
 end
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
-HelperPersonnelNetwork.STATE_VERSION = 19
+HelperPersonnelNetwork.STATE_VERSION = 20
 HelperPersonnelNetwork.ACTION_SELECT_WORKER = "selectWorker"
 HelperPersonnelNetwork.MAX_NETWORK_FARMS = 64
 HelperPersonnelNetwork.MAX_NETWORK_PEOPLE = 1024
@@ -354,6 +354,7 @@ HelperPersonnelNetwork.MAX_NETWORK_HISTORY = 64
 HelperPersonnelNetwork.MAX_NETWORK_ASSIGNMENTS = 1024
 HelperPersonnelNetwork.MAX_NETWORK_CHRONICLE_RECORDS = 4096
 HelperPersonnelNetwork.MAX_NETWORK_CHRONICLE_ENTRIES = 8192
+HelperPersonnelNetwork.MAX_NETWORK_WORKER_HISTORY_OVERVIEWS = 1024
 HelperPersonnelNetwork.MAX_NETWORK_TOTAL_ITEMS = 32768
 
 function HelperPersonnelNetwork.beginNetworkRead()
@@ -585,6 +586,65 @@ function HelperPersonnelNetwork.readChronicleRecords(streamId)
     return records
 end
 
+function HelperPersonnelNetwork.writeWorkerHistoryOverviews(streamId, overviews)
+    overviews = type(overviews) == "table" and overviews or {}
+    local personIds = {}
+    for personId, overview in pairs(overviews) do
+        if type(overview) == "table" and tonumber(personId) ~= nil then
+            table.insert(personIds, tonumber(personId))
+        end
+    end
+    table.sort(personIds)
+    streamWriteInt32(streamId, #personIds)
+
+    for _, personId in ipairs(personIds) do
+        local overview = overviews[personId] or {}
+        streamWriteInt32(streamId, personId)
+        streamWriteInt32(streamId, tonumber(overview.sicknessDays) or 0)
+        streamWriteInt32(streamId, tonumber(overview.salaryRequests) or 0)
+        streamWriteInt32(streamId, tonumber(overview.abortedJobs) or 0)
+        HelperPersonnelNetwork.writeString(streamId, overview.salaryRequestStatus)
+        for _, field in ipairs({ "latestSickness", "latestSalaryRequest", "latestJobAbort" }) do
+            local entry = overview[field]
+            streamWriteBool(streamId, type(entry) == "table")
+            if type(entry) == "table" then
+                streamWriteInt32(streamId, tonumber(entry.day) or 1)
+                streamWriteInt32(streamId, tonumber(entry.calendarMonth) or 1)
+                streamWriteInt32(streamId, tonumber(entry.calendarYear) or 2025)
+                HelperPersonnelNetwork.writeString(streamId, entry.reason)
+            end
+        end
+    end
+end
+
+function HelperPersonnelNetwork.readWorkerHistoryOverviews(streamId)
+    local overviews = {}
+    local count = HelperPersonnelNetwork.readBoundedCount(streamId, HelperPersonnelNetwork.MAX_NETWORK_WORKER_HISTORY_OVERVIEWS, "workerHistoryOverviews")
+    for _ = 1, count do
+        local personId = streamReadInt32(streamId) or 0
+        local overview = {
+            sicknessDays = math.max(0, streamReadInt32(streamId) or 0),
+            salaryRequests = math.max(0, streamReadInt32(streamId) or 0),
+            abortedJobs = math.max(0, streamReadInt32(streamId) or 0),
+            salaryRequestStatus = HelperPersonnelNetwork.readString(streamId) or "unresolved"
+        }
+        for _, field in ipairs({ "latestSickness", "latestSalaryRequest", "latestJobAbort" }) do
+            if streamReadBool(streamId) then
+                overview[field] = {
+                    day = streamReadInt32(streamId) or 1,
+                    calendarMonth = streamReadInt32(streamId) or 1,
+                    calendarYear = streamReadInt32(streamId) or 2025,
+                    reason = HelperPersonnelNetwork.readString(streamId)
+                }
+            end
+        end
+        if personId > 0 then
+            overviews[personId] = overview
+        end
+    end
+    return overviews
+end
+
 function HelperPersonnelNetwork.writeAssignment(streamId, assignment)
     assignment = assignment or {}
     streamWriteInt32(streamId, tonumber(assignment.workerId) or 0)
@@ -660,7 +720,19 @@ function HelperPersonnelNetwork.writeFarmState(streamId, farmState)
     HelperPersonnelNetwork.writePersonArray(streamId, farmState.applicants or {})
     HelperPersonnelNetwork.writeHistory(streamId, farmState.reputationHistory or {})
     HelperPersonnelNetwork.writeHistory(streamId, farmState.actionHistory or {})
-    HelperPersonnelNetwork.writeChronicleRecords(streamId, farmState.personChronicles or {})
+    if HelperPersonnelNetwork.STATE_VERSION >= 20 then
+        local stats = type(farmState.lifetimePersonnelStats) == "table" and farmState.lifetimePersonnelStats or {}
+        streamWriteInt32(streamId, tonumber(stats.jobs) or 0)
+        streamWriteInt32(streamId, tonumber(stats.workMinutes) or 0)
+        streamWriteFloat32(streamId, tonumber(stats.totalPayrollPaid) or 0)
+        streamWriteInt32(streamId, tonumber(stats.everHired) or 0)
+        streamWriteInt32(streamId, tonumber(stats.dismissed) or 0)
+        streamWriteInt32(streamId, tonumber(stats.resigned) or 0)
+        streamWriteInt32(streamId, tonumber(stats.retired) or 0)
+        HelperPersonnelNetwork.writeWorkerHistoryOverviews(streamId, farmState.workerHistoryOverviews)
+    else
+        HelperPersonnelNetwork.writeChronicleRecords(streamId, farmState.personChronicles or {})
+    end
 
     HelperPersonnelNetwork.writeOptionalInt(streamId, farmState.selectedWorkerId)
     HelperPersonnelNetwork.writeString(streamId, farmState.selectedVehicleKey)
@@ -716,7 +788,18 @@ function HelperPersonnelNetwork.readFarmState(streamId, version)
     farmState.applicants = HelperPersonnelNetwork.readPersonArray(streamId, version)
     farmState.reputationHistory = HelperPersonnelNetwork.readHistory(streamId)
     farmState.actionHistory = HelperPersonnelNetwork.readHistory(streamId)
-    if (version or 0) >= 18 then
+    if (version or 0) >= 20 then
+        farmState.lifetimePersonnelStats = {
+            jobs = math.max(0, streamReadInt32(streamId) or 0),
+            workMinutes = math.max(0, streamReadInt32(streamId) or 0),
+            totalPayrollPaid = math.max(0, streamReadFloat32(streamId) or 0),
+            everHired = math.max(0, streamReadInt32(streamId) or 0),
+            dismissed = math.max(0, streamReadInt32(streamId) or 0),
+            resigned = math.max(0, streamReadInt32(streamId) or 0),
+            retired = math.max(0, streamReadInt32(streamId) or 0)
+        }
+        farmState.workerHistoryOverviews = HelperPersonnelNetwork.readWorkerHistoryOverviews(streamId)
+    elseif (version or 0) >= 18 then
         farmState.personChronicles = HelperPersonnelNetwork.readChronicleRecords(streamId)
     else
         farmState.personChronicles = {}

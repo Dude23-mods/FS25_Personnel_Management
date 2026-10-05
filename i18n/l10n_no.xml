@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Administrer transportoppgaver" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Administrer lønnskrav" />
         <e k="input_HP_SELECT_CANCEL" v="Avbryt ansattvalg" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Frigi blokkert medarbeider" />
         <e k="ui_openWorkerView" v="Arbeidere" />
         <e k="ui_openApplicantView" v="Søkere" />
         <e k="ui_backToOverview" v="Tilbake til oversikt" />

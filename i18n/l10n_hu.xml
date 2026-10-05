@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Szállítási feladatok kezelése" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Béremelési kérelmek kezelése" />
         <e k="input_HP_SELECT_CANCEL" v="Kiválasztás megszakítása" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Blokkolt alkalmazott feloldása" />
         <e k="ui_openWorkerView" v="Dolgozók" />
         <e k="ui_openApplicantView" v="Jelentkezők" />
         <e k="ui_backToOverview" v="Vissza az áttekintéshez" />

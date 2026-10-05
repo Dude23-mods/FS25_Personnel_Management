@@ -166,8 +166,9 @@ local function hpLayer_HelperPersonnelManager_getNetworkState_1(self)
         farms = {}
     }
 
-    if self.getSortedFarmIds ~= nil then
-        for _, farmId in ipairs(self:getSortedFarmIds()) do
+    local farmIds = self.getRuntimeFarmIds ~= nil and self:getRuntimeFarmIds() or (self.getSortedFarmIds ~= nil and self:getSortedFarmIds() or {})
+    if farmIds ~= nil then
+        for _, farmId in ipairs(farmIds) do
             if self.ensureMonthlyTrainingOffers ~= nil and self.executeWithFarmContext ~= nil then
                 self:executeWithFarmContext(farmId, function()
                     self:ensureMonthlyTrainingOffers()
@@ -196,7 +197,10 @@ local function hpLayer_HelperPersonnelManager_getNetworkState_1(self)
                     trainingOffers = data.trainingOffers or {},
                     reputationHistory = self.copyHistoryForNetwork ~= nil and self:copyHistoryForNetwork(data.reputationHistory) or data.reputationHistory or {},
                     actionHistory = self.copyHistoryForNetwork ~= nil and self:copyHistoryForNetwork(data.actionHistory) or data.actionHistory or {},
-                    personChronicles = self.copyPersonChroniclesForNetwork ~= nil and self:copyPersonChroniclesForNetwork(data.personChronicles) or {},
+                    lifetimePersonnelStats = self.executeWithFarmContext ~= nil and self:executeWithFarmContext(farmId, function()
+                        return self:getLifetimePersonnelStats()
+                    end, true) or {},
+                    workerHistoryOverviews = {},
                     workers = {},
                     applicants = {},
                     selectedWorkerId = data.selectedWorkerId,
@@ -207,6 +211,10 @@ local function hpLayer_HelperPersonnelManager_getNetworkState_1(self)
 
                 for _, worker in ipairs(data.workers or {}) do
                     table.insert(farmState.workers, self.copyPersonForNetwork ~= nil and self:copyPersonForNetwork(worker) or worker)
+                    local workerId = tonumber(worker.id)
+                    if workerId ~= nil and workerId > 0 then
+                        farmState.workerHistoryOverviews[math.floor(workerId + 0.5)] = self:getWorkerHistoryOverview(worker)
+                    end
                 end
 
                 for _, applicant in ipairs(data.applicants or {}) do
@@ -2919,6 +2927,14 @@ local function hpMP101CollectKnownFarmIds()
 
     table.sort(result.ids, function(a, b) return tonumber(a) < tonumber(b) end)
     return result.ids
+end
+
+function HelperPersonnelManager:getRuntimeFarmIds()
+    local farmIds = hpMP101CollectKnownFarmIds()
+    if #farmIds > 0 then
+        return farmIds
+    end
+    return self:getSortedFarmIds()
 end
 
 local function hpMP101IsRegisteredFarmId(farmId)

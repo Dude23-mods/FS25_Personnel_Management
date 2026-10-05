@@ -65,6 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Gestionar trabajos de transporte" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Gestionar solicitudes de aumento" />
         <e k="input_HP_SELECT_CANCEL" v="Cancelar selección de empleado" />
+        <e k="input_HP_RELEASE_STALE_WORKER" v="Liberar empleado bloqueado" />
         <e k="ui_openWorkerView" v="Empleados" />
         <e k="ui_openApplicantView" v="Candidatos" />
         <e k="ui_backToOverview" v="Volver al resumen" />
