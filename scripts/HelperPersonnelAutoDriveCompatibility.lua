@@ -1001,11 +1001,11 @@ function HelperPersonnelAutoDriveCompatibility.onStartEventSend(eventClass, supe
     return superFunc(eventClass, vehicle)
 end
 
-function HelperPersonnelAutoDriveCompatibility.onInputCall(manager, superFunc, vehicle, input, farmId, sendEvent)
+function HelperPersonnelAutoDriveCompatibility.onInputCall(manager, superFunc, vehicle, input, farmId, uniqueUserId, sendEvent)
     if HelperPersonnelAutoDriveCompatibility.replayingInput == true
         or not HelperPersonnelAutoDriveCompatibility.START_INPUTS[input]
         or not HelperPersonnelAutoDriveCompatibility.isSupportedVehicle(vehicle) then
-        return superFunc(manager, vehicle, input, farmId, sendEvent)
+        return superFunc(manager, vehicle, input, farmId, uniqueUserId, sendEvent)
     end
 
     local key = HelperPersonnelAutoDriveCompatibility.getVehicleKey(vehicle)
@@ -1014,7 +1014,7 @@ function HelperPersonnelAutoDriveCompatibility.onInputCall(manager, superFunc, v
         and key ~= nil and HelperPersonnelAutoDriveCompatibility.getWorkerIdForVehicle(vehicle) ~= nil
         and g_server ~= nil and sendEvent == false then
         HelperPersonnelAutoDriveCompatibility.continuingInputsByVehicleKey[key] = true
-        local ok, result1, result2, result3 = pcall(superFunc, manager, vehicle, input, farmId, sendEvent)
+        local ok, result1, result2, result3 = pcall(superFunc, manager, vehicle, input, farmId, uniqueUserId, sendEvent)
         HelperPersonnelAutoDriveCompatibility.continuingInputsByVehicleKey[key] = nil
         if not ok then
             error(result1)
@@ -1023,7 +1023,7 @@ function HelperPersonnelAutoDriveCompatibility.onInputCall(manager, superFunc, v
     end
 
     if active then
-        return superFunc(manager, vehicle, input, farmId, sendEvent)
+        return superFunc(manager, vehicle, input, farmId, uniqueUserId, sendEvent)
     end
 
     if g_server ~= nil and sendEvent == false then
@@ -1106,7 +1106,7 @@ function HelperPersonnelAutoDriveCompatibility.processStartRequest(vehicle, farm
     vehicle.ad.currentHelper = helper
     vehicle.ad.stateModule:setCurrentHelperIndex(helper.index)
     HelperPersonnelAutoDriveCompatibility.replayingInput = true
-    local ok, errorText = pcall(inputManager.onInputCall, inputManager, vehicle, input, authorizedFarmId, false)
+    local ok, errorText = pcall(inputManager.onInputCall, inputManager, vehicle, input, authorizedFarmId, nil, false)
     HelperPersonnelAutoDriveCompatibility.replayingInput = false
     if not ok and Logging ~= nil and Logging.warning ~= nil then
         Logging.warning("FS25_HelperPersonnel: AutoDrive start failed: %s", tostring(errorText))
