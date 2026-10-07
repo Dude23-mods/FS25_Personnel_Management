@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Standart aylık maaş" />
         <e k="ui_hpSetting_standardWage_desc" v="Bireysel maaşlar kapalıyken kullanılan temel aylık maaşı belirler. Değer bir sonraki maaş hesaplamasından itibaren geçerli olur." />
         <e k="ui_hpSetting_standardWageInvalid" v="%d ile %d arasında bir değer girin. Tutar en yakın 10'a yuvarlanır." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Personel Yönetimini aç" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Personel Yönetimini aç (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Genel bakış" />
         <e k="ui_pmMenuPageApplicants" v="Adaylar" />
         <e k="ui_pmMenuPageEmployees" v="Çalışanlar" />

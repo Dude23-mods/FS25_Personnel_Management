@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Standardmånadslön" />
         <e k="ui_hpSetting_standardWage_desc" v="Anger den grundläggande månadslön som används när individuella löner är avstängda. Värdet gäller från nästa löneberäkning." />
         <e k="ui_hpSetting_standardWageInvalid" v="Ange ett värde mellan %d och %d. Beloppet avrundas till närmaste 10." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Öppna personalhantering" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Öppna personalhantering (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Översikt" />
         <e k="ui_pmMenuPageApplicants" v="Sökande" />
         <e k="ui_pmMenuPageEmployees" v="Medarbetare" />

@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="標準月給" />
         <e k="ui_hpSetting_standardWage_desc" v="個別給与が無効な場合に使用する基本月給を設定します。この値は次回の給与計算から適用されます。" />
         <e k="ui_hpSetting_standardWageInvalid" v="%d から %d の範囲で入力してください。金額は最も近い 10 単位に丸められます。" />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="人事管理を開く" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="人事管理を開く (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="概要" />
         <e k="ui_pmMenuPageApplicants" v="応募者" />
         <e k="ui_pmMenuPageEmployees" v="従業員" />

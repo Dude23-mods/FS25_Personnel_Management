@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="표준 월급" />
         <e k="ui_hpSetting_standardWage_desc" v="개별 급여가 비활성화된 경우 사용할 기본 월급을 설정합니다. 이 값은 다음 급여 계산부터 적용됩니다." />
         <e k="ui_hpSetting_standardWageInvalid" v="%d에서 %d 사이의 값을 입력하세요. 금액은 가장 가까운 10 단위로 반올림됩니다." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="인사 관리 열기" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="인사 관리 열기 (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="개요" />
         <e k="ui_pmMenuPageApplicants" v="지원자" />
         <e k="ui_pmMenuPageEmployees" v="직원" />

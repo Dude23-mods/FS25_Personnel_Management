@@ -617,7 +617,6 @@ function HelperPersonnelManager.new(app, customMt)
     self.saveActiveJobSnapshot = {}
     self.restoredActiveJobs = {}
     self.restoredActiveJobByVehicleKey = {}
-    self.restoredActiveJobByVehicleName = {}
     self.savegameLoadState = "notAttempted"
     self.employerReputation = HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION
     self.lastReputationChangeText = ""
@@ -3142,7 +3141,6 @@ end
 function HelperPersonnelManager:resetRestoredActiveJobs()
     self.restoredActiveJobs = {}
     self.restoredActiveJobByVehicleKey = {}
-    self.restoredActiveJobByVehicleName = {}
 end
 
 function HelperPersonnelManager:normalizeRestoreText(value)
@@ -3171,11 +3169,6 @@ function HelperPersonnelManager:rememberRestoredActiveJob(assignment)
 
     if assignment.vehicleKey ~= nil and assignment.vehicleKey ~= "" then
         self.restoredActiveJobByVehicleKey[tostring(assignment.vehicleKey)] = assignment
-    end
-
-    local normalizedName = self:normalizeRestoreText(assignment.vehicleName)
-    if normalizedName ~= nil then
-        self.restoredActiveJobByVehicleName[normalizedName] = assignment
     end
 
     local worker = self:getWorkerById(assignment.workerId)
@@ -3326,7 +3319,7 @@ function HelperPersonnelManager:writeActiveJobSnapshotToXML(xmlFile)
     end
 end
 
-function HelperPersonnelManager:findRestoredWorkerIdForVehicle(vehicleKey, vehicleName)
+function HelperPersonnelManager:findRestoredWorkerIdForVehicle(vehicleKey)
     if self.restoredActiveJobs == nil then
         return nil
     end
@@ -3336,27 +3329,6 @@ function HelperPersonnelManager:findRestoredWorkerIdForVehicle(vehicleKey, vehic
         if assignment ~= nil and assignment.workerId ~= nil then
             return assignment.workerId
         end
-    end
-
-    local normalizedName = self:normalizeRestoreText(vehicleName)
-    if normalizedName ~= nil and self.restoredActiveJobByVehicleName ~= nil then
-        local assignment = self.restoredActiveJobByVehicleName[normalizedName]
-        if assignment ~= nil and assignment.workerId ~= nil then
-            return assignment.workerId
-        end
-    end
-
-    local openAssignment = nil
-    local openCount = 0
-    for _, assignment in ipairs(self.restoredActiveJobs) do
-        if assignment ~= nil and assignment.workerId ~= nil and assignment.consumed ~= true then
-            openAssignment = assignment
-            openCount = openCount + 1
-        end
-    end
-
-    if openCount == 1 and openAssignment ~= nil then
-        return openAssignment.workerId
     end
 
     return nil
@@ -3529,7 +3501,7 @@ end
 
 function HelperPersonnelManager:isWorkerAvailable(workerId)
     local worker = self:getWorkerById(workerId)
-    return worker ~= nil and worker.busy ~= true and not self:isWorkerSick(worker) and not self:isWorkerInTraining(worker)
+    return worker ~= nil and worker.busy ~= true and worker.restorePending ~= true and not self:isWorkerSick(worker) and not self:isWorkerInTraining(worker)
 end
 
 function HelperPersonnelManager:getApplicantById(applicantId)

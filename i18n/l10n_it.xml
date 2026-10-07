@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Stipendio mensile standard" />
         <e k="ui_hpSetting_standardWage_desc" v="Imposta lo stipendio mensile di base usato quando gli stipendi individuali sono disattivati. Il valore si applica dal prossimo calcolo degli stipendi." />
         <e k="ui_hpSetting_standardWageInvalid" v="Inserisci un valore compreso tra %d e %d. L'importo verrà arrotondato alla decina più vicina." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Apri Gestione del personale" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Apri Gestione del personale (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Panoramica" />
         <e k="ui_pmMenuPageApplicants" v="Candidati" />
         <e k="ui_pmMenuPageEmployees" v="Dipendenti" />

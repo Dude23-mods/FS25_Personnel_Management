@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Standardní měsíční mzda" />
         <e k="ui_hpSetting_standardWage_desc" v="Nastavuje základní měsíční mzdu používanou při vypnutých individuálních mzdách. Hodnota se použije od příštího výpočtu mzdy." />
         <e k="ui_hpSetting_standardWageInvalid" v="Zadejte hodnotu od %d do %d. Částka bude zaokrouhlena na nejbližších 10." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Otevřít personální management" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Otevřít personální management (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Přehled" />
         <e k="ui_pmMenuPageApplicants" v="Uchazeči" />
         <e k="ui_pmMenuPageEmployees" v="Zaměstnanci" />

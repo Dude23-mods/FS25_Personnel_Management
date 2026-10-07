@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Salariu lunar standard" />
         <e k="ui_hpSetting_standardWage_desc" v="Stabilește salariul lunar de bază folosit când salariile individuale sunt dezactivate. Valoarea se aplică de la următorul calcul salarial." />
         <e k="ui_hpSetting_standardWageInvalid" v="Introdu o valoare între %d și %d. Suma va fi rotunjită la cel mai apropiat multiplu de 10." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Deschide Gestionarea personalului" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Deschide Gestionarea personalului (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Prezentare generală" />
         <e k="ui_pmMenuPageApplicants" v="Candidați" />
         <e k="ui_pmMenuPageEmployees" v="Angajați" />

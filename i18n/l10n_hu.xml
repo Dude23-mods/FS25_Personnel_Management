@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Alap havi fizetés" />
         <e k="ui_hpSetting_standardWage_desc" v="Beállítja az egyéni bérek kikapcsolásakor használt havi alapbért. Az érték a következő bérszámítástól érvényes." />
         <e k="ui_hpSetting_standardWageInvalid" v="Adj meg egy %d és %d közötti értéket. Az összeg a legközelebbi 10-re lesz kerekítve." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Személyzeti menedzsment megnyitása" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Személyzeti menedzsment megnyitása (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Áttekintés" />
         <e k="ui_pmMenuPageApplicants" v="Jelentkezők" />
         <e k="ui_pmMenuPageEmployees" v="Dolgozók" />

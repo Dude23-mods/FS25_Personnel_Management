@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Стандартна місячна зарплата" />
         <e k="ui_hpSetting_standardWage_desc" v="Встановлює базову місячну зарплату, що використовується, коли індивідуальні зарплати вимкнено. Значення застосовується з наступного розрахунку зарплати." />
         <e k="ui_hpSetting_standardWageInvalid" v="Введіть значення від %d до %d. Суму буде округлено до найближчих 10." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Відкрити управління персоналом" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Відкрити управління персоналом (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Огляд" />
         <e k="ui_pmMenuPageApplicants" v="Кандидати" />
         <e k="ui_pmMenuPageEmployees" v="Працівники" />

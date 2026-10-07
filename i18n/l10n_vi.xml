@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Lương tháng tiêu chuẩn" />
         <e k="ui_hpSetting_standardWage_desc" v="Đặt mức lương tháng cơ bản được dùng khi tắt lương cá nhân. Giá trị có hiệu lực từ lần tính lương tiếp theo." />
         <e k="ui_hpSetting_standardWageInvalid" v="Nhập giá trị từ %d đến %d. Số tiền sẽ được làm tròn đến bội số 10 gần nhất." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Mở Quản lý nhân sự" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Mở Quản lý nhân sự (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Tổng quan" />
         <e k="ui_pmMenuPageApplicants" v="Ứng viên" />
         <e k="ui_pmMenuPageEmployees" v="Nhân viên" />

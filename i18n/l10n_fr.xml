@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Salaire mensuel standard" />
         <e k="ui_hpSetting_standardWage_desc" v="Définit le salaire mensuel de base utilisé lorsque les salaires individuels sont désactivés. La valeur s'applique dès le prochain calcul de salaire." />
         <e k="ui_hpSetting_standardWageInvalid" v="Saisissez une valeur comprise entre %d et %d. Le montant sera arrondi à la dizaine la plus proche." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Ouvrir la gestion du personnel" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Ouvrir la gestion du personnel (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Vue d'ensemble" />
         <e k="ui_pmMenuPageApplicants" v="Candidats" />
         <e k="ui_pmMenuPageEmployees" v="Employés" />

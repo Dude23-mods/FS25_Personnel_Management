@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Vakio kuukausipalkka" />
         <e k="ui_hpSetting_standardWage_desc" v="Määrittää peruskuukausipalkan, jota käytetään, kun yksilölliset palkat ovat pois käytöstä. Arvo tulee voimaan seuraavassa palkanlaskennassa." />
         <e k="ui_hpSetting_standardWageInvalid" v="Syötä arvo väliltä %d–%d. Summa pyöristetään lähimpään kymmeneen." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Avaa henkilöstöhallinto" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Avaa henkilöstöhallinto (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Yleiskatsaus" />
         <e k="ui_pmMenuPageApplicants" v="Hakijat" />
         <e k="ui_pmMenuPageEmployees" v="Työntekijät" />

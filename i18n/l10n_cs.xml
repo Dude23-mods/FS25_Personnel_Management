@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="标准月工资" />
         <e k="ui_hpSetting_standardWage_desc" v="设置在停用个人工资时使用的基础月工资。该数值从下一次工资计算开始生效。" />
         <e k="ui_hpSetting_standardWageInvalid" v="请输入 %d 到 %d 之间的数值。金额将四舍五入到最接近的 10。" />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="打开人员管理" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="打开人员管理 (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="概览" />
         <e k="ui_pmMenuPageApplicants" v="申请人" />
         <e k="ui_pmMenuPageEmployees" v="员工" />

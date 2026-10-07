@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Standard månedslønn" />
         <e k="ui_hpSetting_standardWage_desc" v="Angir grunnleggende månedslønn som brukes når individuelle lønninger er slått av. Verdien gjelder fra neste lønnsberegning." />
         <e k="ui_hpSetting_standardWageInvalid" v="Skriv inn en verdi mellom %d og %d. Beløpet avrundes til nærmeste 10." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Åpne personalledelse" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Åpne personalledelse (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Oversikt" />
         <e k="ui_pmMenuPageApplicants" v="Søkere" />
         <e k="ui_pmMenuPageEmployees" v="Ansatte" />

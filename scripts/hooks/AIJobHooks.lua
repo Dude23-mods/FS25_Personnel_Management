@@ -83,6 +83,7 @@ function HelperPersonnelAIJobHooks.onAIJobLoadFromXMLFile(job, superFunc, xmlFil
 
     if workerId ~= nil and workerId > 0 then
         job.helperPersonnelWorkerId = workerId
+        job.hpHelperPersonnelRestoredWorkerId = workerId
         if baseHelperIndex ~= nil and baseHelperIndex > 0 then
             job.helperPersonnelBaseHelperIndex = baseHelperIndex
         end
@@ -384,7 +385,7 @@ function HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
             end
         end
 
-        if app.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
+        if app.activeJobsRestoreDone ~= true and app.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
             local restoredWorkerId = app.helperBridge:resolveRestoredWorkerIdForJob(job)
             if restoredWorkerId ~= nil then
                 HelperPersonnelAIJobHooks.applyWorkerToJob(job, restoredWorkerId)
@@ -462,7 +463,8 @@ function HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
         end
     end
 
-    if app.helperBridge ~= nil
+    if app.activeJobsRestoreDone ~= true
+        and app.helperBridge ~= nil
         and app.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
         local restoredWorkerId = app.helperBridge:resolveRestoredWorkerIdForJob(job)
         if restoredWorkerId ~= nil then
@@ -625,6 +627,9 @@ end
 function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, farmId, ...)
     local args = {...}
     local app = g_helperPersonnelApp
+    if HelperPersonnelCourseplayCompatibility ~= nil and HelperPersonnelCourseplayCompatibility.prepareAIJobStart ~= nil then
+        HelperPersonnelCourseplayCompatibility.prepareAIJobStart(job)
+    end
     local workerId = HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
 
     local isRestorePhase = app ~= nil
@@ -777,6 +782,10 @@ function HelperPersonnelAIJobHooks.onAIJobReadStream(job, superFunc, streamId, c
 end
 
 function HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew(job, farmId, ...)
+    if HelperPersonnelCourseplayCompatibility ~= nil and HelperPersonnelCourseplayCompatibility.prepareAIJobStart ~= nil then
+        HelperPersonnelCourseplayCompatibility.prepareAIJobStart(job)
+    end
+
     local originalNew = HelperPersonnelAIJobHooks.originalAIJobStartRequestEventNew
     local event = originalNew(job, farmId, ...)
 

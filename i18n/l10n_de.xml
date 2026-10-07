@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Standard-Monatsgehalt" />
         <e k="ui_hpSetting_standardWage_desc" v="Legt das Grund-Monatsgehalt fest, das bei deaktivierten individuellen Gehältern verwendet wird. Der Wert gilt ab der nächsten Gehaltsberechnung." />
         <e k="ui_hpSetting_standardWageInvalid" v="Gib einen Wert zwischen %d und %d ein. Der Betrag wird auf die nächsten 10 gerundet." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Personalmanagement öffnen" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Personalmanagement öffnen (Strg + M)" />
         <e k="ui_pmMenuPageOverview" v="Übersicht" />
         <e k="ui_pmMenuPageApplicants" v="Bewerber" />
         <e k="ui_pmMenuPageEmployees" v="Mitarbeiter" />

@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Standard monthly wage" />
         <e k="ui_hpSetting_standardWage_desc" v="Sets the base monthly wage used when individual wages are disabled. The value applies from the next wage calculation." />
         <e k="ui_hpSetting_standardWageInvalid" v="Enter a value between %d and %d. The amount is rounded to the nearest 10." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Open Personnel Management" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Open Personnel Management (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Overview" />
         <e k="ui_pmMenuPageApplicants" v="Applicants" />
         <e k="ui_pmMenuPageEmployees" v="Employees" />

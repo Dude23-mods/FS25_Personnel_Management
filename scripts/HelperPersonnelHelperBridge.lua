@@ -1057,10 +1057,8 @@ function HelperPersonnelHelperBridge:resolveRestoredWorkerIdForJob(job)
 
     local vehicle = self:getVehicleFromJob(job)
     local vehicleKey = self:getVehicleKeyFromJob(job)
-    local vehicleName = self:getVehicleNameFromJob(job)
-
     if self.app.manager.findRestoredWorkerIdForVehicle ~= nil then
-        local restoredWorkerId = self.app.manager:findRestoredWorkerIdForVehicle(vehicleKey, vehicleName)
+        local restoredWorkerId = self.app.manager:findRestoredWorkerIdForVehicle(vehicleKey)
         if restoredWorkerId ~= nil then
             return restoredWorkerId
         end

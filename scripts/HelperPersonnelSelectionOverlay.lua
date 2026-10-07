@@ -926,7 +926,8 @@ function HelperPersonnelSelectionOverlay:draw()
     self:resetClickAreas()
     local screenWidth = math.max(1, tonumber(g_screenWidth) or 1920)
     local screenHeight = math.max(1, tonumber(g_screenHeight) or 1080)
-    local scale = math.min(1, (screenWidth - 48) / 896, (screenHeight - 48) / 510)
+    local resolutionScale = math.min(screenWidth / 1920, screenHeight / 1080)
+    local scale = math.min(1.25, math.max(1, resolutionScale), (screenWidth - 48) / 896, (screenHeight - 48) / 510)
     local px, py = scale / screenWidth, scale / screenHeight
     self.drawPixelX, self.drawPixelY = px, py
     local windowWidth, windowHeight = 896 * px, 510 * py

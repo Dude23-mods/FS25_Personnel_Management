@@ -224,7 +224,7 @@
         <e k="ui_hpSetting_standardWage" v="Standardowe wynagrodzenie miesięczne" />
         <e k="ui_hpSetting_standardWage_desc" v="Ustala podstawowe wynagrodzenie miesięczne używane po wyłączeniu indywidualnych płac. Wartość obowiązuje od następnego naliczenia wynagrodzeń." />
         <e k="ui_hpSetting_standardWageInvalid" v="Wprowadź wartość od %d do %d. Kwota zostanie zaokrąglona do najbliższych 10." />
-        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Otwórz Zarządzanie personelem" />
+        <e k="input_HP_OPEN_PERSONNEL_MENU" v="Otwórz Zarządzanie personelem (Ctrl + M)" />
         <e k="ui_pmMenuPageOverview" v="Przegląd" />
         <e k="ui_pmMenuPageApplicants" v="Kandydaci" />
         <e k="ui_pmMenuPageEmployees" v="Pracownicy" />
