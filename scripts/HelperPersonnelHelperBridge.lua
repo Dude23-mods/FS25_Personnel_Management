@@ -5,6 +5,19 @@ HelperPersonnelHelperBridge.BASE_HELPER_NAMES_BY_AVATAR = {
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"
 }
 
+HelperPersonnelHelperBridge.ENHANCED_PORTRAITS_BY_HEAD = {
+    ["mhead01.png"] = "gui/portraits/helperPortrait_01.dds",
+    ["mhead02.png"] = "gui/portraits/helperPortrait_02.dds",
+    ["fhead01.png"] = "gui/portraits/helperPortrait_03.dds",
+    ["fhead02.png"] = "gui/portraits/helperPortrait_04.dds",
+    ["mhead03.png"] = "gui/portraits/helperPortrait_05.dds",
+    ["fhead03.png"] = "gui/portraits/helperPortrait_06.dds",
+    ["mhead04.png"] = "gui/portraits/helperPortrait_07.dds",
+    ["mhead05.png"] = "gui/portraits/helperPortrait_08.dds",
+    ["fhead04.png"] = "gui/portraits/helperPortrait_09.dds",
+    ["mhead06.png"] = "gui/portraits/helperPortrait_10.dds"
+}
+
 HelperPersonnelHelperBridge.GENDER_MALE = "male"
 HelperPersonnelHelperBridge.GENDER_FEMALE = "female"
 
@@ -342,6 +355,26 @@ function HelperPersonnelHelperBridge:getPortraitFilenameForBaseHelper(helper)
     return filename
 end
 
+function HelperPersonnelHelperBridge:getEnhancedPortraitFilename(sourceFilename)
+    if type(sourceFilename) ~= "string" or sourceFilename == "" or self.app == nil or self.app.modDir == nil then
+        return nil
+    end
+
+    local normalizedFilename = string.lower(string.gsub(sourceFilename, "\\", "/"))
+    local headFilename = string.match(normalizedFilename, "([^/]+)$")
+    local relativeFilename = headFilename ~= nil and HelperPersonnelHelperBridge.ENHANCED_PORTRAITS_BY_HEAD[headFilename] or nil
+    if relativeFilename == nil then
+        return nil
+    end
+
+    local enhancedFilename = Utils.getFilename(relativeFilename, self.app.modDir)
+    if fileExists(enhancedFilename) then
+        return enhancedFilename
+    end
+
+    return nil
+end
+
 function HelperPersonnelHelperBridge:getBaseHelperBySavedIndex(person)
     if person == nil or g_helperManager == nil or g_helperManager.getHelperByIndex == nil then
         return nil
@@ -362,15 +395,17 @@ end
 
 function HelperPersonnelHelperBridge:getPortraitFilenameForPerson(person)
     if type(person) ~= "table" then
-        return self:getFallbackPortraitFilenameForPerson(nil)
+        local fallbackFilename = self:getFallbackPortraitFilenameForPerson(nil)
+        return self:getEnhancedPortraitFilename(fallbackFilename) or fallbackFilename
     end
 
     if person.helperPersonnelPortraitFilename ~= nil then
-        return person.helperPersonnelPortraitFilename
+        return self:getEnhancedPortraitFilename(person.helperPersonnelPortraitFilename) or person.helperPersonnelPortraitFilename
     end
 
     if person.id ~= nil and self.portraitFilenamesByWorkerId[person.id] ~= nil then
-        return self.portraitFilenamesByWorkerId[person.id]
+        local cachedFilename = self.portraitFilenamesByWorkerId[person.id]
+        return self:getEnhancedPortraitFilename(cachedFilename) or cachedFilename
     end
 
     local helper = self:getBaseHelperBySavedIndex(person)
@@ -380,8 +415,7 @@ function HelperPersonnelHelperBridge:getPortraitFilenameForPerson(person)
 
     local filename = self:getPortraitFilenameForBaseHelper(helper)
     if filename == nil then
-
-        return self:getFallbackPortraitFilenameForPerson(person)
+        filename = self:getFallbackPortraitFilenameForPerson(person)
     end
 
     person.helperPersonnelPortraitFilename = filename
@@ -389,7 +423,7 @@ function HelperPersonnelHelperBridge:getPortraitFilenameForPerson(person)
         self.portraitFilenamesByWorkerId[person.id] = filename
     end
 
-    return filename
+    return self:getEnhancedPortraitFilename(filename) or filename
 end
 
 function HelperPersonnelHelperBridge:detectGenderFromPlayerStyle(playerStyle)

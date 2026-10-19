@@ -1,14 +1,14 @@
 <texture>
     <meta>
-        <filename>hp_pm_menu_icons_20260710c.dds</filename>
-        <size width="1024" height="128" />
+        <filename>hp_pm_menu_icons_v2.png</filename>
+        <size width="1536" height="1024" />
     </meta>
     <slices>
-        <slice id="overview" uvs="0px 0px 128px 128px"/>
-        <slice id="applicants" uvs="128px 0px 128px 128px"/>
-        <slice id="employees" uvs="256px 0px 128px 128px"/>
-        <slice id="training" uvs="384px 0px 128px 128px"/>
-        <slice id="settings" uvs="512px 0px 128px 128px"/>
-        <slice id="help" uvs="640px 0px 128px 128px"/>
+        <slice id="overview" uvs="0px 0px 512px 512px"/>
+        <slice id="applicants" uvs="512px 0px 512px 512px"/>
+        <slice id="employees" uvs="1024px 0px 512px 512px"/>
+        <slice id="training" uvs="0px 512px 512px 512px"/>
+        <slice id="settings" uvs="512px 512px 512px 512px"/>
+        <slice id="help" uvs="1024px 512px 512px 512px"/>
     </slices>
 </texture>

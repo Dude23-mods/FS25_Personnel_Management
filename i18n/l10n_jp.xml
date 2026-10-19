@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="施肥" />
         <e k="ui_specialization_plantProtection" v="作物保護" />
         <e k="ui_specialization_harvest" v="収穫" />
-        <e k="ui_specialization_transport" v="運搬" />
+        1輸送2
         <e k="ui_specialization_machineCare" v="機械管理" />
         <e k="ui_specialization_resourceSaver" v="資源節約" />
         <e k="ui_specializationLearned" v="%sが新しい専門分野を習得しました：%s。" />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="運搬業務を管理" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="昇給要求を管理" />
         <e k="input_HP_SELECT_CANCEL" v="従業員選択を取消" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="ブロックされた従業員を解放" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="ブロックされた従業員を解放" />
         <e k="ui_openWorkerView" v="従業員" />
         <e k="ui_openApplicantView" v="応募者" />
         <e k="ui_backToOverview" v="概要へ戻る" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="作業時間: %d 仕事 | %s | 月給: %s" />
         <e k="ui_button_transport_assign" v="輸送に割当" />
         <e k="ui_button_transport_remove" v="輸送割当解除" />
-        <e k="ui_transportMarker" v="輸送" />
+        1輸送2
         <e k="ui_transportActionAssigned" v="%s - 輸送に割当." />
         <e k="ui_transportActionRemoved" v="%s - 輸送割当解除." />
         <e k="ui_transportNoDriverAssigned" v="輸送: まだありません." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="研修" />
         <e k="ui_pmStatusApplicant" v="応募者" />
         <e k="ui_pmBirthLine" v="生年月日：%s" />
+        <e k="ui_pmRankLabel" v="ランク" />
         <e k="ui_pmOriginLine" v="職歴：%s" />
         <e k="ui_pmStatsLine" v="経験 %d · 信頼性 %d · 忠誠度 %d" />
         <e k="ui_pmStatExperience" v="経験" />
         <e k="ui_pmStatReliability" v="信頼性" />
         <e k="ui_pmStatLoyalty" v="忠誠度" />
         <e k="ui_pmWageLine" v="給与：%s" />
-        <e k="ui_pmStatusLine" v="状態：%s" />
+        1ステータス: %s2
         <e k="ui_pmOrigin1" v="地方の家族経営農場" />
         <e k="ui_pmOrigin2" v="小規模酪農場" />
         <e k="ui_pmOrigin3" v="農作業請負会社" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="人事" />
         <e k="ui_pmSettingsSectionEconomic" v="経済" />
         <e k="ui_button_transport_assign_long" v="運搬業務を割り当てる" />
-        <e k="ui_button_transport_manage_long" v="輸送" />
+        1輸送2
         <e k="ui_transportPriorityTitle" v="運搬の優先順位" />
         <e k="ui_transportPriorityIntro" v="運搬業務を担当する従業員と、空き状況を確認する順番を設定します。" />
         <e k="ui_transportPriorityHeaderPriority" v="優先度" />
         <e k="ui_transportPriorityHeaderEmployee" v="従業員" />
-        <e k="ui_transportPriorityHeaderStatus" v="状態" />
-        <e k="ui_transportPriorityHeaderEnabled" v="運搬" />
+        1ステータス2
+        1輸送2
         <e k="ui_transportPriorityActive" v="有効" />
         <e k="ui_transportPriorityInactive" v="未割り当て" />
         <e k="ui_transportPriorityMoveUp" v="上へ移動" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="事務職" />
         <e k="ui_status_retirementPending" v="月末に退職予定" />
         <e k="ui_retirementNotice" v="%sは月末に退職します。" />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="専門分野は対応するカテゴリの能力を向上させます。研修は月初にのみ開始でき、費用がかかり、従業員は月末まで利用できません。進行度は完了後に加算されます。提供内容と価格は毎月変わり、3月から2月の農業年度につき研修は1回だけ可能です。習得した専門分野は保持されますが、有効なボーナスは最大2つです。両方の枠を無効にできます。習得済みで無効な専門分野は、従業員1人につき農業年度ごとに1回だけ有効化できます。" />
         <e k="ui_pmTrainingCategoryHeader" v="学習分野" />
         <e k="ui_pmTrainingProgressHeader" v="専門化までの進捗" />
         <e k="ui_pmTrainingRunning" v="研修実施中" />
         <e k="ui_pmTrainingSelectCategory" v="先に研修分野を選択してください" />
         <e k="ui_pmTrainingConfirm" v="%sに%s分野の研修を開始しますか？" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="専門分野: 有効な枠が2つ使用中 · 最後に習得: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="研修：1か月1日の場合は12:00まで · 研修メニューで分野を選択 · 前回：%s" />
         <e k="ui_training_line_first_day_select" v="研修：初日のみ · 研修メニューで分野を選択 · 前回：%s" />
         <e k="ui_training_line_busy_select" v="研修：作業中は不可 · 前回：%s" />
         <e k="ui_training_line_sick_select" v="研修：病気中は不可 · 前回：%s" />
         <e k="ui_training_line_select_category" v="研修：研修メニューで分野を選択 · 前回：%s" />
-        <e k="ui_pmTrainingCostHeader" v="費用" />
+        1費用2
         <e k="ui_pmTrainingAdjustmentHeader" v="割引／追加費用" />
         <e k="ui_pmTrainingNoPlaces" v="現在空きなし" />
         <e k="ui_pmTrainingNoPlacesMessage" v="この研修コースには現在空きがありません。" />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="作業回数：%d" />
         <e k="ui_pmHistoryCareerWorkTime" v="作業時間：%s" />
         <e k="ui_pmHistoryCareerTraining" v="研修：%s" />
-        <e k="ui_pmHistoryCareerTransport" v="輸送：%s" />
+        1交通機関：%s2
         <e k="ui_pmHistoryValueActive" v="有効" />
         <e k="ui_pmHistoryValueInactive" v="無効" />
         <e k="ui_monthlyRowApplicants" v="応募者" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="作業時間" />
         <e k="ui_monthlyRowWages" v="月額給与" />
         <e k="ui_monthlyRowPayroll" v="直近の給与精算" />
-        <e k="ui_pmOverviewOverallHeader" v="合計" />
+        1合計2
         <e k="ui_pmOverviewTotalJobs" v="累計作業数" />
         <e k="ui_pmOverviewTotalWorkTime" v="累計作業時間" />
         <e k="ui_pmOverviewTotalPayroll" v="支払給与総額" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%sは彼女と急にコーヒーを飲みに行くため、進行中の作業を中断しました。" />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%sは彼氏と急にコーヒーを飲みに行くため、進行中の作業を中断しました。" />
         <e k="ui_pmMonth01" v="3月" />
-        <e k="ui_pmMonth02" v="4月" />
+        14月2
         <e k="ui_pmMonth03" v="5月" />
         <e k="ui_pmMonth04" v="6月" />
         <e k="ui_pmMonth05" v="7月" />
-        <e k="ui_pmMonth06" v="8月" />
-        <e k="ui_pmMonth07" v="9月" />
+        18月2
+        19月2
         <e k="ui_pmMonth08" v="10月" />
-        <e k="ui_pmMonth09" v="11月" />
-        <e k="ui_pmMonth10" v="12月" />
+        111月2
+        112月2
         <e k="ui_pmMonth11" v="1月" />
         <e k="ui_pmMonth12" v="2月" />
         <e k="ui_pmPeriodMonthYear" v="%s・%d年目" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="良好な勤務月" />
         <e k="ui_waitingForServerData" v="サーバーデータを待機中" />
         <e k="ui_pmMenuPageHelp" v="ヘルプ" />
-        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.4.0 の詳細なゲーム内ガイドです。 同梱の ReadMe.pdf には追加のルールと計算式があります。" />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.5.0 の詳細なゲーム内ガイドです。" />
         <e k="ui_pmHelpSectionQuickStart" v="クイックスタートと操作|Ctrl + M でメニューを開きます。 メニューのページ操作でタブを切り替えます。 A/D または左右キーで人物を変更し、スペースで決定、Esc で戻り、T で輸送優先順位、G で昇給要求を開きます。" />
         <e k="ui_pmHelpSectionPeople" v="応募者と従業員|新しいセーブは4人の応募者で始まり、同時に最大8人まで登録されます。 プロフィールから採用します。 経験、信頼性、忠誠度は0から100です。 状態、給与、専門分野、履歴、累計値は従業員ページに表示されます。" />
         <e k="ui_pmHelpSectionStats" v="従業員と能力|経験は速度、摩耗、消費に、信頼性は中断、病気、作業の早期終了に、忠誠度は昇給要求と退職に影響します。従業員ページには状態、給与、専門分野、統計、個人履歴も表示されます。" />
@@ -529,81 +530,146 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="退職、解雇、引退|これらは常に即時ではなく、期限に従って月の切り替わり時に完了します。作業中の従業員はすぐには解雇できません。今後の変更は状態と履歴に表示されます。" />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive と Courseplay|従業員 / 輸送で運転手を割り当て、優先順位を設定します。AutoDrive は最初の利用可能な運転手を使い、不在なら開始しません。通常の Courseplay 開始では選択画面が開きます。AutoDrive 後の自動開始では各車両が自身の運転手を維持します。" />
         <e k="ui_pmHelpSectionMultiplayer" v="マルチプレイとセーブ|人事データと設定は農場ごとに分かれます。 サーバーが変更を検証し、権限のある農場管理者だけが自分の農場を管理できます。 従業員、実行中の割り当て、設定は同期されます。 データはセーブ内の helperPersonnel.xml に保存されます。" />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="人員管理 · ジョブを選択" />
+        <e k="ui_selectionPerformanceProfile" v="パフォーマンスプロファイル" />
+        1在庫あり2
+        1クランク2
+        1研修中2
+        1予約済み2
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDriveジョブ" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplayジョブ" />
+        1現地調査2
+        1利用不可2
+        <e k="ui_selectionShowAll" v="すべての従業員を表示" />
+        <e k="ui_selectionShowAvailable" v="利用可能な従業員のみ表示" />
+        <e k="ui_selectionFooterControls" v="A/D 変更 · Space 選択 · Tab すべて · Esc 戻る" />
+        1注文内容不明2
+        1Alter2
+        <e k="ui_selectionWageLabel" v="月給" />
+        1注文2
+        1作業ペース2
+        1%d年2
         <e k="ui_selectionProfessionalDevelopment" v="専門能力の向上" />
         <e k="ui_selectionNoSpecializationProgress" v="専門分野の進捗はまだありません" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="専門分野なし" />
+        1車両：%s2
+        1注文：%s2
+        1フィールド：%s2
+        <e k="ui_selectionTargetLine" v="輸送先: %s" />
+        <e k="ui_selectionCourseplayLine" v="CPジョブ種類: %s" />
+        1ステータス: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="クイックスタートと操作" />
-        <e k="ui_pmHelpTopic01Body" v="Ctrl + M でメニューを開きます。 メニューのページ操作でタブを切り替えます。 A/D または左右キーで人物を変更し、スペースで決定、Esc で戻り、T で輸送優先順位、G で昇給要求を開きます。" />
-        <e k="ui_pmHelpTopic02Title" v="応募者と従業員" />
-        <e k="ui_pmHelpTopic02Body" v="新しいセーブは4人の応募者で始まり、同時に最大8人まで登録されます。 プロフィールから採用します。 経験、信頼性、忠誠度は0から100です。 状態、給与、専門分野、履歴、累計値は従業員ページに表示されます。 Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="従業員と能力" />
-        <e k="ui_pmHelpTopic03Body" v="経験は速度、摩耗、消費に、信頼性は中断、病気、作業の早期終了に、忠誠度は昇給要求と退職に影響します。従業員ページには状態、給与、専門分野、統計、個人履歴も表示されます。" />
-        <e k="ui_pmHelpTopic04Title" v="作業と成長" />
-        <e k="ui_pmHelpTopic04Body" v="通常のAIヘルパー作業を開始すると従業員選択が開きます。 選べるのは利用可能な従業員だけで、1人が複数の作業を同時に行うことはできません。 作業時間で経験と専門分野が成長します。 経験は速度、摩耗、消費に、信頼性は低下、病気、中断に、忠誠度は給与問題と退職に影響します。 The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="経験は速度、摩耗、消費に、信頼性は中断、病気、作業の早期終了に、忠誠度は昇給要求と退職に影響します。従業員ページには状態、給与、専門分野、統計、個人履歴も表示されます。" />
-        <e k="ui_pmHelpTopic06Title" v="給与" />
-        <e k="ui_pmHelpTopic06Body" v="給与は月の切り替わり時に支払われ、月の日数、経済難易度、MOD設定で決まります。従業員は昇給を要求することがあり、期限内に承認または拒否する必要があり、忠誠度に影響します。" />
-        <e k="ui_pmHelpTopic07Title" v="研修" />
-        <e k="ui_pmHelpTopic07Body" v="研修は月初だけ開始でき、費用がかかり、月末まで従業員を使用できません。完了すると選択した専門分野が向上します。研修候補と履歴は研修・従業員画面に表示されます。 Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="専門" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="退職、解雇、引退" />
-        <e k="ui_pmHelpTopic09Body" v="これらは常に即時ではなく、期限に従って月の切り替わり時に完了します。作業中の従業員はすぐには解雇できません。今後の変更は状態と履歴に表示されます。" />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive と Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="従業員 / 輸送で運転手を割り当て、優先順位を設定します。AutoDrive は最初の利用可能な運転手を使い、不在なら開始しません。通常の Courseplay 開始では選択画面が開きます。AutoDrive 後の自動開始では各車両が自身の運転手を維持します。" />
-        <e k="ui_pmHelpTopic11Title" v="マルチプレイとセーブ" />
-        <e k="ui_pmHelpTopic11Body" v="人事データと設定は農場ごとに分かれます。 サーバーが変更を検証し、権限のある農場管理者だけが自分の農場を管理できます。 従業員、実行中の割り当て、設定は同期されます。 データはセーブ内の helperPersonnel.xml に保存されます。" />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="人事データと設定は農場ごとに分かれます。 サーバーが変更を検証し、権限のある農場管理者だけが自分の農場を管理できます。 従業員、実行中の割り当て、設定は同期されます。 データはセーブ内の helperPersonnel.xml に保存されます。" />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="Ctrl + M でメニューを開きます。 メニューのページ操作でタブを切り替えます。 A/D または左右キーで人物を変更し、スペースで決定、Esc で戻り、T で輸送優先順位、G で昇給要求を開きます。 If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="解放" />
-        <e k="ui_pmConfirmReleaseWorker" v="%sを解放しますか？ サーバーが有効な作業を検出しない場合のみ可能です。" />
-        <e k="ui_workerReleaseSuccess" v="従業員を解放しました。" />
-        <e k="ui_workerReleaseDeniedActive" v="解放できません：従業員にはまだ有効な作業があります。" />
-        <e k="ui_workerReleaseDeniedAvailable" v="解放は不要です：従業員はすでに利用可能です。" />
-        <e k="ui_workerReleaseDeniedCheck" v="解放できません：作業状態を安全に確認できませんでした。" />
-        <e k="ui_workerReleaseDeniedPermission" v="解放できません：権限がないか、従業員が無効です。" />
+        1しばらく休ませる2
+        1ログイン2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="%s を %s で無効にしますか？" />
+        <e k="ui_pmSpecializationActivateConfirm" v="%s を %s に有効化しますか？" />
+        <e k="ui_pmSpecializationActivationUsed" v="新しい専門分野は、従業員1人につき農業年度ごとに1回だけ有効化できます。" />
+        <e k="ui_pmSpecializationSlotsFull" v="別の専門分野を有効にする前に、少なくとも1つの有効な専門分野を無効にしてください。" />
+        1アクティブ2
+        <e k="ui_pmSpecializationInactive" v="習得済み、無効" />
+        <e k="ui_specializationActivatedNotice" v="%s は専門分野 %s を再び使用します。" />
+        <e k="ui_specializationDeactivatedNotice" v="%s は専門分野 %s を無効にします。" />
+        1目次2
+        <e k="ui_pmHelpNavigation" v="左/右: 領域 · 上/下: 選択またはスクロール · Page Up/Down: ページ" />
+        1クイックスタートと操作方法2
+        1人事管理では、匿名のAIアシスタントの代わりに、実名を持つ応募者や従業員が登場します。各従業員は長期的に成長し、月給を受け取り、経験、信頼性、忠誠心、専門分野によって、それぞれ異なる強みやリスクを持つことがあります。&#10;独自のメニューは、デフォルトでCtrl + Mで開きます。メニューには、「概要」、「応募者」、「従業員」、「研修」、「設定」、「ヘルプ」が含まれます。キー割り当てはゲーム設定で変更可能です。&#10;デフォルトのキー割り当て：人物の切り替えはA/Dキーまたは左右の矢印キー、選択の確定はスペースキーまたはマウスクリック、キャンセルまたは戻るはEscキー、通勤・給与管理はTキーまたはGキー。「ヘルプ」タブでは、左右の矢印キーで目次と記事の間を切り替え、上下の矢印キーで選択・スクロールを行い、ページ送り/戻しは上/下矢印キーで行います。2
+        1概要と人員状況2
+        1この概要画面には、農場の現在の状況がまとめられています。上部には、従業員、勤務可能な従業員、応募者、および雇用主としての評判が表示されます。その下には、担当者、車両、機器、業務内容を含む進行中の作業が表示されます。&#10;「変更」タイルには、雇用主の評価、経験、信頼性、忠誠心、年齢、専門分野の変更など、関連する人事イベントのみが表示されます。各通知には原因、影響を受けた人物、および影響が記載されており、複数行にわたるエントリも1つの通知として扱われます。&#10;「月次レポート」と「全体」では、現在および累積の主要指標が表示されます。概要画面は迅速な業務計画に活用してください。詳細、意思決定、および履歴については、各専門ページで確認してください。2
+        1求人市場と採用2
+        1新しいラウンドは4人の求職者から始まります。同時に市場に存在できる求職者は最大8人までです。毎月の切り替え時に、最大3つの新しい枠がサイコロで決定されます。各枠の当選確率は15％＋0.7×雇用主の評判です。評判が60の場合、各枠の当選確率は57％、100の場合は85％となります。市場に求職者がいない場合、少なくとも1人の新しい求職者が生成されます。&#10;求職者は、生成された月は確実に利用可能です。最初の月が明けた後は、質に応じて離職確率が10～30％、2ヶ月目以降は30～50％、3ヶ月目には100％となります。質の高いプロフィールは、その質の高さゆえに離職確率が高くなるため、より早く市場から消える可能性があります。&#10;応募者の年齢は18～65歳で、固定された生年月日が設定されており、年齢を重ねていきます。経歴としては、家族経営、酪農、請負業者、畑作、複合農業、物流、農業機械整備工場、事務職などがあります。年齢と経歴は、とりわけ経験や専門的な予備知識の有無に影響を与えます。&#10;希望給与は経験と信頼性に基づいており、96～106％のランダムな変動があり、雇用主の評判の影響を受けます。評判が低いと希望額は上昇し、評判が高いと希望額は低下します。採用前には確認メッセージが表示され、採用により評判が1ポイント上昇します。2
+        1社員プロフィール、価値観、ステータス2
+        1経験、信頼性、忠誠度はそれぞれ0から100までの範囲で表示されます。数値は正確に表示され、バーグラフにより一目で比較が可能です。&#10;ランクは経験値のみに基づいて決定されます：補助要員 0～44、熟練者 45～74、プロ 75～100。経験値は作業速度、追加の摩耗、追加の消費量に影響します。信頼性は、短期的なパフォーマンスの低下、病気、月ごとの推移、および任務中断のリスクに影響を与えます。忠誠心は、会社への愛着度を表し、警告、給与に関するトラブル、および自主退職に影響を与えます。2
+        1AIアシスタント、輸送、FollowMe2
+        1通常のAIアシスタント業務を開始すると、スタッフ選択画面が表示されます。選択できるのは、利用可能なスタッフのみです。1人のスタッフが同時に複数の依頼を引き受けることはできず、病気や研修中は利用できません。&#10;業務は、10秒経過してから初めて完了した依頼として記録されます。専門性の向上には、実務時間が3分以上必要です。&#10;Tキーまたはメニューボタンを押すと、輸送優先順位設定画面が開きます。そこで、どの従業員が輸送業務を担当するか、およびどの順序でチェックされるかを設定します。「AからBへ」の依頼の場合、上から順に最初の空き従業員が選択されます。FollowMeは引き続き従業員選択機能を利用し、輸送業務としてカウントされます。2
+        1経験と仕事への影響2
+        1経験値の獲得&#10;– 経験値は記録された作業時間によって獲得されます。未使用の学習時間は繰り越されます。&#10;– 1回の作業につき、最大2経験値を獲得できます。&#10;– さらに、月ごとの上限により進捗が制限されます。経験値が高くなるほど、次の経験値を獲得するまでに要する時間が長くなります。&#10;影響&#10;– メインの専門分野は有効経験値を12ポイント、サブの専門分野は6ポイント増加させます。ただし、最大値は100です。&#10;– 作業速度 = 70 % + 30 % × 有効経験値 / 100。&#10;– 追加の摩耗は最大15％、追加の資材および燃料消費量は最大10％ × 不足している有効経験値 × 経済係数となります。経済係数は0.75 / 1.00 / 1.25です。&#10;学習時間と月間上限&#10;– 経験値 0～24：25分、月間上限 +1； 25～49：50分、0；50～69：100分、-1。&#10;– 経験値70～84：220分、-2；85～94：540分、-3；95～100：1080分、-4。&#10;– 日数／月ごとの基本上限：1日＝1、2日＝2、3～4日＝3、5～6日＝4、7～9日＝5、 10～12日＝6、13～15日＝7、16～18日＝8、19～21日＝9、22～24日＝10、25～27日＝11、28日＝12。実際の制限＝基本制限＋調整値、最低1。2
+        1信頼性、病気、および任務の中断2
+        1信頼性が85未満の場合、短時間の性能低下が発生する可能性があります。1分ごとにチェックが行われ、信頼性が低下するにつれて発生確率は上昇し、最大15％に達します。性能低下は30～90秒間続き、性能を4～15％低下させ、次の発生までさらに3分間空ける必要があります。&#10;病気の有無は毎日チェックされます。病気の従業員はその日は勤務できません。進行中の任務は終了となります。1ヶ月あたり、月数／3で切り上げた日数までが病気休暇として認められます。信頼性が50未満の場合、60秒後に任務の完全中止が1回チェックされます。その場合、その任務は成功とはみなされず、その事象は履歴に記録されます。&#10;病気休暇／日および任務中止の目安：0～20：10％／20％；21～29：8％／15％；30～40：8％／10％；41～49：6％／5％；50～60：6％／0％； 61～80：4％／0％；81～100：2％／0％。良好な月とするには、少なくとも120分の労働時間、事故ゼロ、病欠日数ゼロ、および夜間労働時間が240分未満であることが必要です。その場合、信頼性が+1になる確率は35％です。マイナスのリスクは合算され、60％に制限されます。2
+        1忠誠心と雇用主の評判2
+        1新入社員の忠誠度は、通常65程度から始まります。給与の期日通りの支払い、長期の勤続、そして給与要求の受け入れは忠誠度を高めますが、経済的な問題、夜勤、および給与要求の拒否や長期にわたる未解決は忠誠度を低下させます。22:00から06:00までの夜勤は記録され、ゲーム内時間120分ごとに忠誠度が最大4ポイント、評判が1～2ポイント減少する可能性があります。&#10;忠誠度と雇用主に対する評判の差が15／30／50ポイント以上ある場合、毎月1／2／3ポイントずつその差が縮まります。イベント：評判が40以上の場合、給与の支払いで忠誠度+1；支払いはマイナス-2；事業が以前に赤字だった場合は-4；在籍期間3／6／12／24ヶ月で+1／+1／+2／+3； 要求が受け入れられた場合 +3；拒否された場合 -5、忠誠度が40未満の場合は -7；猶予期間経過後の未解決の要求は、1ヶ月ごとに -2。&#10;忠誠度0～5での毎月の自主退職率：35％、6～9：20％、10～14：10％、15以上では通常の忠誠度に基づく退職は発生しない。雇用主の評判は60から始まり、0～100の範囲で、0～19は「危機的」、20～39は「低調」、40～59は「堅調」、60～79は「良好」、80～100は「非常に良好」と評価される。これは応募者数や質、希望給与、長期的な忠誠度に影響を与える。2
+        1給与、給与計算、および給与請求2
+        1個々の基本給は、経験値と信頼度に基づいて算出され、各経験帯内で線形補間されます。信頼度は、0.94から1.06の範囲で値に掛けられます。応募者には、さらにランダム要素、評判、および主要専門分野で+5％、副専門分野で+3％の専門化ボーナスが加算されます。&#10;月3日勤務の場合の基本給： 経験値 0～44：1,800～2,200、45～74：2,200～2,700、75～100：2,700～3,300。月額給与＝基本給×月数係数×経済コスト係数（10の倍数に四捨五入）。個別給与が無効になっている場合、10の倍数で100～100,000の標準基本給が適用されます。1～28日分の月数係数：0.58、0.82、1.00、1.15、 1.29；1.41；1.53；1.63；1.73；1.83；1.91；2.00；2.08；2.16；2.24；2.31；2.38；2.45；2.52； 2.58; 2.65; 2.71; 2.77; 2.83; 2.89; 2.94; 3.00; 3.06。&#10;給与の精算は、月末の給与支払いの際に行われます。その時点で雇用関係が終了する従業員も、事前に精算額を受け取ります。熟練者またはプロフェッショナルは昇給を要求できます： 基本成功率は70％ですが、忠誠度により55～85％に制限されます。その後、毎月成功率を半分の確率で再審査できます。承諾すると忠誠度が+3、評判が+1となります。拒否すると忠誠度が5低下し、40未満の場合は7低下します。また、3ヶ月間、解雇リスクと信頼性リスクが高まります。Gを選択すると、未解決の請求がすべて解除されます。2
+        1専門分野と実践的な発展2
+        1基本ルール&#10;– 学習カテゴリーは8つあります：土壌整備、播種、施肥、病害虫防除、収穫、運搬、機械の保護、および効率的な作業方法。&#10;– 進捗状況はカテゴリーごとに個別に保存されます。習得した専門スキルは永続的に保持されますが、同時に有効になるボーナスは最大2つまでです。&#10;学習の進捗&#10;– 学習の閾値は240、420、600、780分であり、その後は各閾値が180分ずつ増加します。&#10;– 学習係数は「1 + (経験値－50)/250 + (信頼性－50)/300」で、0.75から1.30の範囲に制限されます。複数の作業を行う場合、学習時間は重み付けされて配分されます。&#10;作業の分類&#10;– 土壌耕起：プラウ、カルチベーター、ロータリーハロー、ディスクハロー、ローラー、マルチング機。&#10;– 播種：播種機・植栽機および種子。&#10;– 施肥：無機肥料、液体肥料、液肥、発酵残渣、堆肥。病害虫防除：除草剤散布作業。&#10;– 収穫：コンバイン、刈り取り機、ベーラー、刈り取り機、積載車、ピックアップ。輸送：トレーラー、荷下ろし、A地点からB地点への輸送。&#10;ボーナスと有効化&#10;– メイン専門分野：有効経験値+12および基本給+5％。セカンド専門分野：+6および+3％。&#10;– 両方の専門分野を休止状態にすることができます。習得済みの休止中の専門分野は、従業員1人につき農業年度（3月～2月）に1回のみ有効化できます。休止状態にするだけでは、この権利は消費されません。2
+        1研修2
+        1研修は毎月1日のみ開始され、1日またはその月の12:00までに行われる。従業員は、3月から翌年2月までの農業年度ごとに1回の研修のみに参加でき、その間は就業中または病気であってはならない。その人物は月末まで利用不可の状態となり、進捗状況は月をまたぐ時点で修了した際に初めて加算される。&#10;1回の研修で、次の専門分野取得に必要な学習時間の30％（最低30分、不足分を超えることはない）が獲得できる。各カテゴリーには毎月-20％から+20％の価格係数が設定されており、25％の確率で定員に達している。費用は開始時に即座に差し引かれ、その額は当月の給与額に基づいて算出される。&#10;研修費用＝現在の月給×カテゴリー係数×月次修正係数。係数：土壌整備 75％、播種 90％、施肥 90％、病害虫防除 100％、収穫 110％、輸送 65％、機械の保全 120％、省力的な作業方法 120％。2
+        1解雇、自主退職、および定年退職2
+        1解雇は確認が必要です。1日または1ヶ月単位の場合、翌月の切り替え日に効力を生じさせるためには、1日目の12:00までに解雇を通知する必要があります。2日以上の場合、基準日は切り上げられた半月の末日、すなわち ceil(日数/月 ÷ 2) となります。基準日を過ぎると、終了日はさらに1ヶ月先へ繰り延べられます。&#10;解雇の通告により、忠誠度は即座に40ポイント、信頼性は25ポイント低下します。従業員は、原則として解雇が有効となる月末までは引き続き勤務可能です。解雇による評判の低下：1ヶ月未満 -12、3ヶ月未満 -9、6ヶ月未満 -7、12ヶ月未満 -5、24ヶ月未満 -3、24ヶ月以上 -1； 同月内にさらに解雇を行うごとに、追加で4ポイントの評判損失が発生します。&#10;忠誠度が0～14の場合、毎月、従業員による自主退職の可能性がチェックされます。給与要求が拒否されると、その確率が一時的に5パーセントポイント上昇することがあります。自主退職の予告は月末に発効し、評判を10ポイント低下させます。55歳の誕生日以降、退職を予告することができます。そのリスクは67歳まで約80～90％に上昇し、68歳では95％、69歳では98％、70歳では100％となります。その人物は月末まで在籍し続けます。2
+        1プロフィール、沿革、統計2
+        1応募者プロフィールは、年齢、職歴、経験、信頼性、忠誠心、専門分野、およびこれまでの市場での在籍期間を統合し、ダイナミックな文章としてまとめます。従業員プロフィールには、勤続年数、配属先、研修、および学習の進捗状況が追加されます。&#10;個人履歴には、採用、配属の開始・終了、配属の中断、病気、研修、専門分野、給与要求と決定、忠誠心および信頼性の変化、輸送割り当て、ならびに解雇、自己退職、定年退職、および雇用終了を記録できます。&#10;従業員の経歴には、配属、労働時間、研修、輸送状況、直近の出来事、病欠日数、給与請求、配属の中断、およびこれまでに支払われた総給与などが表示されます。概要には、これまでに雇用された人数、解雇された人数、自主退職者数、退職者数といった、事業所全体の集計値も追加で表示されます。2
+        1設定、マルチプレイヤー、セーブデータ2
+        1設定は各ゲームセーブごとに適用され、「作業効率」、「人材開発」、「経済・給与」の3つのカテゴリに分類されます。ゲームプレイへの影響は、関連する経験値効果を有効にします。経験値効果は、速度、摩耗、消耗品、燃料を制御します。人材への影響は、忠誠度の変化と残業オプションを有効にします。経済面の影響により、個別給与と標準月額給与が有効になります。&#10;無効化された効果は、既存の人事データを遡及的に書き換えることはありません。それらは、それぞれの今後の影響を許可または阻止するのみです。標準月額給与は、個別給与が無効になっている場合の基準値として機能し、設定画面で直接変更可能です。キーの割り当ては、ゲーム設定で変更できます。&#10;マルチプレイヤーモードでは、従業員、応募者、任務、給与、研修、採用、および履歴が農場ごとに管理・同期されます。決定権はサーバーにあり、権限を持つ農場マネージャーのみが自身の農場を変更できます。データはセーブデータのhelperPersonnel.xmlに保存されており、読み込み時に進行中の割り当ては可能な限り復元されます。以前のセーブデータは引き続き使用可能です。ただし、すでに退職した従業員に関する履歴データは不完全な場合があります。2
+        <e k="ui_button_emergency_release_worker" v="解放" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="%sを解放しますか？ サーバーが有効な作業を検出しない場合のみ可能です。" />
+        <e k="ui_workerEmergencyReleaseSuccess" v="従業員を解放しました。" />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="解放できません：従業員にはまだ有効な作業があります。" />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="解放は不要です：従業員はすでに利用可能です。" />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="解放できません：作業状態を安全に確認できませんでした。" />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="解放できません：権限がないか、従業員が無効です。" />
+    <e k="ui_pmHelpTopic01Title" v="クイックスタートと操作方法" />
+    <e k="ui_pmHelpTopic01Body" v="人事管理では、匿名のAIアシスタントの代わりに、実名を持つ応募者や従業員が登場します。各従業員は長期的に成長し、月給を受け取り、経験、信頼性、忠誠心、専門分野によって、それぞれ異なる強みやリスクを持つことがあります。&#10;独自のメニューは、デフォルトでCtrl + Mで開きます。メニューには、「概要」、「応募者」、「従業員」、「研修」、「設定」、「ヘルプ」が含まれます。キー割り当てはゲーム設定で変更可能です。&#10;デフォルトのキー割り当て：人物の切り替えはA/Dキーまたは左右の矢印キー、選択の確定はスペースキーまたはマウスクリック、キャンセルまたは戻るはEscキー、通勤・給与管理はTキーまたはGキーです。「ヘルプ」タブでは、左右の矢印キーで目次と記事の間を切り替え、上下の矢印キーで選択またはスクロールし、ページアップ/ページダウンキーでページ単位に移動します。" />
+    <e k="ui_pmHelpTopic02Title" v="概要と人員状況" />
+    <e k="ui_pmHelpTopic02Body" v="この概要画面には、農場の現在の状況がまとめられています。上部には、従業員、勤務可能な従業員、応募者、および雇用主としての評判が表示されます。その下には、担当者、車両、機材、業務内容を含む進行中の作業が表示されます。&#10;「変更」タイルには、雇用主からの評価、経験、信頼性、忠誠心、年齢、専門分野の変更など、関連する人事イベントのみが表示されます。各通知には原因、影響を受けた人物、および影響が記載されており、複数行にわたるエントリも1つの通知として扱われます。&#10;「月次レポート」と「合計」では、現在および累積の指標が表示されます。概要画面は迅速な業務計画に活用してください。詳細、意思決定、および履歴については、各専門ページで確認してください。" />
+    <e k="ui_pmHelpTopic03Title" v="求人市場と採用" />
+    <e k="ui_pmHelpTopic03Body" v="新しいラウンドは4人の求職者から始まります。同時に市場に存在できる求職者は最大8人までです。毎月の切り替え時に、最大3つの新しい枠がサイコロで決定されます。各枠の当選確率は15％＋0.7×雇用主の評判です。評判が60の場合、各枠の当選確率は57％、100の場合は85％となります。市場に求職者がいない場合、少なくとも1人の新しい求職者が生成されます。&#10;求職者は、生成された月は確実に利用可能です。最初の月が明けた後は、質に応じて離職確率が10～30％、2ヶ月目以降は30～50％、3ヶ月目には100％となります。質の高いプロフィールは、その質の高さゆえに離職確率が高くなるため、より早く市場から消える可能性があります。&#10;応募者の年齢は18～65歳で、固定された生年月日が設定されており、年齢は経過とともに増加します。背景には、家族経営、酪農、請負業者、畑作、複合経営、物流、農業機械整備工場、事務職などがあります。年齢と背景は、主に経験や専門的な予備知識の有無に影響を与えます。&#10;希望給与は経験と信頼性に基づいており、96～106％のランダムな変動があり、雇用主の評判の影響を受けます。評判が低いと希望額は上昇し、評判が高いと希望額は低下します。採用前には確認メッセージが表示され、採用により評判が1ポイント上昇します。" />
+    <e k="ui_pmHelpTopic04Title" v="社員プロフィール、価値観、ステータス" />
+    <e k="ui_pmHelpTopic04Body" v="経験、信頼性、忠誠度はそれぞれ0から100までの範囲で表示されます。数値は正確に表示され、バーグラフにより一目で比較が可能です。&#10;ランクは経験値のみに基づいて決定されます：補助要員 0～44、熟練者 45～74、プロ 75～100。経験値は作業速度、追加の摩耗、追加の消費量に影響します。信頼性は、短期的なパフォーマンスの低下、病気、月ごとの推移、および任務中断のリスクに影響を与えます。忠誠心は、会社への愛着度を表し、警告、給与に関するトラブル、および自主退職に影響を与えます。" />
+    <e k="ui_pmHelpTopic05Title" v="AIアシスタント、輸送、FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="通常のAIアシスタント業務を開始すると、スタッフ選択画面が表示されます。選択できるのは、利用可能なスタッフのみです。1人のスタッフが同時に複数の依頼を引き受けることはできず、病気や研修中は利用できません。&#10;業務は、10秒経過してから初めて完了した依頼として記録されます。専門性の向上には、実務時間が3分以上必要です。&#10;Tキーまたはメニューボタンを押すと、輸送優先順位設定画面が開きます。そこで、どの従業員が輸送業務を担当するか、およびどの順序でチェックされるかを設定します。「AからBへ」の依頼の場合、上から順に最初の空き従業員が選択されます。FollowMeは引き続き従業員選択機能を利用し、輸送業務としてカウントされます。" />
+    <e k="ui_pmHelpTopic06Title" v="経験と仕事への影響" />
+    <e k="ui_pmHelpTopic06Body" v="経験値の獲得&#10;– 経験値は記録された作業時間によって獲得されます。未使用の学習時間は保持されます。&#10;– 1回の作業につき、最大2経験値を獲得できます。&#10;– さらに、月ごとの上限により進捗が制限されます。経験値が高くなるほど、次の経験値を獲得するまでに要する時間が長くなります。&#10;影響&#10;– メインの専門分野は有効経験値を12ポイント、サブの専門分野は6ポイント増加させます。ただし、最大値は100です。&#10;– 作業速度 = 70 % + 30 % × 有効経験値 / 100。&#10;– 追加の摩耗は最大15％、追加の資材および燃料消費量は最大10％ × 不足している有効経験値 × 経済係数となります。経済係数は0.75 / 1.00 / 1.25です。&#10;学習時間と月間上限&#10;– 経験値 0～24：25分、月間上限 +1； 25～49：50分、0；50～69：100分、-1。&#10;– 経験値70～84：220分、-2；85～94：540分、-3；95～100：1080分、-4。&#10;– 日数／月ごとの基本制限：1日＝1、2日＝2、3～4日＝3、5～6日＝4、7～9日＝5、 10～12日＝6、13～15日＝7、16～18日＝8、19～21日＝9、22～24日＝10、25～27日＝11、28日＝12。実際の制限＝基本制限＋調整値、最低1。" />
+    <e k="ui_pmHelpTopic07Title" v="信頼性、病気、および任務の中断" />
+    <e k="ui_pmHelpTopic07Body" v="信頼性が85未満の場合、短時間の性能低下が発生する可能性があります。1分ごとにチェックが行われ、信頼性が低下するにつれて発生確率は上昇し、最大15％に達します。性能低下は30～90秒間続き、性能を4～15％低下させ、次の発生までさらに3分間空ける必要があります。&#10;病気の有無は毎日チェックされます。病気の従業員はその日は勤務できません。進行中の任務は終了となります。1ヶ月あたり、月数／3で切り上げた日数までが病気休暇として認められます。信頼性が50未満の場合、60秒後に任務の完全中止が1回チェックされます。その場合、その任務は成功とはみなされず、その事象は履歴に記録されます。&#10;病気休暇／日および任務中止の目安：0～20：10％／20％；21～29：8％／15％；30～40：8％／10％；41～49：6％／5％；50～60：6％／0％； 61～80：4％／0％；81～100：2％／0％。良好な月とするには、少なくとも120分の労働時間、事故ゼロ、病欠日数ゼロ、および240分未満の夜間労働時間が必要であり、その場合、信頼性が+1になる確率は35％となる。マイナスのリスクは合算され、60％に制限される。" />
+    <e k="ui_pmHelpTopic08Title" v="忠誠心と雇用主の評判" />
+    <e k="ui_pmHelpTopic08Body" v="新入社員の忠誠度は、通常65程度から始まります。給与の期日通りの支払い、長期の勤続、そして給与要求の受け入れは忠誠度を高めますが、経済的な問題、夜勤、および給与要求の拒否や長期にわたる未解決は忠誠度を低下させます。22:00から06:00までの夜間勤務は記録され、ゲーム内時間120分ごとに忠誠度が最大4ポイント、評判が1～2ポイント減少する可能性があります。&#10;忠誠度と雇用主に対する評判の差が15／30／50ポイント以上ある場合、毎月1／2／3ポイントずつその差が縮まります。イベント：評判が40以上の場合、給与の支払いで忠誠度+1；支払いはマイナス-2；事業が以前に赤字だった場合は-4；在籍期間3／6／12／24ヶ月で+1／+1／+2／+3； 要求が受け入れられた場合 +3；拒否された場合 -5、忠誠度が40未満の場合は -7；猶予期間経過後の未解決の要求は、1ヶ月ごとに -2。&#10;忠誠度0～5での毎月の自主退職率：35％、6～9：20％、10～14：10％、15以上では通常の忠誠度に基づく退職は発生しない。雇用主の評判は60から始まり、0～100の範囲で、0～19は「危機的」、20～39は「低調」、40～59は「堅調」、60～79は「良好」、80～100は「非常に良好」と評価される。これは応募者数や質、希望給与、長期的な忠誠度に影響を与える。" />
+    <e k="ui_pmHelpTopic09Title" v="給与、給与計算、および給与請求" />
+    <e k="ui_pmHelpTopic09Body" v="個人の基本給は、経験値と信頼度に基づいて算出され、各経験帯内で線形補間されます。信頼度は、0.94から1.06の範囲で値に掛けられます。応募者には、さらにランダム要素、評判、および主要専門分野で+5％、副専門分野で+3％の専門分野別加算が適用されます。&#10;月3日勤務時の基本給： 経験値 0～44：1,800～2,200、45～74：2,200～2,700、75～100：2,700～3,300。月額給与＝基本給×月数係数×経済コスト係数（10の倍数に四捨五入）。個別給与が無効になっている場合、10の倍数で100～100,000の標準基本給が適用されます。1～28日分の月数係数：0.58、0.82、1.00、1.15、 1.29；1.41；1.53；1.63；1.73；1.83；1.91；2.00；2.08；2.16；2.24；2.31；2.38；2.45；2.52； 2.58; 2.65; 2.71; 2.77; 2.83; 2.89; 2.94; 3.00; 3.06。&#10;給与の精算は、月末の給与支払いの際に行われます。その時点で雇用関係が終了する従業員も、事前に精算額を受け取ります。熟練者またはプロは昇給を要求できます： 基本成功率は70％ですが、忠誠度により55～85％に制限されます。その後、毎月成功率を半分にして再審査が可能です。承諾すると忠誠度が+3、評判が+1となります。拒否すると忠誠度が5低下し、40未満の場合は7低下します。また、3ヶ月間、解雇リスクと信頼性リスクが高まります。Gを選択すると、未解決の請求事項がすべて解除されます。" />
+    <e k="ui_pmHelpTopic10Title" v="専門分野と実践的な発展" />
+    <e k="ui_pmHelpTopic10Body" v="基本ルール&#10;– 学習カテゴリーは8つあります：土壌整備、播種、施肥、病害虫防除、収穫、運搬、機械の保護、および効率的な作業方法。&#10;– 進捗状況はカテゴリーごとに個別に保存されます。習得した専門スキルは永続的に保持されますが、同時に有効になるボーナスは最大2つまでです。&#10;学習の進捗&#10;– 学習の閾値は240、420、600、780分であり、その後は各閾値が180分ずつ増加します。&#10;– 学習係数は「1 + (経験値－50)/250 + (信頼性－50)/300」で、0.75から1.30の範囲に制限されます。複数の作業を行う場合、学習時間は重み付けされて配分されます。&#10;作業の分類&#10;– 土壌耕起：プラウ、カルチベーター、ロータリーハロー、ディスクハロー、ローラー、マルチング機。&#10;– 播種：播種機・植栽機および種子。&#10;– 施肥：化学肥料、液体肥料、液肥、発酵残渣、堆肥。病害虫防除：除草剤散布作業。&#10;– 収穫：コンバイン、刈り取り機、ベーラー、刈り取り機、積載車、ピックアップ。輸送：トレーラー、荷下ろし、A地点からB地点への輸送。&#10;ボーナスと有効化&#10;– メイン専門分野：有効経験値+12および基本給+5％。セカンド専門分野：+6および+3％。&#10;– 両方の枠を休止状態にすることができます。習得済みの休止中の専門分野は、従業員1人につき農業年度（3月～2月）に1回のみ有効化できます。休止状態にするだけでは、この権利は消費されません。" />
+    <e k="ui_pmHelpTopic11Title" v="研修" />
+    <e k="ui_pmHelpTopic11Body" v="研修は毎月1日のみ開始され、1日/月の場合は12:00までとなります。従業員は、3月から翌年2月までの農業年度ごとに1回の研修のみに参加でき、その間は就業中または病気であってはなりません。その人物は月末まで利用不可の状態となり、進捗は月をまたぐ時点で修了した際に初めて加算されます。&#10;1回の研修で、次の専門分野取得に必要な学習時間の30％（最低30分、不足分を超えることはない）が獲得できる。各カテゴリーには毎月-20％から+20％の価格係数が設定されており、25％の確率で定員に達している。費用は開始時に即座に差し引かれ、その額は当月の給与額に基づいて算出される。&#10;研修費用＝現在の月給×カテゴリー係数×月次修正係数。係数：土壌整備 75％、播種 90％、施肥 90％、病害虫防除 100％、収穫 110％、輸送 65％、機械の保全 120％、省力的な作業方法 120％。" />
+    <e k="ui_pmHelpTopic12Title" v="解雇、自主退職、および定年退職" />
+    <e k="ui_pmHelpTopic12Body" v="解雇は確認が必要です。1日または1ヶ月単位の場合、翌月の切り替え日に効力を生じさせるためには、1日目の12:00までに解雇を通知する必要があります。2日以上の場合、基準日は切り上げられた半月の末日、すなわち ceil(日数/月 ÷ 2) となります。基準日を過ぎると、終了日はさらに1ヶ月先へ繰り延べられます。&#10;解雇の通告により、忠誠度は即座に40ポイント、信頼性は25ポイント低下します。従業員は、解雇が有効となる月末までは原則として勤務可能です。解雇による評判の低下：1ヶ月未満 -12、3ヶ月未満 -9、6ヶ月未満 -7、12ヶ月未満 -5、24ヶ月未満 -3、24ヶ月以上 -1； 同月内にさらに解雇を行うごとに、追加で4ポイントの評判損失が発生します。&#10;忠誠度が0～14の場合、毎月、従業員による自主退職の可能性がチェックされます。給与要求が拒否されると、その確率が一時的に5パーセントポイント上昇することがあります。自主退職の予告は月末に発効し、評判を10ポイント低下させます。55歳の誕生日以降、退職を予告することができます。そのリスクは67歳まで約80～90％に上昇し、68歳では95％、69歳では98％、70歳では100％となります。その人物は月末まで勤務可能です。" />
+    <e k="ui_pmHelpTopic13Title" v="プロフィール、沿革、統計" />
+    <e k="ui_pmHelpTopic13Body" v="応募者プロフィールは、年齢、職歴、経験、信頼性、忠誠心、専門分野、およびこれまでの市場での在籍期間を統合し、ダイナミックな文章としてまとめます。従業員プロフィールには、勤続年数、配属先、研修、および学習の進捗状況が追加されます。&#10;個人履歴には、採用、配属の開始・終了、配属の中断、病気、研修、専門分野、給与要求と決定、忠誠心および信頼性の変化、輸送割り当て、ならびに解雇、自己退職、定年退職、および雇用終了を記録できます。&#10;従業員の経歴には、配属、労働時間、研修、輸送状況、直近の出来事、病欠日数、給与請求、配属の中断、およびこれまでに支払われた総給与などが表示されます。概要には、これまでに雇用された人数、解雇された人数、自主退職者数、退職者数といった、事業所全体の集計値も併せて表示されます。" />
+    <e k="ui_pmHelpTopic14Title" v="設定、マルチプレイヤー、セーブデータ" />
+    <e k="ui_pmHelpTopic14Body" v="設定は各ゲームセーブごとに適用され、「作業効率」、「人材開発」、「経済・給与」の3つのカテゴリに分類されます。ゲームプレイへの影響は、関連する経験値効果を有効にします。経験値効果は、速度、摩耗、消耗品、燃料を制御します。人材への影響は、忠誠度の変化と残業オプションを有効にします。経済面への影響により、個別給与と標準月額給与が有効になります。&#10;無効化された効果は、既存の人事データを遡って書き換えることはありません。それらは、それぞれの今後の影響を許可または禁止するのみです。標準月額給与は、個別給与が無効になっている場合の基準値として機能し、設定画面で直接変更可能です。キーの割り当ては、ゲーム設定で変更できます。&#10;マルチプレイヤーモードでは、従業員、応募者、任務、給与、研修、採用、および履歴が農場ごとに管理・同期されます。決定権はサーバーにあり、権限を持つ農場マネージャーのみが自身の農場を変更できます。データはセーブデータのhelperPersonnel.xmlに保存されており、読み込み時に進行中の割り当ては可能な限り復元されます。以前のセーブデータは引き続き使用可能です。ただし、すでに退職した従業員に関する履歴データは不完全な場合があります。" />
+    <e k="ui_pmHelpTopic15Title" v="設定と最初のステップ" />
+    <e k="ui_pmHelpTopic15Body" v="応募者のプロフィールを開き、年齢、経歴、価値観、希望給与、および保有する専門分野を確認した上で、採用を確定してください。その応募者は現在の農場の従業員となります。その後のすべての決定、給与計算、および経歴の推移は、その農場に基づいて行われます。&#10;採用後は、まず短期間で適切な仕事を割り当ててください。従業員には勤務可能な状態である必要があります。病気、進行中の業務、研修、確定した退職、または現在有効なMOD割り当てがある場合、その人物の選択はできません。「従業員」タブに具体的な理由が表示されます。&#10;最初の採用により、雇用主の評判が1ポイント向上します。数値が高いからといって必ずしも良いとは限りません。経験豊富な応募者は通常、コストが高くなりますが、安価な新人には育成や研修により多くの時間を要します。" />
+    <e k="ui_pmHelpTopic16Title" v="業務内容と専門分野の割り当て" />
+    <e k="ui_pmHelpTopic16Body" v="割り当ては、車両、作業機、および（ある場合）散布された資材に基づいて決定されます。資材の直接的な割り当てが優先されます。すなわち、種子は「播種」に、除草剤は「病害虫防除」に、無機肥料、液体肥料、液肥、発酵残渣、堆肥は「施肥」に分類されます。石灰は、自動的に独立した学習カテゴリとして認識されません。&#10;車両および機器の分類：プラウ、カルチベーター、ロータリーハロー、ディスクハロー、ローラー、マルチング機は「土壌耕起」に分類されます。播種機および定植機は「播種」に分類されます。明確な資材が指定されていないフィールドスプレーヤーは「施肥」に分類されます。コンバイン、刈り取り機、ベールプレス、草刈機、ローダーワゴン、ピックアップは「収穫」に分類されます。トレーラーおよび荷下ろし可能な車両は「輸送」に分類されます。&#10;FollowMeは、この実用的な識別機能をさらに拡張し、シュレッダー、ジャガイモ・ビート収穫機、反転機、シュワダー、堆肥散布機、液肥タンク、深層耕運機、石拾い機、ハロー、および中耕機も対象に含めています。MOD車両については、その専門性が明確な分類をもたらさない場合、中立のままにすることができます。そうすることで、誤った専門性ボーナスが約束されることを防ぎます。&#10;機械の保護と経済的な作業方法は一般的なボーナスです。前者は経験による追加の摩耗を軽減し、後者は追加の燃料および資材の消費を削減します。選択された作業は選択ウィンドウに表示され、それに適合するアクティブな専門化がそこで強調表示されます。" />
+    <e k="ui_specialization_transport" v="輸送" />
+    <e k="ui_transportMarker" v="輸送" />
+    <e k="ui_pmStatusLine" v="ステータス: %s" />
+    <e k="ui_button_transport_manage_long" v="輸送" />
+    <e k="ui_transportPriorityHeaderStatus" v="ステータス" />
+    <e k="ui_transportPriorityHeaderEnabled" v="輸送" />
+    <e k="ui_pmTrainingCostHeader" v="費用" />
+    <e k="ui_pmHistoryCareerTransport" v="交通機関：%s" />
+    <e k="ui_pmOverviewOverallHeader" v="合計" />
+    <e k="ui_pmMonth02" v="4月" />
+    <e k="ui_pmMonth06" v="8月" />
+    <e k="ui_pmMonth07" v="9月" />
+    <e k="ui_pmMonth09" v="11月" />
+    <e k="ui_pmMonth10" v="12月" />
+    <e k="ui_selectionAvailable" v="在庫あり" />
+    <e k="ui_selectionUnavailableSick" v="クランク" />
+    <e k="ui_selectionUnavailableTraining" v="研修中" />
+    <e k="ui_selectionUnavailableReserved" v="予約済み" />
+    <e k="ui_selectionUnavailableFieldwork" v="現地調査" />
+    <e k="ui_selectionUnavailableOther" v="利用不可" />
+    <e k="ui_selectionJobUnknown" v="注文内容不明" />
+    <e k="ui_selectionAgeLabel" v="Alter" />
+    <e k="ui_selectionJobsLabel" v="注文" />
+    <e k="ui_selectionSpeedLabel" v="作業ペース" />
+    <e k="ui_selectionAgeValue" v="%d年" />
+    <e k="ui_selectionVehicleLine" v="車両：%s" />
+    <e k="ui_selectionActivityLine" v="依頼：%s" />
+    <e k="ui_selectionFieldLine" v="フィールド：%s" />
+    <e k="ui_selectionStatusLine" v="ステータス: %s" />
+    <e k="ui_button_specializationDeactivate" v="しばらく休ませる" />
+    <e k="ui_button_specializationActivate" v="ログイン" />
+    <e k="ui_pmSpecializationActive" v="アクティブ" />
+    <e k="ui_pmHelpContents" v="目次" />
     </elements>
 </l10n>

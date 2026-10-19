@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="Nawożenie" />
         <e k="ui_specialization_plantProtection" v="Ochrona roślin" />
         <e k="ui_specialization_harvest" v="Zbiory" />
-        <e k="ui_specialization_transport" v="Transport" />
+        1Transport2
         <e k="ui_specialization_machineCare" v="Dbałość o maszyny" />
         <e k="ui_specialization_resourceSaver" v="Oszczędne wykorzystanie" />
         <e k="ui_specializationLearned" v="%s rozwinął specjalizację: %s." />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Zarządzaj zadaniami transportowymi" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Zarządzaj wnioskami o podwyżkę" />
         <e k="input_HP_SELECT_CANCEL" v="Anuluj wybór pracownika" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="Zwolnij zablokowanego pracownika" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="Zwolnij zablokowanego pracownika" />
         <e k="ui_openWorkerView" v="Pracownicy" />
         <e k="ui_openApplicantView" v="Kandydaci" />
         <e k="ui_backToOverview" v="Wróć do przeglądu" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="Czas pracy: %d zlecenia | %s | Pensja miesięczna: %s" />
         <e k="ui_button_transport_assign" v="Przydziel transport" />
         <e k="ui_button_transport_remove" v="Usuń transport" />
-        <e k="ui_transportMarker" v="transport" />
+        1Transport2
         <e k="ui_transportActionAssigned" v="%s - przydziel transport." />
         <e k="ui_transportActionRemoved" v="%s - usuń transport." />
         <e k="ui_transportNoDriverAssigned" v="transport: brak." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="Szkolenie" />
         <e k="ui_pmStatusApplicant" v="Kandydat" />
         <e k="ui_pmBirthLine" v="Data urodzenia: %s" />
+        <e k="ui_pmRankLabel" v="Ranga" />
         <e k="ui_pmOriginLine" v="Doświadczenie zawodowe: %s" />
         <e k="ui_pmStatsLine" v="Doświadczenie %d · Niezawodność %d · Lojalność %d" />
         <e k="ui_pmStatExperience" v="Doświadczenie" />
         <e k="ui_pmStatReliability" v="Niezawodność" />
         <e k="ui_pmStatLoyalty" v="Lojalność" />
         <e k="ui_pmWageLine" v="Wynagrodzenie: %s" />
-        <e k="ui_pmStatusLine" v="Status: %s" />
+        1Status: %s2
         <e k="ui_pmOrigin1" v="wiejskie gospodarstwo rodzinne" />
         <e k="ui_pmOrigin2" v="małe gospodarstwo mleczne" />
         <e k="ui_pmOrigin3" v="firma usług rolniczych" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONEL" />
         <e k="ui_pmSettingsSectionEconomic" v="EKONOMIA" />
         <e k="ui_button_transport_assign_long" v="Przydziel zadania transportowe" />
-        <e k="ui_button_transport_manage_long" v="Transport" />
+        1Transport2
         <e k="ui_transportPriorityTitle" v="Priorytet transportu" />
         <e k="ui_transportPriorityIntro" v="Wybierz pracowników do zadań transportowych i ustal kolejność sprawdzania ich dostępności." />
         <e k="ui_transportPriorityHeaderPriority" v="Priorytet" />
         <e k="ui_transportPriorityHeaderEmployee" v="Pracownik" />
-        <e k="ui_transportPriorityHeaderStatus" v="Status" />
-        <e k="ui_transportPriorityHeaderEnabled" v="Transport" />
+        1Status2
+        1Transport2
         <e k="ui_transportPriorityActive" v="Aktywny" />
         <e k="ui_transportPriorityInactive" v="Nieprzydzielony" />
         <e k="ui_transportPriorityMoveUp" v="Przesuń w górę" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="praca biurowa" />
         <e k="ui_status_retirementPending" v="odejście na emeryturę pod koniec miesiąca" />
         <e k="ui_retirementNotice" v="%s przejdzie na emeryturę pod koniec miesiąca." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="Specjalizacje poprawiają wydajność w odpowiedniej kategorii. Szkolenie rozpoczyna się tylko na początku miesiąca, kosztuje pieniądze i czyni pracownika niedostępnym do końca miesiąca. Postęp zostaje zaliczony po ukończeniu. Oferty i ceny zmieniają się co miesiąc; w roku rolniczym od marca do lutego dozwolone jest tylko jedno szkolenie. Poznane specjalizacje pozostają znane, lecz aktywne są najwyżej dwa bonusy. Oba miejsca mogą być nieaktywne. Poznaną nieaktywną specjalizację można aktywować tylko raz na pracownika i rok rolniczy." />
         <e k="ui_pmTrainingCategoryHeader" v="Kierunek nauki" />
         <e k="ui_pmTrainingProgressHeader" v="Postęp do specjalizacji" />
         <e k="ui_pmTrainingRunning" v="szkolenie w toku" />
         <e k="ui_pmTrainingSelectCategory" v="Najpierw wybierz kategorię szkolenia" />
         <e k="ui_pmTrainingConfirm" v="Rozpocząć szkolenie dla %s w kategorii %s?" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="Specjalizacja: dwa aktywne miejsca zajęte · ostatnio poznana: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Szkolenie: przy 1 dniu/miesiąc tylko do 12:00 · wybierz kategorię w menu szkolenia · ostatnie: %s" />
         <e k="ui_training_line_first_day_select" v="Szkolenie: tylko pierwszego dnia · wybierz kategorię w menu szkolenia · ostatnie: %s" />
         <e k="ui_training_line_busy_select" v="Szkolenie: niemożliwe podczas pracy · ostatnie: %s" />
         <e k="ui_training_line_sick_select" v="Szkolenie: niemożliwe podczas choroby · ostatnie: %s" />
         <e k="ui_training_line_select_category" v="Szkolenie: wybierz kategorię w menu szkolenia · ostatnie: %s" />
-        <e k="ui_pmTrainingCostHeader" v="Koszt" />
+        1Koszty2
         <e k="ui_pmTrainingAdjustmentHeader" v="Rabat/dodatkowy koszt" />
         <e k="ui_pmTrainingNoPlaces" v="obecnie brak wolnych miejsc" />
         <e k="ui_pmTrainingNoPlacesMessage" v="Obecnie nie ma wolnych miejsc na to szkolenie." />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="Zadania: %d" />
         <e k="ui_pmHistoryCareerWorkTime" v="Czas pracy: %s" />
         <e k="ui_pmHistoryCareerTraining" v="Szkolenie: %s" />
-        <e k="ui_pmHistoryCareerTransport" v="Transport: %s" />
+        1Transport: %s2
         <e k="ui_pmHistoryValueActive" v="aktywny" />
         <e k="ui_pmHistoryValueInactive" v="nieaktywny" />
         <e k="ui_monthlyRowApplicants" v="Kandydaci" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="Czas pracy" />
         <e k="ui_monthlyRowWages" v="Miesięczne pensje" />
         <e k="ui_monthlyRowPayroll" v="Ostatnia wypłata" />
-        <e k="ui_pmOverviewOverallHeader" v="ŁĄCZNIE" />
+        1OGÓŁEM2
         <e k="ui_pmOverviewTotalJobs" v="Łączna liczba zleceń" />
         <e k="ui_pmOverviewTotalWorkTime" v="Łączny czas pracy" />
         <e k="ui_pmOverviewTotalPayroll" v="Łącznie wypłacone pensje" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s przerwał trwające zadanie, aby spontanicznie spotkać się z dziewczyną na kawę." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s przerwała trwające zadanie, aby spontanicznie spotkać się z chłopakiem na kawę." />
         <e k="ui_pmMonth01" v="marzec" />
-        <e k="ui_pmMonth02" v="kwiecień" />
+        1kwiecień2
         <e k="ui_pmMonth03" v="maj" />
         <e k="ui_pmMonth04" v="czerwiec" />
         <e k="ui_pmMonth05" v="lipiec" />
-        <e k="ui_pmMonth06" v="sierpień" />
-        <e k="ui_pmMonth07" v="wrzesień" />
+        1sierpień2
+        1wrzesień2
         <e k="ui_pmMonth08" v="październik" />
-        <e k="ui_pmMonth09" v="listopad" />
-        <e k="ui_pmMonth10" v="grudzień" />
+        1listopad2
+        1grudzień2
         <e k="ui_pmMonth11" v="styczeń" />
         <e k="ui_pmMonth12" v="luty" />
         <e k="ui_pmPeriodMonthYear" v="%s, rok %d" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="dobry miesiąc pracy" />
         <e k="ui_waitingForServerData" v="Oczekiwanie na dane serwera" />
         <e k="ui_pmMenuPageHelp" v="Pomoc" />
-        <e k="ui_pmHelpIntro" v="Szczegółowa pomoc w grze dla Personnel Management 1.1.4.0. Dołączony ReadMe.pdf zawiera dodatkowe zasady i obliczenia." />
+        <e k="ui_pmHelpIntro" v="Szczegółowa pomoc w grze dla Personnel Management 1.1.5.0." />
         <e k="ui_pmHelpSectionQuickStart" v="Szybki start i sterowanie|Otwórz menu przez Ctrl + M. Zmieniaj karty sterowaniem stron menu. Użyj A/D lub Lewo/Prawo, aby zmienić osobę, Spacji do potwierdzenia, Esc do powrotu, T do priorytetów transportu i G do żądań płacowych." />
         <e k="ui_pmHelpSectionPeople" v="Kandydaci i pracownicy|Nowy zapis zaczyna się z czterema kandydatami; maksymalnie może być dostępnych ośmiu. Zatrudniaj z profili. Doświadczenie, niezawodność i lojalność mają zakres 0-100. Status, płaca, specjalizacje, kronika i sumy są na stronie pracowników." />
         <e k="ui_pmHelpSectionStats" v="Pracownicy i cechy|Doświadczenie wpływa na prędkość, zużycie i spalanie; niezawodność na przerwy, choroby i przerwanie pracy; lojalność na żądania płacowe i odejścia. Strona pracownika pokazuje też status, płacę, specjalizacje, statystyki i osobistą kronikę." />
@@ -529,81 +530,146 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Rezygnacja, zwolnienie i emerytura|Te zakończenia nie zawsze działają natychmiast; są realizowane przy zmianie miesiąca według terminów. Pracownika wykonującego pracę nie można od razu zwolnić. Nadchodzące zmiany widać w statusie i kronice." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive i Courseplay|Przypisz kierowców do transportu w Pracownicy / Transport i ustaw priorytet. AutoDrive używa pierwszego dostępnego i blokuje start, jeśli nikogo nie ma. Zwykły start Courseplay otwiera wybór. Gdy Courseplay uruchamia się automatycznie po AutoDrive, każdy pojazd zachowuje własnego kierowcę bez nowego wyboru." />
         <e k="ui_pmHelpSectionMultiplayer" v="Gra wieloosobowa i zapisy|Dane personelu i ustawienia są oddzielne dla każdej farmy. Serwer sprawdza zmiany; tylko uprawnieni menedżerowie zarządzają swoją farmą. Pracownicy, aktywne przydziały i ustawienia są synchronizowane. Dane zapisuje helperPersonnel.xml w zapisie gry." />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="Zarządzanie personelem · Wybierz zadanie" />
+        <e k="ui_selectionPerformanceProfile" v="PROFIL WYDAJNOŚCI" />
+        1Dostępne2
+        1Krank2
+        1Podczas szkolenia2
+        1Zarezerwowane2
+        <e k="ui_selectionUnavailableAutoDrive" v="Zadanie AutoDrive" />
+        <e k="ui_selectionUnavailableCourseplay" v="Zadanie Courseplay" />
+        1Praca w terenie2
+        1Niedostępne2
+        <e k="ui_selectionShowAll" v="Pokaż wszystkich pracowników" />
+        <e k="ui_selectionShowAvailable" v="Pokaż tylko dostępnych" />
+        <e k="ui_selectionFooterControls" v="A/D Zmień · Spacja Wybierz · Tab Wszyscy · Esc Wstecz" />
+        1Zlecenie nieznane2
+        1Zmiana2
+        <e k="ui_selectionWageLabel" v="Miesięczna pensja" />
+        1Zlecenia2
+        1Tempo pracy2
+        1%d lat2
         <e k="ui_selectionProfessionalDevelopment" v="Rozwój zawodowy" />
         <e k="ui_selectionNoSpecializationProgress" v="Brak postępów specjalizacji" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="Brak specjalizacji" />
+        1Pojazd: %s2
+        1Zlecenie: %s2
+        1Pole: %s2
+        <e k="ui_selectionTargetLine" v="Cel transportu: %s" />
+        <e k="ui_selectionCourseplayLine" v="Typ zadania CP: %s" />
+        1Status: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="Szybki start i sterowanie" />
-        <e k="ui_pmHelpTopic01Body" v="Otwórz menu przez Ctrl + M. Zmieniaj karty sterowaniem stron menu. Użyj A/D lub Lewo/Prawo, aby zmienić osobę, Spacji do potwierdzenia, Esc do powrotu, T do priorytetów transportu i G do żądań płacowych." />
-        <e k="ui_pmHelpTopic02Title" v="Kandydaci i pracownicy" />
-        <e k="ui_pmHelpTopic02Body" v="Nowy zapis zaczyna się z czterema kandydatami; maksymalnie może być dostępnych ośmiu. Zatrudniaj z profili. Doświadczenie, niezawodność i lojalność mają zakres 0-100. Status, płaca, specjalizacje, kronika i sumy są na stronie pracowników. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="Pracownicy i cechy" />
-        <e k="ui_pmHelpTopic03Body" v="Doświadczenie wpływa na prędkość, zużycie i spalanie; niezawodność na przerwy, choroby i przerwanie pracy; lojalność na żądania płacowe i odejścia. Strona pracownika pokazuje też status, płacę, specjalizacje, statystyki i osobistą kronikę." />
-        <e k="ui_pmHelpTopic04Title" v="Praca i rozwój" />
-        <e k="ui_pmHelpTopic04Body" v="Rozpoczęcie zwykłej pracy pomocnika SI otwiera wybór pracownika. Wybrać można tylko dostępnych, a jedna osoba nie może wykonywać kilku prac jednocześnie. Czas pracy zwiększa doświadczenie i specjalizację. Doświadczenie wpływa na prędkość, zużycie i spalanie; niezawodność na spowolnienia, choroby i przerwania; lojalność na spory płacowe i odejścia. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="Doświadczenie wpływa na prędkość, zużycie i spalanie; niezawodność na przerwy, choroby i przerwanie pracy; lojalność na żądania płacowe i odejścia. Strona pracownika pokazuje też status, płacę, specjalizacje, statystyki i osobistą kronikę." />
-        <e k="ui_pmHelpTopic06Title" v="Płace" />
-        <e k="ui_pmHelpTopic06Body" v="Płace są księgowane przy zmianie miesiąca i zależą od dni w miesiącu, trudności ekonomicznej oraz ustawień moda. Pracownicy mogą żądać podwyżki; wniosek trzeba przyjąć lub odrzucić w terminie i może on wpłynąć na lojalność." />
-        <e k="ui_pmHelpTopic07Title" v="Szkolenie" />
-        <e k="ui_pmHelpTopic07Body" v="Szkolenie zaczyna się tylko na początku miesiąca, kosztuje i blokuje pracownika do końca miesiąca. Ukończenie poprawia wybraną specjalizację. Oferty i wcześniejsze szkolenia są widoczne w działach Szkolenie i Pracownicy. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="Specjalizacja" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="Rezygnacja, zwolnienie i emerytura" />
-        <e k="ui_pmHelpTopic09Body" v="Te zakończenia nie zawsze działają natychmiast; są realizowane przy zmianie miesiąca według terminów. Pracownika wykonującego pracę nie można od razu zwolnić. Nadchodzące zmiany widać w statusie i kronice." />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive i Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="Przypisz kierowców do transportu w Pracownicy / Transport i ustaw priorytet. AutoDrive używa pierwszego dostępnego i blokuje start, jeśli nikogo nie ma. Zwykły start Courseplay otwiera wybór. Gdy Courseplay uruchamia się automatycznie po AutoDrive, każdy pojazd zachowuje własnego kierowcę bez nowego wyboru." />
-        <e k="ui_pmHelpTopic11Title" v="Gra wieloosobowa i zapisy" />
-        <e k="ui_pmHelpTopic11Body" v="Dane personelu i ustawienia są oddzielne dla każdej farmy. Serwer sprawdza zmiany; tylko uprawnieni menedżerowie zarządzają swoją farmą. Pracownicy, aktywne przydziały i ustawienia są synchronizowane. Dane zapisuje helperPersonnel.xml w zapisie gry." />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="Dane personelu i ustawienia są oddzielne dla każdej farmy. Serwer sprawdza zmiany; tylko uprawnieni menedżerowie zarządzają swoją farmą. Pracownicy, aktywne przydziały i ustawienia są synchronizowane. Dane zapisuje helperPersonnel.xml w zapisie gry." />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="Otwórz menu przez Ctrl + M. Zmieniaj karty sterowaniem stron menu. Użyj A/D lub Lewo/Prawo, aby zmienić osobę, Spacji do potwierdzenia, Esc do powrotu, T do priorytetów transportu i G do żądań płacowych. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="Zwolnij" />
-        <e k="ui_pmConfirmReleaseWorker" v="Zwolnić %s? Jest to możliwe tylko wtedy, gdy serwer nie wykrywa aktywnego zadania." />
-        <e k="ui_workerReleaseSuccess" v="Pracownik zwolniony." />
-        <e k="ui_workerReleaseDeniedActive" v="Nie można zwolnić: pracownik nadal ma aktywne zadanie." />
-        <e k="ui_workerReleaseDeniedAvailable" v="Zwolnienie nie jest potrzebne: pracownik jest już dostępny." />
-        <e k="ui_workerReleaseDeniedCheck" v="Nie można zwolnić: stan zadania nie mógł zostać bezpiecznie sprawdzony." />
-        <e k="ui_workerReleaseDeniedPermission" v="Nie można zwolnić: brak uprawnień lub nieprawidłowy pracownik." />
+        1Odstawić na bok2
+        1Zaloguj się2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Dezaktywować %s dla %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Aktywować %s dla %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="Nową specjalizację można aktywować tylko raz na pracownika i rok rolniczy." />
+        <e k="ui_pmSpecializationSlotsFull" v="Dezaktywuj co najmniej jedną aktywną specjalizację przed aktywowaniem kolejnej." />
+        1aktywny2
+        <e k="ui_pmSpecializationInactive" v="poznana, nieaktywna" />
+        <e k="ui_specializationActivatedNotice" v="%s ponownie używa specjalizacji %s." />
+        <e k="ui_specializationDeactivatedNotice" v="%s dezaktywuje specjalizację %s." />
+        1SPIS TREŚCI2
+        <e k="ui_pmHelpNavigation" v="Lewo/Prawo: obszar · Góra/Dół: wybierz lub przewiń · Page Up/Down: strona" />
+        1Szybki start i obsługa2
+        1System zarządzania kadrami zastępuje anonimowych asystentów AI konkretnymi kandydatami i pracownikami. Każdy pracownik rozwija się w perspektywie długoterminowej, otrzymuje miesięczne wynagrodzenie i może wykazywać różne mocne strony oraz wiązać się z różnymi ryzykami w zależności od doświadczenia, rzetelności, lojalności i specjalizacji.&#10;Własne menu otwiera się domyślnie za pomocą skrótu klawiszowego Ctrl + M. Zawiera ono: Przegląd, Kandydaci, Pracownicy, Szkolenia, Ustawienia i Pomoc. Przypisanie klawiszy można zmienić w ustawieniach gry.&#10;Domyślne przypisanie klawiszy: zmiana osoby klawiszami A/D lub strzałkami w lewo/w prawo; potwierdzenie wyboru klawiszem spacji lub kliknięciem myszy; anulowanie lub powrót klawiszem Esc; zarządzanie transportem i wynagrodzeniami klawiszami T lub G. W zakładce „Pomoc” klawisze strzałek w lewo/w prawo służą do przełączania się między treścią a artykułami, klawisze strzałek w górę/w dół do wyboru lub przewijania, a klawisze strzałek w górę/w dół do przechodzenia między stronami.2
+        1Przegląd i stan zatrudnienia2
+        1Przegląd przedstawia aktualny stan gospodarstwa: na górze znajdują się pracownicy, dostępni pracownicy, kandydaci oraz wizerunek pracodawcy. Poniżej wyświetlane są bieżące zlecenia wraz z danymi dotyczącymi osoby, pojazdu, sprzętu i czynności.&#10;Karta „Zmiany” zawiera wyłącznie istotne zdarzenia kadrowe, czyli zmiany w zakresie wizerunku pracodawcy, doświadczenia, rzetelności, lojalności, wieku lub specjalizacji. Każda informacja zawiera przyczynę, osobę, której dotyczy, oraz skutek; wpis wielowierszowy stanowi przy tym jedną informację.&#10;Raport miesięczny i podsumowanie ogólne przedstawiają aktualne i historyczne wskaźniki. Skorzystaj z przeglądu do szybkiego planowania zadań; szczegóły, decyzje i kroniki należy umieszczać na poszczególnych stronach tematycznych.2
+        1Rynek pracy i rekrutacja2
+        1Nowa rozgrywka rozpoczyna się z czterema kandydatami. Jednocześnie na rynku może znajdować się maksymalnie ośmiu kandydatów. Z każdą zmianą miesiąca losowanych jest do trzech nowych miejsc; szansa na każde miejsce wynosi 15 % + 0,7 × reputacja pracodawcy. Przy reputacji 60 jest to 57 %, a przy reputacji 100 – 85 % na każde miejsce. Jeśli rynek jest pusty, generowany jest co najmniej jeden nowy kandydat.&#10;Kandydaci pozostają na pewno dostępni w miesiącu, w którym zostali wygenerowani. Po pierwszej zmianie miesiąca ich szansa na odejście wynosi, w zależności od jakości, 10–30%, po drugiej – 30–50%, a przy trzeciej zmianie miesiąca – 100%. Dobrzy kandydaci mogą zniknąć wcześniej, ponieważ ich jakość zwiększa szansę na odejście.&#10;Kandydaci są w wieku 18–65 lat, mają stałą datę urodzenia i starzeją się. Ich tło zawodowe obejmuje: gospodarstwo rodzinne, gospodarstwo mleczne, przedsiębiorstwo usług rolniczych, uprawę roli, gospodarstwo mieszane, logistykę, warsztat maszyn rolniczych oraz pracę biurową. Wiek i tło zawodowe wpływają przede wszystkim na doświadczenie i ewentualną wiedzę fachową.&#10;Oczekiwania płacowe opierają się na doświadczeniu i rzetelności, charakteryzują się odchyleniem losowym wynoszącym 96–106% i są uzależnione od reputacji pracodawcy. Niska reputacja podnosi oczekiwania, natomiast wysoka reputacja je obniża. Przed zatrudnieniem pojawia się potwierdzenie; zatrudnienie podnosi reputację o 1 punkt.2
+        1Profil pracownika, wartości i status2
+        1Doświadczenie, niezawodność i lojalność są oceniane w skali od 0 do 100. Wartość pozostaje wyraźnie widoczna; paski umożliwiają szybkie porównanie.&#10;Poziom zależy wyłącznie od doświadczenia: pomocnik 0–44, specjalista 45–74, profesjonalista 75–100. Doświadczenie determinuje tempo pracy, dodatkowe zużycie i dodatkowe zużycie zasobów. Niezawodność wpływa na krótkotrwałe spadki wydajności, choroby, miesięczne zmiany oraz ryzyko przerwania pracy. Lojalność opisuje przywiązanie do firmy i wpływa na ostrzeżenia, konflikty płacowe oraz samodzielne wypowiedzenia.2
+        1Asystent AI, transport i FollowMe2
+        1Po uruchomieniu standardowego zadania asystenta AI otwiera się okno wyboru pracowników. Można wybrać tylko tych pracowników, którzy są dostępni. Pracownik nie może jednocześnie realizować kilku zleceń i jest niedostępny w przypadku choroby lub szkolenia.&#10;Zadanie jest rejestrowane jako zakończone dopiero po upływie 10 sekund. Aby uzyskać postęp w specjalizacji, praca praktyczna musi trwać co najmniej 3 minuty.&#10;Klawiszem T lub przyciskiem menu otwierasz priorytet transportu. Tam określasz, którzy pracownicy przejmują zadania transportowe i w jakiej kolejności są oni sprawdzani. W przypadku zlecenia typu „z punktu A do punktu B” wybierany jest pierwszy wolny pracownik, zaczynając od góry listy. Funkcja FollowMe nadal korzysta z wyboru pracowników i jest traktowana jako praca transportowa.2
+        1Doświadczenie i jego wpływ na pracę2
+        1ZBIERANIE DOŚWIADCZENIA&#10;– Doświadczenie zdobywa się poprzez zarejestrowany czas pracy; niewykorzystane minuty nauki pozostają zachowane.&#10;– Za każde pojedyncze zadanie można zdobyć maksymalnie 2 punkty doświadczenia.&#10;– Dodatkowo postęp ograniczany jest miesięcznym limitem. Im wyższy poziom doświadczenia, tym dłużej trwa zdobycie kolejnego punktu.&#10;SKUTKI&#10;– Specjalizacja główna zwiększa efektywne doświadczenie o 12 punktów, a specjalizacja dodatkowa o 6; maksymalna wartość wynosi 100.&#10;– Szybkość pracy = 70 % + 30 % × efektywne doświadczenie / 100.&#10;– Dodatkowe zużycie wynosi do 15%, a dodatkowe zużycie materiałów i paliwa do 10% × brakujące doświadczenie efektywne × współczynnik ekonomiczny. Współczynnik ekonomiczny wynosi 0,75 / 1,00 / 1,25.&#10;CZAS NAUKI I LIMIT MIESIĘCZNY&#10;– Doświadczenie 0–24: 25 minut, limit miesięczny +1; 25–49: 50 minut, 0; 50–69: 100 minut, -1.&#10;– Doświadczenie 70–84: 220 minut, -2; 85–94: 540 minut, -3; 95–100: 1080 minut, -4.&#10;– Limit podstawowy według dni/miesiąca: 1 dzień = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Rzeczywisty limit = limit podstawowy + korekta, co najmniej 1.2
+        1Niezawodność, choroby i przerwy w pracy2
+        1Przy wskaźniku niezawodności poniżej 85 mogą wystąpić krótkie spadki wydajności. Sprawdzanie odbywa się raz na minutę; prawdopodobieństwo wzrasta wraz ze spadkiem niezawodności, osiągając maksymalnie 15 %. Spadek trwa 30–90 sekund, zmniejsza wydajność o 4–15 % i może powtórzyć się dopiero po upływie kolejnych 3 minut.&#10;Stan zdrowia jest sprawdzany codziennie. Chory pracownik nie jest dostępny w danym dniu; trwające zadanie zostaje zakończone. W ciągu miesiąca możliwe jest maksymalnie (w zaokrągleniu) dni w miesiącu / 3 dni chorobowe. Przy niezawodności poniżej 50 co 60 sekund przeprowadzana jest jednorazowa kontrola pod kątem całkowitego przerwania zadania; zlecenie nie jest wówczas uznawane za pomyślnie wykonane, a zdarzenie pojawia się w historii.&#10;Wartości orientacyjne dotyczące choroby/dnia i przerwania zlecenia: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. Dobry miesiąc wymaga co najmniej 120 minut pracy, braku zdarzeń, braku dni chorobowych i mniej niż 240 minut pracy nocnej; wówczas istnieje 35 % szansy na +1 do niezawodności. Negatywne czynniki ryzyka sumują się i są ograniczone do 60 %.2
+        1Lojalność i reputacja pracodawcy2
+        1Nowi pracownicy zazwyczaj zaczynają z poziomem lojalności wynoszącym około 65. Terminowo wypłacane wynagrodzenia, długi staż pracy oraz zaakceptowane żądania płacowe wzmacniają lojalność; problemy finansowe, praca w nocy, a także odrzucone lub długo nierozpatrzone żądania ją osłabiają. Praca nocna w godzinach od 22:00 do 06:00 jest rejestrowana i może kosztować od 120 minut w grze do 4 punktów lojalności oraz 1–2 punktów reputacji.&#10;W przypadku różnicy między lojalnością a reputacją pracodawcy wynoszącej co najmniej 15 / 30 / 50 punktów następuje comiesięczne wyrównanie o 1 / 2 / 3 punkty. Zdarzenia: Wypłata wynagrodzenia przy prestiżu co najmniej 40 +1 do lojalności; wypłata powoduje ujemny wynik -2; firma miała wcześniej ujemny wynik -4; staż pracy 3 / 6 / 12 / 24 miesiące +1 / +1 / +2 / +3; przyjęcie żądania +3; odrzucenie -5, przy lojalności poniżej 40 -7; zaległe żądanie po upływie miesiąca karencji -2 za każdy miesiąc.&#10;Miesięczne prawdopodobieństwo odejścia z własnej inicjatywy przy lojalności 0–5: 35%, 6–9: 20%, 10–14: 10%, od 15 brak regularnego odejścia z powodu lojalności. Wizerunek pracodawcy zaczyna się od 60, mieści się w przedziale 0–100 i jest oceniany jako krytyczny 0–19, słaby 20–39, solidny 40–59, dobry 60–79 lub bardzo dobry 80–100. Wpływa on na liczbę i jakość kandydatów, oczekiwania płacowe oraz długoterminową lojalność.2
+        1Wynagrodzenia, rozliczenia i roszczenia płacowe2
+        1Indywidualne wynagrodzenia podstawowe są obliczane na podstawie stażu pracy i niezawodności, a następnie interpolowane liniowo w ramach każdego przedziału stażu. Współczynnik niezawodności mnoży tę wartość przez współczynnik z przedziału od 0,94 do 1,06. Kandydaci otrzymują dodatkowo premie za losowość, reputację oraz ewentualne premie specjalizacyjne w wysokości +5% za specjalizację główną i +3% za specjalizację dodatkową.&#10;Wynagrodzenie podstawowe przy 3 dniach pracy miesięcznie: Doświadczenie 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Wynagrodzenie miesięczne = wynagrodzenie podstawowe × współczynnik długości miesiąca × współczynnik kosztów gospodarczych, zaokrąglone do 10. W przypadku wyłączonych wynagrodzeń indywidualnych obowiązuje standardowe wynagrodzenie podstawowe w przedziale 100–100 000 w krokach co 10. Współczynniki długości miesiąca dla 1–28 dni: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Rozliczenie następuje z końcem miesiąca w formie wypłaty wynagrodzenia. Również pracownicy, których stosunek pracy wówczas się kończy, otrzymują wcześniej należne rozliczenie. Specjalista lub profesjonalista może zażądać podwyżki: Szansa podstawowa wynosi 70%, ograniczona przez lojalność do 55–85%; później można ponownie rozpatrywać wniosek co miesiąc z połową szansy. Przyjęcie wniosku daje +3 do lojalności i +1 do prestiżu; odrzucenie obniża lojalność o 5, a poniżej 40 – o 7, oraz zwiększa na 3 miesiące ryzyko wypowiedzenia i ryzyko związane z niezawodnością. G ujawnia wszystkie zaległe roszczenia.2
+        1Specjalizacje i rozwój praktyczny2
+        1PODSTAWOWE ZASADY&#10;– Istnieje osiem kategorii nauki: uprawa gleby, siew, nawożenie, ochrona roślin, zbiór, transport, dbanie o maszyny oraz oszczędne metody pracy.&#10;– Postępy są zapisywane oddzielnie dla każdej kategorii. Nabyte specjalizacje pozostają na stałe; jednocześnie aktywne mogą być maksymalnie dwie premie.&#10;POSTĘPY W NAUCE&#10;– Progi nauki wynoszą 240, 420, 600 i 780 minut; następnie każdy kolejny próg wzrasta o 180 minut.&#10;– Współczynnik nauki wynosi 1 + (doświadczenie – 50)/250 + (niezawodność – 50)/300 i jest ograniczony do wartości od 0,75 do 1,30. W przypadku wykonywania kilku czynności czas nauki jest rozdzielany proporcjonalnie.&#10;KLASYFIKACJA CZYNNOŚCI&#10;– Uprawa gleby: pług, kultywator, brona obrotowa, brona talerzowa, walec i mulczer.&#10;– Wysiew: siewniki i sadzarki oraz nasiona.&#10;– Nawożenie: nawozy mineralne, nawozy płynne, gnojowica, pozostałości po fermentacji i obornik. Ochrona roślin: zabiegi herbicydowe.&#10;– Zbiór: kombajny, mechanizmy tnące, prasy do bel, kosiarki, przyczepy samozbierające i podbieracze. Transport: przyczepy, rozładunek oraz transport z punktu A do punktu B.&#10;BONUSY I AKTYWACJA&#10;– Główna specjalizacja: +12 punktów doświadczenia i +5% wynagrodzenia podstawowego. Druga specjalizacja: +6 i +3%.&#10;– Oba miejsca mogą pozostawać w stanie uśpienia. Wyuczoną, uśpioną specjalizację można aktywować tylko raz na pracownika w roku rolniczym trwającym od marca do lutego; pozostawienie jej w stanie uśpienia nie wyczerpuje tego prawa.2
+        1Szkolenia2
+        1Szkolenia rozpoczynają się wyłącznie pierwszego dnia miesiąca; w przypadku dni miesięcznych – do godziny 12:00 włącznie. Pracownik może w każdym roku rolniczym, trwającym od marca do lutego, uczestniczyć tylko w jednym szkoleniu i nie może być w tym czasie zatrudniony ani przebywać na zwolnieniu lekarskim. Osoba ta pozostaje niedostępna do końca miesiąca; postępy zostaną zaliczone dopiero po zakończeniu szkolenia na przełomie miesięcy.&#10;Szkolenie zapewnia 30% minut nauki wymaganych do uzyskania kolejnej specjalizacji, co najmniej 30 minut i nigdy więcej niż brakuje do osiągnięcia celu. Każda kategoria ma miesięczny współczynnik cenowy od -20% do +20% i z 25-procentowym prawdopodobieństwem jest w pełni zarezerwowana. Koszty są odliczane natychmiast po rozpoczęciu szkolenia i opierają się na aktualnym wynagrodzeniu miesięcznym.&#10;Koszty szkolenia = aktualne miesięczne wynagrodzenie × współczynnik kategorii × modyfikator miesięczny. Współczynniki: uprawa gleby 75%, siew 90%, nawożenie 90%, ochrona roślin 100%, zbiór 110%, transport 65%, dbanie o maszyny 120%, oszczędny sposób pracy 120%.2
+        1Zwolnienie, rezygnacja z własnej inicjatywy i przejście na emeryturę2
+        1Zwolnienia wymagają potwierdzenia. W przypadku jednego dnia/miesiąca wypowiedzenie musi zostać ogłoszone w dniu 1 do godziny 12:00, aby stało się skuteczne z początkiem następnego miesiąca. W przypadku dwóch lub więcej dni terminem rozliczeniowym jest koniec zaokrąglonego w górę pół miesiąca, czyli dzień ceil(dni/miesiąc ÷ 2). Po upływie terminu rozliczeniowego koniec okresu zatrudnienia przesuwa się o kolejny miesiąc.&#10;Wraz z wypowiedzeniem lojalność natychmiast spada o 40, a rzetelność o 25. Pracownik zasadniczo pozostaje dostępny do pracy do końca miesiąca, w którym wypowiedzenie wchodzi w życie. Utrata reputacji w przypadku zwolnienia: poniżej 1 miesiąca -12, poniżej 3 -9, poniżej 6 -7, poniżej 12 -5, poniżej 24 -3, od 24 miesięcy -1; każde kolejne zwolnienie w tym samym miesiącu kosztuje dodatkowo 4 punkty.&#10;Przy lojalności na poziomie 0–14 co miesiąc sprawdzane jest, czy pracownik nie zamierza sam złożyć wypowiedzenia. Odrzucone żądanie podwyżki wynagrodzenia może tymczasowo zwiększyć to prawdopodobieństwo o 5 punktów procentowych. Zgłoszone wypowiedzenie staje się skuteczne z końcem miesiąca i kosztuje 10 punktów reputacji. Od 55. urodzin można ogłosić przejście na emeryturę; ryzyko wzrasta do około 80–90% w wieku 67 lat, wynosi 95% w wieku 68 lat, 98% w wieku 69 lat i 100% w wieku 70 lat. Osoba pozostaje dostępna do końca miesiąca.2
+        1Profile, historia i statystyki2
+        1Profile kandydatów łączą wiek, przebieg kariery zawodowej, doświadczenie, rzetelność, lojalność, specjalizacje oraz dotychczasowy staż na rynku pracy w jedną dynamiczną całość. Profile pracowników uzupełniają informacje o stażu pracy, przydzielonych zadaniach, szkoleniach i postępach w nauce.&#10;Kronika osobista może obejmować datę zatrudnienia, datę rozpoczęcia i zakończenia zlecenia, przerwy w zleceniach, choroby, szkolenia, specjalizacje, żądania płacowe i decyzje, zmiany w zakresie lojalności i rzetelności, przydziały transportowe, a także zwolnienie, rezygnację, przejście na emeryturę i zakończenie zatrudnienia.&#10;Historia zatrudnienia pracownika przedstawia między innymi zlecenia, czas pracy, szkolenia, status transportu, ostatnie zdarzenia, dni chorobowe, żądania płacowe, przerwy w zleceniach oraz łączną kwotę wynagrodzenia wypłaconego do tej pory. Przegląd zawiera dodatkowo ogólne dane dla całego zakładu, takie jak liczba osób zatrudnionych, zwolnionych, osób, które złożyły rezygnację oraz osób, które przeszły na emeryturę.2
+        1Ustawienia, tryb wieloosobowy i wyniki2
+        1Ustawienia obowiązują dla danego stanu gry i dzielą się na wydajność pracy, rozwój personelu oraz gospodarkę i wynagrodzenia. Efekty związane z rozgrywką odblokowują zależne od nich efekty doświadczenia; efekty doświadczenia regulują prędkość, zużycie, materiały eksploatacyjne i paliwo. Efekty związane z personelem odblokowują zmiany lojalności oraz opcję nadgodzin. Wpływy ekonomiczne odblokowują indywidualne wynagrodzenia oraz standardowe wynagrodzenie miesięczne.&#10;Wyłączone efekty nie zmieniają istniejących danych kadrowych z mocą wsteczną. Zapobiegają one lub zezwalają wyłącznie na dalsze występowanie danego efektu. Standardowe wynagrodzenie miesięczne służy jako wartość podstawowa, gdy indywidualne wynagrodzenia są wyłączone; można je zmienić bezpośrednio w ustawieniach. Przypisania klawiszy można zmieniać w ustawieniach gry.&#10;W trybie wieloosobowym personel, kandydaci, zadania, wynagrodzenia, szkolenia, zatrudnienie i kroniki są zarządzane i synchronizowane w odniesieniu do poszczególnych gospodarstw. Decyzję podejmuje serwer; tylko uprawnieni menedżerowie gospodarstw mogą wprowadzać zmiany we własnym gospodarstwie. Dane znajdują się w pliku helperPersonnel.xml w zapisie gry, a bieżące przypisania są przywracane w miarę możliwości podczas ładowania. Stare zapisy gry pozostają dostępne; dane historyczne dotyczące pracowników, którzy już odeszli, mogą być niekompletne.2
+        <e k="ui_button_emergency_release_worker" v="Zwolnij" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="Zwolnić %s? Jest to możliwe tylko wtedy, gdy serwer nie wykrywa aktywnego zadania." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="Pracownik zwolniony." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="Nie można zwolnić: pracownik nadal ma aktywne zadanie." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Zwolnienie nie jest potrzebne: pracownik jest już dostępny." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="Nie można zwolnić: stan zadania nie mógł zostać bezpiecznie sprawdzony." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="Nie można zwolnić: brak uprawnień lub nieprawidłowy pracownik." />
+    <e k="ui_pmHelpTopic01Title" v="Szybki start i obsługa" />
+    <e k="ui_pmHelpTopic01Body" v="System zarządzania kadrami zastępuje anonimowych asystentów AI konkretnymi kandydatami i pracownikami. Każdy pracownik rozwija się w perspektywie długoterminowej, otrzymuje miesięczne wynagrodzenie i może wykazywać różne mocne strony oraz wiązać się z różnymi ryzykami w zależności od doświadczenia, rzetelności, lojalności i specjalizacji.&#10;Własne menu otwiera się domyślnie za pomocą skrótu klawiszowego Ctrl + M. Zawiera ono: Przegląd, Kandydaci, Pracownicy, Szkolenia, Ustawienia i Pomoc. Przypisanie klawiszy można zmienić w ustawieniach gry.&#10;Domyślne przypisanie klawiszy: zmiana osoby klawiszami A/D lub strzałkami w lewo/w prawo; potwierdzenie wyboru klawiszem spacji lub kliknięciem myszy; anulowanie lub powrót klawiszem Esc; zarządzanie transportem i wynagrodzeniami klawiszami T lub G. W zakładce „Pomoc” klawisze strzałek w lewo/w prawo służą do przełączania się między treścią a artykułami, klawisze strzałek w górę/w dół do wyboru lub przewijania, a klawisze strzałek w górę/w dół do przechodzenia między stronami." />
+    <e k="ui_pmHelpTopic02Title" v="Przegląd i stan zatrudnienia" />
+    <e k="ui_pmHelpTopic02Body" v="Przegląd przedstawia aktualny stan gospodarstwa: na górze znajdują się pracownicy, dostępni pracownicy, kandydaci oraz wizerunek pracodawcy. Poniżej wyświetlane są bieżące zlecenia wraz z danymi dotyczącymi osoby, pojazdu, sprzętu i czynności.&#10;Karta „Zmiany” zawiera wyłącznie istotne zdarzenia kadrowe, czyli zmiany w zakresie wizerunku pracodawcy, doświadczenia, rzetelności, lojalności, wieku lub specjalizacji. Każda informacja zawiera przyczynę, osobę, której dotyczy, oraz skutek; wpis wielowierszowy stanowi przy tym jedną informację.&#10;Raport miesięczny i podsumowanie ogólne przedstawiają aktualne i historyczne wskaźniki. Skorzystaj z przeglądu do szybkiego planowania zadań; szczegóły, decyzje i kroniki należy umieszczać na poszczególnych stronach tematycznych." />
+    <e k="ui_pmHelpTopic03Title" v="Rynek pracy i rekrutacja" />
+    <e k="ui_pmHelpTopic03Body" v="Nowa rozgrywka rozpoczyna się z czterema kandydatami. Jednocześnie na rynku może znajdować się maksymalnie ośmiu kandydatów. Z każdą zmianą miesiąca losowanych jest do trzech nowych miejsc; szansa na każde miejsce wynosi 15 % + 0,7 × reputacja pracodawcy. Przy reputacji 60 jest to 57 %, a przy reputacji 100 – 85 % na każde miejsce. Jeśli rynek jest pusty, generowany jest co najmniej jeden nowy kandydat.&#10;Kandydaci pozostają na pewno dostępni w miesiącu, w którym zostali wygenerowani. Po pierwszej zmianie miesiąca ich szansa na odejście wynosi, w zależności od jakości, 10–30%, po drugiej – 30–50%, a przy trzeciej zmianie miesiąca – 100%. Dobrzy kandydaci mogą zniknąć wcześniej, ponieważ ich jakość zwiększa szansę na odejście.&#10;Kandydaci są w wieku 18–65 lat, mają stałą datę urodzenia i starzeją się. Ich tło zawodowe obejmuje: gospodarstwo rodzinne, gospodarstwo mleczne, przedsiębiorstwo usług rolniczych, uprawę roli, gospodarstwo mieszane, logistykę, warsztat maszyn rolniczych oraz pracę biurową. Wiek i tło zawodowe wpływają przede wszystkim na doświadczenie i ewentualną wiedzę fachową.&#10;Oczekiwania płacowe opierają się na doświadczeniu i rzetelności, charakteryzują się odchyleniem losowym wynoszącym 96–106% i są uzależnione od reputacji pracodawcy. Niska reputacja podnosi oczekiwania, natomiast wysoka reputacja je obniża. Przed zatrudnieniem pojawia się potwierdzenie; zatrudnienie podnosi reputację o 1 punkt." />
+    <e k="ui_pmHelpTopic04Title" v="Profil pracownika, wartości i status" />
+    <e k="ui_pmHelpTopic04Body" v="Doświadczenie, niezawodność i lojalność są oceniane w skali od 0 do 100. Wartość pozostaje wyraźnie widoczna; paski umożliwiają szybkie porównanie.&#10;Poziom zależy wyłącznie od doświadczenia: pomocnik 0–44, specjalista 45–74, profesjonalista 75–100. Doświadczenie determinuje tempo pracy, dodatkowe zużycie i dodatkowe zużycie zasobów. Niezawodność wpływa na krótkotrwałe spadki wydajności, choroby, miesięczne zmiany oraz ryzyko przerwania pracy. Lojalność opisuje przywiązanie do firmy i wpływa na ostrzeżenia, konflikty płacowe oraz samodzielne wypowiedzenia." />
+    <e k="ui_pmHelpTopic05Title" v="Asystent AI, transport i FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="Po uruchomieniu standardowego zadania asystenta AI otwiera się okno wyboru pracowników. Można wybrać tylko tych pracowników, którzy są dostępni. Pracownik nie może jednocześnie realizować kilku zleceń i nie jest dostępny w przypadku choroby lub szkolenia.&#10;Zadanie jest rejestrowane jako zakończone dopiero po upływie 10 sekund. Aby uzyskać postęp w specjalizacji, praca praktyczna musi trwać co najmniej 3 minuty.&#10;Klawiszem T lub przyciskiem menu otwierasz priorytet transportu. Tam określasz, którzy pracownicy przejmują zadania transportowe i w jakiej kolejności są oni sprawdzani. W przypadku zlecenia typu „z punktu A do punktu B” wybierany jest pierwszy wolny pracownik, zaczynając od góry listy. Funkcja FollowMe nadal korzysta z wyboru pracowników i jest traktowana jako praca transportowa." />
+    <e k="ui_pmHelpTopic06Title" v="Doświadczenie i jego wpływ na pracę" />
+    <e k="ui_pmHelpTopic06Body" v="ZBIERANIE DOŚWIADCZENIA&#10;– Doświadczenie zdobywa się poprzez zarejestrowany czas pracy; niewykorzystane minuty nauki pozostają zachowane.&#10;– Za każde pojedyncze zadanie można zdobyć maksymalnie 2 punkty doświadczenia.&#10;– Dodatkowo postęp ograniczany jest miesięcznym limitem. Im wyższy poziom doświadczenia, tym dłużej trwa zdobycie kolejnego punktu.&#10;SKUTKI&#10;– Specjalizacja główna zwiększa efektywne doświadczenie o 12 punktów, a specjalizacja dodatkowa o 6; maksymalna wartość wynosi 100.&#10;– Szybkość pracy = 70 % + 30 % × efektywne doświadczenie / 100.&#10;– Dodatkowe zużycie wynosi do 15%, a dodatkowe zużycie materiałów i paliwa do 10% × brakujące doświadczenie efektywne × współczynnik ekonomiczny. Współczynnik ekonomiczny wynosi 0,75 / 1,00 / 1,25.&#10;CZAS NAUKI I LIMIT MIESIĘCZNY&#10;– Doświadczenie 0–24: 25 minut, limit miesięczny +1; 25–49: 50 minut, 0; 50–69: 100 minut, -1.&#10;– Doświadczenie 70–84: 220 minut, -2; 85–94: 540 minut, -3; 95–100: 1080 minut, -4.&#10;– Limit podstawowy według dni/miesiąca: 1 dzień = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Rzeczywisty limit = limit podstawowy + korekta, co najmniej 1." />
+    <e k="ui_pmHelpTopic07Title" v="Niezawodność, choroby i przerwy w pracy" />
+    <e k="ui_pmHelpTopic07Body" v="Przy wskaźniku niezawodności poniżej 85 mogą wystąpić krótkie spadki wydajności. Sprawdzanie odbywa się raz na minutę; prawdopodobieństwo wzrasta wraz ze spadkiem niezawodności, osiągając maksymalnie 15 %. Spadek trwa 30–90 sekund, zmniejsza wydajność o 4–15 % i może powtórzyć się dopiero po upływie kolejnych 3 minut.&#10;Stan zdrowia jest sprawdzany codziennie. Chory pracownik nie jest dostępny w danym dniu; trwające zadanie zostaje zakończone. W ciągu miesiąca możliwe jest maksymalnie (w zaokrągleniu) dni w miesiącu / 3 dni chorobowe. Przy niezawodności poniżej 50 co 60 sekund przeprowadzana jest jednorazowa kontrola pod kątem całkowitego przerwania zadania; zlecenie nie jest wówczas uznawane za pomyślnie wykonane, a zdarzenie pojawia się w historii.&#10;Wartości orientacyjne dotyczące choroby/dnia i przerwania zlecenia: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. Dobry miesiąc wymaga co najmniej 120 minut pracy, braku zdarzeń, braku dni chorobowych i mniej niż 240 minut pracy nocnej; wówczas istnieje 35 % szansy na +1 do niezawodności. Negatywne czynniki ryzyka sumują się i są ograniczone do 60 %." />
+    <e k="ui_pmHelpTopic08Title" v="Lojalność i reputacja pracodawcy" />
+    <e k="ui_pmHelpTopic08Body" v="Nowi pracownicy zazwyczaj zaczynają z poziomem lojalności wynoszącym około 65. Terminowo wypłacane wynagrodzenia, długi staż pracy oraz zaakceptowane żądania płacowe wzmacniają lojalność; problemy finansowe, praca w nocy, a także odrzucone lub długo nierozpatrzone żądania ją osłabiają. Praca nocna w godzinach od 22:00 do 06:00 jest rejestrowana i może kosztować od 120 minut w grze do 4 punktów lojalności oraz 1–2 punktów reputacji.&#10;W przypadku różnicy między lojalnością a reputacją pracodawcy wynoszącej co najmniej 15 / 30 / 50 punktów następuje comiesięczne wyrównanie o 1 / 2 / 3 punkty. Zdarzenia: Wypłata wynagrodzenia przy prestiżu co najmniej 40 +1 do lojalności; wypłata powoduje ujemny wynik -2; firma miała wcześniej ujemny wynik -4; staż pracy 3 / 6 / 12 / 24 miesiące +1 / +1 / +2 / +3; przyjęcie żądania +3; odrzucenie -5, przy lojalności poniżej 40 -7; zaległe żądanie po upływie miesiąca karencji -2 za każdy miesiąc.&#10;Miesięczne prawdopodobieństwo odejścia z własnej inicjatywy przy lojalności 0–5: 35%, 6–9: 20%, 10–14: 10%, od 15 brak regularnego odejścia z powodu lojalności. Wizerunek pracodawcy zaczyna się od 60, mieści się w przedziale 0–100 i jest oceniany jako krytyczny 0–19, słaby 20–39, solidny 40–59, dobry 60–79 lub bardzo dobry 80–100. Wpływa on na liczbę i jakość kandydatów, oczekiwania płacowe oraz długoterminową lojalność." />
+    <e k="ui_pmHelpTopic09Title" v="Wynagrodzenia, rozliczenia i roszczenia płacowe" />
+    <e k="ui_pmHelpTopic09Body" v="Indywidualne wynagrodzenia podstawowe są obliczane na podstawie stażu pracy i niezawodności, a następnie interpolowane liniowo w ramach każdego przedziału stażu. Współczynnik niezawodności mnoży tę wartość w zakresie od 0,94 do 1,06. Kandydaci otrzymują dodatkowo premie za losowość, reputację oraz ewentualne premie specjalizacyjne w wysokości +5% za specjalizację główną i +3% za specjalizację dodatkową.&#10;Wynagrodzenie podstawowe przy 3 dniach pracy miesięcznie: Doświadczenie 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Wynagrodzenie miesięczne = wynagrodzenie podstawowe × współczynnik długości miesiąca × współczynnik kosztów gospodarczych, zaokrąglone do 10. W przypadku wyłączonych wynagrodzeń indywidualnych obowiązuje standardowe wynagrodzenie podstawowe w przedziale 100–100 000 w krokach co 10. Współczynniki długości miesiąca dla 1–28 dni: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Rozliczenie następuje z końcem miesiąca w formie wypłaty wynagrodzenia. Również pracownicy, których stosunek pracy wówczas się kończy, otrzymują wcześniej należne rozliczenie. Specjalista lub profesjonalista może zażądać podwyżki: Szansa podstawowa wynosi 70%, ograniczona przez lojalność do 55–85%; później można ponownie rozpatrywać wniosek co miesiąc z połową szansy. Przyjęcie wniosku daje +3 do lojalności i +1 do prestiżu; odrzucenie obniża lojalność o 5, a poniżej 40 – o 7, oraz zwiększa na 3 miesiące ryzyko wypowiedzenia i ryzyko związane z niezawodnością. G ujawnia wszystkie zaległe roszczenia." />
+    <e k="ui_pmHelpTopic10Title" v="Specjalizacje i rozwój praktyczny" />
+    <e k="ui_pmHelpTopic10Body" v="PODSTAWOWE ZASADY&#10;– Istnieje osiem kategorii nauki: uprawa gleby, siew, nawożenie, ochrona roślin, zbiór, transport, dbanie o maszyny oraz oszczędne metody pracy.&#10;– Postępy są zapisywane oddzielnie dla każdej kategorii. Nabyte specjalizacje pozostają na stałe; jednocześnie aktywne mogą być maksymalnie dwie premie.&#10;POSTĘPY W NAUCE&#10;– Progi nauki wynoszą 240, 420, 600 i 780 minut; następnie każdy kolejny próg wzrasta o 180 minut.&#10;– Współczynnik nauki wynosi 1 + (doświadczenie – 50)/250 + (niezawodność – 50)/300 i jest ograniczony do wartości od 0,75 do 1,30. W przypadku wykonywania kilku czynności czas nauki jest rozdzielany proporcjonalnie.&#10;KLASYFIKACJA CZYNNOŚCI&#10;– Uprawa gleby: pług, kultywator, brona obrotowa, brona talerzowa, walec i mulczer.&#10;– Wysiew: siewniki i sadzarki oraz nasiona.&#10;– Nawożenie: nawozy mineralne, nawozy płynne, gnojowica, pozostałości po fermentacji i obornik. Ochrona roślin: zabiegi herbicydowe.&#10;– Zbiór: kombajny, mechanizmy tnące, prasy do bel, kosiarki, przyczepy samozbierające i podbieracze. Transport: przyczepy, rozładunek oraz transport z punktu A do punktu B.&#10;BONUSY I AKTYWACJA&#10;– Główna specjalizacja: +12 punktów doświadczenia i +5% wynagrodzenia podstawowego. Druga specjalizacja: +6 i +3%.&#10;– Oba miejsca mogą pozostawać w stanie uśpienia. Wyuczoną, uśpioną specjalizację można aktywować tylko raz na pracownika w roku rolniczym trwającym od marca do lutego; pozostawienie jej w stanie uśpienia nie wyczerpuje tego prawa." />
+    <e k="ui_pmHelpTopic11Title" v="Szkolenia" />
+    <e k="ui_pmHelpTopic11Body" v="Szkolenia rozpoczynają się wyłącznie pierwszego dnia miesiąca; w przypadku dni miesięcznych – do godziny 12:00 włącznie. Pracownik może w każdym roku rolniczym, trwającym od marca do lutego, uczestniczyć tylko w jednym szkoleniu i nie może być w tym czasie zatrudniony ani przebywać na zwolnieniu lekarskim. Osoba ta pozostaje niedostępna do końca miesiąca; postępy zostaną zaliczone dopiero po zakończeniu szkolenia na przełomie miesięcy.&#10;Szkolenie zapewnia 30% minut nauki wymaganych do uzyskania kolejnej specjalizacji, co najmniej 30 minut i nigdy więcej niż brakuje do osiągnięcia celu. Każda kategoria ma miesięczny współczynnik cenowy od -20% do +20% i z 25-procentowym prawdopodobieństwem jest w pełni zarezerwowana. Koszty są odliczane natychmiast po rozpoczęciu szkolenia i opierają się na aktualnym wynagrodzeniu miesięcznym.&#10;Koszty szkolenia = aktualne miesięczne wynagrodzenie × współczynnik kategorii × modyfikator miesięczny. Współczynniki: uprawa gleby 75%, siew 90%, nawożenie 90%, ochrona roślin 100%, zbiór 110%, transport 65%, oszczędzanie maszyn 120%, oszczędny sposób pracy 120%." />
+    <e k="ui_pmHelpTopic12Title" v="Zwolnienie, rezygnacja z własnej inicjatywy i przejście na emeryturę" />
+    <e k="ui_pmHelpTopic12Body" v="Zwolnienia wymagają potwierdzenia. W przypadku jednego dnia/miesiąca wypowiedzenie musi zostać ogłoszone w dniu 1 do godziny 12:00, aby stało się skuteczne z początkiem następnego miesiąca. W przypadku dwóch lub więcej dni terminem rozliczeniowym jest koniec zaokrąglonego w górę pół miesiąca, czyli dzień ceil(dni/miesiąc ÷ 2). Po upływie terminu rozliczeniowego koniec okresu zatrudnienia przesuwa się o kolejny miesiąc.&#10;Wraz z wypowiedzeniem lojalność natychmiast spada o 40, a rzetelność o 25. Pracownik zasadniczo pozostaje dostępny do pracy do końca miesiąca, w którym wypowiedzenie wchodzi w życie. Utrata reputacji w przypadku zwolnienia: poniżej 1 miesiąca -12, poniżej 3 -9, poniżej 6 -7, poniżej 12 -5, poniżej 24 -3, od 24 miesięcy -1; każde kolejne zwolnienie w tym samym miesiącu kosztuje dodatkowo 4 punkty.&#10;Przy lojalności na poziomie 0–14 co miesiąc sprawdzane jest, czy pracownik nie zamierza sam złożyć wypowiedzenia. Odrzucone żądanie podwyżki wynagrodzenia może tymczasowo zwiększyć to prawdopodobieństwo o 5 punktów procentowych. Zgłoszone wypowiedzenie staje się skuteczne z końcem miesiąca i kosztuje 10 punktów reputacji. Od 55. urodzin można ogłosić przejście na emeryturę; ryzyko wzrasta do około 80–90% w wieku 67 lat, wynosi 95% w wieku 68 lat, 98% w wieku 69 lat i 100% w wieku 70 lat. Osoba pozostaje dostępna do końca miesiąca." />
+    <e k="ui_pmHelpTopic13Title" v="Profile, historia i statystyki" />
+    <e k="ui_pmHelpTopic13Body" v="Profile kandydatów łączą wiek, przebieg kariery zawodowej, doświadczenie, rzetelność, lojalność, specjalizacje oraz dotychczasowy staż na rynku pracy w jedną dynamiczną całość. Profile pracowników uzupełniają informacje o stażu pracy, przydzielonych zadaniach, szkoleniach i postępach w nauce.&#10;Kronika osobista może obejmować datę zatrudnienia, datę rozpoczęcia i zakończenia zlecenia, przerwy w zleceniach, choroby, szkolenia, specjalizacje, żądania płacowe i decyzje, zmiany w zakresie lojalności i rzetelności, przydziały transportowe, a także zwolnienie, rezygnację z własnej inicjatywy, przejście na emeryturę i zakończenie zatrudnienia.&#10;Historia zatrudnienia pracownika przedstawia między innymi zlecenia, czas pracy, szkolenia, status transportu, ostatnie zdarzenia, dni chorobowe, żądania płacowe, przerwy w zleceniach oraz łączną kwotę wynagrodzenia wypłaconego do tej pory. Przegląd zawiera dodatkowo ogólne dane dla całego zakładu, takie jak liczba osób zatrudnionych, zwolnionych, osób, które złożyły rezygnację oraz osób, które przeszły na emeryturę." />
+    <e k="ui_pmHelpTopic14Title" v="Ustawienia, tryb wieloosobowy i wyniki" />
+    <e k="ui_pmHelpTopic14Body" v="Ustawienia obowiązują dla danego stanu gry i dzielą się na wydajność pracy, rozwój personelu oraz gospodarkę i wynagrodzenia. Efekty związane z rozgrywką odblokowują zależne od nich efekty doświadczenia; efekty doświadczenia regulują prędkość, zużycie, materiały eksploatacyjne i paliwo. Efekty związane z personelem odblokowują zmiany lojalności oraz opcję nadgodzin. Wpływy ekonomiczne odblokowują indywidualne wynagrodzenia oraz standardowe wynagrodzenie miesięczne.&#10;Wyłączone efekty nie zmieniają istniejących danych kadrowych z mocą wsteczną. Zapobiegają one lub zezwalają wyłącznie na dalsze występowanie danego efektu. Standardowe wynagrodzenie miesięczne służy jako wartość podstawowa, gdy indywidualne wynagrodzenia są wyłączone; można je zmieniać bezpośrednio w ustawieniach. Przypisania klawiszy można zmieniać w ustawieniach gry.&#10;W trybie wieloosobowym personel, kandydaci, zadania, wynagrodzenia, szkolenia, zatrudnienie i kroniki są zarządzane i synchronizowane w odniesieniu do poszczególnych gospodarstw. Decyzję podejmuje serwer; tylko uprawnieni menedżerowie gospodarstw mogą wprowadzać zmiany we własnym gospodarstwie. Dane znajdują się w pliku helperPersonnel.xml w zapisie gry, a bieżące przypisania są przywracane w miarę możliwości podczas ładowania. Stare pliki zapisu pozostają dostępne; dane historyczne dotyczące pracowników, którzy już odeszli, mogą być niekompletne." />
+    <e k="ui_pmHelpTopic15Title" v="Konfiguracja i pierwsze kroki" />
+    <e k="ui_pmHelpTopic15Body" v="Otwórz profil kandydata, sprawdź jego wiek, doświadczenie, wartości, oczekiwania płacowe oraz posiadane specjalizacje, a następnie zatwierdź zatrudnienie. Kandydat staje się pracownikiem bieżącego gospodarstwa; wszystkie kolejne decyzje, rozliczenia i zmiany dotyczą właśnie tego gospodarstwa.&#10;Po zatrudnieniu zaplanuj najpierw krótkie, odpowiednie zadanie. Pracownik musi być dostępny: choroba, bieżące zadania, szkolenie, potwierdzone zakończenie zatrudnienia lub nadal aktywne przypisanie do modułu mogą uniemożliwić wybór. Zakładka „Pracownicy” pokazuje konkretny powód.&#10;Pierwsze zatrudnienie poprawia reputację pracodawcy o jeden punkt. Wysokie wartości nie zawsze są automatycznie lepsze: doświadczony kandydat zazwyczaj kosztuje więcej, podczas gdy tańszy nowicjusz potrzebuje więcej czasu na rozwój i szkolenie." />
+    <e k="ui_pmHelpTopic16Title" v="Zakres obowiązków i przypisanie specjalizacji" />
+    <e k="ui_pmHelpTopic16Body" v="Przyporządkowanie ustala się na podstawie pojazdu, maszyn oraz – jeśli dotyczy – zastosowanego materiału. Pierwszeństwo ma bezpośrednie przyporządkowanie materiału: nasiona należą do siewu; herbicydy do ochrony roślin; nawozy mineralne, nawozy płynne, gnojowica, pozostałości po fermentacji i obornik do nawożenia. Wapno nie jest automatycznie rozpoznawane jako odrębna kategoria uczenia się.&#10;Przypisanie pojazdów i maszyn: pług, kultywator, brona wirnikowa, brona talerzowa, walec i mulczer należą do uprawy gleby. Siewniki i sadzarki należą do siewu. Opryskiwacze polowe bez jednoznacznie określonego materiału zaliczane są do nawożenia. Kombajny, zespoły tnące, prasy do bel, kosiarki, przyczepy samozbierające i podbieracze należą do zbiorów. Przyczepy i pojazdy rozładowalne należą do transportu.&#10;FollowMe rozszerza praktyczne rozpoznawanie o rozdrabniacze, kombajny do ziemniaków i buraków, przetrząsarki, zgrabiarki, rozrzutniki obornika, cysterny do gnojowicy, spulchniacze podglebia, zbieracze kamieni, brony i kultywatory. Pojazdy modowe mogą pozostać neutralne, jeśli ich specjalizacja nie pozwala na jednoznaczne przyporządkowanie. Wówczas nie jest obiecana żadna błędna premia za specjalizację.&#10;Oszczędzanie maszyn i oszczędny tryb pracy to ogólne premie: pierwsza z nich zmniejsza dodatkowe zużycie wynikające z doświadczenia, druga – dodatkowe zużycie paliwa i materiałów. Wybrana czynność jest wyświetlana w oknie wyboru; odpowiednia aktywna specjalizacja jest tam podświetlona." />
+    <e k="ui_specialization_transport" v="Transport" />
+    <e k="ui_transportMarker" v="Transport" />
+    <e k="ui_pmStatusLine" v="Status: %s" />
+    <e k="ui_button_transport_manage_long" v="Transport" />
+    <e k="ui_transportPriorityHeaderStatus" v="Status" />
+    <e k="ui_transportPriorityHeaderEnabled" v="Transport" />
+    <e k="ui_pmTrainingCostHeader" v="Koszty" />
+    <e k="ui_pmHistoryCareerTransport" v="Transport: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="OGÓŁEM" />
+    <e k="ui_pmMonth02" v="kwiecień" />
+    <e k="ui_pmMonth06" v="sierpień" />
+    <e k="ui_pmMonth07" v="wrzesień" />
+    <e k="ui_pmMonth09" v="listopad" />
+    <e k="ui_pmMonth10" v="grudzień" />
+    <e k="ui_selectionAvailable" v="Dostępne" />
+    <e k="ui_selectionUnavailableSick" v="Krank" />
+    <e k="ui_selectionUnavailableTraining" v="Podczas szkolenia" />
+    <e k="ui_selectionUnavailableReserved" v="Zarezerwowane" />
+    <e k="ui_selectionUnavailableFieldwork" v="Praca w terenie" />
+    <e k="ui_selectionUnavailableOther" v="Niedostępne" />
+    <e k="ui_selectionJobUnknown" v="Zlecenie nieznane" />
+    <e k="ui_selectionAgeLabel" v="Zmiana" />
+    <e k="ui_selectionJobsLabel" v="Zlecenia" />
+    <e k="ui_selectionSpeedLabel" v="Tempo pracy" />
+    <e k="ui_selectionAgeValue" v="%d lat" />
+    <e k="ui_selectionVehicleLine" v="Pojazd: %s" />
+    <e k="ui_selectionActivityLine" v="Zlecenie: %s" />
+    <e k="ui_selectionFieldLine" v="Pole: %s" />
+    <e k="ui_selectionStatusLine" v="Status: %s" />
+    <e k="ui_button_specializationDeactivate" v="Odstawić na bok" />
+    <e k="ui_button_specializationActivate" v="Zaloguj się" />
+    <e k="ui_pmSpecializationActive" v="aktywny" />
+    <e k="ui_pmHelpContents" v="SPIS TREŚCI" />
     </elements>
 </l10n>

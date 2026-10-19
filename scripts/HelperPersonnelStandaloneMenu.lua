@@ -93,26 +93,15 @@ function HelperPersonnelApp:onActionOpenPersonnelMenu(actionName, inputValue)
     self:openStandaloneMenu("overview")
 end
 
-function HelperPersonnelApp:updateStandaloneMenuHotkey()
-    if Input == nil or Input.isKeyPressed == nil or Input.KEY_lctrl == nil or Input.KEY_m == nil then
-        return
-    end
-
-    local isDown = Input.isKeyPressed(Input.KEY_lctrl) and Input.isKeyPressed(Input.KEY_m)
-
-    if isDown == true and self.standaloneMenuHotkeyDown ~= true then
-        self:openStandaloneMenu("overview")
-    end
-
-    self.standaloneMenuHotkeyDown = isDown == true
-end
-
 function HelperPersonnelApp:registerStandaloneMenuAction()
     if self.standaloneMenuActionRegistered == true or g_inputBinding == nil then
         return false
     end
 
     local contextName = g_inputBinding.currentContextName
+    if PlayerInputComponent ~= nil and PlayerInputComponent.INPUT_CONTEXT_NAME ~= nil then
+        contextName = PlayerInputComponent.INPUT_CONTEXT_NAME
+    end
     local modificationStarted = false
     if contextName ~= nil and g_inputBinding.beginActionEventsModification ~= nil then
         g_inputBinding:beginActionEventsModification(contextName)

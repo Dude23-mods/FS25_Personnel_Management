@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="Gübreleme" />
         <e k="ui_specialization_plantProtection" v="Bitki koruma" />
         <e k="ui_specialization_harvest" v="Hasat" />
-        <e k="ui_specialization_transport" v="Taşıma" />
+        1Ulaşım2
         <e k="ui_specialization_machineCare" v="Makine bakımı" />
         <e k="ui_specialization_resourceSaver" v="Tasarruflu çalışma" />
         <e k="ui_specializationLearned" v="%s bir uzmanlık geliştirdi: %s." />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Taşıma görevlerini yönet" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Zam taleplerini yönet" />
         <e k="input_HP_SELECT_CANCEL" v="Çalışan seçimini iptal et" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="Engellenen çalışanı serbest bırak" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="Engellenen çalışanı serbest bırak" />
         <e k="ui_openWorkerView" v="Çalışanlar" />
         <e k="ui_openApplicantView" v="Adaylar" />
         <e k="ui_backToOverview" v="Genel bakışa dön" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="Çalışma süresi: %d i̇şler | %s | Aylık maaş: %s" />
         <e k="ui_button_transport_assign" v="Taşımaya ata" />
         <e k="ui_button_transport_remove" v="Taşımayı kaldır" />
-        <e k="ui_transportMarker" v="taşıma" />
+        1Ulaşım2
         <e k="ui_transportActionAssigned" v="%s - taşımaya ata." />
         <e k="ui_transportActionRemoved" v="%s - taşımayı kaldır." />
         <e k="ui_transportNoDriverAssigned" v="taşıma: henüz yok." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="Eğit" />
         <e k="ui_pmStatusApplicant" v="Aday" />
         <e k="ui_pmBirthLine" v="Doğum: %s" />
+        <e k="ui_pmRankLabel" v="Rütbe" />
         <e k="ui_pmOriginLine" v="Mesleki geçmiş: %s" />
         <e k="ui_pmStatsLine" v="Deneyim %d · Güvenilirlik %d · Sadakat %d" />
         <e k="ui_pmStatExperience" v="Deneyim" />
         <e k="ui_pmStatReliability" v="Güvenilirlik" />
         <e k="ui_pmStatLoyalty" v="Sadakat" />
         <e k="ui_pmWageLine" v="Ücret: %s" />
-        <e k="ui_pmStatusLine" v="Durum: %s" />
+        1Durum: %s2
         <e k="ui_pmOrigin1" v="kırsal aile çiftliği" />
         <e k="ui_pmOrigin2" v="küçük süt çiftliği" />
         <e k="ui_pmOrigin3" v="tarımsal yüklenici" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONEL" />
         <e k="ui_pmSettingsSectionEconomic" v="EKONOMİ" />
         <e k="ui_button_transport_assign_long" v="Taşıma görevleri ata" />
-        <e k="ui_button_transport_manage_long" v="Taşıma" />
+        1Ulaşım2
         <e k="ui_transportPriorityTitle" v="Taşıma önceliği" />
         <e k="ui_transportPriorityIntro" v="Taşıma görevlerini üstlenebilecek çalışanları ve kontrol sıralarını belirleyin." />
         <e k="ui_transportPriorityHeaderPriority" v="Öncelik" />
         <e k="ui_transportPriorityHeaderEmployee" v="Çalışan" />
-        <e k="ui_transportPriorityHeaderStatus" v="Durum" />
-        <e k="ui_transportPriorityHeaderEnabled" v="Taşıma" />
+        1Durum2
+        1Ulaşım2
         <e k="ui_transportPriorityActive" v="Etkin" />
         <e k="ui_transportPriorityInactive" v="Atanmamış" />
         <e k="ui_transportPriorityMoveUp" v="Yukarı taşı" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="ofis mesleği" />
         <e k="ui_status_retirementPending" v="ay sonunda emekli olacak" />
         <e k="ui_retirementNotice" v="%s ay sonunda emekli olacak." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="Uzmanlıklar, ilgili kategoride performansı artırır. Eğitim yalnızca ay başında başlar, para tutar ve çalışanı ay sonuna kadar kullanılamaz yapar. İlerleme tamamlanınca kaydedilir. Teklifler ve fiyatlar aylık değişir; marttan şubata kadar tarım yılı başına yalnızca bir eğitim yapılabilir. Öğrenilen uzmanlıklar kalır, ancak en fazla iki bonus etkin olur. Her iki yuva da etkin olmayabilir. Öğrenilmiş etkin olmayan uzmanlık, çalışan ve tarım yılı başına yalnızca bir kez etkinleştirilebilir." />
         <e k="ui_pmTrainingCategoryHeader" v="Öğrenme kategorisi" />
         <e k="ui_pmTrainingProgressHeader" v="Uzmanlığa doğru ilerleme" />
         <e k="ui_pmTrainingRunning" v="eğitim devam ediyor" />
         <e k="ui_pmTrainingSelectCategory" v="Önce bir eğitim kategorisi seçin" />
         <e k="ui_pmTrainingConfirm" v="%s için %s kategorisinde eğitim başlatılsın mı?" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="Uzmanlık: iki etkin yuva dolu · son öğrenilen: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Eğitim: ayda 1 gün ise yalnızca 12.00'ye kadar · eğitim menüsünden kategori seçin · son: %s" />
         <e k="ui_training_line_first_day_select" v="Eğitim: yalnızca ilk gün · eğitim menüsünden kategori seçin · son: %s" />
         <e k="ui_training_line_busy_select" v="Eğitim: çalışırken mümkün değil · son: %s" />
         <e k="ui_training_line_sick_select" v="Eğitim: hastayken mümkün değil · son: %s" />
         <e k="ui_training_line_select_category" v="Eğitim: eğitim menüsünden kategori seçin · son: %s" />
-        <e k="ui_pmTrainingCostHeader" v="Maliyet" />
+        1Maliyetler2
         <e k="ui_pmTrainingAdjustmentHeader" v="İndirim/ek maliyet" />
         <e k="ui_pmTrainingNoPlaces" v="şu anda boş yer yok" />
         <e k="ui_pmTrainingNoPlacesMessage" v="Bu eğitim kursunda şu anda boş yer yok." />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="Görevler: %d" />
         <e k="ui_pmHistoryCareerWorkTime" v="Çalışma süresi: %s" />
         <e k="ui_pmHistoryCareerTraining" v="Eğitim: %s" />
-        <e k="ui_pmHistoryCareerTransport" v="Taşıma: %s" />
+        1Ulaşım: %s2
         <e k="ui_pmHistoryValueActive" v="etkin" />
         <e k="ui_pmHistoryValueInactive" v="etkin değil" />
         <e k="ui_monthlyRowApplicants" v="Adaylar" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="Çalışma süresi" />
         <e k="ui_monthlyRowWages" v="Aylık maaşlar" />
         <e k="ui_monthlyRowPayroll" v="Son maaş ödemesi" />
-        <e k="ui_pmOverviewOverallHeader" v="TOPLAM" />
+        1TOPLAM2
         <e k="ui_pmOverviewTotalJobs" v="Toplam görev" />
         <e k="ui_pmOverviewTotalWorkTime" v="Toplam çalışma süresi" />
         <e k="ui_pmOverviewTotalPayroll" v="Toplam ödenen maaş" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s kız arkadaşıyla aniden kahve içmeye gitmek için devam eden görevi yarıda bıraktı." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s erkek arkadaşıyla aniden kahve içmeye gitmek için devam eden görevi yarıda bıraktı." />
         <e k="ui_pmMonth01" v="Mart" />
-        <e k="ui_pmMonth02" v="Nisan" />
+        1Nisan2
         <e k="ui_pmMonth03" v="Mayıs" />
         <e k="ui_pmMonth04" v="Haziran" />
         <e k="ui_pmMonth05" v="Temmuz" />
-        <e k="ui_pmMonth06" v="Ağustos" />
-        <e k="ui_pmMonth07" v="Eylül" />
+        1Ağustos2
+        1Eylül2
         <e k="ui_pmMonth08" v="Ekim" />
-        <e k="ui_pmMonth09" v="Kasım" />
-        <e k="ui_pmMonth10" v="Aralık" />
+        1Kasım2
+        1Aralık2
         <e k="ui_pmMonth11" v="Ocak" />
         <e k="ui_pmMonth12" v="Şubat" />
         <e k="ui_pmPeriodMonthYear" v="%s, %d. yıl" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="iyi bir çalışma ayı" />
         <e k="ui_waitingForServerData" v="Sunucu verileri bekleniyor" />
         <e k="ui_pmMenuPageHelp" v="Yardım" />
-        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.4.0 için ayrıntılı oyun içi rehber. Paketteki ReadMe.pdf ek kuralları ve hesaplamaları içerir." />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.5.0 için ayrıntılı oyun içi rehber." />
         <e k="ui_pmHelpSectionQuickStart" v="Hızlı başlangıç ve kontroller|Menüyü Ctrl + M ile açın. Menü sayfası kontrolleriyle sekme değiştirin. Kişi değiştirmek için A/D veya Sol/Sağ, onay için Boşluk, geri dönmek için Esc, taşıma öncelikleri için T ve maaş talepleri için G kullanın." />
         <e k="ui_pmHelpSectionPeople" v="Adaylar ve çalışanlar|Yeni kayıt dört adayla başlar; en fazla sekiz aday bulunabilir. Profillerinden işe alın. Deneyim, güvenilirlik ve bağlılık 0-100 arasındadır. Durum, maaş, uzmanlıklar, günlük ve toplamlar çalışan sayfasında gösterilir." />
         <e k="ui_pmHelpSectionStats" v="Çalışanlar ve özellikler|Deneyim hız, aşınma ve tüketimi; güvenilirlik kesintileri, hastalığı ve erken iş bırakmayı; bağlılık maaş taleplerini ve istifaları etkiler. Çalışan sayfası durum, maaş, uzmanlık, istatistik ve kişisel geçmişi de gösterir." />
@@ -529,81 +530,154 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="İstifa, işten çıkarma ve emeklilik|Bunlar her zaman hemen gerçekleşmez; sürelere göre ay değişiminde tamamlanır. Çalışmakta olan biri hemen çıkarılamaz. Yaklaşan değişiklikler durum ve günlükte görünür." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive ve Courseplay|Çalışanlar / Taşıma altında sürücüleri atayın ve öncelik belirleyin. AutoDrive ilk uygun sürücüyü kullanır, kimse yoksa başlamaz. Normal Courseplay başlangıcı seçimi açar. AutoDrive sonrası otomatik başlangıçta her araç yeni seçim olmadan kendi sürücüsünü korur." />
         <e k="ui_pmHelpSectionMultiplayer" v="Çok oyunculu ve kayıtlar|Personel verileri ve ayarlar çiftlik bazında ayrılır. Sunucu değişiklikleri doğrular; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini yönetebilir. Çalışanlar, etkin atamalar ve ayarlar eşitlenir. Veriler kayıttaki helperPersonnel.xml dosyasında tutulur." />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="Personel Yönetimi · İş seç" />
+        <e k="ui_selectionPerformanceProfile" v="PERFORMANS PROFİLİ" />
+        1Mevcut2
+        1Krank2
+        1Eğitimde2
+        1Rezervasyonlu2
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive işi" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay işi" />
+        1Saha çalışması2
+        1Mevcut değil2
+        <e k="ui_selectionShowAll" v="Tüm çalışanları göster" />
+        <e k="ui_selectionShowAvailable" v="Yalnızca uygun olanları göster" />
+        <e k="ui_selectionFooterControls" v="A/D Değiştir · Boşluk Seç · Tab Tümü · Esc Geri" />
+        1Emir bilinmiyor2
+        1Değiştir2
+        <e k="ui_selectionWageLabel" v="Aylık maaş" />
+        1Siparişler2
+        1Çalışma hızı2
+        1%d yıl2
         <e k="ui_selectionProfessionalDevelopment" v="Mesleki gelişim" />
         <e k="ui_selectionNoSpecializationProgress" v="Henüz uzmanlaşma ilerlemesi yok" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="Uzmanlık yok" />
+        1Araç: %s2
+        1Görev: %s2
+        1Alan: %s2
+        <e k="ui_selectionTargetLine" v="Taşıma hedefi: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP iş türü: %s" />
+        1Durum: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="Hızlı başlangıç ve kontroller" />
-        <e k="ui_pmHelpTopic01Body" v="Menüyü Ctrl + M ile açın. Menü sayfası kontrolleriyle sekme değiştirin. Kişi değiştirmek için A/D veya Sol/Sağ, onay için Boşluk, geri dönmek için Esc, taşıma öncelikleri için T ve maaş talepleri için G kullanın." />
-        <e k="ui_pmHelpTopic02Title" v="Adaylar ve çalışanlar" />
-        <e k="ui_pmHelpTopic02Body" v="Yeni kayıt dört adayla başlar; en fazla sekiz aday bulunabilir. Profillerinden işe alın. Deneyim, güvenilirlik ve bağlılık 0-100 arasındadır. Durum, maaş, uzmanlıklar, günlük ve toplamlar çalışan sayfasında gösterilir. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="Çalışanlar ve özellikler" />
-        <e k="ui_pmHelpTopic03Body" v="Deneyim hız, aşınma ve tüketimi; güvenilirlik kesintileri, hastalığı ve erken iş bırakmayı; bağlılık maaş taleplerini ve istifaları etkiler. Çalışan sayfası durum, maaş, uzmanlık, istatistik ve kişisel geçmişi de gösterir." />
-        <e k="ui_pmHelpTopic04Title" v="Çalışma ve gelişim" />
-        <e k="ui_pmHelpTopic04Body" v="Normal bir YZ yardımcı işi başlatıldığında çalışan seçimi açılır. Yalnızca uygun çalışanlar seçilebilir ve bir kişi aynı anda birden fazla iş yapamaz. Çalışma süresi deneyimi ve uzmanlığı artırır. Deneyim hız, aşınma ve tüketimi; güvenilirlik yavaşlama, hastalık ve iş bırakmayı; bağlılık maaş anlaşmazlığı ve istifayı etkiler. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="Deneyim hız, aşınma ve tüketimi; güvenilirlik kesintileri, hastalığı ve erken iş bırakmayı; bağlılık maaş taleplerini ve istifaları etkiler. Çalışan sayfası durum, maaş, uzmanlık, istatistik ve kişisel geçmişi de gösterir." />
-        <e k="ui_pmHelpTopic06Title" v="Maaşlar" />
-        <e k="ui_pmHelpTopic06Body" v="Maaşlar ay değişiminde kesilir ve ay başına gün, ekonomik zorluk ve mod ayarlarına bağlıdır. Çalışan zam isteyebilir; talep süresinde kabul veya reddedilmeli ve bağlılığı etkileyebilir." />
-        <e k="ui_pmHelpTopic07Title" v="Eğitim" />
-        <e k="ui_pmHelpTopic07Body" v="Eğitim yalnızca ay başında başlar, para harcar ve çalışanı ay sonuna kadar kullanılamaz yapar. Tamamlanınca seçilen uzmanlık gelişir. Teklifler ve geçmiş eğitimler Eğitim ve Çalışanlar bölümlerinde görünür. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="Uzmanlık" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="İstifa, işten çıkarma ve emeklilik" />
-        <e k="ui_pmHelpTopic09Body" v="Bunlar her zaman hemen gerçekleşmez; sürelere göre ay değişiminde tamamlanır. Çalışmakta olan biri hemen çıkarılamaz. Yaklaşan değişiklikler durum ve günlükte görünür." />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive ve Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="Çalışanlar / Taşıma altında sürücüleri atayın ve öncelik belirleyin. AutoDrive ilk uygun sürücüyü kullanır, kimse yoksa başlamaz. Normal Courseplay başlangıcı seçimi açar. AutoDrive sonrası otomatik başlangıçta her araç yeni seçim olmadan kendi sürücüsünü korur." />
-        <e k="ui_pmHelpTopic11Title" v="Çok oyunculu ve kayıtlar" />
-        <e k="ui_pmHelpTopic11Body" v="Personel verileri ve ayarlar çiftlik bazında ayrılır. Sunucu değişiklikleri doğrular; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini yönetebilir. Çalışanlar, etkin atamalar ve ayarlar eşitlenir. Veriler kayıttaki helperPersonnel.xml dosyasında tutulur." />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="Personel verileri ve ayarlar çiftlik bazında ayrılır. Sunucu değişiklikleri doğrular; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini yönetebilir. Çalışanlar, etkin atamalar ve ayarlar eşitlenir. Veriler kayıttaki helperPersonnel.xml dosyasında tutulur." />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="Menüyü Ctrl + M ile açın. Menü sayfası kontrolleriyle sekme değiştirin. Kişi değiştirmek için A/D veya Sol/Sağ, onay için Boşluk, geri dönmek için Esc, taşıma öncelikleri için T ve maaş talepleri için G kullanın. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="Serbest bırak" />
-        <e k="ui_pmConfirmReleaseWorker" v="%s serbest bırakılsın mı? Bu yalnızca sunucu etkin bir iş algılamadığında mümkündür." />
-        <e k="ui_workerReleaseSuccess" v="Çalışan serbest bırakıldı." />
-        <e k="ui_workerReleaseDeniedActive" v="Serbest bırakma mümkün değil: çalışanın hâlâ etkin bir işi var." />
-        <e k="ui_workerReleaseDeniedAvailable" v="Serbest bırakma gerekli değil: çalışan zaten kullanılabilir." />
-        <e k="ui_workerReleaseDeniedCheck" v="Serbest bırakma mümkün değil: iş durumu güvenli şekilde doğrulanamadı." />
-        <e k="ui_workerReleaseDeniedPermission" v="Serbest bırakma mümkün değil: izin yok veya çalışan geçersiz." />
+        1Bırakın dinlensin2
+        1Giriş yap2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="%s, %s için devre dışı bırakılsın mı?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="%s, %s için etkinleştirilsin mi?" />
+        <e k="ui_pmSpecializationActivationUsed" v="Yeni bir uzmanlık, çalışan ve tarım yılı başına yalnızca bir kez etkinleştirilebilir." />
+        <e k="ui_pmSpecializationSlotsFull" v="Başka bir uzmanlığı etkinleştirmeden önce en az bir etkin uzmanlığı devre dışı bırakın." />
+        1aktif2
+        <e k="ui_pmSpecializationInactive" v="öğrenildi, etkin değil" />
+        <e k="ui_specializationActivatedNotice" v="%s, %s uzmanlığını yeniden kullanıyor." />
+        <e k="ui_specializationDeactivatedNotice" v="%s, %s uzmanlığını devre dışı bırakır." />
+        1İÇİNDEKİLER2
+        <e k="ui_pmHelpNavigation" v="Sol/Sağ: alan · Yukarı/Aşağı: seç veya kaydır · Page Up/Down: sayfa" />
+        1Hızlı Başlangıç ve Kullanım2
+        1İnsan Kaynakları Yönetimi, isimsiz yapay zeka yardımcılarının yerini isimleri belirtilen adaylar ve çalışanlarla değiştirir. Her çalışan uzun vadede gelişir, aylık maaş alır ve deneyim, güvenilirlik, sadakat ve uzmanlık alanlarına bağlı olarak farklı güçlü yanlara ve risklere sahip olabilir.&#10;Kendi menünüz varsayılan olarak Ctrl + M tuşlarıyla açılır. Menüde Genel Bakış, Adaylar, Çalışanlar, Eğitim, Ayarlar ve Yardım seçenekleri bulunur. Tuş atamaları oyun ayarlarından değiştirilebilir.&#10;Varsayılan tuş atamaları: Kişi değiştirme A/D veya sol/sağ ok tuşları; Seçimi onaylama Boşluk tuşu veya fare tıklaması; İptal veya geri dönme Esc tuşu; Ulaşım ve maaş yönetimi T veya G tuşları. Yardım sekmesinde sol/sağ ok tuşlarıyla içerik ve makaleler arasında geçiş yapılır, yukarı/aşağı ok tuşlarıyla seçim yapılır veya kaydırma gerçekleştirilir ve resim yukarı/aşağı tuşlarıyla sayfa sayfa atlanır.2
+        1Genel Bakış ve Personel Durumu2
+        1Genel bakış, işletmenin mevcut durumunu özetler: Çalışanlar, müsait çalışanlar, adaylar ve işveren itibarı en üstte yer alır. Bunun altında, personel, araç, ekipman ve faaliyet bilgilerini içeren devam eden görevler gösterilir.&#10;&quot;Değişiklikler&quot; sekmesi yalnızca ilgili personel olaylarını, yani işveren itibarında, deneyimde, güvenilirlikte, sadakatte, yaşta veya uzmanlık alanındaki değişiklikleri içerir. Her bildirimde neden, etkilenen kişi ve sonuç belirtilir; birden fazla satırdan oluşan bir giriş yine de tek bir bildirim olarak kabul edilir.&#10;&quot;Aylık Rapor&quot; ve &quot;Toplam&quot; sekmeleri, güncel ve toplam göstergeleri gösterir. Genel bakışı hızlı görev planlaması için kullanın; ayrıntılar, kararlar ve kronikler ise ilgili bölüm sayfalarında yer alır.2
+        1İşgücü piyasası ve işe alım2
+        1Yeni bir oyun turu dört adayla başlar. Aynı anda piyasada en fazla sekiz aday bulunabilir. Her ayın başında, zar atılarak en fazla üç yeni pozisyon belirlenir; her pozisyon için şans %15 + 0,7 × işveren itibarıdır. 60 itibar değerinde bu oran %57, 100 itibar değerinde ise %85’tir. Piyasa boşsa, en az bir yeni aday oluşturulur.&#10;Adaylar, oluşturuldukları ay boyunca kesin olarak mevcut kalırlar. İlk ayın bitiminden sonra, kalitelerine bağlı olarak ayrılma olasılıkları %10–30, ikinci ayın bitiminden sonra %30–50, üçüncü ayın bitiminde ise %100 olur. Kaliteli profiller, kalitelerinin ayrılma olasılığını artırması nedeniyle daha erken ortadan kalkabilir.&#10;Adaylar 18–65 yaş arasındadır, sabit bir doğum tarihine sahiptir ve yaşlanmaya devam ederler. Geçmişleri arasında aile işletmesi, süt sığırcılığı, tarım hizmetleri, tarım, karma işletme, lojistik, tarım makineleri atölyesi ve ofis işleri bulunur. Yaş ve geçmiş, özellikle deneyimi ve olası mesleki ön bilgileri etkiler.&#10;Maaş beklentisi, deneyim ve güvenilirliğe dayanır; %96–106 oranında rastgele sapma gösterir ve işverenin itibarından etkilenir. Düşük itibar beklentiyi artırırken, yüksek itibar beklentiyi düşürür. İşe alımdan önce bir onay mesajı görüntülenir; işe alım, itibarı 1 puan artırır.2
+        1Çalışan profili, değerler ve durum2
+        1Deneyim, güvenilirlik ve sadakat, her biri 0 ile 100 arasında değişir. Sayı tam olarak görünür kalır; çubuklar hızlı karşılaştırma imkanı sağlar.&#10;Sınıflandırma yalnızca deneyime göre belirlenir: Yardımcı 0–44, Uzman 45–74, Profesyonel 75–100. Deneyim, çalışma hızını, ek aşınmayı ve ek tüketimi belirler. Güvenilirlik, kısa vadeli performans düşüşlerini, hastalıkları, aylık gelişimi ve görevin yarıda kesilme riskini etkiler. Sadakat, işletmeye olan bağlılığı tanımlar ve uyarıları, maaş anlaşmazlıklarını ve kendi isteğiyle işten ayrılmaları etkiler.2
+        1AI Asistanı, Taşıma ve FollowMe2
+        1Normal bir AI yardımcısı görevi başlatıldığında, çalışan seçimi penceresi açılır. Yalnızca müsait olan çalışanlar seçilebilir. Bir çalışan aynı anda birden fazla görevi üstlenemez ve hastalık veya eğitim süresince müsait değildir.&#10;Bir görev, ancak 10 saniye geçtikten sonra tamamlanmış görev olarak kaydedilir. Uzmanlık ilerlemesi için pratik çalışmanın en az 3 dakika sürmesi gerekir.&#10;T tuşuna veya menü düğmesine basarak nakliye önceliği penceresini açabilirsiniz. Burada, hangi çalışanların nakliye görevlerini üstleneceğini ve bunların hangi sırayla kontrol edileceğini belirleyebilirsiniz. A’dan B’ye bir görevde, yukarıdan aşağıya doğru ilk müsait çalışan seçilir. FollowMe, çalışan seçimini kullanmaya devam eder ve nakliye işi olarak sayılır.2
+        1Deneyim ve iş üzerindeki etkileri2
+        1DENEYİM KAZANMA&#10;– Deneyim, kaydedilen çalışma süresiyle kazanılır; kullanılmayan öğrenme dakikaları kaybedilmez.&#10;– Her bir görevden en fazla 2 deneyim puanı kazanılabilir.&#10;– Ayrıca, aylık bir sınır ilerlemeyi kısıtlar. Deneyim ne kadar yüksekse, bir sonraki puanı kazanmak o kadar uzun sürer.&#10;ETKİLER&#10;– Birincil uzmanlık, etkin deneyimi 12 puan artırır; ikincil uzmanlık ise 6 puan artırır; değer en fazla 100 olur.&#10;– Çalışma hızı = %70 + %30 × etkin deneyim / 100.&#10;– Ek aşınma %15’e kadar, ek malzeme ve yakıt tüketimi ise %10 × eksik etkin deneyim × ekonomik faktör kadar olabilir. Ekonomik faktör 0,75 / 1,00 / 1,25’tir.&#10;ÖĞRENME SÜRESİ VE AYLIK SINIR&#10;– Deneyim 0–24: 25 dakika, aylık sınır +1; 25–49: 50 dakika, 0; 50–69: 100 dakika, -1.&#10;– Deneyim 70–84: 220 dakika, -2; 85–94: 540 dakika, -3; 95–100: 1080 dakika, -4.&#10;– Gün/Ay bazında temel limit: 1 gün = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Gerçek sınır = Temel sınır + Ayarlama, en az 1.2
+        1Güvenilirlik, hastalık ve görevlerin yarıda kesilmesi2
+        1Güvenilirlik seviyesi 85&apos;in altında olduğunda kısa süreli performans düşüşleri yaşanabilir. Kontrol, dakikada bir yapılır; güvenilirlik azaldıkça bu olasılık artar ve en fazla %15&apos;e ulaşır. Bir düşüş 30–90 saniye sürer, performansı %4–15 oranında düşürür ve ancak 3 dakika sonra tekrar meydana gelebilir.&#10;Hastalık durumu her gün kontrol edilir. Hasta bir çalışan o gün görev yapamaz; devam eden bir görev sonlandırılır. Ayda en fazla, ayın gün sayısı / 3 ile yuvarlanan hastalık günü sayısına kadar hastalık izni alınabilir. Güvenilirlik seviyesi 50&apos;nin altında olduğunda, 60 saniye sonra görevin tamamen sonlandırılması tek seferlik olarak kontrol edilir; bu durumda görev başarılı sayılmaz ve olay kayıt defterinde yer alır.&#10;Hastalık/Gün ve Görev İptali için Referans Değerler: 0–20: %10 / %20; 21–29: %8 / %15; 30–40: %8 / %10; 41–49: %6 / %5; 50–60: %6 / %0; 61–80: %4 / %0; 81–100: %2 / %0. İyi bir ay için en az 120 çalışma dakikası, hiçbir olay, hastalık izni olmaması ve 240&apos;tan az gece çalışma dakikası gerekir; bu durumda güvenilirlik +1 artma şansı %35&apos;tir. Olumsuz riskler toplanır ve %60 ile sınırlandırılır.2
+        1Sadakat ve işveren itibarı2
+        1Yeni çalışanlar genellikle 65 civarında bir sadakat seviyesiyle işe başlar. Zamanında ödenen maaşlar, uzun hizmet süresi ve kabul edilen maaş talepleri bu bağı güçlendirirken; mali sorunlar, gece çalışması ile reddedilen veya uzun süredir bekleyen talepler ise bu bağı zayıflatır. 22:00 ile 06:00 arasındaki gece çalışması kaydedilir ve 120 oyun içi dakikadan itibaren 4 sadakat puanı ile 1–2 itibar puanı kaybına neden olabilir.&#10;Sadakat ile işveren itibarı arasında en az 15 / 30 / 50 puanlık bir fark olması durumunda, her ay 1 / 2 / 3 puanlık bir yakınlaşma gerçekleşir. Olaylar: İtibar en az 40 olduğunda maaş ödenir +1 Sadakat; ödeme, -2 eksiye düşer; işletme önceden eksi durumdaysa -4; 3 / 6 / 12 / 24 aylık üyelik +1 / +1 / +2 / +3; Talep kabul edildiğinde +3; reddedildiğinde -5, sadakat 40&apos;ın altında ise -7; bekleyen talep, bekleme süresinin her ayı için -2.&#10;Sadakat 0–5 arasında aylık kendi isteğiyle işten ayrılma: %35, 6–9: %20, 10–14: %10, 15&apos;ten itibaren düzenli sadakat temelli işten ayrılma olmaz. İşveren itibarı 60&apos;tan başlar, 0–100 arasında değişir ve 0–19 kritik, 20–39 zayıf, 40–59 sağlam, 60–79 iyi veya 80–100 çok iyi olarak değerlendirilir. Bu, aday sayısı ve kalitesini, maaş beklentilerini ve uzun vadeli sadakati etkiler.2
+        1Maaşlar, bordro ve maaş talepleri2
+        1Bireysel temel maaşlar, deneyim ve güvenilirlik temelinde hesaplanır ve her deneyim aralığı içinde doğrusal olarak interpolasyon yoluyla belirlenir. Güvenilirlik, değeri 0,94 ile 1,06 arasında çarpar. Adaylar ayrıca şans, itibar ve ana uzmanlık için %5, ikincil uzmanlık için %3 oranında olası uzmanlık ek ödemeleri alırlar.&#10;Ayda 3 gün çalışmaya karşılık temel maaş: Deneyim 0–44: 1.800–2.200, 45–74: 2.200–2.700, 75–100: 2.700–3.300. Aylık maaş = Temel maaş × Ay uzunluğu faktörü × Ekonomik maliyet faktörü, 10&apos;a yuvarlanır. Bireysel maaşlar devre dışı bırakıldığında, 10&apos;luk artışlarla 100–100.000 aralığındaki standart temel maaş geçerlidir. 1–28 gün için aylık uzunluk faktörleri: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Ödeme, ayın başında maaş ödemesi olarak yapılır. İş ilişkisi o tarihte sona eren çalışanlar da, vadesi gelen ödemelerini önceden alırlar. Uzman veya profesyonel, zam talep edebilir: Temel şans %70’tir, sadakat seviyesi nedeniyle %55–85 aralığıyla sınırlandırılır; daha sonra her ay şansın yarısı oranında yeniden değerlendirilebilir. Kabul etmek +3 sadakat ve +1 itibar kazandırır; reddetmek sadakati 5 puan düşürür, 40’ın altındaysa 7 puan düşürür ve 3 ay boyunca işten ayrılma ve güvenilirlik risklerini artırır. G, tüm ödenmemiş alacakları açığa çıkarır.2
+        1Uzmanlık alanları ve uygulamalı gelişim2
+        1TEMEL KURALLAR&#10;– Sekiz öğrenme kategorisi vardır: Toprak işleme, ekim, gübreleme, bitki koruma, hasat, nakliye, makinelerin ömrünü uzatma ve tasarruflu çalışma.&#10;– İlerleme, her kategori için ayrı ayrı kaydedilir. Öğrenilen uzmanlıklar kalıcı olarak korunur; aynı anda en fazla iki bonus aktif olabilir.&#10;ÖĞRENME İLERLEMESİ&#10;– Öğrenme eşikleri 240, 420, 600 ve 780 dakikadır; bundan sonra her bir eşik 180 dakika artar.&#10;– Öğrenme faktörü 1 + (Deneyim-50)/250 + (Güvenilirlik-50)/300 şeklindedir ve 0,75 ile 1,30 arasında sınırlıdır. Birden fazla faaliyet söz konusu olduğunda, öğrenme süresi ağırlıklandırılarak dağıtılır.&#10;FAALİYETLERİN SINIFLANDIRILMASI&#10;– Toprak işleme: Saban, çapa makinesi, döner çapa, diskli çapa, silindir ve öğütücü.&#10;– Ekim: Ekim ve dikim makineleri ile tohumlar.&#10;– Gübreleme: Mineral gübre, sıvı gübre, sıvı gübre, fermantasyon artıkları ve gübre. Bitki koruma: Herbisit uygulamaları.&#10;– Hasat: Biçerdöver, kesme mekanizmaları, balya presleri, biçme makineleri, yükleme römorkları ve toplama makineleri. Nakliye: Römorklar, boşaltma ve A’dan B’ye nakliye.&#10;BONUSLAR VE AKTİFLEŞTİRME&#10;– Ana uzmanlık: +12 etkili deneyim ve +%5 temel maaş. İkincil uzmanlık: +6 ve +%3.&#10;– Her iki uzmanlık da pasif hale getirilebilir. Öğrenilmiş bir pasif uzmanlık, her çalışan ve Mart–Şubat arasındaki tarım yılı için yalnızca bir kez aktifleştirilebilir; pasif bırakmak bu hakkı tüketmez.2
+        1Eğitimler2
+        1Eğitimler yalnızca ayın ilk günü başlar; ayda bir gün olan durumlarda saat 12:00’ye kadar. Bir çalışan, Mart’tan Şubat’a kadar olan her tarım yılında yalnızca bir eğitime katılabilir ve bu süre zarfında çalışmıyor veya hasta olmamalıdır. Kişi ay sonuna kadar kullanılamaz durumda kalır; ilerleme, ancak ayın değişmesiyle birlikte tamamlandığında hesaba yansıtılır.&#10;Bir eğitim, bir sonraki uzmanlık için gerekli öğrenme süresinin %30’unu sağlar; en az 30 dakika ve hiçbir zaman eksik kalan süreden fazla olamaz. Her kategorinin aylık bir fiyat faktörü (-%20 ile +%20 arası) vardır ve %25 olasılıkla kontenjanı doludur. Maliyetler, eğitimin başlangıcında anında düşülür ve güncel aylık maaşa göre hesaplanır.&#10;Eğitim maliyeti = mevcut aylık maaş × kategori faktörü × aylık değiştirici. Faktörler: Toprak işleme %75, tohum ekimi %90, gübreleme %90, bitki koruma %100, hasat %110, nakliye %65, makine koruma %120, tasarruflu çalışma %120.2
+        1İşten çıkarılma, kendi isteğiyle istifa ve emeklilik2
+        1İşten çıkarmalar onaylanmalıdır. Bir gün/aylık sürelerde, işten çıkarmanın bir sonraki ayın başında yürürlüğe girmesi için 1. gün saat 12:00’ye kadar bildirilmesi gerekir. İki gün veya daha fazla sürelerde, son tarih yuvarlanan yarım ayın sonu, yani ceil(gün/ay ÷ 2) günüdür. Son tarihten sonra, işten çıkarmanın yürürlüğe girme tarihi bir ay daha ertelenir.&#10;İşten çıkarma bildirimi yapıldığında Sadakat derecesi anında 40, Güvenilirlik derecesi ise 25 puan düşer. Çalışan, işten çıkarmanın yürürlüğe gireceği ayın sonuna kadar prensip olarak görevde kalır. İşten çıkarılma durumunda itibar kaybı: 1 aydan az -12, 3 aydan az -9, 6 aydan az -7, 12 aydan az -5, 24 aydan az -3, 24 aydan itibaren -1; aynı ay içinde gerçekleşen her bir işten çıkarma, ek olarak 4 puan kaybına neden olur.&#10;Sadakat seviyesi 0–14 arasında olduğunda, her ay çalışanın kendi isteğiyle istifa etme olasılığı kontrol edilir. Reddedilen bir maaş talebi, bu olasılığı geçici olarak 5 puan artırabilir. Bildirilen kendi isteğiyle istifa, ay sonu itibarıyla yürürlüğe girer ve 10 itibar puanı kaybına neden olur. 55. yaş gününden itibaren emeklilik bildirilebilir; risk 67 yaşına kadar yaklaşık %80–90’a yükselir, 68 yaşında %95, 69 yaşında %98 ve 70 yaşında %100 olur. Kişi ay sonuna kadar görevde kalır.2
+        1Profiller, Tarihçe ve İstatistikler2
+        1Aday profilleri, yaş, mesleki geçmiş, deneyim, güvenilirlik, sadakat, uzmanlık alanları ve piyasada geçirilen süreyi dinamik bir metin halinde bir araya getirir. Çalışan profilleri ise şirketteki kıdem, görevlendirmeler, eğitimler ve öğrenme sürecindeki ilerlemeleri tamamlar.&#10;Kişisel geçmiş, işe alım, görevin başlangıcı ve bitişi, görev kesintileri, hastalık, eğitimler, uzmanlık alanları, maaş talepleri ve kararlar, sadakat ve güvenilirlikteki değişiklikler, nakliye atamaları ile işten çıkarılma, kendi isteğiyle istifa, emeklilik ve istihdamın sona ermesini içerebilir.&#10;Çalışan geçmişi, görevler, çalışma süresi, eğitimler, nakliye durumu, son olaylar, hastalık günleri, maaş talepleri, görev kesintileri ve bugüne kadar ödenen toplam maaş gibi bilgileri gösterir. Genel bakış ayrıca, şirket genelinde şimdiye kadar işe alınan, işten çıkarılan, kendi isteğiyle istifa eden ve emekli olanların sayıları gibi toplam değerleri de gösterir.2
+        1Ayarlar, Çok Oyunculu ve Kayıtlar2
+        1Ayarlar her oyun durumu için geçerlidir ve iş performansı, personel gelişimi ile ekonomi ve maaşlar olarak sınıflandırılır. Oynanış etkileri, bunlara bağlı deneyim etkilerini etkinleştirir; deneyim etkileri ise hız, aşınma, sarf malzemeleri ve yakıtı kontrol eder. Personel etkileri, sadakat değişikliklerini ve fazla mesai seçeneğini etkinleştirir. Ekonomi etkileri, bireysel maaşları ve standart aylık maaşı etkinleştirir.&#10;Devre dışı bırakılan etkiler, mevcut personel verilerini geriye dönük olarak değiştirmez. Yalnızca ilgili sonraki etkiyi engeller veya izin verir. Bireysel maaşlar devre dışı bırakıldığında standart aylık maaş temel değer olarak kullanılır; bu değer ayarlardan doğrudan değiştirilebilir. Tuş atamaları oyun ayarlarından değiştirilebilir.&#10;Çok oyunculu modda personel, adaylar, görevler, maaşlar, eğitimler, ayarlar ve kronikler çiftlik bazında yönetilir ve senkronize edilir. Karar sunucuya aittir; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini değiştirebilir. Veriler, oyun kaydındaki helperPersonnel.xml dosyasında bulunur ve yükleme sırasında mevcut atamalar mümkün olduğunca geri yüklenir. Eski oyun kayıtları kullanılmaya devam edebilir; oyundan ayrılmış çalışanlara ait geçmiş veriler eksik olabilir.2
+        <e k="ui_button_emergency_release_worker" v="Serbest bırak" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="%s serbest bırakılsın mı? Bu yalnızca sunucu etkin bir iş algılamadığında mümkündür." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="Çalışan serbest bırakıldı." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="Serbest bırakma mümkün değil: çalışanın hâlâ etkin bir işi var." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Serbest bırakma gerekli değil: çalışan zaten kullanılabilir." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="Serbest bırakma mümkün değil: iş durumu güvenli şekilde doğrulanamadı." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="Serbest bırakma mümkün değil: izin yok veya çalışan geçersiz." />
+    1Hızlı Başlangıç ve Kullanım2
+    1İnsan Kaynakları Yönetimi, isimsiz yapay zeka yardımcılarının yerini isimleri belirtilen adaylar ve çalışanlarla değiştirir. Her çalışan uzun vadede gelişir, aylık maaş alır ve deneyim, güvenilirlik, sadakat ve uzmanlık alanlarına bağlı olarak farklı güçlü yanlara ve risklere sahip olabilir.&#10;Kendi menünüz varsayılan olarak Ctrl + M tuşlarıyla açılır. Menüde Genel Bakış, Adaylar, Çalışanlar, Eğitim, Ayarlar ve Yardım seçenekleri bulunur. Tuş atamaları oyun ayarlarından değiştirilebilir.&#10;Varsayılan tuş atamaları: Kişi değiştirme A/D veya sol/sağ ok tuşları; Seçimi onaylama Boşluk tuşu veya fare tıklaması; İptal veya geri dönme Esc tuşu; Ulaşım ve maaş yönetimi T veya G tuşları. Yardım sekmesinde sol/sağ ok tuşlarıyla içerik ve makaleler arasında geçiş yapılır, yukarı/aşağı ok tuşlarıyla seçim yapılır veya kaydırma gerçekleştirilir ve resim yukarı/aşağı tuşlarıyla sayfa sayfa atlanır.2
+    1Genel Bakış ve Personel Durumu2
+    1Genel bakış, işletmenin mevcut durumunu özetler: Çalışanlar, müsait çalışanlar, adaylar ve işveren itibarı en üstte yer alır. Bunun altında, personel, araç, ekipman ve faaliyet bilgilerini içeren devam eden görevler gösterilir.&#10;&quot;Değişiklikler&quot; sekmesi yalnızca ilgili personel olaylarını, yani işveren itibarında, deneyimde, güvenilirlikte, sadakatte, yaşta veya uzmanlık alanındaki değişiklikleri içerir. Her bildirimde neden, etkilenen kişi ve sonuç belirtilir; birden fazla satırdan oluşan bir giriş yine de tek bir bildirim olarak kabul edilir.&#10;&quot;Aylık Rapor&quot; ve &quot;Toplam&quot; sekmeleri, güncel ve toplam göstergeleri gösterir. Genel bakışı hızlı görev planlaması için kullanın; ayrıntılar, kararlar ve geçmiş kayıtlar ise ilgili bölüm sayfalarında yer alır.2
+    1İşgücü piyasası ve işe alım2
+    1Yeni bir oyun turu dört adayla başlar. Aynı anda piyasada en fazla sekiz aday bulunabilir. Her ayın başında, zar atılarak en fazla üç yeni pozisyon belirlenir; her pozisyon için şans %15 + 0,7 × işveren itibarıdır. 60 itibar değerinde bu oran %57, 100 itibar değerinde ise %85’tir. Piyasa boşsa, en az bir yeni aday oluşturulur.&#10;Adaylar, oluşturuldukları ay boyunca kesin olarak mevcut kalırlar. İlk ayın bitiminden sonra, kalitelerine bağlı olarak ayrılma olasılıkları %10–30, ikinci ayın bitiminden sonra %30–50, üçüncü ayın bitiminde ise %100 olur. Kaliteli profiller, kalitelerinin ayrılma olasılığını artırması nedeniyle daha erken ortadan kalkabilir.&#10;Adaylar 18–65 yaş arasındadır, sabit bir doğum tarihine sahiptir ve yaşlanmaya devam ederler. Geçmişleri arasında aile işletmesi, süt sığırcılığı, tarım hizmetleri, tarla tarımı, karma işletme, lojistik, tarım makineleri atölyesi ve ofis işleri bulunur. Yaş ve geçmiş, özellikle deneyim ve olası mesleki ön bilgileri etkiler.&#10;Maaş beklentisi, deneyim ve güvenilirliğe dayanır; %96–106 oranında rastgele sapma gösterir ve işverenin itibarından etkilenir. Düşük itibar beklentiyi artırırken, yüksek itibar beklentiyi düşürür. İşe alımdan önce bir onay mesajı görüntülenir; işe alım, itibarı 1 puan artırır.2
+    1Çalışan profili, değerler ve durum2
+    1Deneyim, güvenilirlik ve sadakat, her biri 0 ile 100 arasında değişir. Sayı tam olarak görünür kalır; çubuklar hızlı karşılaştırma imkanı sağlar.&#10;Sınıflandırma yalnızca deneyime göre belirlenir: Yardımcı 0–44, Uzman 45–74, Profesyonel 75–100. Deneyim, çalışma hızını, ek aşınmayı ve ek tüketimi belirler. Güvenilirlik, kısa vadeli performans düşüşlerini, hastalıkları, aylık gelişimi ve görevin yarıda kesilme riskini etkiler. Sadakat, işletmeye olan bağlılığı tanımlar ve uyarıları, maaş anlaşmazlıklarını ve kendi isteğiyle işten ayrılmaları etkiler.2
+    <e k="ui_pmHelpTopic05Title" v="AI Asistanı, Taşıma ve FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="Normal bir AI yardımcısı görevi başlatıldığında, çalışan seçimi penceresi açılır. Yalnızca müsait olan çalışanlar seçilebilir. Bir çalışan aynı anda birden fazla görevi üstlenemez ve hastalık veya eğitim süresince müsait değildir.&#10;Bir görev, ancak 10 saniye geçtikten sonra tamamlanmış görev olarak kaydedilir. Uzmanlık ilerlemesi için pratik çalışmanın en az 3 dakika sürmesi gerekir.&#10;T tuşuna veya menü düğmesine basarak nakliye önceliği penceresini açabilirsiniz. Burada, hangi çalışanların nakliye görevlerini üstleneceğini ve bunların hangi sırayla kontrol edileceğini belirleyebilirsiniz. A’dan B’ye bir görevde, yukarıdan aşağıya doğru ilk müsait çalışan seçilir. FollowMe, çalışan seçimini kullanmaya devam eder ve nakliye işi olarak sayılır." />
+    <e k="ui_pmHelpTopic06Title" v="Deneyim ve iş üzerindeki etkileri" />
+    <e k="ui_pmHelpTopic06Body" v="DENEYİM KAZANMA&#10;– Deneyim, kaydedilen çalışma süresiyle kazanılır; kullanılmayan öğrenme dakikaları kaybedilmez.&#10;– Her bir görevden en fazla 2 deneyim puanı kazanılabilir.&#10;– Ayrıca, aylık bir sınır ilerlemeyi kısıtlar. Deneyim ne kadar yüksekse, bir sonraki puanı kazanmak o kadar uzun sürer.&#10;ETKİLER&#10;– Birincil uzmanlık, etkin deneyimi 12 puan artırır; ikincil uzmanlık ise 6 puan artırır; değer en fazla 100 olur.&#10;– Çalışma hızı = %70 + %30 × etkin deneyim / 100.&#10;– Ek aşınma %15’e kadar, ek malzeme ve yakıt tüketimi ise %10 × eksik etkin deneyim × ekonomik faktör kadar olabilir. Ekonomik faktör 0,75 / 1,00 / 1,25’tir.&#10;ÖĞRENME SÜRESİ VE AYLIK SINIR&#10;– Deneyim 0–24: 25 dakika, aylık sınır +1; 25–49: 50 dakika, 0; 50–69: 100 dakika, -1.&#10;– Deneyim 70–84: 220 dakika, -2; 85–94: 540 dakika, -3; 95–100: 1080 dakika, -4.&#10;– Gün/Ay bazında temel limit: 1 gün = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Gerçek sınır = Temel sınır + Ayarlama, en az 1." />
+    <e k="ui_pmHelpTopic07Title" v="Güvenilirlik, hastalık ve görevlerin yarıda kesilmesi" />
+    <e k="ui_pmHelpTopic07Body" v="Güvenilirlik seviyesi 85&apos;in altında olduğunda kısa süreli performans düşüşleri yaşanabilir. Kontrol, dakikada bir yapılır; güvenilirlik düştükçe bu olasılık artar ve en fazla %15&apos;e ulaşır. Bir düşüş 30–90 saniye sürer, performansı %4–15 oranında düşürür ve ancak 3 dakika sonra tekrar meydana gelebilir.&#10;Hastalık durumu her gün kontrol edilir. Hasta bir çalışan o gün görev yapamaz; devam eden bir görev sonlandırılır. Ayda en fazla, ayın gün sayısı / 3 ile yuvarlanan hastalık günü sayısına kadar hastalık izni alınabilir. Güvenilirlik seviyesi 50&apos;nin altında olduğunda, 60 saniye sonra görevin tamamen sonlandırılması tek seferlik olarak kontrol edilir; bu durumda görev başarılı sayılmaz ve olay kayıt defterinde görünür.&#10;Hastalık/Gün ve Görev İptali için Referans Değerler: 0–20: %10 / %20; 21–29: %8 / %15; 30–40: %8 / %10; 41–49: %6 / %5; 50–60: %6 / %0; 61–80: %4 / %0; 81–100: %2 / %0. İyi bir ay için en az 120 çalışma dakikası, hiçbir olay, hastalık izni olmaması ve 240&apos;tan az gece çalışma dakikası gerekir; bu durumda güvenilirlik +1 artma şansı %35&apos;tir. Olumsuz riskler toplanır ve %60 ile sınırlandırılır." />
+    <e k="ui_pmHelpTopic08Title" v="Sadakat ve işveren itibarı" />
+    <e k="ui_pmHelpTopic08Body" v="Yeni çalışanlar genellikle 65 civarında bir sadakat seviyesiyle işe başlar. Zamanında ödenen maaşlar, uzun hizmet süresi ve kabul edilen maaş talepleri bu bağı güçlendirirken; mali sorunlar, gece çalışması ile reddedilen veya uzun süredir bekleyen talepler ise bu bağı zayıflatır. 22:00 ile 06:00 arasındaki gece çalışması kaydedilir ve 120 oyun içi dakikadan itibaren 4 sadakat puanı ile 1–2 itibar puanı kaybına neden olabilir.&#10;Sadakat ile işveren itibarı arasında en az 15 / 30 / 50 puanlık bir fark olması durumunda, her ay 1 / 2 / 3 puanlık bir yakınlaşma gerçekleşir. Olaylar: İtibar en az 40 olduğunda maaş ödenir +1 Sadakat; ödeme, -2 eksiye düşer; işletme önceden eksi durumdaysa -4; üyelik süresi 3 / 6 / 12 / 24 ay +1 / +1 / +2 / +3; Talep kabul edildiğinde +3; reddedildiğinde -5, sadakat 40&apos;ın altında ise -7; bekleyen talep, bekleme süresinin her ayı için -2.&#10;Sadakat 0–5 arasında aylık kendi isteğiyle işten ayrılma: %35, 6–9: %20, 10–14: %10, 15&apos;ten itibaren normal sadakat şartına dayalı işten ayrılma olmaz. İşveren itibarı 60&apos;tan başlar, 0–100 arasında değişir ve 0–19 kritik, 20–39 zayıf, 40–59 sağlam, 60–79 iyi veya 80–100 çok iyi olarak değerlendirilir. Bu, aday sayısı ve kalitesini, maaş beklentilerini ve uzun vadeli sadakati etkiler." />
+    <e k="ui_pmHelpTopic09Title" v="Maaşlar, bordro ve maaş talepleri" />
+    <e k="ui_pmHelpTopic09Body" v="Bireysel temel maaşlar, deneyim ve güvenilirlik temelinde hesaplanır ve her deneyim aralığı içinde doğrusal olarak interpolasyon yoluyla belirlenir. Güvenilirlik, değeri 0,94 ile 1,06 arasında çarpar. Adaylar ayrıca şans, itibar ve ana uzmanlık için %5, ikincil uzmanlık için %3 oranında olası uzmanlık ek ödemeleri alırlar.&#10;Ayda 3 gün çalışmaya karşılık temel maaş: Deneyim 0–44: 1.800–2.200, 45–74: 2.200–2.700, 75–100: 2.700–3.300. Aylık maaş = Temel maaş × Ay uzunluğu faktörü × Ekonomik maliyet faktörü, 10&apos;a yuvarlanır. Bireysel maaşlar devre dışı bırakıldığında, 10&apos;luk artışlarla 100–100.000 aralığındaki standart temel maaş geçerlidir. 1–28 gün için aylık uzunluk faktörleri: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Ödeme, ayın başında maaş ödemesi olarak yapılır. İş ilişkisi o tarihte sona eren çalışanlar da, vadesi gelen ödemelerini önceden alırlar. Uzman veya profesyonel, zam talep edebilir: Temel şans %70’tir, sadakat seviyesi nedeniyle %55–85 aralığıyla sınırlandırılır; daha sonra her ay şansın yarısı oranında yeniden değerlendirilebilir. Kabul etmek +3 sadakat ve +1 itibar kazandırır; reddetmek sadakati 5 puan düşürür, 40’ın altındaysa 7 puan düşürür ve 3 ay boyunca işten ayrılma ve güvenilirlik risklerini artırır. G, tüm ödenmemiş alacakları açığa çıkarır." />
+    <e k="ui_pmHelpTopic10Title" v="Uzmanlık alanları ve uygulamalı gelişim" />
+    <e k="ui_pmHelpTopic10Body" v="TEMEL KURALLAR&#10;– Sekiz öğrenme kategorisi vardır: Toprak işleme, ekim, gübreleme, bitki koruma, hasat, nakliye, makinelerin ömrünü uzatma ve tasarruflu çalışma.&#10;– İlerleme, her kategori için ayrı ayrı kaydedilir. Öğrenilen uzmanlıklar kalıcı olarak korunur; aynı anda en fazla iki bonus aktif olabilir.&#10;ÖĞRENME İLERLEMESİ&#10;– Öğrenme eşikleri 240, 420, 600 ve 780 dakikadır; bundan sonra her bir eşik 180 dakika artar.&#10;– Öğrenme faktörü 1 + (Deneyim-50)/250 + (Güvenilirlik-50)/300 şeklindedir ve 0,75 ile 1,30 arasında sınırlıdır. Birden fazla faaliyet söz konusu olduğunda, öğrenme süresi ağırlıklandırılarak dağıtılır.&#10;FAALİYETLERİN SINIFLANDIRILMASI&#10;– Toprak işleme: Saban, çapa makinesi, döner çapa, diskli çapa, silindir ve öğütücü.&#10;– Ekim: Ekim ve dikim makineleri ile tohumlar.&#10;– Gübreleme: Mineral gübre, sıvı gübre, sıvı gübre, fermantasyon artıkları ve gübre. Bitki koruma: Herbisit uygulamaları.&#10;– Hasat: Biçerdöver, kesme mekanizmaları, balya presleri, biçme makineleri, yükleme römorkları ve toplama makineleri. Nakliye: Römorklar, boşaltma ve A’dan B’ye nakliye.&#10;BONUSLAR VE AKTİFLEŞTİRME&#10;– Ana uzmanlık: +12 etkili deneyim ve +%5 temel maaş. İkincil uzmanlık: +6 ve +%3.&#10;– Her iki uzmanlık da pasif hale getirilebilir. Öğrenilmiş bir pasif uzmanlık, her çalışan ve Mart–Şubat arasındaki tarım yılı için yalnızca bir kez aktifleştirilebilir; pasif bırakmak bu hakkı tüketmez." />
+    <e k="ui_pmHelpTopic11Title" v="Eğitimler" />
+    <e k="ui_pmHelpTopic11Body" v="Eğitimler yalnızca ayın ilk günü başlar; ayda bir gün olan durumlarda saat 12:00’ye kadar. Bir çalışan, Mart’tan Şubat’a kadar olan her tarım yılında yalnızca bir eğitime katılabilir ve bu süre zarfında çalışmıyor veya hasta olmamalıdır. Kişi ay sonuna kadar kullanılamaz durumda kalır; ilerleme, ancak ayın değişmesiyle birlikte tamamlandığında hesaba yansıtılır.&#10;Bir eğitim, bir sonraki uzmanlık için gerekli öğrenme süresinin %30’unu sağlar; en az 30 dakika ve hiçbir zaman eksik kalan süreden fazla olamaz. Her kategorinin aylık bir fiyat faktörü (-20 % ile +20 % arası) vardır ve %25 olasılıkla kontenjanı doludur. Maliyetler, eğitimin başlangıcında anında düşülür ve güncel aylık maaşa göre hesaplanır.&#10;Eğitim maliyeti = mevcut aylık maaş × kategori faktörü × aylık değiştirici. Faktörler: Toprak işleme %75, Ekim %90, Gübreleme %90, Bitki Koruma %100, Hasat %110, Nakliye %65, Makine Koruma %120, Tasarruflu Çalışma %120." />
+    <e k="ui_pmHelpTopic12Title" v="İşten çıkarılma, kendi isteğiyle istifa ve emeklilik" />
+    <e k="ui_pmHelpTopic12Body" v="İşten çıkarmalar onaylanmalıdır. Bir gün/aylık sürelerde, işten çıkarmanın bir sonraki ayın başında yürürlüğe girmesi için 1. gün saat 12:00’ye kadar bildirilmesi gerekir. İki gün veya daha fazla sürelerde, son tarih yuvarlanan yarım ayın sonu, yani ceil(gün/ay ÷ 2) günüdür. Son tarihten sonra, işten çıkarmanın yürürlüğe girme tarihi bir ay daha ertelenir.&#10;İşten çıkarma bildirimi yapıldığında Sadakat derecesi anında 40, Güvenilirlik derecesi ise 25 puan düşer. Çalışan, işten çıkarmanın yürürlüğe gireceği ayın sonuna kadar prensip olarak görevde kalır. İşten çıkarılma durumunda itibar kaybı: 1 aydan az -12, 3 aydan az -9, 6 aydan az -7, 12 aydan az -5, 24 aydan az -3, 24 aydan itibaren -1; aynı ay içinde gerçekleşen her bir işten çıkarma, ek olarak 4 puan kaybına neden olur.&#10;Sadakat seviyesi 0–14 arasında olduğunda, her ay çalışanın kendi isteğiyle istifa etme olasılığı kontrol edilir. Reddedilen bir maaş talebi, bu olasılığı geçici olarak 5 puan artırabilir. Bildirilen kendi isteğiyle istifa, ay sonu itibarıyla yürürlüğe girer ve 10 itibar puanı kaybına neden olur. 55. yaş gününden itibaren emeklilik bildirilebilir; risk 67 yaşına kadar yaklaşık %80–90’a yükselir, 68 yaşında %95, 69 yaşında %98 ve 70 yaşında %100 olur. Kişi ay sonuna kadar görevde kalır." />
+    <e k="ui_pmHelpTopic13Title" v="Profiller, Tarihçe ve İstatistikler" />
+    <e k="ui_pmHelpTopic13Body" v="Aday profilleri, yaş, mesleki geçmiş, deneyim, güvenilirlik, sadakat, uzmanlık alanları ve piyasada geçirilen süreyi dinamik bir metin halinde bir araya getirir. Çalışan profilleri ise şirketteki kıdem, görevler, eğitimler ve öğrenme sürecindeki ilerlemeleri tamamlar.&#10;Kişisel geçmiş, işe alım, görevin başlangıcı ve bitişi, görev kesintileri, hastalık, eğitimler, uzmanlık alanları, maaş talepleri ve kararlar, sadakat ve güvenilirlikteki değişiklikler, nakliye atamaları ile işten çıkarılma, kendi isteğiyle istifa, emeklilik ve istihdamın sona ermesini içerebilir.&#10;Çalışan geçmişi, görevler, çalışma süresi, eğitimler, nakliye durumu, son olaylar, hastalık günleri, maaş talepleri, görev kesintileri ve bugüne kadar ödenen toplam maaş gibi bilgileri gösterir. Genel bakış ayrıca, şirket genelinde şimdiye kadar işe alınan, işten çıkarılan, kendi isteğiyle istifa eden ve emekli olanların sayıları gibi toplam değerleri de gösterir." />
+    <e k="ui_pmHelpTopic14Title" v="Ayarlar, Çok Oyunculu ve Kayıtlar" />
+    <e k="ui_pmHelpTopic14Body" v="Ayarlar her oyun durumu için geçerlidir ve iş performansı, personel gelişimi ile ekonomi ve maaşlar olarak sınıflandırılır. Oynanış etkileri, bunlara bağlı deneyim etkilerini etkinleştirir; deneyim etkileri ise hız, aşınma, sarf malzemeleri ve yakıtı kontrol eder. Personel etkileri, sadakat değişikliklerini ve fazla mesai seçeneğini etkinleştirir. Ekonomi etkileri, bireysel maaşları ve standart aylık maaşı etkinleştirir.&#10;Devre dışı bırakılan etkiler, mevcut personel verilerini geriye dönük olarak değiştirmez. Yalnızca ilgili sonraki etkiyi engeller veya izin verir. Bireysel maaşlar devre dışı bırakıldığında standart aylık maaş temel değer olarak kullanılır; bu değer ayarlardan doğrudan değiştirilebilir. Tuş atamaları oyun ayarlarından değiştirilebilir.&#10;Çok oyunculu modda personel, adaylar, görevler, maaşlar, eğitimler, ayarlar ve kronikler çiftlik bazında yönetilir ve senkronize edilir. Karar sunucuya aittir; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini değiştirebilir. Veriler, oyun kaydındaki helperPersonnel.xml dosyasında bulunur ve yükleme sırasında mevcut atamalar mümkün olduğunca geri yüklenir. Eski oyun kayıtları kullanılmaya devam edebilir; oyundan ayrılmış çalışanlara ait geçmiş veriler eksik olabilir." />
+    <e k="ui_pmHelpTopic15Title" v="Kurulum ve ilk adımlar" />
+    <e k="ui_pmHelpTopic15Body" v="Bir adayı aç, yaşını, geçmişini, değerlerini, maaş beklentisini ve mevcut uzmanlık alanlarını kontrol et ve ardından işe alımını onayla. Aday, mevcut çiftliğin çalışanı olur; bundan sonraki tüm kararlar, bordro işlemleri ve gelişmeler bu çiftliğe göre değerlendirilir.&#10;İşe alımdan sonra öncelikle kısa ve uygun bir iş planla. Bir çalışanın müsait olması gerekir: Hastalık, devam eden iş, eğitim, onaylanmış bir işten ayrılma veya hâlâ aktif olan bir mod ataması, seçimi engelleyebilir. Çalışan sekmesi somut nedeni gösterir.&#10;İlk işe alım, işveren itibarını bir puan artırır. Yüksek değerler her zaman otomatik olarak daha iyi değildir: Deneyimli bir aday genellikle daha pahalıdır, oysa daha uygun fiyatlı bir yeni başlayan, gelişim ve eğitim için daha fazla zamana ihtiyaç duyar." />
+    <e k="ui_pmHelpTopic16Title" v="Görevler ve Uzmanlık Atamaları" />
+    <e k="ui_pmHelpTopic16Body" v="Atama, araç, ekipman ve – varsa – uygulanan malzeme temelinde belirlenir. Doğrudan malzeme ataması önceliklidir: Tohumlar ekime; herbisitler bitki korumasına; mineral gübre, sıvı gübre, sıvı gübre, fermantasyon artıkları ve gübre ise gübrelemeye aittir. Kireç, otomatik olarak ayrı bir öğrenme kategorisi olarak tanınmaz.&#10;Araç ve ekipman ataması: Saban, çapa makinesi, döner çapa, diskli çapa, silindir ve öğütücü toprak işleme faaliyetlerine aittir. Ekim ve dikim makineleri ekim faaliyetlerine aittir. Tarla püskürtücüler, belirgin bir malzeme olmadan gübreleme faaliyetine dahil edilir. Biçerdöverler, kesme üniteleri, balya presleri, biçme makineleri, yükleme römorkları ve toplama araçları hasat faaliyetlerine aittir. Römorklar ve boşaltılabilir araçlar nakliye faaliyetlerine aittir.&#10;FollowMe, pratik tanıma özelliğini ayrıca öğütücüler, patates ve pancar hasat makineleri, çeviriciler, yığınlayıcılar, gübre serpme makineleri, gübre tankları, toprak gevşeticiler, taş toplayıcılar, tırmıklar ve çapalar ile genişletir. Mod araçları, uzmanlık alanları net bir sınıflandırma sağlamıyorsa tarafsız kalabilir. Bu durumda yanlış bir uzmanlık bonusu vaat edilmez.&#10;Makine koruma ve tasarruflu çalışma genel bonuslardır: İlki, deneyime bağlı ek aşınmayı azaltır; ikincisi ise ek yakıt ve malzeme tüketimini azaltır. Seçilen faaliyet seçim penceresinde görüntülenir; uygun aktif uzmanlık alanı burada vurgulanır." />
+    <e k="ui_specialization_transport" v="Ulaşım" />
+    <e k="ui_transportMarker" v="Ulaşım" />
+    <e k="ui_pmStatusLine" v="Durum: %s" />
+    <e k="ui_button_transport_manage_long" v="Ulaşım" />
+    <e k="ui_transportPriorityHeaderStatus" v="Durum" />
+    <e k="ui_transportPriorityHeaderEnabled" v="Ulaşım" />
+    <e k="ui_pmTrainingCostHeader" v="Maliyetler" />
+    <e k="ui_pmHistoryCareerTransport" v="Ulaşım: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="TOPLAM" />
+    <e k="ui_pmMonth02" v="Nisan" />
+    <e k="ui_pmMonth06" v="Ağustos" />
+    <e k="ui_pmMonth07" v="Eylül" />
+    <e k="ui_pmMonth09" v="Kasım" />
+    <e k="ui_pmMonth10" v="Aralık" />
+    <e k="ui_selectionAvailable" v="Mevcut" />
+    <e k="ui_selectionUnavailableSick" v="Krank" />
+    <e k="ui_selectionUnavailableTraining" v="Eğitimde" />
+    <e k="ui_selectionUnavailableReserved" v="Rezervasyonlu" />
+    <e k="ui_selectionUnavailableFieldwork" v="Saha çalışması" />
+    <e k="ui_selectionUnavailableOther" v="Mevcut değil" />
+    <e k="ui_selectionJobUnknown" v="Emir bilinmiyor" />
+    <e k="ui_selectionAgeLabel" v="Değiştir" />
+    <e k="ui_selectionJobsLabel" v="Siparişler" />
+    <e k="ui_selectionSpeedLabel" v="Çalışma hızı" />
+    <e k="ui_selectionAgeValue" v="%d yıl" />
+    <e k="ui_selectionVehicleLine" v="Araç: %s" />
+    <e k="ui_selectionActivityLine" v="Görev: %s" />
+    <e k="ui_selectionFieldLine" v="Alan: %s" />
+    <e k="ui_selectionStatusLine" v="Durum: %s" />
+    <e k="ui_button_specializationDeactivate" v="Bırakın dinlensin" />
+    <e k="ui_button_specializationActivate" v="Giriş yap" />
+    <e k="ui_pmSpecializationActive" v="aktif" />
+    <e k="ui_pmHelpContents" v="İÇİNDEKİLER" />
+    <e k="ui_pmHelpTopic01Title" v="Hızlı Başlangıç ve Kullanım" />
+    <e k="ui_pmHelpTopic01Body" v="İnsan Kaynakları Yönetimi, isimsiz yapay zeka yardımcılarının yerini isimleri belirtilen adaylar ve çalışanlarla değiştirir. Her çalışan uzun vadede gelişir, aylık maaş alır ve deneyim, güvenilirlik, sadakat ve uzmanlık alanlarına bağlı olarak farklı güçlü yanlara ve risklere sahip olabilir.&#10;Kendi menünüz varsayılan olarak Ctrl + M tuşlarıyla açılır. Menüde Genel Bakış, Adaylar, Çalışanlar, Eğitim, Ayarlar ve Yardım seçenekleri bulunur. Tuş atamaları oyun ayarlarından değiştirilebilir.&#10;Varsayılan tuş atamaları: Kişi değiştirme A/D veya sol/sağ ok tuşları; Seçimi onaylama Boşluk tuşu veya fare tıklaması; İptal veya geri dönme Esc tuşu; Ulaşım ve maaş yönetimi T veya G tuşları. Yardım sekmesinde sol/sağ ok tuşlarıyla içerik ve makaleler arasında geçiş yapılır, yukarı/aşağı ok tuşlarıyla seçim yapılır veya kaydırma gerçekleştirilir ve resim yukarı/aşağı tuşlarıyla sayfa sayfa atlanır." />
+    <e k="ui_pmHelpTopic02Title" v="Genel Bakış ve Personel Durumu" />
+    <e k="ui_pmHelpTopic02Body" v="Genel bakış, işletmenin mevcut durumunu özetler: Çalışanlar, müsait çalışanlar, adaylar ve işveren itibarı en üstte yer alır. Bunun altında, personel, araç, ekipman ve faaliyet bilgilerini içeren devam eden görevler gösterilir.&#10;&quot;Değişiklikler&quot; sekmesi yalnızca ilgili personel olaylarını, yani işveren itibarında, deneyimde, güvenilirlikte, sadakatte, yaşta veya uzmanlık alanındaki değişiklikleri içerir. Her bildirimde neden, etkilenen kişi ve sonuç belirtilir; birden fazla satırdan oluşan bir giriş yine de tek bir bildirim olarak kabul edilir.&#10;&quot;Aylık Rapor&quot; ve &quot;Toplam&quot; sekmeleri, güncel ve toplam göstergeleri gösterir. Genel bakışı hızlı görev planlaması için kullanın; ayrıntılar, kararlar ve geçmiş kayıtlar ise ilgili bölüm sayfalarında yer alır." />
+    <e k="ui_pmHelpTopic03Title" v="İşgücü piyasası ve işe alım" />
+    <e k="ui_pmHelpTopic03Body" v="Yeni bir oyun turu dört adayla başlar. Aynı anda piyasada en fazla sekiz aday bulunabilir. Her ayın başında, zar atılarak en fazla üç yeni pozisyon belirlenir; her pozisyon için şans oranı %15 + 0,7 × işveren itibarıdır. 60 itibar değerinde bu oran %57, 100 itibar değerinde ise %85’tir. Piyasa boşsa, en az bir yeni aday oluşturulur.&#10;Adaylar, oluşturuldukları ay boyunca kesin olarak mevcut kalırlar. İlk ayın bitiminden sonra, kalitelerine bağlı olarak ayrılma olasılıkları %10–30, ikinci ayın bitiminden sonra %30–50, üçüncü ayın bitiminde ise %100 olur. Kaliteli profiller, kalitelerinin ayrılma olasılığını artırması nedeniyle daha erken ortadan kalkabilir.&#10;Adaylar 18–65 yaş arasındadır, sabit bir doğum tarihine sahiptir ve yaşlanmaya devam ederler. Geçmişleri arasında aile işletmesi, süt sığırcılığı, tarım hizmetleri, tarım, karma işletme, lojistik, tarım makineleri atölyesi ve ofis işleri bulunur. Yaş ve geçmiş, özellikle deneyim ve olası mesleki ön bilgileri etkiler.&#10;Maaş beklentisi, deneyim ve güvenilirliğe dayanır; %96–106 oranında rastgele sapma gösterir ve işverenin itibarından etkilenir. Düşük itibar beklentiyi artırırken, yüksek itibar beklentiyi düşürür. İşe alımdan önce bir onay mesajı görüntülenir; işe alım, itibarı 1 puan artırır." />
+    <e k="ui_pmHelpTopic04Title" v="Çalışan profili, değerler ve durum" />
+    <e k="ui_pmHelpTopic04Body" v="Deneyim, güvenilirlik ve sadakat, her biri 0 ile 100 arasında değişir. Sayı tam olarak görünür kalır; çubuklar hızlı karşılaştırma imkanı sağlar.&#10;Sınıflandırma yalnızca deneyime göre belirlenir: Yardımcı 0–44, Uzman 45–74, Profesyonel 75–100. Deneyim, çalışma hızını, ek aşınmayı ve ek tüketimi belirler. Güvenilirlik, kısa vadeli performans düşüşlerini, hastalıkları, aylık gelişimi ve görevin yarıda kesilme riskini etkiler. Sadakat, işletmeye olan bağlılığı tanımlar ve uyarıları, maaş anlaşmazlıklarını ve kendi isteğiyle işten ayrılmaları etkiler." />
     </elements>
 </l10n>

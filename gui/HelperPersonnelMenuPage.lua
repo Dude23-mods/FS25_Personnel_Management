@@ -1,5 +1,7 @@
 HelperPersonnelMenuPage = {}
 local HelperPersonnelMenuPage_mt = Class(HelperPersonnelMenuPage, HelperPersonnelViewBase)
+local hpMenuTypography = HelperPersonnelViewBase.TYPOGRAPHY
+local hpMenuDesign = HelperPersonnelViewBase.MENU_DESIGN
 
 local function hpMenuGetInputAction(actionName, fallback)
     if InputAction ~= nil and InputAction[actionName] ~= nil then
@@ -33,13 +35,43 @@ local function hpMenuClamp(value, minValue, maxValue)
 end
 
 local function hpMenuGetAspectCorrectWidth(height)
-    local screenWidth = tonumber(g_screenWidth) or 1
-    local screenHeight = tonumber(g_screenHeight) or 1
+    local screenWidth = tonumber(g_screenWidth) or 0
+    local screenHeight = tonumber(g_screenHeight) or 0
     if screenWidth <= 0 or screenHeight <= 0 then
-        return height
+        return height * (9 / 16)
     end
 
     return height * (screenHeight / screenWidth)
+end
+
+local function hpMenuGetAspectCorrectHeight(width)
+    local screenWidth = tonumber(g_screenWidth) or 0
+    local screenHeight = tonumber(g_screenHeight) or 0
+    if screenWidth <= 0 or screenHeight <= 0 then
+        return width * (16 / 9)
+    end
+
+    return width * (screenWidth / screenHeight)
+end
+
+local function hpMenuSetText(element, value)
+    if element ~= nil and element.setText ~= nil then
+        element:setText(tostring(value or ""))
+    end
+end
+
+local function hpMenuUpper(value)
+    return string.upper(tostring(value or ""))
+end
+
+local function hpMenuSplitLabelValue(value)
+    local text = tostring(value or "")
+    local separatorStart, separatorEnd = string.find(text, ": ", 1, true)
+    if separatorStart == nil then
+        return text, ""
+    end
+
+    return string.sub(text, 1, separatorStart - 1), string.sub(text, separatorEnd + 1)
 end
 
 function HelperPersonnelMenuPage.new(pageKind, customMt)
@@ -57,12 +89,12 @@ function HelperPersonnelMenuPage.new(pageKind, customMt)
     self.btnPrimary = nil
     self.btnTransport = nil
     self.btnSalary = nil
-    self.btnRelease = nil
+    self.btnEmergencyRelease = nil
     self.navArrowLeftOverlay = nil
     self.navArrowRightOverlay = nil
     self.navDotActiveOverlay = nil
     self.navDotInactiveOverlay = nil
-    self.overviewBrandOverlay = nil
+    self.overviewRefreshElapsed = 0
     self.settingsInfoTextKey = "ui_pmSettingsInfo"
     self.settingsSelectedKey = nil
     self.selectedTrainingCategoryKey = nil
@@ -129,16 +161,6 @@ function HelperPersonnelMenuPage:setContext(app)
             self.navDotInactiveOverlay = inactiveDotOverlay
         end
 
-        if self.pageKind == "overview" then
-            local overviewFilename = Utils.getFilename("gui/overview_personnel_management.dds", app.modDir)
-            local okOverview, overviewOverlay = pcall(function()
-                return Overlay.new(overviewFilename, 0, 0, 0.10, 0.10)
-            end)
-
-            if okOverview then
-                self.overviewBrandOverlay = overviewOverlay
-            end
-        end
     end
 end
 
@@ -163,10 +185,6 @@ function HelperPersonnelMenuPage:deleteNavigationOverlays()
         self.navDotInactiveOverlay = nil
     end
 
-    if self.overviewBrandOverlay ~= nil then
-        self.overviewBrandOverlay:delete()
-        self.overviewBrandOverlay = nil
-    end
 end
 
 function HelperPersonnelMenuPage:delete()
@@ -219,6 +237,853 @@ function HelperPersonnelMenuPage:onFrameOpen()
     self:applyPageKind()
     self:refresh()
     self:updateButtons()
+    self.personPagerLayoutRefreshPending = (self.pageKind == "applicants" or self.pageKind == "employees") and 1 or 0
+end
+
+function HelperPersonnelMenuPage:onGuiSetupFinished()
+    HelperPersonnelMenuPage:superClass().onGuiSetupFinished(self)
+    self:initializeNativeOverviewGui()
+    self:initializeNativeApplicantsGui()
+    self:initializeNativeEmployeesGui()
+    self:initializeNativeTrainingGui()
+end
+
+function HelperPersonnelMenuPage:initializeNativeApplicantsGui()
+    if self.pageKind ~= "applicants" then
+        return
+    end
+
+    self.applicantsPagerDotsDynamic = {}
+    self.applicantsPagerDotCount = 0
+
+    local setTextSize = function(element, size)
+        if element ~= nil and element.setTextSize ~= nil then
+            element:setTextSize(size)
+        end
+    end
+    setTextSize(self.applicantsName, hpMenuTypography.listPrimary.size)
+    setTextSize(self.applicantsProfileTitle, hpMenuTypography.sectionTitle.size)
+    setTextSize(self.applicantsEmpty, hpMenuTypography.listPrimary.size)
+    for _, name in ipairs({"applicantsExperienceLabel", "applicantsReliabilityLabel", "applicantsLoyaltyLabel", "applicantsExperienceValue", "applicantsReliabilityValue", "applicantsLoyaltyValue", "applicantsBirthLabel", "applicantsBirth", "applicantsOriginLabel", "applicantsOrigin", "applicantsWageLabel", "applicantsWage", "applicantsStatusLabel", "applicantsStatus", "applicantsSpecializationLabel", "applicantsSpecialization", "applicantsProfileRow1", "applicantsProfileRow2", "applicantsProfileRow3", "applicantsProfileRow4", "applicantsPermission"}) do
+        setTextSize(self[name], hpMenuTypography.bodyText.size)
+    end
+
+    local pixelFilename = self.app ~= nil and Utils.getFilename("gui/solidPixel.dds", self.app.modDir) or nil
+    if pixelFilename ~= nil then
+        for _, name in ipairs({"applicantsDetailBg"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.055, 0.090, 0.060, 0.94)
+            end
+        end
+        for _, name in ipairs({"applicantsPortraitBg"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.032, 0.052, 0.036, 0.84)
+            end
+        end
+        for _, name in ipairs({"applicantsDetailLine", "applicantsProfileLine"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.61, 0.73, 0.07, 0.86)
+            end
+        end
+        for _, name in ipairs({"applicantsExperienceTrack", "applicantsReliabilityTrack", "applicantsLoyaltyTrack"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.30, 0.34, 0.30, 0.90)
+            end
+        end
+        for _, name in ipairs({"applicantsExperienceFill", "applicantsReliabilityFill", "applicantsLoyaltyFill"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.70, 0.86, 0.12, 1)
+            end
+        end
+    end
+
+    if self.app ~= nil and self.app.modDir ~= nil then
+        local leftFilename = Utils.getFilename("gui/icons/hp_person_nav_left.dds", self.app.modDir)
+        local rightFilename = Utils.getFilename("gui/icons/hp_person_nav_right.dds", self.app.modDir)
+        if self.applicantsPrevIcon ~= nil then self.applicantsPrevIcon:setImageFilename(leftFilename) end
+        if self.applicantsNextIcon ~= nil then self.applicantsNextIcon:setImageFilename(rightFilename) end
+    end
+
+    self:refreshApplicantsNativeGui()
+end
+
+function HelperPersonnelMenuPage:clearApplicantsPagerDots()
+    for _, dot in ipairs(self.applicantsPagerDotsDynamic or {}) do
+        if dot ~= nil and dot.delete ~= nil then
+            dot:delete()
+        end
+    end
+    self.applicantsPagerDotsDynamic = {}
+    self.applicantsPagerDotCount = 0
+end
+
+function HelperPersonnelMenuPage:refreshApplicantsPager(index, count)
+    if self.applicantsPagerDots == nil or self.applicantsPagerDotTemplate == nil then
+        return
+    end
+
+    if self.applicantsPagerDotCount ~= count then
+        self:clearApplicantsPagerDots()
+        for _ = 1, count do
+            local dot = self.applicantsPagerDotTemplate:clone(self.applicantsPagerDots)
+            if dot ~= nil then
+                table.insert(self.applicantsPagerDotsDynamic, dot)
+            end
+        end
+        self.applicantsPagerDotCount = count
+    end
+
+    local activeFilename = self.app ~= nil and Utils.getFilename("gui/icons/hp_person_dot_active.dds", self.app.modDir) or nil
+    local inactiveFilename = self.app ~= nil and Utils.getFilename("gui/icons/hp_person_dot_inactive.dds", self.app.modDir) or nil
+    local centerX = 0.360
+    local desiredDotHeight = 0.012
+    local desiredDotWidth = hpMenuGetAspectCorrectWidth(desiredDotHeight)
+    local maxDotBandWidth = 0.300
+    local spacingFactor = 0.75
+    local dotWidth = desiredDotWidth
+    if count > 1 then
+        dotWidth = math.min(desiredDotWidth, maxDotBandWidth / (count + (count - 1) * spacingFactor))
+    end
+    local dotHeight = hpMenuGetAspectCorrectHeight(dotWidth)
+    local dotSpacing = dotWidth * spacingFactor
+    local totalDotWidth = count > 0 and (count * dotWidth) + ((count - 1) * dotSpacing) or 0
+    local firstDotX = centerX - totalDotWidth * 0.5
+
+    local buttonHeight = 0.050
+    local buttonWidth = 0.028125
+    local iconHeight = 0.032
+    local iconWidth = 0.018
+    local buttonGap = 0.024
+    local previousX = centerX - totalDotWidth * 0.5 - buttonGap - buttonWidth
+    local nextX = centerX + totalDotWidth * 0.5 + buttonGap
+    for _, buttonInfo in ipairs({
+        {button = self.applicantsPrevButton, icon = self.applicantsPrevIcon, x = previousX},
+        {button = self.applicantsNextButton, icon = self.applicantsNextIcon, x = nextX}
+    }) do
+        if buttonInfo.button ~= nil then
+            buttonInfo.button:setPosition(buttonInfo.x, -0.001)
+        end
+        if buttonInfo.icon ~= nil then
+            buttonInfo.icon:setPosition((buttonWidth - iconWidth) * 0.5, (buttonHeight - iconHeight) * 0.5)
+        end
+    end
+
+    for dotIndex, dot in ipairs(self.applicantsPagerDotsDynamic or {}) do
+        if dot ~= nil then
+            dot:setVisible(true)
+            dot:setPosition(firstDotX + (dotIndex - 1) * (dotWidth + dotSpacing), (0.048 - dotHeight) * 0.5)
+            dot:setSize(dotWidth, dotHeight)
+            if activeFilename ~= nil and inactiveFilename ~= nil then
+                dot:setImageFilename(dotIndex == index and activeFilename or inactiveFilename)
+            end
+        end
+    end
+end
+
+function HelperPersonnelMenuPage:refreshApplicantsNativeGui()
+    if self.pageKind ~= "applicants" or self.applicantsContent == nil then
+        return
+    end
+
+    local applicants = self:getApplicants()
+    local count = #applicants
+    self.applicantIndex = hpMenuClamp(self.applicantIndex or 1, 1, math.max(count, 1))
+    local person = applicants[self.applicantIndex]
+    local hasPerson = person ~= nil
+    local canManage = self:canManageCurrentFarm()
+
+    if self.applicantsDetail ~= nil then self.applicantsDetail:setVisible(hasPerson) end
+    if self.applicantsPager ~= nil then self.applicantsPager:setVisible(hasPerson) end
+    if self.applicantsEmpty ~= nil then
+        hpMenuSetText(self.applicantsEmpty, self:getText("ui_noApplicantsDetail", "Keine Bewerber vorhanden"))
+        self.applicantsEmpty:setVisible(not hasPerson)
+    end
+    if self.applicantsPermission ~= nil then
+        hpMenuSetText(self.applicantsPermission, self:getText("ui_pmMenuNoPermission", "Du hast keine Berechtigung, Personalentscheidungen für diesen Hof zu treffen."))
+        self.applicantsPermission:setVisible(not canManage)
+    end
+
+    local hasNavigation = count > 1
+    for _, button in ipairs({self.applicantsPrevButton, self.applicantsNextButton}) do
+        if button ~= nil and button.setDisabled ~= nil then button:setDisabled(not hasNavigation) end
+    end
+
+    self:refreshApplicantsPager(self.applicantIndex, count)
+
+    if not hasPerson then
+        return
+    end
+
+    local lines = self:getPersonCoreLines(person, true)
+    hpMenuSetText(self.applicantsName, self:getPersonName(person))
+    local birthLabel, birthValue = hpMenuSplitLabelValue(lines[1])
+    local originLabel, originValue = hpMenuSplitLabelValue(lines[2])
+    local wageLabel, wageValue = hpMenuSplitLabelValue(lines[3])
+    local statusLabel, statusValue = hpMenuSplitLabelValue(lines[4])
+    local specializationLabel, specializationValue = hpMenuSplitLabelValue(lines[5])
+    hpMenuSetText(self.applicantsBirthLabel, birthLabel .. ":")
+    hpMenuSetText(self.applicantsBirth, birthValue)
+    hpMenuSetText(self.applicantsOriginLabel, originLabel .. ":")
+    hpMenuSetText(self.applicantsOrigin, originValue)
+    hpMenuSetText(self.applicantsWageLabel, wageLabel .. ":")
+    hpMenuSetText(self.applicantsWage, wageValue)
+    hpMenuSetText(self.applicantsStatusLabel, statusLabel .. ":")
+    hpMenuSetText(self.applicantsStatus, statusValue)
+    hpMenuSetText(self.applicantsSpecializationLabel, specializationLabel .. ":")
+    hpMenuSetText(self.applicantsSpecialization, specializationValue)
+    hpMenuSetText(self.applicantsExperienceLabel, self:getText("ui_pmStatExperience", "Erfahrung"))
+    hpMenuSetText(self.applicantsReliabilityLabel, self:getText("ui_pmStatReliability", "Zuverlässigkeit"))
+    hpMenuSetText(self.applicantsLoyaltyLabel, self:getText("ui_pmStatLoyalty", "Loyalität"))
+
+    local stats = {
+        {key = "Experience", value = person.experience or 0},
+        {key = "Reliability", value = person.reliability or 0},
+        {key = "Loyalty", value = person.loyalty or 0}
+    }
+    for _, stat in ipairs(stats) do
+        local value = math.max(0, math.min(100, tonumber(stat.value) or 0))
+        hpMenuSetText(self["applicants" .. stat.key .. "Value"], string.format("%d %%", math.floor(value + 0.5)))
+        local fill = self["applicants" .. stat.key .. "Fill"]
+        if fill ~= nil and fill.setSize ~= nil then fill:setSize(math.max(0.001, 0.150 * value / 100), 0.009) end
+    end
+
+    if self.applicantsPortrait ~= nil and self.applicantsPortrait.setImageFilename ~= nil then
+        self.applicantsPortrait:setImageFilename(self:getPortraitFilename(person))
+    end
+    hpMenuSetText(self.applicantsProfileTitle, self:getText("ui_pmProfileHeader", "PROFIL"))
+    local profileLines = self:getWrappedProfileLines(person, true)
+    for index = 1, 4 do
+        local row = self["applicantsProfileRow" .. index]
+        local value = profileLines[index]
+        hpMenuSetText(row, value or "")
+        if row ~= nil then row:setVisible(value ~= nil) end
+    end
+end
+
+function HelperPersonnelMenuPage:initializeNativeEmployeesGui()
+    if self.pageKind ~= "employees" then
+        return
+    end
+
+    self.employeesPagerDotsDynamic = {}
+    self.employeesPagerDotCount = 0
+    self.employeesProfileFirstIndex = 1
+
+    local setTextSize = function(element, size)
+        if element ~= nil and element.setTextSize ~= nil then
+            element:setTextSize(size)
+        end
+    end
+    setTextSize(self.employeesName, hpMenuTypography.listPrimary.size)
+    setTextSize(self.employeesProfileTitle, hpMenuTypography.sectionTitle.size)
+    setTextSize(self.employeesEmpty, hpMenuTypography.listPrimary.size)
+    for _, name in ipairs({"employeesExperienceLabel", "employeesReliabilityLabel", "employeesLoyaltyLabel", "employeesExperienceValue", "employeesReliabilityValue", "employeesLoyaltyValue", "employeesBirthLabel", "employeesBirth", "employeesOriginLabel", "employeesOrigin", "employeesRankLabel", "employeesRank", "employeesWageLabel", "employeesWage", "employeesStatusLabel", "employeesStatus", "employeesSpecializationLabel", "employeesSpecialization", "employeesProfileRow1", "employeesProfileRow2", "employeesProfileRow3", "employeesProfileRow4", "employeesProfileRow5", "employeesPermission"}) do
+        setTextSize(self[name], hpMenuTypography.bodyText.size)
+    end
+    for _, prefix in ipairs({"employeesHistoryCareer", "employeesHistoryRecent", "employeesHistoryTotals"}) do
+        setTextSize(self[prefix .. "Title"], hpMenuTypography.metricTitle.size)
+        for index = 1, 4 do
+            if prefix == "employeesHistoryRecent" then
+                setTextSize(self[prefix .. "Label" .. index], hpMenuTypography.bodyText.size)
+                setTextSize(self[prefix .. "Value" .. index], hpMenuTypography.bodyText.size)
+            else
+                setTextSize(self[prefix .. "Label" .. index], hpMenuTypography.bodyText.size)
+                setTextSize(self[prefix .. "Value" .. index], hpMenuTypography.bodyText.size)
+            end
+        end
+    end
+
+    local pixelFilename = self.app ~= nil and Utils.getFilename("gui/solidPixel.dds", self.app.modDir) or nil
+    if pixelFilename ~= nil then
+        for _, name in ipairs({"employeesDetailBg", "employeesProfileBg", "employeesHistoryCareerBg", "employeesHistoryRecentBg", "employeesHistoryTotalsBg"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.055, 0.090, 0.060, 0.94)
+            end
+        end
+        for _, name in ipairs({"employeesPortraitBg"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.032, 0.052, 0.036, 0.84)
+            end
+        end
+        for _, name in ipairs({"employeesDetailLine", "employeesProfileLine", "employeesHistoryCareerLine", "employeesHistoryRecentLine", "employeesHistoryTotalsLine"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.61, 0.73, 0.07, 0.86)
+            end
+        end
+        for _, name in ipairs({"employeesExperienceTrack", "employeesReliabilityTrack", "employeesLoyaltyTrack"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.30, 0.34, 0.30, 0.90)
+            end
+        end
+        for _, name in ipairs({"employeesExperienceFill", "employeesReliabilityFill", "employeesLoyaltyFill"}) do
+            local element = self[name]
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                element:setImageColor(nil, 0.70, 0.86, 0.12, 1)
+            end
+        end
+        if self.employeesProfileSlider ~= nil then
+            GuiOverlay.createOverlay(self.employeesProfileSlider.overlay, pixelFilename)
+            GuiOverlay.createOverlay(self.employeesProfileSlider.sliderOverlay, pixelFilename)
+            self.employeesProfileSlider.overlay.color = {0.35, 0.35, 0.35, 0.75}
+            self.employeesProfileSlider.sliderOverlay.color = {0.70, 0.86, 0.12, 1}
+        end
+    end
+
+    if self.app ~= nil and self.app.modDir ~= nil then
+        if self.employeesPrevIcon ~= nil then self.employeesPrevIcon:setImageFilename(Utils.getFilename("gui/icons/hp_person_nav_left.dds", self.app.modDir)) end
+        if self.employeesNextIcon ~= nil then self.employeesNextIcon:setImageFilename(Utils.getFilename("gui/icons/hp_person_nav_right.dds", self.app.modDir)) end
+    end
+
+    self:refreshEmployeesNativeGui()
+end
+
+function HelperPersonnelMenuPage:clearEmployeesPagerDots()
+    for _, dot in ipairs(self.employeesPagerDotsDynamic or {}) do
+        if dot ~= nil and dot.delete ~= nil then
+            dot:delete()
+        end
+    end
+    self.employeesPagerDotsDynamic = {}
+    self.employeesPagerDotCount = 0
+end
+
+function HelperPersonnelMenuPage:refreshEmployeesPagerDots(index, count)
+    if self.employeesPagerDots == nil or self.employeesPagerDotTemplate == nil then
+        return
+    end
+
+    if self.employeesPagerDotCount ~= count then
+        self:clearEmployeesPagerDots()
+        for dotIndex = 1, count do
+            local dot = self.employeesPagerDotTemplate:clone(self.employeesPagerDots)
+            if dot ~= nil then
+                table.insert(self.employeesPagerDotsDynamic, dot)
+            end
+        end
+        self.employeesPagerDotCount = count
+    end
+
+    local activeFilename = self.app ~= nil and Utils.getFilename("gui/icons/hp_person_dot_active.dds", self.app.modDir) or nil
+    local inactiveFilename = self.app ~= nil and Utils.getFilename("gui/icons/hp_person_dot_inactive.dds", self.app.modDir) or nil
+    local centerX = 0.360
+    local desiredDotHeight = 0.012
+    local desiredDotWidth = hpMenuGetAspectCorrectWidth(desiredDotHeight)
+    local maxDotBandWidth = 0.300
+    local spacingFactor = 0.75
+    local dotWidth = desiredDotWidth
+    if count > 1 then
+        dotWidth = math.min(desiredDotWidth, maxDotBandWidth / (count + (count - 1) * spacingFactor))
+    end
+    local dotHeight = hpMenuGetAspectCorrectHeight(dotWidth)
+    local dotSpacing = dotWidth * spacingFactor
+    local totalDotWidth = count > 0 and (count * dotWidth) + ((count - 1) * dotSpacing) or 0
+    local firstDotX = centerX - totalDotWidth * 0.5
+
+    local buttonHeight = 0.050
+    local buttonWidth = 0.028125
+    local iconHeight = 0.032
+    local iconWidth = 0.018
+    local buttonGap = 0.024
+    local previousX = centerX - totalDotWidth * 0.5 - buttonGap - buttonWidth
+    local nextX = centerX + totalDotWidth * 0.5 + buttonGap
+    for _, buttonInfo in ipairs({
+        {button = self.employeesPrevButton, icon = self.employeesPrevIcon, x = previousX},
+        {button = self.employeesNextButton, icon = self.employeesNextIcon, x = nextX}
+    }) do
+        if buttonInfo.button ~= nil then
+            buttonInfo.button:setPosition(buttonInfo.x, -0.001)
+        end
+        if buttonInfo.icon ~= nil then
+            buttonInfo.icon:setPosition((buttonWidth - iconWidth) * 0.5, (buttonHeight - iconHeight) * 0.5)
+        end
+    end
+
+    for dotIndex, dot in ipairs(self.employeesPagerDotsDynamic or {}) do
+        if dot ~= nil then
+            dot:setVisible(true)
+            dot:setPosition(firstDotX + (dotIndex - 1) * (dotWidth + dotSpacing), (0.048 - dotHeight) * 0.5)
+            dot:setSize(dotWidth, dotHeight)
+            if activeFilename ~= nil and inactiveFilename ~= nil then
+                dot:setImageFilename(dotIndex == index and activeFilename or inactiveFilename)
+            end
+        end
+    end
+end
+
+function HelperPersonnelMenuPage:refreshEmployeesProfileRows()
+    local rows = self.employeesProfileRows or {}
+    local visibleRows = 5
+    local maxFirstIndex = math.max(#rows - visibleRows + 1, 1)
+    self.employeesProfileFirstIndex = hpMenuClamp(self.employeesProfileFirstIndex or 1, 1, maxFirstIndex)
+    if self.employeesProfileSlider ~= nil then
+        self.employeesProfileSlider:setMinValue(1)
+        self.employeesProfileSlider:setMaxValue(maxFirstIndex, self.employeesProfileFirstIndex)
+        self.employeesProfileSlider:setSliderSize(visibleRows, #rows)
+        self.employeesProfileSlider:setValue(self.employeesProfileFirstIndex, true, true)
+        self.employeesProfileSlider:setVisible(#rows > visibleRows)
+    end
+    for rowIndex = 1, visibleRows do
+        local row = self["employeesProfileRow" .. rowIndex]
+        local value = rows[self.employeesProfileFirstIndex + rowIndex - 1]
+        hpMenuSetText(row, value or "")
+        if row ~= nil then row:setVisible(value ~= nil) end
+    end
+end
+
+function HelperPersonnelMenuPage:onEmployeesProfileSliderChanged(value)
+    self.employeesProfileFirstIndex = math.floor(tonumber(value) or 1)
+    self:refreshEmployeesProfileRows()
+end
+
+function HelperPersonnelMenuPage:refreshEmployeesNativeGui()
+    if self.pageKind ~= "employees" or self.employeesContent == nil then
+        return
+    end
+
+    local workers = self:getWorkers()
+    local count = #workers
+    self.workerIndex = hpMenuClamp(self.workerIndex or 1, 1, math.max(count, 1))
+    local person = workers[self.workerIndex]
+    local hasPerson = person ~= nil
+    local canManage = self:canManageCurrentFarm()
+
+    if self.employeesDetail ~= nil then self.employeesDetail:setVisible(hasPerson) end
+    if self.employeesProfile ~= nil then self.employeesProfile:setVisible(hasPerson) end
+    for _, panel in ipairs({self.employeesHistoryCareer, self.employeesHistoryRecent, self.employeesHistoryTotals}) do
+        if panel ~= nil then panel:setVisible(hasPerson) end
+    end
+    if self.employeesPager ~= nil then self.employeesPager:setVisible(hasPerson) end
+    if self.employeesEmpty ~= nil then
+        hpMenuSetText(self.employeesEmpty, self:getText("ui_noWorkersDetail", "Keine Mitarbeiter vorhanden"))
+        self.employeesEmpty:setVisible(not hasPerson)
+    end
+    if self.employeesPermission ~= nil then
+        hpMenuSetText(self.employeesPermission, self:getText("ui_pmMenuNoPermission", "Du hast keine Berechtigung, Personalentscheidungen für diesen Hof zu treffen."))
+        self.employeesPermission:setVisible(not canManage)
+    end
+    for _, button in ipairs({self.employeesPrevButton, self.employeesNextButton}) do
+        if button ~= nil and button.setDisabled ~= nil then button:setDisabled(count <= 1) end
+    end
+    self:refreshEmployeesPagerDots(self.workerIndex, count)
+
+    if not hasPerson then
+        return
+    end
+
+    local manager = self:getManager()
+    local lines = self:getPersonCoreLines(person, false)
+    hpMenuSetText(self.employeesName, self:getPersonName(person))
+    local birthLabel, birthValue = hpMenuSplitLabelValue(lines[1])
+    local originLabel, originValue = hpMenuSplitLabelValue(lines[2])
+    local wageLabel, wageValue = hpMenuSplitLabelValue(lines[3])
+    local statusLabel, statusValue = hpMenuSplitLabelValue(lines[4])
+    local specializationLabel, specializationValue = hpMenuSplitLabelValue(lines[5])
+    hpMenuSetText(self.employeesBirthLabel, birthLabel .. ":")
+    hpMenuSetText(self.employeesBirth, birthValue)
+    hpMenuSetText(self.employeesOriginLabel, originLabel .. ":")
+    hpMenuSetText(self.employeesOrigin, originValue)
+    hpMenuSetText(self.employeesRankLabel, self:getText("ui_pmRankLabel", "Rang") .. ":")
+    hpMenuSetText(self.employeesRank, manager ~= nil and manager.getRankText ~= nil and manager:getRankText(person) or "")
+    hpMenuSetText(self.employeesWageLabel, wageLabel .. ":")
+    hpMenuSetText(self.employeesWage, wageValue)
+    hpMenuSetText(self.employeesStatusLabel, statusLabel .. ":")
+    hpMenuSetText(self.employeesStatus, statusValue)
+    hpMenuSetText(self.employeesSpecializationLabel, specializationLabel .. ":")
+    hpMenuSetText(self.employeesSpecialization, specializationValue)
+    hpMenuSetText(self.employeesExperienceLabel, self:getText("ui_pmStatExperience", "Erfahrung"))
+    hpMenuSetText(self.employeesReliabilityLabel, self:getText("ui_pmStatReliability", "Zuverlässigkeit"))
+    hpMenuSetText(self.employeesLoyaltyLabel, self:getText("ui_pmStatLoyalty", "Loyalität"))
+    for _, stat in ipairs({{key = "Experience", value = person.experience or 0}, {key = "Reliability", value = person.reliability or 0}, {key = "Loyalty", value = person.loyalty or 0}}) do
+        local value = math.max(0, math.min(100, tonumber(stat.value) or 0))
+        hpMenuSetText(self["employees" .. stat.key .. "Value"], string.format("%d %%", math.floor(value + 0.5)))
+        local fill = self["employees" .. stat.key .. "Fill"]
+        if fill ~= nil and fill.setSize ~= nil then fill:setSize(math.max(0.001, 0.150 * value / 100), 0.009) end
+    end
+    if self.employeesPortrait ~= nil and self.employeesPortrait.setImageFilename ~= nil then self.employeesPortrait:setImageFilename(self:getPortraitFilename(person)) end
+
+    hpMenuSetText(self.employeesProfileTitle, self:getText("ui_pmProfileHeader", "PROFIL"))
+    self.employeesProfileRows = self:getWrappedProfileLines(person, false)
+    self:refreshEmployeesProfileRows()
+    local columns = self:getWorkerHistoryColumns(person)
+    for columnIndex, prefix in ipairs({"employeesHistoryCareer", "employeesHistoryRecent", "employeesHistoryTotals"}) do
+        local column = columns[columnIndex] or {}
+        hpMenuSetText(self[prefix .. "Title"], column.title or "")
+        for rowIndex = 1, 4 do
+            local line = column.lines ~= nil and column.lines[rowIndex] or ""
+            if prefix == "employeesHistoryRecent" then
+                local label, value = hpMenuSplitLabelValue(line)
+                hpMenuSetText(self[prefix .. "Label" .. rowIndex], label)
+                hpMenuSetText(self[prefix .. "Value" .. rowIndex], value)
+            else
+                local label, value = hpMenuSplitLabelValue(line)
+                hpMenuSetText(self[prefix .. "Label" .. rowIndex], label)
+                hpMenuSetText(self[prefix .. "Value" .. rowIndex], value)
+            end
+        end
+    end
+end
+
+function HelperPersonnelMenuPage:initializeNativeTrainingGui()
+    if self.pageKind ~= "training" then
+        return
+    end
+
+    self.trainingPagerDotsDynamic = {}
+    self.trainingPagerDotCount = 0
+    self.trainingRowsDynamic = {}
+    self.trainingRowCount = 0
+
+    local setTextSize = function(element, size)
+        if element ~= nil and element.setTextSize ~= nil then element:setTextSize(size) end
+    end
+    setTextSize(self.trainingName, hpMenuTypography.listPrimary.size)
+    setTextSize(self.trainingEmpty, hpMenuTypography.listPrimary.size)
+    for _, name in ipairs({"trainingExperienceLabel", "trainingReliabilityLabel", "trainingLoyaltyLabel", "trainingExperienceValue", "trainingReliabilityValue", "trainingLoyaltyValue", "trainingBirthLabel", "trainingBirth", "trainingOriginLabel", "trainingOrigin", "trainingRankLabel", "trainingRank", "trainingWageLabel", "trainingWage", "trainingStatusLabel", "trainingStatus", "trainingSpecializationLabel", "trainingSpecialization", "trainingIntroRow1", "trainingIntroRow2", "trainingIntroRow3", "trainingIntroRow4", "trainingIntroRow5", "trainingPermission"}) do
+        setTextSize(self[name], hpMenuTypography.bodyText.size)
+    end
+    for _, name in ipairs({"trainingCategoryHeader", "trainingProgressHeader", "trainingCostHeader", "trainingAdjustmentHeader"}) do
+        setTextSize(self[name], hpMenuTypography.metricTitle.size)
+    end
+
+    local pixelFilename = self.app ~= nil and Utils.getFilename("gui/solidPixel.dds", self.app.modDir) or nil
+    if pixelFilename ~= nil then
+        for _, name in ipairs({"trainingDetailBg", "trainingIntroBg", "trainingColumnLeftBg", "trainingColumnRightBg"}) do
+            local element = self[name]
+            if element ~= nil then element:setImageFilename(pixelFilename); element:setImageColor(nil, 0.055, 0.090, 0.060, 0.94) end
+        end
+        for _, name in ipairs({"trainingPortraitBg"}) do
+            local element = self[name]
+            if element ~= nil then element:setImageFilename(pixelFilename); element:setImageColor(nil, 0.032, 0.052, 0.036, 0.84) end
+        end
+        for _, name in ipairs({"trainingDetailLine", "trainingIntroLine", "trainingTableLine"}) do
+            local element = self[name]
+            if element ~= nil then element:setImageFilename(pixelFilename); element:setImageColor(nil, 0.61, 0.73, 0.07, 0.86) end
+        end
+        for _, name in ipairs({"trainingExperienceTrack", "trainingReliabilityTrack", "trainingLoyaltyTrack"}) do
+            local element = self[name]
+            if element ~= nil then element:setImageFilename(pixelFilename); element:setImageColor(nil, 0.30, 0.34, 0.30, 0.90) end
+        end
+        for _, name in ipairs({"trainingExperienceFill", "trainingReliabilityFill", "trainingLoyaltyFill"}) do
+            local element = self[name]
+            if element ~= nil then element:setImageFilename(pixelFilename); element:setImageColor(nil, 0.70, 0.86, 0.12, 1) end
+        end
+    end
+    if self.app ~= nil and self.app.modDir ~= nil then
+        if self.trainingPrevIcon ~= nil then self.trainingPrevIcon:setImageFilename(Utils.getFilename("gui/icons/hp_person_nav_left.dds", self.app.modDir)) end
+        if self.trainingNextIcon ~= nil then self.trainingNextIcon:setImageFilename(Utils.getFilename("gui/icons/hp_person_nav_right.dds", self.app.modDir)) end
+    end
+    self:refreshTrainingNativeGui()
+end
+
+function HelperPersonnelMenuPage:clearTrainingPagerDots()
+    for _, dot in ipairs(self.trainingPagerDotsDynamic or {}) do if dot ~= nil and dot.delete ~= nil then dot:delete() end end
+    self.trainingPagerDotsDynamic = {}
+    self.trainingPagerDotCount = 0
+end
+
+function HelperPersonnelMenuPage:refreshTrainingPagerDots(index, count)
+    if self.trainingPagerDots == nil or self.trainingPagerDotTemplate == nil then return end
+    if self.trainingPagerDotCount ~= count then
+        self:clearTrainingPagerDots()
+        for _ = 1, count do
+            local dot = self.trainingPagerDotTemplate:clone(self.trainingPagerDots)
+            if dot ~= nil then table.insert(self.trainingPagerDotsDynamic, dot) end
+        end
+        self.trainingPagerDotCount = count
+    end
+    local activeFilename = self.app ~= nil and Utils.getFilename("gui/icons/hp_person_dot_active.dds", self.app.modDir) or nil
+    local inactiveFilename = self.app ~= nil and Utils.getFilename("gui/icons/hp_person_dot_inactive.dds", self.app.modDir) or nil
+    local centerX = 0.360
+    local desiredDotHeight = 0.012
+    local desiredDotWidth = hpMenuGetAspectCorrectWidth(desiredDotHeight)
+    local maxDotBandWidth = 0.300
+    local spacingFactor = 0.75
+    local dotWidth = desiredDotWidth
+    if count > 1 then
+        dotWidth = math.min(desiredDotWidth, maxDotBandWidth / (count + (count - 1) * spacingFactor))
+    end
+    local dotHeight = hpMenuGetAspectCorrectHeight(dotWidth)
+    local dotSpacing = dotWidth * spacingFactor
+    local totalDotWidth = count > 0 and (count * dotWidth) + ((count - 1) * dotSpacing) or 0
+    local firstDotX = centerX - totalDotWidth * 0.5
+
+    local buttonHeight, buttonWidth = 0.050, 0.028125
+    local iconHeight, iconWidth = 0.032, 0.018
+    local buttonGap = 0.024
+    local previousX = centerX - totalDotWidth * 0.5 - buttonGap - buttonWidth
+    local nextX = centerX + totalDotWidth * 0.5 + buttonGap
+    for _, buttonInfo in ipairs({
+        {button = self.trainingPrevButton, icon = self.trainingPrevIcon, x = previousX},
+        {button = self.trainingNextButton, icon = self.trainingNextIcon, x = nextX}
+    }) do
+        if buttonInfo.button ~= nil then buttonInfo.button:setPosition(buttonInfo.x, -0.001) end
+        if buttonInfo.icon ~= nil then buttonInfo.icon:setPosition((buttonWidth - iconWidth) * 0.5, (buttonHeight - iconHeight) * 0.5) end
+    end
+    for dotIndex, dot in ipairs(self.trainingPagerDotsDynamic or {}) do
+        dot:setVisible(true)
+        dot:setPosition(firstDotX + (dotIndex - 1) * (dotWidth + dotSpacing), (0.048 - dotHeight) * 0.5)
+        dot:setSize(dotWidth, dotHeight)
+        if activeFilename ~= nil and inactiveFilename ~= nil then dot:setImageFilename(dotIndex == index and activeFilename or inactiveFilename) end
+    end
+end
+
+function HelperPersonnelMenuPage:ensureTrainingRows(count)
+    self.trainingRowsDynamic = {}
+    for index = 1, count do
+        local row = self["trainingRow" .. index]
+        if row ~= nil then
+            table.insert(self.trainingRowsDynamic, row)
+        end
+    end
+    self.trainingRowCount = #self.trainingRowsDynamic
+end
+
+function HelperPersonnelMenuPage:refreshTrainingRows(person)
+    local manager = self:getManager()
+    local rows = self:getTrainingCategoryRows(person)
+    self:ensureTrainingRows(#rows)
+    local workerInTraining = manager ~= nil and manager.isWorkerInTraining ~= nil and manager:isWorkerInTraining(person)
+    for index, row in ipairs(rows) do
+        local element = self.trainingRowsDynamic[index]
+        if element ~= nil then
+            local selected = self.selectedTrainingCategoryKey == row.key
+            local selectable = not workerInTraining and (row.acquired or row.learned or row.available == true)
+            local background = element:getDescendantByName("trainingRowBg")
+            local track = element:getDescendantByName("trainingRowTrack")
+            local fill = element:getDescendantByName("trainingRowFill")
+            local name = element:getDescendantByName("trainingRowName")
+            local progress = element:getDescendantByName("trainingRowProgress")
+            local cost = element:getDescendantByName("trainingRowCost")
+            local adjustment = element:getDescendantByName("trainingRowAdjustment")
+            element.trainingKey = row.key
+            element:setVisible(true)
+            if background ~= nil then
+                background:setImageFilename(Utils.getFilename("gui/solidPixel.dds", self.app.modDir))
+                background:setImageColor(nil, 0, 0, 0, 0)
+            end
+            if track ~= nil then track:setImageFilename(Utils.getFilename("gui/solidPixel.dds", self.app.modDir)); track:setImageColor(nil, 0.30, 0.34, 0.30, 0.90) end
+            if fill ~= nil then fill:setImageFilename(Utils.getFilename("gui/solidPixel.dds", self.app.modDir)); fill:setImageColor(nil, 0.70, 0.86, 0.12, (selectable or row.trainingActive or row.acquired) and 1 or 0.48); fill:setSize(math.max(0.001, 0.215 * row.progress / 100), 0.009) end
+            if name ~= nil and name.setTextColor ~= nil then name:setTextColor(1, 1, 1, selectable and 1 or 0.64) end
+            if cost ~= nil and cost.setTextColor ~= nil then cost:setTextColor(1, 1, 1, selectable and 1 or 0.64) end
+            if progress ~= nil and progress.setTextColor ~= nil then progress:setTextColor(0.70, 0.86, 0.12, selectable and 1 or 0.58) end
+            if adjustment ~= nil and adjustment.setTextColor ~= nil then adjustment:setTextColor(0.78, 0.80, 0.78, selectable and 1 or 0.58) end
+            hpMenuSetText(name, row.name)
+            hpMenuSetText(progress, row.trainingActive and self:getText("ui_pmTrainingRunning", "laufende Schulung") or string.format("%d %%", math.floor(row.progress + 0.5)))
+            local costText, adjustmentText = "", ""
+            if row.acquired then costText = self:getText("ui_pmSpecializationActive", "aktiv")
+            elseif row.learned then costText = self:getText("ui_pmSpecializationInactive", "gelernt, inaktiv")
+            elseif row.available == true then
+                costText = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(row.cost) or string.format("%d €", math.floor(row.cost + 0.5))
+                local difference = math.abs(row.costDifference)
+                local amount = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(difference) or string.format("%d €", math.floor(difference + 0.5))
+                adjustmentText = row.costDifference > 0 and "+" .. amount or (row.costDifference < 0 and "-" .. amount or (manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(0) or "0 €"))
+            else costText = self:getText("ui_pmTrainingNoPlaces", "aktuell keine Plätze frei") end
+            hpMenuSetText(cost, costText)
+            hpMenuSetText(adjustment, adjustmentText)
+        end
+    end
+    for index = #rows + 1, 8 do
+        local element = self["trainingRow" .. index]
+        if element ~= nil then
+            element:setVisible(false)
+        end
+    end
+end
+
+function HelperPersonnelMenuPage:refreshTrainingNativeGui()
+    if self.pageKind ~= "training" or self.trainingContent == nil then return end
+    local workers, count = self:getWorkers(), 0
+    count = #workers
+    self.workerIndex = hpMenuClamp(self.workerIndex or 1, 1, math.max(count, 1))
+    local person, hasPerson = workers[self.workerIndex], workers[self.workerIndex] ~= nil
+    if self.trainingDetail ~= nil then self.trainingDetail:setVisible(hasPerson) end
+    if self.trainingIntro ~= nil then self.trainingIntro:setVisible(hasPerson) end
+    if self.trainingTable ~= nil then self.trainingTable:setVisible(hasPerson) end
+    if self.trainingPager ~= nil then self.trainingPager:setVisible(hasPerson) end
+    if self.trainingEmpty ~= nil then hpMenuSetText(self.trainingEmpty, self:getText("ui_noWorkersDetail", "Keine Mitarbeiter vorhanden")); self.trainingEmpty:setVisible(not hasPerson) end
+    if self.trainingPermission ~= nil then hpMenuSetText(self.trainingPermission, self:getText("ui_pmMenuNoPermission", "Du hast keine Berechtigung, Personalentscheidungen für diesen Hof zu treffen.")); self.trainingPermission:setVisible(not self:canManageCurrentFarm()) end
+    for _, button in ipairs({self.trainingPrevButton, self.trainingNextButton}) do if button ~= nil and button.setDisabled ~= nil then button:setDisabled(count <= 1) end end
+    self:refreshTrainingPagerDots(self.workerIndex, count)
+    if not hasPerson then return end
+    if self.selectedTrainingWorkerId ~= person.id then self.selectedTrainingWorkerId = person.id; self.selectedTrainingCategoryKey = nil end
+    local manager, lines = self:getManager(), self:getPersonCoreLines(person, false)
+    local birthLabel, birthValue = hpMenuSplitLabelValue(lines[1])
+    local originLabel, originValue = hpMenuSplitLabelValue(lines[2])
+    local wageLabel, wageValue = hpMenuSplitLabelValue(lines[3])
+    local statusLabel, statusValue = hpMenuSplitLabelValue(lines[4])
+    local specializationLabel, specializationValue = hpMenuSplitLabelValue(lines[5])
+    hpMenuSetText(self.trainingName, self:getPersonName(person))
+    hpMenuSetText(self.trainingBirthLabel, birthLabel .. ":"); hpMenuSetText(self.trainingBirth, birthValue)
+    hpMenuSetText(self.trainingOriginLabel, originLabel .. ":"); hpMenuSetText(self.trainingOrigin, originValue)
+    hpMenuSetText(self.trainingRankLabel, self:getText("ui_pmRankLabel", "Rang") .. ":"); hpMenuSetText(self.trainingRank, manager ~= nil and manager.getRankText ~= nil and manager:getRankText(person) or "")
+    hpMenuSetText(self.trainingWageLabel, wageLabel .. ":"); hpMenuSetText(self.trainingWage, wageValue)
+    hpMenuSetText(self.trainingStatusLabel, statusLabel .. ":"); hpMenuSetText(self.trainingStatus, statusValue)
+    hpMenuSetText(self.trainingSpecializationLabel, specializationLabel .. ":"); hpMenuSetText(self.trainingSpecialization, specializationValue)
+    for _, key in ipairs({"Experience", "Reliability", "Loyalty"}) do
+        local value = math.max(0, math.min(100, tonumber(person[string.lower(key)] or 0) or 0))
+        hpMenuSetText(self["training" .. key .. "Label"], self:getText("ui_pmStat" .. key, key)); hpMenuSetText(self["training" .. key .. "Value"], string.format("%d %%", math.floor(value + 0.5)))
+        local fill = self["training" .. key .. "Fill"]
+        if fill ~= nil then fill:setSize(math.max(0.001, 0.150 * value / 100), 0.009) end
+    end
+    if self.trainingPortrait ~= nil then self.trainingPortrait:setImageFilename(self:getPortraitFilename(person)) end
+    local intro = self:getText("ui_pmTrainingIntro", "Spezialisierungen verbessern die Leistung in der passenden Lernkategorie. Schulungen beginnen nur am Monatsanfang, kosten Geld und machen den Mitarbeiter bis Monatsende nicht verfügbar. Fortschritt wird nach Abschluss gutgeschrieben. Pro Landwirtschaftsjahr von März bis Februar ist nur eine Schulung möglich. Gelernte Spezialisierungen bleiben erhalten, aber höchstens zwei Boni sind aktiv. Beide Plätze können ruhen. Eine gelernte inaktive Spezialisierung kann je Mitarbeiter nur einmal pro Landwirtschaftsjahr eingeloggt werden.")
+    local introLines = self:getWrappedHistoryLines(intro, hpMenuTypography.bodyText.size, 0.688, 120)
+    for index = 1, 5 do local element = self["trainingIntroRow" .. index]; hpMenuSetText(element, introLines[index] or ""); if element ~= nil then element:setVisible(introLines[index] ~= nil) end end
+    hpMenuSetText(self.trainingCategoryHeader, hpMenuUpper(self:getText("ui_pmTrainingCategoryHeader", "Lernkategorie")))
+    self:refreshTrainingRows(person)
+end
+
+function HelperPersonnelMenuPage:initializeNativeOverviewGui()
+    if self.pageKind ~= "overview" then
+        return
+    end
+
+    for _, prefix in ipairs({"overviewMetricEmployees", "overviewMetricAvailable", "overviewMetricApplicants", "overviewMetricReputation"}) do
+        for _, suffix in ipairs({"Label", "Value"}) do
+            local element = self[prefix .. suffix]
+            if element ~= nil then
+                element.textAlignment = RenderText.ALIGN_LEFT
+                element.textOriginalAlignment = RenderText.ALIGN_LEFT
+            end
+        end
+    end
+    for _, element in ipairs({self.overviewActiveEmpty, self.overviewHistoryTitle, self.overviewMonthlyTitle, self.overviewLifetimeTitle}) do
+        if element ~= nil then
+            element.textAlignment = RenderText.ALIGN_LEFT
+            element.textOriginalAlignment = RenderText.ALIGN_LEFT
+        end
+    end
+
+    local setTextSize = function(element, size)
+        if element ~= nil and element.setTextSize ~= nil then
+            element:setTextSize(size)
+        end
+    end
+    for _, prefix in ipairs({"overviewMetricEmployees", "overviewMetricAvailable", "overviewMetricApplicants", "overviewMetricReputation"}) do
+        setTextSize(self[prefix .. "Label"], hpMenuTypography.metricTitle.size)
+        setTextSize(self[prefix .. "Value"], hpMenuTypography.metricValue.size)
+    end
+    setTextSize(self.overviewActiveTitle, hpMenuTypography.sectionTitle.size)
+    setTextSize(self.overviewActiveEmpty, hpMenuTypography.bodyText.size)
+    setTextSize(self.overviewHistoryTitle, hpMenuTypography.sectionTitle.size)
+    setTextSize(self.overviewMonthlyTitle, hpMenuTypography.sectionTitle.size)
+    setTextSize(self.overviewLifetimeTitle, hpMenuTypography.sectionTitle.size)
+    for rowIndex = 1, 6 do
+        for _, suffix in ipairs({"Name", "Status", "Activity"}) do
+            local element = self["overviewEmployee" .. suffix .. rowIndex]
+            if element ~= nil then
+                element.textAlignment = RenderText.ALIGN_LEFT
+                element.textOriginalAlignment = RenderText.ALIGN_LEFT
+            end
+        end
+        setTextSize(self["overviewEmployeeName" .. rowIndex], hpMenuTypography.listPrimary.size)
+        setTextSize(self["overviewEmployeeStatus" .. rowIndex], hpMenuTypography.bodyText.size)
+        setTextSize(self["overviewEmployeeActivity" .. rowIndex], hpMenuTypography.bodyText.size)
+    end
+    for rowIndex = 1, 3 do
+        for _, suffix in ipairs({"Primary", "Secondary"}) do
+            local history = self["overviewHistory" .. suffix .. rowIndex]
+            if history ~= nil then
+                history.textAlignment = RenderText.ALIGN_LEFT
+                history.textOriginalAlignment = RenderText.ALIGN_LEFT
+            end
+        end
+        setTextSize(self["overviewHistoryPrimary" .. rowIndex], 0.0102)
+        setTextSize(self["overviewHistorySecondary" .. rowIndex], 0.0090)
+    end
+    for rowIndex = 1, 7 do
+        for _, prefix in ipairs({"overviewMonthly", "overviewLifetime"}) do
+            local label = self[prefix .. "Label" .. rowIndex]
+            if label ~= nil and label.setTextColor ~= nil then
+                label:setTextColor(0.61, 0.73, 0.07, 1)
+                label.textAlignment = RenderText.ALIGN_LEFT
+                label.textOriginalAlignment = RenderText.ALIGN_LEFT
+            end
+            local value = self[prefix .. "Value" .. rowIndex]
+            if value ~= nil then
+                value.textAlignment = RenderText.ALIGN_RIGHT
+                value.textOriginalAlignment = RenderText.ALIGN_RIGHT
+            end
+            setTextSize(label, hpMenuTypography.bodyText.size)
+            setTextSize(value, hpMenuTypography.bodyText.size)
+        end
+    end
+
+    local colors = hpMenuDesign ~= nil and hpMenuDesign.colors or {}
+    local setImageColor = function(element, color)
+        element:setImageColor(nil, color[1], color[2], color[3], color[4])
+    end
+    local pixelFilename = self.app ~= nil and Utils.getFilename("gui/solidPixel.dds", self.app.modDir) or nil
+    if pixelFilename ~= nil then
+        for _, name in ipairs({
+            "overviewMetricEmployeesBg", "overviewMetricAvailableBg", "overviewMetricApplicantsBg", "overviewMetricReputationBg"
+        }) do
+            local element = self:getDescendantByName(name)
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                setImageColor(element, colors.metric or {0.075, 0.115, 0.075, 0.94})
+            end
+        end
+        for _, name in ipairs({
+            "overviewActiveBg", "overviewHistoryBg", "overviewMonthlyBg", "overviewLifetimeBg"
+        }) do
+            local element = self:getDescendantByName(name)
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                setImageColor(element, colors.panel or {0.055, 0.090, 0.060, 0.94})
+            end
+        end
+        for _, name in ipairs({
+            "overviewEmployeeRowBg1", "overviewEmployeeRowBg2", "overviewEmployeeRowBg3",
+            "overviewEmployeeRowBg4", "overviewEmployeeRowBg5", "overviewEmployeeRowBg6"
+        }) do
+            local element = self:getDescendantByName(name)
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                setImageColor(element, colors.row or {0.032, 0.052, 0.036, 0.84})
+            end
+        end
+        for _, name in ipairs({
+            "overviewMetricEmployeesLine", "overviewMetricAvailableLine", "overviewMetricApplicantsLine", "overviewMetricReputationLine",
+            "overviewActiveLine", "overviewHistoryLine", "overviewMonthlyLine", "overviewLifetimeLine",
+            "overviewHistoryMarker1", "overviewHistoryMarker2", "overviewHistoryMarker3"
+        }) do
+            local element = self:getDescendantByName(name)
+            if element ~= nil then
+                element:setImageFilename(pixelFilename)
+                setImageColor(element, colors.accent or {0.70, 0.86, 0.12, 1})
+            end
+        end
+        for _, slider in ipairs({self.overviewEmployeeSlider, self.overviewHistorySlider}) do
+            if slider ~= nil then
+                GuiOverlay.createOverlay(slider.overlay, pixelFilename)
+                GuiOverlay.createOverlay(slider.sliderOverlay, pixelFilename)
+                slider.overlay.color = {0.35, 0.35, 0.35, 0.75}
+                slider.sliderOverlay.color = {0.70, 0.86, 0.12, 1}
+            end
+        end
+    end
+
+    self:refreshOverviewNativeGui()
 end
 
 function HelperPersonnelMenuPage:onFrameClose()
@@ -227,6 +1092,29 @@ function HelperPersonnelMenuPage:onFrameClose()
     self.salaryRaiseDialogOpen = false
     self.salaryRaiseRows = {}
     HelperPersonnelViewBase:superClass().onFrameClose(self)
+end
+
+function HelperPersonnelMenuPage:update(dt)
+    HelperPersonnelMenuPage:superClass().update(self, dt)
+
+    if (self.personPagerLayoutRefreshPending or 0) > 0 and self:isCurrentMenuPage() == true then
+        self.personPagerLayoutRefreshPending = self.personPagerLayoutRefreshPending - 1
+        if self.pageKind == "applicants" then
+            self:refreshApplicantsNativeGui()
+        elseif self.pageKind == "employees" then
+            self:refreshEmployeesNativeGui()
+        end
+    end
+
+    if self.pageKind ~= "overview" or self:isCurrentMenuPage() ~= true then
+        return
+    end
+
+    self.overviewRefreshElapsed = (self.overviewRefreshElapsed or 0) + (tonumber(dt) or 0)
+    if self.overviewRefreshElapsed >= 1000 then
+        self.overviewRefreshElapsed = 0
+        self:refreshOverviewNativeGui()
+    end
 end
 
 function HelperPersonnelMenuPage:refresh()
@@ -253,7 +1141,156 @@ function HelperPersonnelMenuPage:refresh()
         self:ensureSalaryRaiseSelectionVisible()
     end
 
+    if self.pageKind == "overview" then
+        self:refreshOverviewNativeGui()
+    elseif self.pageKind == "applicants" then
+        self:refreshApplicantsNativeGui()
+    elseif self.pageKind == "employees" then
+        self:refreshEmployeesNativeGui()
+    elseif self.pageKind == "training" then
+        self:refreshTrainingNativeGui()
+    end
+
     self:updateButtons()
+end
+
+function HelperPersonnelMenuPage:refreshOverviewNativeGui()
+    if self.pageKind ~= "overview" or self.overviewEmployeeRow1 == nil then
+        return
+    end
+
+    local manager = self:getManager()
+    local workers = self:getWorkers()
+    local applicants = self:getApplicants()
+    local counts = self:getWorkerSummaryCounts(workers)
+    self.overviewNativeActiveWorkers = self:getActiveWorkerEntries(workers)
+
+    local historyEvents, period, year = {}, nil, nil
+    if manager ~= nil and manager.getMonthlyOverviewChanges ~= nil then
+        historyEvents, period, year = manager:getMonthlyOverviewChanges()
+    elseif manager ~= nil and manager.getMonthlyOverviewChangeLines ~= nil then
+        local lines
+        lines, period, year = manager:getMonthlyOverviewChangeLines()
+        for _, line in ipairs(lines or {}) do
+            table.insert(historyEvents, {title = line, detail = "", kind = "neutral"})
+        end
+    end
+    self.overviewNativeHistoryEvents = historyEvents or {}
+
+    hpMenuSetText(self.overviewMetricEmployeesLabel, hpMenuUpper(self:getText("ui_monthlyRowEmployees", "Mitarbeiter")))
+    hpMenuSetText(self.overviewMetricEmployeesValue, counts.total)
+    hpMenuSetText(self.overviewMetricAvailableLabel, hpMenuUpper(self:getText("ui_monthlyRowAvailable", "Verfügbar")))
+    hpMenuSetText(self.overviewMetricAvailableValue, counts.available)
+    hpMenuSetText(self.overviewMetricApplicantsLabel, hpMenuUpper(self:getText("ui_monthlyRowApplicants", "Bewerber")))
+    hpMenuSetText(self.overviewMetricApplicantsValue, #applicants)
+
+    local reputation = manager ~= nil and (manager.getEmployerReputation ~= nil and manager:getEmployerReputation() or manager.employerReputation) or 0
+    local reputationKey = manager ~= nil and (manager.getEmployerReputationLevelKey ~= nil and manager:getEmployerReputationLevelKey() or "ui_reputationSolid") or "ui_reputationSolid"
+    local reputationLabel = string.gsub(self:getText("ui_overviewReputation", "Arbeitgeberansehen: %d/100 (%s)"), "%s*:?%s*%%d.*$", "")
+    hpMenuSetText(self.overviewMetricReputationLabel, hpMenuUpper(reputationLabel))
+    hpMenuSetText(self.overviewMetricReputationValue, string.format("%d/100 (%s)", tonumber(reputation) or 0, self:getText(reputationKey, "solide")))
+
+    hpMenuSetText(self.overviewActiveTitle, self:getText("ui_workerStockHeader", "MITARBEITER IM EINSATZ"))
+    hpMenuSetText(self.overviewActiveEmpty, self:getText("ui_noActiveWorkers", "Gerade ist kein Mitarbeiter im Einsatz."))
+    if self.overviewActiveEmpty ~= nil then
+        self.overviewActiveEmpty:setVisible(#self.overviewNativeActiveWorkers == 0)
+    end
+    hpMenuSetText(self.overviewHistoryTitle, self:getOverviewHistoryHeader(manager, period, year))
+    hpMenuSetText(self.overviewMonthlyTitle, self:getText("ui_monthlyReportHeader", "MONATSBERICHT"))
+    hpMenuSetText(self.overviewLifetimeTitle, self:getText("ui_pmOverviewOverallHeader", "GESAMT"))
+
+    self:setOverviewReportRows("overviewMonthly", self:getMonthlyReportRows(counts, applicants, workers))
+    self:setOverviewReportRows("overviewLifetime", self:getLifetimeReportRows(manager))
+    self:refreshOverviewEmployeeRows()
+    self:refreshOverviewHistoryRows()
+end
+
+function HelperPersonnelMenuPage:setOverviewReportRows(prefix, rows)
+    for index = 1, 7 do
+        local row = rows[index] or {}
+        hpMenuSetText(self[prefix .. "Label" .. index], row.label)
+        hpMenuSetText(self[prefix .. "Value" .. index], row.value)
+    end
+end
+
+function HelperPersonnelMenuPage:refreshOverviewEmployeeRows()
+    local entries = self.overviewNativeActiveWorkers or {}
+    local visibleRows = 6
+    local maxFirstIndex = math.max(#entries - visibleRows + 1, 1)
+    self.overviewEmployeeFirstIndex = hpMenuClamp(self.overviewEmployeeFirstIndex or 1, 1, maxFirstIndex)
+
+    if self.overviewEmployeeSlider ~= nil then
+        self.overviewEmployeeSlider:setMinValue(1)
+        self.overviewEmployeeSlider:setMaxValue(maxFirstIndex, self.overviewEmployeeFirstIndex)
+        self.overviewEmployeeSlider:setSliderSize(visibleRows, #entries)
+        self.overviewEmployeeSlider:setValue(self.overviewEmployeeFirstIndex, true, true)
+        self.overviewEmployeeSlider:setVisible(#entries > visibleRows)
+    end
+
+    local manager = self:getManager()
+    for rowIndex = 1, visibleRows do
+        local row = self["overviewEmployeeRow" .. rowIndex]
+        local entry = entries[self.overviewEmployeeFirstIndex + rowIndex - 1]
+        local worker = entry ~= nil and entry.worker or nil
+        if row ~= nil then
+            row:setVisible(worker ~= nil)
+        end
+        if worker ~= nil then
+            hpMenuSetText(self["overviewEmployeeName" .. rowIndex], manager ~= nil and manager:getFullName(worker) or "")
+            local status, activity = self:getActiveWorkerOverviewLines(worker)
+            hpMenuSetText(self["overviewEmployeeStatus" .. rowIndex], status)
+            hpMenuSetText(self["overviewEmployeeActivity" .. rowIndex], activity)
+            local portrait = self["overviewEmployeePortrait" .. rowIndex]
+            if portrait ~= nil and portrait.setImageFilename ~= nil then
+                portrait:setImageFilename(self:getPortraitFilename(worker))
+            end
+        end
+    end
+end
+
+function HelperPersonnelMenuPage:refreshOverviewHistoryRows()
+    local events = self.overviewNativeHistoryEvents or {}
+    local visibleRows = 3
+    local maxFirstIndex = math.max(#events - visibleRows + 1, 1)
+    self.overviewHistoryFirstIndex = hpMenuClamp(self.overviewHistoryFirstIndex or 1, 1, maxFirstIndex)
+
+    if self.overviewHistorySlider ~= nil then
+        self.overviewHistorySlider:setMinValue(1)
+        self.overviewHistorySlider:setMaxValue(maxFirstIndex, self.overviewHistoryFirstIndex)
+        self.overviewHistorySlider:setSliderSize(visibleRows, #events)
+        self.overviewHistorySlider:setValue(self.overviewHistoryFirstIndex, true, true)
+        self.overviewHistorySlider:setVisible(#events > visibleRows)
+    end
+
+    for rowIndex = 1, visibleRows do
+        local event = events[self.overviewHistoryFirstIndex + rowIndex - 1]
+        local container = self["overviewHistoryEvent" .. rowIndex]
+        hpMenuSetText(self["overviewHistoryPrimary" .. rowIndex], event ~= nil and event.title or "")
+        hpMenuSetText(self["overviewHistorySecondary" .. rowIndex], event ~= nil and event.detail or "")
+        if container ~= nil then
+            container:setVisible(event ~= nil)
+        end
+        local marker = self["overviewHistoryMarker" .. rowIndex]
+        if marker ~= nil and marker.setImageColor ~= nil then
+            if event ~= nil and event.kind == "negative" then
+                marker:setImageColor(nil, 0.95, 0.56, 0.22, 1)
+            elseif event ~= nil and event.kind == "reputation" then
+                marker:setImageColor(nil, 0.72, 0.78, 0.85, 1)
+            else
+                marker:setImageColor(nil, 0.70, 0.86, 0.12, 1)
+            end
+        end
+    end
+end
+
+function HelperPersonnelMenuPage:onOverviewEmployeeSliderChanged(value)
+    self.overviewEmployeeFirstIndex = math.floor(tonumber(value) or 1)
+    self:refreshOverviewEmployeeRows()
+end
+
+function HelperPersonnelMenuPage:onOverviewHistorySliderChanged(value)
+    self.overviewHistoryFirstIndex = math.floor(tonumber(value) or 1)
+    self:refreshOverviewHistoryRows()
 end
 
 function HelperPersonnelMenuPage:canManageCurrentFarm()
@@ -348,11 +1385,11 @@ function HelperPersonnelMenuPage:createButtonInfo()
             return self:onClickSalaryAction()
         end
     }
-    self.btnRelease = {
-        inputAction = hpMenuGetInputAction("HP_RELEASE_STALE_WORKER", nil),
-        text = self:getText("ui_button_release_worker", "Freigeben"),
+    self.btnEmergencyRelease = {
+        inputAction = hpMenuGetInputAction("HP_EMERGENCY_RELEASE_WORKER", nil),
+        text = self:getText("ui_button_emergency_release_worker", "Notfallfreigabe"),
         callback = function()
-            return self:onClickReleaseWorker()
+            return self:onClickEmergencyReleaseWorker()
         end
     }
     self.btnTransportDialogCancel = {
@@ -417,17 +1454,6 @@ function HelperPersonnelMenuPage:getPrimaryButtonText()
     if self.pageKind == "applicants" then
         return self:getText("ui_button_hire", "Einstellen")
     elseif self.pageKind == "training" then
-        local person = self:getCurrentPerson()
-        local manager = self:getManager()
-        local specializationKey = self.selectedTrainingCategoryKey
-        if person ~= nil and manager ~= nil and specializationKey ~= nil then
-            if manager.workerHasSpecialization ~= nil and manager:workerHasSpecialization(person, specializationKey) then
-                return self:getText("ui_button_specializationDeactivate", "Ruhen lassen")
-            end
-            if manager.workerHasLearnedSpecialization ~= nil and manager:workerHasLearnedSpecialization(person, specializationKey) then
-                return self:getText("ui_button_specializationActivate", "Einloggen")
-            end
-        end
         return self:getText("ui_button_train", "Schulen")
     elseif self.pageKind == "settings" then
         return self:getText("ui_hpSetting_toggle", "Umschalten")
@@ -490,7 +1516,7 @@ function HelperPersonnelMenuPage:updateButtons()
     self.btnPrimary.text = self:getPrimaryButtonText()
     self.btnTransport.text = self:getTransportButtonText()
     self.btnSalary.text = self:getSalaryButtonText()
-    self.btnRelease.text = self:getText("ui_button_release_worker", "Freigeben")
+    self.btnEmergencyRelease.text = self:getText("ui_button_emergency_release_worker", "Notfallfreigabe")
     self.btnPrevPerson.disabled = not hasEntries
     self.btnNextPerson.disabled = not hasEntries
     local currentPerson = self:getCurrentPerson()
@@ -500,13 +1526,13 @@ function HelperPersonnelMenuPage:updateButtons()
     self.btnPrimary.disabled = not hasEntries or not canManage or self.pageKind == "overview" or self.pageKind == "settings" or trainingActive
     self.btnTransport.disabled = self.pageKind ~= "employees" or not hasEntries or not canManage
     self.btnSalary.disabled = self.pageKind ~= "employees" or not hasEntries or not canManage
-    self.btnRelease.disabled = self.pageKind ~= "employees" or not hasEntries or not canManage or currentPerson == nil or currentPerson.busy ~= true
+    self.btnEmergencyRelease.disabled = self.pageKind ~= "employees" or not hasEntries or not canManage or currentPerson == nil or currentPerson.busy ~= true
 
     if self.pageKind ~= "overview" and self.pageKind ~= "settings" then
         if self.pageKind == "employees" then
             table.insert(buttons, self.btnTransport)
             table.insert(buttons, self.btnSalary)
-            table.insert(buttons, self.btnRelease)
+            table.insert(buttons, self.btnEmergencyRelease)
         end
         table.insert(buttons, self.btnPrevPerson)
         table.insert(buttons, self.btnNextPerson)
@@ -915,6 +1941,15 @@ function HelperPersonnelMenuPage:movePersonSelection(delta)
         self.selectedTrainingWorkerId = nil
     end
 
+    if self.pageKind == "applicants" then
+        self:refreshApplicantsNativeGui()
+    elseif self.pageKind == "employees" then
+        self.employeesProfileFirstIndex = 1
+        self:refreshEmployeesNativeGui()
+    elseif self.pageKind == "training" then
+        self:refreshTrainingNativeGui()
+    end
+
     self:updateButtons()
     self.requestRender = true
     return true
@@ -966,6 +2001,33 @@ function HelperPersonnelMenuPage:showTrainingCategoryRequiredMessage()
     return self:showTrainingInfoMessage("ui_pmTrainingSelectCategory", "Erst Schulungskategorie auswählen")
 end
 
+function HelperPersonnelMenuPage:showTrainingCategoryDialog(person)
+    local rows = self:getTrainingCategoryRows(person)
+    if #rows == 0 or OptionDialog == nil or OptionDialog.show == nil then
+        self:showTrainingCategoryRequiredMessage()
+        return false
+    end
+
+    local texts = {}
+    for _, row in ipairs(rows) do
+        texts[#texts + 1] = row.name
+    end
+
+    OptionDialog.show(function(item)
+        local row = rows[tonumber(item) or 0]
+        if row == nil then
+            return
+        end
+
+        self.selectedTrainingWorkerId = person.id
+        self.selectedTrainingCategoryKey = row.key
+        self.trainingCategoryDialogSelection = true
+        self:refreshTrainingNativeGui()
+        self:onClickPrimaryAction()
+    end, self:getText("ui_pmMenuPageTraining", "Schulung"), "", texts)
+    return true
+end
+
 function HelperPersonnelMenuPage:onClickPrimaryAction()
     if not self:canManageCurrentFarm() then
         if self.app ~= nil and self.app.showPlayerMessage ~= nil then
@@ -983,6 +2045,10 @@ function HelperPersonnelMenuPage:onClickPrimaryAction()
         local text = self:formatText("ui_pmConfirmHire", "%s wirklich einstellen?", self:getPersonName(person))
         return self:showConfirmDialog(text, self.onConfirmHire, person)
     elseif self.pageKind == "training" then
+        if self.trainingCategoryDialogSelection ~= true then
+            return self:showTrainingCategoryDialog(person)
+        end
+        self.trainingCategoryDialogSelection = nil
         local manager = self:getManager()
         local specializationKey = self.selectedTrainingCategoryKey
         if specializationKey == nil or specializationKey == "" then
@@ -1053,18 +2119,18 @@ function HelperPersonnelMenuPage:onClickPrimaryAction()
     return self:showConfirmDialog(text, self.onConfirmDismiss, person)
 end
 
-function HelperPersonnelMenuPage:onClickReleaseWorker()
+function HelperPersonnelMenuPage:onClickEmergencyReleaseWorker()
     if not self:canManageCurrentFarm() then
         return false
     end
 
     local person = self:getCurrentPerson()
-    if person == nil or person.busy ~= true or self.app == nil or self.app.requestReleaseStaleWorker == nil then
+    if person == nil or person.busy ~= true or self.app == nil or self.app.requestEmergencyReleaseWorker == nil then
         return false
     end
 
-    local text = self:formatText("ui_pmConfirmReleaseWorker", "%s freigeben? Dies ist nur möglich, wenn der Server keinen aktiven Auftrag erkennt.", self:getPersonName(person))
-    return self:showConfirmDialog(text, self.onConfirmReleaseWorker, person)
+    local text = self:formatText("ui_pmConfirmEmergencyReleaseWorker", "%s notfallmäßig freigeben? Ein laufender Auftrag wird beendet, soweit dies möglich ist. Anschließend werden alle Zuordnungen zwangsläufig entfernt.", self:getPersonName(person))
+    return self:showConfirmDialog(text, self.onConfirmEmergencyReleaseWorker, person)
 end
 
 function HelperPersonnelMenuPage:onConfirmHire(person)
@@ -1087,12 +2153,12 @@ function HelperPersonnelMenuPage:onConfirmDismiss(person)
     return changed
 end
 
-function HelperPersonnelMenuPage:onConfirmReleaseWorker(person)
-    if person == nil or self.app == nil or self.app.requestReleaseStaleWorker == nil then
+function HelperPersonnelMenuPage:onConfirmEmergencyReleaseWorker(person)
+    if person == nil or self.app == nil or self.app.requestEmergencyReleaseWorker == nil then
         return false
     end
 
-    local changed = self.app:requestReleaseStaleWorker(person.id) == true
+    local changed = self.app:requestEmergencyReleaseWorker(person.id) == true
     self:refresh()
     return changed
 end
@@ -1288,8 +2354,6 @@ function HelperPersonnelMenuPage:handleMouseClick(posX, posY)
                 return self:movePersonSelection(-1)
             elseif area.action == "nextPerson" then
                 return self:movePersonSelection(1)
-            elseif type(area.action) == "string" and string.sub(area.action, 1, 17) == "trainingCategory:" then
-                return self:selectTrainingCategory(string.sub(area.action, 18))
             end
         end
     end
@@ -1311,39 +2375,11 @@ function HelperPersonnelMenuPage:draw()
         return
     end
 
-    if self.pageKind == "overview" then
-        self:drawStandaloneHeader()
-
-        if self.overviewBrandOverlay ~= nil then
-            local baseImageHeight = 0.155
-            local baseImageWidth = hpMenuGetAspectCorrectWidth(baseImageHeight) * 2
-
-            if baseImageWidth > 0.18 then
-                baseImageWidth = 0.18
-                local screenWidth = tonumber(g_screenWidth) or 1
-                local screenHeight = tonumber(g_screenHeight) or 1
-                if screenHeight > 0 then
-                    baseImageHeight = baseImageWidth * (screenWidth / screenHeight) * 0.5
-                end
-            end
-
-            local anchorRight = 0.985 - baseImageWidth
-            local anchorTop = 0.715 + baseImageHeight
-            local imageWidth = baseImageWidth * 1.5
-            local imageHeight = baseImageHeight * 1.5
-            self.overviewBrandOverlay:setPosition(anchorRight - imageWidth, anchorTop - imageHeight)
-            self.overviewBrandOverlay:setDimension(imageWidth, imageHeight)
-            self.overviewBrandOverlay:render()
-        end
-
-        self:drawOverview()
+    if self.pageKind == "overview" or self.pageKind == "applicants" or self.pageKind == "employees" or self.pageKind == "training" then
+        return
     elseif self.pageKind == "settings" then
         self:drawStandaloneHeader()
         self:drawTextLine(0.22, 0.790, 0.014, RenderText.ALIGN_LEFT, self:getText("ui_pmSettingsInfo", "Die Einstellungen werden über die nativen Auswahlzeilen geändert."), 1, 1, 1, 1, false)
-    elseif self.pageKind == "training" then
-        self:drawTrainingPage()
-    else
-        self:drawPersonDetailPage()
     end
 
 end
@@ -1612,181 +2648,11 @@ function HelperPersonnelMenuPage:selectTrainingCategory(specializationKey)
     return true
 end
 
-function HelperPersonnelMenuPage:drawTrainingPage()
-    local person, _, entries = self:getCurrentPerson()
-    local title = self:getText(self.pageTitleKey, self.pageTitleFallback)
-    local count = entries ~= nil and #entries or 0
-
-    self:drawTextLine(0.22, 0.850, 0.030, RenderText.ALIGN_LEFT, title, 1, 1, 1, 1, true)
-    self:drawSeparator(0.22, 0.815, 0.62)
-
-    if not self:canManageCurrentFarm() then
-        self:drawTextLine(0.22, 0.792, 0.013, RenderText.ALIGN_LEFT, self:getText("ui_pmMenuNoPermission", "Du hast keine Berechtigung, Personalentscheidungen für diesen Hof zu treffen."), 1, 0.55, 0.2, 1, true)
-    end
-
-    if person == nil then
-        self:drawTextLine(0.22, 0.735, 0.018, RenderText.ALIGN_LEFT, self:getText("ui_noWorkersDetail", "Keine Mitarbeiter vorhanden"), 1, 1, 1, 1, true)
-        return
-    end
-
-    if self.selectedTrainingWorkerId ~= person.id then
-        self.selectedTrainingWorkerId = person.id
-        self.selectedTrainingCategoryKey = nil
-    end
-
-    self:drawPersonPager(self.workerIndex or 1, count)
-    self:drawPersonPortrait(person, 0.22, 0.535, 0.150, 0.210, true)
-    self:drawTextLine(0.405, 0.725, 0.024, RenderText.ALIGN_LEFT, self:getPersonName(person), 1, 1, 1, 1, true)
-    self:drawPersonCoreBlock(person, false)
-
-    self:drawSeparator(0.22, 0.500, 0.62)
-
-    local intro = self:getText("ui_pmTrainingIntro", "Spezialisierungen verbessern die Leistung in der passenden Lernkategorie. Schulungen beginnen nur am Monatsanfang, kosten Geld und machen den Mitarbeiter bis Monatsende nicht verfügbar. Fortschritt wird nach Abschluss gutgeschrieben. Pro Landwirtschaftsjahr von März bis Februar ist nur eine Schulung möglich. Gelernte Spezialisierungen bleiben erhalten, aber höchstens zwei Boni sind aktiv. Beide Plätze können ruhen. Eine gelernte inaktive Spezialisierung kann je Mitarbeiter nur einmal pro Landwirtschaftsjahr eingeloggt werden.")
-    local introLines = self:getWrappedHistoryLines(intro, 0.0107, 0.62, 116)
-    local introY = 0.475
-    for i = 1, math.min(#introLines, 6) do
-        self:drawTextLine(0.22, introY, 0.0107, RenderText.ALIGN_LEFT, introLines[i], 0.92, 0.92, 0.92, 1, false)
-        introY = introY - 0.0165
-    end
-
-    local tableX = 0.22
-    local tableWidth = 0.62
-    local progressBarX = 0.405
-    local progressBarWidth = 0.105
-    local progressX = 0.595
-    local costX = 0.735
-    local adjustmentX = 0.835
-    local headerY = 0.379
-    self:drawTextLine(tableX + 0.012, headerY, 0.0120, RenderText.ALIGN_LEFT, self:getText("ui_pmTrainingCategoryHeader", "Lernkategorie"), 0.61, 0.73, 0.07, 1, true)
-    self:drawTextLine(progressX, headerY, 0.0115, RenderText.ALIGN_RIGHT, self:getText("ui_pmTrainingProgressHeader", "Fortschritt bis zur Spezialisierung"), 0.61, 0.73, 0.07, 1, true)
-    self:drawTextLine(costX, headerY, 0.0120, RenderText.ALIGN_RIGHT, self:getText("ui_pmTrainingCostHeader", "Kosten"), 0.61, 0.73, 0.07, 1, true)
-    self:drawTextLine(adjustmentX, headerY, 0.0117, RenderText.ALIGN_RIGHT, self:getText("ui_pmTrainingAdjustmentHeader", "Rabatt/Mehrkosten"), 0.61, 0.73, 0.07, 1, true)
-    self:drawSeparator(tableX, headerY - 0.016, tableWidth)
-
-    local manager = self:getManager()
-    local rows = self:getTrainingCategoryRows(person)
-    local screenHeight = math.max(1, math.floor((tonumber(g_screenHeight) or 1080) + 0.5))
-    local rowHeightPixels = math.max(1, math.floor((screenHeight * 0.0310) + 0.5))
-    local rowGapPixels = math.max(1, math.floor((screenHeight * 0.0030) + 0.5))
-    local firstRowYPixels = math.floor((screenHeight * 0.330) + 0.5)
-    local rowHeight = rowHeightPixels / screenHeight
-    local workerInTraining = manager ~= nil and manager.isWorkerInTraining ~= nil and manager:isWorkerInTraining(person)
-
-    for index, row in ipairs(rows) do
-        local yPixels = firstRowYPixels - ((index - 1) * (rowHeightPixels + rowGapPixels))
-        local y = yPixels / screenHeight
-        local selected = self.selectedTrainingCategoryKey == row.key
-        local selectable = not workerInTraining and (row.acquired or row.learned or row.available == true)
-        local background = selected and 0.27 or (index % 2 == 0 and 0.145 or 0.115)
-        local alpha = selected and 0.90 or 0.66
-        local r, g, b = background, background, background
-        if selected or row.trainingActive then
-            r, g, b = 0.31, 0.38, 0.06
-            alpha = 0.90
-        end
-        self:drawSolidRect(tableX, y, tableWidth, rowHeight, r, g, b, alpha)
-
-        local textColor = (selectable or row.trainingActive) and 1 or 0.58
-        local mainTextSize = 0.0122
-        local moneyTextSize = 0.0114
-        local mainTextY = y + (rowHeight - mainTextSize) * 0.5
-        local moneyTextY = y + (rowHeight - moneyTextSize) * 0.5
-        self:drawTextLine(tableX + 0.012, mainTextY, mainTextSize, RenderText.ALIGN_LEFT, row.name, textColor, textColor, textColor, 1, true)
-
-        local progressBarHeight = math.min(0.010, rowHeight * 0.38)
-        local progressBarY = y + (rowHeight - progressBarHeight) * 0.5
-        local progressAlpha = (selectable or row.trainingActive or row.acquired) and 1 or 0.48
-        self:drawProgressBar(progressBarX, progressBarY, progressBarWidth, progressBarHeight, row.progress, 100, 0.61, 0.73, 0.07, progressAlpha, false)
-
-        local progressText
-        local progressTextSize = mainTextSize
-        if row.trainingActive then
-            progressText = self:getText("ui_pmTrainingRunning", "laufende Schulung")
-            progressTextSize = 0.0094
-        else
-            progressText = string.format("%d %%", math.floor(row.progress + 0.5))
-        end
-        self:drawTextLine(progressX, mainTextY, progressTextSize, RenderText.ALIGN_RIGHT, progressText, textColor, textColor, textColor, 1, true)
-
-        local costText = ""
-        local adjustmentText = ""
-        if row.acquired then
-            costText = self:getText("ui_pmSpecializationActive", "aktiv")
-        elseif row.learned then
-            costText = self:getText("ui_pmSpecializationInactive", "gelernt, inaktiv")
-        elseif row.available == true then
-            costText = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(row.cost) or string.format("%d €", math.floor(row.cost + 0.5))
-            if row.costDifference > 0 then
-                local amount = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(row.costDifference) or string.format("%d €", math.floor(row.costDifference + 0.5))
-                adjustmentText = "+" .. amount
-            elseif row.costDifference < 0 then
-                local amount = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(math.abs(row.costDifference)) or string.format("%d €", math.floor(math.abs(row.costDifference) + 0.5))
-                adjustmentText = "-" .. amount
-            else
-                adjustmentText = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(0) or "0 €"
-            end
-        else
-            costText = self:getText("ui_pmTrainingNoPlaces", "aktuell keine Plätze frei")
-        end
-
-        self:drawTextLine(costX, moneyTextY, moneyTextSize, RenderText.ALIGN_RIGHT, costText, textColor, textColor, textColor, 1, true)
-        self:drawTextLine(adjustmentX, moneyTextY, moneyTextSize, RenderText.ALIGN_RIGHT, adjustmentText, textColor, textColor, textColor, 1, true)
-
-        if selectable then
-            self:addClickArea(tableX, y, tableWidth, rowHeight, "trainingCategory:" .. tostring(row.key), nil)
-        end
-    end
-end
-
 function HelperPersonnelMenuPage:drawStandaloneHeader()
-    local title = self:getText(self.pageTitleKey, self.pageTitleFallback)
-    self:drawTextLine(0.22, 0.850, 0.030, RenderText.ALIGN_LEFT, title, 1, 1, 1, 1, true)
-
     if not self:canManageCurrentFarm() then
         self:drawTextLine(0.22, 0.817, 0.013, RenderText.ALIGN_LEFT, self:getText("ui_pmMenuNoPermission", "Du hast keine Berechtigung, Personalentscheidungen für diesen Hof zu treffen."), 1, 0.55, 0.2, 1, true)
     end
 end
-
-function HelperPersonnelMenuPage:drawPersonDetailPage()
-    local person, isApplicant, entries = self:getCurrentPerson()
-    local title = self:getText(self.pageTitleKey, self.pageTitleFallback)
-    local count = entries ~= nil and #entries or 0
-    local index = isApplicant and self.applicantIndex or self.workerIndex
-
-    self:drawTextLine(0.22, 0.850, 0.030, RenderText.ALIGN_LEFT, title, 1, 1, 1, 1, true)
-    self:drawSeparator(0.22, 0.815, 0.62)
-
-    if not self:canManageCurrentFarm() then
-        self:drawTextLine(0.22, 0.792, 0.013, RenderText.ALIGN_LEFT, self:getText("ui_pmMenuNoPermission", "Du hast keine Berechtigung, Personalentscheidungen für diesen Hof zu treffen."), 1, 0.55, 0.2, 1, true)
-    end
-
-    if person == nil then
-        local emptyText = isApplicant and self:getText("ui_noApplicantsDetail", "Keine Bewerber vorhanden") or self:getText("ui_noWorkersDetail", "Keine Mitarbeiter vorhanden")
-        self:drawTextLine(0.22, 0.735, 0.018, RenderText.ALIGN_LEFT, emptyText, 1, 1, 1, 1, true)
-        return
-    end
-
-    self:drawPersonPager(index or 1, count)
-
-    self:drawPersonPortrait(person, 0.22, 0.535, 0.150, 0.210, true)
-    self:drawTextLine(0.405, 0.725, 0.024, RenderText.ALIGN_LEFT, self:getPersonName(person), 1, 1, 1, 1, true)
-    self:drawPersonCoreBlock(person, isApplicant)
-
-    self:drawSeparator(0.22, 0.500, 0.62)
-    self:drawTextLine(0.22, 0.470, 0.015, RenderText.ALIGN_LEFT, self:getText("ui_pmProfileHeader", "PROFIL"), 1, 1, 1, 1, true)
-    local lineY = 0.438
-    local profileLines = self:getWrappedProfileLines(person, isApplicant)
-    for i = 1, math.min(#profileLines, 7) do
-        self:drawTextLine(0.22, lineY, 0.0122, RenderText.ALIGN_LEFT, profileLines[i], 0.92, 0.92, 0.92, 1, false)
-        lineY = lineY - 0.023
-    end
-
-    if not isApplicant then
-        self:drawTextLine(0.22, 0.278, 0.015, RenderText.ALIGN_LEFT, self:getText("ui_pmHistoryHeader", "VERLAUF"), 1, 1, 1, 1, true)
-        self:drawWorkerHistoryTable(person)
-    end
-end
-
 
 function HelperPersonnelMenuPage:getSettingsList()
     if HelperPersonnelGameSettings ~= nil and type(HelperPersonnelGameSettings.SETTINGS) == "table" then
@@ -2070,7 +2936,7 @@ function HelperPersonnelMenuPage:formatChronicleDate(entry)
     return self:formatText("ui_pmHistoryDateFormat", "Tag %d · %d/%d", entry.day or 1, entry.calendarMonth or 1, entry.calendarYear or 1)
 end
 
-function HelperPersonnelMenuPage:drawWorkerHistoryTable(person)
+function HelperPersonnelMenuPage:getWorkerHistoryColumns(person)
     local manager = self:getManager()
     local overview = manager ~= nil and manager.getWorkerHistoryOverview ~= nil and manager:getWorkerHistoryOverview(person) or nil
     overview = type(overview) == "table" and overview or {}
@@ -2120,10 +2986,19 @@ function HelperPersonnelMenuPage:drawWorkerHistoryTable(person)
         end
     end
 
+    local salaryHistoryValue = noRecord
+    if overview.latestSalaryRequest ~= nil then
+        salaryHistoryValue = string.format("%s · %s", salaryDate, salaryStatus)
+    end
+    local abortHistoryValue = noRecord
+    if overview.latestJobAbort ~= nil then
+        abortHistoryValue = string.format("%s · %s", abortDate, abortReason)
+    end
+
     local secondColumn = {
         self:formatText("ui_pmHistoryLastSickness", "Zuletzt krank: %s", sicknessDate),
-        self:formatText("ui_pmHistoryLastSalaryRequest", "Letzte Gehaltsforderung: %s · %s", salaryDate, salaryStatus),
-        self:formatText("ui_pmHistoryLastAbort", "Letzter Einsatzabbruch: %s · %s", abortDate, abortReason)
+        self:formatText("ui_pmHistoryLastSalaryRequest", "Letzte Gehaltsforderung: %s", salaryHistoryValue),
+        self:formatText("ui_pmHistoryLastAbort", "Letzter Einsatzabbruch: %s", abortHistoryValue)
     }
 
     local totalSalaryText = manager ~= nil and manager.formatMoneyForText ~= nil and manager:formatMoneyForText(person.totalEarnings or 0) or string.format("%d €", math.floor((tonumber(person.totalEarnings) or 0) + 0.5))
@@ -2134,28 +3009,9 @@ function HelperPersonnelMenuPage:drawWorkerHistoryTable(person)
         self:formatText("ui_pmHistoryTotalSalaryPaid", "Gesamtgehalt: %s", totalSalaryText)
     }
 
-    local columns = {
-        { x = 0.22, width = 0.195, title = self:getText("ui_pmHistoryColumnCareer", "Bisheriger Verlauf"), lines = firstColumn },
-        { x = 0.425, width = 0.290, title = self:getText("ui_pmHistoryColumnRecent", "Letzte Ereignisse"), lines = secondColumn },
-        { x = 0.725, width = 0.115, title = self:getText("ui_pmHistoryColumnTotals", "Summen"), lines = thirdColumn }
+    return {
+        { title = self:getText("ui_pmHistoryColumnCareer", "Bisheriger Verlauf"), lines = firstColumn },
+        { title = self:getText("ui_pmHistoryColumnRecent", "Letzte Ereignisse"), lines = secondColumn },
+        { title = self:getText("ui_pmHistoryColumnTotals", "Summen"), lines = thirdColumn }
     }
-    local scrimY = 0.126
-    local scrimHeight = 0.137
-
-    for index, column in ipairs(columns) do
-        local shade = 0.024
-        self:drawSolidRect(column.x, scrimY, column.width, scrimHeight, shade, shade + 0.012, shade, 0.72)
-        self:drawSolidRect(column.x, scrimY + scrimHeight - 0.003, column.width, 0.003, 0.61, 0.73, 0.07, 0.78)
-
-        local textX = column.x + 0.010
-        self:drawTextLine(textX, 0.239, 0.0112, RenderText.ALIGN_LEFT, column.title, 1, 1, 1, 1, true)
-        local rowY = 0.210
-        for lineIndex, line in ipairs(column.lines) do
-            if lineIndex <= 4 then
-                local textSize = index == 2 and 0.0092 or (index == 3 and 0.0085 or 0.0097)
-                self:drawTextLine(textX, rowY, textSize, RenderText.ALIGN_LEFT, line, 0.61, 0.73, 0.07, 1, false)
-                rowY = rowY - 0.025
-            end
-        end
-    end
 end

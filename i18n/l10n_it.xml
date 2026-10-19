@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="Concimazione" />
         <e k="ui_specialization_plantProtection" v="Protezione delle colture" />
         <e k="ui_specialization_harvest" v="Raccolta" />
-        <e k="ui_specialization_transport" v="Trasporto" />
+        1Trasporti2
         <e k="ui_specialization_machineCare" v="Cura dei macchinari" />
         <e k="ui_specialization_resourceSaver" v="Uso efficiente" />
         <e k="ui_specializationLearned" v="%s ha sviluppato una specializzazione: %s." />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Gestisci lavori di trasporto" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Gestisci richieste di aumento" />
         <e k="input_HP_SELECT_CANCEL" v="Annulla selezione dipendente" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="Libera dipendente bloccato" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="Libera dipendente bloccato" />
         <e k="ui_openWorkerView" v="Dipendenti" />
         <e k="ui_openApplicantView" v="Candidati" />
         <e k="ui_backToOverview" v="Torna alla panoramica" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="Lavoro svolto: %d incarichi | %s | Stipendi mensili: %s" />
         <e k="ui_button_transport_assign" v="Assegna trasporto" />
         <e k="ui_button_transport_remove" v="Rimuovi trasporto" />
-        <e k="ui_transportMarker" v="Trasporto" />
+        1Trasporti2
         <e k="ui_transportActionAssigned" v="%s è assegnato ai trasporti." />
         <e k="ui_transportActionRemoved" v="%s non è più assegnato ai trasporti." />
         <e k="ui_transportNoDriverAssigned" v="Nessun dipendente è assegnato ai trasporti." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="Forma" />
         <e k="ui_pmStatusApplicant" v="Candidato" />
         <e k="ui_pmBirthLine" v="Nascita: %s" />
+        <e k="ui_pmRankLabel" v="Grado" />
         <e k="ui_pmOriginLine" v="Esperienza professionale: %s" />
         <e k="ui_pmStatsLine" v="Esperienza %d · Affidabilità %d · Lealtà %d" />
         <e k="ui_pmStatExperience" v="Esperienza" />
         <e k="ui_pmStatReliability" v="Affidabilità" />
         <e k="ui_pmStatLoyalty" v="Lealtà" />
         <e k="ui_pmWageLine" v="Salario: %s" />
-        <e k="ui_pmStatusLine" v="Stato: %s" />
+        1Stato: %s2
         <e k="ui_pmOrigin1" v="azienda agricola familiare rurale" />
         <e k="ui_pmOrigin2" v="piccola azienda lattiero-casearia" />
         <e k="ui_pmOrigin3" v="impresa di contoterzismo" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONALE" />
         <e k="ui_pmSettingsSectionEconomic" v="ECONOMIA" />
         <e k="ui_button_transport_assign_long" v="Assegna lavori di trasporto" />
-        <e k="ui_button_transport_manage_long" v="Trasporto" />
+        1Trasporti2
         <e k="ui_transportPriorityTitle" v="Priorità di trasporto" />
         <e k="ui_transportPriorityIntro" v="Scegli quali dipendenti possono svolgere lavori di trasporto e l’ordine in cui vengono controllati." />
         <e k="ui_transportPriorityHeaderPriority" v="Priorità" />
         <e k="ui_transportPriorityHeaderEmployee" v="Dipendente" />
-        <e k="ui_transportPriorityHeaderStatus" v="Stato" />
-        <e k="ui_transportPriorityHeaderEnabled" v="Trasporto" />
+        1Stato2
+        1Trasporti2
         <e k="ui_transportPriorityActive" v="Attivo" />
         <e k="ui_transportPriorityInactive" v="Non assegnato" />
         <e k="ui_transportPriorityMoveUp" v="Sposta su" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="professione d'ufficio" />
         <e k="ui_status_retirementPending" v="in pensione a fine mese" />
         <e k="ui_retirementNotice" v="%s andrà in pensione alla fine del mese." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="Le specializzazioni migliorano la prestazione nella categoria corrispondente. La formazione inizia solo all&apos;inizio del mese, costa denaro e rende il dipendente indisponibile fino a fine mese. Il progresso viene accreditato al completamento. Offerte e prezzi cambiano mensilmente; è consentito un solo corso per anno agricolo, da marzo a febbraio. Le specializzazioni apprese restano note, ma al massimo due bonus sono attivi. Entrambi gli slot possono essere inattivi. Una specializzazione appresa e inattiva può essere attivata solo una volta per dipendente e anno agricolo." />
         <e k="ui_pmTrainingCategoryHeader" v="Categoria di apprendimento" />
         <e k="ui_pmTrainingProgressHeader" v="Progresso verso la specializzazione" />
         <e k="ui_pmTrainingRunning" v="formazione in corso" />
         <e k="ui_pmTrainingSelectCategory" v="Seleziona prima una categoria di formazione" />
         <e k="ui_pmTrainingConfirm" v="Avviare una formazione per %s nella categoria %s?" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="Specializzazione: due slot attivi occupati · ultima appresa: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Formazione: con 1 giorno/mese solo fino alle 12:00 · scegli una categoria nel menu formazione · ultima: %s" />
         <e k="ui_training_line_first_day_select" v="Formazione: solo il primo giorno · scegli una categoria nel menu formazione · ultima: %s" />
         <e k="ui_training_line_busy_select" v="Formazione: non possibile durante il lavoro · ultima: %s" />
         <e k="ui_training_line_sick_select" v="Formazione: non possibile durante la malattia · ultima: %s" />
         <e k="ui_training_line_select_category" v="Formazione: scegli una categoria nel menu formazione · ultima: %s" />
-        <e k="ui_pmTrainingCostHeader" v="Costo" />
+        1Costi2
         <e k="ui_pmTrainingAdjustmentHeader" v="Sconto/costo aggiuntivo" />
         <e k="ui_pmTrainingNoPlaces" v="al momento non ci sono posti disponibili" />
         <e k="ui_pmTrainingNoPlacesMessage" v="Al momento non ci sono posti disponibili per questo corso di formazione." />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="Incarichi: %d" />
         <e k="ui_pmHistoryCareerWorkTime" v="Tempo di lavoro: %s" />
         <e k="ui_pmHistoryCareerTraining" v="Formazione: %s" />
-        <e k="ui_pmHistoryCareerTransport" v="Trasporto: %s" />
+        1Trasporti: %s2
         <e k="ui_pmHistoryValueActive" v="attivo" />
         <e k="ui_pmHistoryValueInactive" v="non attivo" />
         <e k="ui_monthlyRowApplicants" v="Candidati" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="Tempo di lavoro" />
         <e k="ui_monthlyRowWages" v="Stipendi mensili" />
         <e k="ui_monthlyRowPayroll" v="Ultimo pagamento stipendi" />
-        <e k="ui_pmOverviewOverallHeader" v="TOTALE" />
+        1TOTALE2
         <e k="ui_pmOverviewTotalJobs" v="Incarichi totali" />
         <e k="ui_pmOverviewTotalWorkTime" v="Tempo di lavoro totale" />
         <e k="ui_pmOverviewTotalPayroll" v="Stipendi pagati" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s ha interrotto il lavoro in corso per andare spontaneamente a prendere un caffè con la sua ragazza." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s ha interrotto il lavoro in corso per andare spontaneamente a prendere un caffè con il suo ragazzo." />
         <e k="ui_pmMonth01" v="marzo" />
-        <e k="ui_pmMonth02" v="aprile" />
+        1aprile2
         <e k="ui_pmMonth03" v="maggio" />
         <e k="ui_pmMonth04" v="giugno" />
         <e k="ui_pmMonth05" v="luglio" />
-        <e k="ui_pmMonth06" v="agosto" />
-        <e k="ui_pmMonth07" v="settembre" />
+        1agosto2
+        1settembre2
         <e k="ui_pmMonth08" v="ottobre" />
-        <e k="ui_pmMonth09" v="novembre" />
-        <e k="ui_pmMonth10" v="dicembre" />
+        1novembre2
+        1dicembre2
         <e k="ui_pmMonth11" v="gennaio" />
         <e k="ui_pmMonth12" v="febbraio" />
         <e k="ui_pmPeriodMonthYear" v="%s, anno %d" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="buon mese di lavoro" />
         <e k="ui_waitingForServerData" v="In attesa dei dati del server" />
         <e k="ui_pmMenuPageHelp" v="Aiuto" />
-        <e k="ui_pmHelpIntro" v="Guida dettagliata in gioco per Personnel Management 1.1.4.0. Il ReadMe.pdf incluso contiene ulteriori regole e calcoli." />
+        <e k="ui_pmHelpIntro" v="Guida dettagliata in gioco per Personnel Management 1.1.5.0." />
         <e k="ui_pmHelpSectionQuickStart" v="Avvio rapido e comandi|Apri il menu con Ctrl + M. Cambia scheda con i comandi pagina del menu. Usa A/D o Sinistra/Destra per cambiare persona, Spazio per confermare, Esc per tornare, T per le priorità di trasporto e G per le richieste salariali." />
         <e k="ui_pmHelpSectionPeople" v="Candidati e dipendenti|Un nuovo salvataggio inizia con quattro candidati; possono essercene al massimo otto. Assumi dai loro profili. Esperienza, affidabilità e lealtà vanno da 0 a 100. Stato, stipendio, specializzazioni, cronaca e totali sono nella pagina dipendenti." />
         <e k="ui_pmHelpSectionStats" v="Dipendenti e attributi|L'esperienza influenza velocità, usura e consumi; l'affidabilità interruzioni, malattia e abbandoni; la lealtà richieste salariali e dimissioni. La pagina dipendente mostra anche stato, stipendio, specializzazioni, statistiche e cronaca personale." />
@@ -529,81 +530,146 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Dimissioni, licenziamento e pensione|Queste conclusioni non sono sempre immediate e avvengono al cambio mese secondo i termini. Un dipendente al lavoro non può essere licenziato subito. I cambiamenti previsti appaiono nello stato e nella cronaca." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive e Courseplay|Attiva i conducenti in Dipendenti / Trasporto e ordina la priorità. AutoDrive usa il primo disponibile e blocca l'avvio se manca. Un avvio normale di Courseplay apre la selezione. Se Courseplay parte automaticamente dopo AutoDrive, il veicolo mantiene il proprio conducente senza nuova scelta. Ogni veicolo deve mantenere il proprio dipendente." />
         <e k="ui_pmHelpSectionMultiplayer" v="Multigiocatore e salvataggi|Dati e impostazioni sono separati per azienda. Il server convalida le modifiche; solo i gestori autorizzati amministrano la propria azienda. Dipendenti, assegnazioni attive e impostazioni vengono sincronizzati. I dati sono salvati in helperPersonnel.xml nel salvataggio." />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="Gestione del personale · Seleziona incarico" />
+        <e k="ui_selectionPerformanceProfile" v="PROFILO PRESTAZIONI" />
+        1Disponibile2
+        1Krank2
+        1In formazione2
+        1Riservato2
+        <e k="ui_selectionUnavailableAutoDrive" v="Incarico AutoDrive" />
+        <e k="ui_selectionUnavailableCourseplay" v="Incarico Courseplay" />
+        1Lavoro sul campo2
+        1Non disponibile2
+        <e k="ui_selectionShowAll" v="Mostra tutti i dipendenti" />
+        <e k="ui_selectionShowAvailable" v="Mostra solo disponibili" />
+        <e k="ui_selectionFooterControls" v="A/D Cambia · Spazio Seleziona · Tab Tutti · Esc Indietro" />
+        1Ordine sconosciuto2
+        1Modifica2
+        <e k="ui_selectionWageLabel" v="Stipendio mensile" />
+        1Ordini2
+        1Ritmo di lavoro2
+        1%d anni2
         <e k="ui_selectionProfessionalDevelopment" v="Sviluppo professionale" />
         <e k="ui_selectionNoSpecializationProgress" v="Nessun progresso di specializzazione finora" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="Nessuna specializzazione" />
+        1Veicolo: %s2
+        1Ordine: %s2
+        1Campo: %s2
+        <e k="ui_selectionTargetLine" v="Destinazione trasporto: %s" />
+        <e k="ui_selectionCourseplayLine" v="Tipo di incarico CP: %s" />
+        1Stato: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="Avvio rapido e comandi" />
-        <e k="ui_pmHelpTopic01Body" v="Apri il menu con Ctrl + M. Cambia scheda con i comandi pagina del menu. Usa A/D o Sinistra/Destra per cambiare persona, Spazio per confermare, Esc per tornare, T per le priorità di trasporto e G per le richieste salariali." />
-        <e k="ui_pmHelpTopic02Title" v="Candidati e dipendenti" />
-        <e k="ui_pmHelpTopic02Body" v="Un nuovo salvataggio inizia con quattro candidati; possono essercene al massimo otto. Assumi dai loro profili. Esperienza, affidabilità e lealtà vanno da 0 a 100. Stato, stipendio, specializzazioni, cronaca e totali sono nella pagina dipendenti. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="Dipendenti e attributi" />
-        <e k="ui_pmHelpTopic03Body" v="L'esperienza influenza velocità, usura e consumi; l'affidabilità interruzioni, malattia e abbandoni; la lealtà richieste salariali e dimissioni. La pagina dipendente mostra anche stato, stipendio, specializzazioni, statistiche e cronaca personale." />
-        <e k="ui_pmHelpTopic04Title" v="Lavoro e sviluppo" />
-        <e k="ui_pmHelpTopic04Body" v="Avviando un normale lavoro IA si apre la selezione del dipendente. Sono selezionabili solo i dipendenti disponibili e nessuno può svolgere più lavori insieme. Il tempo di lavoro aumenta esperienza e specializzazioni. L'esperienza influisce su velocità, usura e consumi; l'affidabilità su rallentamenti, malattia e abbandoni; la lealtà su conflitti salariali e dimissioni. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="L'esperienza influenza velocità, usura e consumi; l'affidabilità interruzioni, malattia e abbandoni; la lealtà richieste salariali e dimissioni. La pagina dipendente mostra anche stato, stipendio, specializzazioni, statistiche e cronaca personale." />
-        <e k="ui_pmHelpTopic06Title" v="Stipendi" />
-        <e k="ui_pmHelpTopic06Body" v="Gli stipendi sono addebitati al cambio mese e dipendono da giorni per mese, difficoltà economica e impostazioni del mod. I dipendenti possono chiedere un aumento; la richiesta va accettata o rifiutata entro la scadenza e può influire sulla lealtà." />
-        <e k="ui_pmHelpTopic07Title" v="Formazione" />
-        <e k="ui_pmHelpTopic07Body" v="La formazione inizia solo a inizio mese, costa denaro e blocca il dipendente fino a fine mese. Il completamento migliora la specializzazione scelta. Offerte e corsi precedenti sono visibili nelle aree Formazione e Dipendenti. Le specializzazioni apprese restano disponibili. Sono attivi al massimo due bonus e si possono disattivare entrambi gli slot. L’attivazione di una specializzazione appresa ma inattiva è consentita una sola volta per dipendente e anno agricolo (marzo-febbraio). La disattivazione non consuma questo diritto annuale. Le soglie sono 240, 420, 600 e 780 minuti, poi aumentano di 180 minuti." />
-        <e k="ui_pmHelpTopic08Title" v="Specializzazione" />
-        <e k="ui_pmHelpTopic08Body" v="Le specializzazioni apprese restano disponibili. Sono attivi al massimo due bonus e si possono disattivare entrambi gli slot. L’attivazione di una specializzazione appresa ma inattiva è consentita una sola volta per dipendente e anno agricolo (marzo-febbraio). La disattivazione non consuma questo diritto annuale. Le soglie sono 240, 420, 600 e 780 minuti, poi aumentano di 180 minuti." />
-        <e k="ui_pmHelpTopic09Title" v="Dimissioni, licenziamento e pensione" />
-        <e k="ui_pmHelpTopic09Body" v="Queste conclusioni non sono sempre immediate e avvengono al cambio mese secondo i termini. Un dipendente al lavoro non può essere licenziato subito. I cambiamenti previsti appaiono nello stato e nella cronaca." />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive e Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="Attiva i conducenti in Dipendenti / Trasporto e ordina la priorità. AutoDrive usa il primo disponibile e blocca l'avvio se manca. Un avvio normale di Courseplay apre la selezione. Se Courseplay parte automaticamente dopo AutoDrive, il veicolo mantiene il proprio conducente senza nuova scelta. Ogni veicolo deve mantenere il proprio dipendente." />
-        <e k="ui_pmHelpTopic11Title" v="Multigiocatore e salvataggi" />
-        <e k="ui_pmHelpTopic11Body" v="Dati e impostazioni sono separati per azienda. Il server convalida le modifiche; solo i gestori autorizzati amministrano la propria azienda. Dipendenti, assegnazioni attive e impostazioni vengono sincronizzati. I dati sono salvati in helperPersonnel.xml nel salvataggio." />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="Dati e impostazioni sono separati per azienda. Il server convalida le modifiche; solo i gestori autorizzati amministrano la propria azienda. Dipendenti, assegnazioni attive e impostazioni vengono sincronizzati. I dati sono salvati in helperPersonnel.xml nel salvataggio." />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="Apri il menu con Ctrl + M. Cambia scheda con i comandi pagina del menu. Usa A/D o Sinistra/Destra per cambiare persona, Spazio per confermare, Esc per tornare, T per le priorità di trasporto e G per le richieste salariali. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="Libera" />
-        <e k="ui_pmConfirmReleaseWorker" v="Liberare %s? È possibile solo se il server non rileva alcun lavoro attivo." />
-        <e k="ui_workerReleaseSuccess" v="Dipendente liberato." />
-        <e k="ui_workerReleaseDeniedActive" v="Liberazione non possibile: il dipendente ha ancora un lavoro attivo." />
-        <e k="ui_workerReleaseDeniedAvailable" v="Liberazione non necessaria: il dipendente è già disponibile." />
-        <e k="ui_workerReleaseDeniedCheck" v="Liberazione non possibile: lo stato del lavoro non può essere verificato con sicurezza." />
-        <e k="ui_workerReleaseDeniedPermission" v="Liberazione non possibile: nessun permesso o dipendente non valido." />
+        1Lasciare riposare2
+        1Accedi2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Disattivare %s per %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Attivare %s per %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="Una nuova specializzazione può essere attivata solo una volta per dipendente e anno agricolo." />
+        <e k="ui_pmSpecializationSlotsFull" v="Disattiva almeno una specializzazione attiva prima di attivarne un&apos;altra." />
+        1attivo2
+        <e k="ui_pmSpecializationInactive" v="appresa, inattiva" />
+        <e k="ui_specializationActivatedNotice" v="%s usa di nuovo la specializzazione %s." />
+        <e k="ui_specializationDeactivatedNotice" v="%s disattiva la specializzazione %s." />
+        1INDICE2
+        <e k="ui_pmHelpNavigation" v="Sinistra/Destra: area · Su/Giù: seleziona o scorri · PagSu/PagGiù: pagina" />
+        1Guida rapida e funzionamento2
+        1La gestione del personale sostituisce gli assistenti anonimi basati sull’intelligenza artificiale con candidati e dipendenti identificati. Ogni dipendente cresce professionalmente nel lungo periodo, riceve uno stipendio mensile e può presentare diversi punti di forza e rischi in base all’esperienza, all’affidabilità, alla lealtà e alle specializzazioni.&#10;Il menu personale si apre di default con Ctrl + M. Contiene Panoramica, Candidati, Dipendenti, Formazione, Impostazioni e Aiuto. L’assegnazione dei tasti può essere modificata nelle impostazioni di gioco.&#10;Configurazione predefinita: cambiare persona con A/D o freccia sinistra/destra; confermare la selezione con la barra spaziatrice o un clic del mouse; annullare o tornare indietro con Esc; gestione dei trasporti e degli stipendi con T o G. Nella scheda Aiuto, le frecce sinistra/destra consentono di passare da un contenuto all’altro, le frecce su/giù selezionano o scorrono il contenuto, mentre i tasti freccia su/giù consentono di passare da una pagina all’altra.2
+        1Panoramica e organico2
+        1La panoramica riassume lo stato attuale dell’azienda: in alto sono riportati i dipendenti, il personale disponibile, i candidati e la reputazione dell’azienda. Sotto compaiono gli incarichi in corso con indicazione di persona, veicolo, attrezzatura e attività.&#10;Il riquadro «Modifiche» contiene solo gli eventi rilevanti relativi al personale, ovvero variazioni relative alla reputazione del datore di lavoro, all’esperienza, all’affidabilità, alla lealtà, all’età o alla specializzazione. Ogni notifica indica la causa, la persona interessata e l’effetto; una voce su più righe costituisce comunque un’unica notifica.&#10;I report «Mensile» e «Totale» mostrano gli indicatori attuali e quelli cumulativi. Utilizza la panoramica per una rapida pianificazione degli incarichi; i dettagli, le decisioni e le cronologie vanno inseriti nelle singole pagine tematiche.2
+        1Mercato del lavoro e assunzioni2
+        1Una nuova partita inizia con quattro candidati. Sul mercato possono essere presenti contemporaneamente al massimo otto candidati. Ad ogni cambio di mese vengono generati fino a tre nuovi posti tramite lancio di dadi; la probabilità per ciascun posto è pari al 15% + 0,7 × reputazione del datore di lavoro. Con una reputazione di 60, la probabilità è del 57%; con una reputazione di 100, è dell’85% per ciascun posto. Se il mercato è vuoto, viene generato almeno un nuovo candidato.&#10;I candidati rimangono sicuramente disponibili nel mese in cui vengono generati. Dopo il primo cambio di mese, la loro probabilità di abbandono è del 10–30% a seconda della qualità; dopo il secondo, del 30–50%; al terzo cambio di mese, del 100%. I profili di qualità superiore possono scomparire prima, poiché la loro qualità aumenta la probabilità di abbandono.&#10;I candidati hanno un’età compresa tra i 18 e i 65 anni, possiedono una data di nascita fissa e continuano a invecchiare. I loro background sono: azienda a conduzione familiare, allevamento da latte, impresa agricola a contratto, coltivazione, azienda mista, logistica, officina di macchine agricole e lavoro d’ufficio. L’età e il background influenzano soprattutto l’esperienza e le eventuali conoscenze tecniche pregresse.&#10;La richiesta salariale si basa sull’esperienza e sull’affidabilità, presenta una variazione casuale compresa tra il 96% e il 106% ed è influenzata dalla reputazione del datore di lavoro. Una reputazione bassa aumenta la richiesta, mentre una reputazione alta la riduce. Prima dell’assunzione viene visualizzata una conferma; l’assunzione aumenta la reputazione di 1 punto.2
+        1Profilo del dipendente, valori e stato2
+        1Esperienza, affidabilità e lealtà vanno da 0 a 100. Il valore rimane chiaramente visibile; le barre consentono un rapido confronto.&#10;Il livello dipende esclusivamente dall’esperienza: aiutante 0–44, operatore qualificato 45–74, professionista 75–100. L’esperienza determina la velocità di lavoro, l’usura aggiuntiva e il consumo aggiuntivo. L’affidabilità influisce sui cali di rendimento a breve termine, sulle assenze per malattia, sull’andamento mensile e sul rischio di interruzione dell’incarico. La lealtà descrive il legame con l’azienda e influisce su avvisi, controversie salariali e dimissioni volontarie.2
+        1Assistenti IA, Trasporto e FollowMe2
+        1All&apos;avvio di un normale incarico assistito dall&apos;IA, si apre la schermata di selezione dei collaboratori. È possibile selezionare solo i collaboratori disponibili. Un collaboratore non può assumere più incarichi contemporaneamente e non è disponibile in caso di malattia o formazione.&#10;Un intervento viene registrato come incarico completato solo dopo 10 secondi. Per progredire nella specializzazione, il lavoro pratico deve durare almeno 3 minuti.&#10;Premendo il tasto T o il pulsante del menu si apre la schermata delle priorità di trasporto. Qui è possibile stabilire quali collaboratori si occupino delle attività di trasporto e in quale ordine vengano verificati. Nel caso di un incarico «da A a B», viene selezionato il primo collaboratore disponibile dall’alto verso il basso. FollowMe continua a utilizzare la selezione dei collaboratori e viene considerato come attività di trasporto.2
+        1Esperienza e ripercussioni sul lavoro2
+        1ACQUISIRE ESPERIENZA&#10;– L’esperienza si accumula in base alle ore di lavoro registrate; i minuti di apprendimento non utilizzati vengono conservati.&#10;– Per ogni singolo incarico si possono ottenere al massimo 2 punti esperienza.&#10;– Inoltre, un limite mensile limita il progresso. Maggiore è l’esperienza, più tempo ci vorrà per ottenere il punto successivo.&#10;EFFETTI&#10;– Una specializzazione principale aumenta l’esperienza effettiva di 12 punti, una secondaria di 6; il valore massimo rimane 100.&#10;– Velocità di lavoro = 70 % + 30 % × esperienza effettiva / 100.&#10;– L’usura aggiuntiva arriva fino al 15%, il consumo aggiuntivo di materiale e carburante fino al 10% × esperienza effettiva mancante × fattore economico. Il fattore economico è 0,75 / 1,00 / 1,25.&#10;TEMPO DI APPRENDIMENTO E LIMITE MENSILE&#10;– Esperienza 0–24: 25 minuti, limite mensile +1; 25–49: 50 minuti, 0; 50–69: 100 minuti, -1.&#10;– Esperienza 70–84: 220 minuti, -2; 85–94: 540 minuti, -3; 95–100: 1080 minuti, -4.&#10;– Limite base in base ai giorni/mese: 1 giorno = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Limite effettivo = limite di base + adeguamento, minimo 1.2
+        1Affidabilità, malattia e interruzioni dell&apos;intervento2
+        1Se l’affidabilità è inferiore a 85, possono verificarsi brevi cali di prestazione. Il controllo avviene una volta al minuto; la probabilità aumenta al diminuire dell’affidabilità fino a un massimo del 15%. Un calo dura 30–90 secondi, riduce la prestazione del 4–15% e può ripetersi solo dopo altri 3 minuti.&#10;La malattia viene verificata quotidianamente. Un collaboratore malato non è disponibile in quel giorno; un intervento in corso viene interrotto. Ogni mese sono consentiti al massimo giorni al mese arrotondati per eccesso / 3 giorni di malattia. Se l’affidabilità è inferiore a 50, dopo 60 secondi viene verificata una sola volta la possibilità di interruzione completa dell’intervento; in tal caso l’incarico non viene considerato completato con successo e l’incidente viene registrato nella cronologia.&#10;Valori indicativi malattia/giorno e interruzione dell’incarico: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. Un mese positivo richiede almeno 120 minuti di lavoro, nessun incidente, nessun giorno di malattia e meno di 240 minuti di lavoro notturno; in tal caso, c’è il 35 % di probabilità di ottenere +1 in affidabilità. I rischi negativi vengono sommati e limitati al 60 %.2
+        1Lealtà e reputazione del datore di lavoro2
+        1I nuovi dipendenti iniziano solitamente con un livello di lealtà pari a 65. Stipendi pagati puntualmente, una lunga anzianità di servizio e richieste salariali accettate rafforzano il legame; problemi finanziari, lavoro notturno e richieste respinte o rimaste in sospeso per lungo tempo lo indeboliscono. Il lavoro notturno tra le 22:00 e le 06:00 viene registrato e può costare, a partire da 120 minuti di gioco, fino a 4 punti di lealtà e 1–2 punti di reputazione.&#10;In caso di differenza tra lealtà e reputazione del datore di lavoro pari ad almeno 15 / 30 / 50 punti, ogni mese si verifica un avvicinamento di 1 / 2 / 3 punti. Eventi: stipendio pagato con Prestigio almeno 40: +1 alla Lealtà; il pagamento porta in negativo: -2; l’azienda era già in negativo: -4; anzianità di servizio di 3 / 6 / 12 / 24 mesi: +1 / +1 / +2 / +3; Richiesta accettata +3; rifiutata -5, se la lealtà è inferiore a 40 -7; richiesta in sospeso dopo il mese di grazia -2 per ogni mese.&#10;Dimissioni spontanee mensili con lealtà 0–5: 35 %, 6–9: 20 %, 10–14: 10 %, a partire da 15 nessuna dimissione regolare basata sulla lealtà. La reputazione del datore di lavoro parte da 60, va da 0 a 100 ed è considerata critica da 0 a 19, debole da 20 a 39, solida da 40 a 59, buona da 60 a 79 o ottima da 80 a 100. Influisce sul numero e sulla qualità dei candidati, sulle aspettative salariali e sulla fedeltà a lungo termine.2
+        1Stipendi, buste paga e richieste di pagamento2
+        1Gli stipendi base individuali vengono calcolati in base all’esperienza e all’affidabilità e interpolati linearmente all’interno di ciascuna fascia di esperienza. L’affidabilità moltiplica il valore compreso tra 0,94 e 1,06. I candidati ricevono inoltre bonus casuali, di reputazione ed eventuali maggiorazioni di specializzazione pari al +5% per la specializzazione principale e al +3% per quella secondaria.&#10;Stipendio base per 3 giorni al mese: Esperienza 0–44: 1.800–2.200, 45–74: 2.200–2.700, 75–100: 2.700–3.300. Stipendio mensile = stipendio base × fattore durata del mese × fattore costi economici, arrotondato a 10. Se gli stipendi individuali sono disattivati, si applica lo stipendio base standard compreso tra 100 e 100.000 con incrementi di 10. Fattori di durata mensile per 1–28 giorni: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Il pagamento avviene a fine mese sotto forma di stipendio. Anche i dipendenti il cui rapporto di lavoro termina in quel momento ricevono in anticipo il pagamento dovuto. Un operatore specializzato o un professionista può richiedere un aumento: probabilità di base del 70%, limitata al 55–85% in base alla lealtà; in seguito è possibile riesaminare la richiesta mensilmente con una probabilità pari alla metà. Accettare comporta +3 alla lealtà e +1 alla reputazione; rifiutare riduce la lealtà di 5, di 7 se è inferiore a 40, e aumenta per 3 mesi i rischi di licenziamento e di inaffidabilità. G rende visibili tutte le richieste in sospeso.2
+        1Specializzazioni e sviluppo pratico2
+        1REGOLE DI BASE&#10;– Esistono otto categorie di apprendimento: lavorazione del terreno, semina, concimazione, protezione delle colture, raccolta, trasporto, cura delle macchine e metodi di lavoro efficienti.&#10;– I progressi vengono salvati separatamente per ciascuna categoria. Le specializzazioni acquisite rimangono permanenti; possono essere attivi al massimo due bonus contemporaneamente.&#10;PROGRESSI DI APPRENDIMENTO&#10;– Le soglie di apprendimento sono 240, 420, 600 e 780 minuti; successivamente, ogni soglia successiva aumenta di 180 minuti.&#10;– Il fattore di apprendimento è pari a 1 + (Esperienza-50)/250 + (Affidabilità-50)/300 ed è limitato a un valore compreso tra 0,75 e 1,30. In caso di attività multiple, il tempo di apprendimento viene ripartito in modo ponderato.&#10;CLASSIFICAZIONE DELLE ATTIVITÀ&#10;– Lavorazione del terreno: aratro, coltivatore, erpice rotante, erpice a dischi, rullo e trinciatrice.&#10;– Semina: seminatrici e piantatrici, nonché sementi.&#10;– Concimazione: concimi minerali, concimi liquidi, liquame, residui di fermentazione e letame. Protezione delle colture: trattamenti con erbicidi.&#10;– Raccolta: mietitrebbiatrici, barre di taglio, imballatrici, falciatrici, rimorchi autocaricanti e raccoglitori. Trasporto: rimorchi, scarico e trasporto da A a B.&#10;BONUS E ATTIVAZIONE&#10;– Specializzazione principale: +12 punti esperienza effettivi e +5 % dello stipendio base. Seconda specializzazione: +6 e +3 %.&#10;– Entrambe le specializzazioni possono essere messe in sospeso. Una specializzazione acquisita e messa in sospeso può essere attivata solo una volta per dipendente e per anno agricolo (da marzo a febbraio); la messa in sospeso non esaurisce questo diritto.2
+        1Corsi di formazione2
+        1I corsi di formazione iniziano solo il primo giorno del mese; se tale giorno cade in un giorno del mese, entro le ore 12:00 incluse. Un dipendente può frequentare un solo corso di formazione per ogni anno agricolo, da marzo a febbraio, e non deve essere né al lavoro né in malattia. La persona rimane indisponibile fino alla fine del mese; i progressi vengono accreditati solo al completamento del corso, a fine mese.&#10;Un corso di formazione fornisce il 30% dei minuti di apprendimento necessari per la specializzazione successiva, con un minimo di 30 minuti e mai più di quelli ancora mancanti. Ogni categoria ha un fattore di prezzo mensile compreso tra -20% e +20% ed è al completo con una probabilità del 25%. I costi vengono detratti immediatamente all’inizio e si basano sullo stipendio mensile attuale.&#10;Costi di formazione = stipendio mensile attuale × fattore di categoria × modificatore mensile. Fattori: lavorazione del terreno 75%, semina 90%, concimazione 90%, protezione delle colture 100%, raccolta 110%, trasporto 65%, cura delle macchine 120%, metodi di lavoro parsimoniosi 120%.2
+        1Licenziamento, dimissioni volontarie e pensionamento2
+        1I licenziamenti devono essere confermati. Nel caso di un giorno/mese, il licenziamento deve essere comunicato entro le ore 12:00 del primo giorno affinché abbia effetto dal cambio di mese successivo. Nel caso di due o più giorni, la data di riferimento è la fine del mezzo mese arrotondato per eccesso, ovvero il giorno ceil(giorni/mese ÷ 2). Dopo la data di riferimento, la scadenza slitta di un altro mese.&#10;Con la notifica del licenziamento, la lealtà diminuisce immediatamente di 40 e l’affidabilità di 25. Il dipendente rimane in linea di principio impiegabile fino alla fine del mese in cui il licenziamento diventa effettivo. Perdita di reputazione in caso di licenziamento: meno di 1 mese -12, meno di 3 -9, meno di 6 -7, meno di 12 -5, meno di 24 -3, a partire da 24 mesi -1; ogni ulteriore licenziamento nello stesso mese costa 4 punti in più.&#10;Con un valore di Lealtà compreso tra 0 e 14, ogni mese viene verificata la possibilità di dimissioni volontarie. Una richiesta salariale respinta può aumentare temporaneamente la probabilità di 5 punti percentuali. Le dimissioni volontarie annunciate hanno effetto alla fine del mese e costano 10 punti di reputazione. A partire dal 55° compleanno è possibile annunciare il pensionamento; il rischio sale fino a circa l’80–90% all’età di 67 anni, raggiunge il 95% a 68 anni, il 98% a 69 anni e il 100% a 70 anni. La persona rimane disponibile fino alla fine del mese.2
+        1Profili, cronologia e statistiche2
+        1I profili dei candidati riuniscono età, percorso professionale, esperienza, affidabilità, lealtà, specializzazioni e anzianità di servizio in un testo dinamico. I profili dei dipendenti integrano l’anzianità aziendale, gli incarichi, i corsi di formazione e i progressi nell’apprendimento.&#10;La cronologia personale può registrare l’assunzione, l’inizio e la fine degli incarichi, le interruzioni degli incarichi, le assenze per malattia, i corsi di formazione, le specializzazioni, le richieste salariali e le decisioni, i cambiamenti in termini di lealtà e affidabilità, le assegnazioni di trasporto, nonché il licenziamento, le dimissioni volontarie, il pensionamento e la cessazione del rapporto di lavoro.&#10;La cronologia del dipendente mostra, tra l’altro, gli incarichi, l’orario di lavoro, la formazione, lo stato dei trasporti, gli ultimi eventi, i giorni di malattia, le richieste salariali, le interruzioni degli incarichi e lo stipendio totale pagato fino a quel momento. La panoramica mostra inoltre i valori complessivi a livello di azienda, quali il numero totale di assunzioni, licenziamenti, dimissioni volontarie e pensionamenti.2
+        1Impostazioni, Multigiocatore e Punteggi2
+        1Le impostazioni valgono per ogni partita e si suddividono in Prestazioni lavorative, Sviluppo del personale, Economia e Stipendi. Gli effetti sul gameplay sbloccano gli effetti di esperienza correlati; gli effetti di esperienza regolano velocità, usura, materiali di consumo e carburante. Gli effetti sul personale sbloccano le variazioni di lealtà e l’opzione di lavoro straordinario. Gli effetti economici sbloccano gli stipendi individuali e lo stipendio mensile standard.&#10;Gli effetti disattivati non modificano retroattivamente i dati esistenti relativi al personale. Essi impediscono o consentono esclusivamente l’ulteriore effetto corrispondente. Lo stipendio mensile standard funge da valore di base quando gli stipendi individuali sono disattivati; può essere modificato direttamente nelle impostazioni. Le assegnazioni dei tasti possono essere modificate nelle impostazioni di gioco.&#10;Nella modalità multigiocatore, il personale, i candidati, gli incarichi, gli stipendi, i corsi di formazione, le assunzioni e le cronache vengono gestiti e sincronizzati a livello di azienda agricola. Il server ha l’ultima parola; solo i manager autorizzati possono modificare la propria azienda agricola. I dati si trovano nel file helperPersonnel.xml all’interno del salvataggio e le assegnazioni in corso vengono ripristinate, per quanto possibile, al momento del caricamento. I vecchi salvataggi rimangono utilizzabili; i dati storici relativi ai dipendenti già usciti dall’azienda potrebbero essere incompleti.2
+        <e k="ui_button_emergency_release_worker" v="Libera" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="Liberare %s? È possibile solo se il server non rileva alcun lavoro attivo." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="Dipendente liberato." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="Liberazione non possibile: il dipendente ha ancora un lavoro attivo." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Liberazione non necessaria: il dipendente è già disponibile." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="Liberazione non possibile: lo stato del lavoro non può essere verificato con sicurezza." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="Liberazione non possibile: nessun permesso o dipendente non valido." />
+    <e k="ui_pmHelpTopic01Title" v="Guida rapida e funzionamento" />
+    <e k="ui_pmHelpTopic01Body" v="La gestione del personale sostituisce gli assistenti anonimi basati sull’intelligenza artificiale con candidati e dipendenti identificati. Ogni dipendente cresce professionalmente nel lungo periodo, riceve uno stipendio mensile e può presentare diversi punti di forza e rischi in base all’esperienza, all’affidabilità, alla lealtà e alle specializzazioni.&#10;Il menu personale si apre di default con Ctrl + M. Contiene Panoramica, Candidati, Dipendenti, Formazione, Impostazioni e Aiuto. L’assegnazione dei tasti può essere modificata nelle impostazioni di gioco.&#10;Configurazione predefinita: cambiare persona con A/D o freccia sinistra/destra; confermare la selezione con la barra spaziatrice o un clic del mouse; annullare o tornare indietro con Esc; gestione dei trasporti e degli stipendi con T o G. Nella scheda Aiuto, le frecce sinistra/destra consentono di passare da un contenuto all’altro, le frecce su/giù selezionano o scorrono il contenuto, mentre i tasti freccia su/giù consentono di passare da una pagina all’altra." />
+    <e k="ui_pmHelpTopic02Title" v="Panoramica e organico" />
+    <e k="ui_pmHelpTopic02Body" v="La panoramica riassume lo stato attuale dell’azienda: in alto sono riportati i dipendenti, il personale disponibile, i candidati e la reputazione dell’azienda. Sotto compaiono gli incarichi in corso con indicazione di persona, veicolo, attrezzatura e attività.&#10;Il riquadro «Modifiche» contiene solo gli eventi rilevanti relativi al personale, ovvero variazioni relative alla reputazione del datore di lavoro, all’esperienza, all’affidabilità, alla lealtà, all’età o alla specializzazione. Ogni notifica indica la causa, la persona interessata e l’effetto; una voce su più righe costituisce comunque un’unica notifica.&#10;I report «Mensile» e «Totale» mostrano gli indicatori attuali e quelli cumulativi. Utilizza la panoramica per una rapida pianificazione degli incarichi; i dettagli, le decisioni e le cronologie vanno inseriti nelle singole pagine tematiche." />
+    <e k="ui_pmHelpTopic03Title" v="Mercato del lavoro e assunzioni" />
+    <e k="ui_pmHelpTopic03Body" v="Una nuova partita inizia con quattro candidati. Sul mercato possono essere presenti contemporaneamente al massimo otto candidati. Ad ogni cambio di mese vengono generati fino a tre nuovi posti tramite lancio di dadi; la probabilità per ciascun posto è pari al 15% + 0,7 × reputazione del datore di lavoro. Con una reputazione di 60, la probabilità è del 57%; con una reputazione di 100, è dell’85% per ciascun posto. Se il mercato è vuoto, viene generato almeno un nuovo candidato.&#10;I candidati rimangono sicuramente disponibili nel mese in cui vengono generati. Dopo il primo cambio di mese, la loro probabilità di abbandono è del 10–30% a seconda della qualità; dopo il secondo, del 30–50%; al terzo cambio di mese, del 100%. I profili di qualità superiore possono scomparire prima, poiché la loro qualità aumenta la probabilità di abbandono.&#10;I candidati hanno un’età compresa tra i 18 e i 65 anni, possiedono una data di nascita fissa e continuano a invecchiare. I loro background sono: azienda a conduzione familiare, allevamento da latte, impresa agricola a contratto, coltivazione, azienda mista, logistica, officina di macchine agricole e lavoro d’ufficio. L’età e il background influenzano soprattutto l’esperienza e le eventuali conoscenze tecniche pregresse.&#10;La richiesta salariale si basa sull’esperienza e sull’affidabilità, presenta una variazione casuale compresa tra il 96% e il 106% ed è influenzata dalla reputazione del datore di lavoro. Una reputazione bassa aumenta la richiesta, mentre una reputazione alta la riduce. Prima dell’assunzione viene visualizzata una conferma; l’assunzione aumenta la reputazione di 1 punto." />
+    <e k="ui_pmHelpTopic04Title" v="Profilo del dipendente, valori e stato" />
+    <e k="ui_pmHelpTopic04Body" v="Esperienza, affidabilità e lealtà vanno da 0 a 100. Il valore rimane chiaramente visibile; le barre consentono un rapido confronto.&#10;Il grado dipende esclusivamente dall’esperienza: aiutante 0–44, operatore specializzato 45–74, professionista 75–100. L’esperienza determina la velocità di lavoro, l’usura aggiuntiva e il consumo aggiuntivo. L’affidabilità influisce sui cali di rendimento a breve termine, sulle assenze per malattia, sull’andamento mensile e sul rischio di interruzione dell’incarico. La lealtà descrive il legame con l’azienda e influisce sugli avvisi, sui conflitti salariali e sulle dimissioni volontarie." />
+    <e k="ui_pmHelpTopic05Title" v="Assistenti IA, Trasporto e FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="All&apos;avvio di un normale incarico assistito dall&apos;IA, si apre la schermata di selezione dei collaboratori. È possibile selezionare solo i collaboratori disponibili. Un collaboratore non può assumere più incarichi contemporaneamente e non è disponibile in caso di malattia o formazione.&#10;Un intervento viene registrato come incarico completato solo dopo 10 secondi. Per progredire nella specializzazione, il lavoro pratico deve durare almeno 3 minuti.&#10;Premendo il tasto T o il pulsante del menu si apre la schermata delle priorità di trasporto. Qui è possibile stabilire quali collaboratori si occupino delle attività di trasporto e in quale ordine vengano verificati. Nel caso di un incarico «da A a B», viene selezionato il primo collaboratore disponibile dall’alto verso il basso. FollowMe continua a utilizzare la selezione dei collaboratori e viene considerato come attività di trasporto." />
+    <e k="ui_pmHelpTopic06Title" v="Esperienza e ripercussioni sul lavoro" />
+    <e k="ui_pmHelpTopic06Body" v="ACQUISIRE ESPERIENZA&#10;– L’esperienza si accumula in base alle ore di lavoro registrate; i minuti di apprendimento non utilizzati vengono conservati.&#10;– Per ogni singolo incarico si possono ottenere al massimo 2 punti esperienza.&#10;– Inoltre, un limite mensile limita il progresso. Maggiore è l’esperienza, più tempo ci vorrà per ottenere il punto successivo.&#10;EFFETTI&#10;– Una specializzazione principale aumenta l’esperienza effettiva di 12 punti, una secondaria di 6; il valore massimo rimane 100.&#10;– Velocità di lavoro = 70 % + 30 % × esperienza effettiva / 100.&#10;– L’usura aggiuntiva arriva fino al 15%, il consumo aggiuntivo di materiale e carburante fino al 10% × esperienza effettiva mancante × fattore economico. Il fattore economico è 0,75 / 1,00 / 1,25.&#10;TEMPO DI APPRENDIMENTO E LIMITE MENSILE&#10;– Esperienza 0–24: 25 minuti, limite mensile +1; 25–49: 50 minuti, 0; 50–69: 100 minuti, -1.&#10;– Esperienza 70–84: 220 minuti, -2; 85–94: 540 minuti, -3; 95–100: 1080 minuti, -4.&#10;– Limite base in base ai giorni/mese: 1 giorno = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Limite effettivo = limite di base + adeguamento, minimo 1." />
+    <e k="ui_pmHelpTopic07Title" v="Affidabilità, malattia e interruzioni dell&apos;intervento" />
+    <e k="ui_pmHelpTopic07Body" v="Se l’affidabilità è inferiore a 85, possono verificarsi brevi cali di prestazione. Il controllo avviene una volta al minuto; la probabilità aumenta al diminuire dell’affidabilità fino a un massimo del 15%. Un calo dura 30–90 secondi, riduce la prestazione del 4–15% e può ripetersi solo dopo altri 3 minuti.&#10;La malattia viene verificata quotidianamente. Un collaboratore malato non è disponibile in quel giorno; un intervento in corso viene interrotto. Ogni mese sono consentiti al massimo giorni al mese arrotondati per eccesso / 3 giorni di malattia. Se l’affidabilità è inferiore a 50, dopo 60 secondi viene verificata una sola volta la possibilità di interruzione completa dell’intervento; in tal caso l’incarico non viene considerato completato con successo e l’incidente viene registrato nella cronologia.&#10;Valori indicativi malattia/giorno e interruzione dell’incarico: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. Un mese positivo richiede almeno 120 minuti di lavoro, nessun incidente, nessun giorno di malattia e meno di 240 minuti di lavoro notturno; in tal caso, c’è il 35 % di probabilità di ottenere +1 in affidabilità. I rischi negativi vengono sommati e limitati al 60 %." />
+    <e k="ui_pmHelpTopic08Title" v="Lealtà e reputazione del datore di lavoro" />
+    <e k="ui_pmHelpTopic08Body" v="I nuovi dipendenti iniziano solitamente con un livello di lealtà pari a 65. Stipendi pagati puntualmente, una lunga anzianità di servizio e richieste salariali accettate rafforzano il legame; problemi finanziari, lavoro notturno e richieste respinte o rimaste in sospeso per lungo tempo lo indeboliscono. Il lavoro notturno tra le 22:00 e le 06:00 viene registrato e può costare, a partire da 120 minuti di gioco, fino a 4 punti di lealtà e 1–2 punti di reputazione.&#10;In caso di differenza tra lealtà e reputazione del datore di lavoro pari ad almeno 15 / 30 / 50 punti, ogni mese si verifica un ravvicinamento di 1 / 2 / 3 punti. Eventi: stipendio pagato con Prestigio di almeno 40: +1 alla Lealtà; il pagamento porta in negativo: -2; l’azienda era già in negativo: -4; anzianità di servizio di 3 / 6 / 12 / 24 mesi: +1 / +1 / +2 / +3; Richiesta accettata +3; rifiutata -5, con lealtà inferiore a 40 -7; richiesta in sospeso dopo il mese di grazia -2 per ogni mese.&#10;Dimissioni spontanee mensili con lealtà 0–5: 35 %, 6–9: 20 %, 10–14: 10 %, a partire da 15 nessuna dimissione regolare basata sulla lealtà. La reputazione del datore di lavoro parte da 60, va da 0 a 100 ed è considerata critica da 0 a 19, debole da 20 a 39, solida da 40 a 59, buona da 60 a 79 o ottima da 80 a 100. Influisce sul numero e sulla qualità dei candidati, sulle aspettative salariali e sulla fedeltà a lungo termine." />
+    <e k="ui_pmHelpTopic09Title" v="Stipendi, buste paga e richieste di pagamento" />
+    <e k="ui_pmHelpTopic09Body" v="Gli stipendi base individuali vengono calcolati in base all’esperienza e all’affidabilità e interpolati linearmente all’interno di ciascuna fascia di esperienza. L’affidabilità moltiplica il valore compreso tra 0,94 e 1,06. I candidati ricevono inoltre bonus casuali, di reputazione ed eventuali maggiorazioni di specializzazione pari al +5% per la specializzazione principale e al +3% per quella secondaria.&#10;Stipendio base per 3 giorni al mese: Esperienza 0–44: 1.800–2.200, 45–74: 2.200–2.700, 75–100: 2.700–3.300. Stipendio mensile = stipendio base × fattore durata del mese × fattore costi economici, arrotondato a 10. Se gli stipendi individuali sono disattivati, si applica lo stipendio base standard compreso tra 100 e 100.000 con incrementi di 10. Fattori di durata del mese per 1–28 giorni: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Il pagamento avviene a fine mese sotto forma di stipendio. Anche i dipendenti il cui rapporto di lavoro termina in quel momento ricevono in anticipo il pagamento dovuto. Un operatore specializzato o un professionista può richiedere un aumento: probabilità di base del 70%, limitata al 55–85% in base alla lealtà; in seguito è possibile riesaminare la richiesta mensilmente con una probabilità pari alla metà. Accettare comporta +3 alla lealtà e +1 alla reputazione; rifiutare riduce la lealtà di 5, di 7 se inferiore a 40, e aumenta per 3 mesi i rischi di licenziamento e di inaffidabilità. G rende visibili tutte le richieste in sospeso." />
+    <e k="ui_pmHelpTopic10Title" v="Specializzazioni e sviluppo pratico" />
+    <e k="ui_pmHelpTopic10Body" v="REGOLE DI BASE&#10;– Esistono otto categorie di apprendimento: lavorazione del terreno, semina, concimazione, protezione delle colture, raccolta, trasporto, cura delle macchine e metodi di lavoro efficienti.&#10;– I progressi vengono salvati separatamente per ciascuna categoria. Le specializzazioni acquisite rimangono permanenti; possono essere attivi al massimo due bonus contemporaneamente.&#10;PROGRESSI DI APPRENDIMENTO&#10;– Le soglie di apprendimento sono 240, 420, 600 e 780 minuti; successivamente, ogni soglia successiva aumenta di 180 minuti.&#10;– Il fattore di apprendimento è pari a 1 + (Esperienza-50)/250 + (Affidabilità-50)/300 ed è limitato a un valore compreso tra 0,75 e 1,30. In caso di attività multiple, il tempo di apprendimento viene ripartito in modo ponderato.&#10;CLASSIFICAZIONE DELLE ATTIVITÀ&#10;– Lavorazione del terreno: aratro, coltivatore, erpice rotante, erpice a dischi, rullo e trinciatrice.&#10;– Semina: seminatrici e piantatrici, nonché sementi.&#10;– Concimazione: concimi minerali, concimi liquidi, liquame, residui di fermentazione e letame. Protezione delle colture: trattamenti con erbicidi.&#10;– Raccolta: mietitrebbiatrici, barre di taglio, imballatrici, falciatrici, rimorchi autocaricanti e raccoglitori. Trasporto: rimorchi, scarico e trasporto da A a B.&#10;BONUS E ATTIVAZIONE&#10;– Specializzazione principale: +12 punti esperienza effettivi e +5 % dello stipendio base. Seconda specializzazione: +6 e +3 %.&#10;– Entrambe le specializzazioni possono essere messe in sospeso. Una specializzazione acquisita e messa in sospeso può essere attivata solo una volta per dipendente e per anno agricolo (da marzo a febbraio); la messa in sospeso non esaurisce questo diritto." />
+    <e k="ui_pmHelpTopic11Title" v="Corsi di formazione" />
+    <e k="ui_pmHelpTopic11Body" v="I corsi di formazione iniziano solo il primo giorno del mese; se tale giorno cade in un giorno del mese, entro le ore 12:00 incluse. Un dipendente può frequentare un solo corso di formazione per ogni anno agricolo, da marzo a febbraio, e non deve essere né al lavoro né in malattia. La persona rimane indisponibile fino alla fine del mese; i progressi vengono accreditati solo al completamento del corso, a fine mese.&#10;Un corso di formazione fornisce il 30% dei minuti di apprendimento necessari per la specializzazione successiva, con un minimo di 30 minuti e mai più di quelli ancora mancanti. Ogni categoria ha un fattore di prezzo mensile compreso tra -20% e +20% ed è al completo con una probabilità del 25%. I costi vengono detratti immediatamente all’inizio e si basano sullo stipendio mensile attuale.&#10;Costi di formazione = stipendio mensile attuale × fattore di categoria × modificatore mensile. Fattori: lavorazione del terreno 75%, semina 90%, concimazione 90%, protezione delle colture 100%, raccolta 110%, trasporto 65%, cura delle macchine 120%, metodi di lavoro parsimoniosi 120%." />
+    <e k="ui_pmHelpTopic12Title" v="Licenziamento, dimissioni volontarie e pensionamento" />
+    <e k="ui_pmHelpTopic12Body" v="I licenziamenti devono essere confermati. Nel caso di un giorno/mese, il licenziamento deve essere comunicato entro le ore 12:00 del primo giorno affinché abbia effetto dal cambio di mese successivo. Nel caso di due o più giorni, la data di riferimento è la fine del mezzo mese arrotondato per eccesso, ovvero il giorno ceil(giorni/mese ÷ 2). Dopo la data di riferimento, la scadenza slitta di un altro mese.&#10;Con la notifica del licenziamento, la lealtà diminuisce immediatamente di 40 e l’affidabilità di 25. Il dipendente rimane in linea di principio impiegabile fino alla fine del mese in cui il licenziamento diventa effettivo. Perdita di reputazione in caso di licenziamento: meno di 1 mese -12, meno di 3 -9, meno di 6 -7, meno di 12 -5, meno di 24 -3, a partire da 24 mesi -1; ogni ulteriore licenziamento nello stesso mese costa 4 punti in più.&#10;Con un valore di Lealtà compreso tra 0 e 14, ogni mese viene verificata la possibilità di dimissioni volontarie. Una richiesta salariale respinta può aumentare temporaneamente la probabilità di 5 punti percentuali. Le dimissioni volontarie annunciate hanno effetto alla fine del mese e costano 10 punti di reputazione. A partire dal 55° compleanno è possibile annunciare il pensionamento; il rischio sale fino a circa l’80–90% all’età di 67 anni, raggiunge il 95% a 68 anni, il 98% a 69 anni e il 100% a 70 anni. La persona rimane disponibile fino alla fine del mese." />
+    <e k="ui_pmHelpTopic13Title" v="Profili, cronologia e statistiche" />
+    <e k="ui_pmHelpTopic13Body" v="I profili dei candidati riuniscono età, percorso professionale, esperienza, affidabilità, lealtà, specializzazioni e anzianità di servizio in un testo dinamico. I profili dei dipendenti integrano l’anzianità aziendale, gli incarichi, i corsi di formazione e i progressi nell’apprendimento.&#10;La cronologia personale può registrare l’assunzione, l’inizio e la fine degli incarichi, le interruzioni degli incarichi, le assenze per malattia, i corsi di formazione, le specializzazioni, le richieste salariali e le decisioni, i cambiamenti in termini di lealtà e affidabilità, le assegnazioni di trasporto, nonché il licenziamento, le dimissioni volontarie, il pensionamento e la cessazione del rapporto di lavoro.&#10;La cronologia del dipendente mostra, tra l’altro, gli incarichi, l’orario di lavoro, la formazione, lo stato dei trasporti, gli ultimi eventi, i giorni di malattia, le richieste salariali, le interruzioni degli incarichi e lo stipendio totale pagato fino a quel momento. La panoramica mostra inoltre i valori complessivi a livello di azienda, quali il numero totale di assunzioni, licenziamenti, dimissioni volontarie e pensionamenti." />
+    <e k="ui_pmHelpTopic14Title" v="Impostazioni, modalità multigiocatore e punteggi" />
+    <e k="ui_pmHelpTopic14Body" v="Le impostazioni valgono per ogni partita e si suddividono in Prestazioni lavorative, Sviluppo del personale, Economia e Stipendi. Gli effetti sul gameplay sbloccano gli effetti di esperienza correlati; gli effetti di esperienza regolano velocità, usura, materiali di consumo e carburante. Gli effetti sul personale sbloccano le variazioni di lealtà e l’opzione di lavoro straordinario. Gli effetti economici sbloccano gli stipendi individuali e lo stipendio mensile standard.&#10;Gli effetti disattivati non modificano retroattivamente i dati esistenti relativi al personale. Essi impediscono o consentono esclusivamente l’ulteriore effetto corrispondente. Lo stipendio mensile standard funge da valore di base quando gli stipendi individuali sono disattivati; può essere modificato direttamente nelle impostazioni. La configurazione dei tasti può essere modificata nelle impostazioni di gioco.&#10;Nella modalità multigiocatore, il personale, i candidati, gli incarichi, gli stipendi, i corsi di formazione, le assunzioni e le cronache vengono gestiti e sincronizzati a livello di azienda agricola. Il server ha l’ultima parola; solo i manager autorizzati dell’azienda agricola possono modificare la propria azienda. I dati si trovano nel file helperPersonnel.xml all’interno del salvataggio di gioco e le assegnazioni in corso vengono ripristinate, per quanto possibile, al momento del caricamento. I vecchi salvataggi rimangono utilizzabili; i dati storici relativi ai dipendenti già usciti dall’azienda potrebbero essere incompleti." />
+    <e k="ui_pmHelpTopic15Title" v="Configurazione e primi passi" />
+    <e k="ui_pmHelpTopic15Body" v="Apri la scheda di un candidato, verifica età, background, valori, aspettative salariali e specializzazioni in possesso, quindi conferma l’assunzione. Il candidato diventa un dipendente della tenuta attuale; tutte le decisioni, i conteggi e gli sviluppi successivi si riferiscono a tale tenuta.&#10;Dopo l’assunzione, pianifica innanzitutto un incarico breve e adeguato. Un dipendente deve essere disponibile: malattia, lavoro in corso, formazione, una cessazione confermata o un’assegnazione a un mod ancora attiva possono impedire la selezione. La scheda “Dipendenti” mostra il motivo specifico.&#10;La prima assunzione migliora la reputazione del datore di lavoro di un punto. Valori elevati non sono sempre automaticamente migliori: un candidato esperto costa solitamente di più, mentre un neofita più economico richiede più tempo per lo sviluppo e la formazione." />
+    <e k="ui_pmHelpTopic16Title" v="Attività e attribuzione delle specializzazioni" />
+    <e k="ui_pmHelpTopic16Body" v="L’assegnazione viene determinata in base al veicolo, alle attrezzature e, se presente, al materiale distribuito. L’assegnazione diretta del materiale ha la precedenza: le sementi appartengono alla semina; gli erbicidi alla protezione delle colture; i fertilizzanti minerali, i fertilizzanti liquidi, il liquame, i residui di fermentazione e il letame alla concimazione. La calce non viene riconosciuta automaticamente come categoria di apprendimento a sé stante.&#10;Assegnazione di veicoli e attrezzi: aratro, coltivatore, erpice rotante, erpice a dischi, rullo e trinciatrice rientrano nella lavorazione del terreno. Le seminatrici e le piantatrici rientrano nella semina. Gli irroratori, in assenza di un materiale specifico, rientrano nella concimazione. Mietitrebbiatrici, barre di taglio, presse per balle, falciatrici, rimorchi autocaricanti e raccoglitori rientrano nella raccolta. I rimorchi e i veicoli scaricabili rientrano nel trasporto.&#10;FollowMe amplia ulteriormente il riconoscimento pratico includendo trinciatrici, raccoglitrici di patate e barbabietole, rivoltatrici, ranghinatori, spandiconcime, cisterne per liquami, dissodatori, raccoglitori di sassi, erpici e zappatrici. I veicoli mod possono rimanere neutri se la loro specializzazione non fornisce un&apos;assegnazione univoca. In tal caso, non viene promesso alcun bonus di specializzazione errato.&#10;La protezione delle macchine e il funzionamento parsimonioso sono bonus generali: il primo riduce l’usura aggiuntiva dovuta all’esperienza, il secondo il consumo aggiuntivo di carburante e materiali. L’attività selezionata viene visualizzata nella finestra di selezione; una specializzazione attiva adeguata viene evidenziata in quella sede." />
+    <e k="ui_specialization_transport" v="Trasporti" />
+    <e k="ui_transportMarker" v="Trasporti" />
+    <e k="ui_pmStatusLine" v="Stato: %s" />
+    <e k="ui_button_transport_manage_long" v="Trasporti" />
+    <e k="ui_transportPriorityHeaderStatus" v="Stato" />
+    <e k="ui_transportPriorityHeaderEnabled" v="Trasporti" />
+    <e k="ui_pmTrainingCostHeader" v="Costi" />
+    <e k="ui_pmHistoryCareerTransport" v="Trasporti: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="TOTALE" />
+    <e k="ui_pmMonth02" v="aprile" />
+    <e k="ui_pmMonth06" v="agosto" />
+    <e k="ui_pmMonth07" v="settembre" />
+    <e k="ui_pmMonth09" v="novembre" />
+    <e k="ui_pmMonth10" v="dicembre" />
+    <e k="ui_selectionAvailable" v="Disponibile" />
+    <e k="ui_selectionUnavailableSick" v="Krank" />
+    <e k="ui_selectionUnavailableTraining" v="In formazione" />
+    <e k="ui_selectionUnavailableReserved" v="Riservato" />
+    <e k="ui_selectionUnavailableFieldwork" v="Lavoro sul campo" />
+    <e k="ui_selectionUnavailableOther" v="Non disponibile" />
+    <e k="ui_selectionJobUnknown" v="Ordine sconosciuto" />
+    <e k="ui_selectionAgeLabel" v="Modifica" />
+    <e k="ui_selectionJobsLabel" v="Ordini" />
+    <e k="ui_selectionSpeedLabel" v="Ritmo di lavoro" />
+    <e k="ui_selectionAgeValue" v="%d anni" />
+    <e k="ui_selectionVehicleLine" v="Veicolo: %s" />
+    <e k="ui_selectionActivityLine" v="Ordine: %s" />
+    <e k="ui_selectionFieldLine" v="Campo: %s" />
+    <e k="ui_selectionStatusLine" v="Stato: %s" />
+    <e k="ui_button_specializationDeactivate" v="Lasciare riposare" />
+    <e k="ui_button_specializationActivate" v="Accedi" />
+    <e k="ui_pmSpecializationActive" v="attivo" />
+    <e k="ui_pmHelpContents" v="INDICE" />
     </elements>
 </l10n>

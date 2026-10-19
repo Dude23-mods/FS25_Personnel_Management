@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="Bón phân" />
         <e k="ui_specialization_plantProtection" v="Bảo vệ cây trồng" />
         <e k="ui_specialization_harvest" v="Thu hoạch" />
-        <e k="ui_specialization_transport" v="Vận chuyển" />
+        1Giao thông vận tải2
         <e k="ui_specialization_machineCare" v="Chăm sóc máy móc" />
         <e k="ui_specialization_resourceSaver" v="Làm việc tiết kiệm" />
         <e k="ui_specializationLearned" v="%s đã phát triển một chuyên môn: %s." />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Quản lý nhiệm vụ vận chuyển" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Quản lý yêu cầu tăng lương" />
         <e k="input_HP_SELECT_CANCEL" v="Hủy chọn nhân viên" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="Giải phóng nhân viên bị kẹt" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="Giải phóng nhân viên bị kẹt" />
         <e k="ui_openWorkerView" v="Nhân viên" />
         <e k="ui_openApplicantView" v="Ứng viên" />
         <e k="ui_backToOverview" v="Quay lại tổng quan" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="Thời gian làm việc: %d công việc | %s | Lương tháng: %s" />
         <e k="ui_button_transport_assign" v="Gán vận chuyển" />
         <e k="ui_button_transport_remove" v="Gỡ vận chuyển" />
-        <e k="ui_transportMarker" v="vận chuyển" />
+        1Giao thông2
         <e k="ui_transportActionAssigned" v="%s - gán vận chuyển." />
         <e k="ui_transportActionRemoved" v="%s - gỡ vận chuyển." />
         <e k="ui_transportNoDriverAssigned" v="vận chuyển: chưa có." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="Đào tạo" />
         <e k="ui_pmStatusApplicant" v="Ứng viên" />
         <e k="ui_pmBirthLine" v="Ngày sinh: %s" />
+        <e k="ui_pmRankLabel" v="Cấp bậc" />
         <e k="ui_pmOriginLine" v="Kinh nghiệm nghề nghiệp: %s" />
         <e k="ui_pmStatsLine" v="Kinh nghiệm %d · Độ tin cậy %d · Lòng trung thành %d" />
         <e k="ui_pmStatExperience" v="Kinh nghiệm" />
         <e k="ui_pmStatReliability" v="Độ tin cậy" />
         <e k="ui_pmStatLoyalty" v="Lòng trung thành" />
         <e k="ui_pmWageLine" v="Lương: %s" />
-        <e k="ui_pmStatusLine" v="Trạng thái: %s" />
+        1Trạng thái: %s2
         <e k="ui_pmOrigin1" v="trang trại gia đình ở nông thôn" />
         <e k="ui_pmOrigin2" v="trang trại bò sữa nhỏ" />
         <e k="ui_pmOrigin3" v="doanh nghiệp dịch vụ nông nghiệp" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="NHÂN SỰ" />
         <e k="ui_pmSettingsSectionEconomic" v="KINH TẾ" />
         <e k="ui_button_transport_assign_long" v="Giao nhiệm vụ vận chuyển" />
-        <e k="ui_button_transport_manage_long" v="Vận chuyển" />
+        1Giao thông vận tải2
         <e k="ui_transportPriorityTitle" v="Ưu tiên vận chuyển" />
         <e k="ui_transportPriorityIntro" v="Chọn nhân viên có thể nhận nhiệm vụ vận chuyển và thứ tự kiểm tra trạng thái sẵn sàng." />
         <e k="ui_transportPriorityHeaderPriority" v="Ưu tiên" />
         <e k="ui_transportPriorityHeaderEmployee" v="Nhân viên" />
-        <e k="ui_transportPriorityHeaderStatus" v="Trạng thái" />
-        <e k="ui_transportPriorityHeaderEnabled" v="Vận chuyển" />
+        1Tình trạng2
+        1Giao thông2
         <e k="ui_transportPriorityActive" v="Đang bật" />
         <e k="ui_transportPriorityInactive" v="Chưa phân công" />
         <e k="ui_transportPriorityMoveUp" v="Di chuyển lên" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="nghề văn phòng" />
         <e k="ui_status_retirementPending" v="sẽ nghỉ hưu vào cuối tháng" />
         <e k="ui_retirementNotice" v="%s sẽ nghỉ hưu vào cuối tháng." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="Chuyên môn cải thiện hiệu suất ở danh mục phù hợp. Đào tạo chỉ bắt đầu đầu tháng, tốn tiền và khiến nhân viên không sẵn sàng đến cuối tháng. Tiến độ được ghi nhận sau khi hoàn thành. Ưu đãi và giá thay đổi hằng tháng; chỉ được một khóa đào tạo mỗi năm nông nghiệp từ tháng 3 đến tháng 2. Chuyên môn đã học vẫn được giữ, nhưng tối đa hai phần thưởng hoạt động. Cả hai vị trí có thể không hoạt động. Một chuyên môn đã học và không hoạt động chỉ có thể được kích hoạt một lần cho mỗi nhân viên và năm nông nghiệp." />
         <e k="ui_pmTrainingCategoryHeader" v="Lĩnh vực học tập" />
         <e k="ui_pmTrainingProgressHeader" v="Tiến độ hướng tới chuyên môn" />
         <e k="ui_pmTrainingRunning" v="đang đào tạo" />
         <e k="ui_pmTrainingSelectCategory" v="Trước tiên hãy chọn một lĩnh vực đào tạo" />
         <e k="ui_pmTrainingConfirm" v="Bắt đầu đào tạo cho %s trong lĩnh vực %s?" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="Chuyên môn: đã dùng hai vị trí hoạt động · học gần nhất: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Đào tạo: với 1 ngày/tháng chỉ đến 12:00 · chọn một lĩnh vực trong menu đào tạo · gần nhất: %s" />
         <e k="ui_training_line_first_day_select" v="Đào tạo: chỉ vào ngày đầu tiên · chọn một lĩnh vực trong menu đào tạo · gần nhất: %s" />
         <e k="ui_training_line_busy_select" v="Đào tạo: không thể khi đang làm việc · gần nhất: %s" />
         <e k="ui_training_line_sick_select" v="Đào tạo: không thể khi đang ốm · gần nhất: %s" />
         <e k="ui_training_line_select_category" v="Đào tạo: chọn một lĩnh vực trong menu đào tạo · gần nhất: %s" />
-        <e k="ui_pmTrainingCostHeader" v="Chi phí" />
+        1Chi phí2
         <e k="ui_pmTrainingAdjustmentHeader" v="Giảm giá/phụ phí" />
         <e k="ui_pmTrainingNoPlaces" v="hiện không còn chỗ trống" />
         <e k="ui_pmTrainingNoPlacesMessage" v="Hiện không còn chỗ trống cho khóa đào tạo này." />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="Công việc: %d" />
         <e k="ui_pmHistoryCareerWorkTime" v="Thời gian làm việc: %s" />
         <e k="ui_pmHistoryCareerTraining" v="Đào tạo: %s" />
-        <e k="ui_pmHistoryCareerTransport" v="Vận chuyển: %s" />
+        1Giao thông: %s2
         <e k="ui_pmHistoryValueActive" v="đang hoạt động" />
         <e k="ui_pmHistoryValueInactive" v="không hoạt động" />
         <e k="ui_monthlyRowApplicants" v="Ứng viên" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="Thời gian làm việc" />
         <e k="ui_monthlyRowWages" v="Lương tháng" />
         <e k="ui_monthlyRowPayroll" v="Lần trả lương gần nhất" />
-        <e k="ui_pmOverviewOverallHeader" v="TỔNG CỘNG" />
+        1TỔNG CỘNG2
         <e k="ui_pmOverviewTotalJobs" v="Tổng số công việc" />
         <e k="ui_pmOverviewTotalWorkTime" v="Tổng thời gian làm việc" />
         <e k="ui_pmOverviewTotalPayroll" v="Tổng lương đã trả" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s đã dừng công việc đang thực hiện để bất chợt đi uống cà phê với bạn gái." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s đã dừng công việc đang thực hiện để bất chợt đi uống cà phê với bạn trai." />
         <e k="ui_pmMonth01" v="tháng 3" />
-        <e k="ui_pmMonth02" v="tháng 4" />
+        1Tháng Tư2
         <e k="ui_pmMonth03" v="tháng 5" />
         <e k="ui_pmMonth04" v="tháng 6" />
         <e k="ui_pmMonth05" v="tháng 7" />
-        <e k="ui_pmMonth06" v="tháng 8" />
-        <e k="ui_pmMonth07" v="tháng 9" />
+        1tháng Tám2
+        1Tháng Chín2
         <e k="ui_pmMonth08" v="tháng 10" />
-        <e k="ui_pmMonth09" v="tháng 11" />
-        <e k="ui_pmMonth10" v="tháng 12" />
+        1Tháng Mười Một2
+        1Tháng 122
         <e k="ui_pmMonth11" v="tháng 1" />
         <e k="ui_pmMonth12" v="tháng 2" />
         <e k="ui_pmPeriodMonthYear" v="%s, năm %d" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="tháng làm việc tốt" />
         <e k="ui_waitingForServerData" v="Đang chờ dữ liệu máy chủ" />
         <e k="ui_pmMenuPageHelp" v="Trợ giúp" />
-        <e k="ui_pmHelpIntro" v="Hướng dẫn chi tiết trong trò chơi cho Personnel Management 1.1.4.0. Tệp ReadMe.pdf đi kèm chứa thêm các quy tắc và phép tính." />
+        <e k="ui_pmHelpIntro" v="Hướng dẫn chi tiết trong trò chơi cho Personnel Management 1.1.5.0." />
         <e k="ui_pmHelpSectionQuickStart" v="Bắt đầu nhanh và điều khiển|Mở menu bằng Ctrl + M. Đổi thẻ bằng điều khiển trang của menu. Dùng A/D hoặc Trái/Phải để đổi người, Space để xác nhận, Esc để quay lại, T cho ưu tiên vận chuyển và G cho yêu cầu lương." />
         <e k="ui_pmHelpSectionPeople" v="Ứng viên và nhân viên|Bản lưu mới bắt đầu với bốn ứng viên; tối đa tám người có thể xuất hiện. Tuyển từ hồ sơ của họ. Kinh nghiệm, độ tin cậy và lòng trung thành từ 0 đến 100. Trạng thái, lương, chuyên môn, biên niên và tổng số nằm trên trang nhân viên." />
         <e k="ui_pmHelpSectionStats" v="Nhân viên và thuộc tính|Kinh nghiệm ảnh hưởng tốc độ, hao mòn và tiêu thụ; độ tin cậy ảnh hưởng gián đoạn, bệnh và kết thúc sớm; lòng trung thành ảnh hưởng yêu cầu lương và nghỉ việc. Trang nhân viên cũng hiển thị trạng thái, lương, chuyên môn, thống kê và lịch sử cá nhân." />
@@ -529,81 +530,154 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Nghỉ việc, sa thải và nghỉ hưu|Các thay đổi này không phải lúc nào cũng có hiệu lực ngay mà hoàn tất khi đổi tháng theo thời hạn. Không thể sa thải ngay nhân viên đang làm việc. Thay đổi sắp tới hiện trong trạng thái và lịch sử." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive và Courseplay|Giao tài xế trong Nhân viên / Vận chuyển và đặt ưu tiên. AutoDrive dùng người sẵn sàng đầu tiên và không khởi động nếu không có ai. Courseplay khởi động thông thường sẽ mở lựa chọn. Sau AutoDrive, mỗi xe tự giữ tài xế riêng mà không cần chọn lại." />
         <e k="ui_pmHelpSectionMultiplayer" v="Nhiều người chơi và bản lưu|Dữ liệu và cài đặt nhân sự được tách theo nông trại. Máy chủ xác thực thay đổi; chỉ quản lý được ủy quyền mới quản lý nông trại của mình. Nhân viên, phân công đang hoạt động và cài đặt được đồng bộ. Dữ liệu nằm trong helperPersonnel.xml của bản lưu." />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="Quản lý nhân sự · Chọn công việc" />
+        <e k="ui_selectionPerformanceProfile" v="HỒ SƠ HIỆU SUẤT" />
+        1Có sẵn2
+        1Krank2
+        1Đang tham gia khóa đào tạo2
+        1Đã đặt trước2
+        <e k="ui_selectionUnavailableAutoDrive" v="Công việc AutoDrive" />
+        <e k="ui_selectionUnavailableCourseplay" v="Công việc Courseplay" />
+        1Công tác thực địa2
+        1Không có sẵn2
+        <e k="ui_selectionShowAll" v="Hiện tất cả nhân viên" />
+        <e k="ui_selectionShowAvailable" v="Chỉ hiện người sẵn sàng" />
+        <e k="ui_selectionFooterControls" v="A/D Đổi · Space Chọn · Tab Tất cả · Esc Quay lại" />
+        1Không rõ đơn hàng2
+        1Alter2
+        <e k="ui_selectionWageLabel" v="Lương tháng" />
+        1Đơn hàng2
+        1Tốc độ làm việc2
+        1%d năm2
         <e k="ui_selectionProfessionalDevelopment" v="Phát triển chuyên môn" />
         <e k="ui_selectionNoSpecializationProgress" v="Chưa có tiến độ chuyên môn hóa" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="Không có chuyên môn" />
+        1Phương tiện: %s2
+        1Nhiệm vụ: %s2
+        1Trường: %s2
+        <e k="ui_selectionTargetLine" v="Điểm đến vận chuyển: %s" />
+        <e k="ui_selectionCourseplayLine" v="Loại công việc CP: %s" />
+        1Trạng thái: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="Bắt đầu nhanh và điều khiển" />
-        <e k="ui_pmHelpTopic01Body" v="Mở menu bằng Ctrl + M. Đổi thẻ bằng điều khiển trang của menu. Dùng A/D hoặc Trái/Phải để đổi người, Space để xác nhận, Esc để quay lại, T cho ưu tiên vận chuyển và G cho yêu cầu lương." />
-        <e k="ui_pmHelpTopic02Title" v="Ứng viên và nhân viên" />
-        <e k="ui_pmHelpTopic02Body" v="Bản lưu mới bắt đầu với bốn ứng viên; tối đa tám người có thể xuất hiện. Tuyển từ hồ sơ của họ. Kinh nghiệm, độ tin cậy và lòng trung thành từ 0 đến 100. Trạng thái, lương, chuyên môn, biên niên và tổng số nằm trên trang nhân viên. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="Nhân viên và thuộc tính" />
-        <e k="ui_pmHelpTopic03Body" v="Kinh nghiệm ảnh hưởng tốc độ, hao mòn và tiêu thụ; độ tin cậy ảnh hưởng gián đoạn, bệnh và kết thúc sớm; lòng trung thành ảnh hưởng yêu cầu lương và nghỉ việc. Trang nhân viên cũng hiển thị trạng thái, lương, chuyên môn, thống kê và lịch sử cá nhân." />
-        <e k="ui_pmHelpTopic04Title" v="Công việc và phát triển" />
-        <e k="ui_pmHelpTopic04Body" v="Khi bắt đầu công việc trợ lý AI thông thường, lựa chọn nhân viên sẽ mở ra. Chỉ nhân viên sẵn sàng mới được chọn và một người không thể làm nhiều việc cùng lúc. Thời gian làm việc tăng kinh nghiệm và chuyên môn. Kinh nghiệm ảnh hưởng tốc độ, hao mòn và tiêu thụ; độ tin cậy ảnh hưởng giảm hiệu suất, bệnh và bỏ việc; lòng trung thành ảnh hưởng tranh chấp lương và nghỉ việc. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="Kinh nghiệm ảnh hưởng tốc độ, hao mòn và tiêu thụ; độ tin cậy ảnh hưởng gián đoạn, bệnh và kết thúc sớm; lòng trung thành ảnh hưởng yêu cầu lương và nghỉ việc. Trang nhân viên cũng hiển thị trạng thái, lương, chuyên môn, thống kê và lịch sử cá nhân." />
-        <e k="ui_pmHelpTopic06Title" v="Lương" />
-        <e k="ui_pmHelpTopic06Body" v="Lương được tính khi đổi tháng và phụ thuộc số ngày mỗi tháng, độ khó kinh tế và cài đặt mod. Nhân viên có thể yêu cầu tăng lương; yêu cầu phải được chấp nhận hoặc từ chối đúng hạn và có thể ảnh hưởng lòng trung thành." />
-        <e k="ui_pmHelpTopic07Title" v="Đào tạo" />
-        <e k="ui_pmHelpTopic07Body" v="Đào tạo chỉ bắt đầu đầu tháng, tốn tiền và khóa nhân viên đến cuối tháng. Hoàn tất sẽ cải thiện chuyên môn đã chọn. Đề nghị và lịch sử xuất hiện trong mục Đào tạo và Nhân viên. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="Chuyên môn" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="Nghỉ việc, sa thải và nghỉ hưu" />
-        <e k="ui_pmHelpTopic09Body" v="Các thay đổi này không phải lúc nào cũng có hiệu lực ngay mà hoàn tất khi đổi tháng theo thời hạn. Không thể sa thải ngay nhân viên đang làm việc. Thay đổi sắp tới hiện trong trạng thái và lịch sử." />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive và Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="Giao tài xế trong Nhân viên / Vận chuyển và đặt ưu tiên. AutoDrive dùng người sẵn sàng đầu tiên và không khởi động nếu không có ai. Courseplay khởi động thông thường sẽ mở lựa chọn. Sau AutoDrive, mỗi xe tự giữ tài xế riêng mà không cần chọn lại." />
-        <e k="ui_pmHelpTopic11Title" v="Nhiều người chơi và bản lưu" />
-        <e k="ui_pmHelpTopic11Body" v="Dữ liệu và cài đặt nhân sự được tách theo nông trại. Máy chủ xác thực thay đổi; chỉ quản lý được ủy quyền mới quản lý nông trại của mình. Nhân viên, phân công đang hoạt động và cài đặt được đồng bộ. Dữ liệu nằm trong helperPersonnel.xml của bản lưu." />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="Dữ liệu và cài đặt nhân sự được tách theo nông trại. Máy chủ xác thực thay đổi; chỉ quản lý được ủy quyền mới quản lý nông trại của mình. Nhân viên, phân công đang hoạt động và cài đặt được đồng bộ. Dữ liệu nằm trong helperPersonnel.xml của bản lưu." />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="Mở menu bằng Ctrl + M. Đổi thẻ bằng điều khiển trang của menu. Dùng A/D hoặc Trái/Phải để đổi người, Space để xác nhận, Esc để quay lại, T cho ưu tiên vận chuyển và G cho yêu cầu lương. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="Giải phóng" />
-        <e k="ui_pmConfirmReleaseWorker" v="Giải phóng %s? Chỉ có thể thực hiện khi máy chủ không phát hiện công việc đang hoạt động." />
-        <e k="ui_workerReleaseSuccess" v="Đã giải phóng nhân viên." />
-        <e k="ui_workerReleaseDeniedActive" v="Không thể giải phóng: nhân viên vẫn có công việc đang hoạt động." />
-        <e k="ui_workerReleaseDeniedAvailable" v="Không cần giải phóng: nhân viên đã sẵn sàng." />
-        <e k="ui_workerReleaseDeniedCheck" v="Không thể giải phóng: không thể xác minh an toàn trạng thái công việc." />
-        <e k="ui_workerReleaseDeniedPermission" v="Không thể giải phóng: không có quyền hoặc nhân viên không hợp lệ." />
+        1Để yên2
+        1Đăng nhập2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Tắt %s cho %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Kích hoạt %s cho %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="Chuyên môn mới chỉ có thể được kích hoạt một lần cho mỗi nhân viên và năm nông nghiệp." />
+        <e k="ui_pmSpecializationSlotsFull" v="Hãy tắt ít nhất một chuyên môn đang hoạt động trước khi bật chuyên môn khác." />
+        1hoạt động2
+        <e k="ui_pmSpecializationInactive" v="đã học, không hoạt động" />
+        <e k="ui_specializationActivatedNotice" v="%s dùng lại chuyên môn %s." />
+        <e k="ui_specializationDeactivatedNotice" v="%s tắt chuyên môn %s." />
+        1MỤC LỤC2
+        <e k="ui_pmHelpNavigation" v="Trái/Phải: khu vực · Lên/Xuống: chọn hoặc cuộn · Page Up/Down: trang" />
+        1Hướng dẫn khởi động nhanh và cách sử dụng2
+        1Hệ thống quản lý nhân sự thay thế các trợ lý AI ẩn danh bằng các ứng viên và nhân viên có tên cụ thể. Mỗi nhân viên đều phát triển theo thời gian, nhận lương hàng tháng và có thể sở hữu những điểm mạnh cũng như rủi ro khác nhau dựa trên kinh nghiệm, độ tin cậy, lòng trung thành và chuyên môn.&#10;Menu cá nhân được mở mặc định bằng phím Ctrl + M. Menu này bao gồm các mục: Tổng quan, Ứng viên, Nhân viên, Đào tạo, Cài đặt và Trợ giúp. Cách gán phím tắt có thể được thay đổi trong cài đặt trò chơi.&#10;Phím tắt mặc định: Chuyển đổi nhân vật bằng phím A/D hoặc mũi tên trái/phải; Xác nhận lựa chọn bằng phím cách hoặc nhấp chuột; Hủy hoặc quay lại bằng phím Esc; Quản lý đi lại và lương bằng phím T hoặc G. Trong tab Trợ giúp, phím mũi tên trái/phải dùng để chuyển đổi giữa nội dung và bài viết, phím mũi tên lên/xuống dùng để chọn hoặc cuộn, còn phím mũi tên lên/xuống dùng để chuyển trang.2
+        1Tổng quan và tình hình nhân sự2
+        1Bảng tổng quan tóm tắt tình hình hiện tại của trang trại: Nhân viên, nhân viên sẵn sàng làm việc, ứng viên và uy tín của nhà tuyển dụng được hiển thị ở phía trên. Phía dưới là các nhiệm vụ đang thực hiện, bao gồm thông tin về nhân sự, phương tiện, thiết bị và công việc.&#10;Ô “Thay đổi” chỉ hiển thị các sự kiện nhân sự có liên quan, tức là những thay đổi về uy tín của nhà tuyển dụng, kinh nghiệm, độ tin cậy, lòng trung thành, độ tuổi hoặc chuyên môn. Mỗi thông báo đều nêu rõ nguyên nhân, người liên quan và tác động; một mục gồm nhiều dòng vẫn được coi là một thông báo.&#10;“Báo cáo hàng tháng” và “Tổng quan” hiển thị các chỉ số hiện tại và tích lũy suốt thời gian làm việc. Hãy sử dụng bảng tổng quan này để lập kế hoạch nhiệm vụ nhanh chóng; các chi tiết, quyết định và lịch sử công việc được trình bày trong các trang chuyên môn riêng biệt.2
+        1Thị trường lao động và tuyển dụng2
+        1Một vòng chơi mới bắt đầu với bốn ứng viên. Đồng thời, trên thị trường chỉ có thể có tối đa tám ứng viên. Vào mỗi đầu tháng, tối đa ba vị trí mới sẽ được xác định ngẫu nhiên; xác suất cho mỗi vị trí là 15% + 0,7 × điểm uy tín của nhà tuyển dụng. Với 60 điểm uy tín, xác suất là 57%; với 100 điểm uy tín, xác suất là 85% cho mỗi vị trí. Nếu thị trường trống, hệ thống sẽ tạo ra ít nhất một ứng viên mới.&#10;Ứng viên chắc chắn vẫn có mặt trong tháng được tạo ra. Sau lần chuyển tháng đầu tiên, xác suất rời đi của họ dao động từ 10–30% tùy theo chất lượng; sau lần thứ hai là 30–50%; và đến lần chuyển tháng thứ ba là 100%. Những hồ sơ chất lượng cao có thể biến mất sớm hơn vì chất lượng của họ làm tăng xác suất rời đi.&#10;Ứng viên trong độ tuổi từ 18–65, có ngày sinh cố định và tiếp tục già đi. Nền tảng nghề nghiệp bao gồm: doanh nghiệp gia đình, trang trại bò sữa, doanh nghiệp dịch vụ nông nghiệp, canh tác cây trồng, trang trại hỗn hợp, logistics, xưởng sửa chữa máy móc nông nghiệp và công việc văn phòng. Tuổi tác và nền tảng nghề nghiệp chủ yếu ảnh hưởng đến kinh nghiệm và kiến thức chuyên môn sẵn có.&#10;Mức lương mong muốn dựa trên kinh nghiệm và độ tin cậy, có độ lệch ngẫu nhiên từ 96–106% và bị ảnh hưởng bởi uy tín của nhà tuyển dụng. Uy tín thấp làm tăng mức lương mong muốn, uy tín cao làm giảm mức lương mong muốn. Trước khi tuyển dụng, sẽ xuất hiện một thông báo xác nhận; việc tuyển dụng làm tăng uy tín thêm 1 điểm.2
+        1Hồ sơ nhân viên, giá trị và tình trạng2
+        1Kinh nghiệm, độ tin cậy và lòng trung thành đều được đánh giá trên thang điểm từ 0 đến 100. Con số luôn hiển thị rõ ràng; các thanh biểu đồ giúp so sánh nhanh chóng.&#10;Cấp bậc chỉ dựa hoàn toàn vào kinh nghiệm: Nhân viên hỗ trợ 0–44, Chuyên viên 45–74, Chuyên gia 75–100. Kinh nghiệm quyết định tốc độ làm việc, mức hao mòn thêm và mức tiêu hao thêm. Độ tin cậy ảnh hưởng đến các sự sụt giảm hiệu suất ngắn hạn, bệnh tật, diễn biến hàng tháng và rủi ro phải ngừng công việc. Lòng trung thành thể hiện mức độ gắn bó với doanh nghiệp và ảnh hưởng đến các cảnh báo, tranh chấp về lương và việc tự nguyện nghỉ việc.2
+        1Trợ lý AI, Vận chuyển và FollowMe2
+        1Khi khởi chạy một tác vụ hỗ trợ AI thông thường, cửa sổ chọn nhân viên sẽ mở ra. Chỉ có thể chọn những nhân viên hiện đang sẵn sàng. Một nhân viên không thể nhận nhiều nhiệm vụ cùng lúc và sẽ không sẵn sàng khi đang ốm hoặc tham gia khóa đào tạo.&#10;Một ca làm việc chỉ được ghi nhận là nhiệm vụ đã hoàn thành sau 10 giây. Để đạt tiến bộ trong chuyên môn, thời gian thực hiện công việc thực tế phải kéo dài ít nhất 3 phút.&#10;Bằng cách nhấn phím T hoặc nút menu, bạn có thể mở cài đặt ưu tiên vận chuyển. Tại đây, bạn xác định nhân viên nào sẽ đảm nhận các nhiệm vụ vận chuyển và thứ tự kiểm tra họ. Đối với nhiệm vụ “từ A đến B”, hệ thống sẽ chọn nhân viên rảnh rỗi đầu tiên theo thứ tự từ trên xuống dưới. Chức năng FollowMe vẫn sử dụng cửa sổ chọn nhân viên và được tính là công việc vận chuyển.2
+        1Kinh nghiệm và tác động đến công việc2
+        1TÍCH LŨY KINH NGHIỆM&#10;– Kinh nghiệm được tích lũy dựa trên thời gian làm việc được ghi nhận; số phút học tập chưa sử dụng sẽ được giữ lại.&#10;– Mỗi lần thực hiện nhiệm vụ có thể mang lại tối đa 2 điểm kinh nghiệm.&#10;– Ngoài ra, tiến độ còn bị giới hạn bởi mức trần hàng tháng. Càng có nhiều kinh nghiệm, thời gian cần thiết để đạt được điểm tiếp theo càng lâu.&#10;TÁC ĐỘNG&#10;– Chuyên môn chính tăng kinh nghiệm hiệu dụng thêm 12 điểm, chuyên môn phụ tăng thêm 6 điểm; giá trị tối đa là 100.&#10;– Tốc độ làm việc = 70% + 30% × kinh nghiệm hiệu dụng / 100.&#10;– Mức hao mòn bổ sung tối đa là 15%, mức tiêu thụ vật liệu và nhiên liệu bổ sung tối đa là 10% × lượng kinh nghiệm hiệu quả còn thiếu × hệ số kinh tế. Hệ số kinh tế là 0,75 / 1,00 / 1,25.&#10;THỜI GIAN HỌC VÀ GIỚI HẠN HÀNG THÁNG&#10;– Kinh nghiệm 0–24: 25 phút, giới hạn hàng tháng +1; 25–49: 50 phút, 0; 50–69: 100 phút, -1.&#10;– Kinh nghiệm 70–84: 220 phút, -2; 85–94: 540 phút, -3; 95–100: 1080 phút, -4.&#10;– Giới hạn cơ bản theo ngày/tháng: 1 ngày = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Giới hạn thực tế = Giới hạn cơ bản + Điều chỉnh, tối thiểu là 1.2
+        1Độ tin cậy, bệnh tật và việc ngừng hoạt động2
+        1Khi chỉ số độ tin cậy dưới 85, có thể xảy ra các đợt sụt giảm hiệu suất ngắn. Hệ thống kiểm tra mỗi phút một lần; xác suất xảy ra tăng lên khi độ tin cậy giảm, tối đa là 15%. Mỗi đợt sụt giảm kéo dài 30–90 giây, làm giảm hiệu suất từ 4–15% và chỉ có thể xảy ra lại sau 3 phút nữa.&#10;Tình trạng bệnh tật được kiểm tra hàng ngày. Nhân viên bị bệnh sẽ không thể làm việc trong ngày đó; nhiệm vụ đang thực hiện sẽ bị dừng lại. Mỗi tháng tối đa có thể có số ngày bệnh tật bằng số ngày trong tháng chia cho 3 (làm tròn lên). Khi độ tin cậy dưới 50, hệ thống sẽ kiểm tra một lần sau 60 giây để xác định liệu có nên dừng hoàn toàn nhiệm vụ hay không; trong trường hợp đó, nhiệm vụ sẽ không được tính là thành công và sự cố sẽ được ghi lại trong nhật ký.&#10;Các mức tham chiếu về bệnh tật/ngày và hủy nhiệm vụ: 0–20: 10% / 20%; 21–29: 8% / 15%; 30–40: 8% / 10%; 41–49: 6% / 5%; 50–60: 6% / 0%; 61–80: 4% / 0%; 81–100: 2% / 0%. Một tháng tốt cần có ít nhất 120 phút làm việc, không có sự cố, không có ngày nghỉ ốm và ít hơn 240 phút làm việc ban đêm; khi đó sẽ có 35% cơ hội tăng +1 điểm độ tin cậy. Các rủi ro tiêu cực được cộng dồn và giới hạn ở mức 60%.2
+        1Lòng trung thành và uy tín của nhà tuyển dụng2
+        1Nhân viên mới thường bắt đầu với mức Lòng trung thành khoảng 65. Việc trả lương đúng hạn, thời gian làm việc lâu năm tại công ty và các yêu cầu tăng lương được chấp nhận sẽ củng cố sự gắn bó; trong khi đó, các vấn đề tài chính, làm ca đêm cũng như các yêu cầu tăng lương bị từ chối hoặc bị trì hoãn lâu ngày sẽ làm suy yếu sự gắn bó này. Công việc ca đêm từ 22:00 đến 06:00 sẽ được ghi nhận và có thể làm giảm từ 120 phút trong game đến tối đa 4 điểm Lòng trung thành cũng như 1–2 điểm Uy tín.&#10;Khi chênh lệch giữa Lòng trung thành và Uy tín của nhà tuyển dụng đạt ít nhất 15 / 30 / 50 điểm, mỗi tháng sẽ có sự điều chỉnh lại tương ứng 1 / 2 / 3 điểm. Các sự kiện: Nhận lương khi Uy tín đạt ít nhất 40: +1 Lòng trung thành; việc thanh toán khiến chỉ số Lòng trung thành giảm -2; nếu doanh nghiệp trước đó đã âm: -4; Thời gian làm việc 3 / 6 / 12 / 24 tháng: +1 / +1 / +2 / +3; Yêu cầu được chấp nhận +3; bị từ chối -5, nếu mức độ trung thành dưới 40 thì -7; yêu cầu chưa được giải quyết sau tháng ân hạn sẽ bị trừ -2 mỗi tháng.&#10;Tỷ lệ tự nghỉ việc hàng tháng khi mức độ trung thành từ 0–5: 35%, 6–9: 20%, 10–14: 10%, từ 15 trở lên không có tỷ lệ tự nghỉ việc theo mức độ trung thành. Điểm uy tín của nhà tuyển dụng bắt đầu từ 60, dao động từ 0–100 và được đánh giá là: 0–19 (nguy cấp), 20–39 (yếu), 40–59 (ổn định), 60–79 (tốt) hoặc 80–100 (rất tốt). Chỉ số này ảnh hưởng đến số lượng và chất lượng ứng viên, mức lương mong muốn cũng như mức độ trung thành lâu dài.2
+        1Lương, tính lương và các khoản nợ lương2
+        1Mức lương cơ bản cá nhân được tính dựa trên thâm niên và độ tin cậy, đồng thời được nội suy tuyến tính trong từng bậc thâm niên. Độ tin cậy sẽ nhân với giá trị nằm trong khoảng từ 0,94 đến 1,06. Ứng viên còn nhận được các khoản phụ cấp ngẫu nhiên, uy tín và các khoản phụ cấp chuyên môn tiềm năng là +5% cho chuyên môn chính và +3% cho chuyên môn phụ.&#10;Mức lương cơ bản với 3 ngày/tháng: Kinh nghiệm 0–44: 1.800–2.200, 45–74: 2.200–2.700, 75–100: 2.700–3.300. Lương tháng = Lương cơ bản × Hệ số độ dài tháng × Hệ số chi phí kinh tế, làm tròn đến hàng chục. Khi chế độ lương cá nhân bị tắt, mức lương cơ bản tiêu chuẩn 100–100.000 sẽ được áp dụng theo các mức tăng 10 đơn vị. Hệ số độ dài tháng cho 1–28 ngày: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Việc thanh toán được thực hiện vào đầu tháng dưới dạng tiền lương. Ngay cả những nhân viên có hợp đồng lao động kết thúc vào thời điểm đó cũng sẽ nhận được khoản thanh toán đến hạn trước đó. Chuyên gia hoặc người có chuyên môn có thể yêu cầu tăng lương: Xác suất cơ bản là 70%, bị giới hạn trong khoảng 55–85% do chỉ số Lòng trung thành; sau đó có thể được xem xét lại hàng tháng với xác suất bằng một nửa. Chấp nhận sẽ tăng +3 Lòng trung thành và +1 Uy tín; Từ chối sẽ làm giảm Lòng trung thành 5 điểm, nếu dưới 40 thì giảm 7 điểm, đồng thời làm tăng rủi ro nghỉ việc và rủi ro về độ tin cậy trong 3 tháng. G sẽ mở tất cả các khoản nợ chưa thanh toán.2
+        1Các chuyên ngành và phát triển thực tiễn2
+        1CÁC QUY TẮC CƠ BẢN&#10;– Có tám hạng mục học tập: Xử lý đất, Gieo hạt, Bón phân, Bảo vệ thực vật, Thu hoạch, Vận chuyển, Bảo dưỡng máy móc và Phương pháp làm việc tiết kiệm.&#10;– Tiến độ học tập được lưu riêng cho từng hạng mục. Các chuyên môn đã học sẽ được giữ vĩnh viễn; tối đa chỉ có hai phần thưởng được kích hoạt cùng lúc.&#10;TIẾN ĐỘ HỌC TẬP&#10;– Các mốc học tập lần lượt là 240, 420, 600 và 780 phút; sau đó, mỗi mốc tiếp theo tăng thêm 180 phút.&#10;– Hệ số học tập được tính theo công thức: 1 + (Kinh nghiệm – 50)/250 + (Độ tin cậy – 50)/300 và được giới hạn trong khoảng từ 0,75 đến 1,30. Khi thực hiện nhiều hoạt động, thời gian học tập sẽ được phân bổ theo tỷ lệ.&#10;PHÂN LOẠI HOẠT ĐỘNG&#10;– Xử lý đất: Máy cày, máy xới, máy xới quay, máy xới đĩa, máy lăn và máy cắt cỏ.&#10;– Gieo hạt: Máy gieo hạt và máy trồng cây, cũng như hạt giống.&#10;– Bón phân: Phân khoáng, phân lỏng, phân chuồng, chất thải lên men và phân bò. Bảo vệ thực vật: Công việc phun thuốc diệt cỏ.&#10;– Thu hoạch: Máy gặt đập liên hợp, bộ cắt, máy ép kiện, máy cắt cỏ, xe chở hàng và xe thu gom. Vận chuyển: Xe kéo, dỡ hàng và vận chuyển từ A đến B.&#10;PHỤ CẤP VÀ KÍCH HOẠT&#10;– Chuyên môn chính: +12 điểm kinh nghiệm hiệu quả và +5% lương cơ bản. Chuyên môn phụ: +6 và +3%.&#10;– Cả hai chuyên môn đều có thể tạm ngưng. Mỗi nhân viên chỉ được kích hoạt một lần chuyên môn đã học nhưng đang tạm ngưng trong mỗi năm nông nghiệp (từ tháng 3 đến tháng 2); việc tạm ngưng không làm mất quyền này.2
+        1Các khóa đào tạo2
+        1Các khóa đào tạo chỉ bắt đầu vào ngày đầu tiên của tháng; nếu ngày đó rơi vào ngày chẵn trong tháng, thì thời gian kết thúc là 12:00. Mỗi năm nông nghiệp (từ tháng 3 đến tháng 2), một nhân viên chỉ được tham gia một khóa đào tạo và không được đang làm việc hoặc ốm. Người đó sẽ không thể tham gia công việc cho đến hết tháng; tiến độ học tập chỉ được tính khi hoàn thành khóa học vào thời điểm chuyển tháng.&#10;Mỗi khóa đào tạo mang lại 30% số phút học tập cần thiết cho chuyên ngành tiếp theo, tối thiểu 30 phút và không bao giờ vượt quá số phút còn thiếu. Mỗi hạng mục có hệ số giá dao động từ -20% đến +20% mỗi tháng và có 25% xác suất đã kín chỗ. Chi phí sẽ được khấu trừ ngay khi bắt đầu và dựa trên mức lương tháng hiện tại.&#10;Chi phí đào tạo = mức lương tháng hiện tại × hệ số danh mục × hệ số điều chỉnh hàng tháng. Các hệ số: Xử lý đất 75%, Gieo hạt 90%, Bón phân 90%, Bảo vệ thực vật 100%, Thu hoạch 110%, Vận chuyển 65%, Bảo vệ máy móc 120%, Phương pháp làm việc tiết kiệm 120%.2
+        1Sa thải, tự nguyện nghỉ việc và nghỉ hưu2
+        1Việc sa thải phải được xác nhận. Đối với trường hợp 1 ngày/tháng, thông báo sa thải phải được đưa ra vào ngày thứ 1 trước 12:00 để có hiệu lực vào ngày đầu tháng tiếp theo. Đối với hai ngày trở lên, ngày hiệu lực là ngày cuối cùng của nửa tháng được làm tròn lên, tức là ngày ceil(số ngày/tháng ÷ 2). Sau ngày hiệu lực, thời điểm kết thúc sẽ được lùi lại thêm một tháng.&#10;Khi thông báo sa thải, chỉ số Lòng trung thành sẽ giảm ngay lập tức 40 điểm và chỉ số Độ tin cậy giảm 25 điểm. Nhân viên về nguyên tắc vẫn có thể làm việc cho đến khi kết thúc tháng có hiệu lực. Mức giảm uy tín khi sa thải: dưới 1 tháng -12, dưới 3 tháng -9, dưới 6 tháng -7, dưới 12 tháng -5, dưới 24 tháng -3, từ 24 tháng trở lên -1; mỗi lần sa thải tiếp theo trong cùng tháng sẽ làm mất thêm 4 điểm.&#10;Khi chỉ số Lòng trung thành ở mức 0–14, hệ thống sẽ kiểm tra hàng tháng xem nhân viên có khả năng tự xin nghỉ việc hay không. Việc yêu cầu tăng lương bị từ chối có thể tạm thời làm tăng khả năng này thêm 5 điểm phần trăm. Thông báo tự xin nghỉ việc sẽ có hiệu lực vào cuối tháng và làm mất 10 điểm Uy tín. Từ sinh nhật lần thứ 55 trở đi, có thể thông báo nghỉ hưu; rủi ro tăng lên khoảng 80–90% cho đến 67 tuổi, đạt 95% ở tuổi 68, 98% ở tuổi 69 và 100% ở tuổi 70. Người đó vẫn tiếp tục làm việc cho đến cuối tháng.2
+        1Hồ sơ, Lịch sử và Thống kê2
+        1Hồ sơ ứng viên tổng hợp các yếu tố như độ tuổi, nền tảng nghề nghiệp, kinh nghiệm, tính đáng tin cậy, lòng trung thành, chuyên môn và thời gian hoạt động trên thị trường thành một văn bản sinh động. Hồ sơ nhân viên bổ sung các thông tin về thâm niên làm việc, các nhiệm vụ đã thực hiện, các khóa đào tạo và tiến trình học tập.&#10;Lịch sử cá nhân có thể ghi lại thông tin về việc tuyển dụng, ngày bắt đầu và kết thúc nhiệm vụ, việc ngừng nhiệm vụ, ốm đau, các khóa đào tạo, chuyên môn, yêu cầu lương và các quyết định, những thay đổi về lòng trung thành và độ tin cậy, phân công vận chuyển cũng như việc sa thải, tự nguyện nghỉ việc, nghỉ hưu và chấm dứt hợp đồng lao động.&#10;Lịch sử nhân viên hiển thị, trong số những thông tin khác, các đợt làm việc, thời gian làm việc, đào tạo, trạng thái vận chuyển, các sự kiện gần đây nhất, ngày nghỉ ốm, yêu cầu lương, việc ngừng làm việc và tổng lương đã được thanh toán cho đến nay. Bảng tổng quan còn hiển thị các số liệu tổng hợp trên toàn công ty như số lượng nhân viên từng được tuyển dụng, sa thải, tự nguyện nghỉ việc và nghỉ hưu.2
+        1Cài đặt, Chế độ nhiều người chơi và Kết quả trò chơi2
+        1Các cài đặt áp dụng cho từng phiên chơi và được chia thành các mục: Hiệu suất làm việc, Phát triển nhân sự, Kinh tế và Lương bổng. Các tác động đến lối chơi sẽ mở khóa các hiệu ứng kinh nghiệm liên quan; các hiệu ứng kinh nghiệm điều chỉnh tốc độ, mức hao mòn, vật tư tiêu hao và nhiên liệu. Các tác động đến nhân sự sẽ mở khóa các thay đổi về lòng trung thành và tùy chọn làm thêm giờ. Các tác động về kinh tế sẽ mở khóa mức lương cá nhân và mức lương tháng tiêu chuẩn.&#10;Các hiệu ứng bị vô hiệu hóa sẽ không điều chỉnh lại dữ liệu nhân sự hiện có theo hiệu lực hồi tố. Chúng chỉ ngăn chặn hoặc cho phép các tác động tiếp theo tương ứng. Mức lương tháng tiêu chuẩn đóng vai trò là giá trị cơ bản khi mức lương cá nhân bị vô hiệu hóa; giá trị này có thể được điều chỉnh trực tiếp trong phần cài đặt. Cách gán phím có thể được thay đổi trong cài đặt trò chơi.&#10;Trong chế độ nhiều người chơi, nhân sự, ứng viên, nhiệm vụ, mức lương, khóa đào tạo, cài đặt và biên niên sử được quản lý và đồng bộ hóa theo từng trang trại. Máy chủ có quyền quyết định; chỉ những người quản lý trang trại được ủy quyền mới được phép thay đổi trang trại của mình. Dữ liệu được lưu trong tệp helperPersonnel.xml trong tệp lưu trò chơi và các phân công hiện tại sẽ được khôi phục khi tải lại, nếu có thể. Các tệp lưu trò chơi cũ vẫn có thể sử dụng được; dữ liệu lịch sử có thể không đầy đủ đối với những nhân viên đã nghỉ việc.2
+        <e k="ui_button_emergency_release_worker" v="Giải phóng" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="Giải phóng %s? Chỉ có thể thực hiện khi máy chủ không phát hiện công việc đang hoạt động." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="Đã giải phóng nhân viên." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="Không thể giải phóng: nhân viên vẫn có công việc đang hoạt động." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Không cần giải phóng: nhân viên đã sẵn sàng." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="Không thể giải phóng: không thể xác minh an toàn trạng thái công việc." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="Không thể giải phóng: không có quyền hoặc nhân viên không hợp lệ." />
+    1Hướng dẫn khởi động nhanh và cách sử dụng2
+    1Hệ thống quản lý nhân sự thay thế các trợ lý AI ẩn danh bằng các ứng viên và nhân viên có tên cụ thể. Mỗi nhân viên đều phát triển theo thời gian, nhận lương hàng tháng và có thể sở hữu những điểm mạnh cũng như rủi ro khác nhau dựa trên kinh nghiệm, độ tin cậy, lòng trung thành và chuyên môn.&#10;Menu cá nhân được mở mặc định bằng phím Ctrl + M. Menu này bao gồm các mục: Tổng quan, Ứng viên, Nhân viên, Đào tạo, Cài đặt và Trợ giúp. Cách gán phím tắt có thể được thay đổi trong cài đặt trò chơi.&#10;Phím tắt mặc định: Chuyển đổi nhân vật bằng phím A/D hoặc mũi tên trái/phải; Xác nhận lựa chọn bằng phím cách hoặc nhấp chuột; Hủy hoặc quay lại bằng phím Esc; Quản lý đi lại và lương bằng phím T hoặc G. Trong tab Trợ giúp, phím mũi tên trái/phải dùng để chuyển đổi giữa nội dung và bài viết, phím mũi tên lên/xuống dùng để chọn hoặc cuộn, còn phím mũi tên lên/xuống dùng để chuyển trang.2
+    1Tổng quan và tình hình nhân sự2
+    1Bảng tổng quan tóm tắt tình hình hiện tại của trang trại: Nhân viên, nhân viên sẵn sàng làm việc, ứng viên và uy tín của nhà tuyển dụng được hiển thị ở phía trên. Phía dưới là các nhiệm vụ đang thực hiện, bao gồm thông tin về nhân sự, phương tiện, thiết bị và công việc.&#10;Ô “Thay đổi” chỉ hiển thị các sự kiện nhân sự có liên quan, tức là những thay đổi về uy tín của nhà tuyển dụng, kinh nghiệm, độ tin cậy, lòng trung thành, độ tuổi hoặc chuyên môn. Mỗi thông báo đều nêu rõ nguyên nhân, người liên quan và tác động; một mục gồm nhiều dòng vẫn được coi là một thông báo.&#10;“Báo cáo hàng tháng” và “Tổng quan” hiển thị các chỉ số hiện tại và tích lũy suốt thời gian làm việc. Hãy sử dụng bảng tổng quan này để lập kế hoạch nhiệm vụ nhanh chóng; các chi tiết, quyết định và lịch sử công việc được trình bày trong các trang chuyên môn riêng biệt.2
+    1Thị trường lao động và tuyển dụng2
+    1Một vòng chơi mới bắt đầu với bốn ứng viên. Đồng thời, trên thị trường chỉ có thể có tối đa tám ứng viên. Vào mỗi đầu tháng, tối đa ba vị trí mới sẽ được xác định ngẫu nhiên; xác suất cho mỗi vị trí là 15% + 0,7 × điểm uy tín của nhà tuyển dụng. Với 60 điểm uy tín, xác suất là 57%; với 100 điểm uy tín, xác suất là 85% cho mỗi vị trí. Nếu thị trường trống, hệ thống sẽ tạo ra ít nhất một ứng viên mới.&#10;Ứng viên chắc chắn vẫn có mặt trong tháng được tạo ra. Sau lần chuyển tháng đầu tiên, xác suất rời đi của họ dao động từ 10–30% tùy theo chất lượng; sau lần thứ hai là 30–50%; và đến lần chuyển tháng thứ ba là 100%. Những hồ sơ chất lượng cao có thể biến mất sớm hơn vì chất lượng của họ làm tăng xác suất rời đi.&#10;Ứng viên trong độ tuổi từ 18–65, có ngày sinh cố định và tiếp tục già đi. Nền tảng nghề nghiệp bao gồm: doanh nghiệp gia đình, trang trại bò sữa, doanh nghiệp dịch vụ nông nghiệp, canh tác cây trồng, trang trại hỗn hợp, logistics, xưởng sửa chữa máy móc nông nghiệp và công việc văn phòng. Tuổi tác và nền tảng nghề nghiệp chủ yếu ảnh hưởng đến kinh nghiệm và kiến thức chuyên môn sẵn có.&#10;Mức lương mong muốn dựa trên kinh nghiệm và độ tin cậy, có độ lệch ngẫu nhiên từ 96–106% và bị ảnh hưởng bởi uy tín của nhà tuyển dụng. Uy tín thấp làm tăng mức lương mong muốn, uy tín cao làm giảm mức lương mong muốn. Trước khi tuyển dụng, sẽ xuất hiện một thông báo xác nhận; việc tuyển dụng làm tăng uy tín thêm 1 điểm.2
+    1Hồ sơ nhân viên, giá trị và tình trạng2
+    1Kinh nghiệm, độ tin cậy và lòng trung thành đều được đánh giá trên thang điểm từ 0 đến 100. Con số luôn hiển thị rõ ràng; các thanh biểu đồ giúp so sánh nhanh chóng.&#10;Cấp bậc chỉ dựa hoàn toàn vào kinh nghiệm: Nhân viên hỗ trợ 0–44, Chuyên viên 45–74, Chuyên gia 75–100. Kinh nghiệm quyết định tốc độ làm việc, mức hao mòn thêm và mức tiêu hao thêm. Độ tin cậy ảnh hưởng đến những đợt sụt giảm hiệu suất ngắn hạn, bệnh tật, diễn biến hàng tháng và rủi ro phải ngừng công việc. Lòng trung thành thể hiện mức độ gắn bó với doanh nghiệp và ảnh hưởng đến các cảnh báo, tranh chấp về lương và việc tự nguyện nghỉ việc.2
+    <e k="ui_pmHelpTopic05Title" v="Trợ lý AI, Vận chuyển và FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="Khi khởi chạy một tác vụ hỗ trợ AI thông thường, cửa sổ chọn nhân viên sẽ mở ra. Chỉ có thể chọn những nhân viên hiện đang sẵn sàng. Một nhân viên không thể nhận nhiều nhiệm vụ cùng lúc và sẽ không sẵn sàng khi đang ốm hoặc tham gia khóa đào tạo.&#10;Một ca làm việc chỉ được ghi nhận là nhiệm vụ đã hoàn thành sau 10 giây. Để đạt tiến bộ trong chuyên môn, thời gian thực hiện công việc thực tế phải kéo dài ít nhất 3 phút.&#10;Bằng cách nhấn phím T hoặc nút menu, bạn có thể mở cài đặt ưu tiên vận chuyển. Tại đây, bạn xác định nhân viên nào sẽ đảm nhận các nhiệm vụ vận chuyển và thứ tự kiểm tra họ. Đối với nhiệm vụ “từ A đến B”, hệ thống sẽ chọn nhân viên rảnh rỗi đầu tiên theo thứ tự từ trên xuống dưới. Chức năng FollowMe vẫn sử dụng cửa sổ chọn nhân viên và được tính là công việc vận chuyển." />
+    <e k="ui_pmHelpTopic06Title" v="Kinh nghiệm và tác động đến công việc" />
+    <e k="ui_pmHelpTopic06Body" v="TÍCH LŨY KINH NGHIỆM&#10;– Kinh nghiệm được tích lũy dựa trên thời gian làm việc được ghi nhận; số phút học tập chưa sử dụng sẽ được giữ lại.&#10;– Mỗi lần thực hiện nhiệm vụ có thể mang lại tối đa 2 điểm kinh nghiệm.&#10;– Ngoài ra, tiến độ còn bị giới hạn bởi mức trần hàng tháng. Càng có nhiều kinh nghiệm, thời gian cần thiết để đạt được điểm tiếp theo càng lâu.&#10;TÁC ĐỘNG&#10;– Chuyên môn chính tăng kinh nghiệm hiệu dụng thêm 12 điểm, chuyên môn phụ tăng thêm 6 điểm; giá trị tối đa là 100.&#10;– Tốc độ làm việc = 70% + 30% × kinh nghiệm hiệu dụng / 100.&#10;– Mức hao mòn bổ sung tối đa là 15%, mức tiêu thụ vật liệu và nhiên liệu bổ sung tối đa là 10% × lượng kinh nghiệm hiệu quả còn thiếu × hệ số kinh tế. Hệ số kinh tế là 0,75 / 1,00 / 1,25.&#10;THỜI GIAN HỌC VÀ GIỚI HẠN HÀNG THÁNG&#10;– Kinh nghiệm 0–24: 25 phút, giới hạn hàng tháng +1; 25–49: 50 phút, 0; 50–69: 100 phút, -1.&#10;– Kinh nghiệm 70–84: 220 phút, -2; 85–94: 540 phút, -3; 95–100: 1080 phút, -4.&#10;– Giới hạn cơ bản theo ngày/tháng: 1 ngày = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Giới hạn thực tế = Giới hạn cơ bản + Điều chỉnh, tối thiểu là 1." />
+    <e k="ui_pmHelpTopic07Title" v="Độ tin cậy, bệnh tật và việc ngừng hoạt động" />
+    <e k="ui_pmHelpTopic07Body" v="Khi chỉ số độ tin cậy dưới 85, có thể xảy ra các đợt sụt giảm hiệu suất ngắn. Hệ thống kiểm tra mỗi phút một lần; xác suất xảy ra tăng lên khi độ tin cậy giảm, tối đa là 15%. Mỗi đợt sụt giảm kéo dài 30–90 giây, làm giảm hiệu suất từ 4–15% và chỉ có thể xảy ra lại sau 3 phút nữa.&#10;Tình trạng bệnh tật được kiểm tra hàng ngày. Nhân viên bị ốm sẽ không thể làm việc trong ngày đó; nhiệm vụ đang thực hiện sẽ bị dừng lại. Mỗi tháng tối đa có thể có số ngày ốm bằng số ngày trong tháng chia cho 3 (làm tròn lên). Khi độ tin cậy dưới 50, hệ thống sẽ kiểm tra một lần sau 60 giây để xác định liệu có nên dừng hoàn toàn nhiệm vụ hay không; trong trường hợp đó, nhiệm vụ sẽ không được tính là thành công và sự cố sẽ được ghi lại trong nhật ký.&#10;Các mức tham chiếu về bệnh tật/ngày và hủy nhiệm vụ: 0–20: 10% / 20%; 21–29: 8% / 15%; 30–40: 8% / 10%; 41–49: 6% / 5%; 50–60: 6% / 0%; 61–80: 4% / 0%; 81–100: 2% / 0%. Một tháng tốt cần có ít nhất 120 phút làm việc, không có sự cố, không có ngày nghỉ ốm và ít hơn 240 phút làm việc ban đêm; khi đó sẽ có 35% cơ hội tăng +1 điểm độ tin cậy. Các rủi ro tiêu cực được cộng dồn và giới hạn ở mức 60%." />
+    <e k="ui_pmHelpTopic08Title" v="Lòng trung thành và uy tín của nhà tuyển dụng" />
+    <e k="ui_pmHelpTopic08Body" v="Nhân viên mới thường bắt đầu với mức Lòng trung thành khoảng 65. Việc trả lương đúng hạn, thời gian làm việc lâu năm tại công ty và các yêu cầu tăng lương được chấp nhận sẽ củng cố sự gắn bó; trong khi đó, các vấn đề tài chính, làm ca đêm cũng như các yêu cầu tăng lương bị từ chối hoặc bị trì hoãn lâu ngày sẽ làm suy yếu sự gắn bó này. Công việc ca đêm từ 22:00 đến 06:00 sẽ được ghi nhận và có thể làm giảm từ 120 phút trong game đến tối đa 4 điểm Lòng trung thành cũng như 1–2 điểm Uy tín.&#10;Khi chênh lệch giữa Lòng trung thành và Uy tín của nhà tuyển dụng đạt ít nhất 15 / 30 / 50 điểm, mỗi tháng sẽ có sự điều chỉnh lại tương ứng 1 / 2 / 3 điểm. Các sự kiện: Nhận lương khi Uy tín đạt ít nhất 40: +1 Lòng trung thành; việc thanh toán khiến chỉ số Lòng trung thành giảm -2; nếu doanh nghiệp trước đó đã âm: -4; Thời gian làm việc 3 / 6 / 12 / 24 tháng: +1 / +1 / +2 / +3; Yêu cầu được chấp nhận +3; bị từ chối -5, nếu mức độ trung thành dưới 40 thì -7; yêu cầu chưa được giải quyết sau tháng ân hạn sẽ bị trừ -2 mỗi tháng.&#10;Tỷ lệ tự nghỉ việc hàng tháng khi mức độ trung thành từ 0–5: 35%, 6–9: 20%, 10–14: 10%, từ 15 trở lên không có tỷ lệ tự nghỉ việc theo mức độ trung thành. Điểm uy tín của nhà tuyển dụng bắt đầu từ 60, dao động từ 0–100 và được đánh giá là: 0–19 (nguy cấp), 20–39 (yếu), 40–59 (ổn định), 60–79 (tốt) hoặc 80–100 (rất tốt). Chỉ số này ảnh hưởng đến số lượng và chất lượng ứng viên, mức lương mong muốn cũng như mức độ trung thành lâu dài." />
+    <e k="ui_pmHelpTopic09Title" v="Lương, tính lương và các khoản nợ lương" />
+    <e k="ui_pmHelpTopic09Body" v="Mức lương cơ bản cá nhân được tính dựa trên thâm niên và độ tin cậy, đồng thời được nội suy tuyến tính trong từng bậc thâm niên. Độ tin cậy sẽ nhân với giá trị nằm trong khoảng từ 0,94 đến 1,06. Ứng viên còn nhận được các khoản phụ cấp ngẫu nhiên, uy tín và các khoản phụ cấp chuyên môn tiềm năng là +5% cho chuyên môn chính và +3% cho chuyên môn phụ.&#10;Mức lương cơ bản với 3 ngày/tháng: Kinh nghiệm 0–44: 1.800–2.200, 45–74: 2.200–2.700, 75–100: 2.700–3.300. Lương tháng = Lương cơ bản × Hệ số độ dài tháng × Hệ số chi phí kinh tế, làm tròn đến hàng chục. Khi chế độ lương cá nhân bị tắt, mức lương cơ bản tiêu chuẩn 100–100.000 sẽ được áp dụng theo các bước tăng 10. Hệ số độ dài tháng cho 1–28 ngày: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Việc thanh toán được thực hiện vào đầu tháng dưới dạng tiền lương. Ngay cả những nhân viên có hợp đồng lao động kết thúc vào thời điểm đó cũng sẽ nhận được khoản thanh toán đến hạn trước đó. Chuyên gia hoặc người có chuyên môn có thể yêu cầu tăng lương: Xác suất cơ bản là 70%, bị giới hạn trong khoảng 55–85% do chỉ số Lòng trung thành; sau đó có thể được xem xét lại hàng tháng với xác suất bằng một nửa. Chấp nhận sẽ tăng +3 Lòng trung thành và +1 Uy tín; Từ chối sẽ làm giảm Lòng trung thành 5 điểm, nếu dưới 40 thì giảm 7 điểm, đồng thời làm tăng rủi ro nghỉ việc và rủi ro về độ tin cậy trong 3 tháng. G sẽ mở tất cả các khoản nợ chưa thanh toán." />
+    <e k="ui_pmHelpTopic10Title" v="Các chuyên ngành và phát triển thực tiễn" />
+    <e k="ui_pmHelpTopic10Body" v="CÁC QUY TẮC CƠ BẢN&#10;– Có tám hạng mục học tập: Xử lý đất, Gieo hạt, Bón phân, Bảo vệ thực vật, Thu hoạch, Vận chuyển, Bảo dưỡng máy móc và Phương pháp làm việc tiết kiệm.&#10;– Tiến độ học tập được lưu riêng cho từng hạng mục. Các chuyên môn đã học sẽ được giữ vĩnh viễn; tối đa chỉ có hai phần thưởng được kích hoạt cùng lúc.&#10;TIẾN ĐỘ HỌC TẬP&#10;– Các mốc học tập lần lượt là 240, 420, 600 và 780 phút; sau đó, mỗi mốc tiếp theo tăng thêm 180 phút.&#10;– Hệ số học tập được tính theo công thức: 1 + (Kinh nghiệm – 50)/250 + (Độ tin cậy – 50)/300 và được giới hạn trong khoảng từ 0,75 đến 1,30. Khi thực hiện nhiều hoạt động, thời gian học tập sẽ được phân bổ theo tỷ trọng.&#10;PHÂN LOẠI HOẠT ĐỘNG&#10;– Xử lý đất: Máy cày, máy xới, máy xới quay, máy xới đĩa, máy lăn và máy cắt cỏ.&#10;– Gieo hạt: Máy gieo hạt và máy trồng cây, cũng như hạt giống.&#10;– Bón phân: Phân khoáng, phân lỏng, phân chuồng lỏng, chất thải lên men và phân chuồng. Bảo vệ thực vật: Công việc phun thuốc diệt cỏ.&#10;– Thu hoạch: Máy gặt đập liên hợp, bộ cắt, máy ép kiện, máy cắt cỏ, xe chở hàng và xe thu gom. Vận chuyển: Xe kéo, dỡ hàng và vận chuyển từ A đến B.&#10;PHỤ CẤP VÀ KÍCH HOẠT&#10;– Chuyên môn chính: +12 điểm kinh nghiệm hiệu quả và +5% lương cơ bản. Chuyên môn phụ: +6 và +3%.&#10;– Cả hai chuyên môn đều có thể tạm ngưng. Mỗi nhân viên chỉ được kích hoạt một lần chuyên môn đã học nhưng đang tạm ngưng trong mỗi năm nông nghiệp (từ tháng 3 đến tháng 2); việc tạm ngưng không làm mất quyền này." />
+    <e k="ui_pmHelpTopic11Title" v="Các khóa đào tạo" />
+    <e k="ui_pmHelpTopic11Body" v="Các khóa đào tạo chỉ bắt đầu vào ngày đầu tiên của tháng; nếu ngày đó rơi vào ngày chẵn trong tháng, thì thời gian kết thúc là 12:00. Mỗi năm nông nghiệp (từ tháng 3 đến tháng 2), một nhân viên chỉ được tham gia một khóa đào tạo và không được đang làm việc hoặc ốm. Người đó sẽ không thể tham gia công việc cho đến hết tháng; tiến độ học tập chỉ được tính khi hoàn thành khóa học vào thời điểm chuyển tháng.&#10;Mỗi khóa đào tạo mang lại 30% số phút học tập cần thiết cho chuyên ngành tiếp theo, tối thiểu 30 phút và không bao giờ vượt quá số phút còn thiếu. Mỗi hạng mục có hệ số giá dao động từ -20% đến +20% mỗi tháng và có 25% xác suất đã kín chỗ. Chi phí sẽ được khấu trừ ngay khi bắt đầu và dựa trên mức lương tháng hiện tại.&#10;Chi phí đào tạo = mức lương tháng hiện tại × hệ số danh mục × hệ số điều chỉnh hàng tháng. Các hệ số: Xử lý đất 75%, Gieo hạt 90%, Bón phân 90%, Bảo vệ thực vật 100%, Thu hoạch 110%, Vận chuyển 65%, Bảo vệ máy móc 120%, Phương pháp làm việc tiết kiệm 120%." />
+    <e k="ui_pmHelpTopic12Title" v="Sa thải, tự nguyện nghỉ việc và nghỉ hưu" />
+    <e k="ui_pmHelpTopic12Body" v="Việc sa thải phải được xác nhận. Đối với trường hợp 1 ngày/tháng, thông báo sa thải phải được đưa ra vào ngày thứ 1 trước 12:00 để có hiệu lực vào ngày đầu tháng tiếp theo. Đối với hai ngày trở lên, ngày hiệu lực là ngày cuối cùng của nửa tháng được làm tròn lên, tức là ngày ceil(số ngày/tháng ÷ 2). Sau ngày hiệu lực, thời điểm kết thúc sẽ được lùi lại thêm một tháng.&#10;Khi thông báo sa thải, chỉ số Lòng trung thành sẽ giảm ngay lập tức 40 điểm và chỉ số Độ tin cậy giảm 25 điểm. Nhân viên về nguyên tắc vẫn có thể tiếp tục làm việc cho đến khi kết thúc tháng có hiệu lực. Mức độ mất uy tín khi sa thải: dưới 1 tháng -12, dưới 3 tháng -9, dưới 6 tháng -7, dưới 12 tháng -5, dưới 24 tháng -3, từ 24 tháng trở lên -1; mỗi lần sa thải tiếp theo trong cùng tháng sẽ làm mất thêm 4 điểm.&#10;Khi chỉ số Lòng trung thành ở mức 0–14, hệ thống sẽ kiểm tra hàng tháng xem nhân viên có khả năng tự xin nghỉ việc hay không. Việc yêu cầu tăng lương bị từ chối có thể tạm thời làm tăng khả năng này thêm 5 điểm phần trăm. Thông báo tự xin nghỉ việc sẽ có hiệu lực vào cuối tháng và làm mất 10 điểm Uy tín. Từ sinh nhật lần thứ 55 trở đi, có thể thông báo nghỉ hưu; rủi ro tăng lên khoảng 80–90% cho đến 67 tuổi, đạt 95% ở tuổi 68, 98% ở tuổi 69 và 100% ở tuổi 70. Người đó vẫn tiếp tục làm việc cho đến cuối tháng." />
+    <e k="ui_pmHelpTopic13Title" v="Hồ sơ, Lịch sử và Thống kê" />
+    <e k="ui_pmHelpTopic13Body" v="Hồ sơ ứng viên tổng hợp các yếu tố như tuổi tác, nền tảng nghề nghiệp, kinh nghiệm, tính đáng tin cậy, lòng trung thành, chuyên môn và thời gian hoạt động trên thị trường thành một văn bản sinh động. Hồ sơ nhân viên bổ sung các thông tin về thâm niên làm việc, các nhiệm vụ đã thực hiện, các khóa đào tạo và tiến trình học tập.&#10;Lịch sử cá nhân có thể ghi lại thông tin về việc tuyển dụng, ngày bắt đầu và kết thúc nhiệm vụ, việc ngừng nhiệm vụ, ốm đau, các khóa đào tạo, chuyên môn, yêu cầu lương và các quyết định, những thay đổi về lòng trung thành và độ tin cậy, phân công vận chuyển cũng như sa thải, tự nguyện nghỉ việc, nghỉ hưu và chấm dứt hợp đồng lao động.&#10;Lịch sử nhân viên hiển thị, trong số những thông tin khác, các đợt làm việc, thời gian làm việc, đào tạo, trạng thái vận chuyển, các sự kiện gần đây nhất, ngày nghỉ ốm, yêu cầu lương, việc ngừng làm việc và tổng lương đã được thanh toán cho đến nay. Bảng tổng quan còn hiển thị các số liệu tổng hợp trên toàn công ty như số lượng nhân viên từng được tuyển dụng, sa thải, tự nguyện nghỉ việc và nghỉ hưu." />
+    <e k="ui_pmHelpTopic14Title" v="Cài đặt, Chế độ nhiều người chơi và Kết quả trò chơi" />
+    <e k="ui_pmHelpTopic14Body" v="Các cài đặt áp dụng cho từng phiên chơi và được chia thành các mục: Hiệu suất làm việc, Phát triển nhân sự, Kinh tế và Lương bổng. Các tác động đến lối chơi sẽ mở khóa các hiệu ứng kinh nghiệm liên quan; các hiệu ứng kinh nghiệm điều chỉnh tốc độ, mức hao mòn, vật tư tiêu hao và nhiên liệu. Các tác động đến nhân sự sẽ mở khóa các thay đổi về lòng trung thành và tùy chọn làm thêm giờ. Các tác động về kinh tế sẽ mở khóa mức lương cá nhân và mức lương tháng tiêu chuẩn.&#10;Các hiệu ứng bị vô hiệu hóa sẽ không điều chỉnh lại dữ liệu nhân sự hiện có theo hiệu lực hồi tố. Chúng chỉ ngăn chặn hoặc cho phép các tác động tiếp theo tương ứng. Mức lương tháng tiêu chuẩn đóng vai trò là giá trị cơ bản khi mức lương cá nhân bị vô hiệu hóa; giá trị này có thể được điều chỉnh trực tiếp trong phần cài đặt. Cách gán phím có thể được thay đổi trong cài đặt trò chơi.&#10;Trong chế độ nhiều người chơi, nhân sự, ứng viên, nhiệm vụ, mức lương, khóa đào tạo, cài đặt và biên niên sử được quản lý và đồng bộ hóa theo từng trang trại. Máy chủ có quyền quyết định; chỉ những người quản lý trang trại được ủy quyền mới được phép thay đổi trang trại của mình. Dữ liệu được lưu trong tệp helperPersonnel.xml trong tệp lưu trò chơi và các phân công hiện tại sẽ được khôi phục khi tải lại, nếu có thể. Các tệp lưu trò chơi cũ vẫn có thể sử dụng được; dữ liệu lịch sử có thể không đầy đủ đối với những nhân viên đã nghỉ việc." />
+    <e k="ui_pmHelpTopic15Title" v="Cài đặt và các bước đầu tiên" />
+    <e k="ui_pmHelpTopic15Body" v="Mở hồ sơ ứng viên, kiểm tra độ tuổi, lý lịch, giá trị, mức lương mong muốn và các chuyên môn hiện có, sau đó xác nhận việc tuyển dụng. Ứng viên sẽ trở thành nhân viên của trang trại hiện tại; tất cả các quyết định, tính lương và diễn biến sau này đều áp dụng cho trang trại đó.&#10;Sau khi tuyển dụng, hãy lên kế hoạch cho một công việc ngắn hạn và phù hợp trước tiên. Nhân viên phải có sẵn: bệnh tật, công việc đang thực hiện, đào tạo, việc chấm dứt hợp đồng đã được xác nhận hoặc việc được phân công làm Mod vẫn còn hiệu lực đều có thể cản trở việc lựa chọn. Tab “Nhân viên” sẽ hiển thị lý do cụ thể.&#10;Việc tuyển dụng đầu tiên sẽ nâng cao uy tín của nhà tuyển dụng thêm một điểm. Các giá trị cao không phải lúc nào cũng tự động tốt hơn: một ứng viên có kinh nghiệm thường có chi phí cao hơn, trong khi một người mới vào nghề với mức lương thấp hơn lại cần nhiều thời gian hơn để phát triển và đào tạo." />
+    <e k="ui_pmHelpTopic16Title" v="Các hoạt động và phân loại chuyên môn" />
+    <e k="ui_pmHelpTopic16Body" v="Việc phân loại được xác định dựa trên phương tiện, thiết bị và – nếu có – vật liệu đã được bón. Việc phân loại vật liệu trực tiếp được ưu tiên: Hạt giống thuộc về công đoạn gieo hạt; thuốc diệt cỏ thuộc về bảo vệ thực vật; phân khoáng, phân lỏng, phân chuồng, bã lên men và phân hữu cơ thuộc về công đoạn bón phân. Vôi không tự động được nhận diện là một danh mục học tập riêng biệt.&#10;Phân loại phương tiện và thiết bị: Máy cày, máy xới đất, máy xới quay, máy xới đĩa, máy lăn và máy cắt cỏ thuộc về công đoạn làm đất. Máy gieo hạt và máy trồng cây thuộc về công đoạn gieo hạt. Máy phun thuốc trừ sâu trên đồng ruộng, nếu không có vật liệu cụ thể, được phân loại vào công đoạn bón phân. Máy gặt đập liên hợp, bộ cắt, máy ép kiện, máy cắt cỏ, xe chở hàng và xe thu gom thuộc về công đoạn thu hoạch. Xe kéo và phương tiện có thể dỡ hàng thuộc về công đoạn vận chuyển.&#10;FollowMe mở rộng khả năng nhận diện thực tế thêm các thiết bị như máy băm, máy thu hoạch khoai tây và củ cải đường, máy lật, máy gom rơm, máy rải phân, thùng chứa phân lỏng, máy xới đất sâu, máy thu gom đá, máy chải và máy xới. Các phương tiện mod có thể được coi là trung lập nếu chuyên môn hóa của chúng không cho phép phân loại rõ ràng. Trong trường hợp đó, hệ thống sẽ không hứa hẹn bất kỳ phần thưởng chuyên môn hóa sai nào.&#10;Bảo vệ máy móc và cách làm việc tiết kiệm là các phần thưởng chung: phần thưởng đầu tiên giảm hao mòn bổ sung do kinh nghiệm gây ra, phần thưởng thứ hai giảm mức tiêu thụ nhiên liệu và vật liệu bổ sung. Hoạt động đã chọn sẽ được hiển thị trong cửa sổ lựa chọn; chuyên môn đang hoạt động phù hợp sẽ được làm nổi bật tại đó." />
+    <e k="ui_specialization_transport" v="Giao thông" />
+    <e k="ui_transportMarker" v="Giao thông" />
+    <e k="ui_pmStatusLine" v="Trạng thái: %s" />
+    <e k="ui_button_transport_manage_long" v="Giao thông vận tải" />
+    <e k="ui_transportPriorityHeaderStatus" v="Tình trạng" />
+    <e k="ui_transportPriorityHeaderEnabled" v="Giao thông vận tải" />
+    <e k="ui_pmTrainingCostHeader" v="Chi phí" />
+    <e k="ui_pmHistoryCareerTransport" v="Giao thông: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="TỔNG CỘNG" />
+    <e k="ui_pmMonth02" v="Tháng Tư" />
+    <e k="ui_pmMonth06" v="tháng Tám" />
+    <e k="ui_pmMonth07" v="Tháng Chín" />
+    <e k="ui_pmMonth09" v="Tháng Mười Một" />
+    <e k="ui_pmMonth10" v="Tháng 12" />
+    <e k="ui_selectionAvailable" v="Có sẵn" />
+    <e k="ui_selectionUnavailableSick" v="Krank" />
+    <e k="ui_selectionUnavailableTraining" v="Đang tham gia khóa đào tạo" />
+    <e k="ui_selectionUnavailableReserved" v="Đã đặt trước" />
+    <e k="ui_selectionUnavailableFieldwork" v="Công tác thực địa" />
+    <e k="ui_selectionUnavailableOther" v="Không có sẵn" />
+    <e k="ui_selectionJobUnknown" v="Không rõ đơn hàng" />
+    <e k="ui_selectionAgeLabel" v="Alter" />
+    <e k="ui_selectionJobsLabel" v="Đơn hàng" />
+    <e k="ui_selectionSpeedLabel" v="Tốc độ làm việc" />
+    <e k="ui_selectionAgeValue" v="%d năm" />
+    <e k="ui_selectionVehicleLine" v="Phương tiện: %s" />
+    <e k="ui_selectionActivityLine" v="Nhiệm vụ: %s" />
+    <e k="ui_selectionFieldLine" v="Trường: %s" />
+    <e k="ui_selectionStatusLine" v="Trạng thái: %s" />
+    <e k="ui_button_specializationDeactivate" v="Để yên" />
+    <e k="ui_button_specializationActivate" v="Đăng nhập" />
+    <e k="ui_pmSpecializationActive" v="hoạt động" />
+    <e k="ui_pmHelpContents" v="MỤC LỤC" />
+    <e k="ui_pmHelpTopic01Title" v="Hướng dẫn khởi động nhanh và cách sử dụng" />
+    <e k="ui_pmHelpTopic01Body" v="Hệ thống quản lý nhân sự thay thế các trợ lý AI ẩn danh bằng các ứng viên và nhân viên có tên cụ thể. Mỗi nhân viên đều phát triển theo thời gian, nhận lương hàng tháng và có thể sở hữu những điểm mạnh cũng như rủi ro khác nhau dựa trên kinh nghiệm, độ tin cậy, lòng trung thành và chuyên môn.&#10;Menu cá nhân được mở mặc định bằng phím Ctrl + M. Menu này bao gồm các mục: Tổng quan, Ứng viên, Nhân viên, Đào tạo, Cài đặt và Trợ giúp. Cách gán phím tắt có thể được thay đổi trong cài đặt trò chơi.&#10;Phím tắt mặc định: Chuyển đổi nhân vật bằng phím A/D hoặc mũi tên trái/phải; Xác nhận lựa chọn bằng phím cách hoặc nhấp chuột; Hủy hoặc quay lại bằng phím Esc; Quản lý đi lại và lương bằng phím T hoặc G. Trong tab Trợ giúp, phím mũi tên trái/phải dùng để chuyển đổi giữa nội dung và bài viết, phím mũi tên lên/xuống dùng để chọn hoặc cuộn, còn phím mũi tên lên/xuống dùng để chuyển trang." />
+    <e k="ui_pmHelpTopic02Title" v="Tổng quan và tình hình nhân sự" />
+    <e k="ui_pmHelpTopic02Body" v="Bảng tổng quan tóm tắt tình hình hiện tại của trang trại: Nhân viên, nhân viên sẵn sàng làm việc, ứng viên và uy tín của nhà tuyển dụng được hiển thị ở phía trên. Phía dưới là các nhiệm vụ đang thực hiện, bao gồm thông tin về nhân sự, phương tiện, thiết bị và công việc.&#10;Ô “Thay đổi” chỉ hiển thị các sự kiện nhân sự có liên quan, tức là những thay đổi về uy tín của nhà tuyển dụng, kinh nghiệm, độ tin cậy, lòng trung thành, độ tuổi hoặc chuyên môn. Mỗi thông báo đều nêu rõ nguyên nhân, người liên quan và tác động; một mục gồm nhiều dòng vẫn được coi là một thông báo.&#10;“Báo cáo hàng tháng” và “Tổng quan” hiển thị các chỉ số hiện tại và tích lũy suốt thời gian làm việc. Hãy sử dụng bảng tổng quan này để lập kế hoạch nhiệm vụ nhanh chóng; các chi tiết, quyết định và lịch sử công việc được trình bày trong các trang chuyên môn riêng biệt." />
+    <e k="ui_pmHelpTopic03Title" v="Thị trường lao động và tuyển dụng" />
+    <e k="ui_pmHelpTopic03Body" v="Một vòng chơi mới bắt đầu với bốn ứng viên. Đồng thời, trên thị trường chỉ có thể có tối đa tám ứng viên. Vào mỗi đầu tháng, tối đa ba vị trí mới sẽ được xác định ngẫu nhiên; xác suất cho mỗi vị trí là 15% + 0,7 × điểm uy tín của nhà tuyển dụng. Với 60 điểm uy tín, xác suất là 57%; với 100 điểm uy tín, xác suất là 85% cho mỗi vị trí. Nếu thị trường trống, hệ thống sẽ tạo ra ít nhất một ứng viên mới.&#10;Ứng viên chắc chắn vẫn có mặt trong tháng được tạo ra. Sau lần chuyển tháng đầu tiên, xác suất rời đi của họ dao động từ 10–30% tùy theo chất lượng; sau lần thứ hai là 30–50%; và đến lần chuyển tháng thứ ba là 100%. Những hồ sơ chất lượng cao có thể biến mất sớm hơn vì chất lượng của họ làm tăng xác suất rời đi.&#10;Ứng viên trong độ tuổi từ 18–65, có ngày sinh cố định và tiếp tục già đi. Nền tảng nghề nghiệp bao gồm: doanh nghiệp gia đình, trang trại bò sữa, công ty dịch vụ nông nghiệp, canh tác cây trồng, trang trại hỗn hợp, logistics, xưởng sửa chữa máy móc nông nghiệp và công việc văn phòng. Tuổi tác và nền tảng nghề nghiệp chủ yếu ảnh hưởng đến kinh nghiệm và kiến thức chuyên môn sẵn có.&#10;Mức lương mong muốn dựa trên kinh nghiệm và độ tin cậy, có độ lệch ngẫu nhiên từ 96–106% và bị ảnh hưởng bởi uy tín của nhà tuyển dụng. Uy tín thấp làm tăng mức lương mong muốn, uy tín cao làm giảm mức lương mong muốn. Trước khi tuyển dụng, sẽ xuất hiện một thông báo xác nhận; việc tuyển dụng làm tăng uy tín thêm 1 điểm." />
+    <e k="ui_pmHelpTopic04Title" v="Hồ sơ nhân viên, giá trị và tình trạng" />
+    <e k="ui_pmHelpTopic04Body" v="Kinh nghiệm, độ tin cậy và lòng trung thành đều được đánh giá trên thang điểm từ 0 đến 100. Con số luôn hiển thị rõ ràng; các thanh biểu đồ giúp so sánh nhanh chóng.&#10;Cấp bậc chỉ dựa hoàn toàn vào kinh nghiệm: Nhân viên hỗ trợ 0–44, Chuyên viên 45–74, Chuyên gia 75–100. Kinh nghiệm quyết định tốc độ làm việc, mức hao mòn thêm và mức tiêu hao thêm. Độ tin cậy ảnh hưởng đến những đợt sụt giảm hiệu suất ngắn hạn, bệnh tật, diễn biến hàng tháng và rủi ro phải ngừng công việc. Lòng trung thành thể hiện mức độ gắn bó với doanh nghiệp và ảnh hưởng đến các cảnh báo, tranh chấp về lương và việc tự nguyện nghỉ việc." />
     </elements>
 </l10n>

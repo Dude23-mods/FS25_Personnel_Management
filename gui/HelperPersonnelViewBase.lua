@@ -40,10 +40,31 @@ HelperPersonnelViewBase.WORKER_DETAIL_ROW_HEIGHT = 0.128
 HelperPersonnelViewBase.WORKER_DETAIL_ROW_STEP = 0.132
 HelperPersonnelViewBase.DETAIL_TEXT_SIZE = 0.0106
 HelperPersonnelViewBase.DETAIL_TEXT_LINE_STEP = 0.014
-HelperPersonnelViewBase.OVERVIEW_HISTORY_VISIBLE_ROWS = 8
-HelperPersonnelViewBase.OVERVIEW_HISTORY_LINE_HEIGHT = 0.0129
-HelperPersonnelViewBase.OVERVIEW_HISTORY_ENTRY_GAP = 0.0025
-HelperPersonnelViewBase.OVERVIEW_ACTIVE_WORKERS_VISIBLE_ROWS = 3
+
+HelperPersonnelViewBase.TYPOGRAPHY = {
+    pageTitle = {size = 0.024, color = {1, 1, 1, 1}, uppercase = true},
+    sectionTitle = {size = 0.0168, color = {1, 1, 1, 1}, uppercase = true},
+    metricTitle = {size = 0.0168, color = {1, 1, 1, 1}, uppercase = true},
+    metricValue = {size = 0.0252, color = {0.70, 0.86, 0.12, 1}, uppercase = false},
+    listPrimary = {size = 0.0149, color = {1, 1, 1, 1}, uppercase = false},
+    bodyText = {size = 0.0134, color = {0.61, 0.73, 0.07, 1}, uppercase = false}
+}
+
+HelperPersonnelViewBase.MENU_DESIGN = {
+    colors = {
+        metric = {0.075, 0.115, 0.075, 0.94},
+        panel = {0.055, 0.090, 0.060, 0.94},
+        row = {0.032, 0.052, 0.036, 0.84},
+        accent = {0.70, 0.86, 0.12, 1},
+        textAccent = {0.61, 0.73, 0.07, 1},
+        muted = {0.66, 0.70, 0.66, 1}
+    },
+    layout = {
+        contentLeft = 0.050,
+        contentWidth = 0.720,
+        cardGap = 0.012
+    }
+}
 
 HelperPersonnelViewBase.FIELD_DETECTION_DEBUG_LOGGING = false
 HelperPersonnelViewBase.FIELD_DETECTION_CACHE_MS = 3000
@@ -124,16 +145,6 @@ function HelperPersonnelViewBase.new(subclass_mt, messageCenter)
     self.detailListMouseArea = nil
     self.detailScrollbarMouseArea = nil
     self.detailScrollbarDragging = false
-    self.overviewHistoryFirstRow = 1
-    self.overviewHistoryRows = {}
-    self.overviewHistoryMouseArea = nil
-    self.overviewHistoryScrollbarMouseArea = nil
-    self.overviewHistoryScrollbarDragging = false
-    self.overviewActiveWorkers = {}
-    self.overviewActiveWorkersFirstRow = 1
-    self.overviewActiveWorkersMouseArea = nil
-    self.overviewActiveWorkersScrollbarMouseArea = nil
-    self.overviewActiveWorkersScrollbarDragging = false
 
     self.uiScale = g_gameSettings:getValue("uiScale") or 1
     self.lineOverlay = nil
@@ -263,7 +274,9 @@ function HelperPersonnelViewBase:copyAttributes(src)
 end
 
 function HelperPersonnelViewBase:initialize() end
-function HelperPersonnelViewBase:onGuiSetupFinished() end
+function HelperPersonnelViewBase:onGuiSetupFinished()
+    HelperPersonnelViewBase:superClass().onGuiSetupFinished(self)
+end
 
 function HelperPersonnelViewBase:registerActionEvents()
 end
@@ -2117,90 +2130,8 @@ function HelperPersonnelViewBase:resetClickAreas()
     self.clickAreas = {}
     self.detailListMouseArea = nil
     self.detailScrollbarMouseArea = nil
-    self.overviewHistoryMouseArea = nil
-    self.overviewHistoryScrollbarMouseArea = nil
-    self.overviewActiveWorkersMouseArea = nil
-    self.overviewActiveWorkersScrollbarMouseArea = nil
 end
 
-function HelperPersonnelViewBase:getOverviewActiveWorkersScrollState()
-    if not self:isOverviewMode() then
-        return nil
-    end
-
-    local count = #(self.overviewActiveWorkers or {})
-    local visibleCount = math.min(count, HelperPersonnelViewBase.OVERVIEW_ACTIVE_WORKERS_VISIBLE_ROWS or 3)
-    if count <= visibleCount or visibleCount <= 0 then
-        return nil
-    end
-
-    local firstRow = hpClamp(math.floor((tonumber(self.overviewActiveWorkersFirstRow) or 1) + 0.5), 1, count - visibleCount + 1)
-    return { count = count, visibleCount = visibleCount, firstRow = firstRow, maxFirstRow = count - visibleCount + 1 }
-end
-
-function HelperPersonnelViewBase:scrollOverviewActiveWorkers(deltaRows)
-    local state = self:getOverviewActiveWorkersScrollState()
-    if state == nil then
-        return false
-    end
-
-    self.overviewActiveWorkersFirstRow = hpClamp(state.firstRow + (tonumber(deltaRows) or 0), 1, state.maxFirstRow)
-    self.requestRender = true
-    return true
-end
-
-function HelperPersonnelViewBase:setOverviewActiveWorkersScrollFromMouseY(posY, area)
-    local state = self:getOverviewActiveWorkersScrollState()
-    if state == nil or area == nil or area.height <= 0 then
-        return false
-    end
-
-    local progress = 1 - hpClamp((posY - area.y) / area.height, 0, 1)
-    self.overviewActiveWorkersFirstRow = 1 + math.floor(progress * (state.maxFirstRow - 1) + 0.5)
-    self.requestRender = true
-    return true
-end
-
-function HelperPersonnelViewBase:handleOverviewActiveWorkersMouseScroll(posX, posY, button)
-    if not self:isOverviewMode() then
-        return false
-    end
-
-    if not self:isPointInClickArea(posX, posY, self.overviewActiveWorkersMouseArea) and not self:isPointInClickArea(posX, posY, self.overviewActiveWorkersScrollbarMouseArea) then
-        return false
-    end
-
-    if self:isMouseWheelUp(button) then
-        return self:scrollOverviewActiveWorkers(-1)
-    elseif self:isMouseWheelDown(button) then
-        return self:scrollOverviewActiveWorkers(1)
-    end
-
-    return false
-end
-
-function HelperPersonnelViewBase:handleOverviewActiveWorkersScrollbarDrag(posX, posY, isDown, isUp)
-    local area = self.overviewActiveWorkersScrollbarMouseArea
-    if not self:isOverviewMode() or area == nil then
-        self.overviewActiveWorkersScrollbarDragging = false
-        return false
-    end
-
-    if isDown and self:isPointInClickArea(posX, posY, area) then
-        self.overviewActiveWorkersScrollbarDragging = true
-        return self:setOverviewActiveWorkersScrollFromMouseY(posY, area)
-    end
-
-    if self.overviewActiveWorkersScrollbarDragging == true then
-        local used = self:setOverviewActiveWorkersScrollFromMouseY(posY, area)
-        if isUp then
-            self.overviewActiveWorkersScrollbarDragging = false
-        end
-        return used
-    end
-
-    return false
-end
 
 function HelperPersonnelViewBase:addClickArea(x, y, width, height, action, index)
     if self.clickAreas == nil then
@@ -2221,66 +2152,6 @@ function HelperPersonnelViewBase:isPointInClickArea(posX, posY, area)
     return area ~= nil and posX >= area.x and posX <= area.x + area.width and posY >= area.y and posY <= area.y + area.height
 end
 
-function HelperPersonnelViewBase:isOverviewMode()
-    return self.mode == HelperPersonnelViewBase.MODE_OVERVIEW
-end
-
-function HelperPersonnelViewBase:getOverviewHistoryScrollState()
-    if not self:isOverviewMode() then
-        return nil
-    end
-
-    local rows = self.overviewHistoryRows or {}
-    local count = #rows
-    local visibleCount = math.min(count, HelperPersonnelViewBase.OVERVIEW_HISTORY_VISIBLE_ROWS or 8)
-
-    if count <= visibleCount or visibleCount <= 0 then
-        return nil
-    end
-
-    local firstRow = hpClamp(math.floor((tonumber(self.overviewHistoryFirstRow) or 1) + 0.5), 1, count - visibleCount + 1)
-
-    return {
-        count = count,
-        visibleCount = visibleCount,
-        firstRow = firstRow,
-        maxFirstRow = count - visibleCount + 1
-    }
-end
-
-function HelperPersonnelViewBase:setOverviewHistoryFirstRow(firstRow)
-    local state = self:getOverviewHistoryScrollState()
-    if state == nil then
-        self.overviewHistoryFirstRow = 1
-        return false
-    end
-
-    self.overviewHistoryFirstRow = hpClamp(math.floor((tonumber(firstRow) or state.firstRow) + 0.5), 1, state.maxFirstRow)
-    self.requestRender = true
-    return true
-end
-
-function HelperPersonnelViewBase:scrollOverviewHistory(deltaRows)
-    local state = self:getOverviewHistoryScrollState()
-    if state == nil then
-        return false
-    end
-
-    return self:setOverviewHistoryFirstRow(state.firstRow + (tonumber(deltaRows) or 0))
-end
-
-function HelperPersonnelViewBase:setOverviewHistoryScrollFromMouseY(posY, area)
-    local state = self:getOverviewHistoryScrollState()
-    if state == nil or area == nil or area.height <= 0 then
-        return false
-    end
-
-    local localY = hpClamp((posY - area.y) / area.height, 0, 1)
-    local progress = 1 - localY
-    local firstRow = 1 + math.floor(progress * (state.maxFirstRow - 1) + 0.5)
-
-    return self:setOverviewHistoryFirstRow(firstRow)
-end
 
 function HelperPersonnelViewBase:isDetailMode()
     return self.mode == HelperPersonnelViewBase.MODE_WORKERS or self.mode == HelperPersonnelViewBase.MODE_APPLICANTS
@@ -2403,56 +2274,6 @@ function HelperPersonnelViewBase:isMouseWheelDown(button)
     return (wheelDown ~= nil and button == wheelDown) or button == 5
 end
 
-function HelperPersonnelViewBase:handleOverviewHistoryMouseScroll(posX, posY, button)
-    if not self:isOverviewMode() then
-        return false
-    end
-
-    local scrollArea = self.overviewHistoryMouseArea
-    local scrollbarArea = self.overviewHistoryScrollbarMouseArea
-    local insideList = self:isPointInClickArea(posX, posY, scrollArea)
-    local insideScrollbar = self:isPointInClickArea(posX, posY, scrollbarArea)
-
-    if not insideList and not insideScrollbar then
-        return false
-    end
-
-    if self:isMouseWheelUp(button) then
-        return self:scrollOverviewHistory(-1)
-    elseif self:isMouseWheelDown(button) then
-        return self:scrollOverviewHistory(1)
-    end
-
-    return false
-end
-
-function HelperPersonnelViewBase:handleOverviewHistoryScrollbarDrag(posX, posY, isDown, isUp)
-    if not self:isOverviewMode() then
-        self.overviewHistoryScrollbarDragging = false
-        return false
-    end
-
-    local area = self.overviewHistoryScrollbarMouseArea
-    if area == nil then
-        self.overviewHistoryScrollbarDragging = false
-        return false
-    end
-
-    if isDown and self:isPointInClickArea(posX, posY, area) then
-        self.overviewHistoryScrollbarDragging = true
-        return self:setOverviewHistoryScrollFromMouseY(posY, area)
-    end
-
-    if self.overviewHistoryScrollbarDragging == true then
-        local used = self:setOverviewHistoryScrollFromMouseY(posY, area)
-        if isUp then
-            self.overviewHistoryScrollbarDragging = false
-        end
-        return used
-    end
-
-    return false
-end
 
 function HelperPersonnelViewBase:handleDetailMouseScroll(posX, posY, button)
     if not self:isDetailMode() then
@@ -2542,14 +2363,6 @@ function HelperPersonnelViewBase:mouseEvent(posX, posY, isDown, isUp, button, ev
         used = superFunc(self, posX, posY, isDown, isUp, button, eventUsed) == true or used
     end
 
-    if self:handleOverviewActiveWorkersMouseScroll(posX, posY, button) then
-        return true
-    end
-
-    if self:handleOverviewActiveWorkersScrollbarDrag(posX, posY, isDown, isUp) then
-        return true
-    end
-
     if self:handleDetailMouseScroll(posX, posY, button) then
         return true
     end
@@ -2571,9 +2384,7 @@ function HelperPersonnelViewBase:draw()
 
     self:drawHeader()
 
-    if self.mode == HelperPersonnelViewBase.MODE_OVERVIEW then
-        self:drawOverview()
-    else
+    if self.mode ~= HelperPersonnelViewBase.MODE_OVERVIEW then
         self:drawDetail()
     end
 end
@@ -2582,87 +2393,6 @@ function HelperPersonnelViewBase:drawHeader()
     self:drawTextLine(0.22, 0.872, 0.031, RenderText.ALIGN_LEFT, self:getText("ui_headerTitle", "PERSONALVERWALTUNG"), 1, 1, 1, 1, true)
 end
 
-function HelperPersonnelViewBase:drawOverviewReportPanel(x, y, width, height, title, rows)
-    local shade = 0.024
-    self:drawSolidRect(x, y, width, height, shade, shade + 0.012, shade, 0.72)
-    self:drawSolidRect(x, y + height - 0.003, width, 0.003, 0.61, 0.73, 0.07, 0.78)
-
-    local textX = x + 0.012
-    local valueX = x + width - 0.012
-    self:drawTextLine(textX, y + height - 0.028, 0.0118, RenderText.ALIGN_LEFT, title or "", 1, 1, 1, 1, true)
-
-    local rowY = y + height - 0.056
-    for _, row in ipairs(rows or {}) do
-        self:drawTextLine(textX, rowY, 0.0103, RenderText.ALIGN_LEFT, row.label or "", 0.92, 0.92, 0.92, 1, true)
-        self:drawTextLine(valueX, rowY, 0.0103, RenderText.ALIGN_RIGHT, row.value or "", 0.61, 0.73, 0.07, 1, false)
-        rowY = rowY - 0.0180
-    end
-end
-
-function HelperPersonnelViewBase:drawOverview()
-    local manager = self:getManager()
-    if manager == nil then
-        return
-    end
-
-    local applicants = self:getApplicants()
-    local workers = self:getWorkers()
-    local counts = self:getWorkerSummaryCounts(workers)
-    local monthlyRows = self:getMonthlyReportRows(counts, applicants, workers)
-    local lifetimeRows = self:getLifetimeReportRows(manager)
-
-    self:drawTextLine(0.22, 0.770, 0.013, RenderText.ALIGN_LEFT,
-        self:formatText("ui_overviewCounts", "Mitarbeiter im Bestand: %d | Frei verfügbar: %d | Bewerber am Markt: %d", counts.total, counts.available, #applicants),
-        0.61, 0.73, 0.07, 1, true)
-
-    local reputation = manager.getEmployerReputation ~= nil and manager:getEmployerReputation() or (manager.employerReputation or 60)
-    local reputationLevelKey = manager.getEmployerReputationLevelKey ~= nil and manager:getEmployerReputationLevelKey() or "ui_reputationSolid"
-    local reputationLevelText = self:getText(reputationLevelKey, "solide")
-
-    self:drawTextLine(0.22, 0.747, 0.013, RenderText.ALIGN_LEFT,
-        self:formatText("ui_overviewReputation", "Arbeitgeberansehen: %d/100 (%s)", reputation, reputationLevelText),
-        0.61, 0.73, 0.07, 1, true)
-
-    local historyBottom = self:drawMonthlyChangeHistory(manager, 0.22, 0.720, 0.580, 0.106)
-    local workerSeparatorY = math.min(0.604, (historyBottom or 0.620) - 0.014)
-    workerSeparatorY = math.max(0.548, workerSeparatorY)
-
-    self:drawSeparator(0.22, workerSeparatorY, 0.58)
-
-    self:drawTextLine(0.51, workerSeparatorY - 0.032, 0.015, RenderText.ALIGN_CENTER, self:getText("ui_workerStockHeader", "MITARBEITER IM EINSATZ"), 1, 1, 1, 1, true)
-
-    local activeWorkerEntries = self:getActiveWorkerEntries(workers)
-    self.overviewActiveWorkers = activeWorkerEntries
-    local activeWorkerScrollState = self:getOverviewActiveWorkersScrollState()
-    if #activeWorkerEntries == 0 then
-        self:drawTextLine(0.22, workerSeparatorY - 0.066, 0.014, RenderText.ALIGN_LEFT, self:getText("ui_noActiveWorkers", "Gerade ist kein Mitarbeiter im Einsatz."), 1, 1, 1, 1, true)
-    else
-        local firstRow = activeWorkerScrollState ~= nil and activeWorkerScrollState.firstRow or 1
-        local lastRow = activeWorkerScrollState ~= nil and (firstRow + activeWorkerScrollState.visibleCount - 1) or #activeWorkerEntries
-        local y = workerSeparatorY - 0.101
-        for i = firstRow, lastRow do
-            local entry = activeWorkerEntries[i]
-            self:drawPersonMiniRow(entry.worker, 0.22, y, 0.44, false, entry.sourceIndex)
-            y = y - 0.074
-        end
-
-        if activeWorkerScrollState ~= nil then
-            local scrollbarY = workerSeparatorY - 0.254
-            local scrollbarHeight = 0.222
-            self.overviewActiveWorkersMouseArea = { x = 0.21, y = scrollbarY, width = 0.46, height = scrollbarHeight }
-            self.overviewActiveWorkersScrollbarMouseArea = { x = 0.672, y = scrollbarY, width = 0.028, height = scrollbarHeight }
-            self:drawDetailScrollbar(0.682, scrollbarY, 0.006, scrollbarHeight, firstRow, activeWorkerScrollState.visibleCount, activeWorkerScrollState.count)
-        end
-    end
-
-    local monthlySeparatorY = workerSeparatorY - 0.264
-    self:drawSeparator(0.22, monthlySeparatorY, 0.62)
-
-    local panelY = 0.075
-    local panelHeight = math.max(0.180, monthlySeparatorY - panelY - 0.018)
-    self:drawOverviewReportPanel(0.22, panelY, 0.292, panelHeight, self:getText("ui_monthlyReportHeader", "MONATSBERICHT"), monthlyRows)
-    self:drawOverviewReportPanel(0.524, panelY, 0.316, panelHeight, self:getText("ui_pmOverviewOverallHeader", "GESAMT"), lifetimeRows)
-end
 
 function HelperPersonnelViewBase:drawDetail()
     local manager = self:getManager()
@@ -2869,7 +2599,7 @@ function HelperPersonnelViewBase:getFallbackPortraitFilename(person)
     local app = self.app or (g_helperPersonnelApp ~= nil and g_helperPersonnelApp or nil)
 
     if app ~= nil and app.modDir ~= nil then
-        local modFilename = Utils.getFilename(string.format("gui/portraits/helperPortrait_%02d.png", index), app.modDir)
+        local modFilename = Utils.getFilename(string.format("gui/portraits/helperPortrait_%02d.dds", index), app.modDir)
         if fileExists(modFilename) then
             return modFilename
         end
@@ -2969,35 +2699,6 @@ function HelperPersonnelViewBase:drawPersonPortrait(person, x, y, width, height,
     end
 end
 
-function HelperPersonnelViewBase:drawPersonMiniRow(person, x, y, width, isApplicantView, entryIndex)
-    local manager = self:getManager()
-    if manager == nil then
-        return
-    end
-
-    self:drawSolidRect(x - 0.010, y - 0.006, width, 0.063, 0, 0, 0, 0.18)
-
-    if entryIndex ~= nil then
-        self:addClickArea(x - 0.010, y - 0.006, width, 0.063, isApplicantView and "applicant" or "overviewWorker", entryIndex)
-    end
-
-    self:drawPersonPortrait(person, x, y, 0.032, 0.057, false)
-
-    local textX = x + 0.044
-    self:drawTextLine(textX, y + 0.039, 0.0125, RenderText.ALIGN_LEFT, manager:getFullName(person), 1, 1, 1, 1, true)
-
-    local line1
-    local line2
-    if isApplicantView then
-        line1 = manager:getApplicantLine1(person)
-        line2 = manager:getApplicantLine2(person)
-    else
-        line1, line2 = self:getActiveWorkerOverviewLines(person)
-    end
-
-    self:drawTextLine(textX, y + 0.019, 0.011, RenderText.ALIGN_LEFT, line1, 0.61, 0.73, 0.07, 1, false)
-    self:drawTextLine(textX, y + 0.000, 0.011, RenderText.ALIGN_LEFT, line2, 0.61, 0.73, 0.07, 1, false)
-end
 
 function HelperPersonnelViewBase:getBaseWorkerHiredLine(manager, person)
     if manager == nil or type(person) ~= "table" then
@@ -3433,39 +3134,6 @@ function HelperPersonnelViewBase:buildOverviewHistoryRows(lines, textSize, maxWi
     return rows
 end
 
-function HelperPersonnelViewBase:drawMonthlyChangeHistory(manager, x, y, width, height)
-    local period, year = nil, nil
-    local lines = nil
-
-    if manager ~= nil and manager.getMonthlyHistoryLines ~= nil then
-        lines, period, year = manager:getMonthlyHistoryLines()
-    else
-        lines = { self:getText("ui_pmOverviewNoChanges", "No changes this month.") }
-    end
-
-    local textSize = 0.0096
-    local lineHeight = HelperPersonnelViewBase.OVERVIEW_HISTORY_LINE_HEIGHT or 0.0129
-    local header = self:getOverviewHistoryHeader(manager, period, year)
-
-    self:drawTextLine(x, y, 0.0115, RenderText.ALIGN_LEFT, header, 1, 1, 1, 1, true)
-
-    local contentTop = y - 0.021
-    local rows = self:buildOverviewHistoryRows(lines, textSize, width - 0.020)
-    self.overviewHistoryRows = rows
-
-    local visibleRows = math.max(1, math.floor(height / lineHeight))
-    HelperPersonnelViewBase.OVERVIEW_HISTORY_VISIBLE_ROWS = visibleRows
-    local firstRow = 1
-    local lastRow = math.min(#rows, visibleRows)
-    local currentY = contentTop
-
-    for rowIndex = firstRow, lastRow do
-        self:drawTextLine(x, currentY, textSize, RenderText.ALIGN_LEFT, rows[rowIndex], 0.61, 0.73, 0.07, 1, false)
-        currentY = currentY - lineHeight
-    end
-
-    return contentTop - (visibleRows * lineHeight)
-end
 
 function HelperPersonnelViewBase:drawHistoryColumn(title, lines, x, y, maxWidth)
     self:drawTextLine(x, y, 0.0115, RenderText.ALIGN_LEFT, title, 1, 1, 1, 1, true)

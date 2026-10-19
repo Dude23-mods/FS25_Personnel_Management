@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="Fertilizare" />
         <e k="ui_specialization_plantProtection" v="Protecția culturilor" />
         <e k="ui_specialization_harvest" v="Recoltare" />
-        <e k="ui_specialization_transport" v="Transport" />
+        1Transport2
         <e k="ui_specialization_machineCare" v="Îngrijirea utilajelor" />
         <e k="ui_specialization_resourceSaver" v="Utilizare eficientă" />
         <e k="ui_specializationLearned" v="%s a dezvoltat o specializare: %s." />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Gestionează sarcinile de transport" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Gestionează cererile de mărire" />
         <e k="input_HP_SELECT_CANCEL" v="Anulează selecția angajatului" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="Eliberează angajat blocat" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="Eliberează angajat blocat" />
         <e k="ui_openWorkerView" v="Lucrători" />
         <e k="ui_openApplicantView" v="Candidați" />
         <e k="ui_backToOverview" v="Înapoi la prezentare" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="Timp de lucru: %d lucrări | %s | Salariu lunar: %s" />
         <e k="ui_button_transport_assign" v="Atribuie transport" />
         <e k="ui_button_transport_remove" v="Elimină transport" />
-        <e k="ui_transportMarker" v="transport" />
+        1Transport2
         <e k="ui_transportActionAssigned" v="%s - atribuie transport." />
         <e k="ui_transportActionRemoved" v="%s - elimină transport." />
         <e k="ui_transportNoDriverAssigned" v="transport: niciuna încă." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="Instruiește" />
         <e k="ui_pmStatusApplicant" v="Candidat" />
         <e k="ui_pmBirthLine" v="Născut(ă): %s" />
+        <e k="ui_pmRankLabel" v="Rang" />
         <e k="ui_pmOriginLine" v="Experiență profesională: %s" />
         <e k="ui_pmStatsLine" v="Experiență %d · Fiabilitate %d · Loialitate %d" />
         <e k="ui_pmStatExperience" v="Experiență" />
         <e k="ui_pmStatReliability" v="Fiabilitate" />
         <e k="ui_pmStatLoyalty" v="Loialitate" />
         <e k="ui_pmWageLine" v="Salariu: %s" />
-        <e k="ui_pmStatusLine" v="Stare: %s" />
+        1Stare: %s2
         <e k="ui_pmOrigin1" v="fermă familială rurală" />
         <e k="ui_pmOrigin2" v="fermă mică de lapte" />
         <e k="ui_pmOrigin3" v="firmă de servicii agricole" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONAL" />
         <e k="ui_pmSettingsSectionEconomic" v="ECONOMIE" />
         <e k="ui_button_transport_assign_long" v="Atribuie sarcini de transport" />
-        <e k="ui_button_transport_manage_long" v="Transport" />
+        1Transport2
         <e k="ui_transportPriorityTitle" v="Prioritate transport" />
         <e k="ui_transportPriorityIntro" v="Alege angajații care pot prelua sarcini de transport și ordinea în care sunt verificați." />
         <e k="ui_transportPriorityHeaderPriority" v="Prioritate" />
         <e k="ui_transportPriorityHeaderEmployee" v="Angajat" />
-        <e k="ui_transportPriorityHeaderStatus" v="Stare" />
-        <e k="ui_transportPriorityHeaderEnabled" v="Transport" />
+        1Stare2
+        1Transport2
         <e k="ui_transportPriorityActive" v="Activ" />
         <e k="ui_transportPriorityInactive" v="Nealocat" />
         <e k="ui_transportPriorityMoveUp" v="Mută în sus" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="profesie de birou" />
         <e k="ui_status_retirementPending" v="se pensionează la sfârșitul lunii" />
         <e k="ui_retirementNotice" v="%s se va pensiona la sfârșitul lunii." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="Specializările îmbunătățesc performanța în categoria potrivită. Instruirea începe doar la începutul lunii, costă bani și face angajatul indisponibil până la finalul lunii. Progresul se acordă după finalizare. Ofertele și prețurile se schimbă lunar; este permis un singur curs pe an agricol, din martie până în februarie. Specializările învățate rămân cunoscute, dar sunt active cel mult două bonusuri. Ambele sloturi pot fi inactive. O specializare învățată și inactivă poate fi activată doar o dată pentru fiecare angajat și an agricol." />
         <e k="ui_pmTrainingCategoryHeader" v="Categorie de învățare" />
         <e k="ui_pmTrainingProgressHeader" v="Progres către specializare" />
         <e k="ui_pmTrainingRunning" v="instruire în desfășurare" />
         <e k="ui_pmTrainingSelectCategory" v="Selectează mai întâi o categorie de instruire" />
         <e k="ui_pmTrainingConfirm" v="Începi instruirea pentru %s în categoria %s?" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="Specializare: două sloturi active ocupate · ultima învățată: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Instruire: cu 1 zi/lună doar până la 12:00 · alege o categorie în meniul de instruire · ultima: %s" />
         <e k="ui_training_line_first_day_select" v="Instruire: doar în prima zi · alege o categorie în meniul de instruire · ultima: %s" />
         <e k="ui_training_line_busy_select" v="Instruire: imposibilă în timpul lucrului · ultima: %s" />
         <e k="ui_training_line_sick_select" v="Instruire: imposibilă în timpul bolii · ultima: %s" />
         <e k="ui_training_line_select_category" v="Instruire: alege o categorie în meniul de instruire · ultima: %s" />
-        <e k="ui_pmTrainingCostHeader" v="Cost" />
+        1Costuri2
         <e k="ui_pmTrainingAdjustmentHeader" v="Reducere/cost suplimentar" />
         <e k="ui_pmTrainingNoPlaces" v="momentan nu sunt locuri disponibile" />
         <e k="ui_pmTrainingNoPlacesMessage" v="Momentan nu sunt locuri disponibile pentru această instruire." />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="Sarcini: %d" />
         <e k="ui_pmHistoryCareerWorkTime" v="Timp de lucru: %s" />
         <e k="ui_pmHistoryCareerTraining" v="Instruire: %s" />
-        <e k="ui_pmHistoryCareerTransport" v="Transport: %s" />
+        1Transport: %s2
         <e k="ui_pmHistoryValueActive" v="activ" />
         <e k="ui_pmHistoryValueInactive" v="inactiv" />
         <e k="ui_monthlyRowApplicants" v="Candidați" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="Timp de lucru" />
         <e k="ui_monthlyRowWages" v="Salarii lunare" />
         <e k="ui_monthlyRowPayroll" v="Ultima plată salarială" />
-        <e k="ui_pmOverviewOverallHeader" v="TOTAL" />
+        1TOTAL2
         <e k="ui_pmOverviewTotalJobs" v="Sarcini totale" />
         <e k="ui_pmOverviewTotalWorkTime" v="Timp total de lucru" />
         <e k="ui_pmOverviewTotalPayroll" v="Salarii plătite" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s a întrerupt sarcina în desfășurare pentru a ieși spontan la o cafea cu prietena lui." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s a întrerupt sarcina în desfășurare pentru a ieși spontan la o cafea cu prietenul ei." />
         <e k="ui_pmMonth01" v="martie" />
-        <e k="ui_pmMonth02" v="aprilie" />
+        1aprilie2
         <e k="ui_pmMonth03" v="mai" />
         <e k="ui_pmMonth04" v="iunie" />
         <e k="ui_pmMonth05" v="iulie" />
-        <e k="ui_pmMonth06" v="august" />
-        <e k="ui_pmMonth07" v="septembrie" />
+        1august2
+        1septembrie2
         <e k="ui_pmMonth08" v="octombrie" />
-        <e k="ui_pmMonth09" v="noiembrie" />
-        <e k="ui_pmMonth10" v="decembrie" />
+        1noiembrie2
+        1decembrie2
         <e k="ui_pmMonth11" v="ianuarie" />
         <e k="ui_pmMonth12" v="februarie" />
         <e k="ui_pmPeriodMonthYear" v="%s, anul %d" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="lună de lucru bună" />
         <e k="ui_waitingForServerData" v="Se așteaptă datele serverului" />
         <e k="ui_pmMenuPageHelp" v="Ajutor" />
-        <e k="ui_pmHelpIntro" v="Ghid detaliat în joc pentru Personnel Management 1.1.4.0. Fișierul ReadMe.pdf inclus conține reguli și calcule suplimentare." />
+        <e k="ui_pmHelpIntro" v="Ghid detaliat în joc pentru Personnel Management 1.1.5.0." />
         <e k="ui_pmHelpSectionQuickStart" v="Pornire rapidă și comenzi|Deschide meniul cu Ctrl + M. Schimbă filele cu comenzile de pagină ale meniului. Folosește A/D sau Stânga/Dreapta pentru persoană, Spațiu pentru confirmare, Esc pentru revenire, T pentru prioritățile de transport și G pentru cererile salariale." />
         <e k="ui_pmHelpSectionPeople" v="Candidați și angajați|Un joc nou începe cu patru candidați; cel mult opt pot fi disponibili. Angajează din profiluri. Experiența, fiabilitatea și loialitatea sunt între 0 și 100. Starea, salariul, specializările, cronica și totalurile sunt pe pagina angajaților." />
         <e k="ui_pmHelpSectionStats" v="Angajați și atribute|Experiența influențează viteza, uzura și consumul; fiabilitatea întreruperile, boala și abandonul; loialitatea cererile salariale și demisiile. Pagina arată și starea, salariul, specializările, statisticile și cronica personală." />
@@ -529,81 +530,154 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Demisie, concediere și pensionare|Acestea nu au întotdeauna efect imediat, ci la schimbarea lunii conform termenelor. Un angajat aflat la lucru nu poate fi concediat imediat. Schimbările viitoare apar în stare și cronică." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive și Courseplay|Atribuie șoferii în Angajați / Transport și stabilește prioritatea. AutoDrive folosește primul disponibil și blochează pornirea dacă nu există unul. Pornirea normală Courseplay deschide selecția. După AutoDrive, fiecare vehicul își păstrează automat propriul șofer fără o selecție nouă." />
         <e k="ui_pmHelpSectionMultiplayer" v="Multiplayer și salvări|Datele și setările sunt separate pe ferme. Serverul validează schimbările; numai managerii autorizați își pot administra ferma. Angajații, atribuirile active și setările sunt sincronizate. Datele se află în helperPersonnel.xml din salvare." />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="Management personal · Selectează sarcina" />
+        <e k="ui_selectionPerformanceProfile" v="PROFIL DE PERFORMANȚĂ" />
+        1Disponibil2
+        1Krank2
+        1În curs de formare2
+        1Rezervat2
+        <e k="ui_selectionUnavailableAutoDrive" v="Sarcină AutoDrive" />
+        <e k="ui_selectionUnavailableCourseplay" v="Sarcină Courseplay" />
+        1Cercetare pe teren2
+        1Indisponibil2
+        <e k="ui_selectionShowAll" v="Arată toți angajații" />
+        <e k="ui_selectionShowAvailable" v="Arată doar angajații disponibili" />
+        <e k="ui_selectionFooterControls" v="A/D Schimbă · Spațiu Selectează · Tab Toți · Esc Înapoi" />
+        1Comandă necunoscută2
+        1Modificare2
+        <e k="ui_selectionWageLabel" v="Salariu lunar" />
+        1Comenzi2
+        1Ritmul de lucru2
+        1%d ani2
         <e k="ui_selectionProfessionalDevelopment" v="Dezvoltare profesională" />
         <e k="ui_selectionNoSpecializationProgress" v="Încă nu există progres de specializare" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="Fără specializare" />
+        1Vehicul: %s2
+        1Comandă: %s2
+        1Câmp: %s2
+        <e k="ui_selectionTargetLine" v="Destinație transport: %s" />
+        <e k="ui_selectionCourseplayLine" v="Tip sarcină CP: %s" />
+        1Stare: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="Pornire rapidă și comenzi" />
-        <e k="ui_pmHelpTopic01Body" v="Deschide meniul cu Ctrl + M. Schimbă filele cu comenzile de pagină ale meniului. Folosește A/D sau Stânga/Dreapta pentru persoană, Spațiu pentru confirmare, Esc pentru revenire, T pentru prioritățile de transport și G pentru cererile salariale." />
-        <e k="ui_pmHelpTopic02Title" v="Candidați și angajați" />
-        <e k="ui_pmHelpTopic02Body" v="Un joc nou începe cu patru candidați; cel mult opt pot fi disponibili. Angajează din profiluri. Experiența, fiabilitatea și loialitatea sunt între 0 și 100. Starea, salariul, specializările, cronica și totalurile sunt pe pagina angajaților. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="Angajați și atribute" />
-        <e k="ui_pmHelpTopic03Body" v="Experiența influențează viteza, uzura și consumul; fiabilitatea întreruperile, boala și abandonul; loialitatea cererile salariale și demisiile. Pagina arată și starea, salariul, specializările, statisticile și cronica personală." />
-        <e k="ui_pmHelpTopic04Title" v="Muncă și dezvoltare" />
-        <e k="ui_pmHelpTopic04Body" v="Pornirea unei lucrări normale cu ajutor IA deschide selecția angajatului. Pot fi aleși doar angajații disponibili și nimeni nu poate face mai multe lucrări simultan. Timpul de lucru crește experiența și specializarea. Experiența afectează viteza, uzura și consumul; fiabilitatea încetinirile, boala și abandonul; loialitatea conflictele salariale și demisiile. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="Experiența influențează viteza, uzura și consumul; fiabilitatea întreruperile, boala și abandonul; loialitatea cererile salariale și demisiile. Pagina arată și starea, salariul, specializările, statisticile și cronica personală." />
-        <e k="ui_pmHelpTopic06Title" v="Salarii" />
-        <e k="ui_pmHelpTopic06Body" v="Salariile sunt debitate la schimbarea lunii și depind de zilele pe lună, dificultatea economică și setările modului. Angajații pot cere o mărire; cererea trebuie acceptată sau respinsă la timp și poate influența loialitatea." />
-        <e k="ui_pmHelpTopic07Title" v="Instruire" />
-        <e k="ui_pmHelpTopic07Body" v="Instruirea începe doar la începutul lunii, costă bani și blochează angajatul până la sfârșitul lunii. Finalizarea îmbunătățește specializarea aleasă. Ofertele și istoricul apar în zonele Instruire și Angajați. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="Specializare" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="Demisie, concediere și pensionare" />
-        <e k="ui_pmHelpTopic09Body" v="Acestea nu au întotdeauna efect imediat, ci la schimbarea lunii conform termenelor. Un angajat aflat la lucru nu poate fi concediat imediat. Schimbările viitoare apar în stare și cronică." />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive și Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="Atribuie șoferii în Angajați / Transport și stabilește prioritatea. AutoDrive folosește primul disponibil și blochează pornirea dacă nu există unul. Pornirea normală Courseplay deschide selecția. După AutoDrive, fiecare vehicul își păstrează automat propriul șofer fără o selecție nouă." />
-        <e k="ui_pmHelpTopic11Title" v="Multiplayer și salvări" />
-        <e k="ui_pmHelpTopic11Body" v="Datele și setările sunt separate pe ferme. Serverul validează schimbările; numai managerii autorizați își pot administra ferma. Angajații, atribuirile active și setările sunt sincronizate. Datele se află în helperPersonnel.xml din salvare." />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="Datele și setările sunt separate pe ferme. Serverul validează schimbările; numai managerii autorizați își pot administra ferma. Angajații, atribuirile active și setările sunt sincronizate. Datele se află în helperPersonnel.xml din salvare." />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="Deschide meniul cu Ctrl + M. Schimbă filele cu comenzile de pagină ale meniului. Folosește A/D sau Stânga/Dreapta pentru persoană, Spațiu pentru confirmare, Esc pentru revenire, T pentru prioritățile de transport și G pentru cererile salariale. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="Eliberează" />
-        <e k="ui_pmConfirmReleaseWorker" v="Eliberați %s? Acest lucru este posibil numai dacă serverul nu detectează nicio sarcină activă." />
-        <e k="ui_workerReleaseSuccess" v="Angajat eliberat." />
-        <e k="ui_workerReleaseDeniedActive" v="Eliberarea nu este posibilă: angajatul are încă o sarcină activă." />
-        <e k="ui_workerReleaseDeniedAvailable" v="Eliberarea nu este necesară: angajatul este deja disponibil." />
-        <e k="ui_workerReleaseDeniedCheck" v="Eliberarea nu este posibilă: starea sarcinii nu a putut fi verificată în siguranță." />
-        <e k="ui_workerReleaseDeniedPermission" v="Eliberarea nu este posibilă: fără permisiune sau angajat nevalid." />
+        1Lasă să se odihnească2
+        1Autentificare2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Dezactivezi %s pentru %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Activezi %s pentru %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="O nouă specializare poate fi activată doar o dată pentru fiecare angajat și an agricol." />
+        <e k="ui_pmSpecializationSlotsFull" v="Dezactivează cel puțin o specializare activă înainte de a activa alta." />
+        1activ2
+        <e k="ui_pmSpecializationInactive" v="învățată, inactivă" />
+        <e k="ui_specializationActivatedNotice" v="%s folosește din nou specializarea %s." />
+        <e k="ui_specializationDeactivatedNotice" v="%s dezactivează specializarea %s." />
+        1CUPRINS2
+        <e k="ui_pmHelpNavigation" v="Stânga/Dreapta: zonă · Sus/Jos: selectează sau derulează · Page Up/Down: pagină" />
+        1Pornire rapidă și utilizare2
+        1Sistemul de gestionare a personalului înlocuiește asistenții anonimi ai IA cu candidați și angajați identificați. Fiecare angajat se dezvoltă pe termen lung, primește un salariu lunar și poate prezenta diferite puncte forte și riscuri, în funcție de experiență, fiabilitate, loialitate și specializări.&#10;Meniul propriu se deschide în mod implicit cu Ctrl + M. Acesta conține secțiunile Prezentare generală, Candidați, Angajați, Instruire, Setări și Ajutor. Configurația tastelor poate fi modificată în setările jocului.&#10;Configurare implicită: schimbare persoană cu A/D sau săgeata stânga/dreapta; confirmare selecție cu tasta spațiu sau clic de mouse; anulare sau întoarcere cu Esc; gestionarea transportului și a salariilor cu T sau G. În fila Ajutor, săgețile stânga/dreapta comută între conținut și articole, sus/jos selectează sau derulează, iar sus/jos pe imagine sare pagină cu pagină.2
+        1Prezentare generală și efectivul de personal2
+        1Prezentarea generală rezumă situația actuală a fermei: angajații, angajații disponibili, candidații și reputația angajatorului sunt afișate în partea de sus. Sub acestea apar misiunile în curs, cu menționarea persoanei, vehiculului, echipamentului și activității.&#10;Secțiunea „Modificări” conține doar evenimentele relevante legate de personal, adică modificări ale reputației angajatorului, experienței, fiabilității, loialității, vârstei sau specializării. Fiecare notificare menționează cauza, persoana afectată și consecința; o înregistrare pe mai multe rânduri rămâne o singură notificare.&#10;„Raportul lunar” și „Total” afișează indicatorii actuali și pe întreaga durată a activității. Utilizează prezentarea generală pentru planificarea rapidă a misiunilor; detaliile, deciziile și cronologiile se regăsesc în paginile de specialitate individuale.2
+        1Piața forței de muncă și recrutarea2
+        1O nouă rundă începe cu patru candidați. În același timp, pe piață pot fi prezenți cel mult opt candidați. La fiecare schimbare de lună, se generează prin aruncarea zarurilor până la trei locuri noi; șansa pentru fiecare loc este de 15 % + 0,7 × reputația angajatorului. La o reputație de 60, aceasta reprezintă 57 %, iar la o reputație de 100, 85 % pentru fiecare loc. Dacă piața este goală, se generează cel puțin un candidat nou.&#10;Candidații rămân disponibili cu siguranță în luna în care au fost generați. După prima schimbare de lună, șansa lor de plecare este de 10–30 %, în funcție de calitate; după a doua, de 30–50 %, iar la a treia schimbare de lună, de 100 %. Profilurile bune pot dispărea mai devreme, deoarece calitatea lor crește șansa de plecare.&#10;Candidații au vârsta cuprinsă între 18 și 65 de ani, au o dată de naștere fixă și continuă să îmbătrânească. Contextele de proveniență sunt: întreprindere familială, fermă de vaci de lapte, întreprindere de prestări servicii agricole, agricultură, exploatație mixtă, logistică, atelier de utilaje agricole și profesie de birou. Vârsta și contextul de proveniență influențează în special experiența și eventualele cunoștințe tehnice prealabile.&#10;Salarul dorit se bazează pe experiență și fiabilitate, prezintă o variație aleatorie de 96–106 % și este influențat de reputația angajatorului. O reputație scăzută crește salariul dorit, iar una ridicată îl scade. Înainte de angajare apare o confirmare; angajarea crește reputația cu 1 punct.2
+        1Profilul angajaților, valorile și statutul2
+        1Experiența, fiabilitatea și loialitatea sunt evaluate pe o scară de la 0 la 100. Valoarea rămâne vizibilă cu precizie; barele permit o comparație rapidă.&#10;Clasificarea se bazează exclusiv pe experiență: asistent 0–44, specialist 45–74, profesionist 75–100. Experiența determină viteza de lucru, uzura suplimentară și consumul suplimentar. Fiabilitatea influențează scăderile de performanță pe termen scurt, bolile, evoluția lunară și riscul de întrerupere a misiunii. Loialitatea descrie atașamentul față de companie și influențează avertismentele, conflictele salariale și demisiile voluntare.2
+        1Asistenți AI, Transport și FollowMe2
+        1La lansarea unei sarcini normale asistate de IA, se deschide fereastra de selectare a angajaților. Pot fi selectați doar angajații disponibili. Un angajat nu poate prelua mai multe sarcini simultan și nu este disponibil în timpul concediului medical sau al cursurilor de formare.&#10;O misiune este înregistrată ca sarcină finalizată abia după 10 secunde. Pentru progresul în specializare, activitatea practică trebuie să dureze cel puțin 3 minute.&#10;Cu tasta T sau butonul de meniu poți deschide secțiunea „Prioritate de transport”. Aici poți stabili care angajați preiau sarcinile de transport și în ce ordine sunt verificați. În cazul unei sarcini de tip „de la A la B”, este selectat primul angajat disponibil, de sus în jos. FollowMe utilizează în continuare fereastra de selecție a angajaților și este considerată activitate de transport.2
+        1Experiența și impactul asupra muncii2
+        1ACUMULAREA DE EXPERIENȚĂ&#10;– Experiența se acumulează pe baza timpului de lucru înregistrat; minutele de învățare neutilizate se păstrează.&#10;– Pentru fiecare misiune în parte se pot obține cel mult 2 puncte de experiență.&#10;– În plus, progresul este limitat de o limită lunară. Cu cât experiența este mai mare, cu atât durează mai mult până la obținerea următorului punct.&#10;EFECTE&#10;– O specializare principală crește experiența efectivă cu 12 puncte, iar o specializare secundară cu 6; valoarea maximă rămâne 100.&#10;– Viteza de lucru = 70 % + 30 % × experiența efectivă / 100.&#10;– Uzura suplimentară este de până la 15 %, consumul suplimentar de materiale și combustibil de până la 10 % × experiența efectivă lipsă × factorul economic. Factorul economic este 0,75 / 1,00 / 1,25.&#10;TIMP DE ÎNVĂȚARE ȘI LIMITĂ LUNARĂ&#10;– Experiență 0–24: 25 de minute, limită lunară +1; 25–49: 50 de minute, 0; 50–69: 100 de minute, -1.&#10;– Experiență 70–84: 220 de minute, -2; 85–94: 540 de minute, -3; 95–100: 1080 de minute, -4.&#10;– Limită de bază pe zile/lună: 1 zi = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Limita efectivă = limita de bază + ajustare, minimum 1.2
+        1Fiabilitatea, îmbolnăvirile și întreruperile misiunilor2
+        1La un nivel de fiabilitate sub 85, pot apărea scurte scăderi de performanță. Se efectuează o verificare o dată pe minut; probabilitatea crește odată cu scăderea fiabilității, până la maximum 15 %. O scădere durează între 30 și 90 de secunde, reduce performanța cu 4–15 % și poate reapărea abia după încă 3 minute.&#10;Starea de sănătate este verificată zilnic. Un angajat bolnav nu este disponibil în ziua respectivă; o misiune în curs este întreruptă. Pe lună sunt posibile cel mult zile pe lună rotunjite la numărul întreg / 3 zile de boală. La un nivel de fiabilitate sub 50, după 60 de secunde se verifică o singură dată posibilitatea întreruperii complete a misiunii; în acest caz, misiunea nu este considerată reușită, iar incidentul apare în cronologie.&#10;Valori orientative pentru boală/zi și întreruperea misiunii: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. O lună bună necesită cel puțin 120 de minute de lucru, fără incidente, fără zile de boală și mai puțin de 240 de minute de lucru pe timp de noapte; în acest caz, există o șansă de 35 % de a obține +1 la fiabilitate. Riscurile negative se cumulează și sunt limitate la 60 %.2
+        1Loialitatea și reputația angajatorului2
+        1Noii angajați încep, de obicei, cu un nivel de loialitate de aproximativ 65. Salariile plătite la timp, vechimea îndelungată în companie și cererile salariale acceptate consolidează loialitatea; problemele financiare, munca de noapte, precum și cererile respinse sau rămase nesoluționate pentru o perioadă îndelungată o slăbesc. Munca de noapte între orele 22:00 și 06:00 este înregistrată și poate costa, începând de la 120 de minute în joc, până la 4 puncte de loialitate, precum și 1–2 puncte de reputație.&#10;În cazul unei diferențe între loialitate și reputația angajatorului de cel puțin 15 / 30 / 50 de puncte, are loc o apropiere lunară cu 1 / 2 / 3 puncte. Evenimente: salariul este plătit dacă Prestigiul este de cel puțin 40 +1 punct de loialitate; plata duce la un sold negativ de -2; întreprinderea era deja în minus -4; vechime de 3 / 6 / 12 / 24 luni +1 / +1 / +2 / +3; cerere acceptată +3; respinsă -5, la loialitate sub 40 -7; cerere neîncheiată după luna de grație -2 pe lună.&#10;Demisia voluntară lunară la loialitate 0–5: 35 %, 6–9: 20 %, 10–14: 10 %, de la 15 în sus nu există demisie regulată pe baza loialității. Reputația angajatorului începe de la 60, variază între 0–100 și este critică între 0–19, slabă între 20–39, solidă între 40–59, bună între 60–79 sau foarte bună între 80–100. Aceasta influențează numărul și calitatea candidaților, așteptările salariale și loialitatea pe termen lung.2
+        1Salarii, salarizare și cereri de plată a salariilor2
+        1Salariile de bază individuale se calculează pe baza vechimii și a fiabilității și se interpolează liniar în cadrul fiecărei trepte de vechime. Fiabilitatea multiplică valoarea cu un coeficient cuprins între 0,94 și 1,06. Candidații beneficiază, în plus, de bonusuri legate de noroc, reputație și posibile specializări, respectiv +5 % pentru specializarea principală și +3 % pentru cea secundară.&#10;Salariul de bază pentru 3 zile/lună: Experiență 0–44: 1.800–2.200, 45–74: 2.200–2.700, 75–100: 2.700–3.300. Salariul lunar = salariul de bază × factorul de lungime a lunii × factorul costurilor economice, rotunjit la 10. În cazul în care salariile individuale sunt dezactivate, se aplică salariul de bază standard de 100–100.000, în pași de zece. Factori de lungime a lunii pentru 1–28 de zile: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Plata se efectuează la sfârșitul lunii, odată cu plata salariului. Chiar și angajații al căror contract de muncă se încheie la acel moment primesc în prealabil suma cuvenită. Un specialist sau un profesionist poate solicita o mărire de salariu: șansă inițială de 70 %, limitată la 55–85 % în funcție de loialitate; ulterior, se poate reevalua lunar cu o șansă de 50 %. Acceptarea aduce +3 la loialitate și +1 la reputație; refuzul scade loialitatea cu 5, iar dacă aceasta este sub 40, cu 7, și crește riscul de concediere și de neseriositate timp de 3 luni. G deschide toate creanțele restante.2
+        1Specializări și dezvoltare practică2
+        1REGULI DE BAZĂ&#10;– Există opt categorii de învățare: prelucrarea solului, însămânțarea, fertilizarea, protecția plantelor, recoltarea, transportul, protejarea utilajelor și modul de lucru eficient.&#10;– Progresul este înregistrat separat pentru fiecare categorie. Specializările dobândite se păstrează permanent; pot fi active simultan cel mult două bonusuri.&#10;PROGRESUL ÎN ÎNVĂȚARE&#10;– Pragurile de învățare sunt de 240, 420, 600 și 780 de minute; după aceea, fiecare prag următor crește cu 180 de minute.&#10;– Factorul de învățare este 1 + (Experiență-50)/250 + (Fiabilitate-50)/300 și este limitat între 0,75 și 1,30. În cazul mai multor activități, timpul de învățare este repartizat ponderat.&#10;CLASIFICAREA ACTIVITĂȚILOR&#10;– Lucrul solului: plug, cultivator, grapa rotativă, grapa cu discuri, cilindru și tocător.&#10;– Semănat: semănători și mașini de plantat, precum și semințe.&#10;– Fertilizare: îngrășăminte minerale, îngrășăminte lichide, gunoi de grajd, reziduuri de fermentare și bălegar. Protecția plantelor: lucrări cu erbicide.&#10;– Recoltare: combine, mecanisme de tăiere, prese de balotat, cositoare, remorci de încărcare și pick-up-uri. Transport: remorci, descărcare și transport de la A la B.&#10;BONUSURI ȘI ACTIVARE&#10;– Specializare principală: +12 puncte de experiență efectivă și +5 % din salariul de bază. Specializare secundară: +6 și +3 %.&#10;– Ambele locuri pot fi lăsate în repaus. O specializare învățată aflată în repaus poate fi activată o singură dată pe angajat și pe an agricol (martie–februarie); lăsarea în repaus nu consumă acest drept.2
+        1Cursuri de formare2
+        1Cursurile încep doar în prima zi a lunii; în cazul unei zile pe lună, până la ora 12:00 inclusiv. Un angajat poate participa la un singur curs pe an agricol, din martie până în februarie, și nu trebuie să fie angajat sau în concediu medical. Persoana respectivă rămâne indisponibilă până la sfârșitul lunii; progresul este creditat abia la finalizarea cursului, la schimbarea lunii.&#10;Un curs de formare aduce 30 % din minutele de învățare necesare pentru următoarea specializare, cel puțin 30 de minute și niciodată mai mult decât numărul de minute care mai lipsesc. Fiecare categorie are lunar un factor de preț cuprins între -20 % și +20 % și are o probabilitate de 25 % de a fi complet ocupată. Costurile sunt deduse imediat la început și se bazează pe salariul lunar actual.&#10;Costurile de formare = salariul lunar actual × factorul de categorie × modificatorul lunar. Factori: prelucrarea solului 75 %, însămânțarea 90 %, fertilizarea 90 %, protecția plantelor 100 %, recoltarea 110 %, transportul 65 %, protecția utilajelor 120 %, metode de lucru economice 120 %.2
+        1Concediere, demisie și pensionare2
+        1Concedierile trebuie confirmate. În cazul unei zile/luni, preavizul trebuie comunicat în prima zi până la ora 12:00, pentru ca acesta să intre în vigoare la începutul lunii următoare. În cazul a două sau mai multe zile, data de referință este la sfârșitul jumătății de lună rotunjite în sus, zi ceil(zile/lună ÷ 2). După data de referință, data de încetare se amână cu încă o lună.&#10;Odată cu pronunțarea concedierii, loialitatea scade imediat cu 40, iar fiabilitatea cu 25. Angajatul rămâne, în principiu, disponibil pentru muncă până la sfârșitul lunii în care concedierea intră în vigoare. Pierderea de reputație în cazul concedierii: sub 1 lună -12, sub 3 -9, sub 6 -7, sub 12 -5, sub 24 -3, de la 24 de luni -1; fiecare concediere suplimentară în aceeași lună costă încă 4 puncte.&#10;La un nivel de loialitate de 0–14, se verifică lunar posibilitatea unei demisii din proprie inițiativă. O cerere salarială respinsă poate crește temporar această probabilitate cu 5 puncte procentuale. O demisie anunțată din proprie inițiativă intră în vigoare la sfârșitul lunii și costă 10 puncte de reputație. Începând cu împlinirea vârstei de 55 de ani, se poate anunța pensionarea; riscul crește până la vârsta de 67 de ani la aproximativ 80–90 %, ajunge la 95 % la 68 de ani, la 98 % la 69 de ani și la 100 % la 70 de ani. Persoana rămâne disponibilă până la sfârșitul lunii.2
+        1Profiluri, cronologie și statistici2
+        1Profilurile candidaților combină vârsta, parcursul profesional, experiența, fiabilitatea, loialitatea, specializările și vechimea pe piața muncii într-un text dinamic. Profilurile angajaților completează vechimea în companie, misiunile, cursurile de formare și progresele învățării.&#10;Cronologia personală poate înregistra angajarea, data începerii și a încheierii misiunilor, întreruperile misiunilor, concediile medicale, cursurile de formare, specializările, cererile salariale și deciziile, schimbările privind loialitatea și fiabilitatea, alocările de transport, precum și concedierea, demisia voluntară, pensionarea și încetarea raporturilor de muncă.&#10;Istoricul angajatului prezintă, printre altele, misiunile, timpul de lucru, cursurile de formare, starea transporturilor, ultimele evenimente, zilele de concediu medical, cererile salariale, întreruperile misiunilor și salariul total plătit până în prezent. Prezentarea generală afișează, în plus, valori totale la nivel de companie, cum ar fi numărul total de angajări, concedieri, demisii și pensionări.2
+        1Setări, Modul multiplayer și Scoruri2
+        1Setările se aplică pentru fiecare joc în parte și sunt împărțite în performanța muncii, dezvoltarea personalului, precum și economie și salarii. Efectele asupra gameplay-ului deblochează efectele de experiență dependente; efectele de experiență controlează viteza, uzura, consumabilele și combustibilul. Efectele asupra personalului deblochează modificările de loialitate și opțiunea de lucru suplimentar. Efectele economice deblochează salariile individuale și salariul lunar standard.&#10;Efectele dezactivate nu modifică retroactiv datele existente privind personalul. Ele împiedică sau permit exclusiv efectul ulterior respectiv. Salariul lunar standard servește ca valoare de bază atunci când salariile individuale sunt dezactivate; acesta poate fi modificat direct în setări. Configurația tastelor poate fi modificată în setările jocului.&#10;În modul multiplayer, personalul, candidații, misiunile, salariile, cursurile de formare, angajările și cronicile sunt gestionate și sincronizate la nivel de fermă. Serverul decide; numai managerii de fermă autorizați pot modifica propria fermă. Datele se află în fișierul helperPersonnel.xml din salvarea jocului, iar alocările curente sunt restabilite pe cât posibil la încărcare. Fișierele de joc vechi rămân utilizabile; datele istorice pot fi incomplete pentru angajații care au părăsit deja ferma.2
+        <e k="ui_button_emergency_release_worker" v="Eliberează" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="Eliberați %s? Acest lucru este posibil numai dacă serverul nu detectează nicio sarcină activă." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="Angajat eliberat." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="Eliberarea nu este posibilă: angajatul are încă o sarcină activă." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Eliberarea nu este necesară: angajatul este deja disponibil." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="Eliberarea nu este posibilă: starea sarcinii nu a putut fi verificată în siguranță." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="Eliberarea nu este posibilă: fără permisiune sau angajat nevalid." />
+    1Pornire rapidă și utilizare2
+    1Sistemul de gestionare a personalului înlocuiește asistenții anonimi ai IA cu candidați și angajați identificați. Fiecare angajat se dezvoltă pe termen lung, primește un salariu lunar și poate prezenta diferite puncte forte și riscuri, în funcție de experiență, fiabilitate, loialitate și specializări.&#10;Meniul propriu se deschide în mod implicit cu Ctrl + M. Acesta conține secțiunile Prezentare generală, Candidați, Angajați, Instruire, Setări și Ajutor. Configurația tastelor poate fi modificată în setările jocului.&#10;Configurare implicită: schimbare persoană cu A/D sau săgeata stânga/dreapta; confirmare selecție cu bara de spațiu sau clic de mouse; anulare sau întoarcere cu Esc; gestionarea transportului și a salariilor cu T respectiv G. În fila Ajutor, săgețile stânga/dreapta comută între conținut și articole, sus/jos selectează sau derulează, iar sus/jos pe imagine sare pagină cu pagină.2
+    1Prezentare generală și efectivul de personal2
+    1Prezentarea generală rezumă situația actuală a fermei: angajații, angajații disponibili, candidații și reputația angajatorului sunt afișate în partea de sus. Sub acestea apar misiunile în curs, cu menționarea persoanei, vehiculului, echipamentului și activității.&#10;Secțiunea „Modificări” conține doar evenimentele relevante legate de personal, adică modificări ale reputației angajatorului, experienței, fiabilității, loialității, vârstei sau specializării. Fiecare notificare menționează cauza, persoana afectată și consecința; o înregistrare pe mai multe rânduri rămâne o singură notificare.&#10;„Raportul lunar” și „Total” afișează indicatorii actuali și pe întreaga durată a activității. Utilizează prezentarea generală pentru planificarea rapidă a misiunilor; detaliile, deciziile și cronologiile se regăsesc în paginile de specialitate individuale.2
+    1Piața forței de muncă și recrutarea2
+    1O nouă rundă începe cu patru candidați. În același timp, pe piață pot fi prezenți cel mult opt candidați. La fiecare schimbare de lună, se generează prin aruncarea zarurilor până la trei locuri noi; șansa pentru fiecare loc este de 15 % + 0,7 × reputația angajatorului. La o reputație de 60, aceasta reprezintă 57 %, iar la o reputație de 100, 85 % pentru fiecare loc. Dacă piața este goală, se generează cel puțin un candidat nou.&#10;Candidații rămân disponibili cu siguranță în luna în care au fost generați. După prima schimbare de lună, șansa lor de plecare este de 10–30 %, în funcție de calitate; după a doua, de 30–50 %, iar la a treia schimbare de lună, de 100 %. Profilurile bune pot dispărea mai devreme, deoarece calitatea lor crește șansa de plecare.&#10;Candidații au vârsta cuprinsă între 18 și 65 de ani, au o dată de naștere fixă și continuă să îmbătrânească. Contextele de proveniență sunt: întreprindere familială, fermă de vaci de lapte, întreprindere de prestări servicii agricole, agricultură, exploatație mixtă, logistică, atelier de utilaje agricole și profesie de birou. Vârsta și contextul de proveniență influențează în special experiența și eventualele cunoștințe tehnice prealabile.&#10;Salarul dorit se bazează pe experiență și fiabilitate, prezintă o variație aleatorie de 96–106 % și este influențat de reputația angajatorului. O reputație scăzută crește salariul dorit, iar una ridicată îl scade. Înainte de angajare apare o confirmare; angajarea crește reputația cu 1 punct.2
+    1Profilul angajaților, valorile și statutul2
+    1Experiența, fiabilitatea și loialitatea sunt evaluate pe o scară de la 0 la 100. Valoarea rămâne vizibilă cu precizie; barele permit o comparație rapidă.&#10;Clasificarea se bazează exclusiv pe experiență: asistent 0–44, specialist 45–74, profesionist 75–100. Experiența determină viteza de lucru, uzura suplimentară și consumul suplimentar. Fiabilitatea influențează scăderile de performanță pe termen scurt, bolile, evoluția lunară și riscul de întrerupere a misiunii. Loialitatea descrie atașamentul față de companie și influențează avertismentele, conflictele salariale și demisiile voluntare.2
+    <e k="ui_pmHelpTopic05Title" v="Asistenți AI, Transport și FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="La lansarea unei sarcini normale asistate de IA, se deschide fereastra de selectare a angajaților. Pot fi selectați doar angajații disponibili. Un angajat nu poate prelua mai multe sarcini simultan și nu este disponibil în timpul concediului medical sau al cursurilor de formare.&#10;O misiune este înregistrată ca sarcină finalizată abia după 10 secunde. Pentru progresul în specializare, activitatea practică trebuie să dureze cel puțin 3 minute.&#10;Cu tasta T sau butonul de meniu poți deschide secțiunea „Prioritate de transport”. Aici poți stabili care angajați preiau sarcinile de transport și în ce ordine sunt verificați. În cazul unei sarcini de tip „de la A la B”, este selectat primul angajat disponibil, de sus în jos. FollowMe utilizează în continuare fereastra de selecție a angajaților și este considerată activitate de transport." />
+    <e k="ui_pmHelpTopic06Title" v="Experiența și impactul asupra muncii" />
+    <e k="ui_pmHelpTopic06Body" v="ACUMULAREA DE EXPERIENȚĂ&#10;– Experiența se acumulează pe baza timpului de lucru înregistrat; minutele de învățare neutilizate se păstrează.&#10;– Pentru fiecare misiune în parte se pot obține cel mult 2 puncte de experiență.&#10;– În plus, progresul este limitat de o limită lunară. Cu cât experiența este mai mare, cu atât durează mai mult până la obținerea următorului punct.&#10;EFECTE&#10;– O specializare principală crește experiența efectivă cu 12 puncte, iar o specializare secundară cu 6; valoarea maximă rămâne 100.&#10;– Viteza de lucru = 70 % + 30 % × experiența efectivă / 100.&#10;– Uzura suplimentară este de până la 15 %, consumul suplimentar de materiale și combustibil de până la 10 % × experiența efectivă lipsă × factorul economic. Factorul economic este 0,75 / 1,00 / 1,25.&#10;TIMP DE ÎNVĂȚARE ȘI LIMITĂ LUNARĂ&#10;– Experiență 0–24: 25 de minute, limită lunară +1; 25–49: 50 de minute, 0; 50–69: 100 de minute, -1.&#10;– Experiență 70–84: 220 de minute, -2; 85–94: 540 de minute, -3; 95–100: 1080 de minute, -4.&#10;– Limită de bază pe zile/lună: 1 zi = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Limita efectivă = limita de bază + ajustare, minimum 1." />
+    <e k="ui_pmHelpTopic07Title" v="Fiabilitatea, îmbolnăvirile și întreruperile misiunilor" />
+    <e k="ui_pmHelpTopic07Body" v="La un nivel de fiabilitate sub 85, pot apărea scurte scăderi de performanță. Se efectuează o verificare o dată pe minut; probabilitatea crește odată cu scăderea fiabilității, până la maximum 15 %. O scădere durează între 30 și 90 de secunde, reduce performanța cu 4–15 % și poate reapărea abia după încă 3 minute.&#10;Starea de sănătate este verificată zilnic. Un angajat bolnav nu este disponibil în ziua respectivă; o misiune în curs este întreruptă. Pe lună sunt posibile cel mult zile pe lună rotunjite la numărul întreg / 3 zile de boală. La un nivel de fiabilitate sub 50, după 60 de secunde se verifică o singură dată posibilitatea întreruperii complete a misiunii; în acest caz, misiunea nu este considerată reușită, iar incidentul apare în cronologie.&#10;Valori orientative pentru boală/zi și întreruperea misiunii: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. O lună bună necesită cel puțin 120 de minute de lucru, fără incidente, fără zile de boală și mai puțin de 240 de minute de lucru pe timp de noapte; în acest caz, există o șansă de 35 % de a obține +1 la fiabilitate. Riscurile negative se cumulează și sunt limitate la 60 %." />
+    <e k="ui_pmHelpTopic08Title" v="Loialitatea și reputația angajatorului" />
+    <e k="ui_pmHelpTopic08Body" v="Noii angajați încep, de obicei, cu un nivel de loialitate de aproximativ 65. Salariile plătite la timp, vechimea îndelungată în companie și cererile salariale acceptate consolidează loialitatea; problemele financiare, munca de noapte, precum și cererile respinse sau rămase nesoluționate pentru o perioadă îndelungată o slăbesc. Munca de noapte între orele 22:00 și 06:00 este înregistrată și poate costa, începând de la 120 de minute în joc, până la 4 puncte de loialitate, precum și 1–2 puncte de reputație.&#10;În cazul unei diferențe între loialitate și reputația angajatorului de cel puțin 15 / 30 / 50 de puncte, are loc o apropiere lunară cu 1 / 2 / 3 puncte. Evenimente: salariul este plătit dacă Prestigiul este de cel puțin 40 +1 punct de loialitate; plata duce la un sold negativ de -2; întreprinderea era deja în minus -4; vechime de 3 / 6 / 12 / 24 luni +1 / +1 / +2 / +3; cerere acceptată +3; respinsă -5, dacă loialitatea este sub 40 -7; cerere neîncheiată după luna de grație -2 pe lună.&#10;Demisia voluntară lunară la loialitate 0–5: 35 %, 6–9: 20 %, 10–14: 10 %, de la 15 în sus nu există demisie regulată bazată pe loialitate. Reputația angajatorului începe de la 60, variază între 0–100 și este critică între 0–19, slabă între 20–39, solidă între 40–59, bună între 60–79 sau foarte bună între 80–100. Aceasta influențează numărul și calitatea candidaților, așteptările salariale și loialitatea pe termen lung." />
+    <e k="ui_pmHelpTopic09Title" v="Salarii, salarizare și cereri de plată a salariilor" />
+    <e k="ui_pmHelpTopic09Body" v="Salariile de bază individuale se calculează pe baza vechimii și a fiabilității și se interpolează liniar în cadrul fiecărei trepte de vechime. Fiabilitatea multiplică valoarea cu un coeficient cuprins între 0,94 și 1,06. Candidații beneficiază, în plus, de bonusuri legate de noroc, reputație și posibile specializări, respectiv +5 % pentru specializarea principală și +3 % pentru cea secundară.&#10;Salariul de bază pentru 3 zile/lună: Experiență 0–44: 1.800–2.200, 45–74: 2.200–2.700, 75–100: 2.700–3.300. Salariul lunar = salariul de bază × factorul de lungime a lunii × factorul costurilor economice, rotunjit la 10. În cazul în care salariile individuale sunt dezactivate, se aplică salariul de bază standard de 100–100.000, în pași de zece. Factori de lungime a lunii pentru 1–28 de zile: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Plata se efectuează la sfârșitul lunii, odată cu plata salariului. Chiar și angajații al căror contract de muncă se încheie la acel moment primesc în prealabil suma cuvenită. Un specialist sau un profesionist poate solicita o mărire de salariu: șansă inițială de 70 %, limitată la 55–85 % în funcție de loialitate; ulterior, se poate reevalua lunar cu o șansă de 50 %. Acceptarea aduce +3 la loialitate și +1 la reputație; refuzul scade loialitatea cu 5, iar dacă aceasta este sub 40, cu 7, și crește riscul de concediere și de neseriositate timp de 3 luni. G deschide toate creanțele restante." />
+    <e k="ui_pmHelpTopic10Title" v="Specializări și dezvoltare practică" />
+    <e k="ui_pmHelpTopic10Body" v="REGULI DE BAZĂ&#10;– Există opt categorii de învățare: prelucrarea solului, însămânțarea, fertilizarea, protecția plantelor, recoltarea, transportul, protejarea utilajelor și modul de lucru eficient.&#10;– Progresul este înregistrat separat pentru fiecare categorie. Specializările dobândite se păstrează permanent; cel mult două bonusuri pot fi active simultan.&#10;PROGRESUL ÎN ÎNVĂȚARE&#10;– Pragurile de învățare sunt de 240, 420, 600 și 780 de minute; după aceea, fiecare prag următor crește cu 180 de minute.&#10;– Factorul de învățare este 1 + (Experiență-50)/250 + (Fiabilitate-50)/300 și este limitat între 0,75 și 1,30. În cazul mai multor activități, timpul de învățare este repartizat ponderat.&#10;CLASIFICAREA ACTIVITĂȚILOR&#10;– Lucrul solului: plug, cultivator, grapa rotativă, grapa cu discuri, cilindrul compactor și tocătorul de vegetație.&#10;– Semănat: semănători și mașini de plantat, precum și semințe.&#10;– Fertilizare: îngrășăminte minerale, îngrășăminte lichide, gunoi de grajd, reziduuri de fermentare și bălegar. Protecția plantelor: lucrări cu erbicide.&#10;– Recoltare: combine, mecanisme de tăiere, prese de balotat, cositoare, remorci de încărcare și pick-up-uri. Transport: remorci, descărcare și transport de la A la B.&#10;BONUSURI ȘI ACTIVARE&#10;– Specializare principală: +12 puncte de experiență efectivă și +5 % din salariul de bază. Specializare secundară: +6 și +3 %.&#10;– Ambele locuri pot fi lăsate în repaus. O specializare învățată aflată în repaus poate fi activată o singură dată pe angajat și pe an agricol (martie–februarie); lăsarea în repaus nu consumă acest drept." />
+    <e k="ui_pmHelpTopic11Title" v="Cursuri de formare" />
+    <e k="ui_pmHelpTopic11Body" v="Cursurile încep doar în prima zi a lunii; în cazul în care acea zi a lunii se încheie la ora 12:00 inclusiv. Un angajat poate participa la un singur curs pe an agricol, din martie până în februarie, și nu poate fi angajat sau în concediu medical în acea perioadă. Persoana respectivă rămâne indisponibilă până la sfârșitul lunii; progresul este creditat abia la finalizarea cursului, la schimbarea lunii.&#10;Un curs de formare asigură 30 % din minutele de învățare necesare pentru următoarea specializare, cel puțin 30 de minute și niciodată mai mult decât numărul de minute care mai lipsesc. Fiecare categorie are un factor de preț lunar cuprins între -20 % și +20 % și are o probabilitate de 25 % de a fi complet ocupată. Costurile sunt deduse imediat la începutul cursului și se bazează pe salariul lunar actual.&#10;Costurile de formare = salariul lunar actual × factorul de categorie × modificatorul lunar. Factori: prelucrarea solului 75 %, însămânțarea 90 %, fertilizarea 90 %, protecția plantelor 100 %, recoltarea 110 %, transportul 65 %, protecția utilajelor 120 %, metode de lucru economice 120 %." />
+    <e k="ui_pmHelpTopic12Title" v="Concediere, demisie și pensionare" />
+    <e k="ui_pmHelpTopic12Body" v="Concedierile trebuie confirmate. În cazul unei zile/luni, preavizul trebuie comunicat în prima zi până la ora 12:00, pentru ca acesta să intre în vigoare la începutul lunii următoare. În cazul a două sau mai multe zile, data de referință este la sfârșitul jumătății de lună rotunjite în sus, zi ceil(zile/lună ÷ 2). După data de referință, data de încetare se amână cu încă o lună.&#10;Odată cu pronunțarea concedierii, loialitatea scade imediat cu 40, iar fiabilitatea cu 25. Angajatul rămâne, în principiu, disponibil pentru muncă până la sfârșitul lunii în care concedierea intră în vigoare. Pierderea de reputație în cazul concedierii: sub 1 lună -12, sub 3 -9, sub 6 -7, sub 12 -5, sub 24 -3, de la 24 de luni -1; fiecare concediere suplimentară în aceeași lună costă încă 4 puncte.&#10;La un nivel de loialitate de 0–14, se verifică lunar posibilitatea unei demisii din proprie inițiativă. O cerere salarială respinsă poate crește temporar această probabilitate cu 5 puncte procentuale. O demisie anunțată din proprie inițiativă intră în vigoare la sfârșitul lunii și costă 10 puncte de reputație. Începând cu împlinirea vârstei de 55 de ani, se poate anunța pensionarea; riscul crește până la vârsta de 67 de ani la aproximativ 80–90 %, ajunge la 95 % la 68 de ani, la 98 % la 69 de ani și la 100 % la 70 de ani. Persoana rămâne disponibilă până la sfârșitul lunii." />
+    <e k="ui_pmHelpTopic13Title" v="Profiluri, cronologie și statistici" />
+    <e k="ui_pmHelpTopic13Body" v="Profilurile candidaților combină vârsta, parcursul profesional, experiența, fiabilitatea, loialitatea, specializările și vechimea pe piața muncii într-un text dinamic. Profilurile angajaților completează vechimea în companie, misiunile, cursurile de formare și progresele învățării.&#10;Cronologia personală poate înregistra angajarea, data începerii și a încheierii misiunilor, întreruperile misiunilor, concediile medicale, cursurile de formare, specializările, cererile salariale și deciziile, schimbările privind loialitatea și fiabilitatea, alocările de transport, precum și concedierea, demisia voluntară, pensionarea și încetarea raporturilor de muncă.&#10;Istoricul angajatului prezintă, printre altele, misiunile, timpul de lucru, cursurile de formare, starea transporturilor, ultimele evenimente, zilele de concediu medical, cererile salariale, întreruperile misiunilor și salariul total plătit până în prezent. Prezentarea generală afișează, în plus, valori totale la nivel de companie, cum ar fi numărul total de angajări, concedieri, demisii și pensionări." />
+    <e k="ui_pmHelpTopic14Title" v="Setări, Modul multiplayer și Scoruri" />
+    <e k="ui_pmHelpTopic14Body" v="Setările se aplică pentru fiecare stadiu al jocului și se împart în „Performanță”, „Dezvoltarea personalului”, „Economie” și „Salarii”. Efectele asupra gameplay-ului deblochează efectele de experiență dependente; efectele de experiență controlează viteza, uzura, consumabilele și combustibilul. Efectele asupra personalului deblochează modificările de loialitate și opțiunea de lucru suplimentar. Efectele economice deblochează salariile individuale și salariul lunar standard.&#10;Efectele dezactivate nu modifică retroactiv datele existente privind personalul. Ele împiedică sau permit exclusiv efectul ulterior respectiv. Salariul lunar standard servește ca valoare de bază atunci când salariile individuale sunt dezactivate; acesta poate fi modificat direct în setări. Configurația tastelor poate fi modificată în setările jocului.&#10;În modul multiplayer, personalul, candidații, misiunile, salariile, cursurile de formare, angajările și cronicile sunt gestionate și sincronizate la nivel de fermă. Serverul decide; numai managerii de fermă autorizați pot modifica propria fermă. Datele se află în fișierul helperPersonnel.xml din salvarea jocului, iar alocările curente sunt restabilite pe cât posibil la încărcare. Fișierele de joc vechi rămân utilizabile; datele istorice pot fi incomplete pentru angajații care au părăsit deja ferma." />
+    <e k="ui_pmHelpTopic15Title" v="Configurare și pași inițiali" />
+    <e k="ui_pmHelpTopic15Body" v="Deschide profilul unui candidat, verifică vârsta, experiența, valorile, salariul dorit și specializările existente, apoi confirmă angajarea. Candidatul devine angajat al fermei actuale; toate deciziile, decontările și evoluțiile ulterioare se referă la această fermă.&#10;După angajare, planifică mai întâi o sarcină scurtă și potrivită. Un angajat trebuie să fie disponibil: boala, sarcinile de lucru în curs, formarea profesională, o încetare a contractului confirmată sau o alocare la un mod încă activ pot împiedica selecția. Fila „Angajați” afișează motivul concret.&#10;Prima angajare îmbunătățește reputația angajatorului cu un punct. Valorile ridicate nu sunt întotdeauna automat mai bune: un candidat cu experiență costă de obicei mai mult, în timp ce un începător mai ieftin are nevoie de mai mult timp pentru dezvoltare și formare profesională." />
+    <e k="ui_pmHelpTopic16Title" v="Activități și domenii de specializare" />
+    <e k="ui_pmHelpTopic16Body" v="Alocarea se determină pe baza vehiculului, a utilajelor și – dacă este cazul – a materialului aplicat. Alocarea directă a materialului are prioritate: semințele țin de însămânțare; erbicidele, de protecția plantelor; îngrășămintele minerale, îngrășămintele lichide, gunoiul de grajd, reziduurile de fermentare și bălegarul țin de fertilizare. Varul nu este recunoscut automat ca o categorie de învățare separată.&#10;Alocarea vehiculelor și a utilajelor: plugul, cultivatorul, grapa rotativă, grapa cu discuri, cilindrul compactor și tocătorul fac parte din prelucrarea solului. Semănătorile și mașinile de plantat fac parte din însămânțare. Pulverizatoarele agricole sunt clasificate ca fertilizare în absența unui material specific. Comboinele, mecanismele de tăiere, presele de balotat, cositoarele, remorcile de încărcare și pickup-urile fac parte din recoltare. Remorcile și vehiculele descărcabile fac parte din transport.&#10;FollowMe extinde recunoașterea practică și la tocătoare, combinele pentru cartofi și sfeclă, întorcătoare, andocatoare, împrăștiatoare de gunoi de grajd, cisterne pentru dejecții, subsolatoare, colectoare de pietre, greble și sape. Vehiculele modificate pot rămâne neutre dacă specializarea lor nu permite o clasificare clară. În acest caz, nu se promite un bonus de specializare eronat.&#10;Protejarea utilajelor și modul de lucru economic sunt bonusuri generale: primul reduce uzura suplimentară cauzată de experiență, iar cel de-al doilea consumul suplimentar de combustibil și materiale. Activitatea selectată este afișată în fereastra de selecție; o specializare activă potrivită este evidențiată acolo." />
+    <e k="ui_specialization_transport" v="Transport" />
+    <e k="ui_transportMarker" v="Transport" />
+    <e k="ui_pmStatusLine" v="Stare: %s" />
+    <e k="ui_button_transport_manage_long" v="Transport" />
+    <e k="ui_transportPriorityHeaderStatus" v="Stare" />
+    <e k="ui_transportPriorityHeaderEnabled" v="Transport" />
+    <e k="ui_pmTrainingCostHeader" v="Costuri" />
+    <e k="ui_pmHistoryCareerTransport" v="Transport: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="TOTAL" />
+    <e k="ui_pmMonth02" v="aprilie" />
+    <e k="ui_pmMonth06" v="august" />
+    <e k="ui_pmMonth07" v="septembrie" />
+    <e k="ui_pmMonth09" v="noiembrie" />
+    <e k="ui_pmMonth10" v="decembrie" />
+    <e k="ui_selectionAvailable" v="Disponibil" />
+    <e k="ui_selectionUnavailableSick" v="Krank" />
+    <e k="ui_selectionUnavailableTraining" v="În curs de formare" />
+    <e k="ui_selectionUnavailableReserved" v="Rezervat" />
+    <e k="ui_selectionUnavailableFieldwork" v="Cercetare pe teren" />
+    <e k="ui_selectionUnavailableOther" v="Indisponibil" />
+    <e k="ui_selectionJobUnknown" v="Comandă necunoscută" />
+    <e k="ui_selectionAgeLabel" v="Modificare" />
+    <e k="ui_selectionJobsLabel" v="Comenzi" />
+    <e k="ui_selectionSpeedLabel" v="Ritmul de lucru" />
+    <e k="ui_selectionAgeValue" v="%d ani" />
+    <e k="ui_selectionVehicleLine" v="Vehicul: %s" />
+    <e k="ui_selectionActivityLine" v="Comandă: %s" />
+    <e k="ui_selectionFieldLine" v="Câmp: %s" />
+    <e k="ui_selectionStatusLine" v="Stare: %s" />
+    <e k="ui_button_specializationDeactivate" v="Lasă să se odihnească" />
+    <e k="ui_button_specializationActivate" v="Autentificare" />
+    <e k="ui_pmSpecializationActive" v="activ" />
+    <e k="ui_pmHelpContents" v="CUPRINS" />
+    <e k="ui_pmHelpTopic01Title" v="Pornire rapidă și utilizare" />
+    <e k="ui_pmHelpTopic01Body" v="Sistemul de gestionare a personalului înlocuiește asistenții anonimi ai IA cu candidați și angajați identificați. Fiecare angajat se dezvoltă pe termen lung, primește un salariu lunar și poate prezenta diferite puncte forte și riscuri, în funcție de experiență, fiabilitate, loialitate și specializări.&#10;Meniul propriu se deschide în mod implicit cu Ctrl + M. Acesta conține secțiunile Prezentare generală, Candidați, Angajați, Instruire, Setări și Ajutor. Configurația tastelor poate fi modificată în setările jocului.&#10;Configurare implicită: schimbare persoană cu A/D sau săgeata stânga/dreapta; confirmare selecție cu bara de spațiu sau clic de mouse; anulare sau întoarcere cu Esc; gestionarea transportului și a salariilor cu T sau G. În fila Ajutor, săgețile stânga/dreapta comută între conținut și articole, sus/jos selectează sau derulează, iar sus/jos pe imagine sare pagină cu pagină." />
+    <e k="ui_pmHelpTopic02Title" v="Prezentare generală și efectivul de personal" />
+    <e k="ui_pmHelpTopic02Body" v="Prezentarea generală rezumă situația actuală a fermei: angajații, angajații disponibili, candidații și reputația angajatorului sunt afișate în partea de sus. Sub acestea apar misiunile în curs, cu menționarea persoanei, vehiculului, echipamentului și activității.&#10;Secțiunea „Modificări” conține doar evenimentele relevante legate de personal, adică modificări ale reputației angajatorului, experienței, fiabilității, loialității, vârstei sau specializării. Fiecare notificare menționează cauza, persoana afectată și consecința; o înregistrare pe mai multe rânduri rămâne o singură notificare.&#10;„Raportul lunar” și „Total” afișează indicatorii actuali și pe întreaga durată a activității. Utilizează prezentarea generală pentru planificarea rapidă a misiunilor; detaliile, deciziile și cronologiile se regăsesc în paginile de specialitate individuale." />
+    <e k="ui_pmHelpTopic03Title" v="Piața forței de muncă și recrutarea" />
+    <e k="ui_pmHelpTopic03Body" v="O nouă rundă începe cu patru candidați. În același timp, pe piață pot fi prezenți cel mult opt candidați. La fiecare schimbare de lună, se generează prin aruncarea zarurilor până la trei locuri noi; șansa pentru fiecare loc este de 15 % + 0,7 × reputația angajatorului. La o reputație de 60, aceasta reprezintă 57 %, iar la o reputație de 100, 85 % pentru fiecare loc. Dacă piața este goală, se generează cel puțin un candidat nou.&#10;Candidații rămân disponibili cu siguranță în luna în care au fost generați. După prima schimbare de lună, șansa lor de plecare este de 10–30 %, în funcție de calitate; după a doua, de 30–50 %, iar la a treia schimbare de lună, de 100 %. Profilurile bune pot dispărea mai devreme, deoarece calitatea lor crește șansa de plecare.&#10;Candidații au vârsta cuprinsă între 18 și 65 de ani, au o dată de naștere fixă și continuă să îmbătrânească. Contextele de proveniență sunt: întreprindere familială, fermă de vaci de lapte, întreprindere de prestări servicii agricole, agricultură, exploatație mixtă, logistică, atelier de utilaje agricole și profesie de birou. Vârsta și contextul de proveniență influențează în special experiența și eventualele cunoștințe tehnice prealabile.&#10;Salarul dorit se bazează pe experiență și fiabilitate, prezintă o variație aleatorie de 96–106 % și este influențat de reputația angajatorului. O reputație scăzută crește salariul dorit, iar una ridicată îl scade. Înainte de angajare apare o confirmare; angajarea crește reputația cu 1 punct." />
+    <e k="ui_pmHelpTopic04Title" v="Profilul angajaților, valorile și statutul" />
+    <e k="ui_pmHelpTopic04Body" v="Experiența, fiabilitatea și loialitatea sunt evaluate pe o scară de la 0 la 100. Valoarea rămâne vizibilă cu precizie; barele permit o comparație rapidă.&#10;Clasificarea se bazează exclusiv pe experiență: asistent 0–44, specialist 45–74, profesionist 75–100. Experiența determină viteza de lucru, uzura suplimentară și consumul suplimentar. Fiabilitatea influențează scăderile de performanță pe termen scurt, bolile, evoluția lunară și riscul de întrerupere a misiunii. Loialitatea descrie atașamentul față de companie și influențează avertismentele, conflictele salariale și demisiile voluntare." />
     </elements>
 </l10n>

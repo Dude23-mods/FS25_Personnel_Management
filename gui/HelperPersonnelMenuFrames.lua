@@ -28,78 +28,25 @@ end
 
 HelperPersonnelHelpFrame = {}
 local HelperPersonnelHelpFrame_mt = Class(HelperPersonnelHelpFrame, HelperPersonnelMenuPage)
-local HP_HELP_TOC_X = 0.080
-local HP_HELP_TOC_WIDTH = 0.170
-local HP_HELP_CONTENT_X = 0.330
-local HP_HELP_CONTENT_Y = 0.775
-local HP_HELP_CONTENT_WIDTH = 0.620
-local HP_HELP_CONTENT_HEIGHT = 0.650
-local HP_HELP_SCROLLBAR_X = 0.972
-local HP_HELP_SCROLLBAR_WIDTH = 0.005
-local HP_HELP_LINE_HEIGHT = 0.027
-local HP_HELP_TEXT_SIZE = 0.015
-local HP_HELP_VISIBLE_TOPICS = 10
-local HP_HELP_TOPIC_HEIGHT = 0.067
-local HP_HELP_TOPIC_GAP = 0.006
+local HP_HELP_LANGUAGE_CODES = {
+    cs = true, cz = true, da = true, de = true, en = true, es = true, fi = true,
+    fr = true, hu = true, it = true, jp = true, kr = true, no = true, pl = true,
+    pt = true, ro = true, ru = true, sv = true, tr = true, uk = true, vi = true
+}
 
-local function hpHelpGetInputConstant(name)
-    if Input ~= nil and Input[name] ~= nil then
-        return Input[name]
-    end
-
-    if _G ~= nil and _G[name] ~= nil then
-        return _G[name]
-    end
-
-    return nil
-end
-
-local function hpHelpGetParagraphs(value)
-    value = tostring(value or "")
-    local paragraphs = {}
-    for sourceLine in string.gmatch(value .. "\n", "(.-)\n") do
-        local startIndex = 1
-        while startIndex <= #sourceLine do
-            local punctuationStart, punctuationEnd = string.find(sourceLine, "[%.%!%?]%s+", startIndex)
-            local paragraph
-            if punctuationStart == nil then
-                paragraph = string.sub(sourceLine, startIndex)
-                startIndex = #sourceLine + 1
-            else
-                paragraph = string.sub(sourceLine, startIndex, punctuationStart)
-                startIndex = punctuationEnd + 1
-            end
-            paragraph = string.gsub(paragraph, "^%s+", "")
-            paragraph = string.gsub(paragraph, "%s+$", "")
-            if paragraph ~= "" then
-                table.insert(paragraphs, paragraph)
-            end
-        end
-    end
-    return paragraphs
-end
+local HP_HELP_LANGUAGE_ALIASES = {
+    ja = "jp",
+    ko = "kr",
+    nb = "no"
+}
 
 function HelperPersonnelHelpFrame.new(target, customMt)
     local self = HelperPersonnelMenuPage.new("help", customMt or HelperPersonnelHelpFrame_mt)
 
-    self.helpRows = {}
-    self.helpFirstRow = 1
-    self.helpVisibleRows = 1
-    self.helpScrollArea = nil
-    self.helpScrollbarArea = nil
-    self.helpScrollbarDragging = false
-    self.helpTocScrollbarArea = nil
-    self.helpTocScrollbarDragging = false
     self.helpSelectedTopic = 1
-    self.helpFirstTopic = 1
-    self.helpTopicAreas = {}
-    self.helpTocArea = nil
-    self.helpFocus = "toc"
     self.helpCachedTopics = nil
     self.helpCachedLanguageCode = nil
     self.helpCachedTexts = nil
-    self.helpCachedRows = nil
-    self.helpCachedTopicIndex = nil
 
     return self
 end
@@ -137,10 +84,10 @@ function HelperPersonnelHelpFrame:getHelpLanguageCode()
 
     for _, candidate in ipairs(candidates) do
         local languageCode = string.lower(tostring(candidate or ""))
-        if string.sub(languageCode, 1, 2) == "de" then
-            return "de"
-        elseif string.sub(languageCode, 1, 2) == "fr" then
-            return "fr"
+        languageCode = string.match(languageCode, "^([a-z][a-z])")
+        languageCode = HP_HELP_LANGUAGE_ALIASES[languageCode] or languageCode
+        if languageCode ~= nil and HP_HELP_LANGUAGE_CODES[languageCode] == true then
+            return languageCode
         end
     end
 
@@ -190,314 +137,144 @@ function HelperPersonnelHelpFrame:getHelpTopics()
 
     local texts = self:getHelpTexts(languageCode)
     local topics = {}
-    for index = 1, 14 do
-        local suffix = string.format("%02d", index)
-        topics[#topics + 1] = {
-            title = texts["ui_pmHelpTopic" .. suffix .. "Title"] or self:getText("ui_pmHelpTopic" .. suffix .. "Title", "ui_pmHelpTopic" .. suffix .. "Title"),
-            body = texts["ui_pmHelpTopic" .. suffix .. "Body"] or self:getText("ui_pmHelpTopic" .. suffix .. "Body", "ui_pmHelpTopic" .. suffix .. "Body")
-        }
+    local topicOrder = languageCode == "de" and {1, 2, 3, 15, 4, 5, 16, 6, 7, 8, 9, 10, 11, 12, 13, 14} or {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
+    local iconIndexBySourceIndex = {
+        [1] = 1, [2] = 2, [3] = 3, [15] = 4,
+        [4] = 5, [5] = 6, [16] = 7, [6] = 8,
+        [7] = 9, [8] = 10, [9] = 11, [10] = 12,
+        [11] = 13, [12] = 14, [13] = 15, [14] = 16
+    }
+    for _, sourceIndex in ipairs(topicOrder) do
+        local suffix = string.format("%02d", sourceIndex)
+        local titleKey = "ui_pmHelpTopic" .. suffix .. "Title"
+        local bodyKey = "ui_pmHelpTopic" .. suffix .. "Body"
+        local title = texts[titleKey]
+        local body = texts[bodyKey]
+        if title ~= nil and body ~= nil then
+            table.insert(topics, {
+                title = title,
+                body = body,
+                iconIndex = iconIndexBySourceIndex[sourceIndex]
+            })
+        end
     end
+
     self.helpCachedTopics = topics
     self.helpCachedLanguageCode = languageCode
-    self.helpCachedRows = nil
-    self.helpCachedTopicIndex = nil
     return topics
 end
 
-function HelperPersonnelHelpFrame:getHelpRows()
-    if self.helpCachedRows ~= nil and self.helpCachedTopicIndex == self.helpSelectedTopic then
-        return self.helpCachedRows
+function HelperPersonnelHelpFrame:onGuiSetupFinished()
+    HelperPersonnelHelpFrame:superClass().onGuiSetupFinished(self)
+end
+
+function HelperPersonnelHelpFrame:onFrameOpen()
+    HelperPersonnelHelpFrame:superClass().onFrameOpen(self)
+    if self.helpTopicList == nil then
+        return
     end
 
-    local rows = {}
-    local maxWidth = HP_HELP_CONTENT_WIDTH - 0.025
     local topics = self:getHelpTopics()
-    self.helpSelectedTopic = math.max(1, math.min(self.helpSelectedTopic or 1, #topics))
-    local topic = topics[self.helpSelectedTopic]
-    for _, paragraph in ipairs(hpHelpGetParagraphs(topic.body)) do
-        for _, line in ipairs(self:getWrappedHistoryLines(paragraph, HP_HELP_TEXT_SIZE, maxWidth, 72)) do
-            table.insert(rows, {kind = "body", text = line})
+    self.helpSelectedTopic = math.max(1, math.min(self.helpSelectedTopic or 1, math.max(#topics, 1)))
+    self.helpTopicList:reloadData()
+    self:setSoundSuppressed(true)
+    FocusManager:setFocus(self.helpTopicList)
+    self:setSoundSuppressed(false)
+    self.helpArticleLayout:registerActionEvents()
+    self:updateNativeHelpArticle(self.helpSelectedTopic)
+end
+
+function HelperPersonnelHelpFrame:onFrameClose()
+    if self.helpArticleLayout ~= nil then
+        self.helpArticleLayout:removeActionEvents()
+    end
+    HelperPersonnelHelpFrame:superClass().onFrameClose(self)
+end
+
+function HelperPersonnelHelpFrame:getNumberOfSections(list)
+    return 1
+end
+
+function HelperPersonnelHelpFrame:getNumberOfItemsInSection(list, section)
+    return #self:getHelpTopics()
+end
+
+function HelperPersonnelHelpFrame:getTitleForSectionHeader(list, section)
+    return self:getHelpText("ui_pmHelpContents", "INHALT")
+end
+
+function HelperPersonnelHelpFrame:populateCellForItemInSection(list, section, index, cell)
+    local topic = self:getHelpTopics()[index]
+    if topic == nil then
+        return
+    end
+    local title = cell:getAttribute("title")
+    if title ~= nil then
+        title:setText(string.upper(topic.title))
+    end
+    local icon = cell:getAttribute("icon")
+    if icon ~= nil then
+        icon:setImageFilename(Utils.getFilename(string.format("gui/icons/help/help_topic_%02d.png", topic.iconIndex or index), self.app.modDir))
+        icon:setVisible(true)
+    end
+end
+
+function HelperPersonnelHelpFrame:onListSelectionChanged(list, section, index)
+    if index == nil or index < 1 then
+        return
+    end
+    self.helpSelectedTopic = index
+    self:updateNativeHelpArticle(index)
+end
+
+function HelperPersonnelHelpFrame:updateNativeHelpArticle(topicIndex)
+    if self.helpArticleLayout == nil or self.helpArticleTitleTemplate == nil or self.helpArticleTextTemplate == nil then
+        return
+    end
+
+    self.helpArticleTitleTemplate:unlinkElement()
+    self.helpArticleTextTemplate:unlinkElement()
+    for index = #self.helpArticleLayout.elements, 1, -1 do
+        self.helpArticleLayout.elements[index]:delete()
+    end
+
+    local topic = self:getHelpTopics()[topicIndex]
+    if topic == nil then
+        self.helpArticleLayout:invalidateLayout()
+        return
+    end
+
+    local title = self.helpArticleTitleTemplate:clone(self.helpArticleLayout)
+    title:setText(string.upper(topic.title))
+
+    local body = tostring(topic.body or "")
+    for paragraph in string.gmatch(body .. "\n", "(.-)\n") do
+        if paragraph ~= "" then
+            local row = self.helpArticleTextTemplate:clone(self.helpArticleLayout)
+            local text = row:getDescendantByName("textFullWidth")
+            if text ~= nil then
+                text:setText(paragraph)
+                local height = text:getTextHeight(true)
+                text:setSize(nil, height)
+                row:setSize(nil, height)
+            end
+            row:invalidateLayout()
         end
-        table.insert(rows, {kind = "spacer", text = ""})
     end
 
-    self.helpCachedRows = rows
-    self.helpCachedTopicIndex = self.helpSelectedTopic
-    return rows
-end
-
-function HelperPersonnelHelpFrame:selectHelpTopic(delta)
-    local topics = self:getHelpTopics()
-    local nextTopic = math.max(1, math.min((self.helpSelectedTopic or 1) + delta, #topics))
-    if nextTopic == self.helpSelectedTopic then
-        return false
-    end
-    self.helpSelectedTopic = nextTopic
-    if self.helpSelectedTopic < self.helpFirstTopic then
-        self.helpFirstTopic = self.helpSelectedTopic
-    elseif self.helpSelectedTopic >= self.helpFirstTopic + HP_HELP_VISIBLE_TOPICS then
-        self.helpFirstTopic = self.helpSelectedTopic - HP_HELP_VISIBLE_TOPICS + 1
-    end
-    self.helpFirstRow = 1
-    self.requestRender = true
-    return true
-end
-
-function HelperPersonnelHelpFrame:getHelpScrollState()
-    self.helpRows = self:getHelpRows()
-    local visibleRows = math.max(1, math.floor(HP_HELP_CONTENT_HEIGHT / HP_HELP_LINE_HEIGHT))
-    local maxFirstRow = math.max(1, #self.helpRows - visibleRows + 1)
-    self.helpFirstRow = math.max(1, math.min(math.floor((tonumber(self.helpFirstRow) or 1) + 0.5), maxFirstRow))
-    self.helpVisibleRows = visibleRows
-
-    return {
-        rows = self.helpRows,
-        visibleRows = visibleRows,
-        maxFirstRow = maxFirstRow,
-        firstRow = self.helpFirstRow
-    }
-end
-
-function HelperPersonnelHelpFrame:scrollHelp(delta)
-    local state = self:getHelpScrollState()
-    local nextRow = math.max(1, math.min(state.firstRow + (tonumber(delta) or 0), state.maxFirstRow))
-    if nextRow == self.helpFirstRow then
-        return false
-    end
-
-    self.helpFirstRow = nextRow
-    self.requestRender = true
-    return true
-end
-
-function HelperPersonnelHelpFrame:scrollHelpTopics(delta)
-    local topics = self:getHelpTopics()
-    local maxFirstTopic = math.max(1, #topics - HP_HELP_VISIBLE_TOPICS + 1)
-    local nextTopic = math.max(1, math.min((self.helpFirstTopic or 1) + (tonumber(delta) or 0), maxFirstTopic))
-    if nextTopic == self.helpFirstTopic then
-        return false
-    end
-
-    self.helpFirstTopic = nextTopic
-    self.requestRender = true
-    return true
-end
-
-function HelperPersonnelHelpFrame:setHelpTopicScrollFromMouseY(posY)
-    local topics = self:getHelpTopics()
-    local area = self.helpTocScrollbarArea
-    local maxFirstTopic = math.max(1, #topics - HP_HELP_VISIBLE_TOPICS + 1)
-    if area == nil or area.height <= 0 or maxFirstTopic <= 1 then
-        return false
-    end
-
-    local localY = math.max(0, math.min((posY - area.y) / area.height, 1))
-    self.helpFirstTopic = 1 + math.floor((1 - localY) * (maxFirstTopic - 1) + 0.5)
-    self.requestRender = true
-    return true
-end
-
-function HelperPersonnelHelpFrame:setHelpScrollFromMouseY(posY)
-    local state = self:getHelpScrollState()
-    local area = self.helpScrollbarArea
-    if area == nil or area.height <= 0 or state.maxFirstRow <= 1 then
-        return false
-    end
-
-    local localY = math.max(0, math.min((posY - area.y) / area.height, 1))
-    self.helpFirstRow = 1 + math.floor((1 - localY) * (state.maxFirstRow - 1) + 0.5)
-    self.requestRender = true
-    return true
+    self.helpArticleLayout:invalidateLayout()
 end
 
 function HelperPersonnelHelpFrame:keyEvent(unicode, sym, modifier, isDown)
-    if not self:isCurrentMenuPage() or not isDown then
-        return false
-    end
-
-    if sym == hpHelpGetInputConstant("KEY_left") or sym == hpHelpGetInputConstant("KEY_leftArrow") or sym == hpHelpGetInputConstant("KEY_a") then
-        self.helpFocus = "toc"
-        return true
-    elseif sym == hpHelpGetInputConstant("KEY_right") or sym == hpHelpGetInputConstant("KEY_rightArrow") or sym == hpHelpGetInputConstant("KEY_d") then
-        self.helpFocus = "article"
-        return true
-    elseif sym == hpHelpGetInputConstant("KEY_up") or sym == hpHelpGetInputConstant("KEY_upArrow") or sym == hpHelpGetInputConstant("KEY_w") then
-        return self.helpFocus == "toc" and self:selectHelpTopic(-1) or self:scrollHelp(-1)
-    elseif sym == hpHelpGetInputConstant("KEY_down") or sym == hpHelpGetInputConstant("KEY_downArrow") or sym == hpHelpGetInputConstant("KEY_s") then
-        return self.helpFocus == "toc" and self:selectHelpTopic(1) or self:scrollHelp(1)
-    elseif sym == hpHelpGetInputConstant("KEY_pageup") or sym == hpHelpGetInputConstant("KEY_pageUp") then
-        return self:scrollHelp(-math.max(1, self.helpVisibleRows - 2))
-    elseif sym == hpHelpGetInputConstant("KEY_pagedown") or sym == hpHelpGetInputConstant("KEY_pageDown") then
-        return self:scrollHelp(math.max(1, self.helpVisibleRows - 2))
-    elseif sym == hpHelpGetInputConstant("KEY_home") then
-        self.helpFirstRow = 1
-        return true
-    elseif sym == hpHelpGetInputConstant("KEY_end") then
-        local state = self:getHelpScrollState()
-        self.helpFirstRow = state.maxFirstRow
-        return true
-    end
-
     return HelperPersonnelHelpFrame:superClass().keyEvent(self, unicode, sym, modifier, isDown)
 end
 
 function HelperPersonnelHelpFrame:mouseEvent(posX, posY, isDown, isUp, button, eventUsed)
-    if self.helpTocScrollbarDragging == true then
-        self:setHelpTopicScrollFromMouseY(posY)
-        if isUp then
-            self.helpTocScrollbarDragging = false
-        end
-        return true
-    end
-
-    if self.helpScrollbarDragging == true then
-        self:setHelpScrollFromMouseY(posY)
-        if isUp then
-            self.helpScrollbarDragging = false
-        end
-        return true
-    end
-
-    if eventUsed ~= true then
-        if isUp then
-            for _, area in ipairs(self.helpTopicAreas or {}) do
-                if self:isPointInClickArea(posX, posY, area) then
-                    self.helpSelectedTopic = area.topicIndex
-                    self.helpFirstRow = 1
-                    self.helpFocus = "toc"
-                    self.requestRender = true
-                    return true
-                end
-            end
-        end
-        local insideContent = self:isPointInClickArea(posX, posY, self.helpScrollArea)
-        local insideScrollbar = self:isPointInClickArea(posX, posY, self.helpScrollbarArea)
-        local insideToc = self:isPointInClickArea(posX, posY, self.helpTocArea)
-        local insideTocScrollbar = self:isPointInClickArea(posX, posY, self.helpTocScrollbarArea)
-
-        if insideToc or insideTocScrollbar then
-            if self:isMouseWheelUp(button) then
-                return self:scrollHelpTopics(-1)
-            elseif self:isMouseWheelDown(button) then
-                return self:scrollHelpTopics(1)
-            end
-        end
-
-        if insideContent or insideScrollbar then
-            if self:isMouseWheelUp(button) then
-                return self:scrollHelp(-2)
-            elseif self:isMouseWheelDown(button) then
-                return self:scrollHelp(2)
-            end
-        end
-
-        if isDown and insideScrollbar then
-            self.helpScrollbarDragging = true
-            self:setHelpScrollFromMouseY(posY)
-            return true
-        end
-
-        if isDown and insideTocScrollbar then
-            self.helpTocScrollbarDragging = true
-            self:setHelpTopicScrollFromMouseY(posY)
-            return true
-        end
-    elseif isUp then
-        self.helpScrollbarDragging = false
-        self.helpTocScrollbarDragging = false
-    end
-
     return HelperPersonnelHelpFrame:superClass().mouseEvent(self, posX, posY, isDown, isUp, button, eventUsed)
 end
 
-function HelperPersonnelHelpFrame:onFrameClose()
-    self.helpScrollbarDragging = false
-    self.helpTocScrollbarDragging = false
-    HelperPersonnelHelpFrame:superClass().onFrameClose(self)
-end
-
 function HelperPersonnelHelpFrame:draw()
-    HelperPersonnelViewBase:superClass().draw(self)
-    self:resetClickAreas()
-
-    local state = self:getHelpScrollState()
-    local topics = self:getHelpTopics()
-    self.helpTopicAreas = {}
-    self:drawSolidRect(0.065, 0.045, 0.216, 0.910, 0.020, 0.026, 0.019, 1)
-    self:drawTextLine(HP_HELP_TOC_X, 0.898, 0.025, RenderText.ALIGN_LEFT, self:getHelpText("ui_pmMenuPageHelp", "Hilfe"), 1, 1, 1, 1, true)
-    self:drawTextLine(HP_HELP_TOC_X, 0.824, 0.014, RenderText.ALIGN_LEFT, self:getHelpText("ui_pmHelpContents", "INHALT"), 1, 1, 1, 1, true)
-
-    local maxFirstTopic = math.max(1, #topics - HP_HELP_VISIBLE_TOPICS + 1)
-    self.helpFirstTopic = math.max(1, math.min(self.helpFirstTopic or 1, maxFirstTopic))
-    local tocTop = 0.800
-    local tocBottom = tocTop - HP_HELP_VISIBLE_TOPICS * HP_HELP_TOPIC_HEIGHT - (HP_HELP_VISIBLE_TOPICS - 1) * HP_HELP_TOPIC_GAP
-    self.helpTocArea = {x = HP_HELP_TOC_X, y = tocBottom, width = HP_HELP_TOC_WIDTH, height = tocTop - tocBottom}
-    local lastTopic = math.min(#topics, self.helpFirstTopic + HP_HELP_VISIBLE_TOPICS - 1)
-    for index = self.helpFirstTopic, lastTopic do
-        local topic = topics[index]
-        local visibleIndex = index - self.helpFirstTopic
-        local rowY = tocTop - (visibleIndex + 1) * HP_HELP_TOPIC_HEIGHT - visibleIndex * HP_HELP_TOPIC_GAP
-        local selected = index == self.helpSelectedTopic
-        if selected then
-            self:drawSolidRect(HP_HELP_TOC_X, rowY, HP_HELP_TOC_WIDTH, HP_HELP_TOPIC_HEIGHT, 0.300, 0.570, 0, 1)
-        else
-            self:drawSolidRect(HP_HELP_TOC_X, rowY, HP_HELP_TOC_WIDTH, HP_HELP_TOPIC_HEIGHT, 0.030, 0.030, 0.030, 1)
-        end
-        local iconX = HP_HELP_TOC_X
-        local iconY = rowY
-        self:drawSolidRect(iconX, iconY, 0.040, HP_HELP_TOPIC_HEIGHT, selected and 0.18 or 0.07, selected and 0.30 or 0.07, selected and 0 or 0.07, 1)
-        self:drawTextLine(iconX + 0.020, iconY + 0.024, 0.013, RenderText.ALIGN_CENTER, string.format("%02d", index), selected and 0.01 or 0.80, selected and 0.01 or 0.80, selected and 0.01 or 0.80, 1, true)
-        local titleLines = self:getWrappedHistoryLines(string.upper(topic.title), 0.0145, HP_HELP_TOC_WIDTH - 0.052, 24)
-        self:drawTextLine(HP_HELP_TOC_X + 0.050, rowY + 0.039, 0.0145, RenderText.ALIGN_LEFT, titleLines[1] or string.upper(topic.title), selected and 0.01 or 0.80, selected and 0.01 or 0.80, selected and 0.01 or 0.80, 1, true)
-        if titleLines[2] ~= nil then
-            self:drawTextLine(HP_HELP_TOC_X + 0.050, rowY + 0.017, 0.0145, RenderText.ALIGN_LEFT, titleLines[2], selected and 0.01 or 0.80, selected and 0.01 or 0.80, selected and 0.01 or 0.80, 1, true)
-        end
-        table.insert(self.helpTopicAreas, {x = HP_HELP_TOC_X, y = rowY, width = HP_HELP_TOC_WIDTH, height = HP_HELP_TOPIC_HEIGHT, topicIndex = index})
-    end
-    self:drawDetailScrollbar(0.264, tocBottom, 0.0035, tocTop - tocBottom, self.helpFirstTopic, HP_HELP_VISIBLE_TOPICS, #topics)
-    self.helpTocScrollbarArea = {x = 0.252, y = tocBottom, width = 0.026, height = tocTop - tocBottom}
-    self:drawSolidRect(0.077, tocBottom - 0.004, 0.177, 0.002, 0.60, 0.60, 0.60, 1)
-    local selectedTopic = topics[self.helpSelectedTopic]
-    self:drawTextLine(HP_HELP_CONTENT_X, 0.842, 0.034, RenderText.ALIGN_LEFT, string.upper(selectedTopic.title), 1, 1, 1, 1, false)
-
-    local lastRow = math.min(#state.rows, state.firstRow + state.visibleRows - 1)
-    local y = HP_HELP_CONTENT_Y
-
-    for rowIndex = state.firstRow, lastRow do
-        local row = state.rows[rowIndex]
-        if row.kind == "intro" then
-            self:drawTextLine(HP_HELP_CONTENT_X, y, HP_HELP_TEXT_SIZE, RenderText.ALIGN_LEFT, row.text, 1, 1, 1, 1, true)
-        elseif row.kind == "body" then
-            self:drawTextLine(HP_HELP_CONTENT_X, y, HP_HELP_TEXT_SIZE, RenderText.ALIGN_LEFT, row.text, 1, 1, 1, 1, false)
-        end
-        y = y - HP_HELP_LINE_HEIGHT
-    end
-
-    self.helpScrollArea = {
-        x = HP_HELP_CONTENT_X,
-        y = HP_HELP_CONTENT_Y - HP_HELP_CONTENT_HEIGHT,
-        width = HP_HELP_CONTENT_WIDTH,
-        height = HP_HELP_CONTENT_HEIGHT
-    }
-    self.helpScrollbarArea = nil
-    if #state.rows > state.visibleRows then
-        self.helpScrollbarArea = {
-            x = HP_HELP_SCROLLBAR_X - 0.012,
-            y = HP_HELP_CONTENT_Y - HP_HELP_CONTENT_HEIGHT,
-            width = HP_HELP_SCROLLBAR_WIDTH + 0.024,
-            height = HP_HELP_CONTENT_HEIGHT
-        }
-        self:drawDetailScrollbar(
-            HP_HELP_SCROLLBAR_X,
-            HP_HELP_CONTENT_Y - HP_HELP_CONTENT_HEIGHT,
-            HP_HELP_SCROLLBAR_WIDTH,
-            HP_HELP_CONTENT_HEIGHT,
-            state.firstRow,
-            state.visibleRows,
-            #state.rows
-        )
-    end
-
+    HelperPersonnelHelpFrame:superClass().draw(self)
 end
 
 HelperPersonnelSettingsFrame = {}
@@ -513,6 +290,12 @@ local HP_SETTINGS_NUMBER_FIELD_WIDTH = 0.144
 local HP_SETTINGS_NUMBER_FIELD_HEIGHT = 0.032
 local HP_SETTINGS_NUMBER_FIELD_TEXT_SIZE = 0.0115
 local HP_SETTINGS_NUMBER_FIELD_MAX_CHARACTERS = 6
+
+local function hpSettingsSetText(element, value)
+    if element ~= nil and element.setText ~= nil then
+        element:setText(value or "")
+    end
+end
 
 local function hpSettingsClearIds(element)
     if element == nil then
@@ -939,77 +722,44 @@ function HelperPersonnelSettingsFrame:buildNativeSettings()
         return false
     end
 
-    if HelperPersonnelGameSettings == nil then
-        return false
-    end
-
-    local sourceLayout = self:getNativeSettingsSource()
-    local root = self.elements ~= nil and self.elements[1] or nil
-    if sourceLayout == nil or root == nil then
-        return false
-    end
-
-    local sectionHeaderTemplate, binaryOptionTemplate = HelperPersonnelGameSettings.findTemplates(sourceLayout)
-    if sectionHeaderTemplate == nil or binaryOptionTemplate == nil then
-        if Logging ~= nil and Logging.warning ~= nil then
-            Logging.warning("%s: Native templates for the personnel management settings were not found.", tostring(self.app ~= nil and self.app.modName or "FS25_PersonnelManagement"))
-        end
+    if HelperPersonnelGameSettings == nil or self.settingsLayout == nil then
         return false
     end
 
     self.nativeSettingsBuildAttempted = true
-
-    local layout = sourceLayout:clone(root, false, true)
-    self:removeLayoutChildren(layout)
-    layout.id = nil
-    layout.name = "helperPersonnelSettingsLayout"
-    if layout.setTarget ~= nil then
-        layout:setTarget(self, sourceLayout.target, false)
-    end
-    layout:setVisible(true)
-    layout:setDisabled(false)
-    if layout.setPosition ~= nil then
-        layout:setPosition(layout.position[1], (layout.position[2] or 0) - HP_SETTINGS_LAYOUT_Y_OFFSET)
-    end
-    hpSettingsSetTransparentBackground(layout)
-    hpSettingsClearToolTips(layout)
-    hpSettingsClearInheritedCallbacks(layout)
-    self.nativeSettingsLayout = layout
+    self.nativeSettingsLayout = self.settingsLayout
 
     local offText = self:getText("ui_hpSetting_off", "Aus")
     local onText = self:getText("ui_hpSetting_on", "An")
-
-    local currentSectionKey = nil
-    local focusIndex = 0
     for _, setting in ipairs(self:getSettingsList()) do
-        if setting.sectionKey ~= currentSectionKey then
-            currentSectionKey = setting.sectionKey
-            self:addNativeSectionHeader(layout, sectionHeaderTemplate, currentSectionKey)
-        end
-
-        local row = binaryOptionTemplate:clone(layout, false, true)
-        if row.setTarget ~= nil then
-            row:setTarget(self, row.target, false)
-        end
-        hpSettingsSetTransparentRow(row)
-        local option = self:configureNativeRow(row, setting, offText, onText)
+        local option = self["setting" .. string.upper(string.sub(setting.key, 1, 1)) .. string.sub(setting.key, 2)]
         if option ~= nil then
-            table.insert(self.nativeSettingItems, { element = row, settingKey = setting.key })
-            focusIndex = focusIndex + 1
-            self:registerFocusElement(row, focusIndex == 1)
-            if focusIndex == 1 and self.settingsSelectedKey == nil then
+            self.nativeSettingElements[setting.key] = option
+            self.nativeSettingRows[setting.key] = option
+            setting.element = option
+            if setting.valueType ~= "number" then
+                option:setTexts({offText, onText})
+            end
+            if self.settingsSelectedKey == nil then
                 self.settingsSelectedKey = setting.key
             end
-        else
-            row:delete()
         end
     end
 
-    self:updateNativeSettingsScroll()
-
     self.nativeSettingsReady = next(self.nativeSettingElements) ~= nil
+    if self.nativeSettingsLayout ~= nil and self.nativeSettingsLayout.invalidateLayout ~= nil then
+        self.nativeSettingsLayout:invalidateLayout()
+    end
+    if self.settingsSlider ~= nil and self.settingsSlider.setDataElement ~= nil then
+        self.settingsSlider:setDataElement(self.nativeSettingsLayout)
+    end
+    if self.settingsSliderBox ~= nil and self.settingsSliderBox.setVisible ~= nil then
+        self.settingsSliderBox:setVisible(true)
+    end
+    if self.settingsLayout ~= nil then
+        self:registerFocusElement(self.settingsLayout, true)
+    end
     self:syncNativeSettings()
-
     return self.nativeSettingsReady
 end
 
@@ -1027,22 +777,9 @@ function HelperPersonnelSettingsFrame:syncNativeSettings()
             local available = self:isSettingAvailable(setting)
             local editable = canEdit and available
             if setting.valueType == "number" then
-                option:setState(1, false)
-                if option.setVisible ~= nil then
-                    option:setVisible(true)
-                end
-                if option.setCanChangeState ~= nil then
-                    option:setCanChangeState(editable)
-                end
-                if option.setDisabled ~= nil then
-                    option:setDisabled(not editable)
-                end
-                if not editable and self.standardWageInputActive == true then
-                    self.standardWageInputActive = false
-                    self.standardWageInputBuffer = nil
-                    self.standardWageInputReplaceOnType = false
-                end
-                hpSettingsSetTransparentTree(option)
+                local value = config ~= nil and tonumber(config[setting.field]) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
+                if option.setText ~= nil then option:setText(tostring(math.floor(value + 0.5))) end
+                if option.setDisabled ~= nil then option:setDisabled(not editable) end
             else
                 option:setState(HelperPersonnelGameSettings.getSettingState(setting), false)
                 if option.setCanChangeState ~= nil then
@@ -1057,6 +794,109 @@ function HelperPersonnelSettingsFrame:syncNativeSettings()
 
     if self.nativeSettingsLayout ~= nil and self.nativeSettingsLayout.invalidateLayout ~= nil then
         self.nativeSettingsLayout:invalidateLayout()
+    end
+    self:updateStaticSettingsInfo()
+end
+
+function HelperPersonnelSettingsFrame:onCreateStaticSettingRow(row)
+    hpSettingsSetTransparentRow(row)
+    local option = hpSettingsFindFirstByType(row, "BinaryOption") or hpSettingsFindFirstByType(row, "TextInput")
+    local setting = option ~= nil and self:getSettingByKey(option.name) or nil
+    local label = hpSettingsFindLabel(row)
+    if setting ~= nil and label ~= nil then
+        local labelText = self:getSettingText(setting, "labelKey", setting.key)
+        local compact = string.match(labelText, "^[^:]+:%s*(.+)$")
+        hpSettingsSetText(label, compact ~= nil and compact or labelText)
+    end
+    if setting ~= nil and option ~= nil and option.getDescendantByName ~= nil then
+        local tooltip = option:getDescendantByName("tooltip")
+        hpSettingsSetText(tooltip, self:getSettingText(setting, "descriptionKey", ""))
+    end
+end
+
+function HelperPersonnelSettingsFrame:onStaticSettingFocused(element)
+    local setting = element ~= nil and self:getSettingByKey(element.name) or nil
+    if setting ~= nil then
+        self.settingsSelectedKey = setting.key
+        self:updateStaticSettingsInfo()
+    end
+end
+
+function HelperPersonnelSettingsFrame:onStaticSettingChanged(state, element)
+    local setting = element ~= nil and self:getSettingByKey(element.name) or nil
+    if setting == nil then return end
+    self.settingsSelectedKey = setting.key
+    self:onNativeSettingChanged(state, element, setting)
+end
+
+function HelperPersonnelSettingsFrame:onStandardWageEnterPressed(element, isClick)
+    if isClick == true then return end
+    self:onStandardWageClicked(element)
+end
+
+function HelperPersonnelSettingsFrame:onStandardWageClicked(state, element)
+    if element == nil and type(state) == "table" then
+        element = state
+    end
+    element = element or self.settingStandardWage
+    self:onStaticSettingFocused(element)
+    local setting = self:getSettingByKey("standardWage")
+    local config = self:getSettingsConfig()
+    local editable = setting ~= nil and config ~= nil and self:canManageCurrentFarm() and self:isServerAuthority() and self:isSettingAvailable(setting)
+    if not editable then
+        self:syncNativeSettings()
+        return
+    end
+
+    if TextInputDialog == nil or TextInputDialog.show == nil then
+        return
+    end
+
+    local value = tostring(math.floor((tonumber(config[setting.field]) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE) + 0.5))
+    local title = self:getSettingText(setting, "labelKey", "Standard-Monatsgehalt")
+    TextInputDialog.show(HelperPersonnelSettingsFrame.onStandardWageDialogClosed, self, value, title, title, HP_SETTINGS_NUMBER_FIELD_MAX_CHARACTERS, self:getText("button_ok", "OK"))
+end
+
+function HelperPersonnelSettingsFrame:onStandardWageDialogClosed(text, clickOk)
+    if clickOk ~= true then
+        self:syncNativeSettings()
+        return
+    end
+
+    local setting = self:getSettingByKey("standardWage")
+    local config = self:getSettingsConfig()
+    local editable = setting ~= nil and config ~= nil and self:canManageCurrentFarm() and self:isServerAuthority() and self:isSettingAvailable(setting)
+    if not editable then
+        self:syncNativeSettings()
+        return
+    end
+
+    local normalized = HelperPersonnelConfig.normalizeStandardBaseMonthlyWage(text or "")
+    if normalized == nil then
+        if InfoDialog ~= nil and InfoDialog.show ~= nil then
+            InfoDialog.show(self:getText("ui_hpSetting_standardWageInvalid", "Ungültiger Monatslohn."))
+        end
+        self:syncNativeSettings()
+        return
+    end
+
+    config[setting.field] = normalized
+    if config.save ~= nil then config:save() end
+    self:syncNativeSettings()
+    if self.app ~= nil and g_server ~= nil and self.app.syncNetworkStateToClients ~= nil then
+        self.app:syncNetworkStateToClients()
+    end
+end
+
+function HelperPersonnelSettingsFrame:onStandardWageEscPressed()
+    self:cancelStandardWageInput()
+    self:syncNativeSettings()
+end
+
+function HelperPersonnelSettingsFrame:updateStaticSettingsInfo()
+    if self.settingsPermission ~= nil then
+        hpSettingsSetText(self.settingsPermission, self:getText("ui_pmSettingsHostOnly", "Diese Einstellungen können nur vom Host geändert werden."))
+        self.settingsPermission:setVisible(not self:isServerAuthority() or not self:canManageCurrentFarm())
     end
 end
 
@@ -1178,7 +1018,15 @@ function HelperPersonnelSettingsFrame:showStandardWageInput(setting)
     self.standardWageInputActive = true
     self.standardWageInputBuffer = tostring(math.floor(currentValue + 0.5))
     self.standardWageInputReplaceOnType = true
+    self:updateNativeStandardWageInputText()
     return true
+end
+
+function HelperPersonnelSettingsFrame:updateNativeStandardWageInputText()
+    local option = self.nativeSettingElements ~= nil and self.nativeSettingElements.standardWage or nil
+    if option ~= nil and option.setText ~= nil then
+        option:setText(tostring(self.standardWageInputBuffer or ""))
+    end
 end
 
 function HelperPersonnelSettingsFrame:cancelStandardWageInput()
@@ -1346,12 +1194,14 @@ function HelperPersonnelSettingsFrame:keyEvent(unicode, sym, modifier, isDown)
             end
             self.standardWageInputBuffer = buffer
             self.standardWageInputReplaceOnType = false
+            self:updateNativeStandardWageInputText()
             return true
         end
 
         if Input ~= nil and Input.KEY_delete ~= nil and sym == Input.KEY_delete then
             self.standardWageInputBuffer = ""
             self.standardWageInputReplaceOnType = false
+            self:updateNativeStandardWageInputText()
             return true
         end
 
@@ -1371,6 +1221,7 @@ function HelperPersonnelSettingsFrame:keyEvent(unicode, sym, modifier, isDown)
             end
             self.standardWageInputBuffer = buffer
             self.standardWageInputReplaceOnType = false
+            self:updateNativeStandardWageInputText()
             return true
         end
 
@@ -1446,32 +1297,12 @@ end
 
 function HelperPersonnelSettingsFrame:draw()
     if self.nativeSettingsReady == true then
-            HelperPersonnelViewBase:superClass().draw(self)
+        HelperPersonnelViewBase:superClass().draw(self)
         self:updateNativeSelectedSetting()
-        local title = self:getText(self.pageTitleKey, self.pageTitleFallback)
-        self:drawTextLine(0.22, 0.850, 0.030, RenderText.ALIGN_LEFT, title, 1, 1, 1, 1, true)
-
-        local selectedSetting = self:getSelectedSetting()
-        local selectedRow = selectedSetting ~= nil and self.nativeSettingRows[selectedSetting.key] or nil
-        local descriptionY = 0.500
-        if selectedRow ~= nil and selectedRow.absPosition ~= nil and selectedRow.absSize ~= nil then
-            descriptionY = (selectedRow.absPosition[2] or descriptionY) + (selectedRow.absSize[2] or 0) * 0.5
-        end
-
-        self.settingsDescriptionX = 0.605
-        self.settingsDescriptionWidth = 0.300
-        self.settingsDescriptionY = math.max(0.265, math.min(0.735, descriptionY))
-        self:drawSettingsDescription(selectedSetting)
-        self:drawStandardWageField()
-
-        local scrollState = self:getNativeSettingsScrollState()
-        self.nativeSettingsScrollArea = { x = 0.145, y = HP_SETTINGS_SCROLL_Y, width = 0.435, height = HP_SETTINGS_SCROLL_HEIGHT }
-        self.nativeSettingsScrollbarArea = nil
-        if scrollState.maxOffset > 0 then
-            self.nativeSettingsScrollbarArea = { x = HP_SETTINGS_SCROLL_X - 0.012, y = HP_SETTINGS_SCROLL_Y, width = HP_SETTINGS_SCROLL_WIDTH + 0.024, height = HP_SETTINGS_SCROLL_HEIGHT }
-            self:drawDetailScrollbar(HP_SETTINGS_SCROLL_X, HP_SETTINGS_SCROLL_Y, HP_SETTINGS_SCROLL_WIDTH, HP_SETTINGS_SCROLL_HEIGHT, scrollState.offset + 1, scrollState.visibleCount, scrollState.itemCount)
-        end
+        self:updateStaticSettingsInfo()
     else
         HelperPersonnelSettingsFrame:superClass().draw(self)
     end
 end
+
+

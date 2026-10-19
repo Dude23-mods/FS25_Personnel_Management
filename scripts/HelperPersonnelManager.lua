@@ -4438,6 +4438,127 @@ function HelperPersonnelManager:getMonthlyHistoryLines(period, year)
     return lines, period, year
 end
 
+function HelperPersonnelManager:isOverviewTrackedHistoryLine(text)
+    local normalized = string.lower(self:normalizeHistoryText(self:getLocalizedHistoryText(text or "")))
+    if normalized == "" then
+        return false
+    end
+
+    local trackedTerms = {
+        "ansehen",
+        "reputation",
+        self:getLocalizedText("ui_pmStatExperience", "experience"),
+        self:getLocalizedText("ui_pmStatReliability", "reliability"),
+        self:getLocalizedText("ui_pmStatLoyalty", "loyalty"),
+        self:getLocalizedText("ui_selectionAgeLabel", "age"),
+        self:getLocalizedText("ui_specialization_short", "specialization")
+    }
+
+    for _, term in ipairs(trackedTerms) do
+        term = string.lower(tostring(term or ""))
+        if term ~= "" and string.find(normalized, term, 1, true) ~= nil then
+            return true
+        end
+    end
+
+    return false
+end
+
+function HelperPersonnelManager:getMonthlyOverviewChanges(period, year)
+    period, year = self:getApplicantPeriodInfo(period, year)
+    local result = {}
+    local seen = {}
+
+    local function addChange(sequence, key, line, title, detail, kind)
+        line = self:normalizeHistoryText(line or "")
+        title = self:normalizeHistoryText(title or line)
+        detail = self:normalizeHistoryText(detail or "")
+        if line ~= "" and seen[key] ~= true then
+            seen[key] = true
+            table.insert(result, {
+                sequence = tonumber(sequence) or 0,
+                line = line,
+                title = title,
+                detail = detail,
+                kind = kind or "neutral"
+            })
+        end
+    end
+
+    for personId, record in pairs(self.personChronicles or {}) do
+        local name = self:normalizeHistoryText(string.format("%s %s", tostring(record.firstName or ""), tostring(record.lastName or "")))
+        for _, entry in ipairs(record.entries or {}) do
+            if tonumber(entry.period) == period and tonumber(entry.gameYear) == year then
+                local eventType = entry.eventType
+                local valueName = entry.valueName
+                local oldValue = tonumber(entry.oldValue)
+                local newValue = tonumber(entry.newValue)
+                local delta = tonumber(entry.delta)
+                local category = entry.category ~= nil and self:getSpecializationDisplayName(entry.category) or nil
+                local isStatChange = (eventType == HelperPersonnelManager.CHRONICLE_EVENT_JOB_COMPLETED and valueName == "experience")
+                    or eventType == HelperPersonnelManager.CHRONICLE_EVENT_RELIABILITY_CHANGED
+                    or eventType == HelperPersonnelManager.CHRONICLE_EVENT_LOYALTY_CHANGED
+                    or eventType == HelperPersonnelManager.CHRONICLE_EVENT_BIRTHDAY
+                    or eventType == HelperPersonnelManager.CHRONICLE_EVENT_TRAINING_COMPLETED
+                local isSpecializationChange = eventType == HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_ACQUIRED
+                    or eventType == HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_ACTIVATED
+                    or eventType == HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_DEACTIVATED
+
+                if isStatChange and oldValue ~= nil and newValue ~= nil and delta ~= nil and delta ~= 0 then
+                    local label = valueName == "experience" and self:getLocalizedText("ui_pmStatExperience", "Experience")
+                        or valueName == "reliability" and self:getLocalizedText("ui_pmStatReliability", "Reliability")
+                        or valueName == "loyalty" and self:getLocalizedText("ui_pmStatLoyalty", "Loyalty")
+                        or valueName == "age" and self:getLocalizedText("ui_selectionAgeLabel", "Age")
+                        or self:getLocalizedText("ui_specialization_short", "Specialization")
+                    local reason = self:getLocalizedHistoryText(entry.text or entry.reason or "")
+                    local line = string.format("%s – %s: %d → %d (%s) – %s", name, label, oldValue, newValue, self:formatSignedDelta(delta), reason)
+                    local title = string.format("%s: %d → %d (%s)", label, oldValue, newValue, self:formatSignedDelta(delta))
+                    local detail = reason ~= "" and string.format("%s · %s", name, reason) or name
+                    addChange(entry.sequence, string.format("person:%s:%s:%s", tostring(personId), tostring(eventType), tostring(entry.sequence)), line, title, detail, delta > 0 and "positive" or "negative")
+                elseif isSpecializationChange and category ~= nil then
+                    local label = self:getLocalizedText("ui_specialization_short", "Specialization")
+                    local reason = self:getLocalizedHistoryText(entry.text or "")
+                    local line = string.format("%s – %s: %s – %s", name, label, category, reason)
+                    local title = string.format("%s: %s", label, category)
+                    local detail = reason ~= "" and string.format("%s · %s", name, reason) or name
+                    addChange(entry.sequence, string.format("person:%s:%s:%s", tostring(personId), tostring(eventType), tostring(entry.sequence)), line, title, detail, "specialization")
+                end
+            end
+        end
+    end
+
+    for _, entry in ipairs(self.reputationHistory or {}) do
+        if tonumber(entry.period) == period and tonumber(entry.year) == year then
+            local text = self:getLocalizedHistoryText(entry.text or "")
+            if self:isOverviewTrackedHistoryLine(text) then
+                local title, detail = string.match(text, "^(.-)%s+%-%s+(.+)$")
+                addChange(entry.sequence, string.format("reputation:%s", tostring(entry.sequence)), text, title or text, detail or "", "reputation")
+            end
+        end
+    end
+
+    table.sort(result, function(a, b)
+        return (tonumber(a.sequence) or 0) > (tonumber(b.sequence) or 0)
+    end)
+
+    if #result == 0 then
+        local text = self:getLocalizedText("ui_pmOverviewNoChanges", "No changes this month.")
+        table.insert(result, {sequence = 0, line = text, title = text, detail = "", kind = "neutral"})
+    end
+
+    return result, period, year
+end
+
+function HelperPersonnelManager:getMonthlyOverviewChangeLines(period, year)
+    local changes
+    changes, period, year = self:getMonthlyOverviewChanges(period, year)
+    local lines = {}
+    for _, change in ipairs(changes) do
+        table.insert(lines, change.line)
+    end
+    return lines, period, year
+end
+
 function HelperPersonnelManager:adjustEmployerReputation(delta, reasonText)
     delta = math.floor((tonumber(delta) or 0) + 0.5)
     if delta == 0 then
@@ -4455,7 +4576,9 @@ function HelperPersonnelManager:adjustEmployerReputation(delta, reasonText)
     end
 
     if newValue - oldValue ~= 0 then
-        self:addReputationHistoryEntry(self.lastReputationChangeText)
+        local label = self:getLocalizedText("ui_overviewReputation", "Employer reputation: %d/100 (%s)")
+        label = string.gsub(label, "%s*:.*$", "")
+        self:addReputationHistoryEntry(string.format("%s: %d → %d (%s) – %s", label, oldValue, newValue, self:formatSignedDelta(newValue - oldValue), self.lastReputationChangeText))
     end
 
     return newValue
@@ -9358,6 +9481,19 @@ function HelperPersonnelManager:processBirthdaysForCurrentDate()
             worker.lastBirthdayYear = calendarYear
             processed = processed + 1
             local age = self:getPersonAge(worker, period, year, day)
+            local previousAge = math.max(0, age - 1)
+            if self.addPersonChronicleEntry ~= nil then
+                self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_BIRTHDAY or "birthday", {
+                    period = period,
+                    gameYear = year,
+                    day = day,
+                    valueName = "age",
+                    oldValue = previousAge,
+                    newValue = age,
+                    delta = age - previousAge,
+                    reason = self:getBirthDateText(worker)
+                })
+            end
             if age >= (HelperPersonnelManager.RETIREMENT_MIN_AGE or 55)
                 and worker.lastRetirementCheckYear < calendarYear
                 and worker.retirementPending ~= true
@@ -9855,6 +9991,7 @@ HelperPersonnelManager.CHRONICLE_EVENT_SALARY_CHANGED = "salaryChanged"
 HelperPersonnelManager.CHRONICLE_EVENT_SALARY_REQUEST_DECLINED = "salaryRequestDeclined"
 HelperPersonnelManager.CHRONICLE_EVENT_LOYALTY_CHANGED = "loyaltyChanged"
 HelperPersonnelManager.CHRONICLE_EVENT_RELIABILITY_CHANGED = "reliabilityChanged"
+HelperPersonnelManager.CHRONICLE_EVENT_BIRTHDAY = "birthday"
 HelperPersonnelManager.CHRONICLE_EVENT_TRANSPORT_ASSIGNED = "transportAssigned"
 HelperPersonnelManager.CHRONICLE_EVENT_TRANSPORT_REMOVED = "transportRemoved"
 HelperPersonnelManager.CHRONICLE_EVENT_DISMISSAL_NOTICE = "dismissalNotice"

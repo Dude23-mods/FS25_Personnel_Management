@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="비료 살포" />
         <e k="ui_specialization_plantProtection" v="작물 보호" />
         <e k="ui_specialization_harvest" v="수확" />
-        <e k="ui_specialization_transport" v="운송" />
+        1교통2
         <e k="ui_specialization_machineCare" v="장비 관리" />
         <e k="ui_specialization_resourceSaver" v="자원 절약" />
         <e k="ui_specializationLearned" v="%s이(가) 전문 분야를 습득했습니다: %s." />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="운송 업무 관리" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="급여 인상 요청 관리" />
         <e k="input_HP_SELECT_CANCEL" v="직원 선택 취소" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="차단된 직원 해제" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="차단된 직원 해제" />
         <e k="ui_openWorkerView" v="직원" />
         <e k="ui_openApplicantView" v="지원자" />
         <e k="ui_backToOverview" v="개요로 돌아가기" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="작업 시간: %d 작업 | %s | 월급: %s" />
         <e k="ui_button_transport_assign" v="운송 배정" />
         <e k="ui_button_transport_remove" v="운송 해제" />
-        <e k="ui_transportMarker" v="운송" />
+        1교통2
         <e k="ui_transportActionAssigned" v="%s - 운송 배정." />
         <e k="ui_transportActionRemoved" v="%s - 운송 해제." />
         <e k="ui_transportNoDriverAssigned" v="운송: 아직 없음." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="교육" />
         <e k="ui_pmStatusApplicant" v="지원자" />
         <e k="ui_pmBirthLine" v="출생: %s" />
+        <e k="ui_pmRankLabel" v="등급" />
         <e k="ui_pmOriginLine" v="직업 배경: %s" />
         <e k="ui_pmStatsLine" v="경험 %d · 신뢰도 %d · 충성도 %d" />
         <e k="ui_pmStatExperience" v="경험" />
         <e k="ui_pmStatReliability" v="신뢰도" />
         <e k="ui_pmStatLoyalty" v="충성도" />
         <e k="ui_pmWageLine" v="임금: %s" />
-        <e k="ui_pmStatusLine" v="상태: %s" />
+        1상태: %s2
         <e k="ui_pmOrigin1" v="농촌 가족 농장" />
         <e k="ui_pmOrigin2" v="소규모 낙농장" />
         <e k="ui_pmOrigin3" v="농업 도급 업체" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="인사" />
         <e k="ui_pmSettingsSectionEconomic" v="경제" />
         <e k="ui_button_transport_assign_long" v="운송 업무 배정" />
-        <e k="ui_button_transport_manage_long" v="운송" />
+        1교통2
         <e k="ui_transportPriorityTitle" v="운송 우선순위" />
         <e k="ui_transportPriorityIntro" v="운송 업무를 맡을 직원과 가용 여부를 확인할 순서를 설정하세요." />
         <e k="ui_transportPriorityHeaderPriority" v="우선순위" />
         <e k="ui_transportPriorityHeaderEmployee" v="직원" />
-        <e k="ui_transportPriorityHeaderStatus" v="상태" />
-        <e k="ui_transportPriorityHeaderEnabled" v="운송" />
+        1상태2
+        1교통2
         <e k="ui_transportPriorityActive" v="활성" />
         <e k="ui_transportPriorityInactive" v="미배정" />
         <e k="ui_transportPriorityMoveUp" v="위로 이동" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="사무직" />
         <e k="ui_status_retirementPending" v="월말에 은퇴 예정" />
         <e k="ui_retirementNotice" v="%s은(는) 월말에 은퇴합니다." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="전문화는 해당 범주의 성과를 높입니다. 교육은 월초에만 시작하며 비용이 들고 직원은 월말까지 이용할 수 없습니다. 진행도는 완료 후 반영됩니다. 제공 항목과 가격은 매월 바뀌며 3월부터 2월까지의 농업 연도마다 교육은 한 번만 가능합니다. 습득한 전문화는 유지되지만 활성 보너스는 최대 두 개입니다. 두 슬롯 모두 비활성일 수 있습니다. 습득했지만 비활성인 전문화는 직원 한 명당 농업 연도마다 한 번만 활성화할 수 있습니다." />
         <e k="ui_pmTrainingCategoryHeader" v="학습 분야" />
         <e k="ui_pmTrainingProgressHeader" v="전문화 진행도" />
         <e k="ui_pmTrainingRunning" v="교육 진행 중" />
         <e k="ui_pmTrainingSelectCategory" v="먼저 교육 분야를 선택하세요" />
         <e k="ui_pmTrainingConfirm" v="%s에게 %s 분야 교육을 시작하시겠습니까?" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="전문화: 활성 슬롯 두 개 사용 중 · 마지막 습득: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="교육: 월 1일이면 12:00까지만 · 교육 메뉴에서 분야 선택 · 최근: %s" />
         <e k="ui_training_line_first_day_select" v="교육: 첫째 날만 · 교육 메뉴에서 분야 선택 · 최근: %s" />
         <e k="ui_training_line_busy_select" v="교육: 작업 중에는 불가 · 최근: %s" />
         <e k="ui_training_line_sick_select" v="교육: 아픈 동안에는 불가 · 최근: %s" />
         <e k="ui_training_line_select_category" v="교육: 교육 메뉴에서 분야 선택 · 최근: %s" />
-        <e k="ui_pmTrainingCostHeader" v="비용" />
+        1비용2
         <e k="ui_pmTrainingAdjustmentHeader" v="할인/추가 비용" />
         <e k="ui_pmTrainingNoPlaces" v="현재 빈자리 없음" />
         <e k="ui_pmTrainingNoPlacesMessage" v="현재 이 교육 과정에는 빈자리가 없습니다." />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="작업: %d" />
         <e k="ui_pmHistoryCareerWorkTime" v="근무 시간: %s" />
         <e k="ui_pmHistoryCareerTraining" v="교육: %s" />
-        <e k="ui_pmHistoryCareerTransport" v="운송: %s" />
+        1교통: %s2
         <e k="ui_pmHistoryValueActive" v="활성" />
         <e k="ui_pmHistoryValueInactive" v="비활성" />
         <e k="ui_monthlyRowApplicants" v="지원자" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="근무 시간" />
         <e k="ui_monthlyRowWages" v="월 급여" />
         <e k="ui_monthlyRowPayroll" v="최근 급여 정산" />
-        <e k="ui_pmOverviewOverallHeader" v="합계" />
+        1총계2
         <e k="ui_pmOverviewTotalJobs" v="총 작업 수" />
         <e k="ui_pmOverviewTotalWorkTime" v="총 작업 시간" />
         <e k="ui_pmOverviewTotalPayroll" v="총 급여 지급액" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s은(는) 여자친구와 갑자기 커피를 마시러 가기 위해 진행 중인 작업을 중단했습니다." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s은(는) 남자친구와 갑자기 커피를 마시러 가기 위해 진행 중인 작업을 중단했습니다." />
         <e k="ui_pmMonth01" v="3월" />
-        <e k="ui_pmMonth02" v="4월" />
+        14월2
         <e k="ui_pmMonth03" v="5월" />
         <e k="ui_pmMonth04" v="6월" />
         <e k="ui_pmMonth05" v="7월" />
-        <e k="ui_pmMonth06" v="8월" />
-        <e k="ui_pmMonth07" v="9월" />
+        18월2
+        19월2
         <e k="ui_pmMonth08" v="10월" />
-        <e k="ui_pmMonth09" v="11월" />
-        <e k="ui_pmMonth10" v="12월" />
+        111월2
+        112월2
         <e k="ui_pmMonth11" v="1월" />
         <e k="ui_pmMonth12" v="2월" />
         <e k="ui_pmPeriodMonthYear" v="%s, %d년" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="좋은 근무 실적" />
         <e k="ui_waitingForServerData" v="서버 데이터 대기 중" />
         <e k="ui_pmMenuPageHelp" v="도움말" />
-        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.4.0의 자세한 게임 내 안내서입니다. 포함된 ReadMe.pdf에서 추가 규칙과 계산식을 확인할 수 있습니다." />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.5.0의 자세한 게임 내 안내서입니다." />
         <e k="ui_pmHelpSectionQuickStart" v="빠른 시작과 조작|Ctrl + M으로 메뉴를 엽니다. 메뉴 페이지 조작으로 탭을 전환합니다. A/D 또는 왼쪽/오른쪽으로 사람을 바꾸고, Space로 확인, Esc로 뒤로 가며, T로 운송 우선순위, G로 임금 요청을 엽니다." />
         <e k="ui_pmHelpSectionPeople" v="지원자와 직원|새 저장 게임은 지원자 4명으로 시작하며 최대 8명까지 대기할 수 있습니다. 프로필에서 채용합니다. 경험, 신뢰도, 충성도는 0부터 100입니다. 상태, 임금, 전문 분야, 기록과 누계는 직원 페이지에 표시됩니다." />
         <e k="ui_pmHelpSectionStats" v="직원과 능력치|경험은 속도, 마모와 소비에, 신뢰도는 중단, 질병과 조기 작업 종료에, 충성도는 임금 요청과 퇴사에 영향을 줍니다. 직원 페이지에는 상태, 임금, 전문 분야, 통계와 개인 기록도 표시됩니다." />
@@ -529,81 +530,146 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="퇴사, 해고와 은퇴|항상 즉시 적용되는 것은 아니며 기한에 따라 월 변경 시 완료됩니다. 작업 중인 직원은 즉시 해고할 수 없습니다. 예정된 변경은 상태와 기록에 표시됩니다." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive와 Courseplay|직원 / 운송에서 운전자를 지정하고 우선순위를 설정하세요. AutoDrive는 첫 번째 사용 가능 운전자를 쓰며 없으면 시작하지 않습니다. 일반 Courseplay 시작은 선택을 엽니다. AutoDrive 뒤 자동 시작 시 각 차량은 새 선택 없이 자신의 운전자를 유지합니다." />
         <e k="ui_pmHelpSectionMultiplayer" v="멀티플레이와 저장 게임|인사 데이터와 설정은 농장별로 분리됩니다. 서버가 변경을 검증하며 권한 있는 농장 관리자만 자신의 농장을 관리할 수 있습니다. 직원, 활성 배정과 설정이 동기화됩니다. 데이터는 저장 게임의 helperPersonnel.xml에 저장됩니다." />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="인사 관리 · 작업 선택" />
+        <e k="ui_selectionPerformanceProfile" v="성과 프로필" />
+        1구입 가능2
+        1크랭크2
+        1교육 중2
+        1예약됨2
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive 작업" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay 작업" />
+        1현장 조사2
+        1사용할 수 없음2
+        <e k="ui_selectionShowAll" v="모든 직원 표시" />
+        <e k="ui_selectionShowAvailable" v="이용 가능한 직원만 표시" />
+        <e k="ui_selectionFooterControls" v="A/D 변경 · Space 선택 · Tab 전체 · Esc 뒤로" />
+        1작업 내용 미상2
+        1Alter2
+        <e k="ui_selectionWageLabel" v="월급" />
+        1주문2
+        1작업 속도2
+        1%d년2
         <e k="ui_selectionProfessionalDevelopment" v="전문성 개발" />
         <e k="ui_selectionNoSpecializationProgress" v="아직 전문화 진행도가 없습니다" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="전문화 없음" />
+        1차량: %s2
+        1작업: %s2
+        1필드: %s2
+        <e k="ui_selectionTargetLine" v="운송 목적지: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP 작업 유형: %s" />
+        1상태: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="빠른 시작과 조작" />
-        <e k="ui_pmHelpTopic01Body" v="Ctrl + M으로 메뉴를 엽니다. 메뉴 페이지 조작으로 탭을 전환합니다. A/D 또는 왼쪽/오른쪽으로 사람을 바꾸고, Space로 확인, Esc로 뒤로 가며, T로 운송 우선순위, G로 임금 요청을 엽니다." />
-        <e k="ui_pmHelpTopic02Title" v="지원자와 직원" />
-        <e k="ui_pmHelpTopic02Body" v="새 저장 게임은 지원자 4명으로 시작하며 최대 8명까지 대기할 수 있습니다. 프로필에서 채용합니다. 경험, 신뢰도, 충성도는 0부터 100입니다. 상태, 임금, 전문 분야, 기록과 누계는 직원 페이지에 표시됩니다. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="직원과 능력치" />
-        <e k="ui_pmHelpTopic03Body" v="경험은 속도, 마모와 소비에, 신뢰도는 중단, 질병과 조기 작업 종료에, 충성도는 임금 요청과 퇴사에 영향을 줍니다. 직원 페이지에는 상태, 임금, 전문 분야, 통계와 개인 기록도 표시됩니다." />
-        <e k="ui_pmHelpTopic04Title" v="작업과 성장" />
-        <e k="ui_pmHelpTopic04Body" v="일반 AI 도우미 작업을 시작하면 직원 선택이 열립니다. 사용 가능한 직원만 선택할 수 있고 한 직원이 여러 작업을 동시에 수행할 수 없습니다. 작업 시간은 경험과 전문 분야 진행도를 높입니다. 경험은 속도, 마모, 소비에, 신뢰도는 감속, 질병, 작업 중단에, 충성도는 임금 갈등과 퇴사에 영향을 줍니다. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="경험은 속도, 마모와 소비에, 신뢰도는 중단, 질병과 조기 작업 종료에, 충성도는 임금 요청과 퇴사에 영향을 줍니다. 직원 페이지에는 상태, 임금, 전문 분야, 통계와 개인 기록도 표시됩니다." />
-        <e k="ui_pmHelpTopic06Title" v="임금" />
-        <e k="ui_pmHelpTopic06Body" v="임금은 월 변경 시 지급되며 월 일수, 경제 난이도와 모드 설정에 따라 달라집니다. 직원이 인상을 요구할 수 있으며 기한 내에 수락하거나 거절해야 하고 충성도에 영향을 줄 수 있습니다." />
-        <e k="ui_pmHelpTopic07Title" v="교육" />
-        <e k="ui_pmHelpTopic07Body" v="교육은 월초에만 시작하고 비용이 들며 월말까지 직원을 사용할 수 없습니다. 완료하면 선택한 전문 분야가 향상됩니다. 교육 제안과 기록은 교육 및 직원 영역에 표시됩니다. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="전문화" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="퇴사, 해고와 은퇴" />
-        <e k="ui_pmHelpTopic09Body" v="항상 즉시 적용되는 것은 아니며 기한에 따라 월 변경 시 완료됩니다. 작업 중인 직원은 즉시 해고할 수 없습니다. 예정된 변경은 상태와 기록에 표시됩니다." />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive와 Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="직원 / 운송에서 운전자를 지정하고 우선순위를 설정하세요. AutoDrive는 첫 번째 사용 가능 운전자를 쓰며 없으면 시작하지 않습니다. 일반 Courseplay 시작은 선택을 엽니다. AutoDrive 뒤 자동 시작 시 각 차량은 새 선택 없이 자신의 운전자를 유지합니다." />
-        <e k="ui_pmHelpTopic11Title" v="멀티플레이와 저장 게임" />
-        <e k="ui_pmHelpTopic11Body" v="인사 데이터와 설정은 농장별로 분리됩니다. 서버가 변경을 검증하며 권한 있는 농장 관리자만 자신의 농장을 관리할 수 있습니다. 직원, 활성 배정과 설정이 동기화됩니다. 데이터는 저장 게임의 helperPersonnel.xml에 저장됩니다." />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="인사 데이터와 설정은 농장별로 분리됩니다. 서버가 변경을 검증하며 권한 있는 농장 관리자만 자신의 농장을 관리할 수 있습니다. 직원, 활성 배정과 설정이 동기화됩니다. 데이터는 저장 게임의 helperPersonnel.xml에 저장됩니다." />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="Ctrl + M으로 메뉴를 엽니다. 메뉴 페이지 조작으로 탭을 전환합니다. A/D 또는 왼쪽/오른쪽으로 사람을 바꾸고, Space로 확인, Esc로 뒤로 가며, T로 운송 우선순위, G로 임금 요청을 엽니다. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="해제" />
-        <e k="ui_pmConfirmReleaseWorker" v="%s 직원을 해제하시겠습니까? 서버가 활성 작업을 감지하지 않을 때만 가능합니다." />
-        <e k="ui_workerReleaseSuccess" v="직원이 해제되었습니다." />
-        <e k="ui_workerReleaseDeniedActive" v="해제할 수 없습니다: 직원에게 활성 작업이 남아 있습니다." />
-        <e k="ui_workerReleaseDeniedAvailable" v="해제할 필요가 없습니다: 직원은 이미 이용 가능합니다." />
-        <e k="ui_workerReleaseDeniedCheck" v="해제할 수 없습니다: 작업 상태를 안전하게 확인할 수 없습니다." />
-        <e k="ui_workerReleaseDeniedPermission" v="해제할 수 없습니다: 권한이 없거나 직원이 유효하지 않습니다." />
+        1잠시 놔두기2
+        1로그인2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="%s에 대해 %s을(를) 비활성화할까요?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="%s에 대해 %s을(를) 활성화할까요?" />
+        <e k="ui_pmSpecializationActivationUsed" v="새 전문화는 직원 한 명당 농업 연도마다 한 번만 활성화할 수 있습니다." />
+        <e k="ui_pmSpecializationSlotsFull" v="다른 전문화를 활성화하기 전에 활성 전문화를 하나 이상 비활성화하세요." />
+        1활성2
+        <e k="ui_pmSpecializationInactive" v="습득함, 비활성" />
+        <e k="ui_specializationActivatedNotice" v="%s이(가) 전문화 %s을(를) 다시 사용합니다." />
+        <e k="ui_specializationDeactivatedNotice" v="%s이(가) 전문화 %s을(를) 비활성화합니다." />
+        1목차2
+        <e k="ui_pmHelpNavigation" v="왼쪽/오른쪽: 영역 · 위/아래: 선택 또는 스크롤 · Page Up/Down: 페이지" />
+        1빠른 시작 및 사용 방법2
+        1인사 관리에서는 익명의 AI 도우미 대신 실명이 있는 지원자와 직원을 사용합니다. 모든 직원은 장기적으로 성장하며 월급을 받으며, 경험, 신뢰성, 충성심, 전문 분야에 따라 각기 다른 강점과 위험 요소를 가질 수 있습니다.&#10;기본적으로 Ctrl + M 키를 누르면 개인 메뉴가 열립니다. 이 메뉴에는 개요, 지원자, 직원, 교육, 설정 및 도움말이 포함되어 있습니다. 키 할당은 게임 설정에서 변경할 수 있습니다.&#10;기본 키 설정: 인물 전환 A/D 또는 좌/우 화살표; 선택 확인 스페이스바 또는 마우스 클릭; 취소 또는 뒤로 가기 Esc; 출장 및 급여 관리 T 또는 G. 도움말 탭에서는 좌/우 화살표로 내용과 항목을 전환하고, 위/아래 화살표로 선택하거나 스크롤하며, 이미지 위/아래 화살표로 페이지 단위로 이동합니다.2
+        1개요 및 인원 현황2
+        1이 개요는 농장의 현재 상황을 요약하여 보여줍니다. 상단에는 직원, 근무 가능한 직원, 지원자 및 고용주 평판이 표시됩니다. 그 아래에는 담당자, 차량, 장비 및 업무 내용이 포함된 진행 중인 업무가 나타납니다.&#10;‘변경 사항’ 타일에는 고용주 평판, 경력, 신뢰도, 충성도, 연령 또는 전문 분야의 변경과 같은 관련 인사 사건만 포함됩니다. 각 알림에는 원인, 관련자 및 영향이 명시되며, 여러 줄로 구성된 항목도 하나의 알림으로 간주됩니다.&#10;‘월간 보고서’와 ‘전체’에서는 현재 및 누적 지표를 확인할 수 있습니다. 이 개요를 활용하여 신속하게 근무 계획을 수립하고, 세부 사항, 의사 결정 및 기록은 각 전문 페이지에서 확인하십시오.2
+        1구직 시장과 채용2
+        1새로운 게임 라운드는 4명의 구직자로 시작됩니다. 동시에 시장에 존재할 수 있는 구직자는 최대 8명입니다. 매월 초마다 주사위를 굴려 최대 3개의 새로운 자리가 생성되며, 자리당 확률은 15% + 0.7 × 고용주 평판입니다. 평판이 60일 경우 자리당 57%, 100일 경우 85%의 확률이 적용됩니다. 시장이 비어 있으면 최소 한 명의 새로운 구직자가 생성됩니다.&#10;지원자는 생성된 달 동안은 확실히 이용 가능합니다. 첫 번째 달이 바뀌면 품질에 따라 이탈 확률이 10~30%가 되며, 두 번째 달이 바뀌면 30~50%, 세 번째 달이 바뀌면 100%가 됩니다. 우수한 프로필은 품질이 높을수록 이탈 확률이 높아지기 때문에 더 일찍 사라질 수 있습니다.&#10;지원자는 18~65세이며, 고정된 생년월일을 가지고 있고 나이가 계속 들어갑니다. 배경으로는 가족 경영 농장, 낙농장, 농업 용역 업체, 경작 농업, 복합 농업, 물류, 농기계 정비소 및 사무직이 있습니다. 연령과 배경은 특히 경험과 잠재적인 전문 지식에 영향을 미칩니다.&#10;희망 연봉은 경험과 신뢰도를 바탕으로 산정되며, 96~106%의 무작위 편차가 적용되고 고용주의 평판에 영향을 받습니다. 평판이 낮으면 희망 연봉이 상승하고, 평판이 높으면 하락합니다. 채용 전 확인 메시지가 표시되며, 채용 시 평판이 1포인트 상승합니다.2
+        1직원 프로필, 가치관 및 현황2
+        1경험, 신뢰도, 충성도는 각각 0에서 100까지의 범위를 가집니다. 수치는 정확히 표시되며, 막대 그래프를 통해 빠르게 비교할 수 있습니다.&#10;등급은 오로지 경험에 따라 결정됩니다: 보조원 0–44, 숙련공 45–74, 전문가 75–100. 경험은 작업 속도, 추가 마모 및 추가 소모량을 결정합니다. 신뢰성은 단기적인 성능 저하, 질병, 월별 성과 추이 및 업무 중단 위험에 영향을 미칩니다. 충성도는 회사에 대한 애착을 나타내며, 경고, 급여 분쟁 및 자진 퇴사에 영향을 미칩니다.2
+        1AI 도우미, 이동 및 FollowMe2
+        1일반 AI 보조 업무를 시작하면 직원 선택 화면이 열립니다. 이용 가능한 직원만 선택할 수 있습니다. 한 직원은 동시에 여러 건의 업무를 맡을 수 없으며, 병가나 교육 기간 중에는 이용 불가능합니다.&#10;업무는 10초가 지나야 완료된 업무로 기록됩니다. 전문성 향상을 위해서는 실무 시간이 최소 3분 이상이어야 합니다.&#10;T 키나 메뉴 버튼을 눌러 운송 우선순위 설정을 열 수 있습니다. 여기서 어떤 직원이 운송 업무를 담당할지, 그리고 어떤 순서로 검토될지를 지정합니다. A에서 B로 이동하는 업무의 경우, 상단부터 하단으로 순차적으로 첫 번째로 사용 가능한 직원이 선택됩니다. FollowMe 기능은 계속해서 직원 선택 기능을 사용하며, 운송 업무로 간주됩니다.2
+        1경험과 업무에 미치는 영향2
+        1경험치 획득&#10;– 경험치는 기록된 근무 시간을 통해 획득되며, 사용하지 않은 학습 시간은 그대로 유지됩니다.&#10;– 한 번의 근무당 최대 2 경험치를 획득할 수 있습니다.&#10;– 또한 월별 한도가 진행 속도를 제한합니다. 경험치가 높을수록 다음 경험치를 획득하는 데 더 오랜 시간이 걸립니다.&#10;효과&#10;– 주 전문 분야는 유효 경험치를 12점, 부 전문 분야는 6점씩 증가시키며, 최대치는 100점입니다.&#10;– 작업 속도 = 70% + 30% × 유효 경험치 / 100.&#10;– 추가 마모율은 최대 15%, 추가 자재 및 연료 소비량은 최대 10% × 부족한 유효 경험치 × 경제 계수입니다. 경제 계수는 0.75 / 1.00 / 1.25입니다.&#10;학습 시간 및 월간 한도&#10;– 경험치 0–24: 25분, 월간 한도 +1; 25–49: 50분, 0; 50–69: 100분, -1.&#10;– 경험치 70–84: 220분, -2; 85–94: 540분, -3; 95–100: 1080분, -4.&#10;– 일/월 기준 기본 한도: 1일 = 1, 2일 = 2, 3–4일 = 3, 5–6일 = 4, 7–9일 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. 실제 한도 = 기본 한도 + 조정치, 최소 1.2
+        1신뢰성, 질병 및 임무 중단2
+        1신뢰도가 85 미만일 경우, 일시적인 성능 저하가 발생할 수 있습니다. 1분에 한 번씩 점검되며, 신뢰도가 낮아질수록 발생 확률은 최대 15%까지 증가합니다. 성능 저하는 30~90초 동안 지속되며, 성능을 4~15% 감소시키고, 3분이 지나야 다시 발생할 수 있습니다.&#10;질병 여부는 매일 확인됩니다. 질병에 걸린 직원은 당일 근무할 수 없으며, 진행 중인 임무는 종료됩니다. 한 달에 최대 월 일수 / 3을 반올림한 일수의 병가만 가능합니다. 신뢰도가 50 미만일 경우, 60초마다 임무 완전 중단 여부를 한 번씩 확인하며, 이 경우 해당 임무는 성공으로 간주되지 않고 사고 내역에 기록됩니다.&#10;질병/일 및 업무 중단 기준치: 0–20: 10% / 20%; 21–29: 8% / 15%; 30–40: 8% / 10%; 41–49: 6% / 5%; 50–60: 6% / 0%; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. 좋은 한 달을 보내려면 최소 120분의 근무 시간, 사고 없음, 병가 없음, 야간 근무 시간 240분 미만이어야 하며, 이 조건을 충족하면 신뢰도 +1이 될 확률이 35 %입니다. 부정적 위험 요소는 합산되며 60 %로 제한됩니다.2
+        1충성심과 고용주 평판2
+        1신입 직원은 대개 충성도 65로 시작합니다. 제때 지급되는 급여, 긴 근속 기간, 그리고 수용된 급여 요구는 충성도를 높이는 반면, 재정적 문제, 야간 근무, 거부되거나 오랫동안 미해결로 남아 있는 급여 요구는 충성도를 약화시킵니다. 22:00부터 06:00까지의 야간 근무는 기록되며, 120 게임 내 분부터 최대 4의 충성도와 1~2의 평판을 소모할 수 있습니다.&#10;충성도와 고용주 평판 간의 차이가 최소 15 / 30 / 50점일 경우, 매월 1 / 2 / 3점씩 차이가 좁혀집니다. 이벤트: 평판이 최소 40 이상일 때 급여 지급 시 충성도 +1; 지급 시 마이너스 -2; 사업장이 이전에 마이너스 상태였을 경우 -4; 소속 기간 3 / 6 / 12 / 24개월 시 +1 / +1 / +2 / +3; 요청 수락 시 +3; 거절 시 -5, 충성도가 40 미만일 경우 -7; 유예 기간이 지난 미결제 청구 건은 매월 -2씩 차감됩니다.&#10;충성도 0–5일 때 월별 자발적 퇴사 확률: 35%, 6–9일: 20%, 10–14일: 10%, 15일 이상부터는 정규 충성도 퇴사가 발생하지 않습니다. 고용주 평판은 60에서 시작하며, 0–100까지 범위가 있고, 0–19는 ‘비판적’, 20–39는 ‘약함’, 40–59는 ‘견고함’, 60–79는 ‘좋음’, 80–100은 ‘매우 좋음’으로 분류됩니다. 이는 지원자 수와 질, 희망 연봉, 장기적인 충성도에 영향을 미칩니다.2
+        1급여, 급여 정산 및 급여 청구2
+        1개별 기본 급여는 경력 및 신뢰도를 바탕으로 산정되며, 각 경력 구간 내에서 선형 보간됩니다. 신뢰도는 0.94에서 1.06 사이의 값에 곱해집니다. 지원자는 추가로 무작위 요소, 평판, 그리고 주 전공에 대해 +5%, 부 전공에 대해 +3%의 잠재적 전문성 가산치를 받게 됩니다.&#10;월 3일 근무 시 기본 급여: 경력 0–44: 1,800–2,200, 45–74: 2,200–2,700, 75–100: 2,700–3,300. 월급 = 기본급 × 월 길이 계수 × 경제 비용 계수, 10의 배수로 반올림. 개별 급여 설정이 비활성화된 경우, 10단위로 나뉘는 100–100,000의 표준 기본 급여가 적용됩니다. 1–28일 기준 월 일수 계수: 0.58; 0.82; 1.00; 1.15; 1.29; 1.41; 1.53; 1.63; 1.73; 1.83; 1.91; 2.00; 2.08; 2.16; 2.24; 2.31; 2.38; 2.45; 2.52; 2.58; 2.65; 2.71; 2.77; 2.83; 2.89; 2.94; 3.00; 3.06.&#10;급여는 매월 말 급여 지급 시 정산됩니다. 이때 고용 관계가 종료되는 직원도 사전에 정산된 급여를 받게 됩니다. 전문 인력이나 프로는 급여 인상을 요청할 수 있습니다: 기본 성공 확률 70%, 충성도에 따라 55–85%로 제한됨; 이후 매월 성공 확률의 절반으로 재검토 가능. 수락 시 충성도 +3 및 평판 +1; 거절 시 충성도가 5 감소하며, 40 미만일 경우 7 감소하고, 3개월 동안 해고 및 신뢰도 위험이 증가합니다. G는 모든 미결 청구 사항을 공개합니다.2
+        1전공 분야 및 실무 역량 개발2
+        1기본 규칙&#10;– 학습 카테고리는 총 8가지입니다: 토양 관리, 파종, 비료 주기, 병해충 방제, 수확, 운송, 기계 보호, 효율적인 작업 방식.&#10;– 진행 상황은 카테고리별로 별도로 저장됩니다. 습득한 전문 기술은 영구적으로 유지되며, 동시에 활성화될 수 있는 보너스는 최대 2개까지입니다.&#10;학습 진행 상황&#10;– 학습 단계는 240, 420, 600, 780분이며, 이후 각 단계는 180분씩 증가합니다.&#10;– 학습 계수는 1 + (경험-50)/250 + (신뢰도-50)/300이며, 0.75에서 1.30 사이로 제한됩니다. 여러 활동이 있을 경우, 학습 시간은 가중치를 적용하여 배분됩니다.&#10;활동 분류&#10;– 토양 관리: 쟁기, 경운기, 회전식 해머, 디스크 해머, 롤러 및 멀처.&#10;– 파종: 파종기 및 식재기, 종자.&#10;– 비료 시비: 광물질 비료, 액체 비료, 액분, 발효 잔여물 및 거름. 작물 보호: 제초 작업.&#10;– 수확: 콤바인, 수확 장치, 베일 프레스, 예초기, 적재차 및 픽업. 운송: 트레일러, 하역 및 A에서 B로의 운송.&#10;보너스 및 활성화&#10;– 주 전문 분야: 유효 경험치 +12 및 기본 급여 +5%. 부 전문 분야: +6 및 +3%.&#10;– 두 전문 분야 모두 휴면 상태로 둘 수 있습니다. 습득한 휴면 전문 분야는 직원 1명당 농업 연도(3월~2월)에 한 번만 활성화할 수 있으며, 휴면 상태로 두는 것만으로는 이 권리가 소모되지 않습니다.2
+        1교육2
+        1교육은 매월 첫째 날에만 시작되며, 해당 월의 1일인 경우 12:00까지 시작해야 합니다. 직원은 3월부터 다음 해 2월까지의 농업 연도 동안 단 한 번의 교육에만 참여할 수 있으며, 근무 중이거나 병가 중이어서는 안 됩니다. 해당 직원은 그 달 말까지 참여가 불가능하며, 진행 상황은 월이 바뀌어 교육을 완료한 시점에야 반영됩니다.&#10;교육 한 번을 이수하면 다음 전문 분야에 필요한 학습 시간의 30%를 획득하며, 최소 30분, 최대 미달 시간만큼만 획득할 수 있습니다. 각 카테고리에는 매월 -20%에서 +20% 사이의 가격 계수가 적용되며, 25%의 확률로 정원이 마감됩니다. 비용은 교육 시작 시 즉시 공제되며, 현재 월급을 기준으로 산정됩니다.&#10;교육 비용 = 현재 월급 × 카테고리 계수 × 월별 수정계수. 계수: 토양 관리 75%, 파종 90%, 비료 시비 90%, 병해충 방제 100%, 수확 110%, 운송 65%, 기계 보호 120%, 효율적인 작업 방식 120%.2
+        1해고, 자진 퇴사 및 정년퇴직2
+        1해고는 확인을 받아야 합니다. 1일/월의 경우, 다음 달 초부터 효력이 발생하려면 1일 12:00까지 해고 통보를 해야 합니다. 2일 이상인 경우, 기준일은 반월을 올림한 날짜, 즉 ceil(일수/월 ÷ 2)일입니다. 기준일이 지나면 종료 시점이 한 달 더 미뤄집니다.&#10;해고 통보가 이루어지면 충성도는 즉시 40, 신뢰도는 25씩 감소합니다. 직원은 원칙적으로 해고가 효력을 발휘하는 월말까지 근무할 수 있습니다. 해고 시 평판 손실: 1개월 미만 -12, 3개월 미만 -9, 6개월 미만 -7, 12개월 미만 -5, 24개월 미만 -3, 24개월 이상 -1; 같은 달에 해고가 한 번 더 발생할 때마다 추가로 4점이 차감됩니다.&#10;충성도가 0~14일 경우, 매월 자진 퇴사 가능성을 점검합니다. 급여 요구가 거절될 경우, 그 확률이 일시적으로 5%포인트 증가할 수 있습니다. 자진 퇴사를 통보하면 해당 월 말부터 효력이 발생하며 평판이 10점 감소합니다. 55세 생일 이후부터 은퇴를 예고할 수 있으며, 은퇴 위험률은 67세까지 약 80–90%로 상승하고, 68세에는 95%, 69세에는 98%, 70세에는 100%에 달합니다. 해당 인물은 해당 월 말까지 근무 가능합니다.2
+        1프로필, 활동 내역 및 통계2
+        1지원자 프로필은 연령, 직업적 배경, 경력, 신뢰성, 충성심, 전문 분야 및 현재까지의 시장 경력을 하나의 역동적인 텍스트로 통합합니다. 직원 프로필은 근속 기간, 업무 배정, 교육 및 학습 진척도를 보완합니다.&#10;개인 이력에는 채용, 근무 시작 및 종료, 근무 중단, 병가, 교육, 전문 분야, 급여 요구 및 결정, 충성도와 신뢰도 변화, 운송 배정, 해고, 자진 퇴사, 정년 퇴직 및 고용 종료 등이 기록됩니다.&#10;직원 이력에는 배치 내역, 근무 시간, 교육, 운송 상태, 최근 사건, 병가 일수, 급여 청구, 배치 중단 및 현재까지 지급된 총 급여 등이 표시됩니다. 이 개요에는 또한 전체 사업장 차원의 총계 값, 즉 총 채용 인원, 해고 인원, 자진 퇴사자 및 퇴직자 수 등이 추가로 표시됩니다.2
+        1설정, 멀티플레이어 및 게임 기록2
+        1설정은 각 게임 진행 상황에 따라 적용되며, 업무 성과, 인력 개발, 경제 및 급여로 구분됩니다. 게임플레이 효과는 이에 따른 경험치 효과를 활성화하며, 경험치 효과는 속도, 마모, 소모품 및 연료를 제어합니다. 인력 효과는 충성도 변화와 추가 근무 옵션을 활성화합니다. 경제 관련 효과는 개별 급여와 표준 월급을 활성화합니다.&#10;비활성화된 효과는 기존 인력 데이터를 소급하여 수정하지 않습니다. 해당 효과는 오직 향후 발생할 수 있는 영향을 차단하거나 허용할 뿐입니다. 개별 급여가 비활성화된 경우 표준 월급이 기본값으로 적용되며, 설정에서 직접 변경할 수 있습니다. 키 배정은 게임 설정에서 변경할 수 있습니다.&#10;멀티플레이어 모드에서는 직원, 지원자, 배치, 급여, 교육, 채용 및 연대기가 농장 단위로 관리 및 동기화됩니다. 서버가 결정권을 가지며, 권한이 있는 농장 관리자만 자신의 농장을 변경할 수 있습니다. 데이터는 게임 저장 파일의 helperPersonnel.xml에 저장되며, 로딩 시 진행 중인 배정은 가능한 한 복원됩니다. 기존 게임 저장 파일은 계속 사용할 수 있습니다. 이미 퇴사한 직원의 경우 과거 데이터가 불완전할 수 있습니다.2
+        <e k="ui_button_emergency_release_worker" v="해제" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="%s 직원을 해제하시겠습니까? 서버가 활성 작업을 감지하지 않을 때만 가능합니다." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="직원이 해제되었습니다." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="해제할 수 없습니다: 직원에게 활성 작업이 남아 있습니다." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="해제할 필요가 없습니다: 직원은 이미 이용 가능합니다." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="해제할 수 없습니다: 작업 상태를 안전하게 확인할 수 없습니다." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="해제할 수 없습니다: 권한이 없거나 직원이 유효하지 않습니다." />
+    <e k="ui_pmHelpTopic01Title" v="빠른 시작 및 사용 방법" />
+    <e k="ui_pmHelpTopic01Body" v="인사 관리에서는 익명의 AI 도우미 대신 실명이 있는 지원자와 직원을 사용합니다. 모든 직원은 장기적으로 성장하며 월급을 받으며, 경험, 신뢰성, 충성심, 전문 분야에 따라 각기 다른 강점과 위험 요소를 가질 수 있습니다.&#10;기본적으로 Ctrl + M 키를 누르면 개인 메뉴가 열립니다. 이 메뉴에는 개요, 지원자, 직원, 교육, 설정 및 도움말이 포함되어 있습니다. 키 할당은 게임 설정에서 변경할 수 있습니다.&#10;기본 키 설정: 인물 전환 A/D 또는 좌/우 화살표; 선택 확인 스페이스바 또는 마우스 클릭; 취소 또는 뒤로 가기 Esc; 출장 및 급여 관리 T 또는 G. 도움말 탭에서는 좌/우 화살표로 내용과 항목을 전환하고, 위/아래 화살표로 선택하거나 스크롤하며, 이미지 위/아래 화살표로 페이지 단위로 이동합니다." />
+    <e k="ui_pmHelpTopic02Title" v="개요 및 인원 현황" />
+    <e k="ui_pmHelpTopic02Body" v="이 개요는 농장의 현재 상황을 요약하여 보여줍니다. 상단에는 직원, 근무 가능한 직원, 지원자 및 고용주 평판이 표시됩니다. 그 아래에는 담당자, 차량, 장비 및 업무 내용이 포함된 진행 중인 업무가 나타납니다.&#10;‘변경 사항’ 타일에는 고용주 평판, 경력, 신뢰도, 충성도, 연령 또는 전문 분야의 변경과 같은 관련 인사 사건만 포함됩니다. 각 알림에는 원인, 관련자 및 영향이 명시되며, 여러 줄로 구성된 항목도 하나의 알림으로 간주됩니다.&#10;‘월간 보고서’와 ‘전체’에서는 현재 및 누적 지표를 확인할 수 있습니다. 이 개요를 활용하여 신속하게 근무 계획을 수립하고, 세부 사항, 의사 결정 및 기록은 각 전문 페이지에서 확인하십시오." />
+    <e k="ui_pmHelpTopic03Title" v="구직 시장과 채용" />
+    <e k="ui_pmHelpTopic03Body" v="새로운 게임 라운드는 4명의 구직자로 시작됩니다. 동시에 시장에 존재할 수 있는 구직자는 최대 8명입니다. 매월 초마다 주사위를 굴려 최대 3개의 새로운 자리가 생성되며, 자리당 확률은 15% + 0.7 × 고용주 평판입니다. 평판이 60일 경우 자리당 57%, 100일 경우 85%의 확률이 적용됩니다. 시장이 비어 있으면 최소 한 명의 새로운 구직자가 생성됩니다.&#10;지원자는 생성된 달 동안은 확실히 이용 가능합니다. 첫 번째 달이 바뀌면 품질에 따라 이탈 확률이 10~30%가 되며, 두 번째 달이 바뀌면 30~50%, 세 번째 달이 바뀌면 100%가 됩니다. 우수한 프로필은 품질이 높을수록 이탈 확률이 높아지기 때문에 더 일찍 사라질 수 있습니다.&#10;지원자는 18~65세이며, 고정된 생년월일을 가지고 있고 나이가 계속 들어갑니다. 배경으로는 가족 경영 농장, 낙농장, 농업 용역 업체, 경작 농업, 복합 농업, 물류, 농기계 정비소 및 사무직이 있습니다. 연령과 배경은 특히 경험과 잠재적인 전문 지식에 영향을 미칩니다.&#10;희망 연봉은 경험과 신뢰도를 바탕으로 산정되며, 96~106%의 무작위 편차가 적용되고 고용주의 평판에 영향을 받습니다. 평판이 낮으면 희망 연봉이 상승하고, 평판이 높으면 하락합니다. 채용 전 확인 메시지가 표시되며, 채용 시 평판이 1포인트 상승합니다." />
+    <e k="ui_pmHelpTopic04Title" v="직원 프로필, 가치관 및 현황" />
+    <e k="ui_pmHelpTopic04Body" v="경험, 신뢰도, 충성도는 각각 0에서 100까지의 범위를 가집니다. 수치는 정확히 표시되며, 막대 그래프를 통해 빠르게 비교할 수 있습니다.&#10;등급은 오로지 경험에 따라 결정됩니다: 보조원 0–44, 숙련공 45–74, 전문가 75–100. 경험은 작업 속도, 추가 마모 및 추가 소모량을 결정합니다. 신뢰성은 단기적인 성능 저하, 질병, 월별 성과 추이 및 업무 중단 위험에 영향을 미칩니다. 충성도는 회사에 대한 애착을 나타내며, 경고, 급여 분쟁 및 자진 퇴사에 영향을 미칩니다." />
+    <e k="ui_pmHelpTopic05Title" v="AI 도우미, 이동 및 FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="일반 AI 보조 업무를 시작하면 직원 선택 화면이 열립니다. 이용 가능한 직원만 선택할 수 있습니다. 한 직원은 동시에 여러 건의 업무를 맡을 수 없으며, 병가나 교육 기간 중에는 이용 불가능합니다.&#10;업무는 10초가 지나야 완료된 업무로 기록됩니다. 전문성 향상을 위해서는 실무 시간이 최소 3분 이상이어야 합니다.&#10;T 키나 메뉴 버튼을 눌러 운송 우선순위 설정을 열 수 있습니다. 여기서 어떤 직원이 운송 업무를 담당할지, 그리고 어떤 순서로 검토될지를 지정합니다. A에서 B로 이동하는 작업의 경우, 상단부터 하단 순서로 첫 번째로 가용한 직원이 선택됩니다. FollowMe 기능은 여전히 직원 선택 기능을 사용하며, 운송 업무로 간주됩니다." />
+    <e k="ui_pmHelpTopic06Title" v="경험과 업무에 미치는 영향" />
+    <e k="ui_pmHelpTopic06Body" v="경험치 획득&#10;– 경험치는 기록된 근무 시간을 통해 획득되며, 사용하지 않은 학습 시간은 그대로 유지됩니다.&#10;– 한 번의 근무당 최대 2 경험치를 획득할 수 있습니다.&#10;– 또한 월별 한도가 진행 속도를 제한합니다. 경험치가 높을수록 다음 경험치를 획득하는 데 더 오랜 시간이 걸립니다.&#10;효과&#10;– 주 전문 분야는 유효 경험치를 12점, 부 전문 분야는 6점씩 증가시키며, 최대치는 100점입니다.&#10;– 작업 속도 = 70% + 30% × 유효 경험치 / 100.&#10;– 추가 마모율은 최대 15%, 추가 자재 및 연료 소비량은 최대 10% × 부족한 유효 경험치 × 경제 계수입니다. 경제 계수는 0.75 / 1.00 / 1.25입니다.&#10;학습 시간 및 월간 한도&#10;– 경험치 0–24: 25분, 월간 한도 +1; 25–49: 50분, 0; 50–69: 100분, -1.&#10;– 경험치 70–84: 220분, -2; 85–94: 540분, -3; 95–100: 1080분, -4.&#10;– 일/월 기준 기본 한도: 1일 = 1, 2일 = 2, 3–4일 = 3, 5–6일 = 4, 7–9일 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. 실제 한도 = 기본 한도 + 조정치, 최소 1." />
+    <e k="ui_pmHelpTopic07Title" v="신뢰성, 질병 및 임무 중단" />
+    <e k="ui_pmHelpTopic07Body" v="신뢰도가 85 미만일 경우, 일시적인 성능 저하가 발생할 수 있습니다. 1분에 한 번씩 점검되며, 신뢰도가 낮아질수록 발생 확률은 최대 15%까지 증가합니다. 성능 저하는 30~90초 동안 지속되며, 성능을 4~15% 감소시키고, 3분이 지나야 다시 발생할 수 있습니다.&#10;질병 여부는 매일 확인됩니다. 질병에 걸린 직원은 당일 근무할 수 없으며, 진행 중인 임무는 종료됩니다. 한 달에 최대 월 일수 / 3을 반올림한 일수의 병가만 가능합니다. 신뢰도가 50 미만일 경우, 60초마다 임무 완전 중단 여부를 한 번씩 확인하며, 이 경우 해당 임무는 성공으로 간주되지 않고 사고 내역에 기록됩니다.&#10;질병/일 및 업무 중단 기준치: 0–20: 10% / 20%; 21–29: 8% / 15%; 30–40: 8% / 10%; 41–49: 6% / 5%; 50–60: 6% / 0%; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. 좋은 한 달을 기록하려면 최소 120분의 근무 시간, 사고 없음, 병가 없음, 야간 근무 시간 240분 미만이어야 하며, 이 경우 신뢰도 +1이 될 확률이 35 %입니다. 부정적 위험 요소는 합산되며 60 %로 제한됩니다." />
+    <e k="ui_pmHelpTopic08Title" v="충성심과 고용주 평판" />
+    <e k="ui_pmHelpTopic08Body" v="신입 직원은 대개 충성도 65로 시작합니다. 제때 지급되는 급여, 긴 근속 기간, 그리고 수용된 급여 요구는 충성도를 높이는 반면, 재정적 문제, 야간 근무, 거부되거나 오랫동안 미해결로 남아 있는 급여 요구는 충성도를 약화시킵니다. 22:00부터 06:00까지의 야간 근무는 기록되며, 120 게임 내 분부터 최대 4의 충성도와 1~2의 평판을 소모할 수 있습니다.&#10;충성도와 고용주 평판 간의 차이가 최소 15 / 30 / 50점일 경우, 매월 1 / 2 / 3점씩 차이가 좁혀집니다. 이벤트: 평판이 최소 40 이상일 때 급여 지급 시 충성도 +1; 지급 시 마이너스 -2; 사업장이 이전에 마이너스 상태였을 경우 -4; 소속 기간 3 / 6 / 12 / 24개월 시 +1 / +1 / +2 / +3; 요청 수락 시 +3; 거절 시 -5, 충성도가 40 미만일 경우 -7; 유예 기간이 지난 미결제 청구 건은 매월 -2씩 차감됩니다.&#10;충성도 0–5일 때 월별 자발적 퇴사 확률: 35%, 6–9일: 20%, 10–14일: 10%, 15일 이상부터는 정규 충성도 퇴사가 발생하지 않습니다. 고용주 평판은 60에서 시작하며 0–100까지 범위가 있고, 0–19는 ‘비판적’, 20–39는 ‘약함’, 40–59는 ‘견고함’, 60–79는 ‘좋음’, 80–100은 ‘매우 좋음’으로 분류됩니다. 이는 지원자 수와 질, 희망 연봉, 장기적인 충성도에 영향을 미칩니다." />
+    <e k="ui_pmHelpTopic09Title" v="급여, 급여 정산 및 급여 청구" />
+    <e k="ui_pmHelpTopic09Body" v="개별 기본 급여는 경력 및 신뢰도를 바탕으로 산정되며, 각 경력 구간 내에서 선형 보간됩니다. 신뢰도는 0.94에서 1.06 사이의 값에 곱해집니다. 지원자는 추가로 무작위 요소, 평판, 그리고 주 전공에 대해 +5%, 부 전공에 대해 +3%의 잠재적 전문성 가산치를 받게 됩니다.&#10;월 3일 근무 시 기본 급여: 경력 0–44: 1,800–2,200, 45–74: 2,200–2,700, 75–100: 2,700–3,300. 월급 = 기본급 × 월 길이 계수 × 경제 비용 계수, 10의 배수로 반올림. 개별 급여가 비활성화된 경우, 10단위로 나뉘는 100–100,000의 표준 기본 급여가 적용됩니다. 1–28일 기준 월 일수 계수: 0.58; 0.82; 1.00; 1.15; 1.29; 1.41; 1.53; 1.63; 1.73; 1.83; 1.91; 2.00; 2.08; 2.16; 2.24; 2.31; 2.38; 2.45; 2.52; 2.58; 2.65; 2.71; 2.77; 2.83; 2.89; 2.94; 3.00; 3.06.&#10;급여는 매월 말 급여 지급 시 정산됩니다. 이때 고용 관계가 종료되는 직원도 사전에 정산된 급여를 받게 됩니다. 전문 인력이나 프로는 급여 인상을 요청할 수 있습니다: 기본 성공 확률 70%, 충성도에 따라 55–85%로 제한됨; 이후 매월 성공 확률의 절반으로 재검토 가능. 수락 시 충성도 +3 및 평판 +1; 거절 시 충성도가 5 감소하며, 40 미만일 경우 7 감소하고, 3개월 동안 해고 및 신뢰도 위험이 증가합니다. G는 모든 미결 청구 사항을 공개합니다." />
+    <e k="ui_pmHelpTopic10Title" v="전공 분야 및 실무 역량 개발" />
+    <e k="ui_pmHelpTopic10Body" v="기본 규칙&#10;– 학습 카테고리는 총 8가지입니다: 토양 관리, 파종, 비료 주기, 병해충 방제, 수확, 운송, 기계 보호, 효율적인 작업 방식.&#10;– 진행 상황은 카테고리별로 별도로 저장됩니다. 습득한 전문 기술은 영구적으로 유지되며, 동시에 활성화될 수 있는 보너스는 최대 2개까지입니다.&#10;학습 진행 상황&#10;– 학습 단계는 240, 420, 600, 780분이며, 이후 각 단계는 180분씩 증가합니다.&#10;– 학습 계수는 1 + (경험-50)/250 + (신뢰도-50)/300이며, 0.75에서 1.30 사이로 제한됩니다. 여러 활동이 있을 경우, 학습 시간은 가중치를 적용하여 배분됩니다.&#10;활동 분류&#10;– 토양 관리: 쟁기, 경운기, 회전식 해머, 디스크 해머, 롤러 및 멀처.&#10;– 파종: 파종기 및 식재기, 종자.&#10;– 비료 시비: 광물질 비료, 액체 비료, 액분, 발효 잔여물 및 거름. 병해충 방제: 제초 작업.&#10;– 수확: 콤바인, 수확기, 베일 프레스, 예초기, 적재차 및 픽업. 운송: 트레일러, 하역 및 A에서 B로의 운송.&#10;보너스 및 활성화&#10;– 주 전문 분야: 유효 경험치 +12 및 기본 급여 +5%. 부 전문 분야: +6 및 +3%.&#10;– 두 전문 분야 모두 휴면 상태로 둘 수 있습니다. 습득한 휴면 전문 분야는 직원 1명당 농업 연도(3월~2월)에 한 번만 활성화할 수 있으며, 휴면 상태로 두는 것만으로는 이 권리가 소모되지 않습니다." />
+    <e k="ui_pmHelpTopic11Title" v="교육" />
+    <e k="ui_pmHelpTopic11Body" v="교육은 매월 첫째 날에만 시작되며, 해당 월의 1일인 경우 12:00까지 시작해야 합니다. 직원은 3월부터 다음 해 2월까지의 농업 연도 동안 단 한 번의 교육에만 참여할 수 있으며, 근무 중이거나 병가 중이어서는 안 됩니다. 해당 직원은 그 달 말까지 참여가 불가능하며, 진행 상황은 월이 바뀌어 교육을 완료한 시점에야 반영됩니다.&#10;교육 한 번을 이수하면 다음 전문 분야에 필요한 학습 시간의 30%를 획득하며, 최소 30분, 최대 미달 시간만큼만 획득할 수 있습니다. 각 카테고리는 매월 -20%에서 +20%의 가격 계수를 가지며, 25%의 확률로 정원이 마감됩니다. 비용은 교육 시작 시 즉시 공제되며, 현재 월급을 기준으로 산정됩니다.&#10;교육 비용 = 현재 월급 × 카테고리 계수 × 월별 수정계수. 계수: 토양 관리 75%, 파종 90%, 비료 시비 90%, 병해충 방제 100%, 수확 110%, 운송 65%, 기계 보호 120%, 효율적인 작업 방식 120%." />
+    <e k="ui_pmHelpTopic12Title" v="해고, 자진 퇴사 및 정년퇴직" />
+    <e k="ui_pmHelpTopic12Body" v="해고는 확인을 받아야 합니다. 1일/월의 경우, 다음 달 초부터 효력이 발생하려면 1일 12:00까지 해고 통보를 해야 합니다. 2일 이상인 경우, 기준일은 반월을 올림한 날짜, 즉 ceil(일수/월 ÷ 2)일입니다. 기준일이 지나면 종료 시점이 한 달 더 미뤄집니다.&#10;해고 통보가 이루어지면 충성도는 즉시 40, 신뢰도는 25씩 감소합니다. 직원은 원칙적으로 해고가 효력을 발휘하는 월말까지 근무할 수 있습니다. 해고 시 평판 손실: 1개월 미만 -12, 3개월 미만 -9, 6개월 미만 -7, 12개월 미만 -5, 24개월 미만 -3, 24개월 이상 -1; 같은 달에 해고가 한 번 더 발생할 때마다 추가로 4점이 차감됩니다.&#10;충성도가 0~14일 경우, 매월 자진 퇴사 가능성을 점검합니다. 급여 요구가 거절되면 그 확률이 일시적으로 5%포인트 증가할 수 있습니다. 자진 퇴사를 통보하면 월말에 효력이 발생하며 평판이 10점 감소합니다. 55세 생일 이후부터 은퇴를 예고할 수 있으며, 은퇴 위험률은 67세까지 약 80–90%로 상승하고, 68세에는 95%, 69세에는 98%, 70세에는 100%에 달합니다. 해당 인물은 해당 월 말까지 근무 가능합니다." />
+    <e k="ui_pmHelpTopic13Title" v="프로필, 활동 내역 및 통계" />
+    <e k="ui_pmHelpTopic13Body" v="지원자 프로필은 연령, 직업적 배경, 경력, 신뢰성, 충성심, 전문 분야 및 현재까지의 시장 경력을 하나의 역동적인 텍스트로 통합합니다. 직원 프로필은 근속 기간, 업무 배정, 교육 및 학습 진척도를 보완합니다.&#10;개인 이력에는 채용, 근무 시작 및 종료, 근무 중단, 병가, 교육, 전문 분야, 급여 요구 및 결정, 충성도와 신뢰도 변화, 운송 배정, 해고, 자진 퇴사, 정년 퇴직 및 고용 종료 등이 기록됩니다.&#10;직원 이력에는 배치 내역, 근무 시간, 교육, 운송 상태, 최근 사건, 병가 일수, 급여 청구, 배치 중단 및 현재까지 지급된 총 급여 등이 표시됩니다. 이 개요에는 또한 전체 사업장 차원의 총계 값, 즉 총 채용 인원, 해고 인원, 자진 퇴사자 및 퇴직자 수 등이 추가로 표시됩니다." />
+    <e k="ui_pmHelpTopic14Title" v="설정, 멀티플레이어 및 게임 기록" />
+    <e k="ui_pmHelpTopic14Body" v="설정은 각 게임 진행 상황에 따라 적용되며, 업무 성과, 인력 개발, 경제 및 급여로 구분됩니다. 게임플레이 효과는 이에 따른 경험치 효과를 활성화하며, 경험치 효과는 속도, 마모, 소모품 및 연료를 제어합니다. 인력 효과는 충성도 변화와 추가 근무 옵션을 활성화합니다. 경제 관련 효과는 개별 급여와 표준 월급을 활성화합니다.&#10;비활성화된 효과는 기존 인력 데이터를 소급하여 수정하지 않습니다. 해당 효과는 오직 향후 발생할 수 있는 영향을 차단하거나 허용할 뿐입니다. 개별 급여가 비활성화된 경우 표준 월급이 기본값으로 적용되며, 설정에서 직접 변경할 수 있습니다. 키 배정은 게임 설정에서 변경할 수 있습니다.&#10;멀티플레이어 모드에서는 직원, 지원자, 배치, 급여, 교육, 채용 및 연대기가 농장 단위로 관리 및 동기화됩니다. 서버가 결정권을 가지며, 권한이 있는 농장 관리자만 자신의 농장을 변경할 수 있습니다. 데이터는 게임 저장 파일의 helperPersonnel.xml에 저장되며, 로딩 시 진행 중인 배정은 가능한 한 복원됩니다. 기존 게임 저장 파일은 계속 사용할 수 있습니다. 이미 퇴사한 직원의 경우 과거 데이터가 불완전할 수 있습니다." />
+    <e k="ui_pmHelpTopic15Title" v="설정 및 첫 단계" />
+    <e k="ui_pmHelpTopic15Body" v="지원자 정보를 열어 나이, 배경, 가치관, 희망 연봉 및 보유한 전문 분야를 확인한 후 채용을 확정하세요. 지원자는 현재 농장의 직원이 되며, 이후의 모든 결정, 급여 계산 및 발전 사항은 해당 농장을 기준으로 적용됩니다.&#10;채용 후에는 먼저 짧고 적합한 업무를 계획하세요. 직원은 근무 가능 상태여야 합니다. 질병, 진행 중인 업무, 교육, 확정된 퇴사 또는 아직 유효한 모드 배정 등은 선발을 방해할 수 있습니다. ‘직원’ 탭에서 구체적인 사유를 확인할 수 있습니다.&#10;첫 채용 시 고용주 평판이 1포인트 상승합니다. 높은 수치가 항상 더 좋은 것은 아닙니다. 경험 많은 지원자는 대개 비용이 더 많이 드는 반면, 비용이 저렴한 신입은 성장과 교육에 더 많은 시간이 필요합니다." />
+    <e k="ui_pmHelpTopic16Title" v="업무 및 전문 분야 배정" />
+    <e k="ui_pmHelpTopic16Body" v="할당은 차량, 장비 및 (있는 경우) 살포된 자재를 바탕으로 결정됩니다. 직접적인 자재 할당이 우선 적용됩니다: 종자는 파종에, 제초제는 병해충 방제에, 광물질 비료, 액체 비료, 액분, 발효 잔여물 및 거름은 시비에 해당합니다. 석회는 자동으로 별도의 학습 범주로 인식되지 않습니다.&#10;차량 및 장비 분류: 쟁기, 경운기, 회전식 해머, 디스크 해머, 롤러 및 멀처는 토양 경작에 속합니다. 파종기 및 식재기는 파종에 속합니다. 농약 살포기는 명확한 자재가 없는 경우 비료 시비에 속합니다. 콤바인, 수확기, 베일 프레스, 예초기, 적재차 및 픽업 트럭은 수확에 속합니다. 트레일러 및 하역 가능한 차량은 운송에 속합니다.&#10;FollowMe는 이 실용적인 인식 기능을 추가로 확장하여, 분쇄기, 감자 및 사탕무 수확기, 뒤집기 기계, 뭉치기 기계, 거름 살포기, 액비 탱크, 심토 풀기 기계, 돌 수집기, 갈퀴 및 괭이까지 포함합니다. 모드 차량은 그 전문성이 명확한 분류를 제공하지 않는 경우 중립 상태를 유지할 수 있습니다. 그러면 잘못된 전문성 보너스가 약속되지 않습니다.&#10;기계 보호와 절약형 작업 방식은 일반적인 보너스입니다. 전자는 경험에 따른 추가 마모를 줄여주고, 후자는 추가 연료 및 자재 소비를 줄여줍니다. 선택한 작업은 선택 창에 표시되며, 이에 적합한 활성화된 전문 분야가 해당 창에서 강조 표시됩니다." />
+    <e k="ui_specialization_transport" v="교통" />
+    <e k="ui_transportMarker" v="교통" />
+    <e k="ui_pmStatusLine" v="상태: %s" />
+    <e k="ui_button_transport_manage_long" v="교통" />
+    <e k="ui_transportPriorityHeaderStatus" v="상태" />
+    <e k="ui_transportPriorityHeaderEnabled" v="교통" />
+    <e k="ui_pmTrainingCostHeader" v="비용" />
+    <e k="ui_pmHistoryCareerTransport" v="교통: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="총계" />
+    <e k="ui_pmMonth02" v="4월" />
+    <e k="ui_pmMonth06" v="8월" />
+    <e k="ui_pmMonth07" v="9월" />
+    <e k="ui_pmMonth09" v="11월" />
+    <e k="ui_pmMonth10" v="12월" />
+    <e k="ui_selectionAvailable" v="구입 가능" />
+    <e k="ui_selectionUnavailableSick" v="크랭크" />
+    <e k="ui_selectionUnavailableTraining" v="교육 중" />
+    <e k="ui_selectionUnavailableReserved" v="예약됨" />
+    <e k="ui_selectionUnavailableFieldwork" v="현장 조사" />
+    <e k="ui_selectionUnavailableOther" v="사용 불가" />
+    <e k="ui_selectionJobUnknown" v="작업 내용 미상" />
+    <e k="ui_selectionAgeLabel" v="Alter" />
+    <e k="ui_selectionJobsLabel" v="주문" />
+    <e k="ui_selectionSpeedLabel" v="작업 속도" />
+    <e k="ui_selectionAgeValue" v="%d년" />
+    <e k="ui_selectionVehicleLine" v="차량: %s" />
+    <e k="ui_selectionActivityLine" v="작업: %s" />
+    <e k="ui_selectionFieldLine" v="필드: %s" />
+    <e k="ui_selectionStatusLine" v="상태: %s" />
+    <e k="ui_button_specializationDeactivate" v="잠시 놔두기" />
+    <e k="ui_button_specializationActivate" v="로그인" />
+    <e k="ui_pmSpecializationActive" v="활성" />
+    <e k="ui_pmHelpContents" v="목차" />
     </elements>
 </l10n>

@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="Gödsling" />
         <e k="ui_specialization_plantProtection" v="Växtskydd" />
         <e k="ui_specialization_harvest" v="Skörd" />
-        <e k="ui_specialization_transport" v="Transport" />
+        1Transport2
         <e k="ui_specialization_machineCare" v="Maskinvård" />
         <e k="ui_specialization_resourceSaver" v="Resurssnål drift" />
         <e k="ui_specializationLearned" v="%s har utvecklat en specialisering: %s." />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Hantera transportuppdrag" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Hantera lönekrav" />
         <e k="input_HP_SELECT_CANCEL" v="Avbryt val av anställd" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="Frigör blockerad medarbetare" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="Frigör blockerad medarbetare" />
         <e k="ui_openWorkerView" v="Arbetare" />
         <e k="ui_openApplicantView" v="Sökande" />
         <e k="ui_backToOverview" v="Tillbaka till översikt" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="Arbetstid: %d jobb | %s | Månadslön: %s" />
         <e k="ui_button_transport_assign" v="Tilldela transport" />
         <e k="ui_button_transport_remove" v="Ta bort transport" />
-        <e k="ui_transportMarker" v="transport" />
+        1Transport2
         <e k="ui_transportActionAssigned" v="%s - tilldela transport." />
         <e k="ui_transportActionRemoved" v="%s - ta bort transport." />
         <e k="ui_transportNoDriverAssigned" v="transport: ingen ännu." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="Utbilda" />
         <e k="ui_pmStatusApplicant" v="Sökande" />
         <e k="ui_pmBirthLine" v="Född: %s" />
+        <e k="ui_pmRankLabel" v="Rang" />
         <e k="ui_pmOriginLine" v="Yrkesbakgrund: %s" />
         <e k="ui_pmStatsLine" v="Erfarenhet %d · Pålitlighet %d · Lojalitet %d" />
         <e k="ui_pmStatExperience" v="Erfarenhet" />
         <e k="ui_pmStatReliability" v="Pålitlighet" />
         <e k="ui_pmStatLoyalty" v="Lojalitet" />
         <e k="ui_pmWageLine" v="Lön: %s" />
-        <e k="ui_pmStatusLine" v="Status: %s" />
+        1Status: %s2
         <e k="ui_pmOrigin1" v="lantligt familjejordbruk" />
         <e k="ui_pmOrigin2" v="litet mjölkbruk" />
         <e k="ui_pmOrigin3" v="lantbruksentreprenad" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="PERSONAL" />
         <e k="ui_pmSettingsSectionEconomic" v="EKONOMI" />
         <e k="ui_button_transport_assign_long" v="Tilldela transportuppdrag" />
-        <e k="ui_button_transport_manage_long" v="Transport" />
+        1Transport2
         <e k="ui_transportPriorityTitle" v="Transportprioritet" />
         <e k="ui_transportPriorityIntro" v="Välj vilka medarbetare som får ta transportuppdrag och i vilken ordning de kontrolleras." />
         <e k="ui_transportPriorityHeaderPriority" v="Prioritet" />
         <e k="ui_transportPriorityHeaderEmployee" v="Medarbetare" />
-        <e k="ui_transportPriorityHeaderStatus" v="Status" />
-        <e k="ui_transportPriorityHeaderEnabled" v="Transport" />
+        1Status2
+        1Transport2
         <e k="ui_transportPriorityActive" v="Aktiv" />
         <e k="ui_transportPriorityInactive" v="Inte tilldelad" />
         <e k="ui_transportPriorityMoveUp" v="Flytta upp" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="kontorsyrke" />
         <e k="ui_status_retirementPending" v="går i pension vid månadens slut" />
         <e k="ui_retirementNotice" v="%s går i pension vid månadens slut." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="Specialiseringar förbättrar prestationen i rätt kategori. Utbildning börjar endast i början av en månad, kostar pengar och gör den anställde otillgänglig till månadens slut. Framsteg tillgodoräknas efter avslut. Erbjudanden och priser ändras varje månad; endast en utbildning är tillåten per jordbruksår från mars till februari. Inlärda specialiseringar finns kvar, men högst två bonusar är aktiva. Båda platserna kan vara inaktiva. En inlärd, inaktiv specialisering kan bara aktiveras en gång per anställd och jordbruksår." />
         <e k="ui_pmTrainingCategoryHeader" v="Inlärningskategori" />
         <e k="ui_pmTrainingProgressHeader" v="Framsteg mot specialisering" />
         <e k="ui_pmTrainingRunning" v="utbildning pågår" />
         <e k="ui_pmTrainingSelectCategory" v="Välj först en utbildningskategori" />
         <e k="ui_pmTrainingConfirm" v="Starta utbildning för %s i kategorin %s?" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="Specialisering: två aktiva platser upptagna · senast lärd: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Utbildning: vid 1 dag/månad endast till kl. 12.00 · välj en kategori i utbildningsmenyn · senast: %s" />
         <e k="ui_training_line_first_day_select" v="Utbildning: endast första dagen · välj en kategori i utbildningsmenyn · senast: %s" />
         <e k="ui_training_line_busy_select" v="Utbildning: inte möjlig under arbete · senast: %s" />
         <e k="ui_training_line_sick_select" v="Utbildning: inte möjlig under sjukdom · senast: %s" />
         <e k="ui_training_line_select_category" v="Utbildning: välj en kategori i utbildningsmenyn · senast: %s" />
-        <e k="ui_pmTrainingCostHeader" v="Kostnad" />
+        1Kostnader2
         <e k="ui_pmTrainingAdjustmentHeader" v="Rabatt/extra kostnad" />
         <e k="ui_pmTrainingNoPlaces" v="för närvarande inga lediga platser" />
         <e k="ui_pmTrainingNoPlacesMessage" v="Det finns för närvarande inga lediga platser på den här utbildningen." />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="Uppdrag: %d" />
         <e k="ui_pmHistoryCareerWorkTime" v="Arbetstid: %s" />
         <e k="ui_pmHistoryCareerTraining" v="Utbildning: %s" />
-        <e k="ui_pmHistoryCareerTransport" v="Transport: %s" />
+        1Transport: %s2
         <e k="ui_pmHistoryValueActive" v="aktiv" />
         <e k="ui_pmHistoryValueInactive" v="inte aktiv" />
         <e k="ui_monthlyRowApplicants" v="Sökande" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="Arbetstid" />
         <e k="ui_monthlyRowWages" v="Månadslöner" />
         <e k="ui_monthlyRowPayroll" v="Senaste löneutbetalning" />
-        <e k="ui_pmOverviewOverallHeader" v="TOTALT" />
+        1SAMMANLAGT2
         <e k="ui_pmOverviewTotalJobs" v="Uppdrag totalt" />
         <e k="ui_pmOverviewTotalWorkTime" v="Arbetstid totalt" />
         <e k="ui_pmOverviewTotalPayroll" v="Utbetalda löner totalt" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s avbröt det pågående uppdraget för att spontant ta en fika med sin flickvän." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s avbröt det pågående uppdraget för att spontant ta en fika med sin pojkvän." />
         <e k="ui_pmMonth01" v="mars" />
-        <e k="ui_pmMonth02" v="april" />
+        1april2
         <e k="ui_pmMonth03" v="maj" />
         <e k="ui_pmMonth04" v="juni" />
         <e k="ui_pmMonth05" v="juli" />
-        <e k="ui_pmMonth06" v="augusti" />
-        <e k="ui_pmMonth07" v="september" />
+        1augusti2
+        1september2
         <e k="ui_pmMonth08" v="oktober" />
-        <e k="ui_pmMonth09" v="november" />
-        <e k="ui_pmMonth10" v="december" />
+        1november2
+        1december2
         <e k="ui_pmMonth11" v="januari" />
         <e k="ui_pmMonth12" v="februari" />
         <e k="ui_pmPeriodMonthYear" v="%s, år %d" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="bra arbetsmånad" />
         <e k="ui_waitingForServerData" v="Väntar på serverdata" />
         <e k="ui_pmMenuPageHelp" v="Hjälp" />
-        <e k="ui_pmHelpIntro" v="Detaljerad hjälp i spelet för Personnel Management 1.1.4.0. Den medföljande ReadMe.pdf innehåller fler regler och beräkningar." />
+        <e k="ui_pmHelpIntro" v="Detaljerad hjälp i spelet för Personnel Management 1.1.5.0." />
         <e k="ui_pmHelpSectionQuickStart" v="Snabbstart och styrning|Öppna menyn med Ctrl + M. Byt flik med menyns sidkontroller. Använd A/D eller Vänster/Höger för att byta person, Mellanslag för att bekräfta, Esc för att gå tillbaka, T för transportprioritet och G för lönekrav." />
         <e k="ui_pmHelpSectionPeople" v="Sökande och medarbetare|Ett nytt sparat spel börjar med fyra sökande; högst åtta kan vara tillgängliga. Anställ från profilerna. Erfarenhet, pålitlighet och lojalitet går från 0 till 100. Status, lön, specialiseringar, krönika och totaler visas på medarbetarsidan." />
         <e k="ui_pmHelpSectionStats" v="Medarbetare och egenskaper|Erfarenhet påverkar fart, slitage och förbrukning; pålitlighet påverkar avbrott, sjukdom och avbrutna jobb; lojalitet påverkar lönekrav och uppsägningar. Medarbetarsidan visar också status, lön, specialiseringar, statistik och personlig krönika." />
@@ -529,81 +530,154 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Uppsägning, avsked och pension|Dessa avslut sker inte alltid genast utan slutförs vid månadsskiftet enligt tidsfristerna. En arbetande medarbetare kan inte avskedas direkt. Kommande ändringar visas i status och krönika." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive och Courseplay|Aktivera förare under Medarbetare / Transport och sortera prioriteten. AutoDrive använder den första lediga och blockerar start om ingen är ledig. En normal Courseplay-start öppnar valet. Startar Courseplay automatiskt efter AutoDrive behåller fordonet sin förare utan nytt val. Varje fordon måste behålla sin egen medarbetare." />
         <e k="ui_pmHelpSectionMultiplayer" v="Flera spelare och sparade spel|Personaldata och inställningar är separerade per gård. Servern validerar ändringar; bara behöriga gårdschefer får hantera sin gård. Medarbetare, aktiva tilldelningar och inställningar synkroniseras. Data sparas i helperPersonnel.xml i sparfilen." />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="Personalhantering · Välj jobb" />
+        <e k="ui_selectionPerformanceProfile" v="PRESTATIONSPROFIL" />
+        1Tillgänglig2
+        1Krank2
+        1Under utbildning2
+        1Reserverat2
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive-jobb" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay-jobb" />
+        1Fältarbete2
+        1Ej tillgängligt2
+        <e k="ui_selectionShowAll" v="Visa alla anställda" />
+        <e k="ui_selectionShowAvailable" v="Visa endast tillgängliga" />
+        <e k="ui_selectionFooterControls" v="A/D Byt · Mellanslag Välj · Tab Alla · Esc Tillbaka" />
+        1Uppdrag okänt2
+        1Ändra2
+        <e k="ui_selectionWageLabel" v="Månadslön" />
+        1Uppdrag2
+        1Arbetstakt2
+        1%d år2
         <e k="ui_selectionProfessionalDevelopment" v="Yrkesutveckling" />
         <e k="ui_selectionNoSpecializationProgress" v="Inga specialiseringsframsteg ännu" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="Ingen specialisering" />
+        1Fordon: %s2
+        1Uppdrag: %s2
+        1Fält: %s2
+        <e k="ui_selectionTargetLine" v="Transportmål: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP-jobbtyp: %s" />
+        1Status: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="Snabbstart och styrning" />
-        <e k="ui_pmHelpTopic01Body" v="Öppna menyn med Ctrl + M. Byt flik med menyns sidkontroller. Använd A/D eller Vänster/Höger för att byta person, Mellanslag för att bekräfta, Esc för att gå tillbaka, T för transportprioritet och G för lönekrav." />
-        <e k="ui_pmHelpTopic02Title" v="Sökande och medarbetare" />
-        <e k="ui_pmHelpTopic02Body" v="Ett nytt sparat spel börjar med fyra sökande; högst åtta kan vara tillgängliga. Anställ från profilerna. Erfarenhet, pålitlighet och lojalitet går från 0 till 100. Status, lön, specialiseringar, krönika och totaler visas på medarbetarsidan. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="Medarbetare och egenskaper" />
-        <e k="ui_pmHelpTopic03Body" v="Erfarenhet påverkar fart, slitage och förbrukning; pålitlighet påverkar avbrott, sjukdom och avbrutna jobb; lojalitet påverkar lönekrav och uppsägningar. Medarbetarsidan visar också status, lön, specialiseringar, statistik och personlig krönika." />
-        <e k="ui_pmHelpTopic04Title" v="Arbete och utveckling" />
-        <e k="ui_pmHelpTopic04Body" v="När ett vanligt AI-hjälparjobb startas öppnas medarbetarvalet. Bara tillgängliga medarbetare kan väljas och ingen kan utföra flera jobb samtidigt. Arbetstid bygger erfarenhet och specialisering. Erfarenhet påverkar fart, slitage och förbrukning; pålitlighet påverkar sänkningar, sjukdom och avbrott; lojalitet påverkar lönekonflikter och uppsägningar. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="Erfarenhet påverkar fart, slitage och förbrukning; pålitlighet påverkar avbrott, sjukdom och avbrutna jobb; lojalitet påverkar lönekrav och uppsägningar. Medarbetarsidan visar också status, lön, specialiseringar, statistik och personlig krönika." />
-        <e k="ui_pmHelpTopic06Title" v="Löner" />
-        <e k="ui_pmHelpTopic06Body" v="Löner bokförs vid månadsskiftet och beror på dagar per månad, ekonomisk svårighet och modinställningar. Medarbetare kan begära högre lön; kravet måste godkännas eller avslås i tid och kan påverka lojaliteten." />
-        <e k="ui_pmHelpTopic07Title" v="Utbildning" />
-        <e k="ui_pmHelpTopic07Body" v="Utbildning börjar bara i början av månaden, kostar pengar och blockerar medarbetaren till månadsslut. Slutförd utbildning förbättrar vald specialisering. Erbjudanden och tidigare utbildning visas under Utbildning och Medarbetare. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="Specialisering" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="Uppsägning, avsked och pension" />
-        <e k="ui_pmHelpTopic09Body" v="Dessa avslut sker inte alltid genast utan slutförs vid månadsskiftet enligt tidsfristerna. En arbetande medarbetare kan inte avskedas direkt. Kommande ändringar visas i status och krönika." />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive och Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="Aktivera förare under Medarbetare / Transport och sortera prioriteten. AutoDrive använder den första lediga och blockerar start om ingen är ledig. En normal Courseplay-start öppnar valet. Startar Courseplay automatiskt efter AutoDrive behåller fordonet sin förare utan nytt val. Varje fordon måste behålla sin egen medarbetare." />
-        <e k="ui_pmHelpTopic11Title" v="Flera spelare och sparade spel" />
-        <e k="ui_pmHelpTopic11Body" v="Personaldata och inställningar är separerade per gård. Servern validerar ändringar; bara behöriga gårdschefer får hantera sin gård. Medarbetare, aktiva tilldelningar och inställningar synkroniseras. Data sparas i helperPersonnel.xml i sparfilen." />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="Personaldata och inställningar är separerade per gård. Servern validerar ändringar; bara behöriga gårdschefer får hantera sin gård. Medarbetare, aktiva tilldelningar och inställningar synkroniseras. Data sparas i helperPersonnel.xml i sparfilen." />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="Öppna menyn med Ctrl + M. Byt flik med menyns sidkontroller. Använd A/D eller Vänster/Höger för att byta person, Mellanslag för att bekräfta, Esc för att gå tillbaka, T för transportprioritet och G för lönekrav. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="Frigör" />
-        <e k="ui_pmConfirmReleaseWorker" v="Frigör %s? Det är endast möjligt när servern inte hittar något aktivt arbete." />
-        <e k="ui_workerReleaseSuccess" v="Medarbetaren har frigjorts." />
-        <e k="ui_workerReleaseDeniedActive" v="Frigöring är inte möjlig: medarbetaren har fortfarande ett aktivt arbete." />
-        <e k="ui_workerReleaseDeniedAvailable" v="Frigöring behövs inte: medarbetaren är redan tillgänglig." />
-        <e k="ui_workerReleaseDeniedCheck" v="Frigöring är inte möjlig: arbetsstatusen kunde inte kontrolleras säkert." />
-        <e k="ui_workerReleaseDeniedPermission" v="Frigöring är inte möjlig: saknar behörighet eller ogiltig medarbetare." />
+        1Låta det vila2
+        1Logga in2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Inaktivera %s för %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Aktivera %s för %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="En ny specialisering kan bara aktiveras en gång per anställd och jordbruksår." />
+        <e k="ui_pmSpecializationSlotsFull" v="Inaktivera minst en aktiv specialisering innan du aktiverar en annan." />
+        1aktiv2
+        <e k="ui_pmSpecializationInactive" v="inlärd, inaktiv" />
+        <e k="ui_specializationActivatedNotice" v="%s använder specialiseringen %s igen." />
+        <e k="ui_specializationDeactivatedNotice" v="%s inaktiverar specialiseringen %s." />
+        1INNEHÅLL2
+        <e k="ui_pmHelpNavigation" v="Vänster/Höger: område · Upp/Ner: välj eller rulla · Page Up/Down: sida" />
+        1Snabbstart och användning2
+        1Personalhanteringen ersätter anonyma AI-assistenter med namngivna sökande och medarbetare. Varje medarbetare utvecklas på lång sikt, får en månadslön och kan ha olika styrkor och risker beroende på erfarenhet, pålitlighet, lojalitet och specialiseringar.&#10;Det egna menyn öppnas som standard med Ctrl + M. Den innehåller Översikt, Sökande, Medarbetare, Utbildning, Inställningar och Hjälp. Tangentbindningarna kan ändras i spelinställningarna.&#10;Standardtangentkombinationer: Byt person med A/D eller vänster-/högerpilen; bekräfta valet med mellanslagstangenten eller ett musklick; avbryt eller gå tillbaka med Esc; transport- och lönehantering med T respektive G. I fliken Hjälp växlar du mellan innehåll och artiklar med vänster-/högerpilen, väljer eller bläddrar med upp-/nedpilen och hoppar sida för sida med bild upp/ned.2
+        1Översikt och personalstyrka2
+        1Översikten sammanfattar gårdens aktuella läge: personal, tillgänglig personal, sökande och arbetsgivarrykte visas högst upp. Därefter visas pågående uppdrag med uppgifter om person, fordon, utrustning och arbetsuppgift.&#10;Rutan ”Ändringar” innehåller endast relevanta personalhändelser, det vill säga förändringar av arbetsgivarrykte, erfarenhet, pålitlighet, lojalitet, ålder eller specialisering. Varje meddelande anger orsak, berörd person och konsekvens; en post som sträcker sig över flera rader räknas fortfarande som ett enda meddelande.&#10;”Månadsrapport” och ”Totalt” visar aktuella och sammanlagda nyckeltal. Använd översikten för snabb uppdragplanering; detaljer, beslut och historik hör hemma på de enskilda ämnessidorna.2
+        1Arbetsmarknaden för arbetssökande och rekrytering2
+        1En ny omgång inleds med fyra sökande. Samtidigt kan högst åtta sökande finnas på marknaden. Vid varje månadsskifte slås upp till tre nya platser ut med tärning; chansen per plats är 15 % + 0,7 × arbetsgivarens anseende. Vid ett anseende på 60 blir det 57 %, vid 100 blir det 85 % per plats. Om marknaden är tom skapas minst en ny sökande.&#10;Sökande förblir garanterat tillgängliga under den månad de skapas. Efter den första månadsskiftningen är deras sannolikhet att lämna marknaden 10–30 % beroende på kvalitet, efter den andra 30–50 % och vid den tredje månadsskiftningen 100 %. Bra profiler kan försvinna tidigare eftersom deras kvalitet ökar sannolikheten att de lämnar marknaden.&#10;Sökande är 18–65 år gamla, har ett fast födelsedatum och fortsätter att åldras. Bakgrunder är familjejordbruk, mjölkboskapsverksamhet, entreprenadföretag, åkerbruk, blandjordbruk, logistik, lantbruksmaskinverkstad och kontorsyrke. Ålder och bakgrund påverkar framför allt erfarenhet och eventuella tidigare fackkunskaper.&#10;Löneönskemålet baseras på erfarenhet och pålitlighet, har en slumpmässig avvikelse på 96–106 % och påverkas av arbetsgivarens anseende. Lågt anseende höjer, högt anseende sänker önskemålet. Innan anställningen sker visas en bekräftelse; anställningen höjer anseendet med 1 poäng.2
+        1Medarbetarprofil, värderingar och status2
+        1Erfarenhet, pålitlighet och lojalitet skalan sträcker sig från 0 till 100. Siffran förblir tydligt synlig; staplar gör det möjligt att snabbt jämföra.&#10;Rangordningen baseras uteslutande på erfarenhet: hjälparbetare 0–44, fackarbetare 45–74, proffs 75–100. Erfarenheten avgör arbetshastighet, extra slitage och extra förbrukning. Pålitligheten påverkar kortvariga prestandaförsämringar, sjukdom, månatlig utveckling och risken för att uppdraget avbryts. Lojaliteten beskriver anknytningen till företaget och påverkar varningar, lönekonflikter och frivilliga uppsägningar.2
+        1AI-assistenter, transport och FollowMe2
+        1När man startar ett normalt AI-assistentsuppdrag öppnas medarbetarvalet. Endast tillgängliga medarbetare kan väljas. En medarbetare kan inte ta emot flera uppdrag samtidigt och är inte tillgänglig vid sjukdom eller utbildning.&#10;Ett uppdrag registreras först som slutfört efter 10 sekunder. För att göra framsteg inom specialiseringen måste det praktiska arbetet pågå i minst 3 minuter.&#10;Med T eller menyknappen öppnar du transportprioriteten. Där anger du vilka medarbetare som ska ta sig an transportuppdrag och i vilken ordning de ska granskas. Vid ett A-till-B-uppdrag väljs den första lediga medarbetaren uppifrån och ner. FollowMe använder fortfarande medarbetarvalsfönstret och räknas som transportarbete.2
+        1Erfarenhet och konsekvenser för arbetet2
+        1SAMLA ERFARENHET&#10;– Erfarenhet ackumuleras genom registrerad arbetstid; outnyttjade inlärningsminuter sparas.&#10;– Högst 2 erfarenhetspoäng kan samlas per enskilt uppdrag.&#10;– Dessutom begränsar en månadsgräns framstegen. Ju högre erfarenhet, desto längre tid tar det att få nästa poäng.&#10;EFFEKTER&#10;– En huvudspecialisering ökar den effektiva erfarenheten med 12 poäng, en andraspecialisering med 6; värdet kan högst uppgå till 100.&#10;– Arbetshastighet = 70 % + 30 % × effektiv erfarenhet / 100.&#10;– Extra slitage uppgår till högst 15 %, extra material- och bränsleförbrukning till högst 10 % × saknad effektiv erfarenhet × ekonomisk faktor. Den ekonomiska faktorn är 0,75 / 1,00 / 1,25.&#10;INLÄRNINGSTID OCH MÅNADSBEGRÄNSNING&#10;– Erfarenhet 0–24: 25 minuter, månadsgräns +1; 25–49: 50 minuter, 0; 50–69: 100 minuter, -1.&#10;– Erfarenhet 70–84: 220 minuter, -2; 85–94: 540 minuter, -3; 95–100: 1080 minuter, -4.&#10;– Grundgräns per dag/månad: 1 dag = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Faktisk gräns = grundgräns + justering, minst 1.2
+        1Tillförlitlighet, sjukdom och avbrutna insatser2
+        1Vid en tillförlitlighet under 85 kan korta prestandaförluster uppstå. Kontroll sker en gång per minut; sannolikheten ökar i takt med att tillförlitligheten sjunker, upp till maximalt 15 %. En prestandaförlust varar i 30–90 sekunder, minskar prestandan med 4–15 % och kan inte upprepas förrän efter ytterligare 3 minuter.&#10;Sjukdom kontrolleras dagligen. En sjuk medarbetare är inte tillgänglig den dagen; ett pågående uppdrag avslutas. Per månad är högst upprundade dagar per månad / 3 sjukdagar möjliga. Vid en tillförlitlighet under 50 kontrolleras det en gång efter 60 sekunder om uppdraget ska avbrytas helt; uppdraget räknas då inte som framgångsrikt och händelsen visas i loggen.&#10;Riktvärden för sjukdom/dag och avbrutet uppdrag: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. En bra månad kräver minst 120 arbetsminuter, inga incidenter, inga sjukdagar och färre än 240 nattarbetsminuter; då finns det 35 % chans till +1 i tillförlitlighet. Negativa risker summeras och begränsas till 60 %.2
+        1Lojalitet och arbetsgivarens anseende2
+        1Nya medarbetare börjar oftast med en lojalitet på omkring 65. Löner som betalas i tid, lång anställningstid och godkända lönekrav stärker lojaliteten; ekonomiska problem, nattarbete samt avslagna eller länge utestående lönekrav försvagar den. Nattarbete mellan kl. 22.00 och 06.00 registreras och kan kosta upp till 4 i lojalitet samt 1–2 i anseende från 120 speltimmar.&#10;Vid en skillnad mellan lojalitet och arbetsgivarens anseende på minst 15 / 30 / 50 poäng sker en månatlig utjämning med 1 / 2 / 3 poäng. Händelser: Lön utbetalas vid anseende på minst 40 +1 lojalitetspoäng; utbetalningen leder till minus 2; verksamheten var tidigare negativ -4; anställningstid 3 / 6 / 12 / 24 månader +1 / +1 / +2 / +3; Krav godkänt +3; avvisat -5, vid lojalitet under 40 -7; utestående krav efter en månads respit -2 per månad.&#10;Månatlig uppsägning på eget initiativ vid lojalitet 0–5: 35 %, 6–9: 20 %, 10–14: 10 %, från 15 ingen regelbunden lojalitetsuppsägning. Arbetsgivarens anseende börjar på 60, sträcker sig från 0–100 och klassificeras som kritiskt 0–19, svagt 20–39, stabilt 40–59, bra 60–79 eller mycket bra 80–100. Det påverkar antalet sökande och deras kvalitet, löneförväntningar samt långsiktig lojalitet.2
+        1Löner, löneavräkning och lönefordringar2
+        1Individuella grundlöner beräknas utifrån erfarenhet och pålitlighet och interpoleras linjärt inom varje erfarenhetsintervall. Pålitligheten multiplicerar värdet med en faktor mellan 0,94 och 1,06. Sökande får dessutom tillägg för slumpmässighet, anseende och eventuella specialiseringstillägg på +5 % för huvudspecialiseringen och +3 % för andraspecialiseringen.&#10;Grundlön vid 3 dagar/månad: Erfarenhet 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Månadslön = grundlön × månadslängdsfaktor × ekonomisk kostnadsfaktor, avrundat till närmaste 10. Om individuella löner är inaktiverade gäller standardgrundlönen 100–100 000 i steg om tio. Månadslängdfaktorer för 1–28 dagar: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Utbetalningen sker vid månadsskiftet som löneutbetalning. Även medarbetare vars anställning då upphör får den förfallna utbetalningen i förväg. En fackman eller proffs kan begära en höjning: Grundläggande chans 70 %, begränsad till 55–85 % på grund av lojalitet; senare kan detta prövas på nytt varje månad med halva chansen. Att acceptera ger +3 i lojalitet och +1 i anseende; att avvisa sänker lojaliteten med 5, under 40 med 7, och ökar risken för uppsägning och bristande pålitlighet under 3 månader. G öppnar alla utestående fordringar.2
+        1Specialiseringar och praktisk utveckling2
+        1GRUNDREGLER&#10;– Det finns åtta inlärningskategorier: jordbearbetning, sådd, gödsling, växtskydd, skörd, transport, skonsam hantering av maskiner och resurssnålt arbetssätt.&#10;– Framstegen sparas separat för varje kategori. Inlärda specialiseringar behålls permanent; högst två bonusar kan vara aktiva samtidigt.&#10;INLÄRNINGSFÖRSKOTT&#10;– Inlärningströsklarna ligger på 240, 420, 600 och 780 minuter; därefter ökar varje ytterligare tröskel med 180 minuter.&#10;– Inlärningsfaktorn är 1 + (erfarenhet-50)/250 + (tillförlitlighet-50)/300 och är begränsad till 0,75 till 1,30. Vid flera aktiviteter fördelas inlärningstiden viktat.&#10;INDELNING AV AKTIVITETER&#10;– Jordbearbetning: plog, kultivator, rotorkultivator, skivharv, vält och mulcher.&#10;– Sådd: Så- och planteringsmaskiner samt utsäde.&#10;– Gödning: Mineralgödsel, flytande gödsel, gödselvätska, jäsningsrester och stallgödsel. Växtskydd: Herbicidbehandlingar.&#10;– Skörd: Skördetröska, skärverk, balpressar, slåttermaskiner, lastvagnar och uppsamlare. Transport: Släpvagnar, lossning och A-till-B.&#10;BONUSAR OCH AKTIVERING&#10;– Huvudspecialisering: +12 effektiv erfarenhet och +5 % grundlön. Andra specialisering: +6 och +3 %.&#10;– Båda platserna får vara vilande. En inlärd vilande specialisering får endast aktiveras en gång per medarbetare och jordbruksår (mars–februari); att låta den vara vilande förbrukar inte denna rättighet.2
+        1Utbildningar2
+        1Utbildningar startar endast den första dagen i en månad; om det är en dag i månaden, senast kl. 12.00. En anställd får endast delta i en utbildning per jordbruksår, från mars till februari, och får varken vara i tjänst eller sjukskriven. Personen är inte tillgänglig fram till månadens slut; framstegen tillgodoräknas först vid avslutningen vid månadsskiftet.&#10;En utbildning ger 30 % av de inlärningsminuter som krävs för nästa specialisering, minst 30 minuter och aldrig mer än vad som återstår. Varje kategori har en månatlig prisfaktor på mellan -20 % och +20 % och är fullbokad med 25 % sannolikhet. Kostnaderna dras av omedelbart vid start och baseras på den aktuella månadslönen.&#10;Utbildningskostnader = aktuell månadslön × kategorifaktor × månadsmodifierare. Faktorer: jordbearbetning 75 %, sådd 90 %, gödsling 90 %, växtskydd 100 %, skörd 110 %, transport 65 %, skonsam hantering av maskiner 120 %, resurssnålt arbetssätt 120 %.2
+        1Uppsägning, frivillig uppsägning och pensionering2
+        1Uppsägningar måste bekräftas. Vid en dag/månad måste uppsägningen meddelas senast kl. 12.00 på dag 1 för att träda i kraft vid nästa månadsskifte. Vid två eller fler dagar infaller slutdatumet vid slutet av den avrundade halva månaden, dag ceil(dagar/månad ÷ 2). Efter slutdatumet skjuts slutdatumet upp med ytterligare en månad.&#10;När uppsägningen meddelas sjunker lojaliteten omedelbart med 40 och pålitligheten med 25. Medarbetaren förblir i princip tillgänglig för arbete fram till månadens slut. Anseendeförlust vid uppsägning: under 1 månad -12, under 3 -9, under 6 -7, under 12 -5, under 24 -3, från 24 månader -1; varje ytterligare uppsägning samma månad kostar ytterligare 4 poäng.&#10;Vid lojalitet 0–14 kontrolleras varje månad om det finns risk för att medarbetaren själv säger upp sig. Ett avvisat lönekrav kan tillfälligt öka risken med 5 procentenheter. En anmäld uppsägning från medarbetarens sida träder i kraft vid månadens slut och kostar 10 anseende. Från och med 55-årsdagen kan pensionering anmälas; risken stiger till cirka 80–90 % fram till 67 års ålder, uppgår till 95 % vid 68 år, 98 % vid 69 år och 100 % vid 70 år. Personen förblir tillgänglig fram till månadens slut.2
+        1Profiler, historik och statistik2
+        1Sökandeprofilerna sammanför ålder, yrkesbakgrund, erfarenhet, pålitlighet, lojalitet, specialiseringar och tid på marknaden till en dynamisk text. Medarbetarprofilerna kompletteras med anställningstid, uppdrag, utbildningar och lärandeprocesser.&#10;Den personliga kroniken kan omfatta anställning, uppdragets start- och slutdatum, avbrutna uppdrag, sjukdom, utbildningar, specialiseringar, lönekrav och beslut, förändringar i lojalitet och pålitlighet, transporttilldelningar samt uppsägning, frivillig uppsägning, pensionering och anställningens upphörande.&#10;Medarbetarhistoriken visar bland annat uppdrag, arbetstid, utbildning, transportstatus, senaste händelser, sjukdagar, lönekrav, avbrutna uppdrag och den totala lön som hittills har betalats ut. Översikten visar dessutom sammanlagda värden för hela verksamheten, såsom antal anställningar, uppsägningar, frivilliga avgångar och pensioneringar.2
+        1Inställningar, flerspelarläge och spelresultat2
+        1Inställningarna gäller per spelstatus och är indelade i arbetsprestanda, personalutveckling samt ekonomi och löner. Spelmekaniska effekter låser upp de beroende erfarenhetseffekterna; erfarenhetseffekter styr hastighet, slitage, förbrukningsmaterial och bränsle. Personaleffekter låser upp lojalitetsförändringar och alternativet för övertidsarbete. Ekonomiska effekter låser upp individuella löner och standardmånadslönen.&#10;Inaktiverade effekter ändrar inte befintliga personaluppgifter retroaktivt. De förhindrar eller tillåter uteslutande den respektive ytterligare effekten. Standardmånadslönen fungerar som basvärde när individuella löner är inaktiverade; den kan ändras direkt i inställningarna. Tangentbindningar kan ändras i spelinställningarna.&#10;I flerspelarläget hanteras och synkroniseras personal, sökande, uppdrag, löner, utbildningar, anställningar och historik per gård. Servern avgör; endast behöriga gårdschefer får ändra sin egen gård. Data finns i filen helperPersonnel.xml i spelsparningen och pågående tilldelningar återställs i möjligaste mån vid inläsning. Gamla spelsparningar förblir användbara; historiska uppgifter kan vara ofullständiga för anställda som redan har slutat.2
+        <e k="ui_button_emergency_release_worker" v="Frigör" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="Frigör %s? Det är endast möjligt när servern inte hittar något aktivt arbete." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="Medarbetaren har frigjorts." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="Frigöring är inte möjlig: medarbetaren har fortfarande ett aktivt arbete." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Frigöring behövs inte: medarbetaren är redan tillgänglig." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="Frigöring är inte möjlig: arbetsstatusen kunde inte kontrolleras säkert." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="Frigöring är inte möjlig: saknar behörighet eller ogiltig medarbetare." />
+    1Snabbstart och användning2
+    1Personalhanteringen ersätter anonyma AI-assistenter med namngivna sökande och medarbetare. Varje medarbetare utvecklas på lång sikt, får en månadslön och kan ha olika styrkor och risker beroende på erfarenhet, pålitlighet, lojalitet och specialiseringar.&#10;Det egna menyn öppnas som standard med Ctrl + M. Den innehåller Översikt, Sökande, Medarbetare, Utbildning, Inställningar och Hjälp. Tangentbindningarna kan ändras i spelinställningarna.&#10;Standardtangentkombinationer: Byt person med A/D eller vänster-/högerpilen; bekräfta valet med mellanslagstangenten eller ett musklick; avbryt eller gå tillbaka med Esc; transport- och lönehantering med T respektive G. I fliken Hjälp växlar du mellan innehåll och artiklar med vänster-/högerpilen, väljer eller bläddrar med upp-/nedpilen och hoppar sida för sida med bild upp/ned.2
+    1Översikt och personalstyrka2
+    1Översikten sammanfattar gårdens aktuella läge: medarbetare, tillgängliga medarbetare, sökande och arbetsgivarrykte visas högst upp. Därefter visas pågående uppdrag med uppgifter om person, fordon, utrustning och arbetsuppgift.&#10;Rutan ”Ändringar” innehåller endast relevanta personalhändelser, det vill säga förändringar av arbetsgivarrykte, erfarenhet, pålitlighet, lojalitet, ålder eller specialisering. Varje meddelande anger orsak, berörd person och konsekvens; en post som sträcker sig över flera rader räknas fortfarande som ett meddelande.&#10;”Månadsrapport” och ”Totalt” visar aktuella och sammanlagda nyckeltal. Använd översikten för snabb uppdragplanering; detaljer, beslut och historik hör hemma på de enskilda ämnessidorna.2
+    1Arbetsmarknaden för arbetssökande och rekrytering2
+    1En ny omgång inleds med fyra sökande. Samtidigt kan högst åtta sökande finnas på marknaden. Vid varje månadsskifte slås upp till tre nya platser ut med tärning; chansen per plats är 15 % + 0,7 × arbetsgivarens anseende. Vid ett anseende på 60 blir det 57 %, vid 100 blir det 85 % per plats. Om marknaden är tom skapas minst en ny sökande.&#10;Sökande förblir garanterat tillgängliga under den månad de skapas. Efter den första månadsskiftningen är deras sannolikhet att lämna marknaden 10–30 % beroende på kvalitet, efter den andra 30–50 % och vid den tredje månadsskiftningen 100 %. Bra profiler kan försvinna tidigare eftersom deras kvalitet ökar sannolikheten att de lämnar marknaden.&#10;Sökande är 18–65 år gamla, har ett fast födelsedatum och fortsätter att åldras. Bakgrunder är familjejordbruk, mjölkboskapsdrift, entreprenadföretag, åkerbruk, blandjordbruk, logistik, lantbruksmaskinverkstad och kontorsyrke. Ålder och bakgrund påverkar framför allt erfarenhet och eventuella tidigare fackkunskaper.&#10;Löneönskemålet baseras på erfarenhet och pålitlighet, har en slumpmässig avvikelse på 96–106 % och påverkas av arbetsgivarens anseende. Lågt anseende höjer, högt anseende sänker önskemålet. Innan anställningen sker visas en bekräftelse; anställningen höjer anseendet med 1 poäng.2
+    1Medarbetarprofil, värderingar och status2
+    1Erfarenhet, tillförlitlighet och lojalitet skalar från 0 till 100. Siffran förblir tydligt synlig; staplar gör det möjligt att snabbt jämföra.&#10;Rangordningen baseras uteslutande på erfarenhet: hjälparbetare 0–44, fackman 45–74, proffs 75–100. Erfarenheten avgör arbetshastighet, extra slitage och extra förbrukning. Pålitligheten påverkar kortvariga prestandaförsämringar, sjukdom, månatlig utveckling och risken för att uppdraget avbryts. Lojaliteten beskriver anknytningen till företaget och påverkar varningar, lönekonflikter och frivilliga uppsägningar.2
+    <e k="ui_pmHelpTopic05Title" v="AI-assistenter, transport och FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="När man startar ett normalt AI-assistentsuppdrag öppnas medarbetarvalet. Endast tillgängliga medarbetare kan väljas. En medarbetare kan inte ta emot flera uppdrag samtidigt och är inte tillgänglig vid sjukdom eller utbildning.&#10;Ett uppdrag registreras först som slutfört efter 10 sekunder. För att göra framsteg inom specialiseringen måste det praktiska arbetet pågå i minst 3 minuter.&#10;Med T eller menyknappen öppnar du transportprioriteten. Där anger du vilka medarbetare som ska ta sig an transportuppdrag och i vilken ordning de ska granskas. Vid ett A-till-B-uppdrag väljs den första lediga medarbetaren uppifrån och ner. FollowMe använder fortfarande medarbetarvalsfönstret och räknas som transportarbete." />
+    <e k="ui_pmHelpTopic06Title" v="Erfarenhet och konsekvenser för arbetet" />
+    <e k="ui_pmHelpTopic06Body" v="SAMLA ERFARENHET&#10;– Erfarenhet ackumuleras genom registrerad arbetstid; outnyttjade inlärningsminuter sparas.&#10;– Högst 2 erfarenhetspoäng kan samlas per enskilt uppdrag.&#10;– Dessutom begränsar en månadsgräns framstegen. Ju högre erfarenhet, desto längre tid tar det att få nästa poäng.&#10;EFFEKTER&#10;– En huvudspecialisering ökar den effektiva erfarenheten med 12 poäng, en andraspecialisering med 6; värdet kan högst uppgå till 100.&#10;– Arbetshastighet = 70 % + 30 % × effektiv erfarenhet / 100.&#10;– Extra slitage uppgår till högst 15 %, extra material- och bränsleförbrukning till högst 10 % × saknad effektiv erfarenhet × ekonomisk faktor. Den ekonomiska faktorn är 0,75 / 1,00 / 1,25.&#10;INLÄRNINGSTID OCH MÅNADSBEGRÄNSNING&#10;– Erfarenhet 0–24: 25 minuter, månadsgräns +1; 25–49: 50 minuter, 0; 50–69: 100 minuter, -1.&#10;– Erfarenhet 70–84: 220 minuter, -2; 85–94: 540 minuter, -3; 95–100: 1080 minuter, -4.&#10;– Grundgräns per dag/månad: 1 dag = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Faktisk gräns = grundgräns + justering, minst 1." />
+    <e k="ui_pmHelpTopic07Title" v="Tillförlitlighet, sjukdom och avbrutna insatser" />
+    <e k="ui_pmHelpTopic07Body" v="Vid en tillförlitlighet under 85 kan korta prestandaförluster uppstå. Kontroll sker en gång per minut; sannolikheten ökar i takt med att tillförlitligheten sjunker, upp till maximalt 15 %. En prestandaförlust varar i 30–90 sekunder, minskar prestandan med 4–15 % och kan inte upprepas förrän efter ytterligare 3 minuter.&#10;Sjukdom kontrolleras dagligen. En sjuk medarbetare är inte tillgänglig den dagen; ett pågående uppdrag avslutas. Per månad är högst upprundade dagar per månad / 3 sjukdagar möjliga. Vid en tillförlitlighet under 50 kontrolleras det en gång efter 60 sekunder om uppdraget ska avbrytas helt; uppdraget räknas då inte som framgångsrikt och händelsen visas i loggen.&#10;Riktvärden för sjukdom/dag och avbrutet uppdrag: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. En bra månad kräver minst 120 arbetsminuter, inga incidenter, inga sjukdagar och färre än 240 nattarbetsminuter; då finns det 35 % chans till +1 i tillförlitlighet. Negativa risker summeras och begränsas till 60 %." />
+    <e k="ui_pmHelpTopic08Title" v="Lojalitet och arbetsgivarens anseende" />
+    <e k="ui_pmHelpTopic08Body" v="Nya medarbetare börjar oftast med en lojalitet på omkring 65. Löner som betalas i tid, lång anställningstid och godkända lönekrav stärker lojaliteten; ekonomiska problem, nattarbete samt avslagna eller länge utestående lönekrav försvagar den. Nattarbete mellan kl. 22.00 och 06.00 registreras och kan kosta upp till 4 i lojalitet samt 1–2 i anseende från 120 speltimmar.&#10;Vid en skillnad mellan lojalitet och arbetsgivarens anseende på minst 15 / 30 / 50 poäng sker en månatlig utjämning med 1 / 2 / 3 poäng. Händelser: Lön utbetalas vid anseende på minst 40 +1 lojalitetspoäng; utbetalningen leder till minus 2; verksamheten var tidigare negativ -4; anställningstid 3 / 6 / 12 / 24 månader +1 / +1 / +2 / +3; Krav godkänt +3; avvisat -5, vid lojalitet under 40 -7; utestående krav efter en månads respit -2 per månad.&#10;Månatlig uppsägning på eget initiativ vid lojalitet 0–5: 35 %, 6–9: 20 %, 10–14: 10 %, från 15 ingen regelbunden lojalitetsuppsägning. Arbetsgivarens anseende börjar på 60, sträcker sig från 0–100 och klassificeras som kritiskt 0–19, svagt 20–39, stabilt 40–59, bra 60–79 eller mycket bra 80–100. Det påverkar antalet sökande och deras kvalitet, löneförväntningar samt långsiktig lojalitet." />
+    <e k="ui_pmHelpTopic09Title" v="Löner, löneavräkning och lönefordringar" />
+    <e k="ui_pmHelpTopic09Body" v="Individuella grundlöner beräknas utifrån erfarenhet och pålitlighet och interpoleras linjärt inom varje erfarenhetsintervall. Pålitligheten multiplicerar värdet med en faktor mellan 0,94 och 1,06. Sökande får dessutom tillägg för slumpmässighet, anseende och eventuella specialiseringstillägg på +5 % för huvudspecialiseringen och +3 % för andraspecialiseringen.&#10;Grundlön vid 3 dagar/månad: Erfarenhet 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Månadslön = grundlön × månadslängdsfaktor × ekonomisk kostnadsfaktor, avrundat till närmaste 10. Om individuella löner är inaktiverade gäller standardgrundlönen 100–100 000 i steg om tio. Månadslängdfaktorer för 1–28 dagar: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Utbetalningen sker vid månadsskiftet som löneutbetalning. Även medarbetare vars anställning då upphör får den förfallna utbetalningen i förväg. En fackman eller proffs kan begära en höjning: Grundläggande chans 70 %, begränsad till 55–85 % på grund av lojalitet; senare kan detta prövas på nytt varje månad med halva chansen. Att acceptera ger +3 i lojalitet och +1 i anseende; att avvisa sänker lojaliteten med 5, under 40 med 7, och ökar risken för uppsägning och bristande pålitlighet under 3 månader. G öppnar alla utestående fordringar." />
+    <e k="ui_pmHelpTopic10Title" v="Specialiseringar och praktisk utveckling" />
+    <e k="ui_pmHelpTopic10Body" v="GRUNDREGLER&#10;– Det finns åtta inlärningskategorier: jordbearbetning, sådd, gödsling, växtskydd, skörd, transport, skonsam hantering av maskiner och resurssnålt arbetssätt.&#10;– Framstegen sparas separat för varje kategori. Inlärda specialiseringar behålls permanent; högst två bonusar kan vara aktiva samtidigt.&#10;INLÄRNINGSFÖRSKOTT&#10;– Inlärningströsklarna ligger på 240, 420, 600 och 780 minuter; därefter ökar varje ytterligare tröskel med 180 minuter.&#10;– Inlärningsfaktorn är 1 + (erfarenhet-50)/250 + (tillförlitlighet-50)/300 och är begränsad till 0,75 till 1,30. Vid flera aktiviteter fördelas inlärningstiden viktat.&#10;INDELNING AV AKTIVITETER&#10;– Jordbearbetning: plog, kultivator, rotorkultivator, skivharv, vält och mulcher.&#10;– Sådd: Så- och planteringsmaskiner samt utsäde.&#10;– Gödning: Mineralgödsel, flytande gödsel, gödselvätska, jäsningsrester och stallgödsel. Växtskydd: Herbicidbehandlingar.&#10;– Skörd: Skördetröska, skärverk, balpressar, slåttermaskiner, lastvagnar och uppsamlare. Transport: Släpvagnar, lossning och A-till-B.&#10;BONUSAR OCH AKTIVERING&#10;– Huvudspecialisering: +12 effektiv erfarenhet och +5 % grundlön. Andra specialisering: +6 och +3 %.&#10;– Båda platserna får vara vilande. En inlärd vilande specialisering får endast aktiveras en gång per medarbetare och jordbruksår (mars–februari); att låta den vara vilande förbrukar inte denna rättighet." />
+    <e k="ui_pmHelpTopic11Title" v="Utbildningar" />
+    <e k="ui_pmHelpTopic11Body" v="Utbildningar startar endast den första dagen i en månad; om det är en dag i månaden, senast kl. 12.00. En anställd får endast delta i en utbildning per jordbruksår, från mars till februari, och får varken vara i tjänst eller sjukskriven. Personen är inte tillgänglig fram till månadens slut; framstegen tillgodoräknas först vid avslutningen vid månadsskiftet.&#10;En utbildning ger 30 % av de inlärningsminuter som krävs för nästa specialisering, minst 30 minuter och aldrig mer än vad som återstår. Varje kategori har en månatlig prisfaktor på mellan -20 % och +20 % och är fullbokad med 25 % sannolikhet. Kostnaderna dras av omedelbart vid start och baseras på den aktuella månadslönen.&#10;Utbildningskostnader = aktuell månadslön × kategorifaktor × månadsmodifierare. Faktorer: jordbearbetning 75 %, sådd 90 %, gödsling 90 %, växtskydd 100 %, skörd 110 %, transport 65 %, skonsam hantering av maskiner 120 %, resurssnålt arbetssätt 120 %." />
+    <e k="ui_pmHelpTopic12Title" v="Uppsägning, frivillig uppsägning och pensionering" />
+    <e k="ui_pmHelpTopic12Body" v="Uppsägningar måste bekräftas. Vid en dag/månad måste uppsägningen meddelas senast kl. 12.00 på dag 1 för att träda i kraft vid nästa månadsskifte. Vid två eller fler dagar infaller slutdatumet vid slutet av den avrundade halva månaden, dag ceil(dagar/månad ÷ 2). Efter slutdatumet skjuts slutdatumet upp med ytterligare en månad.&#10;När uppsägningen meddelas sjunker lojaliteten omedelbart med 40 och pålitligheten med 25. Medarbetaren förblir i princip tillgänglig för arbete fram till månadens slut. Anseendeförlust vid uppsägning: under 1 månad -12, under 3 -9, under 6 -7, under 12 -5, under 24 -3, från 24 månader -1; varje ytterligare uppsägning under samma månad kostar ytterligare 4 poäng.&#10;Vid lojalitet 0–14 kontrolleras varje månad om det finns risk för att medarbetaren själv säger upp sig. Ett avvisat lönekrav kan tillfälligt öka risken med 5 procentenheter. En anmäld uppsägning från medarbetarens sida träder i kraft vid månadens slut och kostar 10 anseende. Från och med 55-årsdagen kan pensionering anmälas; risken stiger till cirka 80–90 % fram till 67 års ålder, uppgår till 95 % vid 68 år, 98 % vid 69 år och 100 % vid 70 år. Personen förblir tillgänglig fram till månadens slut." />
+    <e k="ui_pmHelpTopic13Title" v="Profiler, historik och statistik" />
+    <e k="ui_pmHelpTopic13Body" v="Sökandeprofiler sammanför ålder, yrkesbakgrund, erfarenhet, pålitlighet, lojalitet, specialiseringar och tid på marknaden hittills till en dynamisk text. Medarbetarprofiler kompletteras med anställningstid, uppdrag, utbildningar och lärandeprocesser.&#10;Den personliga kroniken kan omfatta anställning, uppdragets start- och slutdatum, avbrutna uppdrag, sjukdom, utbildningar, specialiseringar, lönekrav och beslut, förändringar i lojalitet och pålitlighet, transporttilldelningar samt uppsägning, frivillig uppsägning, pensionering och anställningens upphörande.&#10;Medarbetarhistoriken visar bland annat uppdrag, arbetstid, utbildning, transportstatus, senaste händelser, sjukdagar, lönekrav, avbrutna uppdrag och den totala lön som hittills har betalats ut. Översikten visar dessutom sammanlagda värden för hela verksamheten, såsom antal anställningar, uppsägningar, frivilliga avgångar och pensioneringar." />
+    <e k="ui_pmHelpTopic14Title" v="Inställningar, flerspelarläge och spelresultat" />
+    <e k="ui_pmHelpTopic14Body" v="Inställningarna gäller per spelstatus och är indelade i arbetsprestanda, personalutveckling samt ekonomi och löner. Spelmekaniska effekter låser upp de beroende erfarenhetseffekterna; erfarenhetseffekter styr hastighet, slitage, förbrukningsmaterial och bränsle. Personaleffekter låser upp lojalitetsförändringar och alternativet för övertidsarbete. Ekonomiska effekter låser upp individuella löner och standardmånadslönen.&#10;Inaktiverade effekter ändrar inte befintliga personaluppgifter retroaktivt. De förhindrar eller tillåter uteslutande den respektive ytterligare effekten. Standardmånadslönen fungerar som grundvärde när individuella löner är inaktiverade; den kan ändras direkt i inställningarna. Tangentbindningar kan ändras i spelinställningarna.&#10;I flerspelarläget hanteras och synkroniseras personal, sökande, uppdrag, löner, utbildningar, anställningar och historik per gård. Servern avgör; endast behöriga gårdschefer får ändra sin egen gård. Data finns i filen helperPersonnel.xml i spelsparningen och pågående tilldelningar återställs i möjligaste mån vid inläsning. Gamla spelsparningar förblir användbara; historiska uppgifter kan vara ofullständiga för anställda som redan har slutat." />
+    <e k="ui_pmHelpTopic15Title" v="Inställningar och första stegen" />
+    <e k="ui_pmHelpTopic15Body" v="Öppna en sökande, kontrollera ålder, bakgrund, värderingar, löneönskemål och befintliga specialiseringar och bekräfta sedan anställningen. Sökanden blir anställd vid den aktuella gården; alla efterföljande beslut, löneutbetalningar och utvecklingar gäller för just den gården.&#10;Planera först in ett kort, lämpligt arbete efter anställningen. En anställd måste vara tillgänglig: sjukdom, pågående arbete, utbildning, en bekräftad uppsägning eller en fortfarande aktiv mod-tilldelning kan hindra valet. Fliken ”Anställda” visar den konkreta orsaken.&#10;Den första anställningen förbättrar arbetsgivarens anseende med en poäng. Höga värden är inte alltid automatiskt bättre: en erfaren sökande kostar oftast mer, medan en billigare nykomling behöver mer tid för utveckling och utbildning." />
+    <e k="ui_pmHelpTopic16Title" v="Arbetsuppgifter och specialisering" />
+    <e k="ui_pmHelpTopic16Body" v="Tilldelningen fastställs utifrån fordon, redskap och – i förekommande fall – det utspridda materialet. Direkt materialtilldelning har företräde: utsäde hör till sådd; ogräsmedel till växtskydd; mineralgödsel, flytande gödsel, gödselvätska, jäsningsrester och gödsel till gödsling. Kalk identifieras inte automatiskt som en egen inlärningskategori.&#10;Tilldelning av fordon och redskap: Plog, kultivator, rotoregg, skivegg, vält och mulcher hör till jordbearbetning. Så- och planteringsmaskiner hör till sådd. Fältsprutor klassificeras som gödsling om inget specifikt material anges. Skördetröskor, skärverk, balpressar, slåttermaskiner, lastvagnar och uppsamlare hör till skörd. Släpvagnar och urlastningsbara fordon hör till transport.&#10;FollowMe utökar den praktiska igenkänningen ytterligare med flishuggare, potatis- och betskördare, vändare, strängläggare, gödselspridare, gödselcisterner, underjordslösare, stensamlare, striglar och hackor. Mod-fordon kan förbli neutrala om deras specialisering inte ger någon entydig klassificering. Då utlovas ingen felaktig specialiseringsbonus.&#10;Maskinskydd och resurssnålt arbetssätt är allmänna bonusar: det förstnämnda minskar det erfarenhetsrelaterade extra slitaget, det sistnämnda den extra bränsle- och materialförbrukningen. Den valda aktiviteten visas i urvalsfönstret; en passande aktiv specialisering markeras där." />
+    <e k="ui_specialization_transport" v="Transport" />
+    <e k="ui_transportMarker" v="Transport" />
+    <e k="ui_pmStatusLine" v="Status: %s" />
+    <e k="ui_button_transport_manage_long" v="Transport" />
+    <e k="ui_transportPriorityHeaderStatus" v="Status" />
+    <e k="ui_transportPriorityHeaderEnabled" v="Transport" />
+    <e k="ui_pmTrainingCostHeader" v="Kostnader" />
+    <e k="ui_pmHistoryCareerTransport" v="Transport: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="SAMMANLAGT" />
+    <e k="ui_pmMonth02" v="april" />
+    <e k="ui_pmMonth06" v="augusti" />
+    <e k="ui_pmMonth07" v="september" />
+    <e k="ui_pmMonth09" v="november" />
+    <e k="ui_pmMonth10" v="december" />
+    <e k="ui_selectionAvailable" v="Tillgänglig" />
+    <e k="ui_selectionUnavailableSick" v="Krank" />
+    <e k="ui_selectionUnavailableTraining" v="Under utbildning" />
+    <e k="ui_selectionUnavailableReserved" v="Reserverat" />
+    <e k="ui_selectionUnavailableFieldwork" v="Fältarbete" />
+    <e k="ui_selectionUnavailableOther" v="Ej tillgängligt" />
+    <e k="ui_selectionJobUnknown" v="Uppdrag okänt" />
+    <e k="ui_selectionAgeLabel" v="Ändra" />
+    <e k="ui_selectionJobsLabel" v="Uppdrag" />
+    <e k="ui_selectionSpeedLabel" v="Arbetstakt" />
+    <e k="ui_selectionAgeValue" v="%d år" />
+    <e k="ui_selectionVehicleLine" v="Fordon: %s" />
+    <e k="ui_selectionActivityLine" v="Uppdrag: %s" />
+    <e k="ui_selectionFieldLine" v="Fält: %s" />
+    <e k="ui_selectionStatusLine" v="Status: %s" />
+    <e k="ui_button_specializationDeactivate" v="Låta det vila" />
+    <e k="ui_button_specializationActivate" v="Logga in" />
+    <e k="ui_pmSpecializationActive" v="aktiv" />
+    <e k="ui_pmHelpContents" v="INNEHÅLL" />
+    <e k="ui_pmHelpTopic01Title" v="Snabbstart och användning" />
+    <e k="ui_pmHelpTopic01Body" v="Personalhanteringen ersätter anonyma AI-assistenter med namngivna sökande och medarbetare. Varje medarbetare utvecklas på lång sikt, får en månadslön och kan ha olika styrkor och risker beroende på erfarenhet, pålitlighet, lojalitet och specialiseringar.&#10;Det egna menyn öppnas som standard med Ctrl + M. Den innehåller Översikt, Sökande, Medarbetare, Utbildning, Inställningar och Hjälp. Tangentbindningarna kan ändras i spelinställningarna.&#10;Standardtangentkombinationer: Byt person med A/D eller vänster-/högerpilen; bekräfta valet med mellanslagstangenten eller ett musklick; avbryt eller gå tillbaka med Esc; transport- och lönehantering med T respektive G. I fliken Hjälp växlar du mellan innehåll och artiklar med vänster-/högerpilen, väljer eller bläddrar med upp-/nedpilen och hoppar sida för sida med bild upp/ned." />
+    <e k="ui_pmHelpTopic02Title" v="Översikt och personalstyrka" />
+    <e k="ui_pmHelpTopic02Body" v="Översikten sammanfattar gårdens aktuella läge: personal, tillgänglig personal, sökande och arbetsgivarrykte visas högst upp. Därefter visas pågående uppdrag med uppgifter om person, fordon, utrustning och arbetsuppgift.&#10;Rutan ”Ändringar” innehåller endast relevanta personalhändelser, det vill säga förändringar av arbetsgivarrykte, erfarenhet, pålitlighet, lojalitet, ålder eller specialisering. Varje meddelande anger orsak, berörd person och konsekvens; en post som sträcker sig över flera rader räknas fortfarande som ett enda meddelande.&#10;”Månadsrapport” och ”Totalt” visar aktuella och sammanlagda nyckeltal. Använd översikten för snabb uppdragplanering; detaljer, beslut och historik hör hemma på de enskilda ämnessidorna." />
+    <e k="ui_pmHelpTopic03Title" v="Arbetsmarknaden för arbetssökande och rekrytering" />
+    <e k="ui_pmHelpTopic03Body" v="En ny omgång inleds med fyra sökande. Samtidigt kan högst åtta sökande finnas på marknaden. Vid varje månadsskifte slås upp till tre nya platser ut med tärning; chansen per plats är 15 % + 0,7 × arbetsgivarens anseende. Vid ett anseende på 60 blir det 57 %, vid 100 blir det 85 % per plats. Om marknaden är tom skapas minst en ny sökande.&#10;Sökande förblir garanterat tillgängliga under den månad de skapas. Efter den första månadsskiftningen är deras sannolikhet att lämna marknaden 10–30 % beroende på kvalitet, efter den andra 30–50 % och vid den tredje månadsskiftningen 100 %. Bra profiler kan försvinna tidigare eftersom deras kvalitet ökar sannolikheten att de lämnar marknaden.&#10;Sökande är 18–65 år gamla, har ett fast födelsedatum och fortsätter att åldras. Bakgrunder är familjejordbruk, mjölkboskapsverksamhet, entreprenadföretag, åkerbruk, blandjordbruk, logistik, lantbruksmaskinverkstad och kontorsyrke. Ålder och bakgrund påverkar framför allt erfarenhet och eventuella tidigare fackkunskaper.&#10;Löneönskemålet baseras på erfarenhet och pålitlighet, har en slumpmässig avvikelse på 96–106 % och påverkas av arbetsgivarens anseende. Lågt anseende höjer, högt anseende sänker önskemålet. Innan anställningen sker visas en bekräftelse; anställningen höjer anseendet med 1 poäng." />
+    <e k="ui_pmHelpTopic04Title" v="Medarbetarprofil, värderingar och status" />
+    <e k="ui_pmHelpTopic04Body" v="Erfarenhet, tillförlitlighet och lojalitet skalar från 0 till 100. Siffran förblir tydligt synlig; staplar gör det möjligt att snabbt jämföra.&#10;Rangordningen baseras uteslutande på erfarenhet: hjälparbetare 0–44, fackman 45–74, proffs 75–100. Erfarenheten avgör arbetshastighet, extra slitage och extra förbrukning. Pålitligheten påverkar kortvariga prestandaförsämringar, sjukdom, månatlig utveckling och risken för att uppdraget avbryts. Lojaliteten beskriver anknytningen till företaget och påverkar varningar, lönekonflikter och frivilliga uppsägningar." />
     </elements>
 </l10n>

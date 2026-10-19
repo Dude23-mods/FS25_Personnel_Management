@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="Trágyázás" />
         <e k="ui_specialization_plantProtection" v="Növényvédelem" />
         <e k="ui_specialization_harvest" v="Betakarítás" />
-        <e k="ui_specialization_transport" v="Szállítás" />
+        1Közlekedés2
         <e k="ui_specialization_machineCare" v="Gépkímélés" />
         <e k="ui_specialization_resourceSaver" v="Takarékos munkavégzés" />
         <e k="ui_specializationLearned" v="%s új szakosodást szerzett: %s." />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Szállítási feladatok kezelése" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Béremelési kérelmek kezelése" />
         <e k="input_HP_SELECT_CANCEL" v="Kiválasztás megszakítása" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="Blokkolt alkalmazott feloldása" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="Blokkolt alkalmazott feloldása" />
         <e k="ui_openWorkerView" v="Dolgozók" />
         <e k="ui_openApplicantView" v="Jelentkezők" />
         <e k="ui_backToOverview" v="Vissza az áttekintéshez" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="Munkaidő: %d munkák | %s | Havi fizetés: %s" />
         <e k="ui_button_transport_assign" v="Szállítás hozzárendelése" />
         <e k="ui_button_transport_remove" v="Szállítás levétele" />
-        <e k="ui_transportMarker" v="szállítás" />
+        1Közlekedés2
         <e k="ui_transportActionAssigned" v="%s - szállítás hozzárendelése." />
         <e k="ui_transportActionRemoved" v="%s - szállítás levétele." />
         <e k="ui_transportNoDriverAssigned" v="szállítás: még nincs." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="Képzés" />
         <e k="ui_pmStatusApplicant" v="Jelentkező" />
         <e k="ui_pmBirthLine" v="Született: %s" />
+        <e k="ui_pmRankLabel" v="Rang" />
         <e k="ui_pmOriginLine" v="Szakmai háttér: %s" />
         <e k="ui_pmStatsLine" v="Tapasztalat %d · Megbízhatóság %d · Lojalitás %d" />
         <e k="ui_pmStatExperience" v="Tapasztalat" />
         <e k="ui_pmStatReliability" v="Megbízhatóság" />
         <e k="ui_pmStatLoyalty" v="Lojalitás" />
         <e k="ui_pmWageLine" v="Bér: %s" />
-        <e k="ui_pmStatusLine" v="Állapot: %s" />
+        1Állapot: %s2
         <e k="ui_pmOrigin1" v="vidéki családi gazdaság" />
         <e k="ui_pmOrigin2" v="kis tejgazdaság" />
         <e k="ui_pmOrigin3" v="mezőgazdasági bérvállalkozás" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="SZEMÉLYZET" />
         <e k="ui_pmSettingsSectionEconomic" v="GAZDASÁG" />
         <e k="ui_button_transport_assign_long" v="Szállítási feladatok hozzárendelése" />
-        <e k="ui_button_transport_manage_long" v="Szállítás" />
+        1Közlekedés2
         <e k="ui_transportPriorityTitle" v="Szállítási prioritás" />
         <e k="ui_transportPriorityIntro" v="Állítsd be, mely dolgozók vállalhatnak szállítási feladatokat, és milyen sorrendben ellenőrizze őket a rendszer." />
         <e k="ui_transportPriorityHeaderPriority" v="Prioritás" />
         <e k="ui_transportPriorityHeaderEmployee" v="Dolgozó" />
-        <e k="ui_transportPriorityHeaderStatus" v="Állapot" />
-        <e k="ui_transportPriorityHeaderEnabled" v="Szállítás" />
+        1Állapot2
+        1Közlekedés2
         <e k="ui_transportPriorityActive" v="Aktív" />
         <e k="ui_transportPriorityInactive" v="Nincs beosztva" />
         <e k="ui_transportPriorityMoveUp" v="Feljebb" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="irodai foglalkozás" />
         <e k="ui_status_retirementPending" v="a hónap végén nyugdíjba vonul" />
         <e k="ui_retirementNotice" v="%s a hónap végén nyugdíjba vonul." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="A specializációk javítják a teljesítményt a megfelelő kategóriában. A képzés csak a hónap elején indul, pénzbe kerül, és a dolgozó a hónap végéig nem elérhető. A fejlődés a befejezéskor kerül jóváírásra. Az ajánlatok és árak havonta változnak; márciustól februárig mezőgazdasági évenként csak egy képzés engedélyezett. A tanult specializációk megmaradnak, de legfeljebb két bónusz aktív. Mindkét hely lehet inaktív. Egy tanult, inaktív specializáció alkalmazottanként és mezőgazdasági évenként csak egyszer aktiválható." />
         <e k="ui_pmTrainingCategoryHeader" v="Fejlődési terület" />
         <e k="ui_pmTrainingProgressHeader" v="Haladás a szakosodás felé" />
         <e k="ui_pmTrainingRunning" v="képzés folyamatban" />
         <e k="ui_pmTrainingSelectCategory" v="Először válassz képzési területet" />
         <e k="ui_pmTrainingConfirm" v="Elindítod %s képzését a(z) %s területen?" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="Specializáció: két aktív hely foglalt · utoljára tanult: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="Képzés: havi 1 napnál csak 12:00-ig · válassz területet a képzési menüben · legutóbb: %s" />
         <e k="ui_training_line_first_day_select" v="Képzés: csak az első napon · válassz területet a képzési menüben · legutóbb: %s" />
         <e k="ui_training_line_busy_select" v="Képzés: munka közben nem lehetséges · legutóbb: %s" />
         <e k="ui_training_line_sick_select" v="Képzés: betegség alatt nem lehetséges · legutóbb: %s" />
         <e k="ui_training_line_select_category" v="Képzés: válassz területet a képzési menüben · legutóbb: %s" />
-        <e k="ui_pmTrainingCostHeader" v="Költség" />
+        1Költségek2
         <e k="ui_pmTrainingAdjustmentHeader" v="Kedvezmény/felár" />
         <e k="ui_pmTrainingNoPlaces" v="jelenleg nincs szabad hely" />
         <e k="ui_pmTrainingNoPlacesMessage" v="Erre a képzésre jelenleg nincs szabad hely." />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="Munkák: %d" />
         <e k="ui_pmHistoryCareerWorkTime" v="Munkaidő: %s" />
         <e k="ui_pmHistoryCareerTraining" v="Képzés: %s" />
-        <e k="ui_pmHistoryCareerTransport" v="Szállítás: %s" />
+        1Közlekedés: %s2
         <e k="ui_pmHistoryValueActive" v="aktív" />
         <e k="ui_pmHistoryValueInactive" v="nem aktív" />
         <e k="ui_monthlyRowApplicants" v="Jelentkezők" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="Munkaidő" />
         <e k="ui_monthlyRowWages" v="Havi bérek" />
         <e k="ui_monthlyRowPayroll" v="Legutóbbi bérfizetés" />
-        <e k="ui_pmOverviewOverallHeader" v="ÖSSZESEN" />
+        1ÖSSZESEN2
         <e k="ui_pmOverviewTotalJobs" v="Összes munka" />
         <e k="ui_pmOverviewTotalWorkTime" v="Összes munkaidő" />
         <e k="ui_pmOverviewTotalPayroll" v="Összes kifizetett bér" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s megszakította a folyamatban lévő munkát, hogy spontán kávézzon a barátnőjével." />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s megszakította a folyamatban lévő munkát, hogy spontán kávézzon a barátjával." />
         <e k="ui_pmMonth01" v="március" />
-        <e k="ui_pmMonth02" v="április" />
+        1április2
         <e k="ui_pmMonth03" v="május" />
         <e k="ui_pmMonth04" v="június" />
         <e k="ui_pmMonth05" v="július" />
-        <e k="ui_pmMonth06" v="augusztus" />
-        <e k="ui_pmMonth07" v="szeptember" />
+        1augusztus2
+        1szeptember2
         <e k="ui_pmMonth08" v="október" />
-        <e k="ui_pmMonth09" v="november" />
-        <e k="ui_pmMonth10" v="december" />
+        1november2
+        1december2
         <e k="ui_pmMonth11" v="január" />
         <e k="ui_pmMonth12" v="február" />
         <e k="ui_pmPeriodMonthYear" v="%s, %d. év" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="jó munkahónap" />
         <e k="ui_waitingForServerData" v="Várakozás a szerveradatokra" />
         <e k="ui_pmMenuPageHelp" v="Súgó" />
-        <e k="ui_pmHelpIntro" v="A Personnel Management 1.1.4.0 részletes játékon belüli útmutatója. A mellékelt ReadMe.pdf további szabályokat és számításokat tartalmaz." />
+        <e k="ui_pmHelpIntro" v="A Personnel Management 1.1.5.0 részletes játékon belüli útmutatója." />
         <e k="ui_pmHelpSectionQuickStart" v="Gyors kezdés és vezérlés|A menüt a Ctrl + M nyitja meg. A fülek között a menü lapvezérlőivel válthatsz. Személyváltás: A/D vagy Bal/Jobb; megerősítés: Szóköz; vissza: Esc; szállítási prioritás: T; béremelési kérelmek: G." />
         <e k="ui_pmHelpSectionPeople" v="Jelentkezők és dolgozók|Egy új mentés négy jelentkezővel indul; legfeljebb nyolc lehet elérhető. A profiljukból veheted fel őket. A tapasztalat, megbízhatóság és hűség 0-100 közötti. Az állapot, bér, szakosodások, krónika és összesítések a dolgozói oldalon láthatók." />
         <e k="ui_pmHelpSectionStats" v="Dolgozók és tulajdonságok|A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a megszakítást, betegséget és korai leállást; a hűség a béremelési kérelmeket és felmondást befolyásolja. Az oldal állapotot, bért, szakosodást, statisztikát és személyes krónikát is mutat." />
@@ -529,81 +530,146 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="Felmondás, elbocsátás és nyugdíj|Ezek nem mindig azonnaliak, hanem a határidők szerint hónapváltáskor lépnek életbe. Dolgozó alkalmazott nem bocsátható el azonnal. A közelgő változások az állapotban és krónikában láthatók." />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive és Courseplay|A Dolgozók / Szállítás alatt jelöld ki a vezetőket és állíts prioritást. Az AutoDrive az első elérhetőt használja, nélküle nem indul. A normál Courseplay-indítás választást nyit. AutoDrive utáni automatikus indításkor minden jármű új választás nélkül megtartja saját vezetőjét." />
         <e k="ui_pmHelpSectionMultiplayer" v="Többjátékos mód és mentések|A személyzeti adatok és beállítások gazdaságonként külön vannak. A szerver ellenőrzi a változtatásokat; csak jogosult gazdaságvezetők kezelhetik a gazdaságukat. A dolgozók, aktív kijelölések és beállítások szinkronizálódnak. Az adatok a mentés helperPersonnel.xml fájljában vannak." />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="Személyzetkezelés · Feladat kiválasztása" />
+        <e k="ui_selectionPerformanceProfile" v="TELJESÍTMÉNYPROFIL" />
+        1Elérhető2
+        1Krank2
+        1Képzés alatt2
+        1Foglalt2
+        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive-feladat" />
+        <e k="ui_selectionUnavailableCourseplay" v="Courseplay-feladat" />
+        1Terepmunka2
+        1Nincs raktáron2
+        <e k="ui_selectionShowAll" v="Minden alkalmazott megjelenítése" />
+        <e k="ui_selectionShowAvailable" v="Csak elérhetők megjelenítése" />
+        <e k="ui_selectionFooterControls" v="A/D Váltás · Szóköz Kiválasztás · Tab Összes · Esc Vissza" />
+        1Megbízás ismeretlen2
+        1Alter2
+        <e k="ui_selectionWageLabel" v="Havi bér" />
+        1Megrendelések2
+        1Munkatempó2
+        1%d év2
         <e k="ui_selectionProfessionalDevelopment" v="Szakmai fejlődés" />
         <e k="ui_selectionNoSpecializationProgress" v="Még nincs specializációs előrehaladás" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="Nincs specializáció" />
+        1Jármű: %s2
+        1Megbízás: %s2
+        1Mező: %s2
+        <e k="ui_selectionTargetLine" v="Szállítási cél: %s" />
+        <e k="ui_selectionCourseplayLine" v="CP-feladattípus: %s" />
+        1Állapot: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="Gyors kezdés és vezérlés" />
-        <e k="ui_pmHelpTopic01Body" v="A menüt a Ctrl + M nyitja meg. A fülek között a menü lapvezérlőivel válthatsz. Személyváltás: A/D vagy Bal/Jobb; megerősítés: Szóköz; vissza: Esc; szállítási prioritás: T; béremelési kérelmek: G." />
-        <e k="ui_pmHelpTopic02Title" v="Jelentkezők és dolgozók" />
-        <e k="ui_pmHelpTopic02Body" v="Egy új mentés négy jelentkezővel indul; legfeljebb nyolc lehet elérhető. A profiljukból veheted fel őket. A tapasztalat, megbízhatóság és hűség 0-100 közötti. Az állapot, bér, szakosodások, krónika és összesítések a dolgozói oldalon láthatók. Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="Dolgozók és tulajdonságok" />
-        <e k="ui_pmHelpTopic03Body" v="A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a megszakítást, betegséget és korai leállást; a hűség a béremelési kérelmeket és felmondást befolyásolja. Az oldal állapotot, bért, szakosodást, statisztikát és személyes krónikát is mutat." />
-        <e k="ui_pmHelpTopic04Title" v="Munka és fejlődés" />
-        <e k="ui_pmHelpTopic04Body" v="Normál MI-segítő munka indításakor megjelenik a dolgozóválasztás. Csak elérhető dolgozó választható, és senki sem végezhet több munkát egyszerre. A munkaidő növeli a tapasztalatot és a szakosodást. A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a lassulást, betegséget és megszakítást; a hűség a bérvitát és felmondást befolyásolja. The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="A tapasztalat a sebességet, kopást és fogyasztást; a megbízhatóság a megszakítást, betegséget és korai leállást; a hűség a béremelési kérelmeket és felmondást befolyásolja. Az oldal állapotot, bért, szakosodást, statisztikát és személyes krónikát is mutat." />
-        <e k="ui_pmHelpTopic06Title" v="Bérek" />
-        <e k="ui_pmHelpTopic06Body" v="A bérek hónapváltáskor kerülnek levonásra, és a havi napoktól, gazdasági nehézségtől és modbeállításoktól függenek. A dolgozó emelést kérhet; ezt határidőn belül el kell fogadni vagy utasítani, és befolyásolhatja a hűséget." />
-        <e k="ui_pmHelpTopic07Title" v="Képzés" />
-        <e k="ui_pmHelpTopic07Body" v="Képzés csak hónap elején indulhat, pénzbe kerül, és hónap végéig lefoglalja a dolgozót. A teljesítés javítja a választott szakosodást. Az ajánlatok és előzmények a Képzés és Dolgozók részen láthatók. Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="Szakosodás" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="Felmondás, elbocsátás és nyugdíj" />
-        <e k="ui_pmHelpTopic09Body" v="Ezek nem mindig azonnaliak, hanem a határidők szerint hónapváltáskor lépnek életbe. Dolgozó alkalmazott nem bocsátható el azonnal. A közelgő változások az állapotban és krónikában láthatók." />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive és Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="A Dolgozók / Szállítás alatt jelöld ki a vezetőket és állíts prioritást. Az AutoDrive az első elérhetőt használja, nélküle nem indul. A normál Courseplay-indítás választást nyit. AutoDrive utáni automatikus indításkor minden jármű új választás nélkül megtartja saját vezetőjét." />
-        <e k="ui_pmHelpTopic11Title" v="Többjátékos mód és mentések" />
-        <e k="ui_pmHelpTopic11Body" v="A személyzeti adatok és beállítások gazdaságonként külön vannak. A szerver ellenőrzi a változtatásokat; csak jogosult gazdaságvezetők kezelhetik a gazdaságukat. A dolgozók, aktív kijelölések és beállítások szinkronizálódnak. Az adatok a mentés helperPersonnel.xml fájljában vannak." />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="A személyzeti adatok és beállítások gazdaságonként külön vannak. A szerver ellenőrzi a változtatásokat; csak jogosult gazdaságvezetők kezelhetik a gazdaságukat. A dolgozók, aktív kijelölések és beállítások szinkronizálódnak. Az adatok a mentés helperPersonnel.xml fájljában vannak." />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="A menüt a Ctrl + M nyitja meg. A fülek között a menü lapvezérlőivel válthatsz. Személyváltás: A/D vagy Bal/Jobb; megerősítés: Szóköz; vissza: Esc; szállítási prioritás: T; béremelési kérelmek: G. If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="Felszabadítás" />
-        <e k="ui_pmConfirmReleaseWorker" v="Felszabadítja %s alkalmazottat? Ez csak akkor lehetséges, ha a szerver nem észlel aktív munkát." />
-        <e k="ui_workerReleaseSuccess" v="Az alkalmazott felszabadítva." />
-        <e k="ui_workerReleaseDeniedActive" v="Felszabadítás nem lehetséges: az alkalmazottnak még aktív munkája van." />
-        <e k="ui_workerReleaseDeniedAvailable" v="Felszabadítás nem szükséges: az alkalmazott már elérhető." />
-        <e k="ui_workerReleaseDeniedCheck" v="Felszabadítás nem lehetséges: a munka állapotát nem lehetett biztonságosan ellenőrizni." />
-        <e k="ui_workerReleaseDeniedPermission" v="Felszabadítás nem lehetséges: nincs jogosultság vagy az alkalmazott érvénytelen." />
+        1Hagyjuk pihenni2
+        1Bejelentkezés2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Kikapcsolja ezt: %s — %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Aktiválja ezt: %s — %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="Új specializáció alkalmazottanként és mezőgazdasági évenként csak egyszer aktiválható." />
+        <e k="ui_pmSpecializationSlotsFull" v="Másik specializáció aktiválása előtt kapcsoljon ki legalább egy aktívat." />
+        1aktív2
+        <e k="ui_pmSpecializationInactive" v="tanult, inaktív" />
+        <e k="ui_specializationActivatedNotice" v="%s ismét használja a(z) %s specializációt." />
+        <e k="ui_specializationDeactivatedNotice" v="%s kikapcsolja a(z) %s specializációt." />
+        1TARTALOMJEGYZÉK2
+        <e k="ui_pmHelpNavigation" v="Bal/Jobb: terület · Fel/Le: kijelölés vagy görgetés · Page Up/Down: oldal" />
+        1Gyorsindítás és kezelés2
+        1A személyzeti menedzsment az anonim AI-segítőket névvel rendelkező pályázókkal és alkalmazottakkal váltja fel. Minden alkalmazott hosszú távon fejlődik, havi fizetést kap, és tapasztalata, megbízhatósága, lojalitása, valamint szakterületei alapján különböző erősségekkel és kockázatokkal rendelkezhet.&#10;A saját menü alapértelmezés szerint a Ctrl + M billentyűkombinációval nyitható meg. Tartalmazza az Áttekintés, Pályázók, Alkalmazottak, Képzés, Beállítások és Súgó menüpontokat. A billentyűkiosztás a játékbeállításokban módosítható.&#10;Alapértelmezett billentyűkiosztás: személy váltás A/D vagy bal/jobb nyíl; kiválasztás megerősítése szóköz vagy egérkattintás; megszakítás vagy visszalépés Esc; közlekedési és fizetéskezelés T vagy G. A Súgó fülön a bal/jobb nyíl a tartalom és a cikkek között vált, a fel/le nyíl választ vagy görget, a kép fel/le nyíl pedig oldalanként ugrik.2
+        1Áttekintés és létszám2
+        1Az áttekintés összefoglalja a vállalat jelenlegi helyzetét: a munkavállalók, a rendelkezésre álló munkavállalók, a jelentkezők és a munkáltatói hírnév szerepelnek a tetején. Alatta a folyamatban lévő megbízások jelennek meg a személy, a jármű, a berendezés és a tevékenység feltüntetésével.&#10;A „Változások” lap csak a releváns személyzeti eseményeket tartalmazza, vagyis a munkáltatói megítélés, a tapasztalat, a megbízhatóság, a lojalitás, az életkor vagy a szakterület változásait. Minden bejegyzés megnevezi az okot, az érintett személyt és a hatást; egy többsoros bejegyzés is egy bejegyzésnek számít.&#10;A „Havi jelentés” és az „Összesítés” az aktuális és az egész pályafutásra vonatkozó mutatókat mutatja. Használd az áttekintést a gyors bevetés-tervezéshez; a részletek, a döntések és a krónikák az egyes szakoldalakra tartoznak.2
+        1A munkaerőpiac és a munkaerő-felvétel2
+        1Egy új játékmenet négy pályázóval kezdődik. Egy időben legfeljebb nyolc pályázó lehet a piacon. Minden hónapváltáskor legfeljebb három új helyet sorsolnak ki; az esély helyenként 15 % + 0,7 × a munkáltató hírneve. 60-as hírnév esetén ez 57 %, 100-as hírnév esetén 85 % helyenként. Ha a piac üres, akkor legalább egy új pályázót generál a rendszer.&#10;A pályázók a létrehozás hónapjában biztosan elérhetőek maradnak. Az első hónapváltás után elvándorlási esélyük a minőségtől függően 10–30%, a második után 30–50%, a harmadik hónapváltáskor pedig 100%. A jó profilok korábban eltűnhetnek, mert minőségük növeli az elvándorlási esélyt.&#10;A pályázók 18–65 évesek, állandó születési dátummal rendelkeznek, és tovább öregednek. Hátterük lehet családi gazdaság, tejtermelő gazdaság, mezőgazdasági vállalkozás, szántóföldi gazdálkodás, vegyes gazdaság, logisztika, mezőgazdasági gépjavító műhely és irodai munkakör. Az életkor és a háttér elsősorban a tapasztalatot és az esetleges szakmai előismereteket befolyásolja.&#10;A fizetési igény a tapasztalaton és a megbízhatóságon alapul, 96–106%-os véletlenszerű eltérést kap, és a munkáltató hírneve is befolyásolja. Az alacsony hírnév növeli, a magas hírnév csökkenti az igényt. A felvétel előtt megerősítés jelenik meg; a felvétel 1 ponttal növeli a hírnevet.2
+        1Munkavállalói profil, értékek és státusz2
+        1A tapasztalat, a megbízhatóság és a lojalitás értéke 0 és 100 között mozog. A szám pontosan látható marad; a sávok lehetővé teszik a gyors összehasonlítást.&#10;A besorolás kizárólag a tapasztalat alapján történik: segédmunkás 0–44, szakember 45–74, profi 75–100. A tapasztalat határozza meg a munkavégzés sebességét, a többletkopást és a többletfogyasztást. A megbízhatóság befolyásolja a rövid távú teljesítménycsökkenéseket, a betegségeket, a havi fejlődést és a megbízás megszakításának kockázatát. A lojalitás a vállalathoz való kötődést írja le, és befolyásolja a figyelmeztetéseket, a fizetési vitákat és az önkéntes felmondásokat.2
+        1Mesterséges intelligencia-segítők, szállítás és FollowMe2
+        1Egy normál KI-segédmunka elindításakor megnyílik a munkatársak kiválasztási ablaka. Csak a rendelkezésre álló munkatársak választhatók ki. Egy munkatárs nem vállalhat egyszerre több megbízást, és betegség vagy képzés idején nem áll rendelkezésre.&#10;Egy bevetés csak 10 másodperc elteltével kerül rögzítésre befejezett megbízásként. A specializáció előrehaladásához a gyakorlati munkának legalább 3 percig kell tartania.&#10;A T gombbal vagy a menügombbal megnyithatod a szállítási prioritást. Itt állíthatod be, hogy mely munkatársak vállaljanak szállítási feladatokat, és milyen sorrendben legyenek ellenőrizve. Egy „A-ból-B-be” feladat esetén a rendszer fentről lefelé haladva választja ki az első szabad munkatársat. A FollowMe továbbra is a munkatárs-kiválasztást használja, és szállítási munkának számít.2
+        1Tapasztalatok és a munkára gyakorolt hatások2
+        1TAPASZTALAT GYŰJTÉSE&#10;– A tapasztalat a rögzített munkaidő alapján halmozódik fel; a fel nem használt tanulási percek megmaradnak.&#10;– Egy-egy megbízás után legfeljebb 2 tapasztalati pont szerezhető.&#10;– Ezen felül egy havi korlát is szab határt a fejlődésnek. Minél magasabb a tapasztalati szint, annál hosszabb időbe telik a következő pont megszerzése.&#10;HATÁSOK&#10;– Egy fő szakterület 12 ponttal, egy másodlagos szakterület 6 ponttal növeli a hatékony tapasztalatot; az érték legfeljebb 100 lehet.&#10;– Munka sebessége = 70 % + 30 % × hatékony tapasztalat / 100.&#10;– A kiegészítő kopás legfeljebb 15 %, a kiegészítő anyag- és üzemanyag-fogyasztás legfeljebb 10 % × hiányzó tényleges tapasztalat × gazdasági tényező. A gazdasági tényező 0,75 / 1,00 / 1,25.&#10;TANULÁSI IDŐ ÉS HAVI KORLÁT&#10;– 0–24 tapasztalati pont: 25 perc, havi korlát +1; 25–49: 50 perc, 0; 50–69: 100 perc, -1.&#10;– Tapasztalat 70–84: 220 perc, -2; 85–94: 540 perc, -3; 95–100: 1080 perc, -4.&#10;– Alapkorlát napok/hónap szerint: 1 nap = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Tényleges korlát = alapkorlát + kiigazítás, legalább 1.2
+        1Megbízhatóság, betegség és a bevetés megszakítása2
+        185 alatti megbízhatósági érték esetén rövid teljesítménycsökkenések fordulhatnak elő. A rendszer percenként egyszer ellenőrzi a helyzetet; a valószínűség a megbízhatóság csökkenésével nő, legfeljebb 15 %-ig. Egy teljesítménycsökkenés 30–90 másodpercig tart, 4–15 %-kal csökkenti a teljesítményt, és csak további 3 perc elteltével fordulhat elő újra.&#10;A betegséget naponta ellenőrzik. A beteg munkatárs aznap nem áll rendelkezésre; a folyamatban lévő bevetést lezárják. Havonta legfeljebb a hónap napjainak száma / 3 betegszabadságnap lehetséges (felfelé kerekítve). 50 alatti megbízhatóság esetén 60 másodperc elteltével egyszer ellenőrzik a bevetés teljes leállítását; a megbízás ilyenkor nem számít sikeresnek, és az esemény megjelenik a naplóban.&#10;Irányértékek betegség/nap és megbízás-megszakítás esetén: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. Egy jó hónaphoz legalább 120 munkaperc szükséges, incidensek nélkül, betegszabadság nélkül és kevesebb, mint 240 éjszakai munkaperc; ekkor 35 %-os esély van a megbízhatóság +1-es növekedésére. A negatív kockázatok összeadódnak, és 60 %-ra vannak korlátozva.2
+        1Hűség és a munkáltató hírneve2
+        1Az új munkatársak hűségi értéke általában 65 körül kezdődik. A pontosan kifizetett fizetések, a hosszú szolgálati idő és az elfogadott fizetésigények erősítik a kötődést; a pénzügyi problémák, az éjszakai munka, valamint az elutasított vagy hosszú ideje függőben lévő fizetésigények pedig gyengítik azt. A 22:00 és 06:00 közötti éjszakai munkát rögzítik, és 120 játékon belüli perctől kezdve akár 4 lojalitási pontot, valamint 1–2 hírnévpontot is levonhatnak.&#10;Ha a lojalitás és a munkáltatói hírnév közötti különbség legalább 15 / 30 / 50 pont, havonta 1 / 2 / 3 ponttal közelítik egymáshoz az értékeket. Események: A fizetés kifizetése legalább 40 hírnév esetén +1 hűségpontot jelent; a kifizetés -2 pontot von le; ha a vállalkozás korábban negatív volt, -4 pontot von le; 3 / 6 / 12 / 24 hónapos tagság esetén +1 / +1 / +2 / +3 pont; Követelés elfogadása +3; elutasítása -5, 40 alatti lojalitás esetén -7; nyitott követelés a türelmi hónap után havonta -2.&#10;Havi önkéntes felmondás 0–5-ös lojalitás esetén: 35 %, 6–9-es: 20 %, 10–14-es: 10 %, 15-től nincs szabályos lojalitásalapú felmondás. A munkáltatói megítélés 60-tól indul, 0–100 között mozog, és kritikus 0–19, gyenge 20–39, szilárd 40–59, jó 60–79 vagy nagyon jó 80–100. Befolyásolja a jelentkezők számát és minőségét, a fizetési elvárásokat és a hosszú távú lojalitást.2
+        1Fizetések, bérszámfejtés és bérkövetelések2
+        1Az egyéni alapfizetéseket a tapasztalat és a megbízhatóság alapján számítják ki, és minden tapasztalati sávon belül lineárisan interpolálják. A megbízhatóság 0,94 és 1,06 közötti szorzóval növeli az értéket. A jelentkezők emellett véletlenszerű, hírnév- és esetleges specializációs pótlékokat kapnak: +5 %-ot az elsődleges és +3 %-ot a másodlagos specializációért.&#10;Alapfizetés 3 nap/hónap esetén: Tapasztalat 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Havi fizetés = alapfizetés × havi hosszúsági tényező × gazdasági költségtényező, 10-es századra kerekítve. Ha az egyéni fizetések ki vannak kapcsolva, akkor a 100–100 000 közötti, tízes lépésekben növekvő standard alapfizetés érvényes. Havi hosszúsági tényezők 1–28 napra: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;A számla kifizetése a hónapváltáskor, a bérfizetéssel együtt történik. Azok a munkavállalók is, akiknek a munkaviszonyuk ekkor véget ér, előzetesen megkapják a járó fizetést. A szakember vagy a profi emelést kérhet: Alapvető esély 70 %, lojalitás miatt 55–85 %-ra korlátozva; később havonta újra megvizsgálható, feleakkora eséllyel. Az elfogadás +3 lojalitást és +1 tekintélyt jelent; az elutasítás 5-tel csökkenti a lojalitást, 40 alatt 7-tel, és 3 hónapra növeli a felmondási és a megbízhatósági kockázatokat. G megnyitja az összes nyitott követelést.2
+        1Szakterületek és gyakorlati fejlesztés2
+        1ALAPSZABÁLYOK&#10;– Nyolc tanulási kategória létezik: talajművelés, vetés, trágyázás, növényvédelem, betakarítás, szállítás, a gépek kímélése és a takarékos munkavégzés.&#10;– Az előrehaladás kategóriánként külön kerül mentésre. A megtanult specializációk véglegesen megmaradnak; egyszerre legfeljebb két bónusz lehet aktív.&#10;TANULÁSI ELŐREHALADÁS&#10;– A tanulási küszöbértékek 240, 420, 600 és 780 perc; ezt követően minden további küszöbérték 180 perccel emelkedik.&#10;– A tanulási tényező értéke: 1 + (tapasztalat – 50)/250 + (megbízhatóság – 50)/300, és 0,75 és 1,30 között van korlátozva. Több tevékenység esetén a tanulási idő súlyozottan oszlik el.&#10;A TEVÉKENYSÉGEK BESOROLÁSA&#10;– Talajművelés: eke, kultivátor, rotációs borona, tárcsás borona, henger és mulcsozó.&#10;– Vetés: vető- és ültetőgépek, valamint vetőmag.&#10;– Trágyázás: ásványi műtrágya, folyékony műtrágya, hígtrágya, erjesztési maradékok és szar. Növényvédelem: gyomirtási munkák.&#10;– Betakarítás: kombájn, vágóművek, bálázók, fűkaszák, rakodókocsik és felvevők. Szállítás: pótkocsik, kirakodás és A-ból-B-be szállítás.&#10;BÓNUSZOK ÉS AKTIVÁLÁS&#10;– Fő szakterület: +12 hatékony tapasztalat és +5 % alapfizetés. Második szakterület: +6 és +3 %.&#10;– Mindkét hely szüneteltethető. Egy megtanult, szüneteltetett szakterületet munkavállalónként és mezőgazdasági évenként (március–február) csak egyszer lehet aktiválni; a szüneteltetés nem meríti ki ezt a jogot.2
+        1Képzések2
+        1A képzések kizárólag a hónap első napján kezdődnek; ha az adott hónapban csak egy ilyen nap van, akkor legkésőbb 12:00-ig. Egy alkalmazott mezőgazdasági évenként (márciustól februárig) csak egy képzésen vehet részt, és közben nem állhat munkaviszonyban, illetve nem lehet beteg. Az illető a hónap végéig nem áll rendelkezésre; az elért haladás csak a hónapváltáskor, a képzés befejezésekor kerül jóváírásra.&#10;Egy képzés a következő specializációhoz szükséges tanulási percek 30%-át adja, de legalább 30 percet, és soha nem többet, mint amennyi még hiányzik. Minden kategóriának havi árfaktorja -20% és +20% között mozog, és 25%-os valószínűséggel teltházas. A költségeket a kezdéskor azonnal levonják, és azok az aktuális havi fizetésen alapulnak.&#10;Képzési költségek = aktuális havi fizetés × kategória-tényező × havi módosító. Tényezők: talajművelés 75 %, vetés 90 %, trágyázás 90 %, növényvédelem 100 %, betakarítás 110 %, szállítás 65 %, gépkímélés 120 %, takarékos munkavégzés 120 %.2
+        1Elbocsátás, önkéntes kilépés és nyugdíjazás2
+        1Az elbocsátásokat meg kell erősíteni. Egy napos/havi időszak esetén a felmondást az 1. napon 12:00 óráig kell kihirdetni, hogy a következő hónapváltáskor hatályba lépjen. Két vagy több nap esetén a határnap a felfelé kerekített fél hónap vége, azaz a ceil(napok/hónap ÷ 2) nap. A határnap után a hatálybalépés egy további hónappal elhalasztódik.&#10;A felmondás kihirdetésével a lojalitás azonnal 40 ponttal, a megbízhatóság pedig 25 ponttal csökken. A munkavállaló elvileg a hatályba lépés hónapjának végéig bevethető marad. Hírnévvesztés elbocsátás esetén: 1 hónap alatt -12, 3 hónap alatt -9, 6 hónap alatt -7, 12 hónap alatt -5, 24 hónap alatt -3, 24 hónap felett -1; minden további elbocsátás ugyanabban a hónapban további 4 pontba kerül.&#10;0–14 közötti lojalitás esetén havonta ellenőrzik a lehetséges önkéntes kilépés esélyét. Egy elutasított fizetésemelési kérelem ideiglenesen 5 százalékponttal növelheti ezt az esélyt. A bejelentett önkéntes kilépés a hónap végén lép hatályba, és 10 hírnévpontba kerül. Az 55. születésnaptól kezdve bejelenthető a nyugdíjazás; a kockázat 67 éves korig körülbelül 80–90 %-ra emelkedik, 68 évesen 95 %, 69 évesen 98 %, 70 évesen pedig 100 %. A személy a hónap végéig rendelkezésre áll.2
+        1Profilok, krónika és statisztikák2
+        1A pályázói profilok az életkort, a szakmai hátteret, a tapasztalatot, a megbízhatóságot, a lojalitást, a szakterületeket és a piacon eltöltött időt egyesítik egy dinamikus szöveggé. A munkavállalói profilok kiegészülnek a vállalatnál eltöltött idővel, a bevetésekkel, a képzésekkel és a tanulási előrehaladással.&#10;A személyes krónika rögzítheti a felvételt, a bevetés kezdetét és végét, a bevetés megszakításait, a betegségeket, a képzéseket, a szakterületeket, a fizetési igényeket és döntéseket, a lojalitás és a megbízhatóság változásait, a szállítási megbízásokat, valamint az elbocsátást, az önkéntes kilépést, a nyugdíjazást és a munkaviszony megszűnését.&#10;A munkavállalói pályafutás többek között a bevetéseket, a munkaidőt, a képzéseket, a szállítási státuszt, a legutóbbi eseményeket, a betegszabadságokat, a fizetési igényeket, a bevetés-megszakításokat és az eddig kifizetett teljes fizetést mutatja. Az áttekintés emellett telephelyszintű összesített értékeket is tartalmaz, például az eddig alkalmazottak számát, az elbocsátások számát, az önkéntes kilépések számát és a nyugdíjazások számát.2
+        1Beállítások, többjátékos mód és eredmények2
+        1A beállítások játékállásonként érvényesek, és a következő kategóriákba sorolhatók: munkateljesítmény, személyzeti fejlesztés, valamint gazdaság és fizetések. A játékmenetre gyakorolt hatások aktiválják a hozzájuk kapcsolódó tapasztalati hatásokat; a tapasztalati hatások pedig szabályozzák a sebességet, a kopást, a fogyóeszközöket és az üzemanyagot. A személyzeti hatások aktiválják a lojalitásváltozásokat és az utómunka opciót. A gazdasági hatások az egyéni fizetéseket és az alap havi fizetést aktiválják.&#10;A deaktivált hatások nem írják át visszamenőlegesen a meglévő személyzeti adatokat. Kizárólag a vonatkozó további hatást akadályozzák meg vagy teszik lehetővé. Az alap havi fizetés alapértékként szolgál, ha az egyéni fizetések deaktiválva vannak; ez közvetlenül a beállításokban módosítható. A gombkiosztás a játékbeállításokban módosítható.&#10;Többjátékos módban a személyzetet, a jelentkezőket, a beosztásokat, a fizetéseket, a képzéseket, a felvételeket és a krónikákat gazdaságonként kezelik és szinkronizálják. A szerver dönt; csak a jogosult gazdaságvezetők módosíthatják a saját gazdaságukat. Az adatok a játékállásban a helperPersonnel.xml fájlban találhatók, és a betöltéskor a folyamatban lévő hozzárendeléseket a lehető legnagyobb mértékben visszaállítják. A régi mentések továbbra is használhatók; a már kilépett alkalmazottak esetében a korábbi adatok hiányosak lehetnek.2
+        <e k="ui_button_emergency_release_worker" v="Felszabadítás" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="Felszabadítja %s alkalmazottat? Ez csak akkor lehetséges, ha a szerver nem észlel aktív munkát." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="Az alkalmazott felszabadítva." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="Felszabadítás nem lehetséges: az alkalmazottnak még aktív munkája van." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Felszabadítás nem szükséges: az alkalmazott már elérhető." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="Felszabadítás nem lehetséges: a munka állapotát nem lehetett biztonságosan ellenőrizni." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="Felszabadítás nem lehetséges: nincs jogosultság vagy az alkalmazott érvénytelen." />
+    <e k="ui_pmHelpTopic01Title" v="Gyorsindítás és kezelés" />
+    <e k="ui_pmHelpTopic01Body" v="A személyzeti menedzsment az anonim AI-segítőket névvel rendelkező pályázókkal és alkalmazottakkal váltja fel. Minden alkalmazott hosszú távon fejlődik, havi fizetést kap, és tapasztalata, megbízhatósága, lojalitása, valamint szakterületei alapján különböző erősségekkel és kockázatokkal rendelkezhet.&#10;A saját menü alapértelmezés szerint a Ctrl + M billentyűkombinációval nyitható meg. Tartalmazza az Áttekintés, Pályázók, Alkalmazottak, Képzés, Beállítások és Súgó menüpontokat. A billentyűkiosztás a játékbeállításokban módosítható.&#10;Alapértelmezett billentyűkiosztás: személy váltás A/D vagy bal/jobb nyíl; kiválasztás megerősítése szóköz vagy egérkattintás; megszakítás vagy visszalépés Esc; közlekedési és fizetéskezelés T vagy G. A Súgó fülön a bal/jobb nyíl a tartalom és a cikkek között vált, a fel/le nyíl választ vagy görget, a kép fel/le nyíl pedig oldalanként ugrik." />
+    <e k="ui_pmHelpTopic02Title" v="Áttekintés és létszám" />
+    <e k="ui_pmHelpTopic02Body" v="Az áttekintés összefoglalja a vállalat jelenlegi helyzetét: a munkavállalók, a rendelkezésre álló munkavállalók, a jelentkezők és a munkáltatói hírnév szerepelnek a tetején. Alatta a folyamatban lévő megbízások jelennek meg a személy, a jármű, a berendezés és a tevékenység feltüntetésével.&#10;A „Változások” lap csak a releváns személyzeti eseményeket tartalmazza, vagyis a munkáltatói megítélés, a tapasztalat, a megbízhatóság, a lojalitás, az életkor vagy a szakterület változásait. Minden bejegyzés megnevezi az okot, az érintett személyt és a hatást; egy többsoros bejegyzés is egy bejegyzésnek számít.&#10;A „Havi jelentés” és az „Összesítés” az aktuális és az egész pályafutásra vonatkozó mutatókat mutatja. Használd az áttekintést a gyors bevetés-tervezéshez; a részletek, a döntések és a krónikák az egyes szakoldalakra tartoznak." />
+    <e k="ui_pmHelpTopic03Title" v="A munkaerőpiac és a munkaerő-felvétel" />
+    <e k="ui_pmHelpTopic03Body" v="Egy új játékmenet négy pályázóval kezdődik. Egy időben legfeljebb nyolc pályázó lehet a piacon. Minden hónapváltáskor legfeljebb három új helyet sorsolnak ki; az esély helyenként 15 % + 0,7 × a munkáltató hírneve. 60-as hírnév esetén ez 57 %, 100-as hírnév esetén 85 % helyenként. Ha a piac üres, akkor legalább egy új pályázót generál a rendszer.&#10;A pályázók a létrehozás hónapjában biztosan elérhetőek maradnak. Az első hónapváltás után elvándorlási esélyük a minőségtől függően 10–30%, a második után 30–50%, a harmadik hónapváltáskor pedig 100%. A jó profilok korábban eltűnhetnek, mert minőségük növeli az elvándorlási esélyt.&#10;A pályázók 18–65 évesek, állandó születési dátummal rendelkeznek, és tovább öregednek. Hátterük lehet családi gazdaság, tejtermelő gazdaság, mezőgazdasági vállalkozás, szántóföldi gazdálkodás, vegyes gazdaság, logisztika, mezőgazdasági gépjavító műhely és irodai munkakör. Az életkor és a háttér elsősorban a tapasztalatot és az esetleges szakmai előismereteket befolyásolja.&#10;A fizetési igény a tapasztalaton és a megbízhatóságon alapul, 96–106%-os véletlenszerű eltérést kap, és a munkáltató hírneve is befolyásolja. Az alacsony hírnév növeli, a magas hírnév csökkenti az igényt. A felvétel előtt megerősítés jelenik meg; a felvétel 1 ponttal növeli a hírnevet." />
+    <e k="ui_pmHelpTopic04Title" v="Munkavállalói profil, értékek és státusz" />
+    <e k="ui_pmHelpTopic04Body" v="A tapasztalat, a megbízhatóság és a lojalitás értéke 0 és 100 között mozog. A szám pontosan látható marad; a sávok lehetővé teszik a gyors összehasonlítást.&#10;A besorolás kizárólag a tapasztalat alapján történik: segédmunkás 0–44, szakember 45–74, profi 75–100. A tapasztalat határozza meg a munkavégzés sebességét, a többletkopást és a többletfogyasztást. A megbízhatóság befolyásolja a rövid távú teljesítménycsökkenéseket, a betegségeket, a havi fejlődést és a megbízás megszakításának kockázatát. A lojalitás a vállalathoz való kötődést írja le, és befolyásolja a figyelmeztetéseket, a fizetési vitákat és az önkéntes felmondásokat." />
+    <e k="ui_pmHelpTopic05Title" v="Mesterséges intelligencia-segítők, szállítás és FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="Egy normál KI-segédmunka elindításakor megnyílik a munkatársak kiválasztási ablaka. Csak a rendelkezésre álló munkatársak választhatók ki. Egy munkatárs nem vállalhat egyszerre több megbízást, és betegség vagy képzés idején nem áll rendelkezésre.&#10;Egy bevetés csak 10 másodperc elteltével kerül rögzítésre befejezett megbízásként. A specializáció előrehaladásához a gyakorlati munkának legalább 3 percig kell tartania.&#10;A T gombbal vagy a menügombbal megnyithatod a szállítási prioritást. Itt állíthatod be, hogy mely munkatársak vállaljanak szállítási feladatokat, és milyen sorrendben legyenek ellenőrizve. Egy „A-ból-B-be” feladat esetén a rendszer fentről lefelé haladva választja ki az első szabad munkatársat. A FollowMe továbbra is a munkatárs-kiválasztást használja, és szállítási munkának számít." />
+    <e k="ui_pmHelpTopic06Title" v="Tapasztalatok és a munkára gyakorolt hatások" />
+    <e k="ui_pmHelpTopic06Body" v="TAPASZTALAT GYŰJTÉSE&#10;– A tapasztalat a rögzített munkaidő alapján halmozódik fel; a fel nem használt tanulási percek megmaradnak.&#10;– Egy-egy megbízás után legfeljebb 2 tapasztalati pont szerezhető.&#10;– Ezen felül egy havi korlát is szab határt a fejlődésnek. Minél magasabb a tapasztalati szint, annál hosszabb időbe telik a következő pont megszerzése.&#10;HATÁSOK&#10;– Egy fő szakterület 12 ponttal, egy másodlagos szakterület 6 ponttal növeli a hatékony tapasztalatot; az érték legfeljebb 100 lehet.&#10;– Munka sebessége = 70 % + 30 % × hatékony tapasztalat / 100.&#10;– A kiegészítő kopás legfeljebb 15 %, a kiegészítő anyag- és üzemanyag-fogyasztás legfeljebb 10 % × hiányzó tényleges tapasztalat × gazdasági tényező. A gazdasági tényező 0,75 / 1,00 / 1,25.&#10;TANULÁSI IDŐ ÉS HAVI KORLÁT&#10;– 0–24 tapasztalati pont: 25 perc, havi korlát +1; 25–49: 50 perc, 0; 50–69: 100 perc, -1.&#10;– Tapasztalat 70–84: 220 perc, -2; 85–94: 540 perc, -3; 95–100: 1080 perc, -4.&#10;– Alapkorlát napok/hónap szerint: 1 nap = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Tényleges korlát = alapkorlát + kiigazítás, legalább 1." />
+    <e k="ui_pmHelpTopic07Title" v="Megbízhatóság, betegség és a bevetés megszakítása" />
+    <e k="ui_pmHelpTopic07Body" v="85 alatti megbízhatósági érték esetén rövid teljesítménycsökkenések fordulhatnak elő. A rendszer percenként egyszer ellenőrzi a helyzetet; a valószínűség a megbízhatóság csökkenésével nő, legfeljebb 15 %-ig. Egy teljesítménycsökkenés 30–90 másodpercig tart, 4–15 %-kal csökkenti a teljesítményt, és csak további 3 perc elteltével fordulhat elő újra.&#10;A betegséget naponta ellenőrzik. A beteg munkatárs aznap nem áll rendelkezésre; a folyamatban lévő bevetést lezárják. Havonta legfeljebb a hónap napjainak száma / 3 betegszabadságnap lehetséges (felfelé kerekítve). 50 alatti megbízhatóság esetén 60 másodperc elteltével egyszer ellenőrzik a bevetés teljes leállítását; a megbízás ilyenkor nem számít sikeresnek, és az eset megjelenik a naplóban.&#10;Irányértékek betegség/nap és megbízás-megszakítás esetén: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. Egy jó hónaphoz legalább 120 munkaperc szükséges, incidensek nélkül, betegszabadság nélkül és kevesebb, mint 240 éjszakai munkaperc; ekkor 35 %-os esély van a megbízhatóság +1-es növekedésére. A negatív kockázatok összeadódnak, és 60 %-ra vannak korlátozva." />
+    <e k="ui_pmHelpTopic08Title" v="Hűség és a munkáltató hírneve" />
+    <e k="ui_pmHelpTopic08Body" v="Az új munkatársak hűségi értéke általában 65 körül kezdődik. A pontosan kifizetett fizetések, a hosszú szolgálati idő és az elfogadott fizetésigények erősítik a kötődést; a pénzügyi problémák, az éjszakai munka, valamint az elutasított vagy hosszú ideje függőben lévő fizetésigények pedig gyengítik azt. A 22:00 és 06:00 közötti éjszakai munkát rögzítik, és 120 játékon belüli perctől kezdve akár 4 lojalitási pontot, valamint 1–2 hírnévpontot is levonhatnak.&#10;Ha a lojalitás és a munkáltatói hírnév közötti különbség legalább 15 / 30 / 50 pont, havonta 1 / 2 / 3 ponttal közelítik egymáshoz az értékeket. Események: A fizetés kifizetése legalább 40 hírnév esetén +1 hűségpontot jelent; a kifizetés -2 pontot von le; ha a vállalkozás korábban negatív volt, -4 pontot von le; 3 / 6 / 12 / 24 hónapos tagság esetén +1 / +1 / +2 / +3 pont; Kérelem elfogadása +3; elutasítása -5, 40 alatti lojalitás esetén -7; nyitott követelés a türelmi hónap után havonta -2.&#10;Havi önkéntes felmondás 0–5-ös lojalitás esetén: 35 %, 6–9-es: 20 %, 10–14-es: 10 %, 15-től nincs szabályos lojalitási felmondás. A munkáltatói megítélés 60-tól indul, 0–100 között mozog, és kritikus 0–19, gyenge 20–39, szilárd 40–59, jó 60–79 vagy nagyon jó 80–100. Befolyásolja a jelentkezők számát és minőségét, a fizetési elvárásokat és a hosszú távú lojalitást." />
+    <e k="ui_pmHelpTopic09Title" v="Fizetések, bérszámfejtés és fizetési követelések" />
+    <e k="ui_pmHelpTopic09Body" v="Az egyéni alapfizetéseket a szakmai tapasztalat és a megbízhatóság alapján számítják ki, és minden tapasztalati sávon belül lineárisan interpolálják. A megbízhatóság 0,94 és 1,06 közötti szorzóval növeli az értéket. A jelentkezők emellett véletlenszerű, hírnév- és esetleges specializációs pótlékokat kapnak: +5 %-ot az elsődleges és +3 %-ot a másodlagos specializációért.&#10;Alapfizetés 3 nap/hónap esetén: Tapasztalat 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Havi fizetés = alapfizetés × havi hosszúsági tényező × gazdasági költségtényező, 10-es századra kerekítve. Ha az egyéni fizetések ki vannak kapcsolva, akkor a 100–100 000 közötti, tízes lépésekben növekvő standard alapfizetés érvényes. Havi hosszúsági tényezők 1–28 napra: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;A számla kifizetése a hónapváltáskor, a bérfizetéssel együtt történik. Azok a munkavállalók is, akiknek a munkaviszonyuk ekkor véget ér, előzetesen megkapják a járó kifizetést. A szakember vagy profi emelést kérhet: Alapvető esély 70 %, lojalitás miatt 55–85 %-ra korlátozva; később havonta újra megvizsgálható, feleakkora eséllyel. Az elfogadás +3 lojalitást és +1 tekintélyt jelent; az elutasítás 5-tel csökkenti a lojalitást, 40 alatt 7-tel, és 3 hónapra növeli a felmondási és a megbízhatósági kockázatokat. G megnyitja az összes nyitott követelést." />
+    <e k="ui_pmHelpTopic10Title" v="Szakterületek és gyakorlati fejlesztés" />
+    <e k="ui_pmHelpTopic10Body" v="ALAPSZABÁLYOK&#10;– Nyolc tanulási kategória létezik: talajművelés, vetés, trágyázás, növényvédelem, betakarítás, szállítás, a gépek kímélése és a takarékos munkavégzés.&#10;– Az előrehaladás kategóriánként külön kerül mentésre. A megtanult specializációk véglegesen megmaradnak; egyszerre legfeljebb két bónusz lehet aktív.&#10;TANULÁSI ELŐREHALADÁS&#10;– A tanulási küszöbértékek 240, 420, 600 és 780 perc; ezt követően minden további küszöbérték 180 perccel emelkedik.&#10;– A tanulási tényező értéke: 1 + (tapasztalat – 50)/250 + (megbízhatóság – 50)/300, és 0,75 és 1,30 között van korlátozva. Több tevékenység esetén a tanulási idő súlyozottan oszlik el.&#10;A TEVÉKENYSÉGEK BESOROLÁSA&#10;– Talajművelés: eke, kultivátor, rotációs borona, tárcsás borona, henger és mulcsozó.&#10;– Vetés: vető- és ültetőgépek, valamint vetőmag.&#10;– Trágyázás: ásványi műtrágya, folyékony műtrágya, hígtrágya, erjesztési maradékok és szar. Növényvédelem: gyomirtási munkák.&#10;– Betakarítás: kombájn, vágóművek, bálázók, fűkaszák, rakodókocsik és felvevők. Szállítás: pótkocsik, kirakodás és A-ból-B-be szállítás.&#10;BÓNUSZOK ÉS AKTIVÁLÁS&#10;– Fő szakterület: +12 hatékony tapasztalat és +5 % alapfizetés. Második szakterület: +6 és +3 %.&#10;– Mindkét hely pihenhet. Egy megtanult, pihenő szakterületet munkavállalónként és mezőgazdasági évben (március–február) csak egyszer lehet aktiválni; a pihentetés nem meríti ki ezt a jogot." />
+    <e k="ui_pmHelpTopic11Title" v="Képzések" />
+    <e k="ui_pmHelpTopic11Body" v="A képzések kizárólag a hónap első napján kezdődnek; ha az adott hónapban csak egy ilyen nap van, akkor legkésőbb 12:00-ig. Egy alkalmazott mezőgazdasági évenként (márciustól februárig) csak egy képzésen vehet részt, és közben nem állhat munkaviszonyban, illetve nem lehet beteg. Az illető a hónap végéig nem áll rendelkezésre; az elért haladás csak a hónapváltáskor, a képzés befejezésekor kerül jóváírásra.&#10;Egy képzés a következő specializációhoz szükséges tanulási percek 30%-át adja, legalább 30 percet, de soha nem többet, mint amennyi még hiányzik. Minden kategóriának havi árfaktorja -20% és +20% között mozog, és 25%-os valószínűséggel teltházas. A költségeket a kezdéskor azonnal levonják, és azok az aktuális havi fizetésen alapulnak.&#10;Képzési költségek = aktuális havi fizetés × kategória-tényező × havi módosító. Tényezők: talajművelés 75 %, vetés 90 %, trágyázás 90 %, növényvédelem 100 %, betakarítás 110 %, szállítás 65 %, gépkímélés 120 %, takarékos munkavégzés 120 %." />
+    <e k="ui_pmHelpTopic12Title" v="Elbocsátás, önkéntes kilépés és nyugdíjazás" />
+    <e k="ui_pmHelpTopic12Body" v="Az elbocsátásokat meg kell erősíteni. Egy napos/havi időszak esetén a felmondást az 1. napon 12:00 óráig kell kihirdetni, hogy a következő hónapváltáskor hatályba lépjen. Két vagy több nap esetén a határnap a felfelé kerekített fél hónap vége, azaz a ceil(napok/hónap ÷ 2) nap. A határnap után a hatálybalépés egy további hónappal elhalasztódik.&#10;A felmondás kihirdetésével a lojalitás azonnal 40 ponttal, a megbízhatóság pedig 25 ponttal csökken. A munkavállaló elvileg a hatályba lépés hónapjának végéig bevethető marad. Hírnévvesztés elbocsátás esetén: 1 hónap alatt -12, 3 hónap alatt -9, 6 hónap alatt -7, 12 hónap alatt -5, 24 hónap alatt -3, 24 hónap felett -1; minden további elbocsátás ugyanabban a hónapban további 4 pontba kerül.&#10;0–14 közötti lojalitás esetén havonta ellenőrzik a lehetséges önkéntes kilépés esélyét. Egy elutasított fizetésemelési kérelem ideiglenesen 5 százalékponttal növelheti az esélyt. A bejelentett önkéntes kilépés a hónap végén lép hatályba, és 10 hírnévpontba kerül. Az 55. születésnaptól kezdve bejelenthető a nyugdíjazás; a kockázat 67 éves korig körülbelül 80–90 %-ra emelkedik, 68 évesen 95 %, 69 évesen 98 %, 70 évesen pedig 100 %. A személy a hónap végéig rendelkezésre áll." />
+    <e k="ui_pmHelpTopic13Title" v="Profilok, krónika és statisztikák" />
+    <e k="ui_pmHelpTopic13Body" v="A pályázói profilok az életkort, a szakmai hátteret, a tapasztalatot, a megbízhatóságot, a lojalitást, a szakterületeket és a piacon eltöltött időt egyesítik egy dinamikus szöveggé. A munkavállalói profilok kiegészülnek a vállalatnál eltöltött idővel, a bevetésekkel, a képzésekkel és a tanulási előrehaladással.&#10;A személyes krónika rögzítheti a felvételt, a bevetés kezdetét és végét, a bevetés megszakításait, a betegségeket, a képzéseket, a szakterületeket, a fizetési igényeket és döntéseket, a lojalitás és a megbízhatóság változásait, a szállítási megbízásokat, valamint az elbocsátást, az önkéntes kilépést, a nyugdíjazást és a munkaviszony megszűnését.&#10;A munkavállalói pályafutás többek között a bevetéseket, a munkaidőt, a képzéseket, a szállítási státuszt, a legutóbbi eseményeket, a betegszabadságokat, a fizetési igényeket, a bevetés-megszakításokat és az eddig kifizetett teljes fizetést mutatja. Az áttekintés emellett telephelyszintű összesített értékeket is tartalmaz, például az eddig alkalmazottak számát, az elbocsátások számát, az önkéntes kilépések számát és a nyugdíjazások számát." />
+    <e k="ui_pmHelpTopic14Title" v="Beállítások, többjátékos mód és eredmények" />
+    <e k="ui_pmHelpTopic14Body" v="A beállítások játékállásonként érvényesek, és a következő kategóriákba sorolhatók: munkateljesítmény, személyzeti fejlesztés, valamint gazdaság és fizetések. A játékmenetre gyakorolt hatások aktiválják a hozzájuk kapcsolódó tapasztalati hatásokat; a tapasztalati hatások pedig szabályozzák a sebességet, a kopást, a fogyóeszközöket és az üzemanyagot. A személyzeti hatások aktiválják a lojalitásváltozásokat és az utómunka opciót. A gazdasági hatások az egyéni fizetéseket és az alap havi fizetést aktiválják.&#10;A deaktivált hatások nem írják át visszamenőlegesen a meglévő személyzeti adatokat. Kizárólag a vonatkozó további hatást akadályozzák meg vagy teszik lehetővé. Az alap havi fizetés alapértékként szolgál, ha az egyéni fizetések deaktiválva vannak; ez közvetlenül a beállításokban módosítható. A gombkiosztás a játékbeállításokban módosítható.&#10;Többjátékos módban a személyzetet, a jelentkezőket, a beosztásokat, a fizetéseket, a képzéseket, a felvételeket és a krónikákat gazdaságonként kezelik és szinkronizálják. A szerver dönt; csak a jogosult gazdaságvezetők módosíthatják a saját gazdaságukat. Az adatok a játékállásban a helperPersonnel.xml fájlban találhatók, és a betöltéskor a folyamatban lévő hozzárendeléseket a lehető legnagyobb mértékben visszaállítják. A régi mentések továbbra is használhatók; a már kilépett alkalmazottak esetében a korábbi adatok hiányosak lehetnek." />
+    <e k="ui_pmHelpTopic15Title" v="Beállítás és az első lépések" />
+    <e k="ui_pmHelpTopic15Body" v="Nyisd meg a jelentkező adatait, ellenőrizd az életkorát, hátterét, értékeit, fizetési elvárásait és meglévő szakterületeit, majd erősítsd meg a felvételt. A jelentkező az aktuális udvar alkalmazottja lesz; az összes későbbi döntés, elszámolás és fejlemény az adott udvarra vonatkozik.&#10;A felvétel után először tervezz meg egy rövid, megfelelő munkát. Egy alkalmazottnak rendelkezésre kell állnia: betegség, folyamatban lévő munka, képzés, megerősített munkaviszony-megszűnés vagy még aktív mod-hozzárendelés megakadályozhatja a kiválasztást. Az „Alkalmazottak” fülön látható a konkrét ok.&#10;Az első felvétel egy ponttal javítja a munkáltatói hírnevet. A magas értékek nem mindig jelentenek automatikusan előnyt: egy tapasztalt jelentkező általában többe kerül, míg egy olcsóbb újoncnak több időre van szüksége a fejlődéshez és a képzéshez." />
+    <e k="ui_pmHelpTopic16Title" v="Tevékenységek és szakterületi besorolás" />
+    <e k="ui_pmHelpTopic16Body" v="A besorolás a jármű, a berendezések és – amennyiben van ilyen – a kijuttatott anyag alapján történik. A közvetlen anyagbesorolás élvez elsőbbséget: a vetőmag a vetéshez tartozik; a gyomirtó szer a növényvédelemhez; az ásványi műtrágya, a folyékony műtrágya, a hígtrágya, az erjesztési maradékok és a szar a trágyázáshoz. A mész nem kerül automatikusan felismerésre önálló tanulási kategóriaként.&#10;Jármű- és berendezés-besorolás: az eke, a talajlazító, a rotációs borona, a tárcsás borona, a talajhenger és a mulcsozó a talajműveléshez tartoznak. A vető- és ültetőgépek a vetéshez tartoznak. A mezőpermetezők egyértelmű anyag hiányában a trágyázáshoz tartoznak. A kombájnok, vágóművek, bálázók, fűkaszák, rakodókocsik és szedőgépek a betakarításhoz tartoznak. A pótkocsik és a kirakható járművek a szállításhoz tartoznak.&#10;A FollowMe kiegészíti a gyakorlati felismerést aprítókkal, burgonya- és répaszedő gépekkel, forgatógépekkel, hordázókkal, trágyaszórókkal, trágyatartályokkal, talajlazítókkal, kőgyűjtőkkel, simítókkal és kapákkal. A mod-járművek semlegesek maradhatnak, ha specializációjuk nem tesz lehetővé egyértelmű besorolást. Ilyenkor nem ígérnek téves specializációs bónuszt.&#10;A gépkímélés és a takarékos munkavégzés általános bónuszok: az előbbi csökkenti a tapasztalatból adódó többletkopást, az utóbbi pedig a többletüzemanyag- és anyagfogyasztást. A kiválasztott tevékenység megjelenik a kiválasztó ablakban; a megfelelő aktív specializációt ott kiemelik." />
+    <e k="ui_specialization_transport" v="Közlekedés" />
+    <e k="ui_transportMarker" v="Közlekedés" />
+    <e k="ui_pmStatusLine" v="Állapot: %s" />
+    <e k="ui_button_transport_manage_long" v="Közlekedés" />
+    <e k="ui_transportPriorityHeaderStatus" v="Állapot" />
+    <e k="ui_transportPriorityHeaderEnabled" v="Közlekedés" />
+    <e k="ui_pmTrainingCostHeader" v="Költségek" />
+    <e k="ui_pmHistoryCareerTransport" v="Közlekedés: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="ÖSSZESEN" />
+    <e k="ui_pmMonth02" v="április" />
+    <e k="ui_pmMonth06" v="augusztus" />
+    <e k="ui_pmMonth07" v="szeptember" />
+    <e k="ui_pmMonth09" v="november" />
+    <e k="ui_pmMonth10" v="december" />
+    <e k="ui_selectionAvailable" v="Elérhető" />
+    <e k="ui_selectionUnavailableSick" v="Krank" />
+    <e k="ui_selectionUnavailableTraining" v="Képzés alatt" />
+    <e k="ui_selectionUnavailableReserved" v="Foglalt" />
+    <e k="ui_selectionUnavailableFieldwork" v="Terepmunka" />
+    <e k="ui_selectionUnavailableOther" v="Nincs raktáron" />
+    <e k="ui_selectionJobUnknown" v="Megbízás ismeretlen" />
+    <e k="ui_selectionAgeLabel" v="Alter" />
+    <e k="ui_selectionJobsLabel" v="Megrendelések" />
+    <e k="ui_selectionSpeedLabel" v="Munkatempó" />
+    <e k="ui_selectionAgeValue" v="%d év" />
+    <e k="ui_selectionVehicleLine" v="Jármű: %s" />
+    <e k="ui_selectionActivityLine" v="Megbízás: %s" />
+    <e k="ui_selectionFieldLine" v="Mező: %s" />
+    <e k="ui_selectionStatusLine" v="Állapot: %s" />
+    <e k="ui_button_specializationDeactivate" v="Hagyjuk pihenni" />
+    <e k="ui_button_specializationActivate" v="Bejelentkezés" />
+    <e k="ui_pmSpecializationActive" v="aktív" />
+    <e k="ui_pmHelpContents" v="TARTALOMJEGYZÉK" />
     </elements>
 </l10n>

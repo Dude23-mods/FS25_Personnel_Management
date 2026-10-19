@@ -19,7 +19,6 @@ function HelperPersonnelApp.new(modName, modDir, customMt)
     self.standaloneMenuTextureLoaded = false
     self.standaloneMenuActionRegistered = false
     self.standaloneMenuActionEventId = nil
-    self.standaloneMenuHotkeyDown = false
     return self
 end
 
@@ -62,7 +61,6 @@ function HelperPersonnelApp:load()
 
     self:tryRegisterStandaloneMenu()
     self:registerStandaloneMenuAction()
-    self:updateStandaloneMenuHotkey()
 end
 
 
@@ -119,7 +117,6 @@ end
 function HelperPersonnelApp:update(dt)
     self:tryRegisterStandaloneMenu()
     self:registerStandaloneMenuAction()
-    self:updateStandaloneMenuHotkey()
 
     if self:isServerAuthority() and self.manager ~= nil and self.manager.update ~= nil then
         self.manager:update(dt)
@@ -640,8 +637,8 @@ function HelperPersonnelApp:processNetworkAction(actionName, targetId, connectio
         changed = self.manager:hireApplicantForFarm(targetId, farmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS and self.manager.dismissWorkerForFarm ~= nil then
         changed = self.manager:dismissWorkerForFarm(targetId, farmId) == true
-    elseif actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER and self.releaseStaleWorkerForFarm ~= nil then
-        changed, releaseFeedback = self:releaseStaleWorkerForFarm(targetId, farmId)
+    elseif actionName == HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER and self.emergencyReleaseWorkerForFarm ~= nil then
+        changed, releaseFeedback = self:emergencyReleaseWorkerForFarm(targetId, farmId)
     end
 
     if changed then
@@ -650,7 +647,7 @@ function HelperPersonnelApp:processNetworkAction(actionName, targetId, connectio
         self:sendNetworkStateToConnection(connection)
     end
 
-    if actionName == HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER and releaseFeedback ~= nil then
+    if actionName == HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER and releaseFeedback ~= nil then
         self:sendNotificationToConnection(connection, releaseFeedback)
     end
 
@@ -701,11 +698,11 @@ function HelperPersonnelApp:requestDismissWorker(workerId)
     return false
 end
 
-function HelperPersonnelApp:requestReleaseStaleWorker(workerId)
+function HelperPersonnelApp:requestEmergencyReleaseWorker(workerId)
     local farmId = self:getCurrentFarmId()
 
     if self:isServerAuthority() then
-        local changed, feedback = self:releaseStaleWorkerForFarm(workerId, farmId)
+        local changed, feedback = self:emergencyReleaseWorkerForFarm(workerId, farmId)
         if changed then
             self:syncNetworkStateToClients()
         end
@@ -718,7 +715,7 @@ function HelperPersonnelApp:requestReleaseStaleWorker(workerId)
     if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
         local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
         if connection ~= nil and connection.sendEvent ~= nil then
-            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_RELEASE_STALE_WORKER, workerId, nil, farmId))
+            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER, workerId, nil, farmId))
             return true
         end
     end

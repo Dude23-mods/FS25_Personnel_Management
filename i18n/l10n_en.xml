@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="Manage transport jobs" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="Manage salary requests" />
         <e k="input_HP_SELECT_CANCEL" v="Cancel employee selection" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="Release blocked employee" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="Emergency release employee" />
         <e k="ui_openWorkerView" v="Workers" />
         <e k="ui_openApplicantView" v="Applicants" />
         <e k="ui_backToOverview" v="Back to Overview" />
@@ -242,6 +242,7 @@
         <e k="ui_button_train" v="Train" />
         <e k="ui_pmStatusApplicant" v="Applicant" />
         <e k="ui_pmBirthLine" v="Born: %s" />
+        <e k="ui_pmRankLabel" v="Rank" />
         <e k="ui_pmOriginLine" v="Professional background: %s" />
         <e k="ui_pmStatsLine" v="Experience %d · Reliability %d · Loyalty %d" />
         <e k="ui_pmStatExperience" v="Experience" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="good work month" />
         <e k="ui_waitingForServerData" v="Waiting for server data" />
         <e k="ui_pmMenuPageHelp" v="Help" />
-        <e k="ui_pmHelpIntro" v="Detailed in-game guide for Personnel Management 1.1.4.0. The packaged ReadMe.pdf contains additional rules and calculations." />
+        <e k="ui_pmHelpIntro" v="Detailed in-game guide for Personnel Management 1.1.5.0." />
         <e k="ui_pmHelpSectionQuickStart" v="Quick start and controls|Open Personnel Management with Ctrl + M. Use the menu bar to switch between Overview, Applicants, Employees, Training, Settings and Help. On person pages, use A/D or Left/Right to change entries. Space confirms an action and Esc goes back. Press T for transport priorities and G for open wage requests." />
         <e k="ui_pmHelpSectionPeople" v="Applicants and hiring|A new save starts with four applicants, and no more than eight may be available at once. Every applicant has experience, reliability, loyalty, a wage request and possibly specializations. Open an applicant profile and confirm hiring. The new employee then permanently belongs to the farm that hired them." />
         <e k="ui_pmHelpSectionStats" v="Employees and attributes|Experience, reliability and loyalty range from 0 to 100. Experience affects work speed, consumption and wear. Reliability affects interruptions, sickness and the risk of an early job abort. Loyalty influences wage requests and possible resignations. The employee page also shows status, wage, specializations, job statistics and the personal chronicle." />
@@ -571,17 +572,17 @@
         <e k="ui_pmHelpContents" v="CONTENTS" />
         <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
         <e k="ui_pmHelpTopic01Title" v="Quick start and controls" />
-        <e k="ui_pmHelpTopic01Body" v="Personnel Management replaces anonymous AI helpers with named applicants and employees. Open: Ctrl + M. Pages: Overview, Applicants, Employees, Training, Settings and Help. Change person: A/D or Left/Right. Confirm: Space or mouse click. Back: Esc. Transport priorities: T. Wage requests: G. In Help, Left/Right changes between contents and article; Up/Down selects or scrolls and Page Up/Down moves by a page." />
-        <e k="ui_pmHelpTopic02Title" v="Applicants and hiring" />
-        <e k="ui_pmHelpTopic02Body" v="A new save starts with four applicants; at most eight are on the market. Profiles show age, background, experience, reliability, loyalty, requested wage and specializations. Departure chance: creation month 0%, after one month 10–30%, after two months 30–50%, after three months 100%. Weighted ages: 18–29 years 30%, 30–39 30%, 40–49 22%, 50–59 13%, 60–65 5%. A hired person permanently belongs to the hiring farm." />
-        <e k="ui_pmHelpTopic03Title" v="Values, ranks and status" />
-        <e k="ui_pmHelpTopic03Body" v="Experience, reliability and loyalty range from 0 to 100. Rank depends only on experience: Helper 0–44, Skilled Worker 45–74, Professional 75–100. Experience affects work speed, extra wear and consumption. Reliability affects slowdowns, sickness, development and job abandonment. Loyalty affects wage conflicts, warnings and resignations. Status, wage, specializations, job values and the personal chronicle are shown in the employee profile." />
-        <e k="ui_pmHelpTopic04Title" v="AI helpers, selection and transport" />
-        <e k="ui_pmHelpTopic04Body" v="Starting normal AI or Courseplay work opens employee selection. It matches the approved performance-profile design and shows real portraits, rank, availability reason, age, wage, three attributes, jobs, speed, specializations and detected job context. Only available employees appear by default; Tab shows everybody. Blocked entries are grey and name field work, Courseplay, AutoDrive, sickness, training, reservation or another reason. A matching specialization is green; unknown jobs remain neutral. A job counts after 10 seconds; practical specialization progress starts after 3 minutes." />
-        <e k="ui_pmHelpTopic05Title" v="Experience and work effects" />
-        <e k="ui_pmHelpTopic05Body" v="Work time converts into experience and unused minutes carry over. Minutes per point: experience 0–24: 25; 25–49: 50; 50–69: 100; 70–84: 220; 85–94: 540; 95–100: 1080. At most 2 points per job. Base monthly cap by days/month: 1→1; 2→2; 3–4→3; 5–6→4; 7–9→5; 10–12→6; 13–15→7; 16–18→8; 19–21→9; 22–24→10; 25–27→11; 28→12. Tier adjustment: +1, 0, -1, -2, -3, -4; actual cap at least 1." />
-        <e k="ui_pmHelpTopic06Title" v="Reliability and sickness" />
-        <e k="ui_pmHelpTopic06Body" v="Below 85 reliability, a slowdown is checked once per minute: up to 15% chance, 30–90 seconds duration, 4–15% loss and 3-minute cooldown. Sickness is checked daily and stops active work; monthly maximum is ceiling(days/month ÷ 3). Below 50 reliability, a one-time full-abandonment check occurs after 60 job seconds. Reference sickness/day and abandonment: 0–20: 10%/20%; 21–29: 8%/15%; 30–40: 8%/10%; 41–49: 6%/5%; 50–60: 6%/0%; 61–80: 4%/0%; 81–100: 2%/0%." />
+        <e k="ui_pmHelpTopic01Body" v="Personnel Management replaces anonymous AI helpers with named applicants and employees. Every employee develops over time, receives a monthly wage and has individual experience, reliability, loyalty and specializations.&#10;Open the menu with Ctrl + M. It contains Overview, Applicants, Employees, Training, Settings and Help. Change person with A/D or Left/Right; confirm with Space or a click; return with Esc. T opens transport priority and G wage requests. In Help, Left/Right changes between contents and article, Up/Down selects or scrolls, and Page Up/Down moves by a page." />
+        <e k="ui_pmHelpTopic02Title" v="Overview and personnel status" />
+        <e k="ui_pmHelpTopic02Body" v="The Overview summarizes the farm: employee, availability and applicant counts plus employer reputation are shown first. Active jobs list the person, vehicle, implement and activity.&#10;Changes only lists relevant personnel events: employer reputation, experience, reliability, loyalty, age or specialization. Each entry names cause, affected person and effect; a multi-line entry remains one notification.&#10;Monthly Report and Total show current and lifetime figures. Use this page for planning; decisions and personal history belong to the specialist pages." />
+        <e k="ui_pmHelpTopic03Title" v="Applicant market and hiring" />
+        <e k="ui_pmHelpTopic03Body" v="A new save starts with four applicants; no more than eight can be on the market. At each month change, up to three places are rolled: each has 15% + 0.7 × employer reputation. An empty market always receives at least one applicant.&#10;Applicants stay during their creation month. Their departure chance is 10–30% after one month, 30–50% after two and 100% after three. Better profiles may leave earlier. They are 18–65, age permanently and have a background that chiefly affects experience and prior knowledge.&#10;Requested pay is based on experience and reliability, 96–106% random variation and reputation. Low reputation raises the request, high reputation lowers it. Confirming a hire adds one reputation point." />
+        <e k="ui_pmHelpTopic04Title" v="Employee profile, values and status" />
+        <e k="ui_pmHelpTopic04Body" v="Experience, reliability and loyalty each range from 0 to 100. The exact number and bar allow quick comparison.&#10;Rank depends only on experience: Helper 0–44, Skilled Worker 45–74, Professional 75–100. Experience changes speed, extra wear and consumption. Reliability changes performance dips, sickness, monthly development and job-abandonment risk. Loyalty describes the bond to the farm and affects warnings, wage conflicts and resignations." />
+        <e k="ui_pmHelpTopic05Title" v="AI helpers, transport and FollowMe" />
+        <e k="ui_pmHelpTopic05Body" v="Starting normal AI helper work opens employee selection. Only available employees can be selected; sickness, training and existing work block selection.&#10;A job is counted after 10 seconds. Practical specialization progress needs at least three minutes.&#10;T or the menu button opens transport priority. It defines which free employee is checked first for A-to-B work. FollowMe also uses employee selection and counts as transport work." />
+        <e k="ui_pmHelpTopic06Title" v="Experience and work effects" />
+        <e k="ui_pmHelpTopic06Body" v="GAINING EXPERIENCE&#10;– Recorded work time creates experience; unused learning minutes carry over. A job can grant at most two points and a monthly cap applies.&#10;EFFECTS&#10;– Primary specialization adds 12 effective experience and secondary adds 6, up to 100. Speed = 70% + 30% × effective experience / 100. Extra wear is up to 15%; extra material and fuel use is up to 10% × missing effective experience × economy factor (0.75 / 1.00 / 1.25).&#10;LEARNING TIME AND MONTHLY CAP&#10;– Experience 0–24: 25 minutes and cap +1; 25–49: 50 and 0; 50–69: 100 and -1; 70–84: 220 and -2; 85–94: 540 and -3; 95–100: 1080 and -4.&#10;– Base cap by days/month: 1=1, 2=2, 3–4=3, 5–6=4, 7–9=5, 10–12=6, 13–15=7, 16–18=8, 19–21=9, 22–24=10, 25–27=11, 28=12; actual cap is never below 1." />
         <e k="ui_pmHelpTopic07Title" v="Loyalty and employer reputation" />
         <e k="ui_pmHelpTopic07Body" v="Loyalty normally starts near 65. Wage paid with reputation at least 40: +1; payment pushes below zero: -2; farm already negative: -4; service 3/6/12/24 months: +1/+1/+2/+3; request accepted: +3; declined: -5, or -7 below 40 loyalty; open after grace month: -2 monthly. Resignation at loyalty 0–5: 35%, 6–9: 20%, 10–14: 10%. Night work 22:00–06:00 may cost up to 4 loyalty and 1–2 reputation from 120 minutes. Reputation starts at 60 and ranges 0–100." />
         <e k="ui_pmHelpTopic08Title" v="Wages and requests" />
@@ -598,12 +599,16 @@
         <e k="ui_pmHelpTopic13Body" v="Settings apply per savegame. Work performance: experience, speed, wear, consumables, fuel and reliability. Personnel development: personnel effects, loyalty and night work. Economy: economic effects, individual wages and standard monthly base wage from 100 to 100,000 in steps of 10. Disabling an effect does not retroactively rewrite saved personnel values. Key bindings can be changed in game settings." />
         <e k="ui_pmHelpTopic14Title" v="Multiplayer and savegames" />
         <e k="ui_pmHelpTopic14Body" v="Personnel, applicants, active assignments, wages, training, settings and chronicles are farm-specific. The server decides in multiplayer; only authorized farm managers may change their own farm. Data is stored in helperPersonnel.xml, synchronized to clients and restored with active assignments where possible. Version 1.1.4.0 stores learned specializations and the last activation year. Older saves automatically treat their previously active specializations as learned." />
-        <e k="ui_button_release_worker" v="Release" />
-        <e k="ui_pmConfirmReleaseWorker" v="Release %s? This is only possible when the server detects no active job." />
-        <e k="ui_workerReleaseSuccess" v="Employee released." />
-        <e k="ui_workerReleaseDeniedActive" v="Release not possible: The employee still has an active job." />
-        <e k="ui_workerReleaseDeniedAvailable" v="Release not required: The employee is already available." />
-        <e k="ui_workerReleaseDeniedCheck" v="Release not possible: The job status could not be verified safely." />
-        <e k="ui_workerReleaseDeniedPermission" v="Release not possible: No permission or invalid employee." />
+        <e k="ui_pmHelpTopic15Title" v="Hiring and first steps" />
+        <e k="ui_pmHelpTopic15Body" v="Open an applicant, check age, background, values, requested pay and existing specializations, then confirm hiring. The applicant becomes an employee of the current farm; all later decisions, pay and development are farm-specific.&#10;Plan a short, suitable first job. An employee must be available: sickness, ongoing work, training, a confirmed end of employment or an active mod assignment can prevent selection. The Employees page shows the exact reason.&#10;The first hire adds one employer-reputation point. More experience normally costs more; a cheaper newcomer needs more work and training." />
+        <e k="ui_pmHelpTopic16Title" v="Activities and specialization mapping" />
+        <e k="ui_pmHelpTopic16Body" v="The mapping uses vehicle, implements and, where available, applied material. Material takes priority: seeds mean sowing; herbicide means plant protection; mineral or liquid fertilizer, slurry, digestate and manure mean fertilizing. Lime has no automatic learning-category mapping.&#10;Ploughs, cultivators, power harrows, disc harrows, rollers and mulchers are tillage. Seeders and planters are sowing. Sprayers without a clear material are fertilizing. Combines, headers, balers, mowers, forage wagons and pickups are harvest. Trailers and unloadable vehicles are transport.&#10;FollowMe also recognizes forage harvesters, potato and beet harvesters, tedders, windrowers, manure spreaders, slurry tanks, subsoilers, stone pickers, weeders and hoes. Mod vehicles can remain neutral when no unambiguous mapping exists. Machine Care lowers experience-based extra wear; Resource Saver lowers extra fuel and material use." />
+        <e k="ui_button_emergency_release_worker" v="Emergency release" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="Emergency-release %s? A running job will be stopped where possible. All employee and vehicle assignments will then be removed." />
+        <e k="ui_workerEmergencyReleaseSuccess" v="Emergency release completed." />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="Release not possible: The employee still has an active job." />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Emergency release not required: the employee is already available." />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="Emergency release unavailable: no valid employee assignment was found." />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="Emergency release unavailable: missing permission or invalid employee." />
     </elements>
 </l10n>

@@ -25,7 +25,7 @@
         <e k="ui_specialization_fertilizing" v="施肥" />
         <e k="ui_specialization_plantProtection" v="作物保护" />
         <e k="ui_specialization_harvest" v="收获" />
-        <e k="ui_specialization_transport" v="运输" />
+        1Doprava2
         <e k="ui_specialization_machineCare" v="机器保养" />
         <e k="ui_specialization_resourceSaver" v="节约作业" />
         <e k="ui_specializationLearned" v="%s 已掌握一项专长：%s。" />
@@ -65,7 +65,7 @@
         <e k="input_HP_TRANSPORT_MANAGE" v="管理运输任务" />
         <e k="input_HP_SALARY_RAISE_MANAGE" v="工资要求管理" />
         <e k="input_HP_SELECT_CANCEL" v="取消员工选择" />
-        <e k="input_HP_RELEASE_STALE_WORKER" v="释放被阻塞的员工" />
+        <e k="input_HP_EMERGENCY_RELEASE_WORKER" v="释放被阻塞的员工" />
         <e k="ui_openWorkerView" v="员工" />
         <e k="ui_openApplicantView" v="申请人" />
         <e k="ui_backToOverview" v="返回概览" />
@@ -141,7 +141,7 @@
         <e k="ui_monthlyLineWorkStats" v="工作时间: %d 工作 | %s | 月薪: %s" />
         <e k="ui_button_transport_assign" v="分配运输" />
         <e k="ui_button_transport_remove" v="移除运输" />
-        <e k="ui_transportMarker" v="运输" />
+        1Doprava2
         <e k="ui_transportActionAssigned" v="%s - 分配运输." />
         <e k="ui_transportActionRemoved" v="%s - 移除运输." />
         <e k="ui_transportNoDriverAssigned" v="运输: 暂无." />
@@ -242,13 +242,14 @@
         <e k="ui_button_train" v="培训" />
         <e k="ui_pmStatusApplicant" v="申请人" />
         <e k="ui_pmBirthLine" v="出生日期：%s" />
+        <e k="ui_pmRankLabel" v="等级" />
         <e k="ui_pmOriginLine" v="职业背景：%s" />
         <e k="ui_pmStatsLine" v="经验 %d · 可靠性 %d · 忠诚度 %d" />
         <e k="ui_pmStatExperience" v="经验" />
         <e k="ui_pmStatReliability" v="可靠性" />
         <e k="ui_pmStatLoyalty" v="忠诚度" />
         <e k="ui_pmWageLine" v="工资：%s" />
-        <e k="ui_pmStatusLine" v="状态：%s" />
+        1Stav: %s2
         <e k="ui_pmOrigin1" v="乡村家庭农场" />
         <e k="ui_pmOrigin2" v="小型奶牛场" />
         <e k="ui_pmOrigin3" v="农业承包企业" />
@@ -274,13 +275,13 @@
         <e k="ui_pmSettingsSectionPersonnel" v="人员" />
         <e k="ui_pmSettingsSectionEconomic" v="经济" />
         <e k="ui_button_transport_assign_long" v="分配运输任务" />
-        <e k="ui_button_transport_manage_long" v="运输" />
+        1Doprava2
         <e k="ui_transportPriorityTitle" v="运输优先级" />
         <e k="ui_transportPriorityIntro" v="设置哪些员工可承担运输任务以及检查顺序。" />
         <e k="ui_transportPriorityHeaderPriority" v="优先级" />
         <e k="ui_transportPriorityHeaderEmployee" v="员工" />
-        <e k="ui_transportPriorityHeaderStatus" v="状态" />
-        <e k="ui_transportPriorityHeaderEnabled" v="运输" />
+        1Stav2
+        1Doprava2
         <e k="ui_transportPriorityActive" v="已启用" />
         <e k="ui_transportPriorityInactive" v="未分配" />
         <e k="ui_transportPriorityMoveUp" v="上移" />
@@ -303,19 +304,19 @@
         <e k="ui_pmOrigin8" v="办公室职业" />
         <e k="ui_status_retirementPending" v="将在月底退休" />
         <e k="ui_retirementNotice" v="%s 将在月底退休。" />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="Specializace zlepšují výkon v odpovídající kategorii. Školení začíná pouze na začátku měsíce, stojí peníze a zaměstnanec je do konce měsíce nedostupný. Postup se započítá po dokončení. Nabídky a ceny se mění každý měsíc; za zemědělský rok od března do února je povoleno jen jedno školení. Naučené specializace zůstávají známé, aktivní jsou však nejvýše dva bonusy. Obě pozice mohou být neaktivní. Naučenou neaktivní specializaci lze aktivovat jen jednou za zaměstnance a zemědělský rok." />
         <e k="ui_pmTrainingCategoryHeader" v="学习类别" />
         <e k="ui_pmTrainingProgressHeader" v="专业化进度" />
         <e k="ui_pmTrainingRunning" v="培训进行中" />
         <e k="ui_pmTrainingSelectCategory" v="请先选择培训类别" />
         <e k="ui_pmTrainingConfirm" v="为 %s 开始 %s 类别的培训吗？" />
-        <e k="ui_training_line_no_capacity" v="Specialization: two active slots occupied · last learned: %s" />
+        <e k="ui_training_line_no_capacity" v="Specializace: dvě aktivní pozice jsou obsazeny · naposledy naučeno: %s" />
         <e k="ui_training_line_single_day_deadline_select" v="培训：每月 1 天时仅限 12:00 前 · 请在培训菜单中选择类别 · 上次：%s" />
         <e k="ui_training_line_first_day_select" v="培训：仅限第一天 · 请在培训菜单中选择类别 · 上次：%s" />
         <e k="ui_training_line_busy_select" v="培训：工作期间无法参加 · 上次：%s" />
         <e k="ui_training_line_sick_select" v="培训：生病期间无法参加 · 上次：%s" />
         <e k="ui_training_line_select_category" v="培训：请在培训菜单中选择类别 · 上次：%s" />
-        <e k="ui_pmTrainingCostHeader" v="费用" />
+        1Náklady2
         <e k="ui_pmTrainingAdjustmentHeader" v="折扣/额外费用" />
         <e k="ui_pmTrainingNoPlaces" v="目前没有名额" />
         <e k="ui_pmTrainingNoPlacesMessage" v="该培训课程目前没有可用名额。" />
@@ -458,7 +459,7 @@
         <e k="ui_pmHistoryCareerJobs" v="完成任务：%d" />
         <e k="ui_pmHistoryCareerWorkTime" v="工作时间：%s" />
         <e k="ui_pmHistoryCareerTraining" v="培训：%s" />
-        <e k="ui_pmHistoryCareerTransport" v="运输：%s" />
+        1Doprava: %s2
         <e k="ui_pmHistoryValueActive" v="启用" />
         <e k="ui_pmHistoryValueInactive" v="未启用" />
         <e k="ui_monthlyRowApplicants" v="应聘者" />
@@ -468,7 +469,7 @@
         <e k="ui_monthlyRowWorkTime" v="工作时间" />
         <e k="ui_monthlyRowWages" v="月工资总额" />
         <e k="ui_monthlyRowPayroll" v="上次工资结算" />
-        <e k="ui_pmOverviewOverallHeader" v="总计" />
+        1CELKEM2
         <e k="ui_pmOverviewTotalJobs" v="总任务数" />
         <e k="ui_pmOverviewTotalWorkTime" v="总工作时间" />
         <e k="ui_pmOverviewTotalPayroll" v="工资总额" />
@@ -490,15 +491,15 @@
         <e k="ui_reliabilityJobAbortPartnerMale" v="%s中止了正在进行的任务，临时去和女朋友喝咖啡。" />
         <e k="ui_reliabilityJobAbortPartnerFemale" v="%s中止了正在进行的任务，临时去和男朋友喝咖啡。" />
         <e k="ui_pmMonth01" v="三月" />
-        <e k="ui_pmMonth02" v="四月" />
+        1duben2
         <e k="ui_pmMonth03" v="五月" />
         <e k="ui_pmMonth04" v="六月" />
         <e k="ui_pmMonth05" v="七月" />
-        <e k="ui_pmMonth06" v="八月" />
-        <e k="ui_pmMonth07" v="九月" />
+        1srpen2
+        1září2
         <e k="ui_pmMonth08" v="十月" />
-        <e k="ui_pmMonth09" v="十一月" />
-        <e k="ui_pmMonth10" v="十二月" />
+        1listopad2
+        1prosinec2
         <e k="ui_pmMonth11" v="一月" />
         <e k="ui_pmMonth12" v="二月" />
         <e k="ui_pmPeriodMonthYear" v="%s，第 %d 年" />
@@ -519,7 +520,7 @@
         <e k="ui_reliabilityReasonGoodWork" v="工作表现良好的月份" />
         <e k="ui_waitingForServerData" v="等待服务器数据" />
         <e k="ui_pmMenuPageHelp" v="帮助" />
-        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.4.0 的详细游戏内指南。 随模组提供的 ReadMe.pdf 包含更多规则和计算公式。" />
+        <e k="ui_pmHelpIntro" v="Personnel Management 1.1.5.0 的详细游戏内指南。" />
         <e k="ui_pmHelpSectionQuickStart" v="快速开始与操作|按 Ctrl + M 打开菜单。 使用菜单翻页控制切换标签页。 按 A/D 或左/右方向键切换人员，空格键确认，Esc 返回，T 设置运输优先级，G 处理加薪请求。" />
         <e k="ui_pmHelpSectionPeople" v="申请人与员工|新存档以四名申请人开始；最多可同时有八名。 可在个人资料中雇用申请人。 经验、可靠性和忠诚度范围为 0 到 100。 员工页面显示状态、工资、专长、履历和累计数据。" />
         <e k="ui_pmHelpSectionStats" v="员工与属性|经验影响速度、磨损和消耗；可靠性影响中断、生病和提前终止任务；忠诚度影响加薪要求和辞职。员工页面还显示状态、工资、专长、统计数据和个人履历。" />
@@ -529,81 +530,154 @@
         <e k="ui_pmHelpSectionEmploymentEnd" v="辞职、解雇与退休|这些变更不一定立即生效，而会按期限在月份变更时完成。正在工作的员工不能立即被解雇。即将发生的变更显示在状态和履历中。" />
         <e k="ui_pmHelpSectionIntegrations" v="AutoDrive 与 Courseplay|先在员工 / 运输中分配司机并设置优先级。AutoDrive 使用第一名可用司机，没有司机时阻止启动。普通 Courseplay 启动会打开选择。AutoDrive 后自动启动 Courseplay 时，每辆车都会保留自己的司机，不再重新选择。" />
         <e k="ui_pmHelpSectionMultiplayer" v="多人游戏与存档|人员数据和设置按农场分开。 服务器验证所有更改；只有获授权的农场管理员可以管理自己的农场。 员工、活动分配和设置会同步。 人员数据保存在存档内的 helperPersonnel.xml 中。" />
-        <e k="ui_selectionKicker" v="Personnel Management · Select job" />
-        <e k="ui_selectionPerformanceProfile" v="PERFORMANCE PROFILE" />
-        <e k="ui_selectionAvailable" v="Available" />
-        <e k="ui_selectionUnavailableSick" v="Sick" />
-        <e k="ui_selectionUnavailableTraining" v="In training" />
-        <e k="ui_selectionUnavailableReserved" v="Reserved" />
-        <e k="ui_selectionUnavailableAutoDrive" v="AutoDrive job" />
-        <e k="ui_selectionUnavailableCourseplay" v="Courseplay job" />
-        <e k="ui_selectionUnavailableFieldwork" v="Field work" />
-        <e k="ui_selectionUnavailableOther" v="Unavailable" />
-        <e k="ui_selectionShowAll" v="Show all employees" />
-        <e k="ui_selectionShowAvailable" v="Show available only" />
-        <e k="ui_selectionFooterControls" v="A/D Change · Space Select · Tab All · Esc Back" />
-        <e k="ui_selectionJobUnknown" v="Unknown job" />
-        <e k="ui_selectionAgeLabel" v="Age" />
-        <e k="ui_selectionWageLabel" v="Monthly wage" />
-        <e k="ui_selectionJobsLabel" v="Jobs" />
-        <e k="ui_selectionSpeedLabel" v="Work speed" />
-        <e k="ui_selectionAgeValue" v="%d years" />
+        <e k="ui_selectionKicker" v="Správa personálu · Vybrat úkol" />
+        <e k="ui_selectionPerformanceProfile" v="PROFIL VÝKONU" />
+        1K dispozici2
+        1Krank2
+        1Ve školení2
+        1Rezervováno2
+        <e k="ui_selectionUnavailableAutoDrive" v="Úkol AutoDrive" />
+        <e k="ui_selectionUnavailableCourseplay" v="Úkol Courseplay" />
+        1Terénní práce2
+        1Není k dispozici2
+        <e k="ui_selectionShowAll" v="Zobrazit všechny zaměstnance" />
+        <e k="ui_selectionShowAvailable" v="Zobrazit jen dostupné" />
+        <e k="ui_selectionFooterControls" v="A/D Změnit · Mezerník Vybrat · Tab Vše · Esc Zpět" />
+        1Zadání neznámé2
+        1Změnit2
+        <e k="ui_selectionWageLabel" v="Měsíční mzda" />
+        1Zakázky2
+        1Tempo práce2
+        1%d let2
         <e k="ui_selectionProfessionalDevelopment" v="专业发展" />
         <e k="ui_selectionNoSpecializationProgress" v="尚无专业发展进度" />
-        <e k="ui_selectionNoSpecialization" v="No specialization" />
-        <e k="ui_selectionVehicleLine" v="Vehicle: %s" />
-        <e k="ui_selectionActivityLine" v="Job: %s" />
-        <e k="ui_selectionFieldLine" v="Field: %s" />
-        <e k="ui_selectionTargetLine" v="Transport target: %s" />
-        <e k="ui_selectionCourseplayLine" v="CP job type: %s" />
-        <e k="ui_selectionStatusLine" v="Status: %s" />
+        <e k="ui_selectionNoSpecialization" v="Žádná specializace" />
+        1Vozidlo: %s2
+        1Úkol: %s2
+        1Pole: %s2
+        <e k="ui_selectionTargetLine" v="Cíl přepravy: %s" />
+        <e k="ui_selectionCourseplayLine" v="Typ úlohy CP: %s" />
+        1Stav: %s2
         <e k="input_HP_SELECT_TOGGLE_ALL" v="Show all employees" />
-        <e k="ui_button_specializationDeactivate" v="Deactivate" />
-        <e k="ui_button_specializationActivate" v="Activate" />
-        <e k="ui_pmSpecializationDeactivateConfirm" v="Deactivate %s for %s?" />
-        <e k="ui_pmSpecializationActivateConfirm" v="Activate %s for %s?" />
-        <e k="ui_pmSpecializationActivationUsed" v="A new specialization can be activated only once per employee and agricultural year." />
-        <e k="ui_pmSpecializationSlotsFull" v="Deactivate at least one active specialization before activating another." />
-        <e k="ui_pmSpecializationActive" v="active" />
-        <e k="ui_pmSpecializationInactive" v="learned, inactive" />
-        <e k="ui_specializationActivatedNotice" v="%s uses specialization %s again." />
-        <e k="ui_specializationDeactivatedNotice" v="%s deactivates specialization %s." />
-        <e k="ui_pmHelpContents" v="CONTENTS" />
-        <e k="ui_pmHelpNavigation" v="Left/Right: area · Up/Down: select or scroll · Page Up/Down: page" />
-        <e k="ui_pmHelpTopic01Title" v="快速开始与操作" />
-        <e k="ui_pmHelpTopic01Body" v="按 Ctrl + M 打开菜单。 使用菜单翻页控制切换标签页。 按 A/D 或左/右方向键切换人员，空格键确认，Esc 返回，T 设置运输优先级，G 处理加薪请求。" />
-        <e k="ui_pmHelpTopic02Title" v="申请人与员工" />
-        <e k="ui_pmHelpTopic02Body" v="新存档以四名申请人开始；最多可同时有八名。 可在个人资料中雇用申请人。 经验、可靠性和忠诚度范围为 0 到 100。 员工页面显示状态、工资、专长、履历和累计数据。 Applicant ages are weighted: 18–29 years 30%, 30–39 years 30%, 40–49 years 22%, 50–59 years 13%, and 60–65 years 5%." />
-        <e k="ui_pmHelpTopic03Title" v="员工与属性" />
-        <e k="ui_pmHelpTopic03Body" v="经验影响速度、磨损和消耗；可靠性影响中断、生病和提前终止任务；忠诚度影响加薪要求和辞职。员工页面还显示状态、工资、专长、统计数据和个人履历。" />
-        <e k="ui_pmHelpTopic04Title" v="工作与发展" />
-        <e k="ui_pmHelpTopic04Body" v="开始普通 AI 帮工任务时会打开员工选择。 只能选择可用员工，并且同一员工不能同时执行多个任务。 工作时间会提升经验和专长进度。 经验影响速度、磨损和消耗；可靠性影响减速、生病和任务中止；忠诚度影响工资冲突和辞职。 The selection window shows portrait, rank, status reason, age, monthly wage, attributes, completed jobs, work speed, specializations and detected job context. By default only available employees are shown. Tab shows all employees; unavailable entries are grey and state the reason. A specialization matching the detected job is highlighted green; an unknown job stays neutral." />
-        <e k="ui_pmHelpTopic05Title" v="Performance and effects" />
-        <e k="ui_pmHelpTopic05Body" v="经验影响速度、磨损和消耗；可靠性影响中断、生病和提前终止任务；忠诚度影响加薪要求和辞职。员工页面还显示状态、工资、专长、统计数据和个人履历。" />
-        <e k="ui_pmHelpTopic06Title" v="工资" />
-        <e k="ui_pmHelpTopic06Body" v="工资在月份变更时扣除，并取决于每月天数、经济难度和模组设置。员工可能要求加薪；必须在期限内接受或拒绝，这可能影响忠诚度。" />
-        <e k="ui_pmHelpTopic07Title" v="培训" />
-        <e k="ui_pmHelpTopic07Body" v="培训只能在月初开始，需要付费，并使员工到月底前不可用。完成培训会提高所选专长。培训选项和历史记录显示在培训与员工区域。 Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic08Title" v="专精" />
-        <e k="ui_pmHelpTopic08Body" v="Learned specializations remain permanently available. At most two bonuses are active at the same time. Either or both slots may be deactivated. Activating a learned inactive specialization is allowed only once per employee and agricultural year (March through February). Deactivation does not consume this yearly activation. Learning thresholds rise with every learned specialization: 240, 420, 600 and 780 minutes, then another 180 minutes each." />
-        <e k="ui_pmHelpTopic09Title" v="辞职、解雇与退休" />
-        <e k="ui_pmHelpTopic09Body" v="这些变更不一定立即生效，而会按期限在月份变更时完成。正在工作的员工不能立即被解雇。即将发生的变更显示在状态和履历中。" />
-        <e k="ui_pmHelpTopic10Title" v="AutoDrive 与 Courseplay" />
-        <e k="ui_pmHelpTopic10Body" v="先在员工 / 运输中分配司机并设置优先级。AutoDrive 使用第一名可用司机，没有司机时阻止启动。普通 Courseplay 启动会打开选择。AutoDrive 后自动启动 Courseplay 时，每辆车都会保留自己的司机，不再重新选择。" />
-        <e k="ui_pmHelpTopic11Title" v="多人游戏与存档" />
-        <e k="ui_pmHelpTopic11Body" v="人员数据和设置按农场分开。 服务器验证所有更改；只有获授权的农场管理员可以管理自己的农场。 员工、活动分配和设置会同步。 人员数据保存在存档内的 helperPersonnel.xml 中。" />
-        <e k="ui_pmHelpTopic12Title" v="Settings" />
-        <e k="ui_pmHelpTopic12Body" v="Settings apply per savegame. Personnel, economy, experience, speed, wear, consumables, fuel, reliability, loyalty and night-work effects can be adjusted separately. Disabling effects does not retroactively rewrite saved personnel values." />
-        <e k="ui_pmHelpTopic13Title" v="Savegame and data" />
-        <e k="ui_pmHelpTopic13Body" v="人员数据和设置按农场分开。 服务器验证所有更改；只有获授权的农场管理员可以管理自己的农场。 员工、活动分配和设置会同步。 人员数据保存在存档内的 helperPersonnel.xml 中。" />
-        <e k="ui_pmHelpTopic14Title" v="Controls and troubleshooting" />
-        <e k="ui_pmHelpTopic14Body" v="按 Ctrl + M 打开菜单。 使用菜单翻页控制切换标签页。 按 A/D 或左/右方向键切换人员，空格键确认，Esc 返回，T 设置运输优先级，G 处理加薪请求。 If nobody can be selected, check sickness, training, active field work, Courseplay, AutoDrive or a reservation. Tab reveals unavailable employees and their concrete reason." />
-        <e k="ui_button_release_worker" v="释放" />
-        <e k="ui_pmConfirmReleaseWorker" v="释放 %s？仅当服务器未检测到活动任务时才可执行。" />
-        <e k="ui_workerReleaseSuccess" v="员工已释放。" />
-        <e k="ui_workerReleaseDeniedActive" v="无法释放：员工仍有活动任务。" />
-        <e k="ui_workerReleaseDeniedAvailable" v="无需释放：员工已可用。" />
-        <e k="ui_workerReleaseDeniedCheck" v="无法释放：无法安全验证任务状态。" />
-        <e k="ui_workerReleaseDeniedPermission" v="无法释放：没有权限或员工无效。" />
+        1Nechat odpočinout2
+        1Přihlásit se2
+        <e k="ui_pmSpecializationDeactivateConfirm" v="Deaktivovat %s pro %s?" />
+        <e k="ui_pmSpecializationActivateConfirm" v="Aktivovat %s pro %s?" />
+        <e k="ui_pmSpecializationActivationUsed" v="Novou specializaci lze aktivovat jen jednou za zaměstnance a zemědělský rok." />
+        <e k="ui_pmSpecializationSlotsFull" v="Před aktivací další specializace deaktivujte alespoň jednu aktivní." />
+        1aktivní2
+        <e k="ui_pmSpecializationInactive" v="naučeno, neaktivní" />
+        <e k="ui_specializationActivatedNotice" v="%s znovu používá specializaci %s." />
+        <e k="ui_specializationDeactivatedNotice" v="%s deaktivuje specializaci %s." />
+        1OBSAH2
+        <e k="ui_pmHelpNavigation" v="Vlevo/Vpravo: oblast · Nahoru/Dolů: vybrat nebo posunout · Page Up/Down: strana" />
+        1Rychlý start a ovládání2
+        1Personální management nahrazuje anonymní pomocníky umělé inteligence konkrétními uchazeči a zaměstnanci. Každý zaměstnanec se dlouhodobě rozvíjí, pobírá měsíční plat a díky svým zkušenostem, spolehlivosti, loajalitě a specializacím může mít různé silné stránky i rizika.&#10;Vlastní nabídka se standardně otevírá klávesovou zkratkou Ctrl + M. Obsahuje přehled, uchazeče, zaměstnance, školení, nastavení a nápovědu. Přiřazení klávesových zkratek lze změnit v nastavení hry.&#10;Výchozí klávesové zkratky: přepínání mezi osobami klávesami A/D nebo šipkami vlevo/vpravo; potvrzení výběru mezerníkem nebo kliknutím myší; zrušení nebo návrat klávesou Esc; správa dopravy a mezd klávesami T nebo G. Na záložce Nápověda se pomocí šipek vlevo/vpravo přepíná mezi obsahem a články, šipkami nahoru/dolů se vybírá nebo posouvá a klávesou Bild nahoru/dolů se přeskakuje po stránkách.2
+        1Přehled a stav zaměstnanců2
+        1Přehled shrnuje aktuální stav podniku: v horní části jsou uvedeni zaměstnanci, dostupní zaměstnanci, uchazeči a reputace zaměstnavatele. Pod nimi se zobrazují probíhající zakázky s uvedením osoby, vozidla, zařízení a činnosti.&#10;Karta „Změny“ obsahuje pouze relevantní personální události, tedy změny v hodnocení zaměstnavatele, zkušenostech, spolehlivosti, loajalitě, věku nebo specializaci. Každá zpráva uvádí příčinu, dotčenou osobu a dopad; víceřádkový záznam se dabei považuje za jednu zprávu.&#10;„Měsíční zpráva“ a „Celkem“ zobrazují aktuální a celoživotní ukazatele. Přehled využijte pro rychlé plánování nasazení; podrobnosti, rozhodnutí a kroniky patří na jednotlivé odborné stránky.2
+        1Trh práce a nábor zaměstnanců2
+        1Nová hra začíná se čtyřmi uchazeči. Na trhu může být současně maximálně osm uchazečů. Při každé změně měsíce se losují až tři nová místa; šance na jedno místo činí 15 % + 0,7 × reputace zaměstnavatele. Při reputaci 60 je to 57 %, při reputaci 100 pak 85 % na jedno místo. Je-li trh prázdný, vygeneruje se alespoň jeden nový uchazeč.&#10;Uchazeči zůstávají v měsíci svého vytvoření zaručeně k dispozici. Po prvním měsíčním přechodu činí jejich šance na odchod v závislosti na kvalitě 10–30 %, po druhém 30–50 % a při třetím měsíčním přechodu 100 %. Dobré profily mohou zmizet dříve, protože jejich kvalita zvyšuje šanci na odchod.&#10;Uchazeči jsou ve věku 18–65 let, mají trvalé datum narození a dále stárnou. Jejich profesní zázemí zahrnuje rodinný podnik, chov dojnic, zemědělské služby, polní hospodářství, smíšený podnik, logistiku, opravnu zemědělských strojů a kancelářské povolání. Věk a profesní zázemí ovlivňují především zkušenosti a případné odborné znalosti.&#10;Požadavek na plat vychází ze zkušeností a spolehlivosti, má náhodnou odchylku 96–106 % a je ovlivněn reputací zaměstnavatele. Nízká reputace požadavek zvyšuje, vysoká reputace jej snižuje. Před přijetím se zobrazí potvrzení; přijetí zvyšuje reputaci o 1 bod.2
+        1Profil zaměstnance, hodnoty a status2
+        1Zkušenosti, spolehlivost a loajalita se pohybují v rozmezí od 0 do 100. Číslo zůstává přesně viditelné; sloupce umožňují rychlé srovnání.&#10;Hodnocení se odvíjí výhradně od zkušeností: pomocník 0–44, odborník 45–74, profesionál 75–100. Zkušenosti určují rychlost práce, dodatečné opotřebení a dodatečnou spotřebu. Spolehlivost ovlivňuje krátkodobé výpadky výkonu, nemoc, měsíční vývoj a riziko přerušení nasazení. Loajalita popisuje vazbu na podnik a ovlivňuje varování, spory ohledně mzdy a vlastní výpovědi.2
+        1Pomocníci s umělou inteligencí, přeprava a FollowMe2
+        1Při spuštění běžné práce s AI asistentem se otevře výběr zaměstnanců. Lze vybrat pouze dostupné zaměstnance. Zaměstnanec nemůže současně převzít více úkolů a není k dispozici v případě nemoci nebo školení.&#10;Úkol se zaznamená jako dokončený až po uplynutí 10 sekund. Pro pokrok ve specializaci musí praktická práce trvat alespoň 3 minuty.&#10;Klávesou T nebo tlačítkem menu otevřeš prioritu přepravy. Tam určíš, kteří zaměstnanci převezmou přepravní úkoly a v jakém pořadí budou prověřováni. U úkolu typu „z bodu A do bodu B“ je vybrán první volný zaměstnanec shora dolů. Funkce FollowMe nadále využívá výběr zaměstnanců a počítá se jako přepravní práce.2
+        1Zkušenosti a dopady na práci2
+        1ZÍSKÁVÁNÍ ZKUŠENOSTÍ&#10;– Zkušenosti se získávají na základě zaznamenané pracovní doby; nevyužité minuty učení se zachovávají.&#10;– Za jeden jednotlivý úkol lze získat maximálně 2 body zkušeností.&#10;– Pokrok je navíc omezen měsíčním limitem. Čím vyšší je úroveň zkušeností, tím déle trvá získání dalšího bodu.&#10;DŮSLEDKY&#10;– Hlavní specializace zvyšuje efektivní zkušenosti o 12 bodů, vedlejší specializace o 6; maximální hodnota je 100.&#10;– Pracovní rychlost = 70 % + 30 % × efektivní zkušenosti / 100.&#10;– Dodatečné opotřebení činí až 15 %, dodatečná spotřeba materiálu a paliva až 10 % × chybějící efektivní zkušenosti × ekonomický faktor. Ekonomický faktor je 0,75 / 1,00 / 1,25.&#10;DOBY UČENÍ A MĚSÍČNÍ LIMIT&#10;– Zkušenosti 0–24: 25 minut, měsíční limit +1; 25–49: 50 minut, 0; 50–69: 100 minut, -1.&#10;– Zkušenost 70–84: 220 minut, -2; 85–94: 540 minut, -3; 95–100: 1080 minut, -4.&#10;– Základní limit podle počtu dnů za měsíc: 1 den = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Skutečný limit = základní limit + úprava, minimálně 1.2
+        1Spolehlivost, nemoc a přerušení nasazení2
+        1Při spolehlivosti nižší než 85 % může docházet ke krátkodobým výpadkům výkonu. Kontrola se provádí jednou za minutu; pravděpodobnost výpadku stoupá s klesající spolehlivostí až na maximálně 15 %. Výpadek trvá 30–90 sekund, snižuje výkon o 4–15 % a může se opakovat až po dalších 3 minutách.&#10;Nemoc se kontroluje denně. Nemocný zaměstnanec není v daný den k dispozici; probíhající zásah je ukončen. Za měsíc je možné maximálně zaokrouhlený počet dnů za měsíc / 3 dny nemoci. Při spolehlivosti pod 50 se po 60 sekundách jednorázově zkontroluje úplné přerušení zásahu; zakázka se pak nepočítá jako úspěšná a událost se objeví v kronice.&#10;Orientační hodnoty pro nemoc/den a přerušení zásahu: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. Dobrý měsíc vyžaduje minimálně 120 pracovních minut, žádné incidenty, žádné dny nemoci a méně než 240 minut noční práce; pak existuje 35% šance na zvýšení spolehlivosti o 1 bod. Negativní rizika se sčítají a jsou omezena na 60 %.2
+        1Loajalita a reputace zaměstnavatele2
+        1Noví zaměstnanci obvykle začínají s loajalitou kolem 65. Včas vyplacené mzdy, dlouhá délka zaměstnání a vyhověné požadavky na mzdu posilují loajalitu; finanční problémy, noční práce a zamítnuté nebo dlouhodobě nevyřízené požadavky ji naopak oslabují. Noční práce mezi 22:00 a 06:00 se zaznamenává a může stát od 120 herních minut až 4 body loajality a 1–2 body prestiže.&#10;Při rozdílu mezi loajalitou a prestiží zaměstnavatele nejméně 15 / 30 / 50 bodů dochází každý měsíc k vyrovnání o 1 / 2 / 3 body. Události: Vyplacení mzdy při prestiži minimálně 40 +1 bod loajality; výplata vede k zápornému zůstatku -2; podnik byl předtím v mínusu -4; délka zaměstnání 3 / 6 / 12 / 24 měsíců +1 / +1 / +2 / +3; přijatý požadavek +3; zamítnutý -5, při loajalitě pod 40 -7; nevyřízený požadavek po uplynutí ochranného měsíce -2 za každý měsíc.&#10;Měsíční výpověď z vlastní iniciativy při loajalitě 0–5: 35 %, 6–9: 20 %, 10–14: 10 %, od 15 žádná běžná výpověď z důvodu loajality. Prestiž zaměstnavatele začíná na 60, pohybuje se v rozmezí 0–100 a je kritická 0–19, slabá 20–39, solidní 40–59, dobrá 60–79 nebo velmi dobrá 80–100. Ovlivňuje počet a kvalitu uchazečů, platové požadavky a dlouhodobou loajalitu.2
+        1Platy, výplaty a mzdové nároky2
+        1Individuální základní platy se vypočítávají na základě praxe a spolehlivosti a v rámci každého praxového pásma se lineárně interpolují. Spolehlivost násobí hodnotu v rozmezí 0,94 až 1,06. Uchazeči navíc získávají příplatky za náhodnost, reputaci a případné specializace ve výši +5 % za hlavní specializaci a +3 % za vedlejší specializaci.&#10;Základní plat při 3 dnech/měsíc: Zkušenosti 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Měsíční plat = základní plat × faktor délky měsíce × faktor ekonomických nákladů, zaokrouhleno na desítky. Jsou-li individuální platy deaktivovány, platí standardní základní plat 100–100 000 v krocích po deseti. Faktory délky měsíce pro 1–28 dní: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Výplata se provádí na konci měsíce jako mzda. I zaměstnanci, jejichž pracovní poměr v tu chvíli končí, obdrží předem náležitou výplatu. Odborník nebo profesionál může požádat o zvýšení: Základní šance 70 %, omezena loajalitou na 55–85 %; později lze každý měsíc znovu zkusit s poloviční šancí. Přijetí přináší +3 k loajalitě a +1 k prestiži; odmítnutí snižuje loajalitu o 5, pod 40 o 7, a na 3 měsíce zvyšuje riziko výpovědi a nespolehlivosti. G otevře všechny nevyřízené pohledávky.2
+        1Specializace a praktický rozvoj2
+        1ZÁKLADNÍ PRAVIDLA&#10;– Existuje osm kategorií učení: příprava půdy, výsev, hnojení, ochrana rostlin, sklizeň, přeprava, šetrné zacházení se stroji a úsporný způsob práce.&#10;– Pokrok se ukládá zvlášť pro každou kategorii. Osvojené specializace zůstávají trvale zachovány; současně mohou být aktivní maximálně dva bonusy.&#10;POKROK V UČENÍ&#10;– Prahové hodnoty učení činí 240, 420, 600 a 780 minut; poté se každá další prahová hodnota zvyšuje o 180 minut.&#10;– Faktor učení je dán vztahem 1 + (zkušenost – 50)/250 + (spolehlivost – 50)/300 a je omezen na hodnotu 0,75 až 1,30. V případě více činností se doba učení váženě rozděluje.&#10;ROZDĚLENÍ ČINNOSTÍ&#10;– Obrábění půdy: pluh, kultivátor, rotační brána, disková brána, válec a mulčovač.&#10;– Výsev: secí a sázecí stroje a osivo.&#10;– Hnojení: minerální hnojiva, tekutá hnojiva, kejda, fermentované zbytky a hnůj. Ochrana rostlin: aplikace herbicidů.&#10;– Sklizeň: kombajny, žací ústrojí, lisy na balíky, sekačky, nakládací vozy a sběrače. Přeprava: přívěsy, vykládka a přeprava z bodu A do bodu B.&#10;BONUSY A AKTIVACE&#10;– Hlavní specializace: +12 efektivních zkušeností a +5 % základního platu. Druhá specializace: +6 a +3 %.&#10;– Obě pozice mohou být v nečinnosti. Naučenou specializaci v nečinnosti lze aktivovat pouze jednou za zaměstnance a zemědělský rok (březen–únor); ponechání v nečinnosti toto právo nevyčerpává.2
+        1Školení2
+        1Školení začínají pouze prvního dne v měsíci; pokud je tento den v měsíci, pak do 12:00 včetně. Zaměstnanec smí v rámci jednoho zemědělského roku (od března do února) absolvovat pouze jedno školení a nesmí být v té době v práci ani nemocný. Tato osoba zůstává nedostupná až do konce měsíce; pokrok se započítá až po dokončení školení na přelomu měsíce.&#10;Jedno školení přináší 30 % z počtu minut výuky potřebných pro další specializaci, minimálně 30 minut a nikdy více, než kolik ještě chybí. Každá kategorie má měsíční cenový faktor v rozmezí od -20 % do +20 % a s 25% pravděpodobností je plně obsazena. Náklady se odečtou ihned při zahájení a vycházejí z aktuálního měsíčního platu.&#10;Náklady na školení = aktuální měsíční plat × faktor kategorie × měsíční modifikátor. Faktory: zpracování půdy 75 %, výsev 90 %, hnojení 90 %, ochrana rostlin 100 %, sklizeň 110 %, přeprava 65 %, šetrné zacházení se stroji 120 %, úsporný způsob práce 120 %.2
+        1Propuštění, výpověď z vlastní iniciativy a odchod do důchodu2
+        1Propuštění musí být potvrzeno. V případě jednoho dne/měsíce musí být výpověď doručena 1. den do 12:00, aby nabyla účinnosti k prvnímu dni následujícího měsíce. V případě dvou nebo více dnů je rozhodným dnem konec zaokrouhleného půlměsíce, tj. den ceil(počet dnů/měsíc ÷ 2). Po uplynutí tohoto rozhodného dne se konec posouvá o další měsíc.&#10;V okamžiku oznámení výpovědi se loajalita okamžitě sníží o 40 a spolehlivost o 25. Zaměstnanec zůstává v zásadě k dispozici až do konce měsíce, kdy výpověď nabývá účinnosti. Ztráta reputace při propuštění: méně než 1 měsíc -12, méně než 3 -9, méně než 6 -7, méně než 12 -5, méně než 24 -3, od 24 měsíců -1; každé další propuštění ve stejném měsíci stojí navíc 4 body.&#10;Při loajalitě 0–14 se každý měsíc prověřuje možnost vlastní výpovědi. Zamítnutý požadavek na zvýšení platu může tuto šanci dočasně zvýšit o 5 procentních bodů. Ohlášená vlastní výpověď nabývá účinnosti ke konci měsíce a stojí 10 bodů reputace. Od 55. narozenin lze oznámit odchod do důchodu; riziko stoupá do 67 let na přibližně 80–90 %, ve věku 68 let činí 95 %, ve věku 69 let 98 % a ve věku 70 let 100 %. Osoba zůstává k dispozici do konce měsíce.2
+        1Profily, kronika a statistiky2
+        1Profily uchazečů spojují věk, profesní zázemí, zkušenosti, spolehlivost, loajalitu, specializace a dosavadní dobu působení na trhu do dynamického textu. Profily zaměstnanců doplňují délku pracovního poměru, nasazení, školení a pokrok ve vzdělávání.&#10;Osobní kronika může zaznamenávat nástup do zaměstnání, začátek a konec nasazení, přerušení nasazení, nemoc, školení, specializace, mzdové požadavky a rozhodnutí, změny v loajalitě a spolehlivosti, přidělení přepravy, jakož i propuštění, vlastní výpověď, odchod do důchodu a ukončení pracovního poměru.&#10;Průběh zaměstnání zaměstnance zobrazuje mimo jiné nasazení, pracovní dobu, školení, stav přepravy, poslední události, dny nemoci, mzdové požadavky, přerušení nasazení a dosud vyplacenou celkovou mzdu. Přehled navíc zobrazuje celkové hodnoty za celý areál, jako je počet kdykoli přijatých, propuštěných, dobrovolně odcházejících a odcházejících do důchodu.2
+        1Nastavení, režim pro více hráčů a skóre2
+        1Nastavení platí pro jednotlivé stavy hry a dělí se na pracovní výkon, rozvoj personálu a ekonomiku a mzdy. Efekty hratelnosti odemykají závislé efekty zkušeností; efekty zkušeností řídí rychlost, opotřebení, spotřební materiál a palivo. Efekty personálu odemykají změny loajality a možnost přesčasů. Ekonomické vlivy odemykají individuální platy a standardní měsíční plat.&#10;Deaktivované efekty nezmění stávající údaje o personálu zpětně. Zabraňují nebo povolují výhradně příslušný další efekt. Standardní měsíční plat slouží jako základní hodnota, pokud jsou individuální platy deaktivovány; lze jej přímo změnit v nastavení. Přiřazení kláves lze změnit v nastavení hry.&#10;V režimu pro více hráčů se personál, uchazeči, úkoly, platy, školení, nastavení a kroniky spravují a synchronizují na úrovni farmy. Rozhoduje server; pouze oprávnění správci farmy mohou měnit svou vlastní farmu. Data se nacházejí v souboru helperPersonnel.xml v uloženém stavu hry a aktuální přiřazení se při načítání obnoví, pokud je to možné. Staré herní pozice zůstávají použitelné; historická data mohou být u již odešlých zaměstnanců neúplná.2
+        <e k="ui_button_emergency_release_worker" v="释放" />
+        <e k="ui_pmConfirmEmergencyReleaseWorker" v="释放 %s？仅当服务器未检测到活动任务时才可执行。" />
+        <e k="ui_workerEmergencyReleaseSuccess" v="员工已释放。" />
+        <e k="ui_workerEmergencyReleaseDeniedActive" v="无法释放：员工仍有活动任务。" />
+        <e k="ui_workerEmergencyReleaseDeniedAvailable" v="无需释放：员工已可用。" />
+        <e k="ui_workerEmergencyReleaseDeniedCheck" v="无法释放：无法安全验证任务状态。" />
+        <e k="ui_workerEmergencyReleaseDeniedPermission" v="无法释放：没有权限或员工无效。" />
+    1Rychlý start a ovládání2
+    1Personální management nahrazuje anonymní pomocníky umělé inteligence konkrétními uchazeči a zaměstnanci. Každý zaměstnanec se dlouhodobě rozvíjí, pobírá měsíční plat a může mít různé silné stránky a rizika dané zkušenostmi, spolehlivostí, loajalitou a specializacemi.&#10;Vlastní nabídka se standardně otevírá klávesovou zkratkou Ctrl + M. Obsahuje přehled, uchazeče, zaměstnance, školení, nastavení a nápovědu. Přiřazení klávesových zkratek lze změnit v nastavení hry.&#10;Výchozí klávesové zkratky: přepínání mezi osobami klávesami A/D nebo šipkami vlevo/vpravo; potvrzení výběru mezerníkem nebo kliknutím myší; zrušení nebo návrat klávesou Esc; správa dopravy a mezd klávesami T nebo G. Na záložce Nápověda se pomocí šipek vlevo/vpravo přepíná mezi obsahem a články, šipkami nahoru/dolů se vybírá nebo posouvá a klávesou Bild nahoru/dolů se přeskakuje po stránkách.2
+    1Přehled a stav zaměstnanců2
+    1Přehled shrnuje aktuální stav podniku: v horní části jsou uvedeni zaměstnanci, dostupní zaměstnanci, uchazeči a reputace zaměstnavatele. Pod nimi se zobrazují probíhající zakázky s uvedením osoby, vozidla, zařízení a činnosti.&#10;Karta „Změny“ obsahuje pouze relevantní personální události, tedy změny v hodnocení zaměstnavatele, zkušenostech, spolehlivosti, loajalitě, věku nebo specializaci. Každá zpráva uvádí příčinu, dotčenou osobu a dopad; víceřádkový záznam se dabei považuje za jednu zprávu.&#10;„Měsíční zpráva“ a „Celkem“ zobrazují aktuální a celoživotní ukazatele. Přehled využijte pro rychlé plánování nasazení; podrobnosti, rozhodnutí a kroniky patří na jednotlivé odborné stránky.2
+    1Trh práce a nábor zaměstnanců2
+    1Nová hra začíná se čtyřmi uchazeči. Na trhu může být současně maximálně osm uchazečů. Při každé změně měsíce se losují až tři nová místa; šance na jedno místo činí 15 % + 0,7 × reputace zaměstnavatele. Při reputaci 60 je to 57 %, při reputaci 100 pak 85 % na jedno místo. Je-li trh prázdný, vygeneruje se alespoň jeden nový uchazeč.&#10;Uchazeči zůstávají v měsíci svého vytvoření zaručeně k dispozici. Po prvním měsíčním přechodu činí jejich šance na odchod v závislosti na kvalitě 10–30 %, po druhém 30–50 % a při třetím měsíčním přechodu 100 %. Dobré profily mohou zmizet dříve, protože jejich kvalita zvyšuje šanci na odchod.&#10;Uchazeči jsou ve věku 18–65 let, mají trvalé datum narození a dále stárnou. Jejich profesní zázemí zahrnuje rodinný podnik, chov dojnic, zemědělské služby, polní hospodářství, smíšený podnik, logistiku, opravnu zemědělských strojů a kancelářské povolání. Věk a profesní zázemí ovlivňují především zkušenosti a případné odborné znalosti.&#10;Požadavek na plat vychází ze zkušeností a spolehlivosti, má náhodnou odchylku 96–106 % a je ovlivněn reputací zaměstnavatele. Nízká reputace požadavek zvyšuje, vysoká reputace jej snižuje. Před přijetím se zobrazí potvrzení; přijetí zvyšuje reputaci o 1 bod.2
+    1Profil zaměstnance, hodnoty a status2
+    1Zkušenosti, spolehlivost a loajalita se pohybují v rozmezí od 0 do 100. Číslo zůstává přesně viditelné; sloupce umožňují rychlé srovnání.&#10;Hodnocení se odvíjí výhradně od zkušeností: pomocník 0–44, odborník 45–74, profesionál 75–100. Zkušenosti určují rychlost práce, dodatečné opotřebení a dodatečnou spotřebu. Spolehlivost ovlivňuje krátkodobé výpadky výkonu, nemoc, měsíční vývoj a riziko přerušení nasazení. Loajalita popisuje vazbu na podnik a ovlivňuje varování, spory ohledně mzdy a vlastní výpovědi.2
+    <e k="ui_pmHelpTopic05Title" v="Pomocníci s umělou inteligencí, přeprava a FollowMe" />
+    <e k="ui_pmHelpTopic05Body" v="Při spuštění běžné práce s AI asistentem se otevře výběr zaměstnanců. Lze vybrat pouze dostupné zaměstnance. Zaměstnanec nemůže současně převzít více úkolů a není k dispozici v případě nemoci nebo školení.&#10;Úkol se zaznamená jako dokončený až po uplynutí 10 sekund. Pro pokrok ve specializaci musí praktická práce trvat alespoň 3 minuty.&#10;Klávesou T nebo tlačítkem menu otevřeš prioritu přepravy. Tam určíš, kteří zaměstnanci převezmou přepravní úkoly a v jakém pořadí budou prověřováni. U úkolu typu „z bodu A do bodu B“ je vybrán první volný zaměstnanec shora dolů. Funkce FollowMe nadále využívá výběr zaměstnanců a počítá se jako přepravní práce." />
+    <e k="ui_pmHelpTopic06Title" v="Zkušenosti a dopady na práci" />
+    <e k="ui_pmHelpTopic06Body" v="ZÍSKÁVÁNÍ ZKUŠENOSTÍ&#10;– Zkušenosti se získávají na základě zaznamenané pracovní doby; nevyužité minuty učení se zachovávají.&#10;– Za jeden jednotlivý úkol lze získat maximálně 2 body zkušeností.&#10;– Pokrok je navíc omezen měsíčním limitem. Čím vyšší je úroveň zkušeností, tím déle trvá získání dalšího bodu.&#10;DŮSLEDKY&#10;– Hlavní specializace zvyšuje efektivní zkušenosti o 12 bodů, vedlejší specializace o 6; maximální hodnota je 100.&#10;– Pracovní rychlost = 70 % + 30 % × efektivní zkušenosti / 100.&#10;– Dodatečné opotřebení činí až 15 %, dodatečná spotřeba materiálu a paliva až 10 % × chybějící efektivní zkušenost × ekonomický faktor. Ekonomický faktor je 0,75 / 1,00 / 1,25.&#10;DOBY UČENÍ A MĚSÍČNÍ LIMIT&#10;– Zkušenost 0–24: 25 minut, měsíční limit +1; 25–49: 50 minut, 0; 50–69: 100 minut, -1.&#10;– Zkušenost 70–84: 220 minut, -2; 85–94: 540 minut, -3; 95–100: 1080 minut, -4.&#10;– Základní limit podle počtu dnů za měsíc: 1 den = 1, 2 = 2, 3–4 = 3, 5–6 = 4, 7–9 = 5, 10–12 = 6, 13–15 = 7, 16–18 = 8, 19–21 = 9, 22–24 = 10, 25–27 = 11, 28 = 12. Skutečný limit = základní limit + úprava, minimálně 1." />
+    <e k="ui_pmHelpTopic07Title" v="Spolehlivost, nemoc a přerušení nasazení" />
+    <e k="ui_pmHelpTopic07Body" v="Při spolehlivosti nižší než 85 % může docházet ke krátkodobým výpadkům výkonu. Kontrola se provádí jednou za minutu; pravděpodobnost výpadku stoupá s klesající spolehlivostí až na maximálně 15 %. Výpadek trvá 30–90 sekund, snižuje výkon o 4–15 % a může se opakovat až po dalších 3 minutách.&#10;Nemoc se kontroluje denně. Nemocný zaměstnanec není v daný den k dispozici; probíhající zásah je ukončen. Za měsíc je možné maximálně zaokrouhlený počet dnů za měsíc / 3 dny nemoci. Při spolehlivosti pod 50 se po 60 sekundách jednorázově zkontroluje úplné přerušení zásahu; zakázka se pak nepočítá jako úspěšná a událost se objeví v kronice.&#10;Orientační hodnoty pro nemoc/den a přerušení zásahu: 0–20: 10 % / 20 %; 21–29: 8 % / 15 %; 30–40: 8 % / 10 %; 41–49: 6 % / 5 %; 50–60: 6 % / 0 %; 61–80: 4 % / 0 %; 81–100: 2 % / 0 %. Dobrý měsíc vyžaduje minimálně 120 pracovních minut, žádné incidenty, žádné dny nemoci a méně než 240 minut noční práce; pak existuje 35% šance na zvýšení spolehlivosti o 1 bod. Negativní rizika se sčítají a jsou omezena na 60 %." />
+    <e k="ui_pmHelpTopic08Title" v="Loajalita a reputace zaměstnavatele" />
+    <e k="ui_pmHelpTopic08Body" v="Noví zaměstnanci obvykle začínají s loajalitou kolem 65. Včas vyplacené mzdy, dlouhá délka zaměstnání a vyhověné požadavky na mzdu posilují loajalitu; finanční problémy, noční práce a zamítnuté nebo dlouhodobě nevyřízené požadavky ji naopak oslabují. Noční práce mezi 22:00 a 06:00 se zaznamenává a může stát od 120 herních minut až 4 body loajality a 1–2 body prestiže.&#10;Při rozdílu mezi loajalitou a prestiží zaměstnavatele nejméně 15 / 30 / 50 bodů dochází každý měsíc k vyrovnání o 1 / 2 / 3 body. Události: Vyplacení mzdy při prestiži minimálně 40 +1 bod loajality; výplata vede k zápornému zůstatku -2; podnik byl předtím v mínusu -4; délka zaměstnání 3 / 6 / 12 / 24 měsíců +1 / +1 / +2 / +3; přijatý požadavek +3; zamítnutý -5, při loajalitě pod 40 -7; nevyřízený požadavek po uplynutí ochranného měsíce -2 za každý měsíc.&#10;Měsíční výpověď z vlastní iniciativy při loajalitě 0–5: 35 %, 6–9: 20 %, 10–14: 10 %, od 15 žádná běžná výpověď z důvodu loajality. Prestiž zaměstnavatele začíná na 60, pohybuje se v rozmezí 0–100 a je kritická 0–19, slabá 20–39, solidní 40–59, dobrá 60–79 nebo velmi dobrá 80–100. Ovlivňuje počet a kvalitu uchazečů, platové požadavky a dlouhodobou loajalitu." />
+    <e k="ui_pmHelpTopic09Title" v="Platy, výplaty a mzdové nároky" />
+    <e k="ui_pmHelpTopic09Body" v="Individuální základní platy se vypočítávají na základě praxe a spolehlivosti a v rámci každého praxového pásma se lineárně interpolují. Spolehlivost násobí hodnotu v rozmezí 0,94 až 1,06. Uchazeči navíc získávají příplatky za náhodnost, reputaci a případné specializace ve výši +5 % za hlavní specializaci a +3 % za vedlejší specializaci.&#10;Základní plat při 3 dnech/měsíc: Zkušenosti 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Měsíční plat = základní plat × faktor délky měsíce × faktor ekonomických nákladů, zaokrouhleno na desítky. Jsou-li individuální platy deaktivovány, platí standardní základní plat 100–100 000 v krocích po deseti. Faktory délky měsíce pro 1–28 dní: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Výplata se provádí na konci měsíce jako mzda. I zaměstnanci, jejichž pracovní poměr v tu chvíli končí, obdrží předem náležitou výplatu. Odborník nebo profesionál může požádat o zvýšení: Základní šance 70 %, omezeno loajalitou na 55–85 %; později lze každý měsíc znovu zkusit s poloviční šancí. Přijetí přináší +3 k loajalitě a +1 k prestiži; odmítnutí snižuje loajalitu o 5, pod 40 o 7, a na 3 měsíce zvyšuje riziko výpovědi a nespolehlivosti. G odemkne všechny otevřené pohledávky." />
+    <e k="ui_pmHelpTopic10Title" v="Specializace a praktický rozvoj" />
+    <e k="ui_pmHelpTopic10Body" v="ZÁKLADNÍ PRAVIDLA&#10;– Existuje osm kategorií učení: příprava půdy, výsev, hnojení, ochrana rostlin, sklizeň, přeprava, šetrné zacházení se stroji a úsporný způsob práce.&#10;– Pokrok se ukládá zvlášť pro každou kategorii. Osvojené specializace zůstávají trvale zachovány; současně mohou být aktivní maximálně dva bonusy.&#10;POKROK V UČENÍ&#10;– Prahové hodnoty učení činí 240, 420, 600 a 780 minut; poté se každá další prahová hodnota zvyšuje o 180 minut.&#10;– Faktor učení je dán vztahem 1 + (zkušenost – 50)/250 + (spolehlivost – 50)/300 a je omezen na hodnotu 0,75 až 1,30. V případě více činností se doba učení váženě rozděluje.&#10;ROZDĚLENÍ ČINNOSTÍ&#10;– Obrábění půdy: pluh, kultivátor, rotační brána, disková brána, válec a mulčovač.&#10;– Výsev: secí a sázecí stroje a osivo.&#10;– Hnojení: minerální hnojiva, tekutá hnojiva, kejda, fermentované zbytky a hnůj. Ochrana rostlin: aplikace herbicidů.&#10;– Sklizeň: kombajny, žací ústrojí, lisy na balíky, sekačky, nakládací vozy a sběrače. Přeprava: přívěsy, vykládka a přeprava z bodu A do bodu B.&#10;BONUSY A AKTIVACE&#10;– Hlavní specializace: +12 efektivních zkušeností a +5 % základního platu. Druhá specializace: +6 a +3 %.&#10;– Obě místa mohou být neaktivní. Naučenou neaktivní specializaci lze aktivovat pouze jednou za zaměstnance a zemědělský rok (březen–únor); ponechání v neaktivním stavu toto právo nevyčerpává." />
+    <e k="ui_pmHelpTopic11Title" v="Školení" />
+    <e k="ui_pmHelpTopic11Body" v="Školení začínají pouze prvního dne v měsíci; pokud je to den v měsíci, nejpozději do 12:00. Zaměstnanec smí v rámci jednoho zemědělského roku (od března do února) absolvovat pouze jedno školení a nesmí být v té době v práci ani nemocný. Tato osoba zůstává nedostupná až do konce měsíce; pokrok se započítá až po dokončení školení na přelomu měsíce.&#10;Jedno školení přináší 30 % z počtu minut výuky potřebných pro další specializaci, minimálně 30 minut a nikdy více, než kolik ještě chybí. Každá kategorie má měsíční cenový faktor v rozmezí od -20 % do +20 % a s 25% pravděpodobností je plně obsazena. Náklady se odečtou ihned při zahájení a vycházejí z aktuálního měsíčního platu.&#10;Náklady na školení = aktuální měsíční plat × faktor kategorie × měsíční modifikátor. Faktory: zpracování půdy 75 %, výsev 90 %, hnojení 90 %, ochrana rostlin 100 %, sklizeň 110 %, přeprava 65 %, šetrné zacházení se stroji 120 %, úsporný způsob práce 120 %." />
+    <e k="ui_pmHelpTopic12Title" v="Propuštění, výpověď z vlastní iniciativy a odchod do důchodu" />
+    <e k="ui_pmHelpTopic12Body" v="Propuštění musí být potvrzeno. V případě jednoho dne/měsíce musí být výpověď doručena 1. den do 12:00, aby nabyla účinnosti k prvnímu dni následujícího měsíce. V případě dvou nebo více dnů je rozhodným dnem konec zaokrouhleného půlměsíce, tj. den ceil(počet dnů/měsíc ÷ 2). Po uplynutí tohoto rozhodného dne se konec posouvá o další měsíc.&#10;V okamžiku oznámení výpovědi se loajalita okamžitě sníží o 40 a spolehlivost o 25. Zaměstnanec zůstává v zásadě k dispozici až do konce měsíce, kdy výpověď nabývá účinnosti. Ztráta reputace při propuštění: méně než 1 měsíc -12, méně než 3 -9, méně než 6 -7, méně než 12 -5, méně než 24 -3, od 24 měsíců -1; každé další propuštění ve stejném měsíci stojí navíc 4 body.&#10;Při loajalitě 0–14 se každý měsíc prověřuje možnost vlastní výpovědi. Zamítnutý požadavek na zvýšení platu může tuto šanci dočasně zvýšit o 5 procentních bodů. Ohlášená vlastní výpověď nabývá účinnosti ke konci měsíce a stojí 10 bodů reputace. Od 55. narozenin lze oznámit odchod do důchodu; riziko stoupá do 67 let na přibližně 80–90 %, ve věku 68 let činí 95 %, ve věku 69 let 98 % a ve věku 70 let 100 %. Osoba zůstává k dispozici do konce měsíce." />
+    <e k="ui_pmHelpTopic13Title" v="Profily, kronika a statistiky" />
+    <e k="ui_pmHelpTopic13Body" v="Profily uchazečů spojují věk, profesní zázemí, zkušenosti, spolehlivost, loajalitu, specializace a dosavadní dobu působení na trhu do dynamického textu. Profily zaměstnanců doplňují délku pracovního poměru, nasazení, školení a pokrok ve vzdělávání.&#10;Osobní kronika může zaznamenávat nástup do zaměstnání, začátek a konec nasazení, přerušení nasazení, nemoc, školení, specializace, mzdové požadavky a rozhodnutí, změny v loajalitě a spolehlivosti, přidělení přepravy, jakož i propuštění, vlastní výpověď, odchod do důchodu a ukončení pracovního poměru.&#10;Průběh zaměstnání zaměstnance zobrazuje mimo jiné nasazení, pracovní dobu, školení, stav přepravy, poslední události, dny nemoci, mzdové požadavky, přerušení nasazení a dosud vyplacenou celkovou mzdu. Přehled navíc zobrazuje celkové hodnoty za celý areál, jako je počet kdykoli přijatých, propuštěných, dobrovolně odcházejících a odcházejících do důchodu." />
+    <e k="ui_pmHelpTopic14Title" v="Nastavení, režim pro více hráčů a skóre" />
+    <e k="ui_pmHelpTopic14Body" v="Nastavení platí pro jednotlivé stavy hry a dělí se na pracovní výkon, rozvoj personálu a ekonomiku a mzdy. Efekty hratelnosti odemykají závislé efekty zkušeností; efekty zkušeností řídí rychlost, opotřebení, spotřební materiál a palivo. Efekty personálu odemykají změny loajality a možnost přesčasů. Ekonomické efekty odemykají individuální platy a standardní měsíční plat.&#10;Deaktivované efekty nezmění stávající údaje o personálu zpětně. Zabraňují nebo povolují výhradně příslušný další efekt. Standardní měsíční plat slouží jako základní hodnota, pokud jsou individuální platy deaktivovány; lze jej přímo změnit v nastavení. Přiřazení kláves lze změnit v nastavení hry.&#10;V režimu pro více hráčů se personál, uchazeči, úkoly, platy, školení, nastavení a kroniky spravují a synchronizují na úrovni farmy. Rozhoduje server; pouze oprávnění správci farmy mohou měnit svou vlastní farmu. Data se nacházejí v souboru helperPersonnel.xml v uloženém stavu hry a aktuální přiřazení se při načítání obnoví, pokud je to možné. Staré herní pozice zůstávají použitelné; historická data mohou být u již odešlých zaměstnanců neúplná." />
+    <e k="ui_pmHelpTopic15Title" v="Nastavení a první kroky" />
+    <e k="ui_pmHelpTopic15Body" v="Otevři profil uchazeče, zkontroluj jeho věk, zázemí, hodnoty, požadovaný plat a stávající specializace a poté potvrď jeho přijetí. Uchazeč se stane zaměstnancem aktuálního statku; všechna následující rozhodnutí, výplaty a vývoj se vztahují k tomuto statku.&#10;Po přijetí nejprve naplánuj krátkou, vhodnou práci. Zaměstnanec musí být k dispozici: nemoc, probíhající práce, školení, potvrzené ukončení pracovního poměru nebo stále aktivní přiřazení k modu mohou výběr znemožnit. Na záložce „Zaměstnanci“ se zobrazí konkrétní důvod.&#10;První přijetí zvyšuje reputaci zaměstnavatele o jeden bod. Vysoké hodnoty nejsou vždy automaticky lepší: zkušený uchazeč obvykle stojí více, zatímco levnější nováček potřebuje více času na rozvoj a školení." />
+    <e k="ui_pmHelpTopic16Title" v="Činnosti a zařazení do specializací" />
+    <e k="ui_pmHelpTopic16Body" v="Přiřazení se určuje na základě vozidla, zařízení a – je-li k dispozici – aplikovaného materiálu. Přednost má přímé přiřazení materiálu: osivo patří k výsevu; herbicid k ochraně rostlin; minerální hnojiva, tekutá hnojiva, kejda, fermentované zbytky a hnůj k hnojení. Vápno není automaticky rozpoznáno jako samostatná učící se kategorie.&#10;Přiřazení vozidel a zařízení: pluh, kultivátor, rotační brána, disková brána, válec a mulčovač patří k obdělávání půdy. Secí a sázecí stroje patří k výsevu. Polní postřikovače bez jednoznačně určeného materiálu spadají do hnojení. Kombajny, žací ústrojí, lisy na balíky, sekačky, nakládací vozy a sběrače patří ke sklizni. Přívěsy a vykládatelná vozidla patří k přepravě.&#10;FollowMe rozšiřuje praktickou detekci navíc o drtiče, sklízecí stroje na brambory a řepu, obraceče, shrnovače, rozmetadla hnoje, cisterny na kejdu, podzemní kypřiče, sběrače kamenů, brány a okopávače. Modifikovaná vozidla mohou zůstat neutrální, pokud jejich specializace neumožňuje jednoznačné zařazení. V takovém případě není slibován žádný nesprávný bonus za specializaci.&#10;Šetrné zacházení se stroji a úsporný provoz jsou obecné bonusy: první z nich snižuje dodatečné opotřebení způsobené zkušenostmi, druhý dodatečnou spotřebu paliva a materiálu. Zvolená činnost se zobrazí ve výběrovém okně; vhodná aktivní specializace je tam zvýrazněna." />
+    <e k="ui_specialization_transport" v="Doprava" />
+    <e k="ui_transportMarker" v="Doprava" />
+    <e k="ui_pmStatusLine" v="Stav: %s" />
+    <e k="ui_button_transport_manage_long" v="Doprava" />
+    <e k="ui_transportPriorityHeaderStatus" v="Stav" />
+    <e k="ui_transportPriorityHeaderEnabled" v="Doprava" />
+    <e k="ui_pmTrainingCostHeader" v="Náklady" />
+    <e k="ui_pmHistoryCareerTransport" v="Doprava: %s" />
+    <e k="ui_pmOverviewOverallHeader" v="CELKEM" />
+    <e k="ui_pmMonth02" v="duben" />
+    <e k="ui_pmMonth06" v="srpen" />
+    <e k="ui_pmMonth07" v="září" />
+    <e k="ui_pmMonth09" v="listopad" />
+    <e k="ui_pmMonth10" v="prosinec" />
+    <e k="ui_selectionAvailable" v="K dispozici" />
+    <e k="ui_selectionUnavailableSick" v="Krank" />
+    <e k="ui_selectionUnavailableTraining" v="Ve školení" />
+    <e k="ui_selectionUnavailableReserved" v="Rezervováno" />
+    <e k="ui_selectionUnavailableFieldwork" v="Terénní práce" />
+    <e k="ui_selectionUnavailableOther" v="Není k dispozici" />
+    <e k="ui_selectionJobUnknown" v="Zadání neznámé" />
+    <e k="ui_selectionAgeLabel" v="Změnit" />
+    <e k="ui_selectionJobsLabel" v="Zakázky" />
+    <e k="ui_selectionSpeedLabel" v="Pracovní tempo" />
+    <e k="ui_selectionAgeValue" v="%d let" />
+    <e k="ui_selectionVehicleLine" v="Vozidlo: %s" />
+    <e k="ui_selectionActivityLine" v="Úkol: %s" />
+    <e k="ui_selectionFieldLine" v="Pole: %s" />
+    <e k="ui_selectionStatusLine" v="Stav: %s" />
+    <e k="ui_button_specializationDeactivate" v="Nechat odpočinout" />
+    <e k="ui_button_specializationActivate" v="Přihlásit se" />
+    <e k="ui_pmSpecializationActive" v="aktivní" />
+    <e k="ui_pmHelpContents" v="OBSAH" />
+    <e k="ui_pmHelpTopic01Title" v="Rychlý start a ovládání" />
+    <e k="ui_pmHelpTopic01Body" v="Personální management nahrazuje anonymní pomocníky umělé inteligence konkrétními uchazeči a zaměstnanci. Každý zaměstnanec se dlouhodobě rozvíjí, pobírá měsíční plat a díky svým zkušenostem, spolehlivosti, loajalitě a specializacím může mít různé silné stránky i rizika.&#10;Vlastní nabídka se standardně otevírá klávesovou zkratkou Ctrl + M. Obsahuje přehled, uchazeče, zaměstnance, školení, nastavení a nápovědu. Přiřazení klávesových zkratek lze změnit v nastavení hry.&#10;Výchozí klávesové zkratky: přepínání mezi osobami klávesami A/D nebo šipkami vlevo/vpravo; potvrzení výběru mezerníkem nebo kliknutím myší; zrušení nebo návrat klávesou Esc; správa dopravy a mezd klávesami T nebo G. Na záložce Nápověda se pomocí šipek vlevo/vpravo přepíná mezi obsahem a články, šipkami nahoru/dolů se vybírá nebo posouvá a klávesou Bild nahoru/dolů se přeskakuje po stránkách." />
+    <e k="ui_pmHelpTopic02Title" v="Přehled a stav zaměstnanců" />
+    <e k="ui_pmHelpTopic02Body" v="Přehled shrnuje aktuální stav podniku: v horní části jsou uvedeni zaměstnanci, dostupní zaměstnanci, uchazeči a reputace zaměstnavatele. Pod nimi se zobrazují probíhající zakázky s uvedením osoby, vozidla, zařízení a činnosti.&#10;Karta „Změny“ obsahuje pouze relevantní personální události, tedy změny v hodnocení zaměstnavatele, zkušenostech, spolehlivosti, loajalitě, věku nebo specializaci. Každá zpráva uvádí příčinu, dotčenou osobu a dopad; víceřádkový záznam se dabei považuje za jednu zprávu.&#10;„Měsíční zpráva“ a „Celkem“ zobrazují aktuální a celoživotní ukazatele. Přehled využijte pro rychlé plánování nasazení; podrobnosti, rozhodnutí a kroniky patří na jednotlivé odborné stránky." />
+    <e k="ui_pmHelpTopic03Title" v="Trh práce a nábor zaměstnanců" />
+    <e k="ui_pmHelpTopic03Body" v="Nová hra začíná se čtyřmi uchazeči. Na trhu může být současně maximálně osm uchazečů. Při každé změně měsíce se losují až tři nová místa; šance na jedno místo činí 15 % + 0,7 × reputace zaměstnavatele. Při reputaci 60 je to 57 %, při reputaci 100 pak 85 % na jedno místo. Je-li trh prázdný, vygeneruje se alespoň jeden nový uchazeč.&#10;Uchazeči zůstávají v měsíci svého vytvoření zaručeně k dispozici. Po prvním měsíčním přechodu činí jejich šance na odchod v závislosti na kvalitě 10–30 %, po druhém 30–50 % a při třetím měsíčním přechodu 100 %. Dobré profily mohou zmizet dříve, protože jejich kvalita zvyšuje šanci na odchod.&#10;Uchazeči jsou ve věku 18–65 let, mají trvalé datum narození a dále stárnou. Jejich profesní zázemí zahrnuje rodinný podnik, chov dojnic, zemědělské služby, polní hospodářství, smíšený podnik, logistiku, opravnu zemědělských strojů a kancelářské povolání. Věk a profesní zázemí ovlivňují především zkušenosti a případné odborné znalosti.&#10;Požadavek na plat vychází ze zkušeností a spolehlivosti, má náhodnou odchylku 96–106 % a je ovlivněn reputací zaměstnavatele. Nízká reputace požadavek zvyšuje, vysoká reputace jej snižuje. Před přijetím se zobrazí potvrzení; přijetí zvyšuje reputaci o 1 bod." />
+    <e k="ui_pmHelpTopic04Title" v="Profil zaměstnance, hodnoty a status" />
+    <e k="ui_pmHelpTopic04Body" v="Zkušenosti, spolehlivost a loajalita se pohybují v rozmezí od 0 do 100. Číslo zůstává přesně viditelné; sloupce umožňují rychlé srovnání.&#10;Hodnocení se odvíjí výhradně od zkušeností: pomocník 0–44, odborník 45–74, profesionál 75–100. Zkušenosti určují rychlost práce, dodatečné opotřebení a dodatečnou spotřebu. Spolehlivost ovlivňuje krátkodobé výpadky výkonu, nemoc, měsíční vývoj a riziko přerušení nasazení. Loajalita popisuje vazbu na podnik a ovlivňuje varování, spory ohledně mzdy a vlastní výpovědi." />
     </elements>
 </l10n>

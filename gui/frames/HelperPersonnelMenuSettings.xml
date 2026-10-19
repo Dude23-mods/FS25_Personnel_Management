@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <GUI name="helperPersonnelMenuSettings">
-    <GuiElement name="helperPersonnelMenuSettings" />
+    <GuiElement profile="fs25_menuContainer" name="helperPersonnelMenuSettings">
+        <GuiElement profile="fs25_menuHeaderPanel">
+            <Bitmap profile="fs25_menuHeaderIconBg"><Bitmap profile="fs25_menuHeaderIcon" imageSliceId="hpUiPm20260710c.settings" /></Bitmap>
+            <Text profile="fs25_menuHeaderTitle" text="$l10n_ui_pmMenuPageSettings" />
+        </GuiElement>
+        <ThreePartBitmap profile="fs25_lineSeparatorTopHighlighted" position="0px -57px" />
+        <!-- Native FS25 settings host: owns clipping, tooltip column and scrolling. -->
+        <GuiElement profile="fs25_subCategorySelectorTabbedContainer" id="settingsContainer">
+            <Text profile="fs25_settingsNoPermissionText" id="settingsPermission" name="noPermissionText" text="$l10n_ui_pmSettingsHostOnly" visible="false" />
+            <ScrollingLayout profile="fs25_settingsLayout" id="settingsLayout" name="layout" bottomClipperElementName="bottomClipper">
+                <Text profile="fs25_settingsSectionHeader" id="settingsSectionWork" text="$l10n_ui_hpSetting_groupWork" />
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingGameplayEffects" name="gameplayEffects" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_gameplayEffects" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingExperienceEffects" name="experienceEffects" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_experienceEffects" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingSpeedEffect" name="speedEffect" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_speedEffect" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingWearEffect" name="wearEffect" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_wearEffect" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingConsumablesEffect" name="consumablesEffect" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_consumablesEffect" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingFuelEffect" name="fuelEffect" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_fuelEffect" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingReliabilityEffects" name="reliabilityEffects" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_reliabilityEffects" /></Bitmap>
+                <Text profile="fs25_settingsSectionHeader" id="settingsSectionPersonnel" text="$l10n_ui_hpSetting_groupPersonnel" />
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingPersonnelEffects" name="personnelEffects" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_personnelEffects" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingLoyaltyEffects" name="loyaltyEffects" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_loyaltyEffects" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingNightWorkLoyaltyEffect" name="nightWorkLoyaltyEffect" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_nightWorkLoyaltyEffect" /></Bitmap>
+                <Text profile="fs25_settingsSectionHeader" id="settingsSectionEconomy" text="$l10n_ui_hpSetting_groupEconomy" />
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingEconomicEffects" name="economicEffects" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_economicEffects" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><BinaryOption profile="fs25_settingsBinaryOption" id="settingIndividualWages" name="individualWages" onClick="onStaticSettingChanged" onFocus="onStaticSettingFocused"><Text profile="fs25_multiTextOptionTooltip" name="tooltip" /></BinaryOption><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_individualWages" /></Bitmap>
+                <Bitmap profile="fs25_multiTextOptionContainer" onCreate="onCreateStaticSettingRow"><TextInput profile="hp_settingsTextInput" id="settingStandardWage" name="standardWage" onClick="onStandardWageClicked" onEnterPressed="onStandardWageEnterPressed" onEscPressed="onStandardWageEscPressed" onFocus="onStaticSettingFocused" enterWhenClickOutside="true" maxCharacters="6"><ThreePartBitmap profile="fs25_textInputBg" /><Bitmap profile="fs25_textInputIconBox"><Bitmap profile="fs25_textInputIcon" /></Bitmap></TextInput><Text profile="fs25_settingsMultiTextOptionTitle" text="$l10n_ui_hpSetting_standardWage" /></Bitmap>
+            </ScrollingLayout>
+            <Bitmap profile="fs25_settingsTooltipSeparator" name="separator" />
+            <Bitmap profile="fs25_stopClipper" name="bottomClipper" />
+        </GuiElement>
+        <ThreePartBitmap profile="fs25_sliderDockedBg" id="settingsSliderBox">
+            <ThreePartBitmap profile="fs25_sliderDockedBox"><Slider profile="fs25_sliderDocked" id="settingsSlider" /></ThreePartBitmap>
+        </ThreePartBitmap>
+    </GuiElement>
+    <GUIProfiles>
+        <Profile name="hp_settingsTextInput" extends="fs25_textInput" with="anchorMiddleRight">
+            <size value="276px 32px" />
+            <position value="-12px 0px" />
+            <maxInputTextWidth value="245px" />
+        </Profile>
+    </GUIProfiles>
 </GUI>
