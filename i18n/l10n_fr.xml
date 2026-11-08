@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="PROFIL" />
         <e k="ui_pmHistoryHeader" v="HISTORIQUE" />
         <e k="ui_button_train" v="Former" />
+        <e k="ui_pmManageSpecialization" v="Gérer la spécialisation" />
         <e k="ui_pmStatusApplicant" v="Candidat" />
         <e k="ui_pmBirthLine" v="Né(e) le : %s" />
         <e k="ui_pmRankLabel" v="Rang" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="Actif" />
         <e k="ui_transportPriorityInactive" v="Non affecté" />
         <e k="ui_transportPriorityMoveUp" v="Monter" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="Monter" />
         <e k="ui_transportPriorityMoveDown" v="Descendre" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="Descendre" />
         <e k="ui_transportPriorityToggle" v="Activer/désactiver" />
         <e k="ui_transportPriorityApply" v="Appliquer" />
         <e k="ui_transportPriorityCancel" v="Annuler" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="profession de bureau" />
         <e k="ui_status_retirementPending" v="départ à la retraite à la fin du mois" />
         <e k="ui_retirementNotice" v="%s prendra sa retraite à la fin du mois." />
-        <e k="ui_pmTrainingIntro" v="Les spécialisations améliorent les performances dans la catégorie adaptée. Une formation commence uniquement au début du mois, coûte de l’argent et rend l’employé indisponible jusqu’à la fin du mois. La progression est créditée à la fin. Les offres et prix changent chaque mois ; une seule formation est possible par année agricole de mars à février. Les spécialisations apprises restent acquises, mais seuls deux bonus sont actifs. Les deux emplacements peuvent être désactivés. Une spécialisation inactive ne peut être réactivée qu’une fois par employé et par année agricole." />
+        <e k="ui_pmTrainingIntro" v="Développez votre équipe de manière ciblée : sélectionnez « %s », puis choisissez une catégorie de formation. Les spécialisations améliorent les performances dans le domaine correspondant. Les formations débutent au début du mois, ont un coût et mobilisent le collaborateur jusqu'à la fin du mois. Les progrès sont pris en compte une fois la formation terminée. Les offres et les tarifs varient chaque mois. Chaque employé peut suivre une formation par année agricole, de mars à février. Les spécialisations acquises sont conservées ; deux bonus au maximum peuvent être actifs, et les deux places peuvent être mises en veille. Par employé et par année agricole, une seule spécialisation acquise mais inactive peut être activée." />
         <e k="ui_pmTrainingCategoryHeader" v="Catégorie d'apprentissage" />
         <e k="ui_pmTrainingProgressHeader" v="Progression vers la spécialisation" />
         <e k="ui_pmTrainingRunning" v="formation en cours" />
@@ -576,9 +579,9 @@
         <e k="ui_pmHelpTopic02Title" v="Candidats et recrutement" />
         <e k="ui_pmHelpTopic02Body" v="Une nouvelle sauvegarde commence avec quatre candidats ; huit au maximum sont présents. Départ du marché : mois de création 0 %, après un mois 10–30 %, deux mois 30–50 %, trois mois 100 %. Âges pondérés : 18–29 ans 30 %, 30–39 30 %, 40–49 22 %, 50–59 13 %, 60–65 5 %. Le profil affiche parcours, valeurs, salaire demandé et spécialisations. La personne recrutée appartient durablement à l’exploitation." />
         <e k="ui_pmHelpTopic03Title" v="Valeurs, rangs et statut" />
-        <e k="ui_pmHelpTopic03Body" v="Expérience, fiabilité et loyauté vont de 0 à 100. Rang selon l’expérience : Aide 0–44, Ouvrier qualifié 45–74, Professionnel 75–100. L’expérience agit sur vitesse, usure et consommation ; la fiabilité sur ralentissements, maladie et abandon ; la loyauté sur conflits salariaux et démissions. Le profil affiche statut, salaire, spécialisations, missions et chronique." />
+        <e k="ui_pmHelpTopic03Body" v="Tous les candidats sont générés sur un marché global. C’est ensuite la réputation de l’employeur qui détermine à quelles exploitations un candidat est proposé. C’est pourquoi les exploitations peuvent recevoir des offres différentes ; si une même personne est proposée à plusieurs exploitations, elle présente partout les mêmes données de base, les mêmes valeurs et la même fourchette de valeurs initiale. Dès qu’une exploitation embauche cette personne, celle-ci disparaît de toutes les autres exploitations.&#10;Au départ, l’expérience, la fiabilité, la loyauté, le rang et les prétentions salariales restent cachés. Pour chaque candidat, une seule de ces trois valeurs est visible sous la forme d’une fourchette aléatoire de 30 points de pourcentage. La valeur réelle se trouve toujours dans cette fourchette, mais pas nécessairement au milieu. Le nom, l’âge, le parcours professionnel, le CV et les spécialisations restent visibles.&#10;Un entretien d’embauche comprend au maximum trois questions. Une première question portant sur une valeur inconnue révèle une fourchette de 30 points ; poser une nouvelle question réduit cette fourchette à 15 points, et une question supplémentaire révèle la valeur exacte. Les valeurs déjà connues ne peuvent pas être sélectionnées à nouveau. L’entretien peut être interrompu et repris plus tard en conservant l’état d’avancement actuel. Les prétentions salariales sont révélées avec la dernière réponse." />
         <e k="ui_pmHelpTopic04Title" v="Aides IA, sélection et transport" />
-        <e k="ui_pmHelpTopic04Body" v="Le démarrage d’un travail IA ou Courseplay ouvre la sélection conforme au profil approuvé : vrais portraits, rang, motif de disponibilité, âge, salaire, trois valeurs, missions, vitesse, spécialisations et contexte détecté. Par défaut seuls les disponibles sont visibles ; Tab affiche tout le personnel. Les indisponibles sont grisés avec le motif champ, Courseplay, AutoDrive, maladie, formation, réservation ou autre. La spécialisation adaptée est verte ; une mission inconnue reste neutre. Une mission compte après 10 secondes et la progression pratique après 3 minutes." />
+        <e k="ui_pmHelpTopic04Body" v="L'expérience, la fiabilité et la loyauté sont notées sur une échelle de 0 à 100. Tant que les entretiens d'embauche sont en cours, ces valeurs ne s'affichent pour les candidats qu'en fonction de l'état d'avancement connu de l'entretien. Le classement dépend exclusivement de l'expérience et n'apparaît donc que dès que celle-ci est connue avec précision.&#10;Après l'embauche, les valeurs encore inconnues restent dans un premier temps masquées. Lors de missions réelles, le collaborateur accumule de l'expérience en temps réel. Au bout d’une durée fixée pour chaque personne, comprise entre 20 et 35 minutes, les trois valeurs sont entièrement connues. Les pauses et les périodes sans mission en cours ne sont pas prises en compte. La progression est enregistrée dans le score.&#10;L’expérience détermine la vitesse de travail, l’usure supplémentaire et la consommation supplémentaire. La fiabilité influe sur les baisses de performance à court terme, la maladie, l’évolution mensuelle et le risque d’interruption de la mission. La loyauté décrit l’attachement à l’entreprise et influe sur les avertissements, les conflits salariaux et les démissions spontanées." />
         <e k="ui_pmHelpTopic05Title" v="Expérience et effets" />
         <e k="ui_pmHelpTopic05Body" v="Minutes par point : expérience 0–24 : 25 ; 25–49 : 50 ; 50–69 : 100 ; 70–84 : 220 ; 85–94 : 540 ; 95–100 : 1080. Maximum 2 points par mission. Limite mensuelle selon jours/mois : 1→1 ; 2→2 ; 3–4→3 ; 5–6→4 ; 7–9→5 ; 10–12→6 ; 13–15→7 ; 16–18→8 ; 19–21→9 ; 22–24→10 ; 25–27→11 ; 28→12. Ajustement par niveau : +1, 0, -1, -2, -3, -4 ; minimum réel 1." />
         <e k="ui_pmHelpTopic06Title" v="Fiabilité et maladie" />
@@ -598,9 +601,9 @@
         <e k="ui_pmHelpTopic13Title" v="Paramètres" />
         <e k="ui_pmHelpTopic13Body" v="Paramètres par sauvegarde. Performance : expérience, vitesse, usure, consommables, carburant et fiabilité. Personnel : effets, loyauté et nuit. Économie : effets économiques, salaires individuels et base mensuelle 100–100 000 par pas de 10. Désactiver un effet ne réécrit pas rétroactivement les valeurs enregistrées. Les touches sont modifiables dans les paramètres du jeu." />
         <e k="ui_pmHelpTopic14Title" v="Multijoueur et sauvegardes" />
-        <e k="ui_pmHelpTopic14Body" v="Personnel, candidats, affectations, salaires, formations, paramètres et chroniques sont séparés par exploitation. Le serveur décide ; seuls les responsables autorisés modifient leur ferme. Données dans helperPersonnel.xml, synchronisées et restaurées autant que possible. La version 1.1.4.0 stocke les spécialisations apprises et la dernière année d’activation. Les anciennes sauvegardes considèrent automatiquement les spécialisations actives comme apprises." />
+        <e k="ui_pmHelpTopic14Body" v="Le paramètre « Entretiens d'embauche » s'applique à chaque partie. S'il est activé, les valeurs masquées, les entretiens et leur révélation ultérieure s'appliquent pendant la durée de la mission. S'il est désactivé, toutes les valeurs des candidats et des employés s'affichent intégralement, comme auparavant. Seuls le serveur et les gestionnaires de ferme autorisés peuvent modifier ce paramètre.&#10;En mode multijoueur, c'est le serveur qui décide de chaque question et synchronise l'état des entretiens. Le premier gestionnaire de ferme autorisé à ouvrir la fenêtre mène l’entretien. Les autres joueurs de la même ferme peuvent observer en direct ; leurs boutons thématiques restent désactivés. Si le responsable de l’entretien ferme la fenêtre ou si sa connexion est interrompue, un autre gestionnaire de ferme autorisé peut prendre le relais.&#10;Le personnel, les candidats, les missions, les salaires, les formations, les embauches et les chroniques restent spécifiques à chaque ferme. Les candidats globaux peuvent être proposés à plusieurs fermes, mais leurs entretiens sont enregistrés séparément pour chaque ferme." />
         <e k="ui_pmHelpTopic15Title" v="Recrutement et premiers pas" />
-        <e k="ui_pmHelpTopic15Body" v="Ouvrez un candidat, vérifiez son âge, son parcours, ses valeurs, son salaire demandé et ses spécialisations, puis confirmez le recrutement. Il devient employé de l’exploitation actuelle ; les décisions, salaires et évolutions suivants sont propres à cette exploitation.&#10;Planifiez d’abord un travail court et adapté. Une maladie, une mission en cours, une formation, une fin de contrat confirmée ou une affectation encore active peuvent empêcher la sélection. L’onglet Employés indique le motif précis.&#10;Le premier recrutement ajoute un point de réputation. Plus d’expérience coûte généralement plus cher ; un débutant économique demande davantage de travail et de formation." />
+        <e k="ui_pmHelpTopic15Body" v="Dans l'onglet « Candidat », ouvrez l'entretien d'embauche et sélectionnez « Expérience », « Fiabilité » ou « Loyauté ». La question choisie et la réponse apparaissent dans le fil de l'entretien. L'entretien se termine au plus tard après trois questions et les prétentions salariales s'affichent. Prends ta décision concernant l’embauche en fonction des valeurs exactes connues, des fourchettes et de l’incertitude restante.&#10;Après l’embauche, les valeurs qui n’ont pas été entièrement clarifiées restent dans un premier temps à leur dernier niveau connu. Planifie des missions réelles : après 20 à 35 minutes d’activité en temps réel, les valeurs sont entièrement révélées. Le collaborateur doit être disponible ; une maladie, un travail en cours, une formation ou un départ confirmé peuvent empêcher sa sélection.&#10;Une embauche améliore la réputation de l’employeur d’un point. Des valeurs élevées ne sont pas toujours automatiquement meilleures : un candidat expérimenté coûte généralement plus cher, tandis qu’un débutant moins coûteux nécessite plus de temps pour son développement et sa formation." />
         <e k="ui_pmHelpTopic16Title" v="Activités et attribution des spécialisations" />
         <e k="ui_pmHelpTopic16Body" v="L’attribution utilise le véhicule, les outils et, lorsqu’elle existe, la matière appliquée. La matière est prioritaire : semences pour semis, herbicide pour protection, engrais minéral ou liquide, lisier, digestat et fumier pour fertilisation. La chaux n’a pas d’attribution automatique.&#10;Charrues, cultivateurs, herses, rouleaux et broyeurs appartiennent au travail du sol ; semoirs et planteuses au semis. Les pulvérisateurs sans matière claire sont classés en fertilisation. Moissonneuses, barres de coupe, presses, faucheuses, autochargeuses et pick-ups sont de la récolte ; remorques et véhicules déchargeables sont du transport.&#10;FollowMe reconnaît aussi ensileuses, arracheuses, faneuses, andaineurs, épandeurs, tonnes à lisier, décompacteurs, ramasseuses de pierres, herses étrilles et houes. Les véhicules de mods peuvent rester neutres si aucune attribution fiable n’existe. Entretien réduit l’usure supplémentaire ; Économie réduit carburant et matériaux supplémentaires." />
         <e k="ui_button_emergency_release_worker" v="Libération d’urgence" />
@@ -610,5 +613,244 @@
         <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Libération d’urgence inutile : l’employé est déjà disponible." />
         <e k="ui_workerEmergencyReleaseDeniedCheck" v="Libération d’urgence indisponible : aucune affectation valide n’a été trouvée." />
         <e k="ui_workerEmergencyReleaseDeniedPermission" v="Libération d’urgence indisponible : autorisation manquante ou employé invalide." />
+        <e k="ui_hpSetting_applicantInterviews" v="Entretiens d'embauche" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="Masque les informations relatives aux candidats. Au cours de trois séries de questions au maximum, des fourchettes ou des montants précis sont révélés ; les prétentions salariales apparaissent à la fin de l'entretien." />
+        <e k="ui_pmValueUnknown" v="Inconnu" />
+        <e k="ui_hpInterviewPrompt" v="Que souhaites-tu demander ?" />
+        <e k="ui_hpInterviewTitle" v="Entretien d'embauche" />
+        <e k="ui_hpInterviewTopicExperience" v="Expérience" />
+        <e k="ui_hpInterviewTopicReliability" v="Fiabilité" />
+        <e k="ui_hpInterviewTopicLoyalty" v="loyauté" />
+        <e k="ui_hpInterviewRound" v="Séance de questions-réponses %d sur 3" />
+        <e k="ui_hpInterviewLeader" v="C'est toi qui mènes la conversation." />
+        <e k="ui_hpInterviewObserver" v="Tu suis la conversation." />
+        <e k="ui_hpInterviewFinished" v="L'entretien d'embauche est terminé." />
+        <e k="ui_hpInterviewWageIntro" v="Mes prétentions salariales :" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="Quelle expérience pratique apportez-vous pour travailler dans notre exploitation ?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="Pourriez-vous préciser davantage votre expérience pratique ?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="Comment vous assurez-vous que nous puissions compter sur vous au quotidien ?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="Comment décririez-vous plus précisément votre fiabilité lorsque vous travaillez de manière autonome ?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="Qu'est-ce qui est important pour vous pour que vous restiez fidèle à une entreprise sur le long terme ?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="Comment évalueriez-vous plus précisément votre fidélité à long terme envers un employeur ?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="Mon parcours professionnel jusqu'à présent reste assez simple." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="J'ai déjà pris en charge plusieurs missions dans ce domaine." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="Je dispose d'une grande expérience pratique." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="Lorsque je suis pressé par le temps, j'ai parfois besoin de consignes claires." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="En règle générale, on peut compter sur les accords conclus et les tâches accomplies." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="Je travaille avec beaucoup de rigueur et je tiens toujours mes engagements." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="Lorsqu'il s'agit d'une nouvelle entreprise, je prends d'abord une décision plutôt à court terme." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="Si la collaboration se passe bien, je peux tout à fait envisager de rester plus longtemps." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="La constance et une collaboration à long terme sont très importantes pour moi." />
+        <e k="ui_hpInterviewAnswerIntro1" v="Je dirais ça comme ça :" />
+        <e k="ui_hpInterviewAnswerIntro2" v="À mon avis, voici ce qu'il en est :" />
+        <e k="ui_hpInterviewAnswerIntro3" v="L'évaluation suivante est la plus pertinente :" />
+        <e k="ui_hpInterviewOpen" v="Entretien d'embauche" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="Quelle expérience pratique apportez-vous pour travailler dans notre exploitation ?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="Quelles tâches avez-vous assumées jusqu'à présent dans le secteur agricole ?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="Quels sont les travaux agricoles que vous maîtrisez déjà ?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Pourriez-vous décrire plus en détail lesquelles de ces tâches vous avez effectuées de manière autonome ?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="Pour quelles tâches vous sentez-vous déjà à l'aise, et dans quels domaines auriez-vous encore besoin d'une formation ?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="Selon vous, quelles expériences acquises jusqu'à présent pourraient s'avérer particulièrement utiles dans notre exploitation ?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="Comment vous assurez-vous que nous puissions compter sur vous au quotidien ?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="Comment gérez-vous les tâches qui doivent être réalisées dans les délais impartis ?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="Que pouvons-nous attendre de vous si un imprévu survient au travail ?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="Que faites-vous lorsque vous vous rendez compte que vous ne pourrez pas respecter un accord ?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="Comment faites-vous pour ne pas perdre le fil lorsque vous devez mener plusieurs tâches de front ?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Pouvez-vous décrire plus précisément comment vous gérez vos responsabilités lorsque vous travaillez de manière autonome ?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="Qu'est-ce qui est important pour vous pour que vous restiez fidèle à une entreprise à long terme ?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="Qu'attendez-vous d'une collaboration à long terme au sein de notre exploitation ?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="Quelles seraient les conditions idéales pour que vous ayez envie de travailler chez nous sur le long terme ?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="Quelle importance accordez-vous à une relation à long terme avec un employeur ?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="Dans quelle mesure seriez-vous prêt à rester dans une entreprise même en période difficile ?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="Qu'est-ce qui vous inciterait à poursuivre cette collaboration ou à vous réorienter ?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="Jusqu'à présent, j'ai surtout aidé à effectuer des tâches simples. Je m'attaquerais progressivement à de nouvelles tâches." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="Mon expérience pratique est encore limitée, mais j'aime apprendre et je n'hésite pas à poser des questions quand je ne sais pas quelque chose." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="Je connais certaines tâches à effectuer dans une ferme, mais il me reste encore beaucoup à apprendre dans le cadre de mon travail quotidien." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="J'ai déjà effectué diverses tâches au sein d'une exploitation et je m'en sors bien avec les tâches qui me sont familières." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="J'ai déjà travaillé avec certaines machines et suivi certains processus. Lorsque je dois effectuer de nouvelles tâches, j'ai parfois besoin d'une brève formation." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="J'apporte une expérience pratique, même s'il y a certainement des domaines dans lesquels j'ai encore des choses à apprendre." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="J'ai travaillé pendant longtemps dans des exploitations agricoles et j'y ai accompli de nombreuses tâches de manière autonome." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="Je maîtrise bien les tâches habituelles et le fonctionnement des machines. Je prends néanmoins le temps d'étudier attentivement les nouveaux processus." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="J'ai déjà découvert différentes entreprises et différentes méthodes de travail, et je m'adapte généralement rapidement à de nouvelles tâches." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="Quand j'ai beaucoup de choses à faire en même temps, des accords clairs m'aident. Je sais alors mieux par quoi commencer." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="J'essaie d'accomplir mes tâches correctement. Mais j'ai parfois encore du mal à garder une vue d'ensemble et à tout faire à temps." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="Lorsqu'il s'agit de tâches nouvelles ou inhabituelles, je préfère poser des questions au fur et à mesure, afin de ne rien oublier d'important." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="Je veille au respect des accords. Si je me rends compte que quelque chose ne va pas marcher, j'en informe les personnes concernées le plus tôt possible." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="J'effectue mes tâches avec rigueur. Lorsque les priorités ne sont pas claires, je préfère me concerter à nouveau." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="Dans l'ensemble, on peut compter sur moi. Quand il y a beaucoup à faire, un petit échange m'aide à m'organiser." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="Lorsque je me charge d'une tâche, je m'en occupe. S'il y a un problème, j'en parle dès que possible." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="Je garde un œil sur les rendez-vous et les accords, et je vérifie à la fin si tout a bien été fait." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="Même lorsque je travaille à mon compte, je tiens à respecter mes engagements et à informer les autres de tout changement important." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="Je voudrais d'abord voir comment le travail se déroule ici. Je pourrai ensuite mieux décider de la suite." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="Je suis ouvert à de nouvelles opportunités et je n'aime pas m'engager trop tôt auprès d'un nouvel employeur." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="Pour moi, la collaboration doit fonctionner au quotidien. Si ma situation venait à changer, j'envisagerais d'autres solutions." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="Si la collaboration se passe bien et que les conditions sont favorables, je peux envisager de rester plus longtemps." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="Il est important pour moi de travailler dans un environnement fiable. La durée de mon engagement dépendra aussi de la façon dont nous nous entendrons." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="Je recherche une bonne collaboration et j'aimerais d'abord prendre mes marques. Si cela convient aux deux parties, j'ai de nombreuses raisons de rester." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="J'apprécie la stabilité et je recherche une entreprise dans laquelle je pourrai m'investir sur le long terme." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="Il est important pour moi de faire partie d'une équipe sur laquelle on peut compter. Si nous travaillons bien ensemble, je ne souhaite pas changer d'équipe sans cesse." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="J'aimerais travailler plus longtemps dans une ferme et acquérir de l'expérience au sein de cette exploitation." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ travaillait auparavant dans une exploitation familiale rurale." />
+        <e k="ui_pmNewApplicantIntro1_2" v="Avant de postuler, ZXQNAMEQXZ travaillait dans une exploitation agricole familiale en milieu rural." />
+        <e k="ui_pmNewApplicantIntro1_3" v="Le parcours professionnel de ZXQNAMEQXZ comprend une expérience au sein d'une exploitation familiale rurale." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ travaillait auparavant dans une petite exploitation laitière." />
+        <e k="ui_pmNewApplicantIntro2_2" v="Avant de postuler, ZXQNAMEQXZ travaillait dans une petite exploitation laitière." />
+        <e k="ui_pmNewApplicantIntro2_3" v="Le parcours professionnel de ZXQNAMEQXZ comprend un poste dans une petite exploitation laitière." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ travaillait auparavant dans une entreprise de travaux agricoles." />
+        <e k="ui_pmNewApplicantIntro3_2" v="Avant de postuler, ZXQNAMEQXZ travaillait dans une entreprise de travaux agricoles." />
+        <e k="ui_pmNewApplicantIntro3_3" v="Le parcours professionnel de ZXQNAMEQXZ comprend un poste au sein d'une entreprise de travaux agricoles." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ travaillait auparavant dans une exploitation agricole." />
+        <e k="ui_pmNewApplicantIntro4_2" v="Avant de postuler, ZXQNAMEQXZ travaillait dans une exploitation agricole." />
+        <e k="ui_pmNewApplicantIntro4_3" v="Le parcours professionnel de ZXQNAMEQXZ comprend un poste au sein d'une exploitation agricole." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ travaillait auparavant dans une entreprise mixte." />
+        <e k="ui_pmNewApplicantIntro5_2" v="Avant de postuler, ZXQNAMEQXZ travaillait dans une entreprise mixte." />
+        <e k="ui_pmNewApplicantIntro5_3" v="Le parcours professionnel de ZXQNAMEQXZ comprend une expérience professionnelle dans une exploitation mixte." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ travaillait auparavant dans une entreprise de logistique." />
+        <e k="ui_pmNewApplicantIntro6_2" v="Avant de postuler, ZXQNAMEQXZ travaillait dans une entreprise de logistique." />
+        <e k="ui_pmNewApplicantIntro6_3" v="Le parcours professionnel de ZXQNAMEQXZ comprend un poste au sein d'une entreprise de logistique." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ travaillait auparavant dans un atelier de machines agricoles." />
+        <e k="ui_pmNewApplicantIntro7_2" v="Avant de postuler, ZXQNAMEQXZ travaillait dans un atelier de machines agricoles." />
+        <e k="ui_pmNewApplicantIntro7_3" v="Le parcours professionnel de ZXQNAMEQXZ comprend un poste dans un atelier de machines agricoles." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ occupait auparavant un poste administratif." />
+        <e k="ui_pmNewApplicantIntro8_2" v="Avant de postuler, ZXQNAMEQXZ occupait un poste administratif." />
+        <e k="ui_pmNewApplicantIntro8_3" v="Le parcours professionnel de ZXQNAMEQXZ comprend un poste administratif." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ travaillait auparavant dans une exploitation familiale rurale et fait partie de l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Avant de travailler à la ferme, ZXQNAMEQXZ travaillait dans une exploitation familiale rurale. Son ancienneté dans l'entreprise est de ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ fait partie de l'équipe depuis ZXQMONTHSQXZ mois et travaillait auparavant dans une exploitation familiale en milieu rural." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ travaille à la ferme depuis ZXQMONTHSQXZ mois ; auparavant, il travaillait dans une exploitation familiale rurale." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ travaillait auparavant dans une exploitation familiale rurale et travaille dans cette entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ travaillait auparavant dans une petite exploitation laitière et fait partie de l'exploitation depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Avant de travailler à la ferme, ZXQNAMEQXZ travaillait dans une petite exploitation laitière. Son ancienneté dans l'entreprise est de ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ fait partie de l'équipe depuis ZXQMONTHSQXZ mois et travaillait auparavant dans une petite exploitation laitière." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ travaille à la ferme depuis ZXQMONTHSQXZ mois ; auparavant, il travaillait dans une petite exploitation laitière." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ travaillait auparavant dans une petite exploitation laitière et fait partie de l'exploitation depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ travaillait auparavant dans une entreprise de travaux agricoles et fait partie de l'exploitation depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Avant de travailler à la ferme, ZXQNAMEQXZ était employé dans une entreprise de travaux agricoles. Son ancienneté dans l'entreprise est de ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ fait partie de l'équipe depuis ZXQMONTHSQXZ mois et travaillait auparavant dans une entreprise de travaux agricoles." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ travaille à la ferme depuis ZXQMONTHSQXZ mois ; auparavant, il était employé chez un entrepreneur agricole." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ travaillait auparavant dans une entreprise de travaux agricoles et fait partie de l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ travaillait auparavant dans une exploitation agricole et fait partie de l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Avant de travailler à la ferme, ZXQNAMEQXZ était employé dans une exploitation agricole. Son ancienneté est de ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ fait partie de l'équipe depuis ZXQMONTHSQXZ mois et travaillait auparavant dans une exploitation agricole." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ travaille à la ferme depuis ZXQMONTHSQXZ mois ; auparavant, il travaillait dans une exploitation céréalière." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ travaillait auparavant dans une exploitation agricole et fait partie de l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ travaillait auparavant dans une exploitation mixte et fait partie de l'exploitation depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Avant de travailler à la ferme, ZXQNAMEQXZ travaillait dans une exploitation mixte. Son ancienneté dans l'entreprise est de ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ fait partie de l'équipe depuis ZXQMONTHSQXZ mois et travaillait auparavant dans une entreprise mixte." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ travaille à la ferme depuis ZXQMONTHSQXZ mois ; auparavant, il exerçait ses activités dans une exploitation mixte." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ fonctionnait auparavant en mode mixte et est en service depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ travaillait auparavant dans une entreprise de logistique et fait partie de l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Avant de travailler à la ferme, ZXQNAMEQXZ était employé dans une entreprise de logistique. Son ancienneté est de ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ fait partie de l'équipe depuis ZXQMONTHSQXZ mois et travaillait auparavant dans une entreprise de logistique." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ travaille à la ferme depuis ZXQMONTHSQXZ mois ; auparavant, il était employé dans une entreprise de logistique." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ travaillait auparavant dans une entreprise de logistique et travaille dans cette entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ travaillait auparavant dans un atelier de machines agricoles et fait partie de l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Avant de travailler à la ferme, ZXQNAMEQXZ travaillait dans un atelier de machines agricoles. Son ancienneté dans l'entreprise est de ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ fait partie de l'équipe depuis ZXQMONTHSQXZ mois et travaillait auparavant dans un atelier de machines agricoles." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ travaille à la ferme depuis ZXQMONTHSQXZ mois ; auparavant, il travaillait dans un atelier de machines agricoles." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ travaillait auparavant dans un atelier de machines agricoles et fait partie de l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ occupait auparavant un poste administratif et fait partie de l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Avant de travailler à la ferme, ZXQNAMEQXZ occupait un poste administratif. Son ancienneté dans l'entreprise est de ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ fait partie de l'équipe depuis ZXQMONTHSQXZ mois et occupait auparavant un poste administratif." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ travaille à la ferme depuis ZXQMONTHSQXZ mois ; auparavant, il occupait un poste administratif." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ occupait auparavant un poste administratif et travaille dans l'entreprise depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewApplicantAge1_1" v="À ZXQAGEQXZ ans, le parcours professionnel n'en est encore qu'à ses débuts." />
+        <e k="ui_pmNewApplicantAge1_2" v="À partir de ZXQAGEQXZ ans, il est possible d'acquérir davantage d'expérience pratique à la ferme." />
+        <e k="ui_pmNewApplicantAge1_3" v="À l'âge de ZXQAGEQXZ ans, l'occasion se présente de poursuivre son parcours professionnel." />
+        <e k="ui_pmNewApplicantAge2_1" v="À l'âge de ZXQAGEQXZ ans, les compétences professionnelles peuvent continuer à se consolider." />
+        <e k="ui_pmNewApplicantAge2_2" v="À l'âge de ZXQAGEQXZ ans, les expériences acquises jusqu'à présent peuvent être enrichies par de nouvelles missions." />
+        <e k="ui_pmNewApplicantAge2_3" v="À ZXQAGEQXZ ans, il est encore possible de poursuivre son parcours professionnel." />
+        <e k="ui_pmNewApplicantAge3_1" v="À ZXQAGEQXZ ans, il a déjà un long parcours professionnel derrière lui." />
+        <e k="ui_pmNewApplicantAge3_2" v="Au cours de ses ZXQAGEQXZ années de carrière, il a pu acquérir des expériences variées." />
+        <e k="ui_pmNewApplicantAge3_3" v="À l'âge de ZXQAGEQXZ ans, on peut s'appuyer sur une expérience professionnelle ; son lien avec l'agriculture dépend du parcours professionnel." />
+        <e k="ui_pmNewApplicantAge4_1" v="À ZXQAGEQXZ ans, il a déjà une longue carrière professionnelle derrière lui." />
+        <e k="ui_pmNewApplicantAge4_2" v="À l'âge de ZXQAGEQXZ ans, on dispose d'une expérience professionnelle générale qui ne correspond pas nécessairement à une expérience dans le domaine agricole." />
+        <e k="ui_pmNewApplicantAge4_3" v="À l'âge de ZXQAGEQXZ ans, on dispose de diverses expériences professionnelles ; leur utilité à la ferme dépend des activités exercées jusqu'alors." />
+        <e k="ui_pmNewApplicantMarket1_1" v="La campagne publicitaire est diffusée depuis ce mois-ci." />
+        <e k="ui_pmNewApplicantMarket1_2" v="La recherche d'un nouvel emploi n'a commencé que récemment." />
+        <e k="ui_pmNewApplicantMarket1_3" v="L'offre d'emploi a été publiée ce mois-ci." />
+        <e k="ui_pmNewApplicantMarket2_1" v="L'offre d'emploi est publiée depuis un mois." />
+        <e k="ui_pmNewApplicantMarket2_2" v="La recherche d'un nouvel emploi dure depuis un mois." />
+        <e k="ui_pmNewApplicantMarket2_3" v="L'appel à candidatures est ouvert aux entreprises intéressées depuis un mois." />
+        <e k="ui_pmNewApplicantMarket3_1" v="L'annonce est en ligne depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewApplicantMarket3_2" v="La recherche d'un nouvel emploi dure depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewApplicantMarket3_3" v="L'appel à candidatures est ouvert aux entreprises intéressées depuis ZXQMONTHSQXZ mois." />
+        <e k="ui_pmNewWorkerExperience1_1" v="L'expérience pratique commence tout juste à se développer ; de nombreuses tâches nécessitent encore des conseils." />
+        <e k="ui_pmNewWorkerExperience1_2" v="De nombreux processus de travail à la ferme sont encore nouveaux." />
+        <e k="ui_pmNewWorkerExperience1_3" v="La mise en pratique en est encore à ses débuts." />
+        <e k="ui_pmNewWorkerExperience1_4" v="Les tâches élémentaires nécessitent encore de la pratique et un accompagnement." />
+        <e k="ui_pmNewWorkerExperience1_5" v="Les procédures pratiques s'apprennent étape par étape." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Certaines notions de base sont acquises, mais un accompagnement reste nécessaire pour les exercices plus complexes." />
+        <e k="ui_pmNewWorkerExperience2_2" v="On dispose déjà d'une première expérience pratique ; dans plusieurs domaines, on manque encore de routine." />
+        <e k="ui_pmNewWorkerExperience2_3" v="Les tâches familières sont de mieux en mieux maîtrisées, tandis que les tâches plus complexes nécessitent une période d'adaptation supplémentaire." />
+        <e k="ui_pmNewWorkerExperience2_4" v="Les bases sont bien maîtrisées, mais il faut encore s'entraîner pour garantir la sécurité des opérations." />
+        <e k="ui_pmNewWorkerExperience2_5" v="Des connaissances pratiques ont déjà été acquises et peuvent être consolidées au quotidien dans le cadre du travail." />
+        <e k="ui_pmNewWorkerExperience3_1" v="Une solide expérience permet d'accomplir de nombreuses tâches courantes de manière autonome." />
+        <e k="ui_pmNewWorkerExperience3_2" v="La plupart des tâches quotidiennes s'effectuent sans problème." />
+        <e k="ui_pmNewWorkerExperience3_3" v="Les bases pratiques sont acquises ; les procédures familières sont mises en œuvre de manière autonome." />
+        <e k="ui_pmNewWorkerExperience3_4" v="Une bonne routine s'est mise en place pour les tâches habituelles." />
+        <e k="ui_pmNewWorkerExperience3_5" v="Il maîtrise divers domaines d'activité et les gère de manière largement autonome." />
+        <e k="ui_pmNewWorkerExperience4_1" v="Une vaste expérience pratique permet une utilisation polyvalente." />
+        <e k="ui_pmNewWorkerExperience4_2" v="Même les tâches les plus exigeantes font partie de ses attributions habituelles." />
+        <e k="ui_pmNewWorkerExperience4_3" v="Une bonne maîtrise des tâches permet de prendre en charge différents processus de travail de manière autonome." />
+        <e k="ui_pmNewWorkerExperience4_4" v="Cette expérience se traduit par une maîtrise assurée de tâches variées." />
+        <e k="ui_pmNewWorkerExperience4_5" v="De nombreux processus pratiques sont bien connus, même lorsque les tâches varient." />
+        <e k="ui_pmNewWorkerExperience5_1" v="On dispose d'une expérience pratique exceptionnellement riche." />
+        <e k="ui_pmNewWorkerExperience5_2" v="Une très grande expérience est également utile pour mener à bien des tâches complexes et inhabituelles." />
+        <e k="ui_pmNewWorkerExperience5_3" v="On dispose de connaissances particulièrement approfondies pour le travail à la ferme." />
+        <e k="ui_pmNewWorkerExperience5_4" v="Une expérience professionnelle de longue date et variée garantit une grande assurance dans le travail quotidien." />
+        <e k="ui_pmNewWorkerExperience5_5" v="Un large éventail de travaux agricoles est maîtrisé avec une grande aisance." />
+        <e k="ui_pmNewWorkerReliability1_1" v="Les accords conclus et l'exécution minutieuse des tâches requièrent une attention particulière." />
+        <e k="ui_pmNewWorkerReliability1_2" v="Dans le quotidien professionnel, des contrôles fréquents et des consignes claires sont nécessaires." />
+        <e k="ui_pmNewWorkerReliability1_3" v="Pour garantir une planification fiable, les tâches doivent faire l'objet d'un suivi étroit." />
+        <e k="ui_pmNewWorkerReliability1_4" v="Les accords et les procédures de travail ne sont pas encore systématiquement respectés." />
+        <e k="ui_pmNewWorkerReliability1_5" v="Les tâches importantes nécessitent une coordination et un contrôle supplémentaires." />
+        <e k="ui_pmNewWorkerReliability2_1" v="Les accords ne sont pas toujours respectés de manière constante ; des directives claires sont utiles." />
+        <e k="ui_pmNewWorkerReliability2_2" v="La fiabilité reste inégale ; les travaux importants devraient faire l'objet d'un suivi." />
+        <e k="ui_pmNewWorkerReliability2_3" v="Lorsqu'il s'agit de tâches familières, on y parvient souvent, mais un contrôle ponctuel reste utile." />
+        <e k="ui_pmNewWorkerReliability2_4" v="On travaille encore à une mise en œuvre plus stable des tâches confiées." />
+        <e k="ui_pmNewWorkerReliability2_5" v="Des responsabilités clairement définies et des retours réguliers facilitent le travail au quotidien." />
+        <e k="ui_pmNewWorkerReliability3_1" v="Pour la plupart des tâches, on peut compter sur une exécution fiable." />
+        <e k="ui_pmNewWorkerReliability3_2" v="Les accords sont généralement respectés et les tâches sont, dans l'ensemble, accomplies avec soin." />
+        <e k="ui_pmNewWorkerReliability3_3" v="Cette fiabilité constitue une base solide pour la planification des interventions." />
+        <e k="ui_pmNewWorkerReliability3_4" v="Les tâches confiées sont généralement accomplies avec sérieux et fiabilité." />
+        <e k="ui_pmNewWorkerReliability3_5" v="Au quotidien, on constate que la manière de travailler est globalement constante." />
+        <e k="ui_pmNewWorkerReliability4_1" v="Le travail est effectué de manière fiable et les accords conclus sont scrupuleusement respectés." />
+        <e k="ui_pmNewWorkerReliability4_2" v="Les tâches confiées sont accomplies avec constance et rigueur." />
+        <e k="ui_pmNewWorkerReliability4_3" v="Cette méthode de travail rigoureuse facilite une planification fiable des interventions." />
+        <e k="ui_pmNewWorkerReliability4_4" v="On peut compter à coup sûr sur le respect des engagements et la bonne exécution du travail." />
+        <e k="ui_pmNewWorkerReliability4_5" v="Les responsabilités et les tâches convenues sont suivies de près." />
+        <e k="ui_pmNewWorkerReliability5_1" v="Même dans le cadre de missions exigeantes, on peut compter sur ce travail à un degré exceptionnel." />
+        <e k="ui_pmNewWorkerReliability5_2" v="Les accords conclus sont toujours respectés et les tâches sont accomplies avec un grand sérieux." />
+        <e k="ui_pmNewWorkerReliability5_3" v="Son fonctionnement extrêmement fiable offre une grande sécurité de planification." />
+        <e k="ui_pmNewWorkerReliability5_4" v="Les responsabilités sont assumées avec beaucoup de soin et une constance exceptionnelle." />
+        <e k="ui_pmNewWorkerReliability5_5" v="Même les tâches les plus complexes sont réalisées avec une grande fiabilité." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="L'attachement à l'entreprise est actuellement très faible." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="Pour l'instant, cette collaboration est plutôt envisagée à court terme." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="L'attachement à la ferme sur le long terme n'est pour l'instant que très faible." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="On se montre actuellement réticent à l'idée d'une ancienneté de service de longue durée." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="La volonté de rester en activité à long terme est actuellement faible." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="L'attachement à l'entreprise reste encore modéré." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="Une collaboration à long terme doit d'abord se mettre en place." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="Un lien étroit avec l'entreprise ne s'est pas encore établi." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="La poursuite de cette collaboration offre encore la possibilité de renforcer la confiance." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="Une ancienneté plus longue est envisageable, mais elle est encore considérée avec réserve." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="Il existe un lien solide avec l'entreprise." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="Cette collaboration constitue une base solide pour une longue carrière au sein de l'entreprise." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="La connexion à l'entreprise est stable." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="La fidélité se maintient à un niveau stable." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="Il existe de bonnes bases pour poursuivre cette coopération à long terme." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="Le lien avec l'entreprise est très fort." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="La collaboration avec la cour revêt une grande importance." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="La volonté de rester en activité à long terme est très marquée." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="Ce lien solide témoigne d'une collaboration durable." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="On constate clairement un intérêt pour une ancienneté plus longue au sein de l'entreprise." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="Le lien avec l'entreprise est exceptionnellement fort." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="La collaboration à long terme avec la cour revêt une importance toute particulière." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="Le sentiment d'appartenance à l'entreprise est exceptionnellement fort." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="La loyauté et la volonté d'une collaboration durable sont particulièrement élevées." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="Le sentiment d'appartenance à l'entreprise et à son développement à long terme est exceptionnellement fort." />
+        <e k="ui_pmNewWorkerTenureNew" v="Le travail à la ferme a commencé ce mois-ci." />
+        <e k="ui_pmNewWorkerTenureOne" v="Le travail à la ferme a commencé il y a un mois." />
     </elements>
 </l10n>

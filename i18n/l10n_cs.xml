@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="档案" />
         <e k="ui_pmHistoryHeader" v="历史" />
         <e k="ui_button_train" v="培训" />
+        <e k="ui_pmManageSpecialization" v="管理专业方向" />
         <e k="ui_pmStatusApplicant" v="申请人" />
         <e k="ui_pmBirthLine" v="出生日期：%s" />
         <e k="ui_pmRankLabel" v="等级" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="已启用" />
         <e k="ui_transportPriorityInactive" v="未分配" />
         <e k="ui_transportPriorityMoveUp" v="上移" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="上移" />
         <e k="ui_transportPriorityMoveDown" v="下移" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="下移" />
         <e k="ui_transportPriorityToggle" v="启用/停用" />
         <e k="ui_transportPriorityApply" v="应用" />
         <e k="ui_transportPriorityCancel" v="取消" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="办公室职业" />
         <e k="ui_status_retirementPending" v="将在月底退休" />
         <e k="ui_retirementNotice" v="%s 将在月底退休。" />
-        <e k="ui_pmTrainingIntro" v="Specializace zlepšují výkon v odpovídající kategorii. Školení začíná pouze na začátku měsíce, stojí peníze a zaměstnanec je do konce měsíce nedostupný. Postup se započítá po dokončení. Nabídky a ceny se mění každý měsíc; za zemědělský rok od března do února je povoleno jen jedno školení. Naučené specializace zůstávají známé, aktivní jsou však nejvýše dva bonusy. Obě pozice mohou být neaktivní. Naučenou neaktivní specializaci lze aktivovat jen jednou za zaměstnance a zemědělský rok." />
+        <e k="ui_pmTrainingIntro" v="Cíleně rozvíjejte svůj tým: Vyberte „%s“ a poté si zvolte kategorii školení. Specializace zlepšují výkon v příslušné oblasti. Školení začínají na začátku měsíce, jsou placená a zaměstnance vázají až do konce měsíce. Pokrok se započítá po dokončení. Nabídky a ceny se mění každý měsíc. Každý zaměstnanec může absolvovat jedno školení za zemědělský rok, který trvá od března do února. Získané specializace zůstávají zachovány; aktivní mohou být maximálně dva bonusy, přičemž obě pozice mohou být neaktivní. Na jednoho zaměstnance a jeden zemědělský rok lze aktivovat pouze jednu získanou neaktivní specializaci." />
         <e k="ui_pmTrainingCategoryHeader" v="学习类别" />
         <e k="ui_pmTrainingProgressHeader" v="专业化进度" />
         <e k="ui_pmTrainingRunning" v="培训进行中" />
@@ -566,7 +569,7 @@
         <e k="ui_pmSpecializationActivationUsed" v="Novou specializaci lze aktivovat jen jednou za zaměstnance a zemědělský rok." />
         <e k="ui_pmSpecializationSlotsFull" v="Před aktivací další specializace deaktivujte alespoň jednu aktivní." />
         1aktivní2
-        <e k="ui_pmSpecializationInactive" v="naučeno, neaktivní" />
+        <e k="ui_pmSpecializationInactive" v="已学习并已停用" />
         <e k="ui_specializationActivatedNotice" v="%s znovu používá specializaci %s." />
         <e k="ui_specializationDeactivatedNotice" v="%s deaktivuje specializaci %s." />
         1OBSAH2
@@ -633,9 +636,9 @@
     <e k="ui_pmHelpTopic13Title" v="Profily, kronika a statistiky" />
     <e k="ui_pmHelpTopic13Body" v="Profily uchazečů spojují věk, profesní zázemí, zkušenosti, spolehlivost, loajalitu, specializace a dosavadní dobu působení na trhu do dynamického textu. Profily zaměstnanců doplňují délku pracovního poměru, nasazení, školení a pokrok ve vzdělávání.&#10;Osobní kronika může zaznamenávat nástup do zaměstnání, začátek a konec nasazení, přerušení nasazení, nemoc, školení, specializace, mzdové požadavky a rozhodnutí, změny v loajalitě a spolehlivosti, přidělení přepravy, jakož i propuštění, vlastní výpověď, odchod do důchodu a ukončení pracovního poměru.&#10;Průběh zaměstnání zaměstnance zobrazuje mimo jiné nasazení, pracovní dobu, školení, stav přepravy, poslední události, dny nemoci, mzdové požadavky, přerušení nasazení a dosud vyplacenou celkovou mzdu. Přehled navíc zobrazuje celkové hodnoty za celý areál, jako je počet kdykoli přijatých, propuštěných, dobrovolně odcházejících a odcházejících do důchodu." />
     <e k="ui_pmHelpTopic14Title" v="Nastavení, režim pro více hráčů a skóre" />
-    <e k="ui_pmHelpTopic14Body" v="Nastavení platí pro jednotlivé stavy hry a dělí se na pracovní výkon, rozvoj personálu a ekonomiku a mzdy. Efekty hratelnosti odemykají závislé efekty zkušeností; efekty zkušeností řídí rychlost, opotřebení, spotřební materiál a palivo. Efekty personálu odemykají změny loajality a možnost přesčasů. Ekonomické efekty odemykají individuální platy a standardní měsíční plat.&#10;Deaktivované efekty nezmění stávající údaje o personálu zpětně. Zabraňují nebo povolují výhradně příslušný další efekt. Standardní měsíční plat slouží jako základní hodnota, pokud jsou individuální platy deaktivovány; lze jej přímo změnit v nastavení. Přiřazení kláves lze změnit v nastavení hry.&#10;V režimu pro více hráčů se personál, uchazeči, úkoly, platy, školení, nastavení a kroniky spravují a synchronizují na úrovni farmy. Rozhoduje server; pouze oprávnění správci farmy mohou měnit svou vlastní farmu. Data se nacházejí v souboru helperPersonnel.xml v uloženém stavu hry a aktuální přiřazení se při načítání obnoví, pokud je to možné. Staré herní pozice zůstávají použitelné; historická data mohou být u již odešlých zaměstnanců neúplná." />
+        <e k="ui_pmHelpTopic14Body" v="“面试”设置按当前游戏进度生效。若该设置处于激活状态，则在面试期间将显示隐藏的数值、对话内容以及后续的数值揭示；若处于禁用状态，则所有应聘者和员工的数值将如往常一样完整显示。仅服务器和具有权限的农场经理可修改此设置。&#10;在多人游戏中，服务器将决定每个问题，并同步面试进度。首位打开该窗口且具备权限的农场经理将主持面试。同一农场的其他玩家可以实时观看；他们的主题按钮将保持禁用状态。如果对话主持人关闭窗口或连接中断，另一位有权限的农场经理可以接手。&#10;人员、应聘者、任务、薪资、培训、招聘和日志仍与农场相关联。全球应聘者可以向多个农场投递简历，但他们的对话将按每个农场分别保存。" />
     <e k="ui_pmHelpTopic15Title" v="Nastavení a první kroky" />
-    <e k="ui_pmHelpTopic15Body" v="Otevři profil uchazeče, zkontroluj jeho věk, zázemí, hodnoty, požadovaný plat a stávající specializace a poté potvrď jeho přijetí. Uchazeč se stane zaměstnancem aktuálního statku; všechna následující rozhodnutí, výplaty a vývoj se vztahují k tomuto statku.&#10;Po přijetí nejprve naplánuj krátkou, vhodnou práci. Zaměstnanec musí být k dispozici: nemoc, probíhající práce, školení, potvrzené ukončení pracovního poměru nebo stále aktivní přiřazení k modu mohou výběr znemožnit. Na záložce „Zaměstnanci“ se zobrazí konkrétní důvod.&#10;První přijetí zvyšuje reputaci zaměstnavatele o jeden bod. Vysoké hodnoty nejsou vždy automaticky lepší: zkušený uchazeč obvykle stojí více, zatímco levnější nováček potřebuje více času na rozvoj a školení." />
+        <e k="ui_pmHelpTopic15Body" v="在“应聘者”标签页中打开面试记录，并选择“工作经验”、“可靠性”或“忠诚度”。所选问题及回答将显示在面试记录中。最多问完三个问题后，面试结束，此时薪资期望值将显示出来。请根据已知的精确数值、范围以及剩余的不确定性来决定是否录用。&#10;录用后，尚未完全澄清的数值将暂时保持在您最后掌握的状态。请安排实际工作任务：经过20至35分钟的实时活跃时间后，所有数值将完全揭示。员工必须有空；生病、正在进行的工作、培训或已确认的离职都可能导致无法录用。&#10;每次录用都会使雇主声誉提升一点。高数值并不总是自动意味着更好：经验丰富的应聘者通常成本更高，而成本较低的新人则需要更多时间进行培养和培训。" />
     <e k="ui_pmHelpTopic16Title" v="Činnosti a zařazení do specializací" />
     <e k="ui_pmHelpTopic16Body" v="Přiřazení se určuje na základě vozidla, zařízení a – je-li k dispozici – aplikovaného materiálu. Přednost má přímé přiřazení materiálu: osivo patří k výsevu; herbicid k ochraně rostlin; minerální hnojiva, tekutá hnojiva, kejda, fermentované zbytky a hnůj k hnojení. Vápno není automaticky rozpoznáno jako samostatná učící se kategorie.&#10;Přiřazení vozidel a zařízení: pluh, kultivátor, rotační brána, disková brána, válec a mulčovač patří k obdělávání půdy. Secí a sázecí stroje patří k výsevu. Polní postřikovače bez jednoznačně určeného materiálu spadají do hnojení. Kombajny, žací ústrojí, lisy na balíky, sekačky, nakládací vozy a sběrače patří ke sklizni. Přívěsy a vykládatelná vozidla patří k přepravě.&#10;FollowMe rozšiřuje praktickou detekci navíc o drtiče, sklízecí stroje na brambory a řepu, obraceče, shrnovače, rozmetadla hnoje, cisterny na kejdu, podzemní kypřiče, sběrače kamenů, brány a okopávače. Modifikovaná vozidla mohou zůstat neutrální, pokud jejich specializace neumožňuje jednoznačné zařazení. V takovém případě není slibován žádný nesprávný bonus za specializaci.&#10;Šetrné zacházení se stroji a úsporný provoz jsou obecné bonusy: první z nich snižuje dodatečné opotřebení způsobené zkušenostmi, druhý dodatečnou spotřebu paliva a materiálu. Zvolená činnost se zobrazí ve výběrovém okně; vhodná aktivní specializace je tam zvýrazněna." />
     <e k="ui_specialization_transport" v="Doprava" />
@@ -669,15 +672,254 @@
     <e k="ui_selectionStatusLine" v="Stav: %s" />
     <e k="ui_button_specializationDeactivate" v="Nechat odpočinout" />
     <e k="ui_button_specializationActivate" v="Přihlásit se" />
-    <e k="ui_pmSpecializationActive" v="aktivní" />
+    <e k="ui_pmSpecializationActive" v="已启用" />
     <e k="ui_pmHelpContents" v="OBSAH" />
     <e k="ui_pmHelpTopic01Title" v="Rychlý start a ovládání" />
     <e k="ui_pmHelpTopic01Body" v="Personální management nahrazuje anonymní pomocníky umělé inteligence konkrétními uchazeči a zaměstnanci. Každý zaměstnanec se dlouhodobě rozvíjí, pobírá měsíční plat a díky svým zkušenostem, spolehlivosti, loajalitě a specializacím může mít různé silné stránky i rizika.&#10;Vlastní nabídka se standardně otevírá klávesovou zkratkou Ctrl + M. Obsahuje přehled, uchazeče, zaměstnance, školení, nastavení a nápovědu. Přiřazení klávesových zkratek lze změnit v nastavení hry.&#10;Výchozí klávesové zkratky: přepínání mezi osobami klávesami A/D nebo šipkami vlevo/vpravo; potvrzení výběru mezerníkem nebo kliknutím myší; zrušení nebo návrat klávesou Esc; správa dopravy a mezd klávesami T nebo G. Na záložce Nápověda se pomocí šipek vlevo/vpravo přepíná mezi obsahem a články, šipkami nahoru/dolů se vybírá nebo posouvá a klávesou Bild nahoru/dolů se přeskakuje po stránkách." />
     <e k="ui_pmHelpTopic02Title" v="Přehled a stav zaměstnanců" />
     <e k="ui_pmHelpTopic02Body" v="Přehled shrnuje aktuální stav podniku: v horní části jsou uvedeni zaměstnanci, dostupní zaměstnanci, uchazeči a reputace zaměstnavatele. Pod nimi se zobrazují probíhající zakázky s uvedením osoby, vozidla, zařízení a činnosti.&#10;Karta „Změny“ obsahuje pouze relevantní personální události, tedy změny v hodnocení zaměstnavatele, zkušenostech, spolehlivosti, loajalitě, věku nebo specializaci. Každá zpráva uvádí příčinu, dotčenou osobu a dopad; víceřádkový záznam se dabei považuje za jednu zprávu.&#10;„Měsíční zpráva“ a „Celkem“ zobrazují aktuální a celoživotní ukazatele. Přehled využijte pro rychlé plánování nasazení; podrobnosti, rozhodnutí a kroniky patří na jednotlivé odborné stránky." />
     <e k="ui_pmHelpTopic03Title" v="Trh práce a nábor zaměstnanců" />
-    <e k="ui_pmHelpTopic03Body" v="Nová hra začíná se čtyřmi uchazeči. Na trhu může být současně maximálně osm uchazečů. Při každé změně měsíce se losují až tři nová místa; šance na jedno místo činí 15 % + 0,7 × reputace zaměstnavatele. Při reputaci 60 je to 57 %, při reputaci 100 pak 85 % na jedno místo. Je-li trh prázdný, vygeneruje se alespoň jeden nový uchazeč.&#10;Uchazeči zůstávají v měsíci svého vytvoření zaručeně k dispozici. Po prvním měsíčním přechodu činí jejich šance na odchod v závislosti na kvalitě 10–30 %, po druhém 30–50 % a při třetím měsíčním přechodu 100 %. Dobré profily mohou zmizet dříve, protože jejich kvalita zvyšuje šanci na odchod.&#10;Uchazeči jsou ve věku 18–65 let, mají trvalé datum narození a dále stárnou. Jejich profesní zázemí zahrnuje rodinný podnik, chov dojnic, zemědělské služby, polní hospodářství, smíšený podnik, logistiku, opravnu zemědělských strojů a kancelářské povolání. Věk a profesní zázemí ovlivňují především zkušenosti a případné odborné znalosti.&#10;Požadavek na plat vychází ze zkušeností a spolehlivosti, má náhodnou odchylku 96–106 % a je ovlivněn reputací zaměstnavatele. Nízká reputace požadavek zvyšuje, vysoká reputace jej snižuje. Před přijetím se zobrazí potvrzení; přijetí zvyšuje reputaci o 1 bod." />
+        <e k="ui_pmHelpTopic03Body" v="所有求职者均在统一的全球市场中生成。随后，雇主声誉将决定求职者会被推荐给哪些农场。因此，不同农场可能收到不同的推荐；若同一人被推荐给多个农场，其在各处的基线数据、属性值及初始属性范围均保持一致。一旦某农场录用该人，该人便会从所有其他农场的推荐列表中消失。&#10;起初，经验、可靠性、忠诚度、职级和期望薪资均处于隐藏状态。每位求职者仅有一项指标以随机分布的30个百分点区间形式显示。真实数值始终包含在该区间内，但不一定位于中间。姓名、年龄、职业背景、简历和专业领域则始终可见。&#10;一次面试最多包含三个问题。关于未知数值的首个问题会揭示一个30个百分点的区间；再次询问会将区间缩小至15个百分点，而第三个问题则会显示确切数值。已知的数值不能再次被选中。面试可以暂停，并稍后从同一进度继续。薪资期望值会在最后一个问题的回答后显示出来。" />
     <e k="ui_pmHelpTopic04Title" v="Profil zaměstnance, hodnoty a status" />
-    <e k="ui_pmHelpTopic04Body" v="Zkušenosti, spolehlivost a loajalita se pohybují v rozmezí od 0 do 100. Číslo zůstává přesně viditelné; sloupce umožňují rychlé srovnání.&#10;Hodnocení se odvíjí výhradně od zkušeností: pomocník 0–44, odborník 45–74, profesionál 75–100. Zkušenosti určují rychlost práce, dodatečné opotřebení a dodatečnou spotřebu. Spolehlivost ovlivňuje krátkodobé výpadky výkonu, nemoc, měsíční vývoj a riziko přerušení nasazení. Loajalita popisuje vazbu na podnik a ovlivňuje varování, spory ohledně mzdy a vlastní výpovědi." />
+        <e k="ui_pmHelpTopic04Body" v="经验、可靠性和忠诚度各自的评分范围均为0至100。只要面试仍在进行中，应聘者的这些数值只会根据已知的面试进度显示。等级完全取决于经验，因此只有在经验值确切确定后才会显示。&#10;录用后，尚未确定的数值将暂时隐藏。员工在实际执行任务期间会实时积累经验。在每人预设的20至35分钟时间段结束后，这三项数值将全部显示。休息时间及未执行任务的时间不计入其中。进度将保存在游戏进度中。&#10;经验值决定工作速度、额外磨损和额外消耗。可靠性影响短期性能下降、生病、月度发展以及任务中断的风险。忠诚度反映员工对企业的归属感，并影响警告、薪资纠纷和主动辞职。" />
+        <e k="ui_hpSetting_applicantInterviews" v="求职面试" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="隐藏应聘者的数据。在最多三轮提问中，将逐步披露相关领域或具体数值；期望薪资将在面试结束时显示。" />
+        <e k="ui_pmValueUnknown" v="未知" />
+        <e k="ui_hpInterviewPrompt" v="你想问什么？" />
+        <e k="ui_hpInterviewTitle" v="求职面试" />
+        <e k="ui_hpInterviewTopicExperience" v="经验" />
+        <e k="ui_hpInterviewTopicReliability" v="可靠性" />
+        <e k="ui_hpInterviewTopicLoyalty" v="忠诚" />
+        <e k="ui_hpInterviewRound" v="问答环节 %d/3" />
+        <e k="ui_hpInterviewLeader" v="由你来主导谈话。" />
+        <e k="ui_hpInterviewObserver" v="你在关注这场对话。" />
+        <e k="ui_hpInterviewFinished" v="面试已经结束。" />
+        <e k="ui_hpInterviewWageIntro" v="我的期望薪资：" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="您在我们的农场工作方面有哪些实际经验？" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="您能否更具体地描述一下您的实践经验？" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="您如何确保我们在日常工作中能够信赖您？" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="您能更具体地描述一下自己在独立工作时的可靠性吗？" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="对您来说，什么因素最重要，才能让您长期忠于一家企业？" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="您会如何更具体地评价自己与雇主之间的长期忠诚度？" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="我迄今为止的职业生涯还算简单明了。" />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="我已经接手了一些合适的任务。" />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="我拥有丰富的实践经验。" />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="在时间紧迫的情况下，我偶尔需要明确的约定。" />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="通常来说，达成的协议和已完成的任务都是可以信赖的。" />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="我工作非常认真负责，并且始终如一地履行承诺。" />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="对于新公司，我起初往往会比较迅速地做出决定。" />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="如果合作顺利的话，我很乐意长期合作。" />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="稳定性与长期合作对我来说非常重要。" />
+        <e k="ui_hpInterviewAnswerIntro1" v="我会这样描述：" />
+        <e k="ui_hpInterviewAnswerIntro2" v="在我看来，情况是这样的：" />
+        <e k="ui_hpInterviewAnswerIntro3" v="以下评估最为贴切：" />
+        <e k="ui_hpInterviewOpen" v="求职面试" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="Jaké praktické zkušenosti přinášíte do práce na našem statku?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="Jaké úkoly jste dosud v zemědělství vykonával/a?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="S jakými pracemi na zemědělském hospodářství již máte zkušenosti?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Mohl byste trochu podrobněji popsat, které z těchto úkolů jste vykonával samostatně?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="Při jakých pracích se již cítíte jistě a v čem byste se ještě museli zaučit?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="Které z vašich dosavadních zkušeností by podle vás byly na naší farmě obzvláště užitečné?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="Jak zajišťujete, abychom se na vás mohli v každodenní práci spolehnout?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="Jak přistupujete k úkolům, které je třeba splnit v termínu?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="Co můžeme od vás očekávat, pokud se vám v práci náhodou něco přihodí?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="Co uděláte, když si uvědomíte, že nemůžete dodržet dohodu?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="Jak si udržujete přehled, když máte na starosti několik úkolů najednou?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Můžete podrobněji popsat, jak přistupujete k odpovědnosti při samostatné práci?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="Co je pro vás důležité, abyste zůstali dané firmě věrní i v dlouhodobém horizontu?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="Co byste si přáli od dlouhodobější spolupráce na našem statku?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="Co by pro vás bylo důležité, abyste u nás rádi pracovali delší dobu?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="Jakou roli pro vás hraje dlouhodobý vztah k zaměstnavateli?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="Jak byste ohodnotili svou ochotu zůstat v daném podniku i v obtížnějších dobách?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="Co by pro vás bylo rozhodujícím faktorem pro to, abyste ve spolupráci pokračovali, nebo se vydali novým směrem?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="Zatím jsem pomáhal hlavně s jednoduchými pracemi. K novým úkolům bych se přibližoval postupně." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="Moje praktické zkušenosti jsou zatím omezené, ale ráda se učím a ptám se, když něco nevím." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="Znám některé pracovní postupy na statku, ale v každodenní práci bych se ještě musel hodně naučit." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="V podniku jsem již vykonával různé práce a se známými úkoly si poradím bez problémů." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="S některými stroji a pracovními postupy jsem již pracoval. U nových úkolů někdy potřebuji krátké zaškolení." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="Mám praktické zkušenosti, i když jistě existují oblasti, ve kterých se ještě mohu něco naučit." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="Dlouhou dobu jsem pracoval na zemědělských hospodářstvích a při tom jsem samostatně vykonával mnoho úkolů." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="S běžnými pracemi a stroji jsem dobře obeznámen. Nové postupy si přesto nejprve pečlivě prohlédnu." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="Měl jsem již příležitost seznámit se s různými podniky a způsoby práce a většinou se dokážu rychle přizpůsobit novým úkolům." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="Když se toho nahromadí hodně najednou, pomáhají mi jasné dohody. Pak lépe vím, co je nejdůležitější udělat jako první." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="Snažím se své úkoly plnit řádně. Někdy se ale ještě musím snažit, abych měl vše včas pod kontrolou." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="U nových nebo neznámých úkolů se raději občas zeptám, aby mi nic důležitého neuniklo." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="Dbám na dodržování dohod. Pokud vidím, že něco nevyjde, dám o tom vědět co nejdříve." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="Své úkoly plním svědomitě. Pokud nejsou priority jasné, raději se ještě jednou poradím." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="Celkově vzato se na mě dá spolehnout. Když je hodně práce, pomůže mi krátká konzultace." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="Když se ujmeme nějakého úkolu, postaráme se o něj. Pokud by se vyskytl nějaký problém, včas na něj upozorníme." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="Sleduji termíny a domluvy a na závěr zkontroluji, zda je vše vyřízeno." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="I při samostatné práci kladu důraz na to, abych dodržoval své závazky a informoval ostatní o důležitých změnách." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="Nejprve bych se rád podíval, jak to tady funguje. Potom se budu moci lépe rozhodnout, jak dál." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="Jsem otevřený novým příležitostem a u nového zaměstnavatele se nerad zavazuji příliš brzy." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="Pro mě je důležité, aby spolupráce vyhovovala mým každodenním potřebám. Pokud by se moje situace změnila, zvážil bych i jiné možnosti." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="Pokud bude spolupráce fungovat a podmínky budou vyhovující, dokážu si představit, že tu zůstanu déle." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="Důležité je pro mě spolehlivé pracovní prostředí. To, jak dlouho tu zůstanu, závisí také na tom, jak si spolu budeme rozumět." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="Hledám dobrou spolupráci a rád bych se nejprve zabydlel. Pokud to bude vyhovovat oběma stranám, mám mnoho důvodů, proč zůstat." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="Cením si stability a hledám firmu, ve které bych se mohl dlouhodobě angažovat." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="Je pro mě důležité být součástí spolehlivého týmu. Pokud spolu dobře spolupracujeme, nechci neustále měnit zaměstnání." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="Rád bych na farmě pracoval déle a společně s týmem farmy sbíral zkušenosti." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ dříve pracoval v rodinném zemědělském podniku na venkově." />
+        <e k="ui_pmNewApplicantIntro1_2" v="Před podáním žádosti pracoval ZXQNAMEQXZ na rodinném statku na venkově." />
+        <e k="ui_pmNewApplicantIntro1_3" v="Součástí profesní dráhy ZXQNAMEQXZ je práce na venkovském rodinném hospodářství." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ dříve pracoval na malé farmě zaměřené na chov dojnic." />
+        <e k="ui_pmNewApplicantIntro2_2" v="Než se ucházel o místo, pracoval ZXQNAMEQXZ na malé farmě chovající dojnice." />
+        <e k="ui_pmNewApplicantIntro2_3" v="Součástí profesní dráhy ZXQNAMEQXZ je práce na malé farmě s chovem dojnic." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ dříve pracoval u zemědělské firmy." />
+        <e k="ui_pmNewApplicantIntro3_2" v="Před podáním žádosti pracoval ZXQNAMEQXZ u zemědělské firmy." />
+        <e k="ui_pmNewApplicantIntro3_3" v="Součástí profesní dráhy ZXQNAMEQXZ je i práce u zemědělské dodavatelské firmy." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ dříve pracoval v zemědělském podniku." />
+        <e k="ui_pmNewApplicantIntro4_2" v="Před podáním žádosti pracoval ZXQNAMEQXZ v zemědělském podniku." />
+        <e k="ui_pmNewApplicantIntro4_3" v="Součástí profesní dráhy ZXQNAMEQXZ je práce v zemědělském podniku." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ dříve pracoval v podniku se smíšeným provozem." />
+        <e k="ui_pmNewApplicantIntro5_2" v="Před podáním žádosti pracoval ZXQNAMEQXZ v podniku s kombinovaným provozem." />
+        <e k="ui_pmNewApplicantIntro5_3" v="Součástí profesní dráhy ZXQNAMEQXZ je práce v podniku se smíšenou činností." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ dříve pracoval v logistické společnosti." />
+        <e k="ui_pmNewApplicantIntro6_2" v="Před podáním žádosti o zaměstnání pracoval ZXQNAMEQXZ v logistické firmě." />
+        <e k="ui_pmNewApplicantIntro6_3" v="Součástí profesní dráhy ZXQNAMEQXZ je práce v logistické společnosti." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ dříve pracoval v opravně zemědělských strojů." />
+        <e k="ui_pmNewApplicantIntro7_2" v="Před podáním žádosti pracoval ZXQNAMEQXZ v opravně zemědělských strojů." />
+        <e k="ui_pmNewApplicantIntro7_3" v="Součástí profesní dráhy ZXQNAMEQXZ je práce v opravně zemědělských strojů." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ dříve pracoval v kanceláři." />
+        <e k="ui_pmNewApplicantIntro8_2" v="Před podáním žádosti pracoval ZXQNAMEQXZ v kanceláři." />
+        <e k="ui_pmNewApplicantIntro8_3" v="Součástí profesní dráhy ZXQNAMEQXZ je práce v kanceláři." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ dříve pracoval v rodinném zemědělském podniku na venkově a je součástí tohoto podniku již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Než začal pracovat na farmě, pracoval ZXQNAMEQXZ v rodinném zemědělském podniku na venkově. Délka jeho zaměstnání činí ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ je součástí týmu již ZXQMONTHSQXZ měsíců a předtím pracoval na rodinném statku na venkově." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ pracuje na farmě již ZXQMONTHSQXZ měsíců a předtím působil v rodinném zemědělském podniku na venkově." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ dříve pracoval na venkovském rodinném hospodářství a v tomto podniku je již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ dříve pracoval na malé mléčné farmě a je součástí podniku již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Než začal pracovat na farmě, pracoval ZXQNAMEQXZ na malé mléčné farmě. Délka jeho zaměstnání činí ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ je součástí týmu již ZXQMONTHSQXZ měsíců a předtím pracoval na malé farmě s chovem dojnic." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ pracuje na farmě již ZXQMONTHSQXZ měsíců a předtím působil na malé farmě s chovem dojnic." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ dříve pracoval na malé farmě s chovem dojnic a v tomto podniku je již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ dříve pracoval u jedné zemědělské firmy a je součástí podniku již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Než začal pracovat na farmě, pracoval ZXQNAMEQXZ u zemědělské firmy. Délka jeho zaměstnání činí ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ je součástí týmu již ZXQMONTHSQXZ měsíců a předtím pracoval u jedné zemědělské firmy." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ pracuje na farmě již ZXQMONTHSQXZ měsíců a předtím působil u jedné zemědělské firmy." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ dříve pracoval u jedné zemědělské firmy a v našem podniku je již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ dříve pracoval v zemědělském podniku a je součástí tohoto podniku již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Než začal pracovat na farmě, pracoval ZXQNAMEQXZ v zemědělském podniku. Délka jeho zaměstnání činí ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ je součástí týmu již ZXQMONTHSQXZ měsíců a předtím pracoval na zemědělském podniku zaměřeném na polní pěstování." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ pracuje na statku již ZXQMONTHSQXZ měsíců a předtím působil v zemědělském podniku zaměřeném na polní hospodářství." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ dříve pracoval na zemědělském podniku a v tomto podniku je již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ dříve pracoval v podniku se smíšeným provozem a je součástí tohoto podniku již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Než začal pracovat na farmě, pracoval ZXQNAMEQXZ v zemědělském a živočišném podniku. Délka jeho zaměstnání činí ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ je součástí týmu již ZXQMONTHSQXZ měsíců a předtím pracoval v podniku se smíšeným provozem." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ pracuje na farmě již ZXQMONTHSQXZ měsíců a předtím působil v smíšeném hospodářství." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ dříve pracoval v kombinovaném provozu a je v provozu již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ dříve pracoval v logistické firmě a je součástí podniku již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Než začal pracovat na farmě, pracoval ZXQNAMEQXZ v logistické firmě. Délka jeho zaměstnání činí ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ je součástí týmu již ZXQMONTHSQXZ měsíců a předtím pracoval v logistické společnosti." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ pracuje na farmě již ZXQMONTHSQXZ měsíců a předtím působil v logistické firmě." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ dříve pracoval v logistické firmě a v této firmě pracuje již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ dříve pracoval v opravně zemědělských strojů a je součástí podniku již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Než začal pracovat na farmě, pracoval ZXQNAMEQXZ v opravně zemědělských strojů. Délka jeho zaměstnání činí ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ je součástí týmu již ZXQMONTHSQXZ měsíců a předtím pracoval v servisu zemědělských strojů." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ pracuje na farmě již ZXQMONTHSQXZ měsíců a předtím působil v opravně zemědělských strojů." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ dříve pracoval v opravně zemědělských strojů a v tomto podniku je již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ dříve pracoval v kanceláři a je součástí firmy již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Než začal pracovat na farmě, pracoval ZXQNAMEQXZ v kanceláři. Délka jeho zaměstnání činí ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ je součástí týmu již ZXQMONTHSQXZ měsíců a předtím pracoval v kanceláři." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ pracuje na farmě již ZXQMONTHSQXZ měsíců; předtím vykonával kancelářskou práci." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ dříve pracoval v kanceláři a v podniku je již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewApplicantAge1_1" v="Ve věku ZXQAGEQXZ let je profesní dráha teprve na začátku." />
+        <e k="ui_pmNewApplicantAge1_2" v="Ve věku ZXQAGEQXZ let lze na statku získat další praktické zkušenosti." />
+        <e k="ui_pmNewApplicantAge1_3" v="Ve věku ZXQAGEQXZ let se naskýtá příležitost k dalšímu profesnímu rozvoji." />
+        <e k="ui_pmNewApplicantAge2_1" v="Ve věku ZXQAGEQXZ let se mohou profesní znalosti dále upevňovat." />
+        <e k="ui_pmNewApplicantAge2_2" v="Ve věku ZXQAGEQXZ let lze dosavadní zkušenosti doplnit o nové úkoly." />
+        <e k="ui_pmNewApplicantAge2_3" v="Ve věku ZXQAGEQXZ let je prostor pro další rozvoj dosavadní profesní dráhy." />
+        <e k="ui_pmNewApplicantAge3_1" v="Ve věku ZXQAGEQXZ let má za sebou již dlouhou profesní dráhu." />
+        <e k="ui_pmNewApplicantAge3_2" v="Ve svých ZXQAGEQXZ letech jsem během dosavadní profesní kariéry nasbíral různé zkušenosti." />
+        <e k="ui_pmNewApplicantAge3_3" v="Ve věku ZXQAGEQXZ let lze čerpat z dosavadních pracovních zkušeností; jejich souvislost se zemědělstvím závisí na dosavadní kariéře." />
+        <e k="ui_pmNewApplicantAge4_1" v="Ve věku ZXQAGEQXZ let má již za sebou dlouhou profesní kariéru." />
+        <e k="ui_pmNewApplicantAge4_2" v="Ve věku ZXQAGEQXZ let má uchazeč obecné pracovní zkušenosti, které nemusí nutně znamenat praxi v zemědělství." />
+        <e k="ui_pmNewApplicantAge4_3" v="Během ZXQAGEQXZ let života nasbírali různé zkušenosti; jejich užitečnost na statku závisí na dosavadních činnostech." />
+        <e k="ui_pmNewApplicantMarket1_1" v="Tato nabídka je na trhu od tohoto měsíce." />
+        <e k="ui_pmNewApplicantMarket1_2" v="Hledání nového zaměstnání začalo teprve nedávno." />
+        <e k="ui_pmNewApplicantMarket1_3" v="Inzerát byl zveřejněn tento měsíc." />
+        <e k="ui_pmNewApplicantMarket2_1" v="Nabídka je na trhu již měsíc." />
+        <e k="ui_pmNewApplicantMarket2_2" v="Hledání nového zaměstnání trvá už měsíc." />
+        <e k="ui_pmNewApplicantMarket2_3" v="Přihláška je zájemcům k dispozici již měsíc." />
+        <e k="ui_pmNewApplicantMarket3_1" v="Nabídka je na trhu již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewApplicantMarket3_2" v="Hledání nového zaměstnání trvá již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewApplicantMarket3_3" v="Přihláška je zájemcům k dispozici již ZXQMONTHSQXZ měsíců." />
+        <e k="ui_pmNewWorkerExperience1_1" v="Praktické zkušenosti se teprve získávají; při mnoha úkolech je stále zapotřebí vedení." />
+        <e k="ui_pmNewWorkerExperience1_2" v="Mnohé pracovní postupy na farmě jsou ještě nové." />
+        <e k="ui_pmNewWorkerExperience1_3" v="Praktická činnost se zatím nachází v rané fázi zapracování." />
+        <e k="ui_pmNewWorkerExperience1_4" v="Základní úkoly ještě vyžadují nácvik a podporu." />
+        <e k="ui_pmNewWorkerExperience1_5" v="Praktické postupy se osvojují krok za krokem." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Některé základy jsou známé, u náročnějších úkolů je však stále zapotřebí pomoci." />
+        <e k="ui_pmNewWorkerExperience2_2" v="První praktické zkušenosti již máme; v několika oblastech však ještě chybí rutina." />
+        <e k="ui_pmNewWorkerExperience2_3" v="Známe úkoly zvládá čím dál lépe, složitější práce však vyžadují další zaškolení." />
+        <e k="ui_pmNewWorkerExperience2_4" v="Základy již známe, pro bezpečný průběh je však zapotřebí dalšího nácviku." />
+        <e k="ui_pmNewWorkerExperience2_5" v="Praktické znalosti již byly získány a lze je v každodenní pracovní praxi dále upevňovat." />
+        <e k="ui_pmNewWorkerExperience3_1" v="Díky bohatým zkušenostem je možné mnoho běžných úkolů zvládnout samostatně." />
+        <e k="ui_pmNewWorkerExperience3_2" v="Většinu běžných prací zvládnete bez problémů." />
+        <e k="ui_pmNewWorkerExperience3_3" v="Existuje praktický základ; osvědčené postupy se přebírají samostatně." />
+        <e k="ui_pmNewWorkerExperience3_4" v="Při běžných pracích je patrná dobrá rutina." />
+        <e k="ui_pmNewWorkerExperience3_5" v="Je obeznámen s různými oblastmi činnosti a zvládá je z velké části samostatně." />
+        <e k="ui_pmNewWorkerExperience4_1" v="Bohaté praktické zkušenosti umožňují všestranné využití." />
+        <e k="ui_pmNewWorkerExperience4_2" v="Mezi běžné pracovní úkoly patří i náročnější práce." />
+        <e k="ui_pmNewWorkerExperience4_3" v="Díky bohatým zkušenostem lze různé pracovní postupy zvládat samostatně." />
+        <e k="ui_pmNewWorkerExperience4_4" v="Tato zkušenost se projevuje v jistém zvládání rozmanitých úkolů." />
+        <e k="ui_pmNewWorkerExperience4_5" v="Je obeznámen s celou řadou praktických postupů, a to i při střídání pracovních úkolů." />
+        <e k="ui_pmNewWorkerExperience5_1" v="K dispozici je mimořádně bohatá praktická zkušenost." />
+        <e k="ui_pmNewWorkerExperience5_2" v="Velmi bohaté zkušenosti jsou přínosem i při řešení složitých a neobvyklých úkolů." />
+        <e k="ui_pmNewWorkerExperience5_3" v="Pro práci na statku jsou k dispozici obzvláště rozsáhlé znalosti." />
+        <e k="ui_pmNewWorkerExperience5_4" v="Dlouholeté a všestranné praktické zkušenosti zajišťují vysokou jistotu při každodenní práci." />
+        <e k="ui_pmNewWorkerExperience5_5" v="Zvládá širokou škálu zemědělských prací s mimořádnou rutinou." />
+        <e k="ui_pmNewWorkerReliability1_1" v="Dohody a pečlivé plnění úkolů vyžadují zvláštní pozornost." />
+        <e k="ui_pmNewWorkerReliability1_2" v="V každodenní pracovní praxi jsou nezbytné časté kontroly a jasné pokyny." />
+        <e k="ui_pmNewWorkerReliability1_3" v="Pro spolehlivé plánování je třeba úkoly pečlivě sledovat." />
+        <e k="ui_pmNewWorkerReliability1_4" v="Dohody a pracovní postupy se zatím nedodržují důsledně." />
+        <e k="ui_pmNewWorkerReliability1_5" v="Důležité úkoly vyžadují dodatečnou koordinaci a kontrolu." />
+        <e k="ui_pmNewWorkerReliability2_1" v="Dohody nejsou vždy důsledně dodržovány; jasné pokyny pomáhají." />
+        <e k="ui_pmNewWorkerReliability2_2" v="Spolehlivost je zatím kolísavá; důležité práce by měly být prováděny pod dohledem." />
+        <e k="ui_pmNewWorkerReliability2_3" v="U známých úkolů se daří mnoho věcí, ale občasná kontrola má stále smysl." />
+        <e k="ui_pmNewWorkerReliability2_4" v="Na stabilnějším řešení svěřených úkolů se stále pracuje." />
+        <e k="ui_pmNewWorkerReliability2_5" v="Jasné rozdělení odpovědností a pravidelná zpětná vazba pomáhají v každodenní práci." />
+        <e k="ui_pmNewWorkerReliability3_1" v="U většiny úkolů lze počítat se spolehlivým provedením." />
+        <e k="ui_pmNewWorkerReliability3_2" v="Dohody se zpravidla dodržují a úkoly se většinou plní pečlivě." />
+        <e k="ui_pmNewWorkerReliability3_3" v="Spolehlivost představuje solidní základ pro plánování nasazení." />
+        <e k="ui_pmNewWorkerReliability3_4" v="Svěřené úkoly jsou většinou plněny svědomitě a spolehlivě." />
+        <e k="ui_pmNewWorkerReliability3_5" v="V každodenní pracovní praxi se projevuje převážně stabilní způsob práce." />
+        <e k="ui_pmNewWorkerReliability4_1" v="Práce je prováděna spolehlivě a dohodnuté podmínky jsou pečlivě dodržovány." />
+        <e k="ui_pmNewWorkerReliability4_2" v="Svěřené úkoly jsou plněny důsledně a svědomitě." />
+        <e k="ui_pmNewWorkerReliability4_3" v="Pečlivý přístup k práci usnadňuje spolehlivé plánování nasazení." />
+        <e k="ui_pmNewWorkerReliability4_4" v="Na sliby a provedení práce se lze ve velké míře spolehnout." />
+        <e k="ui_pmNewWorkerReliability4_5" v="Odpovědnost a dohodnuté úkoly jsou spolehlivě sledovány." />
+        <e k="ui_pmNewWorkerReliability5_1" v="I při náročných úkolech se na tuto práci dá mimořádně spolehnout." />
+        <e k="ui_pmNewWorkerReliability5_2" v="Dohody jsou důsledně dodržovány a úkoly jsou plněny s mimořádnou pečlivostí." />
+        <e k="ui_pmNewWorkerReliability5_3" v="Tento mimořádně spolehlivý způsob fungování poskytuje vysokou míru jistoty při plánování." />
+        <e k="ui_pmNewWorkerReliability5_4" v="Odpovědnost je přijímána s velkou pečlivostí a mimořádnou vytrvalostí." />
+        <e k="ui_pmNewWorkerReliability5_5" v="I rozsáhlé úkoly jsou vyřizovány obzvláště spolehlivě." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="Vazba na podnik je v současné době velmi slabá." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="Spolupráce je v současné době vnímána spíše jako krátkodobá." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="Dlouhodobá vazba na statek je v současné době jen velmi slabá." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="K dlouhodobému zaměstnání se v současné době přistupuje s rezervou." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="Ochota zůstat v podniku dlouhodobě je v současné době nízká." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="Vazba na podnik je zatím spíše vlažná." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="Dlouhodobá spolupráce se musí nejprve vyvinout." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="Zatím se ještě nevytvořilo úzké pouto s podnikem." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="Další spolupráce nabízí ještě prostor pro budování důvěry." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="Delší délka pracovního poměru je sice možná, ale zatím se k ní přistupuje s rezervou." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="Existuje silná vazba na podnik." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="Tato spolupráce představuje solidní základ pro dlouhodobé setrvání v podniku." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="Spojení s provozem je trvalé." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="Loajalita se drží na stabilní úrovni." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="Existují dobré předpoklady pro to, aby spolupráce pokračovala i v dlouhodobém horizontu." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="Vazba na podnik je velmi silná." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="Spolupráce s farmou má pro nás velký význam." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="Je zde patrná výrazná ochota zůstat v podniku i v dlouhodobém horizontu." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="Silná vazba svědčí o trvalé spolupráci." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="Zájem o delší dobu zaměstnání je zřetelně patrný." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="Vazba na podnik je mimořádně silná." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="Dlouhodobá spolupráce s tímto statkem má pro nás mimořádný význam." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="Vazba na podnik je mimořádně silná." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="Loajalita a ochota k dlouhodobé spolupráci jsou zde obzvláště vysoké." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="Identifikace s podnikem a jeho dlouhodobým rozvojem je mimořádně silná." />
+        <e k="ui_pmNewWorkerTenureNew" v="Tento měsíc začala práce na statku." />
+        <e k="ui_pmNewWorkerTenureOne" v="Práce na farmě začala před měsícem." />
     </elements>
 </l10n>

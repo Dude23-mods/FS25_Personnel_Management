@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="PROFIL" />
         <e k="ui_pmHistoryHeader" v="HISTORIKK" />
         <e k="ui_button_train" v="Lær opp" />
+        <e k="ui_pmManageSpecialization" v="Administrer spesialisering" />
         <e k="ui_pmStatusApplicant" v="Søker" />
         <e k="ui_pmBirthLine" v="Født: %s" />
         <e k="ui_pmRankLabel" v="Rang" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="Aktiv" />
         <e k="ui_transportPriorityInactive" v="Ikke tildelt" />
         <e k="ui_transportPriorityMoveUp" v="Flytt opp" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="Flytt opp" />
         <e k="ui_transportPriorityMoveDown" v="Flytt ned" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="Flytt ned" />
         <e k="ui_transportPriorityToggle" v="Aktiver/deaktiver" />
         <e k="ui_transportPriorityApply" v="Bruk" />
         <e k="ui_transportPriorityCancel" v="Avbryt" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="kontoryrke" />
         <e k="ui_status_retirementPending" v="går av med pensjon ved månedsslutt" />
         <e k="ui_retirementNotice" v="%s går av med pensjon ved slutten av måneden." />
-        <e k="ui_pmTrainingIntro" v="Spesialiseringer forbedrer ytelsen i riktig kategori. Opplæring starter bare ved månedens begynnelse, koster penger og gjør den ansatte utilgjengelig til månedsslutt. Fremgang tildeles etter fullføring. Tilbud og priser endres hver måned; bare ett kurs er tillatt per landbruksår fra mars til februar. Lærte spesialiseringer beholdes, men maksimalt to bonuser er aktive. Begge plassene kan være inaktive. En lært, inaktiv spesialisering kan bare aktiveres én gang per ansatt og landbruksår." />
+        <e k="ui_pmTrainingIntro" v="Utvikle teamet ditt målrettet: Velg «%s» og velg deretter en læringskategori. Spesialiseringer forbedrer ytelsen innen det aktuelle området. Opplæringen starter ved månedens begynnelse, koster penger og binder den ansatte til slutten av måneden. Fremgangen godskrives etter fullføring. Tilbud og priser endres hver måned. Hver ansatt kan gjennomføre ett kurs per landbruksår, fra mars til februar. Innlærte spesialiseringer beholdes; maksimalt to bonuser kan være aktive, og begge plassene kan være inaktive. Per ansatt og landbruksår kan kun én innlært, inaktiv spesialisering aktiveres." />
         <e k="ui_pmTrainingCategoryHeader" v="Læringskategori" />
         <e k="ui_pmTrainingProgressHeader" v="Framgang mot spesialisering" />
         <e k="ui_pmTrainingRunning" v="opplæring pågår" />
@@ -611,9 +614,9 @@
     <e k="ui_pmHelpTopic02Title" v="Oversikt og bemanning" />
     <e k="ui_pmHelpTopic02Body" v="Oversikten oppsummerer den aktuelle situasjonen på gården: Ansatte, tilgjengelige medarbeidere, søkere og arbeidsgiveromdømme vises øverst. Under dette vises pågående oppdrag med opplysninger om person, kjøretøy, utstyr og oppgave.&#10;Ruten «Endringer» inneholder kun relevante personalhendelser, det vil si endringer i arbeidsgiveromdømme, erfaring, pålitelighet, lojalitet, alder eller spesialisering. Hver melding angir årsak, berørt person og konsekvens; en oppføring på flere linjer regnes som én melding.&#10;«Månedsrapport» og «Totalt» viser aktuelle og samlede nøkkeltall. Bruk oversikten til rask oppdragsplanlegging; detaljer, beslutninger og historikk hører hjemme på de enkelte fagsideene." />
     <e k="ui_pmHelpTopic03Title" v="Arbeidsmarkedet for jobbsøkere og rekruttering" />
-    <e k="ui_pmHelpTopic03Body" v="En ny runde starter med fire søkere. Det kan samtidig være maksimalt åtte søkere på markedet. Ved hvert månedsskifte blir det trukket opptil tre nye plasser; sjansen per plass er 15 % + 0,7 × arbeidsgiverens omdømme. Ved et omdømme på 60 er dette 57 %, ved 100 er det 85 % per plass. Hvis markedet er tomt, genereres det minst én ny søker.&#10;Søkere forblir garantert tilgjengelige i den måneden de opprettes. Etter den første månedsskiftet er sjansen for at de forlater markedet 10–30 % avhengig av kvalitet, etter den andre 30–50 %, og ved det tredje månedsskiftet 100 %. Gode profiler kan forsvinne tidligere, fordi kvaliteten øker sjansen for at de forlater markedet.&#10;Søkere er mellom 18 og 65 år gamle, har en fast fødselsdato og fortsetter å eldes. Bakgrunnene er familiebedrift, melkeproduksjon, entreprenørvirksomhet, åkerbruk, blandingsdrift, logistikk, landbruksmaskinverksted og kontorarbeid. Alder og bakgrunn påvirker først og fremst erfaring og eventuelle faglige forkunnskaper.&#10;Lønnsønsket baseres på erfaring og pålitelighet, har en tilfeldig avvik på 96–106 % og påvirkes av arbeidsgiverens omdømme. Lavt omdømme øker lønnsønsket, mens høyt omdømme reduserer det. Før ansettelsen vises en bekreftelse; ansettelsen øker omdømmet med 1 poeng." />
+        <e k="ui_pmHelpTopic03Body" v="Alle søkere genereres i et globalt marked. Deretter avgjør arbeidsgiverens omdømme hvilke gårder en søker blir tilbudt til. Derfor kan gårder motta ulike tilbud; hvis den samme personen blir tilbudt til flere gårder, har vedkommende de samme grunnleggende opplysningene, verdiene og det samme innledende verdispennet overalt. Så snart en gård ansetter personen, forsvinner vedkommende fra alle andre gårder.&#10;I utgangspunktet forblir erfaring, pålitelighet, lojalitet, rang og lønnsønske skjult. For hver søker er nøyaktig én av de tre verdiene synlig som et tilfeldig plassert intervall på 30 prosentpoeng. Den virkelige verdien ligger alltid innenfor dette intervallet, men ikke nødvendigvis i midten. Navn, alder, yrkesbakgrunn, CV og spesialiseringer forblir synlige.&#10;Et ansettelsessamtale består av maksimalt tre spørsmål. Et første spørsmål om en ukjent verdi avdekker et spenn på 30 poeng; ytterligere spørsmål reduserer spennet til 15 poeng, og et nytt spørsmål avslører den eksakte verdien. Verdier som allerede er kjent, kan ikke velges på nytt. Samtalen kan avbrytes og fortsettes senere fra samme punkt. Lønnsforventningen blir synlig sammen med det siste svaret." />
     <e k="ui_pmHelpTopic04Title" v="Medarbeiderprofil, verdier og status" />
-    <e k="ui_pmHelpTopic04Body" v="Erfaring, pålitelighet og lojalitet måles på en skala fra 0 til 100. Tallet forblir tydelig synlig, og stolper gjør det mulig å sammenligne raskt.&#10;Rangeringen baseres utelukkende på erfaring: Hjelper 0–44, fagperson 45–74, profesjonell 75–100. Erfaring avgjør arbeidshastighet, ekstra slitasje og ekstra forbruk. Pålitelighet påvirker kortsiktige ytelsesnedganger, sykdom, månedlig utvikling og risikoen for at oppdraget avbrytes. Lojalitet beskriver tilknytningen til bedriften og påvirker advarsler, lønnskonflikter og frivillig oppsigelse." />
+        <e k="ui_pmHelpTopic04Body" v="Erfaring, pålitelighet og lojalitet går fra 0 til 100 hver. Så lenge ansettelsessamtalene pågår, vises disse verdiene for søkerne kun i henhold til den kjente statusen i samtalene. Rangeringen avhenger utelukkende av erfaring og vises derfor først når erfaringen er nøyaktig kjent.&#10;Etter ansettelsen forblir ukjente verdier i første omgang skjult. Under faktiske oppdrag samler den ansatte aktiv tid i sanntid. Etter en tidsperiode på mellom 20 og 35 minutter, som er fastsatt for hver person, blir alle tre verdiene fullstendig kjent. Pauser og perioder uten pågående oppdrag teller ikke med. Fremdriften lagres i spillstatusen.&#10;Erfaring bestemmer arbeidshastighet, ekstra slitasje og ekstra forbruk. Pålitelighet påvirker kortsiktige ytelsesnedganger, sykdom, månedlig utvikling og risikoen for at oppdraget avbrytes. Lojalitet beskriver tilknytningen til bedriften og påvirker advarsler, lønnskonflikter og frivillig oppsigelse." />
     <e k="ui_pmHelpTopic05Title" v="AI-hjelpere, transport og FollowMe" />
     <e k="ui_pmHelpTopic05Body" v="Når du starter en vanlig AI-assistentoppgave, åpnes medarbeidervalget. Du kan bare velge tilgjengelige medarbeidere. En medarbeider kan ikke påta seg flere oppdrag samtidig og er ikke tilgjengelig ved sykdom eller opplæring.&#10;Et oppdrag registreres først som fullført etter 10 sekunder. For å oppnå fremgang i spesialiseringen må det praktiske arbeidet vare i minst 3 minutter.&#10;Med T eller menyknappen åpner du transportprioriteten. Der angir du hvilke medarbeidere som skal påta seg transportoppgaver og i hvilken rekkefølge de skal vurderes. Ved en A-til-B-oppgave velges den første ledige medarbeideren fra toppen og nedover. FollowMe bruker fortsatt medarbeidervalget og regnes som transportarbeid." />
     <e k="ui_pmHelpTopic06Title" v="Erfaring og innvirkning på arbeidet" />
@@ -633,9 +636,9 @@
     <e k="ui_pmHelpTopic13Title" v="Profiler, kronikk og statistikk" />
     <e k="ui_pmHelpTopic13Body" v="Søkerprofilene kombinerer alder, yrkesbakgrunn, erfaring, pålitelighet, lojalitet, spesialiseringer og tid på markedet til en dynamisk tekst. Medarbeiderprofilene supplerer ansiennitet, oppdrag, opplæring og læringsfremgang.&#10;Den personlige kronikken kan registrere ansettelse, oppdragets start og slutt, avbrutte oppdrag, sykdom, opplæring, spesialiseringer, lønnskrav og beslutninger, endringer i lojalitet og pålitelighet, transporttildelinger samt oppsigelse, frivillig oppsigelse, pensjonering og avslutning av ansettelsesforholdet.&#10;Medarbeiderhistorikken viser blant annet oppdrag, arbeidstid, opplæring, transportstatus, siste hendelser, sykedager, lønnskrav, avbrutte oppdrag og samlet lønn utbetalt hittil. Oversikten viser i tillegg samlede verdier for hele bedriften, som antall ansettelser, oppsigelser, frivillige oppsigelser og pensjoneringer." />
     <e k="ui_pmHelpTopic14Title" v="Innstillinger, flerspiller og spillresultater" />
-    <e k="ui_pmHelpTopic14Body" v="Innstillingene gjelder per spillstatus og er inndelt i arbeidsytelse, personalutvikling samt økonomi og lønn. Spillmekaniske effekter låser opp de avhengige erfaringsvirkningene; erfaringsvirkningene styrer hastighet, slitasje, forbruksvarer og drivstoff. Personaleffekter låser opp lojalitetsendringer og muligheten for overtid. Økonomiske effekter låser opp individuelle lønninger og standard månedslønn.&#10;Deaktiverte effekter endrer ikke eksisterende personaldata med tilbakevirkende kraft. De forhindrer eller tillater utelukkende den respektive videre effekten. Standard månedslønn fungerer som grunnverdi når individuelle lønninger er deaktivert; den kan endres direkte i innstillingene. Tastetilordninger kan endres i spillinnstillingene.&#10;I flerspillermodus administreres og synkroniseres personale, søkere, oppdrag, lønninger, opplæring, ansettelser og historikk på gårdsnivå. Serveren bestemmer; kun autoriserte gårdsledere har lov til å endre sin egen gård. Dataene ligger i filen helperPersonnel.xml i spilllagringen, og gjeldende tilordninger gjenopprettes så langt det er mulig ved innlasting. Gamle spillfilene forblir brukbare; historiske data kan være ufullstendige for ansatte som allerede har sluttet." />
+        <e k="ui_pmHelpTopic14Body" v="Innstillingen «Jobbintervjuer» gjelder per spillstatus. Hvis den er aktiv, gjelder de skjulte verdiene, samtalene og den senere avsløringen i løpet av innsatstiden. Hvis den er deaktivert, vises alle verdiene for søkere og ansatte i sin helhet, som tidligere. Kun serveren og autoriserte farmmanagere kan endre innstillingen.&#10;I flerspillermodus avgjør serveren hvert spørsmål og synkroniserer samtalestatusen. Den første autoriserte gårdsforvalteren som åpner vinduet, leder samtalen. Andre spillere fra samme gård kan se på live; deres temaknapper forblir deaktiverte. Hvis den som leder samtalen lukker vinduet eller mister forbindelsen, kan en annen autorisert gårdsleder ta over.&#10;Personale, søkere, oppdrag, lønn, opplæring, ansettelser og kronikker forblir gårdsspesifikke. Globale søkere kan tilbys til flere gårder, men samtalene deres lagres separat for hver gård." />
     <e k="ui_pmHelpTopic15Title" v="Oppsett og første skritt" />
-    <e k="ui_pmHelpTopic15Body" v="Åpne en søker, sjekk alder, bakgrunn, verdier, lønnsforventninger og eksisterende spesialiseringer, og bekreft deretter ansettelsen. Søkeren blir ansatt ved den aktuelle gården; alle påfølgende beslutninger, lønnsutbetalinger og utviklinger gjelder for denne gården.&#10;Planlegg først en kort, passende oppgave etter ansettelsen. En ansatt må være tilgjengelig: Sykdom, pågående arbeid, opplæring, en bekreftet oppsigelse eller en fortsatt aktiv mod-tildeling kan hindre valg. Fanen «Ansatte» viser den konkrete årsaken.&#10;Den første ansettelsen forbedrer arbeidsgiveromdømmet med ett poeng. Høye verdier er ikke alltid automatisk bedre: En erfaren søker koster vanligvis mer, mens en rimelig nybegynner trenger mer tid til utvikling og opplæring." />
+        <e k="ui_pmHelpTopic15Body" v="Åpne intervjuet i fanen «Søkere» og velg «Erfaring», «Pålitelighet» eller «Lojalitet». Det valgte spørsmålet og svaret vises i intervjuforløpet. Etter senest tre spørsmål avsluttes intervjuet, og lønnsforventningen blir synlig. Ta en beslutning om ansettelse basert på de kjente eksakte verdiene, spennene og gjenværende usikkerheten.&#10;Etter ansettelsen forblir verdier som ikke er fullstendig avklart, i første omgang på det siste kjente nivået. Planlegg faktiske oppdrag: Etter 20 til 35 minutter med aktiv sanntid blir verdiene fullstendig avdekket. Den ansatte må være tilgjengelig; sykdom, pågående arbeid, opplæring eller en bekreftet oppsigelse kan hindre utvelgelsen.&#10;En ansettelse forbedrer arbeidsgiverens omdømme med ett poeng. Høye verdier er ikke alltid automatisk bedre: En erfaren søker koster vanligvis mer, mens en rimelig nybegynner trenger mer tid til utvikling og opplæring." />
     <e k="ui_pmHelpTopic16Title" v="Oppgaver og spesialiseringskategori" />
     <e k="ui_pmHelpTopic16Body" v="Tilordningen beregnes ut fra kjøretøy, redskaper og – hvis tilgjengelig – det utbrakte materialet. Direkte materialtilordning har forrang: Såfrø tilhører såing; ugressmiddel til plantevern; mineralgjødsel, flytende gjødsel, gjødsel, gjæringsrester og husdyrgjødsel til gjødsling. Kalk gjenkjennes ikke automatisk som en egen læringskategori.&#10;Tildeling av kjøretøy og redskaper: Plog, kultivator, rotoregg, skiveegg, vals og mulcher hører til jordbearbeiding. Så- og plante maskiner hører til såing. Felt sprøyter uten entydig materiale regnes som gjødsling. Kombiner, skjæreaggregater, ballepresser, slåmaskiner, lastevogner og oppsamlere hører til høsting. Tilhengere og tømbare kjøretøy hører til transport.&#10;FollowMe utvider den praktiske gjenkjenningen ytterligere til å omfatte hakker, potet- og betehøstere, vendere, svingere, gjødselspredere, gjødselvogner, undergrunnsløsere, steinsamlere, strigler og hakker. Mod-kjøretøy kan forbli nøytrale dersom deres spesialisering ikke gir en entydig tilordning. Da blir det ikke lovet noen feil spesialiseringsbonus.&#10;Maskinbeskyttelse og økonomisk driftsmåte er generelle bonuser: Den førstnevnte reduserer den erfaringsbaserte ekstra slitasjen, den sistnevnte reduserer det ekstra forbruket av drivstoff og materialer. Den valgte aktiviteten vises i valgvinduet; en passende aktiv spesialisering blir fremhevet der." />
     <e k="ui_specialization_transport" v="Transport" />
@@ -671,5 +674,244 @@
     <e k="ui_button_specializationActivate" v="Logg inn" />
     <e k="ui_pmSpecializationActive" v="aktiv" />
     <e k="ui_pmHelpContents" v="INNHOLD" />
+        <e k="ui_hpSetting_applicantInterviews" v="Jobbintervjuer" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="Skjuler søkernes tall. I opptil tre spørsmålsrunder blir lønnsnivåer eller eksakte tall avslørt; lønnsforventningen kommer frem ved slutten av samtalen." />
+        <e k="ui_pmValueUnknown" v="Ukjent" />
+        <e k="ui_hpInterviewPrompt" v="Hva vil du spørre om?" />
+        <e k="ui_hpInterviewTitle" v="Jobbintervju" />
+        <e k="ui_hpInterviewTopicExperience" v="Erfaring" />
+        <e k="ui_hpInterviewTopicReliability" v="Pålitelighet" />
+        <e k="ui_hpInterviewTopicLoyalty" v="Lojalitet" />
+        <e k="ui_hpInterviewRound" v="Spørsmålsrunde %d av 3" />
+        <e k="ui_hpInterviewLeader" v="Det er du som leder samtalen." />
+        <e k="ui_hpInterviewObserver" v="Du følger med på samtalen." />
+        <e k="ui_hpInterviewFinished" v="Jobbintervjuet er over." />
+        <e k="ui_hpInterviewWageIntro" v="Mine lønnsforventninger:" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="Hvilken praktisk erfaring har du som kan komme til nytte i arbeidet på gården vår?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="Kan du beskrive din praktiske erfaring litt mer detaljert?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="Hvordan sikrer De at vi kan stole på Dem i hverdagen på jobben?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="Hvordan vil du nærmere beskrive hvor pålitelig du er når du arbeider selvstendig?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="Hva er viktig for deg for at du skal forbli lojal mot en bedrift på lang sikt?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="Hvordan vil du nærmere vurdere din langsiktige tilknytning til en arbeidsgiver?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="Karrieren min så langt er fortsatt oversiktlig." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="Jeg har allerede påtatt meg noen passende oppgaver." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="Jeg har omfattende praktisk erfaring." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="Når jeg har dårlig tid, trenger jeg av og til klare avtaler." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="Man kan som regel stole på avtaler og oppgaver som er fullført." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="Jeg jobber svært pliktoppfyllende og holder alltid det jeg lover." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="Når det gjelder en ny bedrift, tar jeg i utgangspunktet en beslutning på ganske kort sikt." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="Hvis samarbeidet fungerer bra, kan jeg godt tenke meg at det blir en lengre periode." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="Pålitelighet og et langsiktig samarbeid er svært viktig for meg." />
+        <e k="ui_hpInterviewAnswerIntro1" v="Jeg vil beskrive det slik:" />
+        <e k="ui_hpInterviewAnswerIntro2" v="Slik jeg ser det, gjelder følgende:" />
+        <e k="ui_hpInterviewAnswerIntro3" v="Følgende vurdering passer best:" />
+        <e k="ui_hpInterviewOpen" v="Jobbintervju" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="Hvilke praktiske erfaringer har du som kan komme til nytte i arbeidet på gården vår?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="Hvilke oppgaver har du hatt innen landbruket hittil?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="Hvilke oppgaver på en gård har du allerede erfaring med?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Kan du beskrive litt mer detaljert hvilke av disse oppgavene du har utført på egen hånd?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="Hvilke oppgaver føler du deg allerede trygg på, og hvor trenger du fortsatt å sette deg inn i ting?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="Hvilke av dine erfaringer fra tidligere tror du vil være spesielt nyttige på gården vår?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="Hvordan sikrer De at vi kan stole på Dem i hverdagen på jobben?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="Hvordan håndterer du oppgaver som må fullføres innen fristen?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="Hva kan vi forvente av deg hvis det skulle oppstå noe uforutsett på jobben?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="Hva gjør du når du innser at du ikke kan overholde en avtale?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="Hvordan holder du oversikten når du har flere oppgaver å ta tak i samtidig?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Kan du beskrive nærmere hvordan du håndterer ansvaret når du arbeider selvstendig?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="Hva er viktig for deg for at du skal forbli lojal mot en bedrift på lang sikt?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="Hva ønsker du deg av et langsiktig samarbeid på gården vår?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="Hva må være på plass for at du skal ha lyst til å jobbe hos oss over lengre tid?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="Hvilken rolle spiller et langsiktig forhold til en arbeidsgiver for deg?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="Hvordan vil du vurdere din vilje til å bli værende i en bedrift, også i vanskeligere tider?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="Hva ville være avgjørende for deg når det gjelder å fortsette et samarbeid eller å finne en ny retning?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="Hittil har jeg hovedsakelig hjulpet til med enkle oppgaver. Jeg vil gå frem skritt for skritt når det gjelder nye oppgaver." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="Min praktiske erfaring er fortsatt begrenset, men jeg lærer gjerne mer og spør når det er noe jeg ikke vet." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="Jeg kjenner til noen av arbeidsoppgavene på en gård, men det er fortsatt mye jeg må lære meg i det daglige arbeidet." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="Jeg har allerede utført ulike oppgaver på en bedrift og klarer meg godt med oppgaver jeg er kjent med." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="Jeg har allerede jobbet med noen maskiner og arbeidsprosesser. Når jeg får nye oppgaver, trenger jeg av og til en kort innføring." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="Jeg har praktisk erfaring, selv om det sikkert finnes områder der jeg fortsatt har noe å lære." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="Jeg har jobbet på gårder over lengre tid og utført mange oppgaver på egen hånd." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="Jeg er godt kjent med de vanlige oppgavene og maskinene. Likevel ser jeg alltid nøye på nye arbeidsprosesser først." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="Jeg har allerede fått kjennskap til ulike virksomheter og arbeidsmetoder, og klarer som regel å tilpasse meg nye oppgaver raskt." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="Når det er mye å gjøre samtidig, hjelper det meg å ha klare avtaler. Da vet jeg bedre hva som er viktigst å ta tak i først." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="Jeg prøver å utføre oppgavene mine på en ordentlig måte. Noen ganger må jeg imidlertid fortsatt jobbe med å holde oversikten over alt i tide." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="Når det gjelder nye eller ukjente oppgaver, foretrekker jeg å spørre innimellom, slik at ingenting viktig blir oversett." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="Jeg legger vekt på avtaler. Hvis jeg ser at noe ikke kommer til å gå, gir jeg beskjed så tidlig som mulig." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="Jeg utfører oppgavene mine grundig. Hvis prioriteringene er uklare, foretrekker jeg å avklare dette med noen først." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="I det store og hele kan man stole på meg. Når det er mye å gjøre, setter jeg pris på en kort avstemming." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="Når jeg påtar meg en oppgave, sørger jeg for at den blir utført. Skulle det oppstå et problem, tar jeg det opp i god tid." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="Jeg holder oversikt over avtaler og oppgaver, og sjekker til slutt om alt er gjort." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="Selv når jeg jobber på egen hånd, legger jeg vekt på å holde det jeg har lovet og informere andre om viktige endringer." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="Først vil jeg se hvordan arbeidet foregår her. Deretter kan jeg bedre avgjøre hvordan det skal gå videre." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="Jeg er åpen for nye muligheter og vil helst ikke binde meg for tidlig til en ny arbeidsgiver." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="For meg må samarbeidet passe inn i hverdagen. Hvis situasjonen min endrer seg, vil jeg også vurdere andre alternativer." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="Hvis samarbeidet går bra og forholdene er de rette, kan jeg tenke meg å bli her lenger." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="Et trygt arbeidsmiljø er viktig for meg. Hvor lenge jeg blir, avhenger også av hvordan vi kommer overens." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="Jeg ønsker et godt samarbeid og vil gjerne finne meg til rette først. Hvis det passer for begge parter, er det mange grunner til at jeg bør bli." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="Jeg setter pris på stabilitet og søker en bedrift der jeg kan engasjere meg på lang sikt." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="Det er viktig for meg å være en del av et pålitelig team. Hvis vi samarbeider godt, ønsker jeg ikke å bytte jobb hele tiden." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="Jeg vil gjerne jobbe lenger på en gård og få erfaring sammen med bedriften." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ jobbet tidligere på en familiebedrift på landsbygda." />
+        <e k="ui_pmNewApplicantIntro1_2" v="Før han søkte på stillingen, jobbet ZXQNAMEQXZ på en familiebedrift på landsbygda." />
+        <e k="ui_pmNewApplicantIntro1_3" v="ZXQNAMEQXZ har blant annet arbeidet på en familiebedrift på landsbygda." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ jobbet tidligere på en liten melkeproduksjonsgård." />
+        <e k="ui_pmNewApplicantIntro2_2" v="Før han søkte på stillingen, jobbet ZXQNAMEQXZ på en liten melkeproduksjonsgård." />
+        <e k="ui_pmNewApplicantIntro2_3" v="ZXQNAMEQXZ har blant annet jobbet på en liten melkeproduksjonsgård." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ jobbet tidligere hos et entreprenørfirma." />
+        <e k="ui_pmNewApplicantIntro3_2" v="Før han søkte på stillingen, jobbet ZXQNAMEQXZ hos et landbruksforetak." />
+        <e k="ui_pmNewApplicantIntro3_3" v="ZXQNAMEQXZ har blant annet jobbet hos et landbruksforetak." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ jobbet tidligere på en jordbruksbedrift." />
+        <e k="ui_pmNewApplicantIntro4_2" v="Før han søkte på stillingen, jobbet ZXQNAMEQXZ på en jordbruksbedrift." />
+        <e k="ui_pmNewApplicantIntro4_3" v="ZXQNAMEQXZ har blant annet arbeidet på en jordbruksbedrift i løpet av sin yrkeskarriere." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ jobbet tidligere på en bedrift med blandet drift." />
+        <e k="ui_pmNewApplicantIntro5_2" v="Før han søkte på stillingen, jobbet ZXQNAMEQXZ på et anlegg med blandet drift." />
+        <e k="ui_pmNewApplicantIntro5_3" v="ZXQNAMEQXZ har blant annet arbeidet på en blandet bedrift i løpet av sin yrkeskarriere." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ jobbet tidligere i en logistikkbedrift." />
+        <e k="ui_pmNewApplicantIntro6_2" v="Før han søkte på stillingen, jobbet ZXQNAMEQXZ i et logistikkfirma." />
+        <e k="ui_pmNewApplicantIntro6_3" v="ZXQNAMEQXZ har blant annet jobbet i et logistikkfirma." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ jobbet tidligere i et verksted for landbruksmaskiner." />
+        <e k="ui_pmNewApplicantIntro7_2" v="Før han søkte på stillingen, jobbet ZXQNAMEQXZ i et verksted for landbruksmaskiner." />
+        <e k="ui_pmNewApplicantIntro7_3" v="ZXQNAMEQXZ har blant annet jobbet i et verksted for landbruksmaskiner." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ hadde tidligere en kontorjobb." />
+        <e k="ui_pmNewApplicantIntro8_2" v="Før han søkte på stillingen, jobbet ZXQNAMEQXZ i et kontorjobb." />
+        <e k="ui_pmNewApplicantIntro8_3" v="ZXQNAMEQXZ har blant annet arbeidet i et kontorjobbet." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ jobbet tidligere på en familiebedrift på landsbygda og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Før han begynte å jobbe på gården, jobbet ZXQNAMEQXZ på en familiebedrift på landsbygda. Han har vært ansatt i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ har vært en del av teamet i ZXQMONTHSQXZ måneder og jobbet tidligere på en familiebedrift på landsbygda." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ har jobbet på gården i ZXQMONTHSQXZ måneder og jobbet tidligere på en familiebedrift på landsbygda." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ jobbet tidligere på en familiebedrift på landsbygda og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ jobbet tidligere på en liten melkeproduksjonsgård og har vært ansatt på gården i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Før han begynte å jobbe på gården, jobbet ZXQNAMEQXZ på en liten melkeproduksjonsbedrift. Han har vært ansatt i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ har vært en del av teamet i ZXQMONTHSQXZ måneder og jobbet tidligere på en liten melkeproduksjonsgård." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ har jobbet på gården i ZXQMONTHSQXZ måneder og jobbet tidligere på en liten melkeproduksjonsgård." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ jobbet tidligere på en liten melkeproduksjonsgård og har vært ansatt på gården i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ jobbet tidligere hos et entreprenørfirma og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Før han begynte å jobbe på gården, jobbet ZXQNAMEQXZ hos et landbruksfirma. Han har vært ansatt der i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ har vært en del av teamet i ZXQMONTHSQXZ måneder og jobbet tidligere hos et entreprenørfirma." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ har jobbet på gården i ZXQMONTHSQXZ måneder og jobbet tidligere hos et landbruksforetak." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ jobbet tidligere hos et entreprenørfirma og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ jobbet tidligere på en jordbruksbedrift og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Før han begynte å jobbe på gården, jobbet ZXQNAMEQXZ på en jordbruksbedrift. Han har vært ansatt i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ har vært en del av teamet i ZXQMONTHSQXZ måneder og jobbet tidligere på en åkerbruksbedrift." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ har jobbet på gården i ZXQMONTHSQXZ måneder og jobbet tidligere på en åkerbruksbedrift." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ jobbet tidligere på en åkerbruksbedrift og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ jobbet tidligere på en bedrift med blandet drift og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Før han begynte å jobbe på gården, jobbet ZXQNAMEQXZ på en blandingsgård. Han har vært ansatt i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ har vært en del av teamet i ZXQMONTHSQXZ måneder og jobbet tidligere i en blandet virksomhet." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ har jobbet på gården i ZXQMONTHSQXZ måneder og jobbet tidligere på en blandingsgård." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ var tidligere i drift på et blandet anlegg og har vært i drift i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ jobbet tidligere i et logistikkfirma og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Før han begynte å jobbe på gården, jobbet ZXQNAMEQXZ i et logistikkfirma. Han har vært ansatt i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ har vært en del av teamet i ZXQMONTHSQXZ måneder og jobbet tidligere i en logistikkbedrift." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ har jobbet på gården i ZXQMONTHSQXZ måneder og jobbet tidligere i et logistikkfirma." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ jobbet tidligere i et logistikkfirma og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ jobbet tidligere i et verksted for landbruksmaskiner og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Før han begynte å jobbe på gården, jobbet ZXQNAMEQXZ i et verksted for landbruksmaskiner. Han har vært ansatt i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ har vært en del av teamet i ZXQMONTHSQXZ måneder og jobbet tidligere i et verksted for landbruksmaskiner." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ har jobbet på gården i ZXQMONTHSQXZ måneder og jobbet tidligere i et verksted for landbruksmaskiner." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ jobbet tidligere i et verksted for landbruksmaskiner og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ hadde tidligere et kontorjobb og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Før han begynte å jobbe på gården, hadde ZXQNAMEQXZ et kontorjobb. Han har vært ansatt i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ har vært en del av teamet i ZXQMONTHSQXZ måneder og jobbet tidligere med kontorarbeid." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ har jobbet på gården i ZXQMONTHSQXZ måneder og hadde tidligere et kontorjobb." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ jobbet tidligere med kontorarbeid og har vært ansatt i bedriften i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewApplicantAge1_1" v="I en alder av ZXQAGEQXZ år er karriereveien fortsatt i startfasen." />
+        <e k="ui_pmNewApplicantAge1_2" v="I alderen ZXQAGEQXZ kan man skaffe seg ytterligere praktisk erfaring på gården." />
+        <e k="ui_pmNewApplicantAge1_3" v="Når man er ZXQAGEQXZ år, har man muligheten til å videreutvikle sin karriere." />
+        <e k="ui_pmNewApplicantAge2_1" v="I en alder av ZXQAGEQXZ år kan man videreutvikle sine faglige ferdigheter." />
+        <e k="ui_pmNewApplicantAge2_2" v="I en alder av ZXQAGEQXZ år kan man utvide sine hidtidige erfaringer med nye oppgaver." />
+        <e k="ui_pmNewApplicantAge2_3" v="Når man er ZXQAGEQXZ år gammel, har man mulighet til å videreutvikle sin hittil fulgte karrierevei." />
+        <e k="ui_pmNewApplicantAge3_1" v="Med sine ZXQAGEQXZ år har han allerede en lang karriere bak seg." />
+        <e k="ui_pmNewApplicantAge3_2" v="I løpet av sine ZXQAGEQXZ år har han fått ulike erfaringer i sin hittilvarende yrkeskarriere." />
+        <e k="ui_pmNewApplicantAge3_3" v="Ved en alder av ZXQAGEQXZ år har man arbeidserfaring; i hvilken grad denne er knyttet til landbruket, avhenger av karriereforløpet." />
+        <e k="ui_pmNewApplicantAge4_1" v="Med sine ZXQAGEQXZ år har han allerede en lang karriere bak seg." />
+        <e k="ui_pmNewApplicantAge4_2" v="Ved en alder av ZXQAGEQXZ år har man generell yrkeserfaring, som ikke nødvendigvis innebærer erfaring fra landbruket." />
+        <e k="ui_pmNewApplicantAge4_3" v="I løpet av ZXQAGEQXZ leveår har man samlet ulike erfaringer; hvor nyttige disse er på gården, avhenger av hvilke aktiviteter man har drevet med hittil." />
+        <e k="ui_pmNewApplicantMarket1_1" v="Søknaden har vært tilgjengelig på markedet siden denne måneden." />
+        <e k="ui_pmNewApplicantMarket1_2" v="Jakten på en ny jobb har nettopp begynt." />
+        <e k="ui_pmNewApplicantMarket1_3" v="Søknaden ble offentliggjort denne måneden." />
+        <e k="ui_pmNewApplicantMarket2_1" v="Stillingsannonsen har vært ute i en måned." />
+        <e k="ui_pmNewApplicantMarket2_2" v="Jakten på en ny jobb har pågått i en måned." />
+        <e k="ui_pmNewApplicantMarket2_3" v="Søknaden har vært tilgjengelig for interesserte bedrifter i en måned." />
+        <e k="ui_pmNewApplicantMarket3_1" v="Søknaden har vært ute på markedet i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewApplicantMarket3_2" v="Jakten på en ny jobb har vart i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewApplicantMarket3_3" v="Søknaden har vært tilgjengelig for interesserte bedrifter i ZXQMONTHSQXZ måneder." />
+        <e k="ui_pmNewWorkerExperience1_1" v="Den praktiske erfaringen er fortsatt i en tidlig fase; mange oppgaver krever fortsatt veiledning." />
+        <e k="ui_pmNewWorkerExperience1_2" v="Mange arbeidsprosesser på gården er fortsatt nye." />
+        <e k="ui_pmNewWorkerExperience1_3" v="Det praktiske arbeidet er fortsatt i en tidlig innkjøringsfase." />
+        <e k="ui_pmNewWorkerExperience1_4" v="De grunnleggende oppgavene krever fortsatt øvelse og veiledning." />
+        <e k="ui_pmNewWorkerExperience1_5" v="De praktiske arbeidsgangene læres trinn for trinn." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Noen grunnleggende prinsipper er kjent, men ved mer krevende oppgaver er det fortsatt behov for støtte." />
+        <e k="ui_pmNewWorkerExperience2_2" v="De første praktiske erfaringene er på plass, men på flere områder mangler det fortsatt rutine." />
+        <e k="ui_pmNewWorkerExperience2_3" v="Oppgaver man er vant til, går stadig bedre, mens mer komplekse oppgaver krever ytterligere opplæring." />
+        <e k="ui_pmNewWorkerExperience2_4" v="Grunnleggende ferdigheter er på plass, men det kreves mer øvelse for å sikre at prosessene gjennomføres på en sikker måte." />
+        <e k="ui_pmNewWorkerExperience2_5" v="Praktiske ferdigheter er allerede opparbeidet og kan videreutvikles i det daglige arbeidet." />
+        <e k="ui_pmNewWorkerExperience3_1" v="Solid erfaring gjør det mulig å utføre mange vanlige oppgaver på egen hånd." />
+        <e k="ui_pmNewWorkerExperience3_2" v="De fleste hverdagsoppgavene går greit." />
+        <e k="ui_pmNewWorkerExperience3_3" v="Det foreligger et praktisk grunnlag; kjente arbeidsganger utføres selvstendig." />
+        <e k="ui_pmNewWorkerExperience3_4" v="Når det gjelder de vanlige oppgavene, er det en god rutine på plass." />
+        <e k="ui_pmNewWorkerExperience3_5" v="Vedkommende har god kjennskap til ulike arbeidsområder og utfører oppgavene i stor grad på egen hånd." />
+        <e k="ui_pmNewWorkerExperience4_1" v="Omfattende praktisk erfaring gjør det mulig å bruke den på mange forskjellige måter." />
+        <e k="ui_pmNewWorkerExperience4_2" v="Selv mer krevende oppgaver inngår i det vanlige arbeidsområdet." />
+        <e k="ui_pmNewWorkerExperience4_3" v="God rutine gjør det lettere å ta ansvar for ulike arbeidsoppgaver på egen hånd." />
+        <e k="ui_pmNewWorkerExperience4_4" v="Erfaringen kommer til uttrykk i en trygg håndtering av ulike oppgaver." />
+        <e k="ui_pmNewWorkerExperience4_5" v="Mange praktiske arbeidsganger er velkjente, selv når oppgavene varierer." />
+        <e k="ui_pmNewWorkerExperience5_1" v="Det foreligger svært mye praktisk erfaring." />
+        <e k="ui_pmNewWorkerExperience5_2" v="En svært bred erfaring er også til hjelp når man står overfor komplekse og ukjente oppgaver." />
+        <e k="ui_pmNewWorkerExperience5_3" v="Det finnes særlig omfattende kunnskap tilgjengelig for arbeidet på gården." />
+        <e k="ui_pmNewWorkerExperience5_4" v="Mange års og allsidig praksis gir stor trygghet i hverdagen på jobben." />
+        <e k="ui_pmNewWorkerExperience5_5" v="Et bredt spekter av landbruksarbeid utføres med særlig stor rutine." />
+        <e k="ui_pmNewWorkerReliability1_1" v="Avtaler og nøye utførelse av oppgaver krever spesiell oppmerksomhet." />
+        <e k="ui_pmNewWorkerReliability1_2" v="I det daglige arbeidet er det nødvendig med hyppige kontroller og klare retningslinjer." />
+        <e k="ui_pmNewWorkerReliability1_3" v="For å sikre en pålitelig planlegging bør oppgavene følges nøye opp." />
+        <e k="ui_pmNewWorkerReliability1_4" v="Avtaler og arbeidsprosesser blir ennå ikke fulgt konsekvent." />
+        <e k="ui_pmNewWorkerReliability1_5" v="Viktige oppgaver krever ekstra samordning og kontroll." />
+        <e k="ui_pmNewWorkerReliability2_1" v="Avtaler blir ikke alltid overholdt; klare retningslinjer er til hjelp." />
+        <e k="ui_pmNewWorkerReliability2_2" v="Påliteligheten er fortsatt ustabil; viktige oppgaver bør overvåkes." />
+        <e k="ui_pmNewWorkerReliability2_3" v="Når det gjelder oppgaver man er kjent med, går mye bra, men det er fortsatt lurt med sporadisk oppfølging." />
+        <e k="ui_pmNewWorkerReliability2_4" v="Det arbeides fortsatt med å sikre en mer stabil gjennomføring av de overførte oppgavene." />
+        <e k="ui_pmNewWorkerReliability2_5" v="Tydelige ansvarsområder og regelmessig tilbakemelding er til hjelp i hverdagen på jobben." />
+        <e k="ui_pmNewWorkerReliability3_1" v="I de fleste oppgaver kan man regne med at de blir utført på en pålitelig måte." />
+        <e k="ui_pmNewWorkerReliability3_2" v="Avtaler blir som regel overholdt, og oppgavene blir for det meste utført grundig." />
+        <e k="ui_pmNewWorkerReliability3_3" v="Påliteligheten gir et solidt grunnlag for operasjonsplanleggingen." />
+        <e k="ui_pmNewWorkerReliability3_4" v="Oppgaver som blir tildelt, blir som regel utført grundig og pålitelig." />
+        <e k="ui_pmNewWorkerReliability3_5" v="I den daglige arbeidshverdagen ser man en overveiende stabil arbeidsmåte." />
+        <e k="ui_pmNewWorkerReliability4_1" v="Arbeidet utføres pålitelig, og avtaler overholdes nøye." />
+        <e k="ui_pmNewWorkerReliability4_2" v="Oppgaver som blir tildelt, utføres konsekvent og grundig." />
+        <e k="ui_pmNewWorkerReliability4_3" v="Den grundige arbeidsmåten gjør det enklere å utarbeide en pålitelig innsatsplan." />
+        <e k="ui_pmNewWorkerReliability4_4" v="Man kan i høy grad stole på at løfter blir innfridd og at arbeidet blir utført." />
+        <e k="ui_pmNewWorkerReliability4_5" v="Ansvar og avtalte oppgaver blir nøye fulgt opp." />
+        <e k="ui_pmNewWorkerReliability5_1" v="Selv når det gjelder krevende oppgaver, kan man stole på arbeidet i usedvanlig stor grad." />
+        <e k="ui_pmNewWorkerReliability5_2" v="Avtaler overholdes svært konsekvent, og oppgavene utføres med stor omhu." />
+        <e k="ui_pmNewWorkerReliability5_3" v="Den svært pålitelige driften gir stor planleggingssikkerhet." />
+        <e k="ui_pmNewWorkerReliability5_4" v="Ansvaret påtas med stor omhu og enestående standhaftighet." />
+        <e k="ui_pmNewWorkerReliability5_5" v="Selv omfattende oppgaver blir utført på en svært pålitelig måte." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="Tilknytningen til bedriften er for tiden svært svak." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="Samarbeidet betraktes foreløpig som et kortsiktig tiltak." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="Foreløpig er det kun en svak tilknytning til gården på lengre sikt." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="For øyeblikket er holdningen til langvarig ansettelse tilbakeholden." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="Viljen til å fortsette i bedriften på lengre sikt er for tiden liten." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="Engasjementet for bedriften er fortsatt tilbakeholdent." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="Et langsiktig samarbeid må først utvikles." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="Det har ennå ikke oppstått noen nær tilknytning til bedriften." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="Det videre samarbeidet gir fortsatt rom for å bygge opp tillit." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="En lengre ansettelsestid er tenkelig, men blir foreløpig vurdert med forsiktighet." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="Det foreligger en sterk tilknytning til bedriften." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="Samarbeidet gir et solidt grunnlag for lengre ansettelsestid." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="Forbindelsen til anlegget er stabil." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="Lojaliteten ligger på et solidt nivå." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="Det er et godt grunnlag for å fortsette samarbeidet på lengre sikt." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="Tilknytningen til bedriften er svært sterk." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="Samarbeidet med gården er svært viktig." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="Det er en sterk vilje til å fortsette i bedriften på lang sikt." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="Det sterke båndet tyder på et varig samarbeid." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="Det er tydelig at det er stor interesse for lengre ansettelsestid." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="Båndet til bedriften er usedvanlig sterkt." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="Det langsiktige samarbeidet med gården er av særlig stor betydning." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="Tilknytningen til bedriften er usedvanlig sterk." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="Lojaliteten og viljen til et varig samarbeid er svært høy." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="Identifikasjonen med bedriften og dens langsiktige utvikling er usedvanlig sterk." />
+        <e k="ui_pmNewWorkerTenureNew" v="Arbeidet på gården har startet denne måneden." />
+        <e k="ui_pmNewWorkerTenureOne" v="Arbeidet på gården begynte for en måned siden." />
     </elements>
 </l10n>

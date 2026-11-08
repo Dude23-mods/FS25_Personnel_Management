@@ -17,6 +17,7 @@ HelperPersonnelConfig.xmlSchema:register(XMLValueType.BOOL, "helperPersonnelConf
 HelperPersonnelConfig.xmlSchema:register(XMLValueType.BOOL, "helperPersonnelConfig.personnelEffects#enabled", "Personalbezogene Auswirkungen der Mitarbeiterwerte aktiv", true)
 HelperPersonnelConfig.xmlSchema:register(XMLValueType.BOOL, "helperPersonnelConfig.personnelEffects.loyalty#enabled", "Loyalitaetsveraenderungen aktiv", true)
 HelperPersonnelConfig.xmlSchema:register(XMLValueType.BOOL, "helperPersonnelConfig.personnelEffects.loyalty.nightWork#enabled", "Nachtarbeit beeinflusst Loyalitaet und Arbeitgeberansehen", true)
+HelperPersonnelConfig.xmlSchema:register(XMLValueType.BOOL, "helperPersonnelConfig.personnelEffects.applicantInterviews#enabled", "Bewerbungsgespraeche aktiv", true)
 HelperPersonnelConfig.xmlSchema:register(XMLValueType.BOOL, "helperPersonnelConfig.economicEffects#enabled", "Wirtschaftliche Einfluesse der Mitarbeiterwerte aktiv", true)
 HelperPersonnelConfig.xmlSchema:register(XMLValueType.BOOL, "helperPersonnelConfig.economicEffects.individualWages#enabled", "Individuelle Gehaelter aktiv", true)
 HelperPersonnelConfig.xmlSchema:register(XMLValueType.FLOAT, "helperPersonnelConfig.economicEffects.standardWage#baseMonthlyWage", "Standard-Monatsgehalt bei Referenz-Monatslaenge", HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE)
@@ -35,6 +36,7 @@ function HelperPersonnelConfig.new(manager, customMt)
     self.personnelEffectsEnabled = true
     self.loyaltyEffectsEnabled = true
     self.nightWorkLoyaltyEffectEnabled = true
+    self.applicantInterviewsEnabled = true
     self.economicEffectsEnabled = true
     self.individualWagesEnabled = true
     self.standardBaseMonthlyWage = HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
@@ -81,10 +83,18 @@ function HelperPersonnelConfig:load()
         self.personnelEffectsEnabled = xmlFile:getBool("helperPersonnelConfig.personnelEffects#enabled", true) == true
         self.loyaltyEffectsEnabled = xmlFile:getBool("helperPersonnelConfig.personnelEffects.loyalty#enabled", true) == true
         self.nightWorkLoyaltyEffectEnabled = xmlFile:getBool("helperPersonnelConfig.personnelEffects.loyalty.nightWork#enabled", true) == true
+        self.applicantInterviewsEnabled = xmlFile:getBool("helperPersonnelConfig.personnelEffects.applicantInterviews#enabled", true) == true
         self.economicEffectsEnabled = xmlFile:getBool("helperPersonnelConfig.economicEffects#enabled", true) == true
         self.individualWagesEnabled = xmlFile:getBool("helperPersonnelConfig.economicEffects.individualWages#enabled", true) == true
         local loadedStandardBaseMonthlyWage = xmlFile:getFloat("helperPersonnelConfig.economicEffects.standardWage#baseMonthlyWage", HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE)
-        self.standardBaseMonthlyWage = HelperPersonnelConfig.normalizeStandardBaseMonthlyWage(loadedStandardBaseMonthlyWage) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
+        local normalizedStandardBaseMonthlyWage = HelperPersonnelConfig.normalizeStandardBaseMonthlyWage(loadedStandardBaseMonthlyWage)
+        if normalizedStandardBaseMonthlyWage == nil then
+            if Logging ~= nil and Logging.warning ~= nil then
+                Logging.warning("FS25_HelperPersonnel: Invalid configured standard monthly wage reset to the safe default.")
+            end
+            normalizedStandardBaseMonthlyWage = HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
+        end
+        self.standardBaseMonthlyWage = normalizedStandardBaseMonthlyWage
         xmlFile:delete()
     end
 
@@ -123,6 +133,7 @@ function HelperPersonnelConfig:save()
     xmlFile:setBool("helperPersonnelConfig.personnelEffects#enabled", self.personnelEffectsEnabled == true)
     xmlFile:setBool("helperPersonnelConfig.personnelEffects.loyalty#enabled", self.loyaltyEffectsEnabled == true)
     xmlFile:setBool("helperPersonnelConfig.personnelEffects.loyalty.nightWork#enabled", self.nightWorkLoyaltyEffectEnabled == true)
+    xmlFile:setBool("helperPersonnelConfig.personnelEffects.applicantInterviews#enabled", self.applicantInterviewsEnabled == true)
     xmlFile:setBool("helperPersonnelConfig.economicEffects#enabled", self.economicEffectsEnabled == true)
     xmlFile:setBool("helperPersonnelConfig.economicEffects.individualWages#enabled", self.individualWagesEnabled == true)
     xmlFile:setFloat("helperPersonnelConfig.economicEffects.standardWage#baseMonthlyWage", tonumber(self.standardBaseMonthlyWage) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE)
@@ -208,6 +219,7 @@ function HelperPersonnelConfig:getNetworkState()
         personnelEffectsEnabled = self.personnelEffectsEnabled == true,
         loyaltyEffectsEnabled = self.loyaltyEffectsEnabled == true,
         nightWorkLoyaltyEffectEnabled = self.nightWorkLoyaltyEffectEnabled == true,
+        applicantInterviewsEnabled = self.applicantInterviewsEnabled == true,
         economicEffectsEnabled = self.economicEffectsEnabled == true,
         individualWagesEnabled = self.individualWagesEnabled == true,
         standardBaseMonthlyWage = tonumber(self.standardBaseMonthlyWage) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
@@ -229,6 +241,7 @@ function HelperPersonnelConfig:applyNetworkState(state)
     self.personnelEffectsEnabled = state.personnelEffectsEnabled ~= false
     self.loyaltyEffectsEnabled = state.loyaltyEffectsEnabled ~= false
     self.nightWorkLoyaltyEffectEnabled = state.nightWorkLoyaltyEffectEnabled ~= false
+    self.applicantInterviewsEnabled = state.applicantInterviewsEnabled ~= false
     self.economicEffectsEnabled = state.economicEffectsEnabled == true
     self.individualWagesEnabled = state.individualWagesEnabled == true
     self.standardBaseMonthlyWage = tonumber(state.standardBaseMonthlyWage) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE

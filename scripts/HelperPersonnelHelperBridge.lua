@@ -399,6 +399,11 @@ function HelperPersonnelHelperBridge:getPortraitFilenameForPerson(person)
         return self:getEnhancedPortraitFilename(fallbackFilename) or fallbackFilename
     end
 
+    local profileIndex = tonumber(person.avatarIndex) or 0
+    if profileIndex > 10 and HelperPersonnelPortraitProfiles[profileIndex] ~= nil then
+        return Utils.getFilename(string.format("gui/portraits/helperPortrait_%02d.dds", profileIndex), self.app.modDir)
+    end
+
     if person.helperPersonnelPortraitFilename ~= nil then
         return self:getEnhancedPortraitFilename(person.helperPersonnelPortraitFilename) or person.helperPersonnelPortraitFilename
     end
@@ -692,7 +697,7 @@ function HelperPersonnelHelperBridge:getAvatarIndicesForGender(gender)
     local maxIndex = HelperPersonnelManager ~= nil and HelperPersonnelManager.PORTRAIT_COUNT or #HelperPersonnelHelperBridge.BASE_HELPER_NAMES_BY_AVATAR
 
     for index = 1, maxIndex do
-        local helperGender = self:getGenderForBaseHelperIndex(index)
+        local helperGender = index > 10 and HelperPersonnelPortraitProfiles[index][1] or self:getGenderForBaseHelperIndex(index)
         if helperGender == gender then
             table.insert(result, index)
         end
@@ -778,6 +783,51 @@ function HelperPersonnelHelperBridge:getPlayerStyleForWorker(worker)
     return nil, nil
 end
 
+function HelperPersonnelHelperBridge:createPortraitStyle(worker, sourceStyle)
+    if sourceStyle == nil or PlayerStyle == nil then
+        return sourceStyle
+    end
+
+    local index = tonumber(worker.avatarIndex) or 0
+    if index <= 10 then
+        local filename = self:getPortraitFilenameForPerson(worker)
+        index = tonumber(type(filename) == "string" and filename:match("helperPortrait_(%d+)%.dds$") or nil) or 0
+    end
+    local profile = HelperPersonnelPortraitProfiles[index]
+    if profile == nil or self:detectGenderFromPlayerStyle(sourceStyle) ~= profile[1] then
+        Logging.warning("[PersonnelManagement] Portrait profile %s cannot be applied to worker %s: incompatible base style.", tostring(index), tostring(worker.id))
+        return sourceStyle
+    end
+
+    local style = PlayerStyle.new()
+    style:copyFrom(sourceStyle)
+    style:loadConfigurationIfRequired()
+    local configs = style.configs
+    local faceName = string.format("head%02d", profile[2])
+    local hairName = string.format("hair%02d", profile[3])
+    if not style.isConfigurationLoaded or configs == nil or configs.face == nil or configs.hairStyle == nil
+        or configs.face.itemsByName == nil or configs.face.itemsByName[faceName] == nil
+        or configs.hairStyle.itemsByName == nil or configs.hairStyle.itemsByName[hairName] == nil
+        or (profile[5] ~= nil and (configs.beard == nil or configs.beard.itemsByName == nil or configs.beard.itemsByName[profile[5]] == nil)) then
+        Logging.warning("[PersonnelManagement] Portrait profile %s has unavailable character options for worker %s.", tostring(index), tostring(worker.id))
+        return sourceStyle
+    end
+    configs.face:setSelectedItemName(faceName)
+    configs.hairStyle:setSelectedItemName(hairName)
+    configs.hairStyle:setSelectedColorIndex(profile[4])
+    if profile[5] ~= nil then
+        configs.beard:setSelectedItemName(profile[5])
+        if profile[5] ~= "empty" then
+            configs.beard:setSelectedColorIndex(profile[4])
+        end
+    end
+    if configs.headgear ~= nil and configs.headgear.itemsByName ~= nil and configs.headgear.itemsByName.empty ~= nil then
+        configs.headgear:setSelectedItemName("empty")
+    end
+    style:updateDisabledOptions()
+    return style
+end
+
 function HelperPersonnelHelperBridge:ensureHelperProfile(worker)
     if worker == nil or g_helperManager == nil then
         return nil
@@ -803,6 +853,8 @@ function HelperPersonnelHelperBridge:ensureHelperProfile(worker)
         playerStyle, baseHelperName = self:getPlayerStyleForWorker(worker)
     end
 
+    playerStyle = self:createPortraitStyle(worker, playerStyle)
+
     if helper == nil then
         helper = g_helperManager:addHelper(helperKey, title, {1, 1, 1}, playerStyle, self.app.modDir, false)
     else
@@ -822,7 +874,7 @@ function HelperPersonnelHelperBridge:ensureHelperProfile(worker)
         helper.helperPersonnelAvatarIndex = self:getAvatarIndexForWorker(worker)
         helper.helperPersonnelBaseHelperName = baseHelperName
         helper.helperPersonnelBaseHelperIndex = baseHelperIndex or helper.helperPersonnelBaseHelperIndex
-        helper.helperPersonnelPortraitFilename = self:getPortraitFilenameForBaseHelper(baseHelper) or self:getPortraitFilenameForPlayerStyle(playerStyle)
+        helper.helperPersonnelPortraitFilename = self:getPortraitFilenameForPerson(worker)
 
         worker.helperPersonnelPortraitFilename = helper.helperPersonnelPortraitFilename
         if worker.id ~= nil and helper.helperPersonnelPortraitFilename ~= nil then
@@ -981,6 +1033,13 @@ function HelperPersonnelHelperBridge:getWorkerIdByVehicleKey(vehicleKey)
 
     if self.app ~= nil and self.app.manager ~= nil and self.app.manager.getWorkerByVehicleKey ~= nil then
         local worker = self.app.manager:getWorkerByVehicleKey(vehicleKey)
+        if worker ~= nil then
+            return worker.id
+        end
+    end
+
+    if self.app ~= nil and self.app.manager ~= nil and self.app.manager.getWorkerByVehicleKeyAnyFarm ~= nil then
+        local worker = self.app.manager:getWorkerByVehicleKeyAnyFarm(vehicleKey)
         if worker ~= nil then
             return worker.id
         end
@@ -1160,6 +1219,18 @@ function HelperPersonnelHelperBridge:hasActiveJobForWorker(workerId)
     return self.workerJobById[workerId] ~= nil
 end
 
+local function hpBridgeNormalizeFarmId(farmId)
+    farmId = tonumber(farmId)
+    if farmId == nil or farmId <= 0 then
+        return nil
+    end
+    farmId = math.floor(farmId + 0.5)
+    if FarmManager ~= nil and FarmManager.SPECTATOR_FARM_ID ~= nil and farmId == FarmManager.SPECTATOR_FARM_ID then
+        return nil
+    end
+    return farmId
+end
+
 function HelperPersonnelHelperBridge:canUseWorkerForJob(workerId, job)
     if self.app == nil or self.app.manager == nil then
         return false
@@ -1170,9 +1241,19 @@ function HelperPersonnelHelperBridge:canUseWorkerForJob(workerId, job)
         return false
     end
 
+    local workerFarmId = self.app.manager.getWorkerFarmId ~= nil and hpBridgeNormalizeFarmId(self.app.manager:getWorkerFarmId(workerId)) or nil
+    local vehicle = self.getVehicleFromJob ~= nil and self:getVehicleFromJob(job) or nil
+    local vehicleFarmId = self.app.getStrictFarmIdForVehicle ~= nil and hpBridgeNormalizeFarmId(self.app:getStrictFarmIdForVehicle(vehicle)) or nil
+    if workerFarmId ~= nil and vehicleFarmId ~= nil and workerFarmId ~= vehicleFarmId then
+        if Logging ~= nil and Logging.warning ~= nil then
+            Logging.warning("FS25_HelperPersonnel: AI job with worker %s rejected: vehicle belongs to farm %s, worker belongs to farm %s.", tostring(workerId), tostring(vehicleFarmId), tostring(workerFarmId))
+        end
+        return false
+    end
+
     local assignedJob = self.workerJobById[workerId]
     if assignedJob ~= nil and assignedJob ~= job then
-        return false
+        return HelperPersonnelTransportAssignments ~= nil and HelperPersonnelTransportAssignments.canReuseWorker(self, workerId, job) == true
     end
 
     if worker.busy == true and assignedJob ~= job then
@@ -1184,6 +1265,82 @@ function HelperPersonnelHelperBridge:canUseWorkerForJob(workerId, job)
     end
 
     return true
+end
+
+-- Record actual job equipment independently of optional gameplay-effect hooks.
+function HelperPersonnelHelperBridge:sampleJobSpecialization(job, workerId)
+    local manager = self.app ~= nil and self.app.manager or nil
+    if manager == nil or job == nil or workerId == nil or self:hpIsServerAuthority() ~= true then
+        return
+    end
+    local worker = manager:getWorkerById(workerId)
+    local vehicle = self:getVehicleFromJob(job)
+    if worker == nil or worker.busy ~= true or vehicle == nil then
+        return
+    end
+    if self.app.getRootVehicle ~= nil then
+        vehicle = self.app:getRootVehicle(vehicle) or vehicle
+    end
+    local objects, visited = {}, {}
+    local function collect(object, depth)
+        if object == nil or visited[object] or depth > 4 then return end
+        visited[object] = true
+        table.insert(objects, object)
+        if object.getAttachedImplements ~= nil then
+            local ok, attached = pcall(object.getAttachedImplements, object)
+            if ok and type(attached) == "table" then
+                for _, item in pairs(attached) do
+                    local child = type(item) == "table" and (item.object or item.vehicle or item.implement) or item
+                    if child ~= nil then collect(child, depth + 1) end
+                end
+            end
+        end
+    end
+    collect(vehicle, 0)
+    local transportKey = nil
+    local keys = {}
+    for _, object in ipairs(objects) do
+        local fillType = nil
+        if object.spec_sprayer ~= nil and object.getFillUnitFillType ~= nil and object.spec_fillUnit ~= nil then
+            for index in pairs(object.spec_fillUnit.fillUnits or {}) do
+                local ok, value = pcall(object.getFillUnitFillType, object, index)
+                if ok and manager:getSpecializationForFillType(value) ~= nil then fillType = value; break end
+            end
+        end
+        local key = manager:getSpecializationForVehicle(object, nil, fillType)
+        if key == nil and manager:vehicleHasAnySpec(object, {"spec_subsoiler", "spec_stonePicker"}) then
+            key = HelperPersonnelManager.SPECIALIZATION_TILLAGE
+        elseif key == nil and manager:vehicleHasAnySpec(object, {"spec_weeder", "spec_hoe"}) then
+            key = HelperPersonnelManager.SPECIALIZATION_PLANT_PROTECTION
+        elseif key == nil and manager:vehicleHasAnySpec(object, {"spec_manureSpreader", "spec_slurryTank"}) then
+            key = HelperPersonnelManager.SPECIALIZATION_FERTILIZING
+        elseif key == nil and manager:vehicleHasAnySpec(object, {"spec_windrower", "spec_tedder", "spec_forageHarvester"}) then
+            key = HelperPersonnelManager.SPECIALIZATION_HARVEST
+        end
+        if key == HelperPersonnelManager.SPECIALIZATION_TRANSPORT then
+            transportKey = key
+        elseif key ~= nil then
+            keys[key] = true
+        end
+    end
+    if next(keys) == nil and transportKey ~= nil then keys[transportKey] = true end
+    worker.currentJobIndependentPractice = worker.currentJobIndependentPractice or {}
+    for key in pairs(keys) do
+        if worker.currentJobIndependentPractice[key] ~= true then
+            manager:rememberWorkerSpecializationContext(worker, key, 2)
+            worker.currentJobIndependentPractice[key] = true
+        end
+    end
+end
+
+function HelperPersonnelHelperBridge:sampleActiveJobSpecializations(dt)
+    if self:hpIsServerAuthority() ~= true then return end
+    self.hpSpecializationSampleElapsed = (self.hpSpecializationSampleElapsed or 0) + math.max(0, tonumber(dt) or 0)
+    if self.hpSpecializationSampleElapsed < 10000 then return end
+    self.hpSpecializationSampleElapsed = 0
+    for workerId, job in pairs(self.workerJobById or {}) do
+        self:sampleJobSpecialization(job, workerId)
+    end
 end
 
 function HelperPersonnelHelperBridge:attachRestoredJob(job, workerId)
@@ -1223,17 +1380,10 @@ function HelperPersonnelHelperBridge:attachRestoredJob(job, workerId)
     end
 
     local now = self.app.manager:getCurrentTimestampMs()
-    local elapsedMs = 0
-
-    if worker.busy ~= true then
-        elapsedMs = math.max(0, worker.currentJobElapsedMs or 0)
+    if worker.busy ~= true or worker.restorePending == true then
         worker.busy = true
-        worker.currentJobStartedAt = now - elapsedMs
-        worker.currentJobElapsedMs = 0
-    elseif worker.currentJobStartedAt == nil or worker.currentJobStartedAt <= 0 then
-        elapsedMs = math.max(0, worker.currentJobElapsedMs or 0)
-        worker.currentJobStartedAt = now - elapsedMs
-        worker.currentJobElapsedMs = 0
+        worker.currentJobStartedAt = now
+        worker.currentJobElapsedMs = math.max(0, worker.currentJobElapsedMs or 0)
     end
 
     worker.restorePending = false
@@ -1241,6 +1391,7 @@ function HelperPersonnelHelperBridge:attachRestoredJob(job, workerId)
     worker.restoreVehicleKey = nil
     worker.reliabilityJobAbortChecked = true
     worker.reliabilityJobAbortCheckAt = 0
+    self:sampleJobSpecialization(job, workerId)
 
     if vehicleName ~= nil and vehicleName ~= "" then
         worker.vehicleName = vehicleName
@@ -1248,6 +1399,69 @@ function HelperPersonnelHelperBridge:attachRestoredJob(job, workerId)
 
     if self.app.manager.consumeRestoredWorkerId ~= nil then
         self.app.manager:consumeRestoredWorkerId(workerId, vehicleKey)
+    end
+
+    job.hpHelperPersonnelFinalized = true
+    if job.hp1565RestoreRestart == true then
+        job.hp1565RestoreConfirmed = true
+    end
+    return true
+end
+
+function HelperPersonnelHelperBridge:syncNetworkAssignmentsFromManager()
+    self.vehicleWorkerIds = self.vehicleWorkerIds or {}
+    self.workerJobById = self.workerJobById or {}
+    self.jobWorkerIds = self.jobWorkerIds or {}
+
+    if self.app == nil or self.app.manager == nil then
+        return false
+    end
+
+    local manager = self.app.manager
+    local activeWorkerIds = {}
+    local activeVehicleKeys = {}
+
+    if manager.storeCurrentFarmData ~= nil then
+        manager:storeCurrentFarmData()
+    end
+
+    for _, data in pairs(manager.farms or {}) do
+        local assignments = data.activeAssignments
+        if assignments == nil and manager.getActiveAssignmentsForFarmData ~= nil then
+            assignments = manager:getActiveAssignmentsForFarmData(data)
+        end
+
+        for _, assignment in ipairs(assignments or {}) do
+            local workerId = tonumber(assignment.workerId)
+            local vehicleKey = assignment.vehicleKey ~= nil and tostring(assignment.vehicleKey) or nil
+            if workerId ~= nil then
+                activeWorkerIds[workerId] = true
+            end
+            if workerId ~= nil and vehicleKey ~= nil and vehicleKey ~= "" then
+                self.vehicleWorkerIds[vehicleKey] = workerId
+                activeVehicleKeys[vehicleKey] = true
+            end
+        end
+    end
+
+    if self.app.isMultiplayerClient ~= nil and self.app:isMultiplayerClient() then
+        for vehicleKey, _ in pairs(self.vehicleWorkerIds) do
+            if activeVehicleKeys[vehicleKey] ~= true then
+                self.vehicleWorkerIds[vehicleKey] = nil
+            end
+        end
+
+        for workerId, job in pairs(self.workerJobById) do
+            if activeWorkerIds[workerId] ~= true then
+                self.workerJobById[workerId] = nil
+                if job ~= nil then
+                    self.jobWorkerIds[job] = nil
+                    if job.helperPersonnelWorkerId == workerId then
+                        job.helperPersonnelWorkerId = nil
+                    end
+                end
+            end
+        end
     end
 
     return true
@@ -1322,16 +1536,16 @@ function HelperPersonnelHelperBridge:onJobStarted(job, workerId)
         return
     end
 
-    if vehicleKey ~= nil and self.app ~= nil and self.app.manager ~= nil then
-        local worker = self.app.manager:getWorkerById(workerId)
-        if worker ~= nil then
-            worker.vehicleKey = vehicleKey
-        end
-    end
-
     local changed = false
     if self.app ~= nil and self.app.manager ~= nil then
-        if self.app.manager.startWorkerJob ~= nil then
+        local farmId = self.getFarmIdForWorkerOrVehicle ~= nil and self:getFarmIdForWorkerOrVehicle(workerId, vehicle) or nil
+        if self.app.manager.setSelectedWorkerForFarm ~= nil then
+            self.app.manager:setSelectedWorkerForFarm(workerId, farmId, vehicleKey, vehicleName)
+        end
+
+        if self.app.manager.startWorkerJobForFarm ~= nil then
+            changed = self.app.manager:startWorkerJobForFarm(workerId, farmId, vehicleName, vehicleKey) == true
+        elseif self.app.manager.startWorkerJob ~= nil then
             changed = self.app.manager:startWorkerJob(workerId, vehicleName, vehicleKey) == true
         elseif self.app.manager.setWorkerBusy ~= nil then
             self.app.manager:setWorkerBusy(workerId, true, vehicleName, vehicleKey)
@@ -1339,6 +1553,7 @@ function HelperPersonnelHelperBridge:onJobStarted(job, workerId)
         end
     end
 
+    if changed then self:sampleJobSpecialization(job, workerId) end
     self:hpSyncStateAfterJobChange(changed)
 end
 
@@ -1438,14 +1653,34 @@ function HelperPersonnelHelperBridge:onJobStopped(job)
         return
     end
 
+    if job.hpHelperPersonnelStopHandled == true then
+        return
+    end
+
     self.jobWorkerIds = self.jobWorkerIds or {}
     self.workerJobById = self.workerJobById or {}
     self.vehicleWorkerIds = self.vehicleWorkerIds or {}
 
+    if not self:hpIsServerAuthority() and self.isClientJoinRestorePhase ~= nil and self:isClientJoinRestorePhase() then
+        if self:retainClientJobMapping(job) then
+            return
+        end
+    end
+
     local workerId = self:getWorkerIdByJob(job)
+    if workerId ~= nil then self:sampleJobSpecialization(job, workerId) end
     local changed = false
+    local assignedJob = workerId ~= nil and self.workerJobById[workerId] or nil
+    local vehicleKey = self:getVehicleKeyFromJob(job)
+
+    if HelperPersonnelAutoDriveCompatibility ~= nil
+        and HelperPersonnelAutoDriveCompatibility.beforeBridgeJobStopped ~= nil
+        and HelperPersonnelAutoDriveCompatibility.beforeBridgeJobStopped(self, job, workerId) == true then
+        return
+    end
 
     if workerId ~= nil then
+        local farmId = self.getFarmIdForWorkerOrVehicle ~= nil and self:getFarmIdForWorkerOrVehicle(workerId, self:getVehicleFromJob(job)) or nil
         local assignedJob = self.workerJobById[workerId]
         if assignedJob == nil or assignedJob == job then
             self.workerJobById[workerId] = nil
@@ -1457,6 +1692,8 @@ function HelperPersonnelHelperBridge:onJobStopped(job)
                         self.app.manager:setWorkerBusy(workerId, false, "")
                         changed = true
                     end
+                elseif self.app.manager.finishWorkerJobForFarm ~= nil then
+                    changed = self.app.manager:finishWorkerJobForFarm(workerId, farmId) == true
                 elseif self.app.manager.finishWorkerJob ~= nil then
                     changed = self.app.manager:finishWorkerJob(workerId) == true
                 elseif self.app.manager.setWorkerBusy ~= nil then
@@ -1467,7 +1704,6 @@ function HelperPersonnelHelperBridge:onJobStopped(job)
         end
     end
 
-    local vehicleKey = self:getVehicleKeyFromJob(job)
     if vehicleKey ~= nil then
         self.vehicleWorkerIds[vehicleKey] = nil
     end
@@ -1476,4 +1712,13 @@ function HelperPersonnelHelperBridge:onJobStopped(job)
     job.helperPersonnelWorkerId = nil
 
     self:hpSyncStateAfterJobChange(changed)
+
+    if HelperPersonnelAutoDriveCompatibility ~= nil and HelperPersonnelAutoDriveCompatibility.afterBridgeJobStopped ~= nil then
+        HelperPersonnelAutoDriveCompatibility.afterBridgeJobStopped(self, job, workerId, assignedJob, vehicleKey)
+    end
+
+    if workerId ~= nil then
+        job.helperPersonnelWorkerId = workerId
+        job.hpHelperPersonnelStopHandled = true
+    end
 end

@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="PROFILE" />
         <e k="ui_pmHistoryHeader" v="HISTORY" />
         <e k="ui_button_train" v="Train" />
+        <e k="ui_pmManageSpecialization" v="Manage specialisation" />
         <e k="ui_pmStatusApplicant" v="Applicant" />
         <e k="ui_pmBirthLine" v="Born: %s" />
         <e k="ui_pmRankLabel" v="Rank" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="Active" />
         <e k="ui_transportPriorityInactive" v="Not assigned" />
         <e k="ui_transportPriorityMoveUp" v="Move up" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="Move up" />
         <e k="ui_transportPriorityMoveDown" v="Move down" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="Move down" />
         <e k="ui_transportPriorityToggle" v="Enable/disable" />
         <e k="ui_transportPriorityApply" v="Apply" />
         <e k="ui_transportPriorityCancel" v="Cancel" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="office profession" />
         <e k="ui_status_retirementPending" v="retiring at the end of the month" />
         <e k="ui_retirementNotice" v="%s will retire at the end of the month." />
-        <e k="ui_pmTrainingIntro" v="Specializations improve performance in the matching category. Training starts only at the beginning of a month, costs money and makes the employee unavailable until month end. Progress is credited after completion. Offers and prices change monthly; only one training course is allowed per agricultural year from March through February. Learned specializations remain known, but at most two bonuses are active. Both slots may be inactive. A learned inactive specialization can be activated only once per employee and agricultural year." />
+        <e k="ui_pmTrainingIntro" v="Develop your team in a targeted way: Select “%s” and then choose a training category. Specializations improve performance in the corresponding area. Training sessions begin at the start of the month, cost money, and tie up the employee until the end of the month. Progress is credited upon completion. Offers and prices change monthly. Each employee can complete one training course per agricultural year, from March through February. Specializations learned are retained; a maximum of two bonuses can be active at any given time, and both slots can be on hold. Only one learned, inactive specialization can be activated per employee per agricultural year." />
         <e k="ui_pmTrainingCategoryHeader" v="Learning category" />
         <e k="ui_pmTrainingProgressHeader" v="Progress toward specialization" />
         <e k="ui_pmTrainingRunning" v="training in progress" />
@@ -576,9 +579,9 @@
         <e k="ui_pmHelpTopic02Title" v="Overview and personnel status" />
         <e k="ui_pmHelpTopic02Body" v="The Overview summarizes the farm: employee, availability and applicant counts plus employer reputation are shown first. Active jobs list the person, vehicle, implement and activity.&#10;Changes only lists relevant personnel events: employer reputation, experience, reliability, loyalty, age or specialization. Each entry names cause, affected person and effect; a multi-line entry remains one notification.&#10;Monthly Report and Total show current and lifetime figures. Use this page for planning; decisions and personal history belong to the specialist pages." />
         <e k="ui_pmHelpTopic03Title" v="Applicant market and hiring" />
-        <e k="ui_pmHelpTopic03Body" v="A new save starts with four applicants; no more than eight can be on the market. At each month change, up to three places are rolled: each has 15% + 0.7 × employer reputation. An empty market always receives at least one applicant.&#10;Applicants stay during their creation month. Their departure chance is 10–30% after one month, 30–50% after two and 100% after three. Better profiles may leave earlier. They are 18–65, age permanently and have a background that chiefly affects experience and prior knowledge.&#10;Requested pay is based on experience and reliability, 96–106% random variation and reputation. Low reputation raises the request, high reputation lowers it. Confirming a hire adds one reputation point." />
+        <e k="ui_pmHelpTopic03Body" v="All applicants are generated in a global market. The employer’s reputation then determines which farms an applicant is offered to. This is why farms may receive different offers; if the same person is offered to multiple farms, they have the same master data, values, and initial value range at every farm. As soon as one farm hires the person, they disappear from all other farms.&#10;At the start, experience, reliability, loyalty, rank, and salary expectations remain hidden. For each applicant, exactly one of these three values is visible as a randomly placed range of 30 percentage points. The true value always lies within that range, though not necessarily in the middle. Name, age, professional background, resume, and specializations remain visible.&#10;A job interview consists of no more than three questions. The first question about an unknown value reveals a 30-point range; asking again narrows it to 15 points, and a third question reveals the exact value. Values already known cannot be selected again. The interview can be paused and resumed later at the same point. The salary expectation becomes visible with the last answer." />
         <e k="ui_pmHelpTopic04Title" v="Employee profile, values and status" />
-        <e k="ui_pmHelpTopic04Body" v="Experience, reliability and loyalty each range from 0 to 100. The exact number and bar allow quick comparison.&#10;Rank depends only on experience: Helper 0–44, Skilled Worker 45–74, Professional 75–100. Experience changes speed, extra wear and consumption. Reliability changes performance dips, sickness, monthly development and job-abandonment risk. Loyalty describes the bond to the farm and affects warnings, wage conflicts and resignations." />
+        <e k="ui_pmHelpTopic04Body" v="Experience, reliability, and loyalty each range from 0 to 100. As long as job interviews are active, these values are displayed for applicants only based on the known status of the interview. Rank depends solely on experience and therefore appears only once the exact experience value is known.&#10;After hiring, any unknown values remain hidden for the time being. During actual assignments, the employee gains active experience in real time. After a duration set for each person—between 20 and 35 minutes—all three values become fully known. Breaks and periods without an active assignment do not count. Progress is saved in the game score.&#10;Experience determines work speed, additional wear and tear, and additional consumption. Reliability influences short-term performance drops, illness, monthly development, and the risk of mission termination. Loyalty describes the employee’s commitment to the company and influences warnings, salary disputes, and voluntary resignations." />
         <e k="ui_pmHelpTopic05Title" v="AI helpers, transport and FollowMe" />
         <e k="ui_pmHelpTopic05Body" v="Starting normal AI helper work opens employee selection. Only available employees can be selected; sickness, training and existing work block selection.&#10;A job is counted after 10 seconds. Practical specialization progress needs at least three minutes.&#10;T or the menu button opens transport priority. It defines which free employee is checked first for A-to-B work. FollowMe also uses employee selection and counts as transport work." />
         <e k="ui_pmHelpTopic06Title" v="Experience and work effects" />
@@ -598,9 +601,9 @@
         <e k="ui_pmHelpTopic13Title" v="Settings" />
         <e k="ui_pmHelpTopic13Body" v="Settings apply per savegame. Work performance: experience, speed, wear, consumables, fuel and reliability. Personnel development: personnel effects, loyalty and night work. Economy: economic effects, individual wages and standard monthly base wage from 100 to 100,000 in steps of 10. Disabling an effect does not retroactively rewrite saved personnel values. Key bindings can be changed in game settings." />
         <e k="ui_pmHelpTopic14Title" v="Multiplayer and savegames" />
-        <e k="ui_pmHelpTopic14Body" v="Personnel, applicants, active assignments, wages, training, settings and chronicles are farm-specific. The server decides in multiplayer; only authorized farm managers may change their own farm. Data is stored in helperPersonnel.xml, synchronized to clients and restored with active assignments where possible. Version 1.1.4.0 stores learned specializations and the last activation year. Older saves automatically treat their previously active specializations as learned." />
+        <e k="ui_pmHelpTopic14Body" v="The &quot;Job Interviews&quot; setting applies per game session. If it is enabled, the hidden stats, interviews, and subsequent reveal take effect during the assignment period. If it is disabled, all applicant and employee stats are displayed in full as before. Only the server and authorized farm managers may change this setting.&#10;In multiplayer mode, the server decides on each question and synchronizes the interview progress. The first authorized farm manager to open the window conducts the interview. Other players from the same farm can watch live; their topic buttons remain disabled. If the conversation leader closes the window or loses their connection, another authorized farm manager can take over.&#10;Staff, applicants, assignments, salaries, training, hiring, and chronicles remain farm-specific. Global applicants can be offered to multiple farms, but their conversations are stored separately for each farm." />
         <e k="ui_pmHelpTopic15Title" v="Hiring and first steps" />
-        <e k="ui_pmHelpTopic15Body" v="Open an applicant, check age, background, values, requested pay and existing specializations, then confirm hiring. The applicant becomes an employee of the current farm; all later decisions, pay and development are farm-specific.&#10;Plan a short, suitable first job. An employee must be available: sickness, ongoing work, training, a confirmed end of employment or an active mod assignment can prevent selection. The Employees page shows the exact reason.&#10;The first hire adds one employer-reputation point. More experience normally costs more; a cheaper newcomer needs more work and training." />
+        <e k="ui_pmHelpTopic15Body" v="In the &quot;Applicant&quot; tab, open the interview and select &quot;Experience,&quot; &quot;Reliability,&quot; or &quot;Loyalty.&quot; The selected question and the answer will appear in the interview transcript. The interview ends after no more than three questions, and the salary expectation becomes visible. Decide whether to hire based on the known exact values, ranges, and remaining uncertainty.&#10;After hiring, values that have not been fully clarified initially remain at their last known level. Schedule actual assignments: After 20 to 35 minutes of active real-time work, the values are fully revealed. The employee must be available; illness, ongoing work, training, or a confirmed resignation may prevent selection.&#10;A hire improves the employer’s reputation by one point. High values aren’t always automatically better: An experienced candidate usually costs more, while a less expensive newcomer requires more time for development and training." />
         <e k="ui_pmHelpTopic16Title" v="Activities and specialization mapping" />
         <e k="ui_pmHelpTopic16Body" v="The mapping uses vehicle, implements and, where available, applied material. Material takes priority: seeds mean sowing; herbicide means plant protection; mineral or liquid fertilizer, slurry, digestate and manure mean fertilizing. Lime has no automatic learning-category mapping.&#10;Ploughs, cultivators, power harrows, disc harrows, rollers and mulchers are tillage. Seeders and planters are sowing. Sprayers without a clear material are fertilizing. Combines, headers, balers, mowers, forage wagons and pickups are harvest. Trailers and unloadable vehicles are transport.&#10;FollowMe also recognizes forage harvesters, potato and beet harvesters, tedders, windrowers, manure spreaders, slurry tanks, subsoilers, stone pickers, weeders and hoes. Mod vehicles can remain neutral when no unambiguous mapping exists. Machine Care lowers experience-based extra wear; Resource Saver lowers extra fuel and material use." />
         <e k="ui_button_emergency_release_worker" v="Emergency release" />
@@ -610,5 +613,244 @@
         <e k="ui_workerEmergencyReleaseDeniedAvailable" v="Emergency release not required: the employee is already available." />
         <e k="ui_workerEmergencyReleaseDeniedCheck" v="Emergency release unavailable: no valid employee assignment was found." />
         <e k="ui_workerEmergencyReleaseDeniedPermission" v="Emergency release unavailable: missing permission or invalid employee." />
+        <e k="ui_hpSetting_applicantInterviews" v="Job Interviews" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="Hides candidate figures. Over the course of up to three rounds of questions, ranges or exact figures are revealed; the desired salary is disclosed at the end of the interview." />
+        <e k="ui_pmValueUnknown" v="Unknown" />
+        <e k="ui_hpInterviewPrompt" v="What would you like to ask?" />
+        <e k="ui_hpInterviewTitle" v="Job Interview" />
+        <e k="ui_hpInterviewTopicExperience" v="Experience" />
+        <e k="ui_hpInterviewTopicReliability" v="Reliability" />
+        <e k="ui_hpInterviewTopicLoyalty" v="Loyalty" />
+        <e k="ui_hpInterviewRound" v="Q&amp;A Session %d of 3" />
+        <e k="ui_hpInterviewLeader" v="You're leading the conversation." />
+        <e k="ui_hpInterviewObserver" v="You're following the conversation." />
+        <e k="ui_hpInterviewFinished" v="The job interview is over." />
+        <e k="ui_hpInterviewWageIntro" v="My desired salary:" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="What practical experience do you bring to working on our farm?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="Can you describe your practical experience in more detail?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="How do you ensure that we can rely on you in our day-to-day work?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="How would you describe your reliability when working independently in more detail?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="What factors are important to you in deciding whether to remain loyal to a company over the long term?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="How would you rate your long-term commitment to an employer?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="My career so far has been fairly straightforward." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="I've already taken on a few suitable assignments." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="I have extensive practical experience." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="When I'm pressed for time, I occasionally need clear agreements." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="As a rule, you can count on agreements and completed tasks." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="I work very conscientiously and consistently follow through on my commitments." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="When it comes to a new business, I tend to make decisions on a rather short-term basis at first." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="If we work well together, I can definitely see myself staying for a longer period of time." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="Consistency and long-term collaboration are very important to me." />
+        <e k="ui_hpInterviewAnswerIntro1" v="I would describe it this way:" />
+        <e k="ui_hpInterviewAnswerIntro2" v="In my view, the following applies:" />
+        <e k="ui_hpInterviewAnswerIntro3" v="The following assessment is the most accurate:" />
+        <e k="ui_hpInterviewOpen" v="Job Interview" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="What practical experience do you bring to the role on our farm?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="What roles have you taken on in the agricultural sector so far?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="What types of work on a farm are you already familiar with?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Could you describe in a bit more detail which of these tasks you carried out independently?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="Which tasks do you already feel confident with, and which ones would you still need to familiarise yourself with?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="In your view, which of your previous experiences would be particularly useful on our farm?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="How do you ensure that we can rely on you in our day-to-day work?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="How do you deal with tasks that need to be completed by a certain deadline?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="What can we expect from you if something comes up at work?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="What do you do if you realise you won’t be able to keep to an agreement?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="How do you keep track of things when you have several tasks to do at once?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Could you describe in more detail how you handle responsibility when working independently?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="What factors are important to you in ensuring that you remain loyal to a business in the long term?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="What would you like to see from a long-term working relationship on our farm?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="What would need to be in place for you to be happy working with us over the long term?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="How important is a long-term commitment to an employer to you?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="How would you rate your willingness to stay with a company even in difficult times?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="What would be the deciding factor for you in choosing to continue a working relationship or to look for new opportunities?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="So far, I’ve mainly helped out with simple tasks. I’d like to tackle new tasks step by step." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="My practical experience is still limited, but I enjoy learning new things and ask questions when there’s something I don’t know." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="I’m familiar with some of the routines on a farm, but there’s still a lot I’d need to learn as part of my day-to-day work." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="I have already taken on various tasks at a farm and cope well with familiar tasks." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="I’ve already worked with some of the machines and work processes. When it comes to new tasks, I sometimes need a brief introduction." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="I have practical experience, although there are certainly areas where I still have room for improvement." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="I worked on farms for quite some time and carried out many tasks independently." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="I am very familiar with the usual tasks and machinery. Nevertheless, I always take a close look at new procedures first." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="I have already gained experience of different organisations and ways of working, and I am usually able to adapt quickly to new tasks." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="When there’s a lot to do at once, clear agreements help me. Then I have a better idea of what needs to be done first." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="I try to carry out my tasks properly. However, I still need to work on keeping track of everything on time." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="When I’m faced with new or unfamiliar tasks, I prefer to ask for clarification from time to time, so that nothing important gets overlooked." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="I make sure to stick to agreements. If I can see that something isn’t going to work out, I let people know as early as possible." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="I carry out my tasks conscientiously. If priorities are unclear, I prefer to check with someone else first." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="Generally speaking, you can count on me. When things get busy, it helps if we have a quick chat." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="When I take on a task, I see it through. If there’s a problem, I raise it at an early stage." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="I keep track of deadlines and arrangements, and check at the end to make sure everything has been done." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="Even when working independently, I make a point of keeping my commitments and keeping others informed of any important changes." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="I’d like to start by seeing how things work here. After that, I’ll be in a better position to decide how to proceed." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="I’m open to new opportunities and am reluctant to commit myself too early to a new employer." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="For me, the working arrangement has to suit my day-to-day life. If my circumstances change, I would also consider other options." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="If the collaboration goes well and the conditions are right, I can see myself staying on for longer." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="A stable working environment is important to me. How long I stay will also depend on how well we get on with one another." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="I’m looking to build a good working relationship and would like to settle in first. If it works out for both of us, there are plenty of reasons for me to stay." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="I value stability and am looking for a company where I can make a long-term contribution." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="It’s important to me to be part of a reliable team. If we work well together, I don’t want to be constantly changing jobs." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="I would like to work on a farm for a longer period and gain experience whilst working there." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ previously worked on a rural family farm." />
+        <e k="ui_pmNewApplicantIntro1_2" v="Before applying, ZXQNAMEQXZ worked on a family-run farm in the countryside." />
+        <e k="ui_pmNewApplicantIntro1_3" v="ZXQNAMEQXZ’s career history includes a period working on a rural family farm." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ previously worked on a small dairy farm." />
+        <e k="ui_pmNewApplicantIntro2_2" v="Before applying, ZXQNAMEQXZ worked on a small dairy farm." />
+        <e k="ui_pmNewApplicantIntro2_3" v="ZXQNAMEQXZ’s career history includes a period working on a small dairy farm." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ previously worked for a contracting firm." />
+        <e k="ui_pmNewApplicantIntro3_2" v="Before applying, ZXQNAMEQXZ worked for a contracting firm." />
+        <e k="ui_pmNewApplicantIntro3_3" v="ZXQNAMEQXZ’s career history includes a period working for a contracting firm." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ previously worked on a farm." />
+        <e k="ui_pmNewApplicantIntro4_2" v="Before applying, ZXQNAMEQXZ worked on a arable farm." />
+        <e k="ui_pmNewApplicantIntro4_3" v="ZXQNAMEQXZ’s career history includes a period working on an arable farm." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ had previously worked at a mixed-use facility." />
+        <e k="ui_pmNewApplicantIntro5_2" v="Before applying, ZXQNAMEQXZ worked at a mixed-use facility." />
+        <e k="ui_pmNewApplicantIntro5_3" v="ZXQNAMEQXZ’s career history includes a period working at a mixed-use facility." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ previously worked at a logistics company." />
+        <e k="ui_pmNewApplicantIntro6_2" v="Before applying, ZXQNAMEQXZ worked at a logistics company." />
+        <e k="ui_pmNewApplicantIntro6_3" v="ZXQNAMEQXZ’s career history includes a role at a logistics company." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ previously worked in an agricultural machinery workshop." />
+        <e k="ui_pmNewApplicantIntro7_2" v="Before applying, ZXQNAMEQXZ worked in an agricultural machinery workshop." />
+        <e k="ui_pmNewApplicantIntro7_3" v="ZXQNAMEQXZ’s career history includes a period working in an agricultural machinery workshop." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ previously worked in an office job." />
+        <e k="ui_pmNewApplicantIntro8_2" v="Before applying, ZXQNAMEQXZ worked in an office job." />
+        <e k="ui_pmNewApplicantIntro8_3" v="ZXQNAMEQXZ’s career history includes working in an office-based role." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ previously worked on a rural family farm and has been with the farm for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Before working on the farm, ZXQNAMEQXZ worked on a family-run farm in the countryside. He has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ has been part of the team for ZXQMONTHSQXZ months and previously worked on a rural family farm." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ has been working on the farm for ZXQMONTHSQXZ months and previously worked on a rural family farm." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ previously worked on a rural family farm and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ previously worked on a small dairy farm and has been with the farm for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Before working on the farm, ZXQNAMEQXZ worked on a small dairy farm. He has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ has been part of the team for ZXQMONTHSQXZ months and previously worked on a small dairy farm." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ has been working on the farm for ZXQMONTHSQXZ months and previously worked on a small dairy farm." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ previously worked on a small dairy farm and has been with the farm for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ previously worked for a contracting firm and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Before working on the farm, ZXQNAMEQXZ worked for a contracting firm. He has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ has been part of the team for ZXQMONTHSQXZ months and previously worked for a contracting firm." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ has been working on the farm for ZXQMONTHSQXZ months and previously worked for a contracting firm." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ previously worked for a contracting firm and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ previously worked on an arable farm and has been with the farm for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Before working on the farm, ZXQNAMEQXZ worked on an arable farm. He has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ has been part of the team for ZXQMONTHSQXZ months and previously worked on a arable farm." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ has been working on the farm for ZXQMONTHSQXZ months and previously worked on an arable farm." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ previously worked on a arable farm and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ previously worked at a mixed-use facility and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Before working on the farm, ZXQNAMEQXZ worked on a mixed farm. He has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ has been part of the team for ZXQMONTHSQXZ months and previously worked at a mixed-use facility." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ has been working on the farm for ZXQMONTHSQXZ months and previously worked on a mixed farm." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ was previously in mixed operation and has been in operation for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ previously worked at a logistics company and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Before working on the farm, ZXQNAMEQXZ worked at a logistics company. He has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ has been part of the team for ZXQMONTHSQXZ months and previously worked in a logistics company." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ has been working on the farm for ZXQMONTHSQXZ months and previously worked in a logistics company." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ previously worked at a logistics company and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ previously worked in an agricultural machinery workshop and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Before working on the farm, ZXQNAMEQXZ worked in an agricultural machinery workshop. He has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ has been part of the team for ZXQMONTHSQXZ months and previously worked in an agricultural machinery workshop." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ has been working on the farm for ZXQMONTHSQXZ months and previously worked in an agricultural machinery workshop." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ previously worked in an agricultural machinery workshop and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ previously worked in an office role and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Before working on the farm, ZXQNAMEQXZ held an office job. They have been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ has been part of the team for ZXQMONTHSQXZ months and previously worked in an office role." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ has been working on the farm for ZXQMONTHSQXZ months and previously held an office job." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ previously worked in an office job and has been with the company for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewApplicantAge1_1" v="At the age of ZXQAGEQXZ, one’s career is still in its early stages." />
+        <e k="ui_pmNewApplicantAge1_2" v="At the age of ZXQAGEQXZ, you can gain further practical experience on the farm." />
+        <e k="ui_pmNewApplicantAge1_3" v="At the age of ZXQAGEQXZ, there is an opportunity to further your career." />
+        <e k="ui_pmNewApplicantAge2_1" v="At the age of ZXQAGEQXZ, professional skills can be further consolidated." />
+        <e k="ui_pmNewApplicantAge2_2" v="At the age of ZXQAGEQXZ, previous experiences can be complemented by new challenges." />
+        <e k="ui_pmNewApplicantAge2_3" v="At the age of ZXQAGEQXZ, there is scope to further develop one’s career path to date." />
+        <e k="ui_pmNewApplicantAge3_1" v="At the age of ZXQAGEQXZ, he already has a long career behind him." />
+        <e k="ui_pmNewApplicantAge3_2" v="Over the course of ZXQAGEQXZ years, I have gained a wide range of experience in my career to date." />
+        <e k="ui_pmNewApplicantAge3_3" v="At the age of ZXQAGEQXZ, one can draw on professional experience; the extent to which this relates to agriculture depends on one’s career path." />
+        <e k="ui_pmNewApplicantAge4_1" v="At the age of ZXQAGEQXZ, he already has a long career behind him." />
+        <e k="ui_pmNewApplicantAge4_2" v="At the age of ZXQAGEQXZ, a person will have general work experience, which does not necessarily mean practical experience in agriculture." />
+        <e k="ui_pmNewApplicantAge4_3" v="Over the course of ZXQAGEQXZ years, a variety of experiences have been gained; how useful these are on the farm depends on the work carried out to date." />
+        <e k="ui_pmNewApplicantMarket1_1" v="The application has been on the market since this month." />
+        <e k="ui_pmNewApplicantMarket1_2" v="The search for a new job has only just begun." />
+        <e k="ui_pmNewApplicantMarket1_3" v="The vacancy was advertised this month." />
+        <e k="ui_pmNewApplicantMarket2_1" v="The job advert has been on the market for a month." />
+        <e k="ui_pmNewApplicantMarket2_2" v="The search for a new job has been going on for a month." />
+        <e k="ui_pmNewApplicantMarket2_3" v="The application form has been available to interested businesses for a month." />
+        <e k="ui_pmNewApplicantMarket3_1" v="The application has been on the market for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewApplicantMarket3_2" v="The search for a new job has been going on for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewApplicantMarket3_3" v="The application has been available to interested businesses for ZXQMONTHSQXZ months." />
+        <e k="ui_pmNewWorkerExperience1_1" v="Practical experience is only just being gained; many tasks still require guidance." />
+        <e k="ui_pmNewWorkerExperience1_2" v="Many of the work processes on the farm are still new." />
+        <e k="ui_pmNewWorkerExperience1_3" v="The practical work is still at an early stage of implementation." />
+        <e k="ui_pmNewWorkerExperience1_4" v="Basic tasks still require practice and guidance." />
+        <e k="ui_pmNewWorkerExperience1_5" v="The practical procedures are learnt step by step." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Some of the basics are already understood, but support is still needed for more challenging tasks." />
+        <e k="ui_pmNewWorkerExperience2_2" v="We have gained some initial practical experience; however, we still lack routine in several areas." />
+        <e k="ui_pmNewWorkerExperience2_3" v="Familiar tasks are being carried out increasingly well, whilst more complex tasks require further training." />
+        <e k="ui_pmNewWorkerExperience2_4" v="We are familiar with the basics, but further practice is needed to ensure procedures are carried out safely." />
+        <e k="ui_pmNewWorkerExperience2_5" v="Practical skills have already been developed and can be further consolidated in day-to-day work." />
+        <e k="ui_pmNewWorkerExperience3_1" v="Solid experience enables you to carry out many routine tasks independently." />
+        <e k="ui_pmNewWorkerExperience3_2" v="Most everyday tasks can be carried out safely." />
+        <e k="ui_pmNewWorkerExperience3_3" v="A practical foundation is in place; familiar procedures are carried out independently." />
+        <e k="ui_pmNewWorkerExperience3_4" v="A good routine is evident in day-to-day tasks." />
+        <e k="ui_pmNewWorkerExperience3_5" v="They are familiar with various areas of responsibility and carry out these tasks largely independently." />
+        <e k="ui_pmNewWorkerExperience4_1" v="Extensive practical experience enables a wide range of applications." />
+        <e k="ui_pmNewWorkerExperience4_2" v="Even more demanding tasks form part of their usual remit." />
+        <e k="ui_pmNewWorkerExperience4_3" v="A good deal of routine helps you to take on different work processes independently." />
+        <e k="ui_pmNewWorkerExperience4_4" v="This experience is evident in the confident handling of a wide range of tasks." />
+        <e k="ui_pmNewWorkerExperience4_5" v="Numerous practical procedures are familiar and are carried out reliably, even when the work changes." />
+        <e k="ui_pmNewWorkerExperience5_1" v="There is an exceptional amount of practical experience." />
+        <e k="ui_pmNewWorkerExperience5_2" v="A very wide range of experience is also helpful when dealing with complex and unfamiliar tasks." />
+        <e k="ui_pmNewWorkerExperience5_3" v="There is a particularly wide range of expertise available for work on the farm." />
+        <e k="ui_pmNewWorkerExperience5_4" v="Many years of varied practical experience ensure a high level of confidence in day-to-day work." />
+        <e k="ui_pmNewWorkerExperience5_5" v="A wide range of agricultural tasks is carried out with a high degree of proficiency." />
+        <e k="ui_pmNewWorkerReliability1_1" v="Coordination and the careful execution of tasks require particular attention." />
+        <e k="ui_pmNewWorkerReliability1_2" v="In day-to-day work, frequent monitoring and clear guidelines are essential." />
+        <e k="ui_pmNewWorkerReliability1_3" v="To ensure reliable planning, tasks should be closely monitored." />
+        <e k="ui_pmNewWorkerReliability1_4" v="Agreements and work processes are not yet consistently adhered to." />
+        <e k="ui_pmNewWorkerReliability1_5" v="Important tasks require additional coordination and monitoring." />
+        <e k="ui_pmNewWorkerReliability2_1" v="Agreements are not always consistently adhered to; clear guidelines help." />
+        <e k="ui_pmNewWorkerReliability2_2" v="Reliability is still somewhat inconsistent; important tasks should be supervised." />
+        <e k="ui_pmNewWorkerReliability2_3" v="When it comes to familiar tasks, a great deal can be achieved, but occasional checks are still advisable." />
+        <e k="ui_pmNewWorkerReliability2_4" v="Work is still underway to ensure a more consistent approach to the tasks assigned." />
+        <e k="ui_pmNewWorkerReliability2_5" v="Clear lines of responsibility and regular feedback are helpful in day-to-day work." />
+        <e k="ui_pmNewWorkerReliability3_1" v="For most tasks, you can count on them being carried out reliably." />
+        <e k="ui_pmNewWorkerReliability3_2" v="Agreements are generally honoured and tasks are, for the most part, carried out with care." />
+        <e k="ui_pmNewWorkerReliability3_3" v="Reliability provides a solid basis for operational planning." />
+        <e k="ui_pmNewWorkerReliability3_4" v="Tasks assigned are usually carried out conscientiously and reliably." />
+        <e k="ui_pmNewWorkerReliability3_5" v="In day-to-day work, a largely consistent approach is evident." />
+        <e k="ui_pmNewWorkerReliability4_1" v="The work is carried out reliably and agreements are carefully adhered to." />
+        <e k="ui_pmNewWorkerReliability4_2" v="Tasks assigned are carried out consistently and conscientiously." />
+        <e k="ui_pmNewWorkerReliability4_3" v="A meticulous approach to work facilitates reliable resource planning." />
+        <e k="ui_pmNewWorkerReliability4_4" v="You can rely on them to a great extent to honour their commitments and carry out the work." />
+        <e k="ui_pmNewWorkerReliability4_5" v="Responsibilities and agreed tasks are reliably monitored." />
+        <e k="ui_pmNewWorkerReliability5_1" v="Even when it comes to challenging tasks, you can rely on the work to an exceptional degree." />
+        <e k="ui_pmNewWorkerReliability5_2" v="Agreements are consistently honoured and tasks are carried out with the utmost care." />
+        <e k="ui_pmNewWorkerReliability5_3" v="Its exceptionally reliable operation offers a high degree of planning certainty." />
+        <e k="ui_pmNewWorkerReliability5_4" v="Responsibility is shouldered with great care and exceptional consistency." />
+        <e k="ui_pmNewWorkerReliability5_5" v="Even large-scale tasks are carried out with the utmost reliability." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="Loyalty to the company is currently very low." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="At the moment, the collaboration is viewed as being of a rather short-term nature." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="At present, there is little sense of long-term attachment to the farm." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="At present, there is a reluctance to encourage long-term service with the company." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="There is currently little willingness to remain with the company in the long term." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="Loyalty to the company remains somewhat limited." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="A long-term partnership needs to develop over time." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="A close connection with the company has not yet been established." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="Continued cooperation still offers scope for building trust." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="A longer period of service is conceivable, but is still viewed with some caution." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="There is a strong sense of loyalty to the company." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="This collaboration provides a solid foundation for longer-term employment." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="The connection to the plant is stable." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="Loyalty remains at a solid level." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="There is a solid foundation for continuing this collaboration in the longer term." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="The link with the business is very strong." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="We place great importance on our collaboration with the farm." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="There is a strong willingness to remain with the company in the long term." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="This strong bond is a sign of a lasting partnership." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="There is a clear interest in longer-term employment." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="The connection to the business is exceptionally strong." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="We attach particular importance to our long-term partnership with the farm." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="Loyalty to the company is exceptionally strong." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="Loyalty and a willingness to engage in long-term cooperation are particularly high." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="The sense of identification with the company and its long-term development is exceptionally strong." />
+        <e k="ui_pmNewWorkerTenureNew" v="Work on the farm began this month." />
+        <e k="ui_pmNewWorkerTenureOne" v="I started working on the farm a month ago." />
     </elements>
 </l10n>

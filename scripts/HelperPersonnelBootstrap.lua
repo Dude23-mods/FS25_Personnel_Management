@@ -7,16 +7,23 @@ function HelperPersonnel.debugInfo(message, ...)
     end
 end
 
+source(g_currentModDirectory .. "scripts/HelperPersonnelPortraitProfiles.lua")
 source(g_currentModDirectory .. "gui/HelperPersonnelViewBase.lua")
 source(g_currentModDirectory .. "gui/HelperPersonnelMenuPage.lua")
+source(g_currentModDirectory .. "gui/HelperPersonnelPersonnelDialog.lua")
+source(g_currentModDirectory .. "gui/HelperPersonnelInterviewDialog.lua")
+source(g_currentModDirectory .. "gui/HelperPersonnelSelectionDialog.lua")
 source(g_currentModDirectory .. "gui/HelperPersonnelMenuFrames.lua")
 source(g_currentModDirectory .. "gui/HelperPersonnelInGameMenu.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelConfig.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelGameSettings.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelManager.lua")
+source(g_currentModDirectory .. "scripts/HelperPersonnelInterviews.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelNetwork.lua")
+source(g_currentModDirectory .. "scripts/HelperPersonnelHookRegistrar.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelHelperBridge.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelSelectionOverlay.lua")
+source(g_currentModDirectory .. "scripts/HelperPersonnelAppearanceCycle.lua")
 source(g_currentModDirectory .. "scripts/HelperPersonnelApp.lua")
 source(g_currentModDirectory .. "scripts/hooks/AIStartHooks.lua")
 source(g_currentModDirectory .. "scripts/hooks/AIJobHooks.lua")
@@ -36,6 +43,24 @@ HelperPersonnelBootstrap.mission00Loaded = false
 HelperPersonnelBootstrap.menuHookInstalled = false
 HelperPersonnelBootstrap.guiHooksInstalled = false
 
+local function hpRegisterBootstrapHook(owner, methodName, hookKind, hookFunction, hookKey, purpose, side)
+    if HelperPersonnelHookRegistrar ~= nil and HelperPersonnelHookRegistrar.install ~= nil then
+        return HelperPersonnelHookRegistrar:install(owner, methodName, hookKind, hookFunction, hookKey, purpose, side)
+    end
+
+    if owner == nil or owner[methodName] == nil then
+        return false
+    end
+    if hookKind == "append" then
+        owner[methodName] = Utils.appendedFunction(owner[methodName], hookFunction)
+    elseif hookKind == "prepend" then
+        owner[methodName] = Utils.prependedFunction(owner[methodName], hookFunction)
+    else
+        owner[methodName] = Utils.overwrittenFunction(owner[methodName], hookFunction)
+    end
+    return true
+end
+
 function HelperPersonnelBootstrap.install()
     if HelperPersonnelBootstrap.isInstalled then
         return
@@ -53,27 +78,35 @@ function HelperPersonnelBootstrap.install()
     HelperPersonnelCourseplayCompatibility.install("bootstrap")
     HelperPersonnelAutoDriveCompatibility.install("bootstrap")
 
-    FSBaseMission.loadMapFinished = Utils.prependedFunction(FSBaseMission.loadMapFinished, HelperPersonnelBootstrap.onBeforeLoadMapFinished)
-    FSBaseMission.loadMapFinished = Utils.appendedFunction(FSBaseMission.loadMapFinished, HelperPersonnelBootstrap.onLoadMapFinished)
-    FSBaseMission.saveSavegame = Utils.prependedFunction(FSBaseMission.saveSavegame, HelperPersonnelBootstrap.onBeforeSaveSavegame)
-    FSBaseMission.saveSavegame = Utils.appendedFunction(FSBaseMission.saveSavegame, HelperPersonnelBootstrap.onSaveSavegame)
-    BaseMission.delete = Utils.prependedFunction(BaseMission.delete, HelperPersonnelBootstrap.onBeforeMissionDelete)
-    BaseMission.delete = Utils.appendedFunction(BaseMission.delete, HelperPersonnelBootstrap.onMissionDelete)
-
-    if BaseMission ~= nil and BaseMission.mouseEvent ~= nil then
-        BaseMission.mouseEvent = Utils.overwrittenFunction(BaseMission.mouseEvent, HelperPersonnelBootstrap.onMouseEvent)
-    end
+    hpRegisterBootstrapHook(FSBaseMission, "loadMapFinished", "prepend", HelperPersonnelBootstrap.onBeforeLoadMapFinished, "giants.FSBaseMission.loadMapFinished.before", "Missionsinitialisierung", "both")
+    hpRegisterBootstrapHook(FSBaseMission, "loadMapFinished", "append", HelperPersonnelBootstrap.onLoadMapFinished, "giants.FSBaseMission.loadMapFinished.after", "Missionsinitialisierung", "both")
+    hpRegisterBootstrapHook(FSBaseMission, "saveSavegame", "prepend", HelperPersonnelBootstrap.onBeforeSaveSavegame, "giants.FSBaseMission.saveSavegame.before", "Save-Snapshot", "server")
+    hpRegisterBootstrapHook(FSBaseMission, "saveSavegame", "append", HelperPersonnelBootstrap.onSaveSavegame, "giants.FSBaseMission.saveSavegame.after", "Savegame-Schreiben", "server")
+    hpRegisterBootstrapHook(BaseMission, "delete", "prepend", HelperPersonnelBootstrap.onBeforeMissionDelete, "giants.BaseMission.delete.before", "Missionsbereinigung", "both")
+    hpRegisterBootstrapHook(BaseMission, "delete", "append", HelperPersonnelBootstrap.onMissionDelete, "giants.BaseMission.delete.after", "Missionsbereinigung", "both")
+    hpRegisterBootstrapHook(Vehicle, "registerActionEvents", "append", HelperPersonnelBootstrap.onVehicleRegisterActionEvents, "giants.Vehicle.registerActionEvents.after", "Fahrzeug-Menueaktion", "client")
 
     HelperPersonnelBootstrap.ensureMenuHook()
     HelperPersonnelBootstrap.ensureGuiHooks()
 
     if PlayerCamera ~= nil and PlayerCamera.updateRotation ~= nil then
-        PlayerCamera.updateRotation = Utils.overwrittenFunction(PlayerCamera.updateRotation, HelperPersonnelBootstrap.onPlayerCameraUpdateRotation)
+        hpRegisterBootstrapHook(PlayerCamera, "updateRotation", "overwrite", HelperPersonnelBootstrap.onPlayerCameraUpdateRotation, "giants.PlayerCamera.updateRotation", "Auswahl-Overlay", "client")
     end
 
     if Mission00 ~= nil and Mission00.loadMission00Finished ~= nil then
-        Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, HelperPersonnelBootstrap.onMissionLoaded)
+        hpRegisterBootstrapHook(Mission00, "loadMission00Finished", "append", HelperPersonnelBootstrap.onMissionLoaded, "giants.Mission00.loadMission00Finished", "Missionsinitialisierung", "both")
     end
+end
+
+function HelperPersonnelBootstrap.onVehicleRegisterActionEvents(vehicle, excludedVehicle)
+    if g_dedicatedServerInfo ~= nil or g_helperPersonnelApp == nil or g_currentMission == nil or g_gui == nil
+        or g_gui:getIsGuiVisible() or g_currentMission.isPlayerFrozen or excludedVehicle == vehicle
+        or vehicle.isClient ~= true or vehicle.rootVehicle ~= vehicle
+        or vehicle.getIsActiveForInput == nil or not vehicle:getIsActiveForInput(true, true) then
+        return
+    end
+
+    g_helperPersonnelApp:registerVehicleMenuAction(vehicle)
 end
 
 function HelperPersonnelBootstrap.ensureGuiHooks()
@@ -85,9 +118,9 @@ function HelperPersonnelBootstrap.ensureGuiHooks()
         return false
     end
 
-    g_gui.showGui = Utils.overwrittenFunction(g_gui.showGui, HelperPersonnelBootstrap.onShowGui)
-    g_gui.changeScreen = Utils.overwrittenFunction(g_gui.changeScreen, HelperPersonnelBootstrap.onChangeScreen)
-    HelperPersonnelBootstrap.guiHooksInstalled = true
+    local showGuiInstalled = hpRegisterBootstrapHook(g_gui, "showGui", "overwrite", HelperPersonnelBootstrap.onShowGui, "giants.Gui.showGui", "Menue-Schutz", "client")
+    local changeScreenInstalled = hpRegisterBootstrapHook(g_gui, "changeScreen", "overwrite", HelperPersonnelBootstrap.onChangeScreen, "giants.Gui.changeScreen", "Menue-Schutz", "client")
+    HelperPersonnelBootstrap.guiHooksInstalled = showGuiInstalled and changeScreenInstalled
     if Logging ~= nil and Logging.info ~= nil then
         Logging.info("FS25_HelperPersonnel: Native GUI open guards installed=true.")
     end
@@ -103,8 +136,7 @@ function HelperPersonnelBootstrap.ensureMenuHook()
         return false
     end
 
-    GameInfoDisplayMobile.onOpenMenu = Utils.overwrittenFunction(GameInfoDisplayMobile.onOpenMenu, HelperPersonnelBootstrap.onOpenMenu)
-    HelperPersonnelBootstrap.menuHookInstalled = true
+    HelperPersonnelBootstrap.menuHookInstalled = hpRegisterBootstrapHook(GameInfoDisplayMobile, "onOpenMenu", "overwrite", HelperPersonnelBootstrap.onOpenMenu, "giants.GameInfoDisplayMobile.onOpenMenu", "Menue-Schutz", "client")
     if Logging ~= nil and Logging.info ~= nil then
         Logging.info("FS25_HelperPersonnel: GameInfoDisplayMobile onOpenMenu hook installed=true.")
     end
@@ -238,19 +270,6 @@ function HelperPersonnelBootstrap.onMissionDelete(mission)
     end
 end
 
-function HelperPersonnelBootstrap.onMouseEvent(mission, superFunc, posX, posY, isDown, isUp, button)
-    local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
-    if selectionOverlay ~= nil and selectionOverlay.isVisible == true and g_helperPersonnelApp.mouseEvent ~= nil then
-        return g_helperPersonnelApp:mouseEvent(posX, posY, isDown, isUp, button)
-    end
-
-    if superFunc ~= nil then
-        return superFunc(mission, posX, posY, isDown, isUp, button)
-    end
-
-    return false
-end
-
 function HelperPersonnelBootstrap.onOpenMenu(display, superFunc, ...)
     local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
     if selectionOverlay ~= nil then
@@ -271,7 +290,7 @@ end
 
 function HelperPersonnelBootstrap.shouldSuppressNativeGuiOpen()
     local selectionOverlay = g_helperPersonnelApp ~= nil and g_helperPersonnelApp.selectionOverlay or nil
-    if selectionOverlay == nil then
+    if selectionOverlay == nil or selectionOverlay.guiTransition == true then
         return false
     end
 

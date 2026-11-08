@@ -115,7 +115,7 @@ function HelperPersonnelManager:getActiveAssignmentsForFarmData(data)
                 vehicleName = worker.vehicleName or worker.restoreVehicleName or "",
                 helperIndex = worker.assignedHelperIndex,
                 baseHelperIndex = worker.assignedBaseHelperIndex,
-                currentJobElapsedMs = self.getCurrentJobElapsedMs ~= nil and self:getCurrentJobElapsedMs(worker) or worker.currentJobElapsedMs
+                currentJobElapsedMs = worker.busy == true and self.getCurrentJobElapsedMs ~= nil and self:getCurrentJobElapsedMs(worker) or worker.currentJobElapsedMs
             })
         end
     end
@@ -140,7 +140,7 @@ function HelperPersonnelManager:applyActiveAssignmentsToFarmData(data, assignmen
             worker.assignedBaseHelperIndex = assignment.baseHelperIndex or worker.assignedBaseHelperIndex
             if assignment.currentJobElapsedMs ~= nil then
                 worker.currentJobElapsedMs = math.max(0, tonumber(assignment.currentJobElapsedMs) or 0)
-                worker.currentJobStartedAt = self.getCurrentTimestampMs ~= nil and (self:getCurrentTimestampMs() - worker.currentJobElapsedMs) or worker.currentJobStartedAt
+                worker.currentJobStartedAt = self.getCurrentTimestampMs ~= nil and self:getCurrentTimestampMs() or 0
             end
             worker.reliabilityJobAbortChecked = true
             worker.reliabilityJobAbortCheckAt = 0
@@ -148,8 +148,13 @@ function HelperPersonnelManager:applyActiveAssignmentsToFarmData(data, assignmen
     end
 end
 
-local HP_V1540_ORIGINAL_MANAGER_GET_NETWORK_STATE = HelperPersonnelManager.getNetworkState
-local function hpLayer_HelperPersonnelManager_getNetworkState_1(self)
+function HelperPersonnelManager:getSynchronizedNetworkState()
+    if g_server ~= nil or (g_currentMission ~= nil and g_currentMission.getIsServer ~= nil and g_currentMission:getIsServer() == true) then
+        if self.hpMP101EnsureFarmDataForKnownFarms ~= nil then
+            self:hpMP101EnsureFarmDataForKnownFarms()
+        end
+    end
+
     if self.storeCurrentFarmData ~= nil then
         self:storeCurrentFarmData()
     end
@@ -224,74 +229,33 @@ local function hpLayer_HelperPersonnelManager_getNetworkState_1(self)
                 table.insert(state.farms, farmState)
             end
         end
-    elseif HP_V1540_ORIGINAL_MANAGER_GET_NETWORK_STATE ~= nil then
-        return HP_V1540_ORIGINAL_MANAGER_GET_NETWORK_STATE(self)
+    end
+
+    if self.filterSynchronizedNetworkState ~= nil then
+        return self:filterSynchronizedNetworkState(state)
     end
 
     return state
 end
 
-local HP_V1540_ORIGINAL_MANAGER_APPLY_NETWORK_STATE = HelperPersonnelManager.applyNetworkState
-local function hpOverride_HelperPersonnelManager_applyNetworkState_1(self, state)
-    if HP_V1540_ORIGINAL_MANAGER_APPLY_NETWORK_STATE == nil then
-        return false
-    end
-
-    local applied = HP_V1540_ORIGINAL_MANAGER_APPLY_NETWORK_STATE(self, state)
-
-    if applied == true and self.config ~= nil and self.config.applyNetworkState ~= nil and type(state) == "table" and type(state.config) == "table" then
-        self.config:applyNetworkState(state.config)
-    end
-
-    if applied ~= true or type(state) ~= "table" or type(state.farms) ~= "table" then
-        return applied
-    end
-
-    for _, farmState in ipairs(state.farms) do
-        local farmId = tonumber(farmState.farmId)
-        local data = self.farms ~= nil and self.farms[farmId] or nil
-        if data ~= nil then
-            data.selectedWorkerId = farmState.selectedWorkerId
-            data.selectedVehicleKey = farmState.selectedVehicleKey
-            data.selectedVehicleName = farmState.selectedVehicleName
-            self:applyActiveAssignmentsToFarmData(data, farmState.activeAssignments or {})
-        end
-    end
-
-    if self.refreshFarmContext ~= nil then
-        self:refreshFarmContext()
-    end
-
-    return true
-end
-HelperPersonnelManager.applyNetworkState = hpOverride_HelperPersonnelManager_applyNetworkState_1
-
-local HP_V1540_ORIGINAL_MANAGER_START_WORKER_JOB = HelperPersonnelManager.startWorkerJob
 function HelperPersonnelManager:startWorkerJobForFarm(workerId, farmId, vehicleName, vehicleKey)
     if self.executeWithFarmContext ~= nil then
         return self:executeWithFarmContext(farmId, function()
-            if HP_V1540_ORIGINAL_MANAGER_START_WORKER_JOB ~= nil then
-                return HP_V1540_ORIGINAL_MANAGER_START_WORKER_JOB(self, workerId, vehicleName, vehicleKey)
-            end
-            return false
+            return self:startWorkerJob(workerId, vehicleName, vehicleKey)
         end, true)
     end
 
-    return HP_V1540_ORIGINAL_MANAGER_START_WORKER_JOB ~= nil and HP_V1540_ORIGINAL_MANAGER_START_WORKER_JOB(self, workerId, vehicleName, vehicleKey) == true
+    return self:startWorkerJob(workerId, vehicleName, vehicleKey) == true
 end
 
-local HP_V1540_ORIGINAL_MANAGER_FINISH_WORKER_JOB = HelperPersonnelManager.finishWorkerJob
 function HelperPersonnelManager:finishWorkerJobForFarm(workerId, farmId)
     if self.executeWithFarmContext ~= nil then
         return self:executeWithFarmContext(farmId, function()
-            if HP_V1540_ORIGINAL_MANAGER_FINISH_WORKER_JOB ~= nil then
-                return HP_V1540_ORIGINAL_MANAGER_FINISH_WORKER_JOB(self, workerId)
-            end
-            return false
+            return self:finishWorkerJob(workerId)
         end, true)
     end
 
-    return HP_V1540_ORIGINAL_MANAGER_FINISH_WORKER_JOB ~= nil and HP_V1540_ORIGINAL_MANAGER_FINISH_WORKER_JOB(self, workerId) == true
+    return self:finishWorkerJob(workerId) == true
 end
 
 function HelperPersonnelApp:getFarmIdForVehicle(vehicle, fallbackFarmId)
@@ -313,12 +277,7 @@ function HelperPersonnelApp:getFarmIdForVehicle(vehicle, fallbackFarmId)
     return 1
 end
 
-local HP_V1540_ORIGINAL_APP_SET_PENDING_WORKER = HelperPersonnelApp.setPendingWorkerForVehicle
-local function hpOverride_HelperPersonnelApp_setPendingWorkerForVehicle_1(self, vehicle, workerId)
-    if HP_V1540_ORIGINAL_APP_SET_PENDING_WORKER ~= nil then
-        HP_V1540_ORIGINAL_APP_SET_PENDING_WORKER(self, vehicle, workerId)
-    end
-
+function HelperPersonnelApp:syncPendingWorkerSelection(vehicle, workerId)
     local farmId = self:getFarmIdForVehicle(vehicle)
     local vehicleKey = self.getVehicleKey ~= nil and self:getVehicleKey(vehicle) or nil
     local vehicleName = self.getVehicleName ~= nil and self:getVehicleName(vehicle) or ""
@@ -336,56 +295,6 @@ local function hpOverride_HelperPersonnelApp_setPendingWorkerForVehicle_1(self, 
         end
     end
 end
-HelperPersonnelApp.setPendingWorkerForVehicle = hpOverride_HelperPersonnelApp_setPendingWorkerForVehicle_1
-
-local function hpLayer_HelperPersonnelApp_processNetworkSelection_1(self, workerId, farmId, vehicleKey, vehicleName, connection)
-    if not self:isServerAuthority() or self.manager == nil or self.manager.setSelectedWorkerForFarm == nil then
-        return false
-    end
-
-    local changed = self.manager:setSelectedWorkerForFarm(workerId, farmId, vehicleKey, vehicleName) == true
-    if changed then
-        self:syncNetworkStateToClients()
-    elseif connection ~= nil then
-        self:sendNetworkStateToConnection(connection)
-    end
-
-    return changed
-end
-
-local HP_V1540_ORIGINAL_APP_APPLY_NETWORK_STATE = HelperPersonnelApp.applyNetworkState
-local function hpLayer_HelperPersonnelApp_applyNetworkState_1(self, state)
-    local applied = HP_V1540_ORIGINAL_APP_APPLY_NETWORK_STATE ~= nil and HP_V1540_ORIGINAL_APP_APPLY_NETWORK_STATE(self, state) or false
-
-    if applied == true and self.helperBridge ~= nil and self.helperBridge.syncNetworkAssignmentsFromManager ~= nil then
-        self.helperBridge:syncNetworkAssignmentsFromManager()
-    end
-
-    return applied
-end
-
-local function hpLayer_HelperPersonnelHelperBridge_syncNetworkAssignmentsFromManager_1(self)
-    self.vehicleWorkerIds = self.vehicleWorkerIds or {}
-
-    if self.app == nil or self.app.manager == nil or self.app.manager.getActiveAssignmentsForFarmData == nil then
-        return false
-    end
-
-    local manager = self.app.manager
-    if manager.farms == nil then
-        return false
-    end
-
-    for _, data in pairs(manager.farms) do
-        for _, assignment in ipairs(data.activeAssignments or manager:getActiveAssignmentsForFarmData(data)) do
-            if assignment.vehicleKey ~= nil and assignment.workerId ~= nil then
-                self.vehicleWorkerIds[assignment.vehicleKey] = assignment.workerId
-            end
-        end
-    end
-
-    return true
-end
 
 function HelperPersonnelHelperBridge:getFarmIdForWorkerOrVehicle(workerId, vehicle)
     if self.app ~= nil and self.app.manager ~= nil and self.app.manager.getWorkerFarmId ~= nil then
@@ -400,95 +309,6 @@ function HelperPersonnelHelperBridge:getFarmIdForWorkerOrVehicle(workerId, vehic
     end
 
     return 1
-end
-
-local function hpOverride_HelperPersonnelHelperBridge_onJobStarted_1(self, job, workerId)
-    if job == nil or workerId == nil then
-        return
-    end
-
-    self.jobWorkerIds = self.jobWorkerIds or {}
-    self.workerJobById = self.workerJobById or {}
-    self.vehicleWorkerIds = self.vehicleWorkerIds or {}
-
-    self.jobWorkerIds[job] = workerId
-    self.workerJobById[workerId] = job
-    job.helperPersonnelWorkerId = workerId
-
-    local vehicle = self:getVehicleFromJob(job)
-    local vehicleKey = self:getVehicleKeyFromJob(job)
-    if vehicleKey ~= nil then
-        self.vehicleWorkerIds[vehicleKey] = workerId
-    end
-
-    vehicle = self.app ~= nil and self.app.getRootVehicle ~= nil and self.app:getRootVehicle(vehicle) or vehicle
-    local vehicleName = self.app ~= nil and self.app.getVehicleName ~= nil and self.app:getVehicleName(vehicle) or ""
-    local farmId = self:getFarmIdForWorkerOrVehicle(workerId, vehicle)
-
-    if not self:hpIsServerAuthority() then
-        return
-    end
-
-    local changed = false
-    if self.app ~= nil and self.app.manager ~= nil then
-        if self.app.manager.setSelectedWorkerForFarm ~= nil then
-            self.app.manager:setSelectedWorkerForFarm(workerId, farmId, vehicleKey, vehicleName)
-        end
-
-        if self.app.manager.startWorkerJobForFarm ~= nil then
-            changed = self.app.manager:startWorkerJobForFarm(workerId, farmId, vehicleName, vehicleKey) == true
-        elseif self.app.manager.startWorkerJob ~= nil then
-            changed = self.app.manager:startWorkerJob(workerId, vehicleName, vehicleKey) == true
-        elseif self.app.manager.setWorkerBusy ~= nil then
-            self.app.manager:setWorkerBusy(workerId, true, vehicleName, vehicleKey)
-            changed = true
-        end
-    end
-
-    self:hpSyncStateAfterJobChange(changed)
-end
-HelperPersonnelHelperBridge.onJobStarted = hpOverride_HelperPersonnelHelperBridge_onJobStarted_1
-
-local function hpLayer_HelperPersonnelHelperBridge_onJobStopped_1(self, job)
-    if job == nil then
-        return
-    end
-
-    self.jobWorkerIds = self.jobWorkerIds or {}
-    self.workerJobById = self.workerJobById or {}
-    self.vehicleWorkerIds = self.vehicleWorkerIds or {}
-
-    local workerId = self:getWorkerIdByJob(job)
-    local changed = false
-    local farmId = nil
-
-    if workerId ~= nil then
-        farmId = self:getFarmIdForWorkerOrVehicle(workerId, self:getVehicleFromJob(job))
-        local assignedJob = self.workerJobById[workerId]
-        if assignedJob == nil or assignedJob == job then
-            self.workerJobById[workerId] = nil
-            if self:hpIsServerAuthority() and self.app ~= nil and self.app.manager ~= nil then
-                if self.app.manager.finishWorkerJobForFarm ~= nil then
-                    changed = self.app.manager:finishWorkerJobForFarm(workerId, farmId) == true
-                elseif self.app.manager.finishWorkerJob ~= nil then
-                    changed = self.app.manager:finishWorkerJob(workerId) == true
-                elseif self.app.manager.setWorkerBusy ~= nil then
-                    self.app.manager:setWorkerBusy(workerId, false, "")
-                    changed = true
-                end
-            end
-        end
-    end
-
-    local vehicleKey = self:getVehicleKeyFromJob(job)
-    if vehicleKey ~= nil then
-        self.vehicleWorkerIds[vehicleKey] = nil
-    end
-
-    self.jobWorkerIds[job] = nil
-    job.helperPersonnelWorkerId = nil
-
-    self:hpSyncStateAfterJobChange(changed)
 end
 
 local function hpV1550NormalizeFarmId(farmId)
@@ -719,11 +539,19 @@ function HelperPersonnelApp:validateNetworkActionTarget(actionName, targetId, fa
         return false
     end
 
-    if actionName == HelperPersonnelNetwork.ACTION_HIRE then
+    if actionName == HelperPersonnelNetwork.ACTION_HIRE
+        or actionName == HelperPersonnelNetwork.ACTION_OPEN_APPLICANT_INTERVIEW
+        or actionName == HelperPersonnelNetwork.ACTION_CLOSE_APPLICANT_INTERVIEW
+        or actionName == HelperPersonnelNetwork.ACTION_ASK_APPLICANT_INTERVIEW then
         return self.manager.hasApplicantInFarm ~= nil and self.manager:hasApplicantInFarm(targetId, farmId) == true
-    elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS or actionName == HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER then
+    elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS
+        or actionName == HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER
+        or actionName == HelperPersonnelNetwork.ACTION_TRAIN_WORKER
+        or actionName == HelperPersonnelNetwork.ACTION_ACTIVATE_SPECIALIZATION
+        or actionName == HelperPersonnelNetwork.ACTION_DEACTIVATE_SPECIALIZATION then
         return self.manager.hasWorkerInFarm ~= nil and self.manager:hasWorkerInFarm(targetId, farmId) == true
-    elseif actionName == HelperPersonnelNetwork.ACTION_SET_TRANSPORT_PRIORITY then
+    elseif actionName == HelperPersonnelNetwork.ACTION_SET_TRANSPORT_PRIORITY
+        or actionName == HelperPersonnelNetwork.ACTION_SET_APPLICANT_INTERVIEWS then
         return true
     elseif actionName == HelperPersonnelNetwork.ACTION_GRANT_SALARY_RAISE or actionName == HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE then
         return self.manager.hasWorkerInFarm ~= nil and self.manager:hasWorkerInFarm(targetId, farmId) == true
@@ -732,10 +560,96 @@ function HelperPersonnelApp:validateNetworkActionTarget(actionName, targetId, fa
     return false
 end
 
-local HP_V1550_ORIGINAL_APP_PROCESS_NETWORK_ACTION = HelperPersonnelApp.processNetworkAction
-local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionName, targetId, connection, farmId, actionData)
+function HelperPersonnelApp:validateNetworkActionPayload(actionName, actionData, farmId)
+    if actionName == HelperPersonnelNetwork.ACTION_SET_APPLICANT_INTERVIEWS then
+        local value = tostring(actionData or "")
+        return value == "1" or value == "0", value == "1"
+    end
+
+    if actionName == HelperPersonnelNetwork.ACTION_ASK_APPLICANT_INTERVIEW then
+        local topic = tostring(actionData or "")
+        return topic == "experience" or topic == "reliability" or topic == "loyalty", topic
+    end
+
+    if actionName == HelperPersonnelNetwork.ACTION_SET_TRANSPORT_PRIORITY then
+        local workerIds = self.decodeTransportPriorityOrder ~= nil and self:decodeTransportPriorityOrder(actionData) or nil
+        if workerIds == nil then
+            return false, nil
+        end
+        for _, workerId in ipairs(workerIds) do
+            if self.manager.hasWorkerInFarm == nil or self.manager:hasWorkerInFarm(workerId, farmId) ~= true then
+                return false, nil
+            end
+        end
+        return true, workerIds
+    end
+
+    if actionName == HelperPersonnelNetwork.ACTION_TRAIN_WORKER
+        or actionName == HelperPersonnelNetwork.ACTION_ACTIVATE_SPECIALIZATION
+        or actionName == HelperPersonnelNetwork.ACTION_DEACTIVATE_SPECIALIZATION then
+        local specializationKey = self.manager.normalizeSpecializationKey ~= nil and self.manager:normalizeSpecializationKey(actionData) or nil
+        return specializationKey ~= nil, specializationKey
+    end
+
+    if actionData == nil or actionData == "" then
+        return true, nil
+    end
+
+    return false, nil
+end
+
+function HelperPersonnelApp:getApplicantInterviewLeaderToken(connection)
+    if connection == nil then
+        return "host"
+    end
+    local userId = self.getConnectionUserId ~= nil and self:getConnectionUserId(connection) or nil
+    return userId ~= nil and tostring(userId) or nil
+end
+
+function HelperPersonnelApp:setApplicantInterviewControl(applicantId, canControl)
+    self.applicantInterviewControl = self.applicantInterviewControl or {}
+    self.applicantInterviewControl[tonumber(applicantId) or 0] = canControl == true
+end
+
+function HelperPersonnelApp:canControlApplicantInterview(applicantId)
+    return self.applicantInterviewControl ~= nil and self.applicantInterviewControl[tonumber(applicantId) or 0] == true
+end
+
+function HelperPersonnelApp:sendApplicantInterviewStatus(connection, applicantId, canControl)
+    if connection == nil then
+        self:setApplicantInterviewControl(applicantId, canControl)
+        return true
+    end
+    if connection.sendEvent ~= nil and HelperPersonnelInterviewStatusEvent ~= nil then
+        connection:sendEvent(HelperPersonnelInterviewStatusEvent.new(applicantId, canControl))
+        return true
+    end
+    return false
+end
+
+function HelperPersonnelApp:processAuthorizedNetworkAction(actionName, targetId, connection, farmId, actionData)
     if not self:isServerAuthority() or self.manager == nil then
         return false
+    end
+
+    if actionName == HelperPersonnelNetwork.ACTION_OPEN_APPLICANT_INTERVIEW or actionName == HelperPersonnelNetwork.ACTION_CLOSE_APPLICANT_INTERVIEW then
+        local authorizedFarmId = tonumber(farmId)
+        local connectionFarmId = connection ~= nil and self:getFarmIdFromConnection(connection) or authorizedFarmId
+        if authorizedFarmId == nil or connectionFarmId == nil or tonumber(connectionFarmId) ~= tonumber(authorizedFarmId)
+            or not self:validateNetworkActionTarget(actionName, targetId, authorizedFarmId) then
+            self:sendApplicantInterviewStatus(connection, targetId, false)
+            return false
+        end
+        local leaderToken = self:getApplicantInterviewLeaderToken(connection)
+        if actionName == HelperPersonnelNetwork.ACTION_CLOSE_APPLICANT_INTERVIEW then
+            local released = self.manager.releaseApplicantInterviewLeadership ~= nil and self.manager:releaseApplicantInterviewLeadership(targetId, authorizedFarmId, leaderToken) == true
+            self:sendApplicantInterviewStatus(connection, targetId, false)
+            return released
+        end
+        local canManage = self.isConnectionFarmManager ~= nil and self:isConnectionFarmManager(connection, authorizedFarmId) == true
+        local claimed = canManage and self.manager.claimApplicantInterviewLeadership ~= nil and self.manager:claimApplicantInterviewLeadership(targetId, authorizedFarmId, leaderToken) == true
+        self:sendApplicantInterviewStatus(connection, targetId, claimed)
+        return true
     end
 
     local allowed, authorizedFarmId = self:resolveAuthorizedFarmId(connection, farmId, nil, actionName)
@@ -760,6 +674,28 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
         return false
     end
 
+    if actionName == HelperPersonnelNetwork.ACTION_ASK_APPLICANT_INTERVIEW then
+        local leaderToken = self:getApplicantInterviewLeaderToken(connection)
+        if self.manager.isApplicantInterviewLeader == nil or not self.manager:isApplicantInterviewLeader(targetId, authorizedFarmId, leaderToken) then
+            self:sendApplicantInterviewStatus(connection, targetId, false)
+            if connection ~= nil then self:sendNetworkStateToConnection(connection) end
+            return false
+        end
+    end
+
+    local validPayload, normalizedPayload = self:validateNetworkActionPayload(actionName, actionData, authorizedFarmId)
+    if not validPayload then
+        hpV1550Warn("Network request '%s' rejected: invalid payload.", tostring(actionName))
+        if connection ~= nil then
+            self:sendNetworkStateToConnection(connection)
+        end
+        return false
+    end
+
+    if self.manager.hpMP101EnsureFarmDataForFarm ~= nil then
+        self.manager:hpMP101EnsureFarmDataForFarm(authorizedFarmId)
+    end
+
     local changed = false
     local releaseFeedback = nil
     if actionName == HelperPersonnelNetwork.ACTION_HIRE and self.manager.hireApplicantForFarm ~= nil then
@@ -767,16 +703,25 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
     elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS and self.manager.dismissWorkerForFarm ~= nil then
         changed = self.manager:dismissWorkerForFarm(targetId, authorizedFarmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_SET_TRANSPORT_PRIORITY and self.decodeTransportPriorityOrder ~= nil and self.manager.setTransportPriorityOrderForFarm ~= nil then
-        local workerIds = self:decodeTransportPriorityOrder(actionData)
-        changed = workerIds ~= nil and self.manager:setTransportPriorityOrderForFarm(workerIds, authorizedFarmId) == true
+        changed = self.manager:setTransportPriorityOrderForFarm(normalizedPayload, authorizedFarmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_GRANT_SALARY_RAISE and self.manager.grantSalaryRaiseForFarm ~= nil then
         changed = self.manager:grantSalaryRaiseForFarm(targetId, authorizedFarmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE and self.manager.declineSalaryRaiseForFarm ~= nil then
         changed = self.manager:declineSalaryRaiseForFarm(targetId, authorizedFarmId) == true
     elseif actionName == HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER and self.emergencyReleaseWorkerForFarm ~= nil then
         changed, releaseFeedback = self:emergencyReleaseWorkerForFarm(targetId, authorizedFarmId)
-    elseif HP_V1550_ORIGINAL_APP_PROCESS_NETWORK_ACTION ~= nil then
-        changed = HP_V1550_ORIGINAL_APP_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, authorizedFarmId, actionData) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_TRAIN_WORKER and self.manager.trainWorkerForFarm ~= nil then
+        changed = self.manager:trainWorkerForFarm(targetId, authorizedFarmId, normalizedPayload) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_ACTIVATE_SPECIALIZATION and self.manager.activateWorkerSpecializationForFarm ~= nil then
+        changed = self.manager:activateWorkerSpecializationForFarm(targetId, authorizedFarmId, normalizedPayload) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_DEACTIVATE_SPECIALIZATION and self.manager.deactivateWorkerSpecializationForFarm ~= nil then
+        changed = self.manager:deactivateWorkerSpecializationForFarm(targetId, authorizedFarmId, normalizedPayload) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_ASK_APPLICANT_INTERVIEW and self.manager.askApplicantInterviewQuestionForFarm ~= nil then
+        changed = self.manager:askApplicantInterviewQuestionForFarm(targetId, authorizedFarmId, normalizedPayload) == true
+    elseif actionName == HelperPersonnelNetwork.ACTION_SET_APPLICANT_INTERVIEWS and self.manager.config ~= nil then
+        changed = self.manager.config.applicantInterviewsEnabled ~= normalizedPayload
+        self.manager.config.applicantInterviewsEnabled = normalizedPayload == true
+        if self.manager.config.save ~= nil then self.manager.config:save() end
     end
 
     if changed then
@@ -792,7 +737,6 @@ local function hpLayer_HelperPersonnelApp_processNetworkAction_1(self, actionNam
     return changed
 end
 
-local HP_V1550_ORIGINAL_APP_PROCESS_NETWORK_SELECTION = hpLayer_HelperPersonnelApp_processNetworkSelection_1
 function HelperPersonnelApp:processNetworkSelection(workerId, farmId, vehicleKey, vehicleName, connection)
     if not self:isServerAuthority() or self.manager == nil then
         return false
@@ -834,8 +778,6 @@ function HelperPersonnelApp:processNetworkSelection(workerId, farmId, vehicleKey
     local changed = false
     if self.manager.setSelectedWorkerForFarm ~= nil then
         changed = self.manager:setSelectedWorkerForFarm(workerId, authorizedFarmId, vehicleKey, vehicleName) == true
-    elseif HP_V1550_ORIGINAL_APP_PROCESS_NETWORK_SELECTION ~= nil then
-        changed = HP_V1550_ORIGINAL_APP_PROCESS_NETWORK_SELECTION(self, workerId, authorizedFarmId, vehicleKey, vehicleName, connection) == true
     end
 
     if changed then
@@ -845,51 +787,6 @@ function HelperPersonnelApp:processNetworkSelection(workerId, farmId, vehicleKey
     end
 
     return changed
-end
-
-local HP_V1550_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB = HelperPersonnelHelperBridge.canUseWorkerForJob
-local function hpOverride_HelperPersonnelHelperBridge_canUseWorkerForJob_1(self, workerId, job)
-    if HP_V1550_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB ~= nil and HP_V1550_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB(self, workerId, job) ~= true then
-        return false
-    end
-
-    if self.app == nil or self.app.manager == nil then
-        return false
-    end
-
-    local workerFarmId = self.app.manager.getWorkerFarmId ~= nil and hpV1550NormalizeFarmId(self.app.manager:getWorkerFarmId(workerId)) or nil
-    local vehicle = self.getVehicleFromJob ~= nil and self:getVehicleFromJob(job) or nil
-    local vehicleFarmId = self.app.getStrictFarmIdForVehicle ~= nil and hpV1550NormalizeFarmId(self.app:getStrictFarmIdForVehicle(vehicle)) or nil
-
-    if workerFarmId ~= nil and vehicleFarmId ~= nil and workerFarmId ~= vehicleFarmId then
-        hpV1550Warn("AI job with worker %s rejected: vehicle belongs to farm %s, worker belongs to farm %s.", tostring(workerId), tostring(vehicleFarmId), tostring(workerFarmId))
-        return false
-    end
-
-    return true
-end
-HelperPersonnelHelperBridge.canUseWorkerForJob = hpOverride_HelperPersonnelHelperBridge_canUseWorkerForJob_1
-
-local HP_V1550_ORIGINAL_SEND_SELECTED_AI_JOB = HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.sendSelectedAIJob or nil
-if HelperPersonnelAIStartHooks ~= nil and HP_V1550_ORIGINAL_SEND_SELECTED_AI_JOB ~= nil then
-    local function hpOverride_HelperPersonnelAIStartHooks_sendSelectedAIJob_1(vehicle, workerId, fallbackJob, fallbackFarmId)
-        local app = g_helperPersonnelApp
-        if app ~= nil and app.manager ~= nil then
-            local workerFarmId = app.manager.getWorkerFarmId ~= nil and hpV1550NormalizeFarmId(app.manager:getWorkerFarmId(workerId)) or nil
-            local vehicleFarmId = app.getStrictFarmIdForVehicle ~= nil and hpV1550NormalizeFarmId(app:getStrictFarmIdForVehicle(vehicle)) or hpV1550NormalizeFarmId(fallbackFarmId)
-
-            if workerFarmId ~= nil and vehicleFarmId ~= nil and workerFarmId ~= vehicleFarmId then
-                if app.showPlayerMessage ~= nil then
-                    app:showPlayerMessage("ui_selectionWorkerUnavailable")
-                end
-                hpV1550Warn("Local worker selection rejected: vehicle belongs to farm %s, worker belongs to farm %s.", tostring(vehicleFarmId), tostring(workerFarmId))
-                return false
-            end
-        end
-
-        return HP_V1550_ORIGINAL_SEND_SELECTED_AI_JOB(vehicle, workerId, fallbackJob, fallbackFarmId)
-    end
-    HelperPersonnelAIStartHooks.sendSelectedAIJob = hpOverride_HelperPersonnelAIStartHooks_sendSelectedAIJob_1
 end
 
 function HelperPersonnelApp:getStrictFarmIdForVehicle(vehicle)
@@ -977,9 +874,7 @@ local function hpV1560IsClientConnection(connection)
     return true
 end
 
-local HP_V1560_ORIGINAL_APP_LOAD = HelperPersonnelApp.load
-local function hpOverride_HelperPersonnelApp_load_1(self)
-
+function HelperPersonnelApp:initializeNetworkJoinSync()
     self.hpJoinSyncApplied = false
     self.hpJoinSyncRequestTimer = 0
     self.hpJoinSyncRequestAttempts = 0
@@ -989,8 +884,6 @@ local function hpOverride_HelperPersonnelApp_load_1(self)
     self.hpServerEarlyBroadcastTimer = 0
     self.hpServerEarlyBroadcastCount = 0
 
-    HP_V1560_ORIGINAL_APP_LOAD(self)
-
     if self:isServerAuthority() then
         self.hpKnownSyncConnections = self.hpKnownSyncConnections or setmetatable({}, {__mode = "k"})
     elseif self:isMultiplayerClient() then
@@ -998,25 +891,14 @@ local function hpOverride_HelperPersonnelApp_load_1(self)
         self.hpJoinSyncRequestsEnabled = true
     end
 end
-HelperPersonnelApp.load = hpOverride_HelperPersonnelApp_load_1
-local HP_V1560_ORIGINAL_APP_REQUEST_NETWORK_STATE = HelperPersonnelApp.requestNetworkState
-local function hpOverride_HelperPersonnelApp_requestNetworkState_1(self)
+
+function HelperPersonnelApp:requestSynchronizedNetworkState()
     if not self:isMultiplayerClient() or g_client == nil or HelperPersonnelNetworkRequestStateEvent == nil then
         return false
     end
 
     if self.hpJoinSyncRequestsEnabled ~= true then
         return false
-    end
-
-    local sent = false
-
-    if HP_V1560_ORIGINAL_APP_REQUEST_NETWORK_STATE ~= nil then
-        sent = HP_V1560_ORIGINAL_APP_REQUEST_NETWORK_STATE(self) == true
-    end
-
-    if sent then
-        return true
     end
 
     local candidates = {}
@@ -1044,7 +926,7 @@ local function hpOverride_HelperPersonnelApp_requestNetworkState_1(self)
 
     return false
 end
-HelperPersonnelApp.requestNetworkState = hpOverride_HelperPersonnelApp_requestNetworkState_1
+
 function HelperPersonnelApp:hp1560CollectServerConnections()
     local result = {}
     local seen = {}
@@ -1143,48 +1025,7 @@ function HelperPersonnelApp:hp1560UpdateServerJoinSync(dt)
     end
 end
 
-local HP_V1560_ORIGINAL_APP_APPLY_NETWORK_STATE = hpLayer_HelperPersonnelApp_applyNetworkState_1
-local function hpLayer_HelperPersonnelApp_applyNetworkState_2(self, state)
-    local applied = false
-
-    if HP_V1560_ORIGINAL_APP_APPLY_NETWORK_STATE ~= nil then
-        applied = HP_V1560_ORIGINAL_APP_APPLY_NETWORK_STATE(self, state) == true
-    end
-
-    if applied and self:isMultiplayerClient() then
-        self.hpJoinSyncApplied = true
-        self.hpJoinSyncRequestTimer = 0
-        self.hpJoinSyncRequestAttempts = 0
-    end
-
-    return applied
-end
-
-local HP_V1561_ORIGINAL_AIJOB_CAN_USE_WORKER_FOR_JOB = HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.canUseWorkerForJob or nil
-if HelperPersonnelAIJobHooks ~= nil and HP_V1561_ORIGINAL_AIJOB_CAN_USE_WORKER_FOR_JOB ~= nil then
-    local function hpOverride_HelperPersonnelAIJobHooks_canUseWorkerForJob_1(workerId, job)
-        local app = g_helperPersonnelApp
-        if app ~= nil and app.isMultiplayerClient ~= nil and app:isMultiplayerClient() then
-            if app.hpJoinSyncApplied ~= true or app.activeJobsRestoreDone ~= true then
-                return true
-            end
-        end
-
-        return HP_V1561_ORIGINAL_AIJOB_CAN_USE_WORKER_FOR_JOB(workerId, job)
-    end
-    HelperPersonnelAIJobHooks.canUseWorkerForJob = hpOverride_HelperPersonnelAIJobHooks_canUseWorkerForJob_1
-end
-
-local HP_V1560_ORIGINAL_APP_UPDATE = HelperPersonnelApp.update
-local function hpLayer_HelperPersonnelApp_update_1(self, dt)
-    if HP_V1560_ORIGINAL_APP_UPDATE ~= nil then
-        HP_V1560_ORIGINAL_APP_UPDATE(self, dt)
-    end
-
-    if self.isMissionDeleting == true then
-        return
-    end
-
+function HelperPersonnelApp:updateNetworkJoinSync(dt)
     self:hp1560UpdateClientJoinSync(dt)
     self:hp1560UpdateServerJoinSync(dt)
 end
@@ -1271,211 +1112,39 @@ function HelperPersonnelManager:getActiveAssignmentCountFromNetworkState(state)
     return count
 end
 
-local HP_V1562_ORIGINAL_BRIDGE_GET_WORKER_ID_BY_VEHICLE_KEY = HelperPersonnelHelperBridge.getWorkerIdByVehicleKey
-local function hpOverride_HelperPersonnelHelperBridge_getWorkerIdByVehicleKey_1(self, vehicleKey)
-    local workerId = nil
-
-    if HP_V1562_ORIGINAL_BRIDGE_GET_WORKER_ID_BY_VEHICLE_KEY ~= nil then
-        workerId = HP_V1562_ORIGINAL_BRIDGE_GET_WORKER_ID_BY_VEHICLE_KEY(self, vehicleKey)
-        if workerId ~= nil then
-            return workerId
-        end
-    end
-
-    if self.app ~= nil and self.app.manager ~= nil and self.app.manager.getWorkerByVehicleKeyAnyFarm ~= nil then
-        local worker = self.app.manager:getWorkerByVehicleKeyAnyFarm(vehicleKey)
-        if worker ~= nil then
-            return worker.id
-        end
-    end
-
-    return nil
-end
-HelperPersonnelHelperBridge.getWorkerIdByVehicleKey = hpOverride_HelperPersonnelHelperBridge_getWorkerIdByVehicleKey_1
-
-local HP_V1562_ORIGINAL_BRIDGE_SYNC_ASSIGNMENTS = hpLayer_HelperPersonnelHelperBridge_syncNetworkAssignmentsFromManager_1
-function HelperPersonnelHelperBridge:syncNetworkAssignmentsFromManager()
-    self.vehicleWorkerIds = self.vehicleWorkerIds or {}
-    self.workerJobById = self.workerJobById or {}
-    self.jobWorkerIds = self.jobWorkerIds or {}
-
-    local activeWorkerIds = {}
-    local activeVehicleKeys = {}
-
-    if self.app ~= nil and self.app.manager ~= nil then
-        local manager = self.app.manager
-        if manager.storeCurrentFarmData ~= nil then
-            manager:storeCurrentFarmData()
-        end
-
-        for _, data in pairs(manager.farms or {}) do
-            local assignments = data.activeAssignments
-            if assignments == nil and manager.getActiveAssignmentsForFarmData ~= nil then
-                assignments = manager:getActiveAssignmentsForFarmData(data)
-            end
-
-            for _, assignment in ipairs(assignments or {}) do
-                local workerId = tonumber(assignment.workerId)
-                local vehicleKey = hpV1562NormalizeVehicleKey(assignment.vehicleKey)
-                if workerId ~= nil then
-                    activeWorkerIds[workerId] = true
-                end
-                if workerId ~= nil and vehicleKey ~= nil then
-                    self.vehicleWorkerIds[vehicleKey] = workerId
-                    activeVehicleKeys[vehicleKey] = true
-                end
-            end
-        end
-    end
-
-    if self.app ~= nil and self.app.isMultiplayerClient ~= nil and self.app:isMultiplayerClient() then
-        for vehicleKey, _ in pairs(self.vehicleWorkerIds or {}) do
-            if activeVehicleKeys[vehicleKey] ~= true then
-                self.vehicleWorkerIds[vehicleKey] = nil
-            end
-        end
-
-        for workerId, job in pairs(self.workerJobById or {}) do
-            if activeWorkerIds[workerId] ~= true then
-                self.workerJobById[workerId] = nil
-                if job ~= nil then
-                    self.jobWorkerIds[job] = nil
-                    if job.helperPersonnelWorkerId == workerId then
-                        job.helperPersonnelWorkerId = nil
-                    end
-                end
-            end
-        end
-    elseif HP_V1562_ORIGINAL_BRIDGE_SYNC_ASSIGNMENTS ~= nil then
-
-        HP_V1562_ORIGINAL_BRIDGE_SYNC_ASSIGNMENTS(self)
-    end
-
-    return true
-end
-
-local function hpV1562IsClientJoinRestorePhase(app)
+function HelperPersonnelHelperBridge:isClientJoinRestorePhase()
+    local app = self.app
     return app ~= nil
         and app.isMultiplayerClient ~= nil
         and app:isMultiplayerClient()
         and (app.hpJoinSyncApplied ~= true or app.activeJobsRestoreDone ~= true)
 end
 
-local function hpV1562TryAttachClientRestoredJob(app, vehicle, job)
-    if app == nil or app.helperBridge == nil or job == nil then
-        return nil
+function HelperPersonnelHelperBridge:retainClientJobMapping(job)
+    if job == nil then
+        return false
     end
 
-    local workerId = job.helperPersonnelWorkerId
-    if workerId == nil and app.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
-        workerId = app.helperBridge:resolveRestoredWorkerIdForJob(job)
+    local workerId = self:getWorkerIdByJob(job)
+    local vehicleKey = hpV1562GetVehicleKeyFromJob(self, job)
+    if workerId == nil and vehicleKey ~= nil then
+        workerId = self:getWorkerIdByVehicleKey(vehicleKey)
     end
-    if workerId == nil and app.helperBridge.getWorkerIdByVehicle ~= nil then
-        workerId = app.helperBridge:getWorkerIdByVehicle(vehicle)
-    end
-    if workerId == nil and app.helperBridge.getVehicleKeyFromJob ~= nil and app.helperBridge.getWorkerIdByVehicleKey ~= nil then
-        workerId = app.helperBridge:getWorkerIdByVehicleKey(app.helperBridge:getVehicleKeyFromJob(job))
+    if workerId == nil then
+        return false
     end
 
-    if workerId ~= nil then
-        job.helperPersonnelWorkerId = workerId
-        if app.helperBridge.attachRestoredJob ~= nil then
-            app.helperBridge:attachRestoredJob(job, workerId)
-        elseif HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.applyWorkerToJob ~= nil then
-            HelperPersonnelAIJobHooks.applyWorkerToJob(job, workerId)
-        end
+    self.jobWorkerIds = self.jobWorkerIds or {}
+    self.workerJobById = self.workerJobById or {}
+    self.vehicleWorkerIds = self.vehicleWorkerIds or {}
+    self.jobWorkerIds[job] = workerId
+    self.workerJobById[workerId] = job
+    job.helperPersonnelWorkerId = workerId
+    if vehicleKey ~= nil then
+        self.vehicleWorkerIds[vehicleKey] = workerId
     end
 
-    return workerId
-end
-
-local HP_V1562_ORIGINAL_AI_START_HANDLE_VEHICLE_START = HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.handleVehicleStart or nil
-if HelperPersonnelAIStartHooks ~= nil and HP_V1562_ORIGINAL_AI_START_HANDLE_VEHICLE_START ~= nil then
-    local function hpOverride_HelperPersonnelAIStartHooks_handleVehicleStart_1(vehicle, superFunc, ...)
-        local app = g_helperPersonnelApp
-
-        if hpV1562IsClientJoinRestorePhase(app) and vehicle ~= nil then
-            local startableJob = nil
-            if vehicle.getStartableAIJob ~= nil then
-                local ok, result = pcall(vehicle.getStartableAIJob, vehicle)
-                if ok then
-                    startableJob = result
-                end
-            end
-
-            hpV1562TryAttachClientRestoredJob(app, vehicle, startableJob)
-
-            if superFunc ~= nil then
-                return superFunc(vehicle, ...)
-            end
-
-            return nil
-        end
-
-        return HP_V1562_ORIGINAL_AI_START_HANDLE_VEHICLE_START(vehicle, superFunc, ...)
-    end
-    HelperPersonnelAIStartHooks.handleVehicleStart = hpOverride_HelperPersonnelAIStartHooks_handleVehicleStart_1
-end
-
-local HP_V1562_ORIGINAL_BRIDGE_ON_JOB_STOPPED = hpLayer_HelperPersonnelHelperBridge_onJobStopped_1
-local function hpLayer_HelperPersonnelHelperBridge_onJobStopped_2(self, job)
-
-    if not self:hpIsServerAuthority()
-        and hpV1562IsClientJoinRestorePhase(self.app) then
-        local workerId = self:getWorkerIdByJob(job)
-        local vehicleKey = hpV1562GetVehicleKeyFromJob(self, job)
-
-        if workerId == nil and vehicleKey ~= nil and self.getWorkerIdByVehicleKey ~= nil then
-            workerId = self:getWorkerIdByVehicleKey(vehicleKey)
-        end
-
-        if workerId ~= nil then
-            self.jobWorkerIds = self.jobWorkerIds or {}
-            self.workerJobById = self.workerJobById or {}
-            self.vehicleWorkerIds = self.vehicleWorkerIds or {}
-
-            self.jobWorkerIds[job] = workerId
-            self.workerJobById[workerId] = job
-            if job ~= nil then
-                job.helperPersonnelWorkerId = workerId
-            end
-            if vehicleKey ~= nil then
-                self.vehicleWorkerIds[vehicleKey] = workerId
-            end
-
-            return
-        end
-    end
-
-    if HP_V1562_ORIGINAL_BRIDGE_ON_JOB_STOPPED ~= nil then
-        return HP_V1562_ORIGINAL_BRIDGE_ON_JOB_STOPPED(self, job)
-    end
-end
-
-local HP_V1562_ORIGINAL_APP_APPLY_NETWORK_STATE = hpLayer_HelperPersonnelApp_applyNetworkState_2
-local function hpLayer_HelperPersonnelApp_applyNetworkState_3(self, state)
-    local activeAssignmentCount = 0
-    if self.manager ~= nil and self.manager.getActiveAssignmentCountFromNetworkState ~= nil then
-        activeAssignmentCount = self.manager:getActiveAssignmentCountFromNetworkState(state)
-    end
-
-    local applied = HP_V1562_ORIGINAL_APP_APPLY_NETWORK_STATE ~= nil and HP_V1562_ORIGINAL_APP_APPLY_NETWORK_STATE(self, state) == true
-
-    if applied == true and self:isMultiplayerClient() then
-        if self.helperBridge ~= nil and self.helperBridge.syncNetworkAssignmentsFromManager ~= nil then
-            self.helperBridge:syncNetworkAssignmentsFromManager()
-        end
-
-        if activeAssignmentCount > 0 then
-            self.activeJobsRestoreDone = false
-            self.activeJobsRestoreAttempts = 0
-            if self.restoreActiveAIJobs ~= nil then
-                self:restoreActiveAIJobs()
-            end
-        end
-    end
-
-    return applied
+    return true
 end
 
 local function hpV1563NormalizeText(value)
@@ -1586,7 +1255,7 @@ function HelperPersonnelManager:hp1563WorkerHasRealActiveJob(worker, activeLooku
     return false
 end
 
-function HelperPersonnelManager:hp1563ClearWorkerActiveState(worker)
+function HelperPersonnelManager:clearWorkerActiveState(worker)
     if worker == nil then
         return false
     end
@@ -1611,7 +1280,7 @@ function HelperPersonnelManager:hp1563ClearWorkerActiveState(worker)
     return wasActive
 end
 
-function HelperPersonnelApp:hp1150FindActiveJobForWorker(workerId, activeLookup)
+function HelperPersonnelApp:findActiveJobForWorker(workerId, activeLookup)
     local bridge = self.helperBridge
     local jobSet = activeLookup ~= nil and activeLookup.jobSet or nil
     if bridge == nil or type(jobSet) ~= "table" then
@@ -1636,7 +1305,7 @@ function HelperPersonnelApp:hp1150FindActiveJobForWorker(workerId, activeLookup)
     return nil
 end
 
-function HelperPersonnelApp:hp1150ClearWorkerBridgeMappings(workerId)
+function HelperPersonnelApp:clearWorkerBridgeMappings(workerId)
     local bridge = self.helperBridge
     local changed = false
 
@@ -1734,7 +1403,7 @@ function HelperPersonnelApp:emergencyReleaseWorkerForFarm(workerId, farmId)
         end
     end
 
-    if worker == nil or self.manager.hp1563ClearWorkerActiveState == nil then
+    if worker == nil or self.manager.clearWorkerActiveState == nil then
         return false, "ui_workerEmergencyReleaseDeniedCheck"
     end
 
@@ -1743,13 +1412,13 @@ function HelperPersonnelApp:emergencyReleaseWorkerForFarm(workerId, farmId)
         or (worker.vehicleName ~= nil and worker.vehicleName ~= "")
         or (worker.restoreVehicleName ~= nil and worker.restoreVehicleName ~= "")
     local activeLookup = self.hp15611BuildActiveAssignmentLookup ~= nil and self:hp15611BuildActiveAssignmentLookup() or nil
-    local activeJob = self:hp1150FindActiveJobForWorker(workerId, activeLookup)
+    local activeJob = self:findActiveJobForWorker(workerId, activeLookup)
     if activeJob ~= nil and self.helperBridge ~= nil and self.helperBridge.tryStopAIJob ~= nil then
         pcall(self.helperBridge.tryStopAIJob, self.helperBridge, activeJob)
     end
 
-    local bridgeChanged = self:hp1150ClearWorkerBridgeMappings(workerId)
-    local stateChanged = self.manager:hp1563ClearWorkerActiveState(worker)
+    local bridgeChanged = self:clearWorkerBridgeMappings(workerId)
+    local stateChanged = self.manager:clearWorkerActiveState(worker)
     if hadAssignment ~= true and bridgeChanged ~= true and stateChanged ~= true then
         return false, "ui_workerEmergencyReleaseDeniedAvailable"
     end
@@ -1822,7 +1491,7 @@ function HelperPersonnelManager:hp1563CleanupStaleActiveAssignments(activeLookup
         for _, worker in ipairs(data.workers or {}) do
             local markedActive = worker.busy == true or worker.restorePending == true
             if markedActive and self:hp1563WorkerHasRealActiveJob(worker, activeLookup) ~= true then
-                if self:hp1563ClearWorkerActiveState(worker) then
+                if self:clearWorkerActiveState(worker) then
                     changed = true
                 end
             end
@@ -1855,22 +1524,6 @@ function HelperPersonnelManager:hp1563CleanupStaleActiveAssignments(activeLookup
     return changed
 end
 
-local HP_V1563_ORIGINAL_APP_FINISH_ACTIVE_JOB_RESTORE = HelperPersonnelApp.finishActiveJobRestore
-
-local HP_V1563_ORIGINAL_MANAGER_GET_OR_CREATE_FARM_DATA = HelperPersonnelManager.getOrCreateFarmData
-local function hpOverride_HelperPersonnelManager_getOrCreateFarmData_1(self, farmId, initializeApplicants)
-    if self.app ~= nil and self.app.isMultiplayerClient ~= nil and self.app:isMultiplayerClient() then
-        initializeApplicants = false
-    end
-
-    if HP_V1563_ORIGINAL_MANAGER_GET_OR_CREATE_FARM_DATA ~= nil then
-        return HP_V1563_ORIGINAL_MANAGER_GET_OR_CREATE_FARM_DATA(self, farmId, initializeApplicants)
-    end
-
-    return nil
-end
-HelperPersonnelManager.getOrCreateFarmData = hpOverride_HelperPersonnelManager_getOrCreateFarmData_1
-
 function HelperPersonnelManager:hp1563PromoteRestoredWorkersWithActiveJobs(activeLookup)
     activeLookup = activeLookup or {}
     if (activeLookup.count or 0) <= 0 or activeLookup.hasIdentifiers ~= true then
@@ -1900,10 +1553,8 @@ function HelperPersonnelManager:hp1563PromoteRestoredWorkersWithActiveJobs(activ
                 end
                 worker.restoreVehicleKey = nil
                 worker.restoreVehicleName = nil
-                if worker.currentJobStartedAt == nil or worker.currentJobStartedAt <= 0 then
-                    worker.currentJobStartedAt = now - elapsedMs
-                    worker.currentJobElapsedMs = 0
-                end
+                worker.currentJobStartedAt = now
+                worker.currentJobElapsedMs = elapsedMs
                 worker.reliabilityJobAbortChecked = true
                 worker.reliabilityJobAbortCheckAt = 0
                 changed = true
@@ -1926,8 +1577,7 @@ function HelperPersonnelManager:hp1563PromoteRestoredWorkersWithActiveJobs(activ
     return changed
 end
 
-local HP_V1563_FINAL_ORIGINAL_APP_FINISH_ACTIVE_JOB_RESTORE = HP_V1563_ORIGINAL_APP_FINISH_ACTIVE_JOB_RESTORE
-local function hpOverride_HelperPersonnelApp_finishActiveJobRestore_1(self)
+function HelperPersonnelApp:finalizeRestoredAssignments()
     local lookup = nil
     local promoted = false
 
@@ -1938,8 +1588,24 @@ local function hpOverride_HelperPersonnelApp_finishActiveJobRestore_1(self)
         end
     end
 
-    if HP_V1563_FINAL_ORIGINAL_APP_FINISH_ACTIVE_JOB_RESTORE ~= nil then
-        HP_V1563_FINAL_ORIGINAL_APP_FINISH_ACTIVE_JOB_RESTORE(self)
+    if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.pendingRestoredJobs ~= nil then
+        for job, _ in pairs(HelperPersonnelAIJobHooks.pendingRestoredJobs) do
+            HelperPersonnelAIJobHooks.pendingRestoredJobs[job] = nil
+        end
+    end
+
+    if self.manager ~= nil then
+        for _, worker in ipairs(self.manager.workers or {}) do
+            if worker.restorePending == true and worker.busy ~= true then
+                worker.restorePending = false
+                worker.restoreVehicleName = nil
+                worker.restoreVehicleKey = nil
+                worker.vehicleName = ""
+                worker.vehicleKey = nil
+                worker.currentJobStartedAt = 0
+                worker.currentJobElapsedMs = 0
+            end
+        end
     end
 
     if self:isServerAuthority() and self.manager ~= nil and self.manager.hp1563CleanupStaleActiveAssignments ~= nil then
@@ -1950,131 +1616,6 @@ local function hpOverride_HelperPersonnelApp_finishActiveJobRestore_1(self)
         end
     end
 end
-HelperPersonnelApp.finishActiveJobRestore = hpOverride_HelperPersonnelApp_finishActiveJobRestore_1
-
-local function hpV1564GetJobActiveState(app, job)
-    if app == nil or job == nil or app.getActiveAIJobs == nil then
-        return false, false
-    end
-
-    local activeJobs = app:getActiveAIJobs()
-    if type(activeJobs) ~= "table" then
-        return false, false
-    end
-
-    for key, value in pairs(activeJobs) do
-        if value == job or key == job then
-            return true, true
-        end
-    end
-
-    return true, false
-end
-
-local function hpV1564ShouldFinalizeStartedJob(app, job)
-    local known, active = hpV1564GetJobActiveState(app, job)
-    if known then
-        return active == true
-    end
-
-    return true
-end
-
-local function hpV1564ClearPendingStart(app, job)
-    if app == nil then
-        return
-    end
-
-    if app.consumePendingWorkerForVehicle ~= nil and HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.getVehicleFromJob ~= nil then
-        app:consumePendingWorkerForVehicle(HelperPersonnelAIJobHooks.getVehicleFromJob(job))
-    end
-end
-
-local function hpOverride_HelperPersonnelAIJobHooks_onAIJobStart_1(job, superFunc, farmId, ...)
-    local args = {...}
-    local app = g_helperPersonnelApp
-    local workerId = HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
-    local result = nil
-    local insideAISystemStart = (HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth or 0) > 0
-
-    if workerId ~= nil and not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job) then
-        HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, job)
-        return false
-    end
-
-    if workerId ~= nil then
-        result = HelperPersonnelAIJobHooks.callWithForcedHelper(job, workerId, function()
-            return superFunc(job, farmId, unpack(args))
-        end)
-    else
-        result = superFunc(job, farmId, unpack(args))
-    end
-
-    if result ~= false and app ~= nil and app.helperBridge ~= nil and job ~= nil and not insideAISystemStart then
-        if workerId == nil then
-            workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
-        end
-
-        if workerId ~= nil and hpV1564ShouldFinalizeStartedJob(app, job) then
-            HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
-        elseif workerId ~= nil then
-            hpV1564ClearPendingStart(app, job)
-        end
-    end
-
-    return result
-end
-HelperPersonnelAIJobHooks.onAIJobStart = hpOverride_HelperPersonnelAIJobHooks_onAIJobStart_1
-
-local function hpOverride_HelperPersonnelAIJobHooks_onAISystemStartJob_1(aiSystem, superFunc, job, farmId, ...)
-    local args = {...}
-    local app = g_helperPersonnelApp
-    local workerId = HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
-    local result = nil
-
-    if workerId ~= nil then
-        if not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job) then
-            HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, job)
-            return false
-        end
-
-        HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth = (HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth or 0) + 1
-        result = HelperPersonnelAIJobHooks.callWithForcedHelper(job, workerId, function()
-            return superFunc(aiSystem, job, farmId, unpack(args))
-        end)
-        HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth = math.max(0, (HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth or 1) - 1)
-
-        if result ~= false then
-            if hpV1564ShouldFinalizeStartedJob(app, job) then
-                HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
-            else
-                hpV1564ClearPendingStart(app, job)
-                HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI start was not registered as an active assignment because the job ended immediately")
-            end
-        end
-
-        return result
-    end
-
-    HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth = (HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth or 0) + 1
-    result = superFunc(aiSystem, job, farmId, unpack(args))
-    HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth = math.max(0, (HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth or 1) - 1)
-
-    if result ~= false and app ~= nil and app.helperBridge ~= nil and job ~= nil then
-        workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
-        if workerId ~= nil then
-            if hpV1564ShouldFinalizeStartedJob(app, job) then
-                HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
-            else
-                hpV1564ClearPendingStart(app, job)
-                HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI start was not registered as an active assignment because the job ended immediately")
-            end
-        end
-    end
-
-    return result
-end
-HelperPersonnelAIJobHooks.onAISystemStartJob = hpOverride_HelperPersonnelAIJobHooks_onAISystemStartJob_1
 
 function HelperPersonnelApp:hp1564FindVehicleByKey(vehicleKey)
     vehicleKey = hpV1562NormalizeVehicleKey(vehicleKey)
@@ -2169,22 +1710,54 @@ function HelperPersonnelApp:hp1564TryRestartRestoredAIJobs()
     return changed
 end
 
-local HP_V1564_ORIGINAL_APP_RESTORE_ACTIVE_AI_JOBS = HelperPersonnelApp.restoreActiveAIJobs
-local function hpOverride_HelperPersonnelApp_restoreActiveAIJobs_1(self)
-    local restored = false
-
-    if HP_V1564_ORIGINAL_APP_RESTORE_ACTIVE_AI_JOBS ~= nil then
-        restored = HP_V1564_ORIGINAL_APP_RESTORE_ACTIVE_AI_JOBS(self) == true
+function HelperPersonnelApp:restoreActiveAIJobAssignments()
+    if self.helperBridge == nil then
+        return false
     end
 
-    if self:isServerAuthority() and restored ~= true then
+    local restored = 0
+    local activeJobs = self:getActiveAIJobs()
+    if activeJobs == nil then
+        return false
+    end
+
+    for _, job in pairs(activeJobs) do
+        if job ~= nil then
+            local workerId = nil
+            if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.pendingRestoredJobs ~= nil then
+                workerId = HelperPersonnelAIJobHooks.pendingRestoredJobs[job]
+            end
+            if workerId == nil and self.helperBridge.getWorkerIdByJob ~= nil then
+                workerId = self.helperBridge:getWorkerIdByJob(job)
+            end
+            if workerId == nil then
+                workerId = job.helperPersonnelWorkerId
+            end
+            if workerId == nil and self.helperBridge.resolveRestoredWorkerIdForJob ~= nil then
+                workerId = self.helperBridge:resolveRestoredWorkerIdForJob(job)
+            end
+            if workerId == nil and self.helperBridge.getVehicleKeyFromJob ~= nil and self.helperBridge.getWorkerIdByVehicleKey ~= nil then
+                workerId = self.helperBridge:getWorkerIdByVehicleKey(self.helperBridge:getVehicleKeyFromJob(job))
+            end
+            if workerId == nil and job.helperIndex ~= nil and self.helperBridge.getWorkerIdByHelperIndex ~= nil then
+                workerId = self.helperBridge:getWorkerIdByHelperIndex(job.helperIndex)
+            end
+            if workerId ~= nil and self.helperBridge:attachRestoredJob(job, workerId) then
+                restored = restored + 1
+                if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.pendingRestoredJobs ~= nil then
+                    HelperPersonnelAIJobHooks.pendingRestoredJobs[job] = nil
+                end
+            end
+        end
+    end
+
+    if self:isServerAuthority() and restored == 0 then
         local restarted = self:hp1564TryRestartRestoredAIJobs() == true
-        restored = restored or restarted
+        return restarted
     end
 
-    return restored
+    return restored > 0
 end
-HelperPersonnelApp.restoreActiveAIJobs = hpOverride_HelperPersonnelApp_restoreActiveAIJobs_1
 
 local function hpV1565GetTimeMs()
     if g_time ~= nil then
@@ -2372,67 +1945,6 @@ function HelperPersonnelApp:hp1565ClearFailedRestoreJob(job, workerId, assignmen
     end
 end
 
-if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.finalizeStartedJob ~= nil then
-    local HP_V1565_ORIGINAL_AIJOB_FINALIZE_STARTED_JOB = HelperPersonnelAIJobHooks.finalizeStartedJob
-    local function hpOverride_HelperPersonnelAIJobHooks_finalizeStartedJob_1(app, job, workerId)
-        if HP_V1565_ORIGINAL_AIJOB_FINALIZE_STARTED_JOB ~= nil then
-            HP_V1565_ORIGINAL_AIJOB_FINALIZE_STARTED_JOB(app, job, workerId)
-        end
-
-        if job ~= nil then
-            job.hpHelperPersonnelFinalized = true
-            if job.hp1565RestoreRestart == true then
-                job.hp1565RestoreConfirmed = true
-            end
-        end
-    end
-    HelperPersonnelAIJobHooks.finalizeStartedJob = hpOverride_HelperPersonnelAIJobHooks_finalizeStartedJob_1
-end
-
-if HelperPersonnelHelperBridge ~= nil and HelperPersonnelHelperBridge.attachRestoredJob ~= nil then
-    local HP_V1565_ORIGINAL_BRIDGE_ATTACH_RESTORED_JOB = HelperPersonnelHelperBridge.attachRestoredJob
-    local function hpOverride_HelperPersonnelHelperBridge_attachRestoredJob_1(self, job, workerId)
-        local result = HP_V1565_ORIGINAL_BRIDGE_ATTACH_RESTORED_JOB ~= nil and HP_V1565_ORIGINAL_BRIDGE_ATTACH_RESTORED_JOB(self, job, workerId) == true
-        if result and job ~= nil then
-            job.hpHelperPersonnelFinalized = true
-            if job.hp1565RestoreRestart == true then
-                job.hp1565RestoreConfirmed = true
-            end
-        end
-        return result
-    end
-    HelperPersonnelHelperBridge.attachRestoredJob = hpOverride_HelperPersonnelHelperBridge_attachRestoredJob_1
-end
-
-if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.onAIJobStop ~= nil then
-    local HP_V1565_ORIGINAL_AIJOB_STOP = HelperPersonnelAIJobHooks.onAIJobStop
-    local function hpOverride_HelperPersonnelAIJobHooks_onAIJobStop_1(job, aiMessage)
-        local app = g_helperPersonnelApp
-        local workerId = hpV1565GetWorkerIdFromJob(job)
-
-        if job ~= nil and workerId ~= nil and job.hpHelperPersonnelFinalized ~= true then
-            if app ~= nil and app.hp1565ClearFailedRestoreJob ~= nil then
-                app:hp1565ClearFailedRestoreJob(job, workerId, job.hp1565RestoreAssignment, "job was not confirmed as an active assignment")
-            end
-            return
-        end
-
-        if job ~= nil and job.hp1565RestoreRestart == true then
-            local now = hpV1565GetTimeMs()
-            local protectUntil = job.hp1565RestoreProtectUntil or 0
-            if now <= protectUntil then
-                if app ~= nil and app.hp1565ClearFailedRestoreJob ~= nil then
-                    app:hp1565ClearFailedRestoreJob(job, workerId, job.hp1565RestoreAssignment, "restore job ended during the grace period")
-                end
-                return
-            end
-        end
-
-        return HP_V1565_ORIGINAL_AIJOB_STOP(job, aiMessage)
-    end
-    HelperPersonnelAIJobHooks.onAIJobStop = hpOverride_HelperPersonnelAIJobHooks_onAIJobStop_1
-end
-
 function HelperPersonnelApp:hp1565VerifyPendingRestoreRestarts()
     if not self:isServerAuthority() or self.hp1565PendingRestoreRestartJobs == nil then
         return
@@ -2445,7 +1957,7 @@ function HelperPersonnelApp:hp1565VerifyPendingRestoreRestarts()
         if job == nil or record == nil then
             self.hp1565PendingRestoreRestartJobs[job] = nil
         elseif now >= (record.verifyAt or 0) then
-            local known, active = hpV1564GetJobActiveState(self, job)
+            local known, active = HelperPersonnelAIJobHooks.getStartedJobActiveState(self, job)
             local vehicleActive = false
             local vehicle = record.vehicle
             if vehicle ~= nil and vehicle.getIsAIActive ~= nil then
@@ -2554,7 +2066,7 @@ function HelperPersonnelApp:hp1564TryRestartRestoredAssignment(assignment)
     end)
 
     if not okStart or result == false then
-        hpV1564ClearPendingStart(self, aiJob)
+        HelperPersonnelAIJobHooks.clearPendingStart(self, aiJob)
         assignment.hp1564RestartFailed = true
         if self.hp1565ClearFailedRestoreJob ~= nil then
             self:hp1565ClearFailedRestoreJob(aiJob, assignment.workerId, assignment, okStart and "AISystem.startJob returned false" or tostring(result))
@@ -2581,15 +2093,6 @@ function HelperPersonnelApp:hp1564TryRestartRestoredAssignment(assignment)
 
     HelperPersonnel.debugInfo("FS25_HelperPersonnel: Saved AI job for worker ID %s was queued for restart", tostring(assignment.workerId))
     return true, true
-end
-
-local HP_V1565_ORIGINAL_APP_UPDATE = hpLayer_HelperPersonnelApp_update_1
-local function hpLayer_HelperPersonnelApp_update_2(self, dt)
-    if HP_V1565_ORIGINAL_APP_UPDATE ~= nil then
-        HP_V1565_ORIGINAL_APP_UPDATE(self, dt)
-    end
-
-    self:hp1565VerifyPendingRestoreRestarts()
 end
 
 local function hpV15611NormalizeVehicleKey(vehicleKey)
@@ -2644,9 +2147,10 @@ if HelperPersonnelAIJobHooks ~= nil then
             local classObject = _G[className]
             if classObject ~= nil and classObject.hp15611StopHookInstalled ~= true then
                 local stopFunc = rawget(classObject, "stop")
-                if stopFunc ~= nil and Utils ~= nil and Utils.prependedFunction ~= nil and HelperPersonnelAIJobHooks.onAIJobStop ~= nil then
-                    classObject.stop = Utils.prependedFunction(stopFunc, HelperPersonnelAIJobHooks.onAIJobStop)
-                    classObject.hp15611StopHookInstalled = true
+                if stopFunc ~= nil and HelperPersonnelHookRegistrar ~= nil and HelperPersonnelHookRegistrar.install ~= nil and HelperPersonnelAIJobHooks.onAIJobStop ~= nil then
+                    classObject.hp15611StopHookInstalled = HelperPersonnelHookRegistrar:install(
+                        classObject, "stop", "prepend", HelperPersonnelAIJobHooks.onAIJobStop,
+                        "giants." .. className .. ".stop", "KI-Job-Ende bei ueberschriebener Stop-Methode", "both")
                 end
             end
         end
@@ -2894,66 +2398,6 @@ function HelperPersonnelApp:hp15611UpdateFinishedJobAudit(dt)
         end
         HelperPersonnel.debugInfo("FS25_HelperPersonnel: Ended or stale worker assignments were cleared")
     end
-end
-
-local HP_V15611_ORIGINAL_APP_UPDATE = hpLayer_HelperPersonnelApp_update_2
-local function hpOverride_HelperPersonnelApp_update_1(self, dt)
-    if HP_V15611_ORIGINAL_APP_UPDATE ~= nil then
-        HP_V15611_ORIGINAL_APP_UPDATE(self, dt)
-    end
-
-    if HelperPersonnelAutoDriveCompatibility ~= nil and HelperPersonnelAutoDriveCompatibility.update ~= nil then
-        HelperPersonnelAutoDriveCompatibility.update(dt)
-    end
-
-    if self.hp15611UpdateFinishedJobAudit ~= nil then
-        self:hp15611UpdateFinishedJobAudit(dt)
-    end
-end
-HelperPersonnelApp.update = hpOverride_HelperPersonnelApp_update_1
-
-if HelperPersonnelHelperBridge ~= nil and HelperPersonnelHelperBridge.onJobStopped ~= nil then
-    local HP_V15182_ORIGINAL_BRIDGE_ON_JOB_STOPPED = hpLayer_HelperPersonnelHelperBridge_onJobStopped_2
-    local function hpOverride_HelperPersonnelHelperBridge_onJobStopped_1(self, job)
-        if job == nil then
-            return
-        end
-
-        if job.hpHelperPersonnelStopHandled == true then
-            return
-        end
-
-        local workerId = nil
-        if self.getWorkerIdByJob ~= nil then
-            workerId = self:getWorkerIdByJob(job)
-        elseif job.helperPersonnelWorkerId ~= nil then
-            workerId = job.helperPersonnelWorkerId
-        end
-
-
-        if HelperPersonnelAutoDriveCompatibility ~= nil
-            and HelperPersonnelAutoDriveCompatibility.beforeBridgeJobStopped ~= nil
-            and HelperPersonnelAutoDriveCompatibility.beforeBridgeJobStopped(self, job, workerId) == true then
-            return
-        end
-
-        local assignedJob = workerId ~= nil and self.workerJobById[workerId] or nil
-        local vehicleKey = self.getVehicleKeyFromJob ~= nil and self:getVehicleKeyFromJob(job) or nil
-
-        local result = HP_V15182_ORIGINAL_BRIDGE_ON_JOB_STOPPED(self, job)
-
-        if HelperPersonnelAutoDriveCompatibility ~= nil and HelperPersonnelAutoDriveCompatibility.afterBridgeJobStopped ~= nil then
-            HelperPersonnelAutoDriveCompatibility.afterBridgeJobStopped(self, job, workerId, assignedJob, vehicleKey)
-        end
-
-        if workerId ~= nil then
-            job.helperPersonnelWorkerId = workerId
-            job.hpHelperPersonnelStopHandled = true
-        end
-
-        return result
-    end
-    HelperPersonnelHelperBridge.onJobStopped = hpOverride_HelperPersonnelHelperBridge_onJobStopped_1
 end
 
 local function hpMP101GetFarmManager()
@@ -3222,25 +2666,11 @@ function HelperPersonnelManager:hpMP101EnsureFarmDataForKnownFarms()
     return changed
 end
 
-local HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE = hpLayer_HelperPersonnelManager_getNetworkState_1
-local function hpOverride_HelperPersonnelManager_getNetworkState_1(self)
-    if g_server ~= nil or (g_currentMission ~= nil and g_currentMission.getIsServer ~= nil and g_currentMission:getIsServer() == true) then
-        if self.hpMP101EnsureFarmDataForKnownFarms ~= nil then
-            self:hpMP101EnsureFarmDataForKnownFarms()
-        end
-    end
-
-    if HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE ~= nil then
-        local state = HP_MP101_ORIGINAL_MANAGER_GET_NETWORK_STATE(self)
-        return hpMP101FilterNetworkStateToRegisteredFarms(self, state)
-    end
-
-    return nil
+function HelperPersonnelManager:filterSynchronizedNetworkState(state)
+    return hpMP101FilterNetworkStateToRegisteredFarms(self, state)
 end
-HelperPersonnelManager.getNetworkState = hpOverride_HelperPersonnelManager_getNetworkState_1
 
-local HP_MP101_ORIGINAL_APP_SEND_NETWORK_STATE_TO_CONNECTION = HelperPersonnelApp.sendNetworkStateToConnection
-local function hpOverride_HelperPersonnelApp_sendNetworkStateToConnection_1(self, connection)
+function HelperPersonnelApp:prepareNetworkSyncForConnection(connection)
     if self:isServerAuthority() and self.manager ~= nil then
         if self.getFarmIdFromConnection ~= nil then
             local farmId = hpMP101NormalizeFarmId(self:getFarmIdFromConnection(connection))
@@ -3253,30 +2683,15 @@ local function hpOverride_HelperPersonnelApp_sendNetworkStateToConnection_1(self
             self.manager:hpMP101EnsureFarmDataForKnownFarms()
         end
     end
-
-    if HP_MP101_ORIGINAL_APP_SEND_NETWORK_STATE_TO_CONNECTION ~= nil then
-        return HP_MP101_ORIGINAL_APP_SEND_NETWORK_STATE_TO_CONNECTION(self, connection)
-    end
-
-    return false
 end
-HelperPersonnelApp.sendNetworkStateToConnection = hpOverride_HelperPersonnelApp_sendNetworkStateToConnection_1
 
-local HP_MP101_ORIGINAL_APP_SYNC_NETWORK_STATE_TO_CLIENTS = HelperPersonnelApp.syncNetworkStateToClients
-local function hpOverride_HelperPersonnelApp_syncNetworkStateToClients_1(self)
+function HelperPersonnelApp:prepareNetworkSyncForBroadcast()
     if self:isServerAuthority() and self.manager ~= nil and self.manager.hpMP101EnsureFarmDataForKnownFarms ~= nil then
         self.manager:hpMP101EnsureFarmDataForKnownFarms()
     end
-
-    if HP_MP101_ORIGINAL_APP_SYNC_NETWORK_STATE_TO_CLIENTS ~= nil then
-        return HP_MP101_ORIGINAL_APP_SYNC_NETWORK_STATE_TO_CLIENTS(self)
-    end
-
-    return false
 end
-HelperPersonnelApp.syncNetworkStateToClients = hpOverride_HelperPersonnelApp_syncNetworkStateToClients_1
 
-local function hpLayer_HelperPersonnelApp_hpMP101FilterClientStateToServerFarms_1(self, state)
+function HelperPersonnelApp:filterClientStateToKnownServerFarms(state)
     if not self:isMultiplayerClient() or self.manager == nil or type(state) ~= "table" or type(state.farms) ~= "table" then
         return false
     end
@@ -3319,28 +2734,70 @@ local function hpLayer_HelperPersonnelApp_hpMP101FilterClientStateToServerFarms_
     return false
 end
 
-local HP_MP101_ORIGINAL_APP_APPLY_NETWORK_STATE = hpLayer_HelperPersonnelApp_applyNetworkState_3
-local function hpOverride_HelperPersonnelApp_applyNetworkState_1(self, state)
-    local applied = false
-    if HP_MP101_ORIGINAL_APP_APPLY_NETWORK_STATE ~= nil then
-        applied = HP_MP101_ORIGINAL_APP_APPLY_NETWORK_STATE(self, state) == true
+function HelperPersonnelApp:applySynchronizedNetworkState(state)
+    if self.manager == nil or self.manager.applyNetworkState == nil then
+        return false
     end
 
-    if applied == true then
-        local rebound = self:hpMP101FilterClientStateToServerFarms(state) == true
-        if rebound == true then
-            if self.helperBridge ~= nil and self.helperBridge.rebuildHelperProfiles ~= nil then
-                self.helperBridge:rebuildHelperProfiles()
-            end
-            if self.refreshPersonnelMenu ~= nil then
-                self:refreshPersonnelMenu()
+    local activeAssignmentCount = self.manager.getActiveAssignmentCountFromNetworkState ~= nil
+        and self.manager:getActiveAssignmentCountFromNetworkState(state) or 0
+    local applied = self.manager:applyNetworkState(state) == true
+    if applied ~= true then
+        return false
+    end
+
+    if self.manager.config ~= nil and self.manager.config.applyNetworkState ~= nil and type(state) == "table" and type(state.config) == "table" then
+        self.manager.config:applyNetworkState(state.config)
+    end
+
+    if type(state) == "table" and type(state.farms) == "table" then
+        for _, farmState in ipairs(state.farms) do
+            local farmId = tonumber(farmState.farmId)
+            local data = self.manager.farms ~= nil and self.manager.farms[farmId] or nil
+            if data ~= nil then
+                data.selectedWorkerId = farmState.selectedWorkerId
+                data.selectedVehicleKey = farmState.selectedVehicleKey
+                data.selectedVehicleName = farmState.selectedVehicleName
+                if self.manager.applyActiveAssignmentsToFarmData ~= nil then
+                    self.manager:applyActiveAssignmentsToFarmData(data, farmState.activeAssignments or {})
+                end
             end
         end
     end
 
-    return applied
+    if self.helperBridge ~= nil and self.helperBridge.rebuildHelperProfiles ~= nil then
+        self.helperBridge:rebuildHelperProfiles()
+    end
+    if self.manager.refreshFarmContext ~= nil then
+        self.manager:refreshFarmContext()
+    end
+
+    local rebound = self:hpMP101FilterClientStateToServerFarms(state) == true
+    if rebound == true and self.helperBridge ~= nil and self.helperBridge.rebuildHelperProfiles ~= nil then
+        self.helperBridge:rebuildHelperProfiles()
+    end
+
+    if self.helperBridge ~= nil and self.helperBridge.syncNetworkAssignmentsFromManager ~= nil then
+        self.helperBridge:syncNetworkAssignmentsFromManager()
+    end
+
+    if self:isMultiplayerClient() then
+        self.hpJoinSyncApplied = true
+        self.hpJoinSyncRequestTimer = 0
+        self.hpJoinSyncRequestAttempts = 0
+
+        if activeAssignmentCount > 0 then
+            self.activeJobsRestoreDone = false
+            self.activeJobsRestoreAttempts = 0
+            if self.restoreActiveAIJobs ~= nil then
+                self:restoreActiveAIJobs()
+            end
+        end
+    end
+
+    self:refreshPersonnelMenu()
+    return true
 end
-HelperPersonnelApp.applyNetworkState = hpOverride_HelperPersonnelApp_applyNetworkState_1
 
 function HelperPersonnelApp:hpMP101ClientHasSyncedApplicant(applicantId)
     if self.manager == nil or self.getCurrentFarmId == nil then
@@ -3394,148 +2851,6 @@ function HelperPersonnelApp:hpMP101ClientHasSyncedWorker(workerId)
     return false
 end
 
-local HP_MP101_ORIGINAL_APP_REQUEST_HIRE_APPLICANT = HelperPersonnelApp.requestHireApplicant
-local function hpLayer_HelperPersonnelApp_requestHireApplicant_1(self, applicantId)
-    if self:isMultiplayerClient() then
-        if self.hpJoinSyncApplied ~= true or self:hpMP101ClientHasSyncedApplicant(applicantId) ~= true then
-            if self.requestNetworkState ~= nil then
-                self:requestNetworkState()
-            end
-            if self.refreshPersonnelMenu ~= nil then
-                self:refreshPersonnelMenu()
-            end
-            return false
-        end
-    end
-
-    if HP_MP101_ORIGINAL_APP_REQUEST_HIRE_APPLICANT ~= nil then
-        return HP_MP101_ORIGINAL_APP_REQUEST_HIRE_APPLICANT(self, applicantId)
-    end
-
-    return false
-end
-
-local HP_MP101_ORIGINAL_APP_REQUEST_DISMISS_WORKER = HelperPersonnelApp.requestDismissWorker
-local function hpLayer_HelperPersonnelApp_requestDismissWorker_1(self, workerId)
-    if self:isMultiplayerClient() then
-        if self.hpJoinSyncApplied ~= true or self:hpMP101ClientHasSyncedWorker(workerId) ~= true then
-            if self.requestNetworkState ~= nil then
-                self:requestNetworkState()
-            end
-            if self.refreshPersonnelMenu ~= nil then
-                self:refreshPersonnelMenu()
-            end
-            return false
-        end
-    end
-
-    if HP_MP101_ORIGINAL_APP_REQUEST_DISMISS_WORKER ~= nil then
-        return HP_MP101_ORIGINAL_APP_REQUEST_DISMISS_WORKER(self, workerId)
-    end
-
-    return false
-end
-
-local HP_MP101_ORIGINAL_APP_PROCESS_NETWORK_ACTION = hpLayer_HelperPersonnelApp_processNetworkAction_1
-local function hpLayer_HelperPersonnelApp_processNetworkAction_2(self, actionName, targetId, connection, farmId, actionData)
-    if self:isServerAuthority() and self.manager ~= nil then
-        local requestedFarmId = hpMP101NormalizeFarmId(farmId)
-        if requestedFarmId == nil and self.getFarmIdFromConnection ~= nil then
-            requestedFarmId = hpMP101NormalizeFarmId(self:getFarmIdFromConnection(connection))
-        end
-
-        if requestedFarmId ~= nil and self.manager.hpMP101EnsureFarmDataForFarm ~= nil then
-            self.manager:hpMP101EnsureFarmDataForFarm(requestedFarmId)
-        end
-    end
-
-    if HP_MP101_ORIGINAL_APP_PROCESS_NETWORK_ACTION ~= nil then
-        return HP_MP101_ORIGINAL_APP_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, farmId, actionData)
-    end
-
-    return false
-end
-
-local function hpMP102IsMultiplayerClientRuntime()
-    if g_server ~= nil then
-        return false
-    end
-
-    if g_client ~= nil then
-        return true
-    end
-
-    local app = g_helperPersonnelApp
-    if app ~= nil and app.isMultiplayerClient ~= nil then
-        return app:isMultiplayerClient() == true
-    end
-
-    return false
-end
-
-local HP_MP102_ORIGINAL_MANAGER_ENSURE_INITIAL_MARKET = HelperPersonnelManager.ensureInitialApplicantMarketForFarmData
-local function hpOverride_HelperPersonnelManager_ensureInitialApplicantMarketForFarmData_1(self, data)
-    if hpMP102IsMultiplayerClientRuntime() then
-        if type(data) == "table" then
-            data.workers = data.workers or {}
-            data.applicants = data.applicants or {}
-        end
-        return 0
-    end
-
-    if HP_MP102_ORIGINAL_MANAGER_ENSURE_INITIAL_MARKET ~= nil then
-        return HP_MP102_ORIGINAL_MANAGER_ENSURE_INITIAL_MARKET(self, data)
-    end
-
-    return 0
-end
-HelperPersonnelManager.ensureInitialApplicantMarketForFarmData = hpOverride_HelperPersonnelManager_ensureInitialApplicantMarketForFarmData_1
-
-local HP_MP102_ORIGINAL_MANAGER_INITIALIZE_NEW_MARKET = HelperPersonnelManager.initializeNewApplicantMarket
-local function hpOverride_HelperPersonnelManager_initializeNewApplicantMarket_1(self)
-    if hpMP102IsMultiplayerClientRuntime() then
-        self.applicants = self.applicants or {}
-        return 0
-    end
-
-    if HP_MP102_ORIGINAL_MANAGER_INITIALIZE_NEW_MARKET ~= nil then
-        return HP_MP102_ORIGINAL_MANAGER_INITIALIZE_NEW_MARKET(self)
-    end
-
-    return 0
-end
-HelperPersonnelManager.initializeNewApplicantMarket = hpOverride_HelperPersonnelManager_initializeNewApplicantMarket_1
-
-local HP_MP102_ORIGINAL_MANAGER_ENSURE_APPLICANT_BUFFER = HelperPersonnelManager.ensureApplicantBuffer
-local function hpOverride_HelperPersonnelManager_ensureApplicantBuffer_1(self, minimumCount, targetCount)
-    if hpMP102IsMultiplayerClientRuntime() then
-        self.applicants = self.applicants or {}
-        return 0
-    end
-
-    if HP_MP102_ORIGINAL_MANAGER_ENSURE_APPLICANT_BUFFER ~= nil then
-        return HP_MP102_ORIGINAL_MANAGER_ENSURE_APPLICANT_BUFFER(self, minimumCount, targetCount)
-    end
-
-    return 0
-end
-HelperPersonnelManager.ensureApplicantBuffer = hpOverride_HelperPersonnelManager_ensureApplicantBuffer_1
-
-local HP_MP102_ORIGINAL_MANAGER_GENERATE_MONTHLY_APPLICANTS = HelperPersonnelManager.generateMonthlyApplicants
-local function hpOverride_HelperPersonnelManager_generateMonthlyApplicants_1(self, forceAtLeastOne)
-    if hpMP102IsMultiplayerClientRuntime() then
-        self.applicants = self.applicants or {}
-        return 0
-    end
-
-    if HP_MP102_ORIGINAL_MANAGER_GENERATE_MONTHLY_APPLICANTS ~= nil then
-        return HP_MP102_ORIGINAL_MANAGER_GENERATE_MONTHLY_APPLICANTS(self, forceAtLeastOne)
-    end
-
-    return 0
-end
-HelperPersonnelManager.generateMonthlyApplicants = hpOverride_HelperPersonnelManager_generateMonthlyApplicants_1
-
 function HelperPersonnelApp:hpMP102GetSyncedApplicantFarmId(applicantId)
     if self.manager == nil then
         return nil
@@ -3578,114 +2893,8 @@ function HelperPersonnelApp:hpMP102GetSyncedWorkerFarmId(workerId)
     return nil
 end
 
-local HP_MP102_ORIGINAL_APP_REQUEST_HIRE_APPLICANT = hpLayer_HelperPersonnelApp_requestHireApplicant_1
-local function hpOverride_HelperPersonnelApp_requestHireApplicant_1(self, applicantId)
-    if self:isMultiplayerClient() then
-        if self.hpJoinSyncApplied ~= true then
-            if self.requestNetworkState ~= nil then
-                self:requestNetworkState()
-            end
-            return false
-        end
-
-        local applicantFarmId = self:hpMP102GetSyncedApplicantFarmId(applicantId)
-        if applicantFarmId == nil then
-            if self.requestNetworkState ~= nil then
-                self:requestNetworkState()
-            end
-            if self.refreshPersonnelMenu ~= nil then
-                self:refreshPersonnelMenu()
-            end
-            return false
-        end
-
-        if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
-            self.manager:refreshFarmContext(applicantFarmId)
-        end
-    end
-
-    if HP_MP102_ORIGINAL_APP_REQUEST_HIRE_APPLICANT ~= nil then
-        return HP_MP102_ORIGINAL_APP_REQUEST_HIRE_APPLICANT(self, applicantId)
-    end
-
-    return false
-end
-HelperPersonnelApp.requestHireApplicant = hpOverride_HelperPersonnelApp_requestHireApplicant_1
-
-local HP_MP102_ORIGINAL_APP_REQUEST_DISMISS_WORKER = hpLayer_HelperPersonnelApp_requestDismissWorker_1
-local function hpOverride_HelperPersonnelApp_requestDismissWorker_1(self, workerId)
-    if self:isMultiplayerClient() then
-        if self.hpJoinSyncApplied ~= true then
-            if self.requestNetworkState ~= nil then
-                self:requestNetworkState()
-            end
-            return false
-        end
-
-        local workerFarmId = self:hpMP102GetSyncedWorkerFarmId(workerId)
-        if workerFarmId == nil then
-            if self.requestNetworkState ~= nil then
-                self:requestNetworkState()
-            end
-            if self.refreshPersonnelMenu ~= nil then
-                self:refreshPersonnelMenu()
-            end
-            return false
-        end
-
-        if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
-            self.manager:refreshFarmContext(workerFarmId)
-        end
-    end
-
-    if HP_MP102_ORIGINAL_APP_REQUEST_DISMISS_WORKER ~= nil then
-        return HP_MP102_ORIGINAL_APP_REQUEST_DISMISS_WORKER(self, workerId)
-    end
-
-    return false
-end
-HelperPersonnelApp.requestDismissWorker = hpOverride_HelperPersonnelApp_requestDismissWorker_1
-
-local HP_MP102_ORIGINAL_APP_PROCESS_NETWORK_ACTION = hpLayer_HelperPersonnelApp_processNetworkAction_2
-local function hpOverride_HelperPersonnelApp_processNetworkAction_1(self, actionName, targetId, connection, farmId, actionData)
-    if self:isServerAuthority() and self.manager ~= nil and actionName == "hire" then
-        local requestedFarmId = hpMP101NormalizeFarmId(farmId)
-        if requestedFarmId == nil and self.getFarmIdFromConnection ~= nil then
-            requestedFarmId = hpMP101NormalizeFarmId(self:getFarmIdFromConnection(connection))
-        end
-
-        if requestedFarmId ~= nil and self.manager.hasApplicantInFarm ~= nil and self.manager:hasApplicantInFarm(targetId, requestedFarmId) ~= true then
-            local foundFarmId = nil
-            for existingFarmId, data in pairs(self.manager.farms or {}) do
-                for _, applicant in ipairs(data.applicants or {}) do
-                    if tonumber(applicant.id) == tonumber(targetId) then
-                        foundFarmId = hpMP101NormalizeFarmId(existingFarmId) or hpMP101NormalizeFarmId(data.farmId)
-                        break
-                    end
-                end
-                if foundFarmId ~= nil then
-                    break
-                end
-            end
-
-            Logging.warning("FS25_HelperPersonnel: Network request 'hire' diagnostics: Target=%s RequestedFarm=%s FoundFarm=%s", tostring(targetId), tostring(requestedFarmId), tostring(foundFarmId))
-        end
-    end
-
-    if HP_MP102_ORIGINAL_APP_PROCESS_NETWORK_ACTION ~= nil then
-        return HP_MP102_ORIGINAL_APP_PROCESS_NETWORK_ACTION(self, actionName, targetId, connection, farmId, actionData)
-    end
-
-    return false
-end
-HelperPersonnelApp.processNetworkAction = hpOverride_HelperPersonnelApp_processNetworkAction_1
-
-local HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE = hpLayer_HelperPersonnelApp_hpMP101FilterClientStateToServerFarms_1
 function HelperPersonnelApp:hpMP101FilterClientStateToServerFarms(state)
     if not self:isMultiplayerClient() or self.manager == nil or type(state) ~= "table" or type(state.farms) ~= "table" then
-        if HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE ~= nil then
-            return HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE(self, state)
-        end
         return false
     end
 
@@ -3698,10 +2907,7 @@ function HelperPersonnelApp:hpMP101FilterClientStateToServerFarms(state)
         end
     end
 
-    local result = false
-    if HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE ~= nil then
-        result = HP_MP102_ORIGINAL_APP_FILTER_CLIENT_STATE(self, state) == true
-    end
+    local result = self:filterClientStateToKnownServerFarms(state) == true
 
     if currentFarmId ~= nil and allowed[currentFarmId] ~= true and self.manager.createFarmData ~= nil and self.manager.bindFarmData ~= nil then
         local data = self.manager:createFarmData(currentFarmId)

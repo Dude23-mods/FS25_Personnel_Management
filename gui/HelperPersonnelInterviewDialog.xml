@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose">
+    <GuiElement profile="newLayer"/>
+    <Bitmap profile="dialogFullscreenBg"/>
+    <GuiElement profile="fs25_dialogBg" size="1700px 850px">
+        <ThreePartBitmap profile="fs25_dialogBgMiddleSmall"/>
+        <ThreePartBitmap profile="fs25_dialogBgTopSmall"/>
+        <ThreePartBitmap profile="fs25_dialogBgBottom"/>
+        <Text id="dialogTitle" profile="hpInterviewTitle"/>
+        <ThreePartBitmap profile="fs25_lineSeparatorTop" position="0px -96px" size="1620px 4px"/>
+        <Text id="headerApplicant" profile="hpInterviewHeaderApplicant"/>
+        <Text id="headerProgress" profile="hpInterviewHeaderProgress"/>
+        <GuiElement profile="hpInterviewChatPanel">
+            <Bitmap id="chatBackground" profile="hpInterviewPanelBackground"/>
+            <Text id="applicantProfile" profile="hpInterviewProfile"/>
+            <Bitmap id="questionBubble1" profile="hpInterviewQuestionBubble" position="108px 490px"/><Bitmap id="answerBubble1" profile="hpInterviewAnswerBubble" position="310px 396px"/>
+            <Bitmap id="questionIcon1" position="28px 498px" size="56px 56px"/><Text id="question1" profile="hpInterviewQuestion" position="130px 500px"/>
+            <Bitmap id="answerPortrait1" position="1012px 401px" size="80px 80px"/><Text id="answer1" profile="hpInterviewAnswer" position="332px 408px"/>
+            <Bitmap id="questionBubble2" profile="hpInterviewQuestionBubble" position="108px 315px"/><Bitmap id="answerBubble2" profile="hpInterviewAnswerBubble" position="310px 221px"/>
+            <Bitmap id="questionIcon2" position="28px 323px" size="56px 56px"/><Text id="question2" profile="hpInterviewQuestion" position="130px 325px"/>
+            <Bitmap id="answerPortrait2" position="1012px 226px" size="80px 80px"/><Text id="answer2" profile="hpInterviewAnswer" position="332px 233px"/>
+            <Bitmap id="questionBubble3" profile="hpInterviewQuestionBubble" position="108px 140px"/><Bitmap id="answerBubble3" profile="hpInterviewAnswerBubble" position="310px 46px"/>
+            <Bitmap id="questionIcon3" position="28px 148px" size="56px 56px"/><Text id="question3" profile="hpInterviewQuestion" position="130px 150px"/>
+            <Bitmap id="answerPortrait3" position="1012px 51px" size="80px 80px"/><Text id="answer3" profile="hpInterviewAnswer" position="332px 58px"/>
+        </GuiElement>
+        <GuiElement profile="hpInterviewSidePanel">
+            <Bitmap id="sideBackground" profile="hpInterviewPanelBackground"/>
+            <Bitmap id="applicantPortrait" position="20px 420px" size="210px 210px"/>
+            <Text id="applicantName" profile="hpInterviewApplicantName"/>
+            <Text id="ageText" profile="hpInterviewAge"/>
+            <Text id="roundText" profile="hpInterviewMeta" position="248px 540px"/>
+            <Text id="experienceKnowledge" profile="hpInterviewKnowledge" position="248px 496px"/>
+            <Text id="reliabilityKnowledge" profile="hpInterviewKnowledge" position="248px 454px"/>
+            <Text id="loyaltyKnowledge" profile="hpInterviewKnowledge" position="248px 412px"/>
+            <Bitmap id="sideSeparator" position="20px 373px" size="440px 2px"/>
+            <Text id="questionPrompt" profile="hpInterviewPrompt"/>
+            <Bitmap id="experienceButtonBackground" position="16px 230px" size="448px 72px"/>
+            <Button id="experienceButton" profile="hpInterviewTopicButton" position="20px 235px" size="440px 62px" inputAction="MENU_ACCEPT" isTriggerableByGlobalAction="false" onFocus="onTopicFocused" onClick="onExperience"/>
+            <Bitmap id="reliabilityButtonBackground" position="16px 158px" size="448px 72px"/>
+            <Button id="reliabilityButton" profile="hpInterviewTopicButton" position="20px 163px" size="440px 62px" inputAction="MENU_ACCEPT" isTriggerableByGlobalAction="false" onFocus="onTopicFocused" onClick="onReliability"/>
+            <Bitmap id="loyaltyButtonBackground" position="16px 86px" size="448px 72px"/>
+            <Button id="loyaltyButton" profile="hpInterviewTopicButton" position="20px 91px" size="440px 62px" inputAction="MENU_ACCEPT" isTriggerableByGlobalAction="false" onFocus="onTopicFocused" onClick="onLoyalty"/>
+            <Text id="leaderText" profile="hpInterviewSideMessage"/>
+            <Text id="finishedText" profile="hpInterviewFinished"/>
+        </GuiElement>
+        <Button profile="buttonBack" position="40px 40px" text="$l10n_ui_button_back" onClick="onClickBack"/>
+    </GuiElement>
+    <GUIProfiles>
+        <Profile name="hpInterviewTitle" extends="baseReference" with="anchorTopLeft"><position value="45px -42px"/><size value="900px 44px"/><textAlignment value="left"/><textBold value="true"/><textSize value="29px"/></Profile>
+        <Profile name="hpInterviewChatPanel" extends="emptyPanel"><position value="40px 80px"/><size value="1120px 650px"/></Profile>
+        <Profile name="hpInterviewProfile" extends="baseReference"><position value="28px 570px"/><size value="1060px 70px"/><textSize value="15px"/><textMaxNumLines value="4"/><textAlignment value="left"/><textColor value="0.72 0.80 0.75 1"/></Profile>
+        <Profile name="hpInterviewSidePanel" extends="emptyPanel"><position value="1180px 80px"/><size value="480px 650px"/></Profile>
+        <Profile name="hpInterviewPanelBackground" extends="baseReference" with="anchorStretchingYStretchingX"><imageColor value="0.008 0.020 0.016 0.98"/></Profile>
+        <Profile name="hpInterviewQuestionBubble" extends="baseReference"><size value="830px 66px"/></Profile>
+        <Profile name="hpInterviewAnswerBubble" extends="baseReference"><size value="680px 90px"/></Profile>
+        <Profile name="hpInterviewHeaderApplicant" extends="baseReference" with="anchorTopLeft"><position value="1150px -44px"/><size value="250px 40px"/><textSize value="18px"/><textColor value="0.88 0.94 0.89 1"/></Profile>
+        <Profile name="hpInterviewHeaderProgress" extends="baseReference" with="anchorTopLeft"><position value="1410px -44px"/><size value="245px 40px"/><textSize value="18px"/><textColor value="0.74 0.88 0.20 1"/></Profile>
+        <Profile name="hpInterviewQuestion" extends="baseReference"><size value="790px 52px"/><textSize value="18px"/><textMaxNumLines value="2"/><textAlignment value="left"/><textColor value="0.94 0.97 0.92 1"/></Profile>
+        <Profile name="hpInterviewAnswer" extends="baseReference"><size value="636px 74px"/><textSize value="17px"/><textMaxNumLines value="4"/><textAlignment value="left"/><textColor value="0.94 0.97 0.92 1"/></Profile>
+        <Profile name="hpInterviewApplicantName" extends="baseReference"><position value="248px 600px"/><size value="215px 34px"/><textBold value="true"/><textSize value="23px"/></Profile>
+        <Profile name="hpInterviewAge" extends="baseReference"><position value="248px 570px"/><size value="215px 26px"/><textSize value="16px"/><textColor value="0.72 0.80 0.75 1"/></Profile>
+        <Profile name="hpInterviewMeta" extends="baseReference"><size value="215px 28px"/><textSize value="16px"/><textColor value="0.72 0.80 0.75 1"/></Profile>
+        <Profile name="hpInterviewKnowledge" extends="baseReference"><size value="215px 32px"/><textSize value="15px"/><textColor value="0.90 0.95 0.89 1"/></Profile>
+        <Profile name="hpInterviewPrompt" extends="baseReference"><position value="20px 300px"/><size value="440px 32px"/><textBold value="true"/><textSize value="18px"/><textColor value="0.90 0.95 0.89 1"/></Profile>
+        <Profile name="hpInterviewTopicButton" extends="emptyPanel"><size value="440px 62px"/><handleFocus value="true"/><fitToContent value="false"/><iconSize value="0px 0px"/><hideKeyboardGlyph value="true"/><textAlignment value="center"/><textSize value="20px"/><textBold value="true"/><textColor value="$preset_fs25_colorMainLight"/><textFocusedColor value="$preset_fs25_colorMainLight"/><textHighlightedColor value="$preset_fs25_colorMainLight"/><textDisabledColor value="$preset_colorDisabled"/></Profile>
+        <Profile name="hpInterviewSideMessage" extends="baseReference"><position value="20px 50px"/><size value="440px 30px"/><textAlignment value="center"/><textSize value="16px"/><textColor value="0.74 0.88 0.20 1"/></Profile>
+        <Profile name="hpInterviewFinished" extends="baseReference"><position value="20px 50px"/><size value="440px 30px"/><textAlignment value="center"/><textSize value="16px"/><textColor value="0.74 0.88 0.20 1"/></Profile>
+    </GUIProfiles>
+</GUI>

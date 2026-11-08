@@ -214,7 +214,7 @@ function HelperPersonnelHelpFrame:populateCellForItemInSection(list, section, in
     end
     local icon = cell:getAttribute("icon")
     if icon ~= nil then
-        icon:setImageFilename(Utils.getFilename(string.format("gui/icons/help/help_topic_%02d.png", topic.iconIndex or index), self.app.modDir))
+        icon:setImageFilename(Utils.getFilename(string.format("gui/icons/help/help_topic_%02d.dds", topic.iconIndex or index), self.app.modDir))
         icon:setVisible(true)
     end
 end
@@ -769,13 +769,14 @@ function HelperPersonnelSettingsFrame:syncNativeSettings()
     end
 
     local config = self:getSettingsConfig()
-    local canEdit = config ~= nil and self:canManageCurrentFarm() and self:isServerAuthority()
+    local canManage = config ~= nil and self:canManageCurrentFarm()
 
     for _, setting in ipairs(self:getSettingsList()) do
         local option = self.nativeSettingElements[setting.key]
         if option ~= nil then
             local available = self:isSettingAvailable(setting)
-            local editable = canEdit and available
+            local remoteInterviewSetting = setting.key == "applicantInterviews" and canManage
+            local editable = (canManage and self:isServerAuthority() or remoteInterviewSetting) and available
             if setting.valueType == "number" then
                 local value = config ~= nil and tonumber(config[setting.field]) or HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE
                 if option.setText ~= nil then option:setText(tostring(math.floor(value + 0.5))) end
@@ -786,7 +787,7 @@ function HelperPersonnelSettingsFrame:syncNativeSettings()
                     option:setCanChangeState(editable)
                 end
                 if option.setDisabled ~= nil then
-                    option:setDisabled(not canEdit)
+                    option:setDisabled(not (canManage and self:isServerAuthority() or remoteInterviewSetting))
                 end
             end
         end
@@ -1084,7 +1085,8 @@ function HelperPersonnelSettingsFrame:onNativeSettingChanged(state, button, sett
     end
 
     local config = self:getSettingsConfig()
-    local editable = config ~= nil and self:canManageCurrentFarm() and self:isServerAuthority() and self:isSettingAvailable(setting)
+    local isRemoteInterviewSetting = setting ~= nil and setting.key == "applicantInterviews" and self:canManageCurrentFarm()
+    local editable = config ~= nil and self:canManageCurrentFarm() and (self:isServerAuthority() or isRemoteInterviewSetting) and self:isSettingAvailable(setting)
 
     if not editable then
         self:syncNativeSettings()
@@ -1106,7 +1108,15 @@ function HelperPersonnelSettingsFrame:onNativeSettingChanged(state, button, sett
         newState = 2
     end
 
-    config[setting.field] = newState == 2
+    local enabled = newState == 2
+    if isRemoteInterviewSetting and not self:isServerAuthority() then
+        if self.app ~= nil and self.app.requestApplicantInterviewsSetting ~= nil then
+            self.app:requestApplicantInterviewsSetting(enabled)
+        end
+        return
+    end
+
+    config[setting.field] = enabled
 
     if config.save ~= nil then
         config:save()

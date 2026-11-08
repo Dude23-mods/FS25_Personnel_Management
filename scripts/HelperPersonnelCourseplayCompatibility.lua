@@ -57,6 +57,15 @@ function HelperPersonnelCourseplayCompatibility.prepareAIJobStart(job)
         return false
     end
 
+    local activeJobs = app.getActiveAIJobs ~= nil and app:getActiveAIJobs() or nil
+    if type(activeJobs) == "table" then
+        for key, activeJob in pairs(activeJobs) do
+            if key == job or activeJob == job then
+                return false
+            end
+        end
+    end
+
     local bridge = app.helperBridge
     local workerId = job.helperPersonnelWorkerId
     if workerId == nil and bridge ~= nil and bridge.getWorkerIdByJob ~= nil then
@@ -72,7 +81,7 @@ function HelperPersonnelCourseplayCompatibility.prepareAIJobStart(job)
         end
         if bridge.getVehicleKeyFromJob ~= nil and bridge.vehicleWorkerIds ~= nil then
             local vehicleKey = bridge:getVehicleKeyFromJob(job)
-            if vehicleKey ~= nil and (workerId == nil or bridge.vehicleWorkerIds[vehicleKey] == workerId) then
+            if vehicleKey ~= nil and workerId ~= nil and bridge.vehicleWorkerIds[vehicleKey] == workerId then
                 bridge.vehicleWorkerIds[vehicleKey] = nil
             end
         end
@@ -83,6 +92,7 @@ function HelperPersonnelCourseplayCompatibility.prepareAIJobStart(job)
     job.hpHelperPersonnelFinalized = nil
     job.hpHelperPersonnelStopHandled = nil
     job.hpHelperPersonnelRestoredWorkerId = nil
+    job.hpCourseplayNeedsWorkerSelection = true
     HelperPersonnel.debugInfo("FS25_HelperPersonnel: Cleared stopped or restored Courseplay job assignment before new start")
     return true
 end

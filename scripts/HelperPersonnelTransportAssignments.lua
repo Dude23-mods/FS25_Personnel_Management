@@ -310,27 +310,8 @@ local function hp1570IsTransportJobByClass(job)
     return false
 end
 
-if HelperPersonnelAIJobHooks ~= nil then
-    function HelperPersonnelAIJobHooks.isTransportJob(job)
-        return hp1570IsTransportJobByClass(job)
-    end
-
-    local HP_V15192_ORIGINAL_GET_WORKER_ID_FOR_JOB = HelperPersonnelAIJobHooks.getWorkerIdForJob
-    local function hpOverride_HelperPersonnelAIJobHooks_getWorkerIdForJob_1(app, job)
-        if hp1570IsTransportJobByClass(job)
-            and type(job) == "table"
-            and job.helperPersonnelWorkerId == nil then
-
-            return nil
-        end
-
-        if HP_V15192_ORIGINAL_GET_WORKER_ID_FOR_JOB ~= nil then
-            return HP_V15192_ORIGINAL_GET_WORKER_ID_FOR_JOB(app, job)
-        end
-
-        return nil
-    end
-    HelperPersonnelAIJobHooks.getWorkerIdForJob = hpOverride_HelperPersonnelAIJobHooks_getWorkerIdForJob_1
+function HelperPersonnelTransportAssignments.isTransportJob(job)
+    return hp1570IsTransportJobByClass(job)
 end
 
 local function hp1570GetBridgeVehicleKey(bridge, job)
@@ -375,39 +356,17 @@ local function hp1570IsSameTransportVehicle(bridge, oldJob, newJob)
     return oldKey ~= nil and newKey ~= nil and oldKey == newKey
 end
 
-if HelperPersonnelHelperBridge ~= nil then
-    local HP_V15193_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB = HelperPersonnelHelperBridge.canUseWorkerForJob
-    local function hpOverride_HelperPersonnelHelperBridge_canUseWorkerForJob_2(self, workerId, job)
-        if HP_V15193_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB ~= nil
-            and HP_V15193_ORIGINAL_BRIDGE_CAN_USE_WORKER_FOR_JOB(self, workerId, job) == true then
-            return true
-        end
-
-        if hp1570IsTransportJobByClass(job) ~= true or self.app == nil or self.app.manager == nil then
-            return false
-        end
-
-        workerId = tonumber(workerId)
-        if workerId == nil then
-            return false
-        end
-
-        local worker = self.app.manager:getWorkerById(workerId)
-        if worker == nil then
-            return false
-        end
-
-        local assignedJob = self.workerJobById ~= nil and self.workerJobById[workerId] or nil
-        if assignedJob ~= nil
-            and assignedJob ~= job
-            and hp1570IsTransportJobByClass(assignedJob) == true
-            and hp1570IsSameTransportVehicle(self, assignedJob, job) == true then
-            return true
-        end
-
+function HelperPersonnelTransportAssignments.canReuseWorker(bridge, workerId, job)
+    if not hp1570IsTransportJobByClass(job) or bridge.app == nil or bridge.app.manager == nil then
         return false
     end
-    HelperPersonnelHelperBridge.canUseWorkerForJob = hpOverride_HelperPersonnelHelperBridge_canUseWorkerForJob_2
+    workerId = tonumber(workerId)
+    if workerId == nil or bridge.app.manager:getWorkerById(workerId) == nil then
+        return false
+    end
+    local assignedJob = bridge.workerJobById ~= nil and bridge.workerJobById[workerId] or nil
+    return assignedJob ~= nil and assignedJob ~= job and hp1570IsTransportJobByClass(assignedJob) == true
+        and hp1570IsSameTransportVehicle(bridge, assignedJob, job) == true
 end
 
 if HelperPersonnelManager ~= nil then
@@ -780,221 +739,131 @@ if HelperPersonnelApp ~= nil then
 
 end
 
-if HelperPersonnelAIStartHooks ~= nil then
-    local HP_V1570_ORIGINAL_OPEN_SELECTION_FOR_AI_JOB = HelperPersonnelAIStartHooks.openSelectionForAIJob
-    local function hpOverride_HelperPersonnelAIStartHooks_openSelectionForAIJob_1(job, fallbackFarmId)
-        if HelperPersonnelAIJobHooks ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob(job) == true then
+function HelperPersonnelTransportAssignments.startTransportJob(job, fallbackFarmId)
+    local app = g_helperPersonnelApp
+    if app == nil or app.manager == nil then
+        return false
+    end
 
-            local app = g_helperPersonnelApp
-            if app == nil or app.manager == nil then
-                return false
-            end
+    local vehicle = HelperPersonnelAIStartHooks.getVehicleFromAIJob ~= nil and HelperPersonnelAIStartHooks.getVehicleFromAIJob(job) or nil
+    if vehicle == nil then
+        return false
+    end
 
-            local vehicle = HelperPersonnelAIStartHooks.getVehicleFromAIJob ~= nil and HelperPersonnelAIStartHooks.getVehicleFromAIJob(job) or nil
-            if vehicle == nil then
-                return false
-            end
+    local farmId = hp1570NormalizeFarmId(fallbackFarmId)
+    if farmId == nil and app.getFarmIdForVehicle ~= nil then
+        farmId = hp1570NormalizeFarmId(app:getFarmIdForVehicle(vehicle))
+    end
+    farmId = farmId or (app.getCurrentFarmId ~= nil and app:getCurrentFarmId() or 1)
 
-            local farmId = hp1570NormalizeFarmId(fallbackFarmId)
-            if farmId == nil and app.getFarmIdForVehicle ~= nil then
-                farmId = hp1570NormalizeFarmId(app:getFarmIdForVehicle(vehicle))
-            end
-            farmId = farmId or (app.getCurrentFarmId ~= nil and app:getCurrentFarmId() or 1)
+    local drivers, reason, hasTransportDrivers = nil, nil, false
+    if app.manager.getAvailableTransportDriversForFarm ~= nil then
+        drivers, reason, hasTransportDrivers = app.manager:getAvailableTransportDriversForFarm(farmId, job)
+    elseif app.manager.getAvailableTransportDriversForJob ~= nil then
+        drivers, reason, hasTransportDrivers = app.manager:getAvailableTransportDriversForJob(job)
+    elseif app.manager.getAvailableTransportDriverForFarm ~= nil then
+        local worker = nil
+        worker, reason, hasTransportDrivers = app.manager:getAvailableTransportDriverForFarm(farmId, job)
+        if worker ~= nil then
+            drivers = {worker}
+        end
+    end
 
-            local drivers, reason, hasTransportDrivers = nil, nil, false
-            if app.manager.getAvailableTransportDriversForFarm ~= nil then
-                drivers, reason, hasTransportDrivers = app.manager:getAvailableTransportDriversForFarm(farmId, job)
-            elseif app.manager.getAvailableTransportDriversForJob ~= nil then
-                drivers, reason, hasTransportDrivers = app.manager:getAvailableTransportDriversForJob(job)
-            elseif app.manager.getAvailableTransportDriverForFarm ~= nil then
-                local worker = nil
-                worker, reason, hasTransportDrivers = app.manager:getAvailableTransportDriverForFarm(farmId, job)
-                if worker ~= nil then
-                    drivers = {worker}
-                end
-            end
-
-            if drivers == nil or #drivers == 0 then
-                if app.showPlayerMessage ~= nil then
-                    if reason == "busy" or hasTransportDrivers == true then
-                        app:showPlayerMessage("ui_transportNoDriverAvailable")
-                    else
-                        app:showPlayerMessage("ui_transportNoDriverAssigned")
-                    end
-                end
-                HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job without an available transport worker was blocked")
-                return false
-            end
-
-            hp1570ClearPendingWorkerForTransport(app, vehicle)
-
-            for _, worker in ipairs(drivers) do
-                if worker ~= nil and worker.id ~= nil then
-                    HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job will be prepared automatically with worker ID %s", tostring(worker.id))
-                    hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | start attempt with driver | ID=%s | Name=%s", tostring(worker.id), hp1570GetWorkerName(app.manager, worker))
-                    hp1570ClearStaleBridgeAssignment(app, worker)
-                    hp1570ClearTransportStartResidues(app, job, vehicle, worker.id)
-                    if type(job) == "table" then
-                        job.hpTransportAllowWorkerId = tonumber(worker.id)
-                    end
-                    local started = HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, worker.id, job, farmId) == true
-                    if started then
-                        if type(job) == "table" then
-                            job.helperPersonnelTransportStarted = true
-                        end
-                        if app.showPlayerMessage ~= nil then
-                            app:showPlayerMessage("ui_transportAutoAssigned")
-                        end
-                        return true
-                    end
-
-                    if type(job) == "table" then
-                        job.helperPersonnelWorkerId = nil
-                        job.hpTransportAllowWorkerId = nil
-                    end
-                    hp1570ClearPendingWorkerForTransport(app, vehicle)
-                end
-            end
-
-            if app.showPlayerMessage ~= nil then
+    if drivers == nil or #drivers == 0 then
+        if app.showPlayerMessage ~= nil then
+            if reason == "busy" or hasTransportDrivers == true then
                 app:showPlayerMessage("ui_transportNoDriverAvailable")
-            end
-            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job could not be started with any assigned available worker")
-            return false
-        end
-
-        if HP_V1570_ORIGINAL_OPEN_SELECTION_FOR_AI_JOB ~= nil then
-            return HP_V1570_ORIGINAL_OPEN_SELECTION_FOR_AI_JOB(job, fallbackFarmId)
-        end
-
-        return false
-    end
-    HelperPersonnelAIStartHooks.openSelectionForAIJob = hpOverride_HelperPersonnelAIStartHooks_openSelectionForAIJob_1
-
-    local HP_V15191_ORIGINAL_QUEUE_SELECTION_FOR_VEHICLE = HelperPersonnelAIStartHooks.queueSelectionForVehicle
-    local function hpOverride_HelperPersonnelAIStartHooks_queueSelectionForVehicle_1(vehicle, fallbackJob, fallbackFarmId, reason, delayFrames)
-        local job = fallbackJob
-        if job == nil and vehicle ~= nil and vehicle.getStartableAIJob ~= nil then
-            local ok, startableJob = pcall(vehicle.getStartableAIJob, vehicle)
-            if ok then
-                job = startableJob
+            else
+                app:showPlayerMessage("ui_transportNoDriverAssigned")
             end
         end
-
-        if HelperPersonnelAIJobHooks ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob(job) == true then
-
-            return false
-        end
-
-        if HP_V15191_ORIGINAL_QUEUE_SELECTION_FOR_VEHICLE ~= nil then
-            return HP_V15191_ORIGINAL_QUEUE_SELECTION_FOR_VEHICLE(vehicle, fallbackJob, fallbackFarmId, reason, delayFrames)
-        end
-
+        HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job without an available transport worker was blocked")
         return false
     end
-    HelperPersonnelAIStartHooks.queueSelectionForVehicle = hpOverride_HelperPersonnelAIStartHooks_queueSelectionForVehicle_1
 
-    local HP_V15191_ORIGINAL_QUEUE_SELECTION_FOR_AI_JOB = HelperPersonnelAIStartHooks.queueSelectionForAIJob
-    local function hpOverride_HelperPersonnelAIStartHooks_queueSelectionForAIJob_1(job, fallbackFarmId)
-        if HelperPersonnelAIJobHooks ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob(job) == true then
-            return HelperPersonnelAIStartHooks.openSelectionForAIJob(job, fallbackFarmId) == true
-        end
+    hp1570ClearPendingWorkerForTransport(app, vehicle)
 
-        if HP_V15191_ORIGINAL_QUEUE_SELECTION_FOR_AI_JOB ~= nil then
-            return HP_V15191_ORIGINAL_QUEUE_SELECTION_FOR_AI_JOB(job, fallbackFarmId)
-        end
-
-        return false
-    end
-    HelperPersonnelAIStartHooks.queueSelectionForAIJob = hpOverride_HelperPersonnelAIStartHooks_queueSelectionForAIJob_1
-end
-
-if HelperPersonnelAIJobHooks ~= nil then
-    local HP_V15197_ORIGINAL_GET_WORKER_ID_FOR_JOB = HelperPersonnelAIJobHooks.getWorkerIdForJob
-    local function hpOverride_HelperPersonnelAIJobHooks_getWorkerIdForJob_2(app, job)
-        if HelperPersonnelAIJobHooks.isTransportJob ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob(job) == true
-            and not (HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.isSendingSelectedAIJob == true)
-            and not (type(job) == "table" and job.hpTransportAllowWorkerId ~= nil) then
-
-            local vehicle = HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.getVehicleFromAIJob ~= nil and HelperPersonnelAIStartHooks.getVehicleFromAIJob(job) or nil
-            hp1570ClearTransportStartResidues(app, job, vehicle, nil)
-            hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | regular worker assignment ignored for transport start; available transport driver selection is enforced")
-            return nil
-        end
-
-        if HP_V15197_ORIGINAL_GET_WORKER_ID_FOR_JOB ~= nil then
-            return HP_V15197_ORIGINAL_GET_WORKER_ID_FOR_JOB(app, job)
-        end
-
-        return nil
-    end
-    HelperPersonnelAIJobHooks.getWorkerIdForJob = hpOverride_HelperPersonnelAIJobHooks_getWorkerIdForJob_2
-
-    local HP_V15197_ORIGINAL_GET_WORKER_ID_FROM_JOB = HelperPersonnelAIJobHooks.getWorkerIdFromJob
-    local function hpOverride_HelperPersonnelAIJobHooks_getWorkerIdFromJob_1(job)
-        if HelperPersonnelAIJobHooks.isTransportJob ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob(job) == true
-            and not (HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.isSendingSelectedAIJob == true)
-            and not (HelperPersonnelAIJobHooks.isRunningStartRequestEvent == true)
-            and not (type(job) == "table" and (job.hpTransportAllowWorkerId ~= nil or job.helperPersonnelTransportStarted == true)) then
-
-            if type(job) == "table" and job.helperPersonnelWorkerId ~= nil then
-                hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | stale worker ID on transport job ignored before start | ID=%s", tostring(job.helperPersonnelWorkerId))
-                job.helperPersonnelWorkerId = nil
+    for _, worker in ipairs(drivers) do
+        if worker ~= nil and worker.id ~= nil then
+            HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job will be prepared automatically with worker ID %s", tostring(worker.id))
+            hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | start attempt with driver | ID=%s | Name=%s", tostring(worker.id), hp1570GetWorkerName(app.manager, worker))
+            hp1570ClearStaleBridgeAssignment(app, worker)
+            hp1570ClearTransportStartResidues(app, job, vehicle, worker.id)
+            if type(job) == "table" then
+                job.hpTransportAllowWorkerId = tonumber(worker.id)
             end
-            return nil
-        end
-
-        if HP_V15197_ORIGINAL_GET_WORKER_ID_FROM_JOB ~= nil then
-            return HP_V15197_ORIGINAL_GET_WORKER_ID_FROM_JOB(job)
-        end
-
-        return nil
-    end
-    HelperPersonnelAIJobHooks.getWorkerIdFromJob = hpOverride_HelperPersonnelAIJobHooks_getWorkerIdFromJob_1
-end
-
-if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.sendSelectedAIJob ~= nil then
-    local HP_V15197_ORIGINAL_SEND_SELECTED_AI_JOB = HelperPersonnelAIStartHooks.sendSelectedAIJob
-    local function hpOverride_HelperPersonnelAIStartHooks_sendSelectedAIJob_2(vehicle, workerId, fallbackJob, fallbackFarmId)
-        if HelperPersonnelAIJobHooks ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob ~= nil
-            and HelperPersonnelAIJobHooks.isTransportJob(fallbackJob) == true then
-
-            local app = g_helperPersonnelApp
-            if app ~= nil and app.manager ~= nil then
-                local worker = app.manager.getWorkerById ~= nil and app.manager:getWorkerById(workerId) or nil
-                if worker ~= nil then
-                    hp1570ClearStaleBridgeAssignment(app, worker)
+            local started = HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, worker.id, job, farmId) == true
+            if started then
+                if type(job) == "table" then
+                    job.helperPersonnelTransportStarted = true
                 end
-                hp1570ClearTransportStartResidues(app, fallbackJob, vehicle, workerId)
+                if app.showPlayerMessage ~= nil then
+                    app:showPlayerMessage("ui_transportAutoAssigned")
+                end
+                return true
             end
 
-            if type(fallbackJob) == "table" then
-                fallbackJob.hpTransportAllowWorkerId = tonumber(workerId)
+            if type(job) == "table" then
+                job.helperPersonnelWorkerId = nil
+                job.hpTransportAllowWorkerId = nil
             end
-
-            local oldSending = HelperPersonnelAIStartHooks.isSendingSelectedAIJob
-            HelperPersonnelAIStartHooks.isSendingSelectedAIJob = true
-            local result = HP_V15197_ORIGINAL_SEND_SELECTED_AI_JOB(vehicle, workerId, fallbackJob, fallbackFarmId)
-            HelperPersonnelAIStartHooks.isSendingSelectedAIJob = oldSending
-
-            if result == true and type(fallbackJob) == "table" then
-                fallbackJob.helperPersonnelTransportStarted = true
-            end
-
-            hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | sendSelectedAIJob transport result | Worker=%s | Result=%s", tostring(workerId), tostring(result == true))
-            return result
+            hp1570ClearPendingWorkerForTransport(app, vehicle)
         end
-
-        return HP_V15197_ORIGINAL_SEND_SELECTED_AI_JOB(vehicle, workerId, fallbackJob, fallbackFarmId)
     end
-    HelperPersonnelAIStartHooks.sendSelectedAIJob = hpOverride_HelperPersonnelAIStartHooks_sendSelectedAIJob_2
+
+    if app.showPlayerMessage ~= nil then
+        app:showPlayerMessage("ui_transportNoDriverAvailable")
+    end
+    HelperPersonnel.debugInfo("FS25_HelperPersonnel: Transport job could not be started with any assigned available worker")
+    return false
 end
+
+function HelperPersonnelTransportAssignments.shouldIgnoreWorkerForJob(app, job)
+    if not hp1570IsTransportJobByClass(job) then
+        return false
+    end
+    if not (HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.isSendingSelectedAIJob == true)
+        and not (type(job) == "table" and job.hpTransportAllowWorkerId ~= nil) then
+        local vehicle = HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.getVehicleFromAIJob ~= nil and HelperPersonnelAIStartHooks.getVehicleFromAIJob(job) or nil
+        hp1570ClearTransportStartResidues(app, job, vehicle, nil)
+        hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | regular worker assignment ignored for transport start; available transport driver selection is enforced")
+        return true
+    end
+    return type(job) == "table" and job.helperPersonnelWorkerId == nil
+end
+
+function HelperPersonnelTransportAssignments.shouldIgnoreWorkerFromJob(job)
+    if not hp1570IsTransportJobByClass(job)
+        or (HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.isSendingSelectedAIJob == true)
+        or (HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.isRunningStartRequestEvent == true)
+        or (type(job) == "table" and (job.hpTransportAllowWorkerId ~= nil or job.helperPersonnelTransportStarted == true)) then
+        return false
+    end
+    if type(job) == "table" and job.helperPersonnelWorkerId ~= nil then
+        hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | stale worker ID on transport job ignored before start | ID=%s", tostring(job.helperPersonnelWorkerId))
+        job.helperPersonnelWorkerId = nil
+    end
+    return true
+end
+
+function HelperPersonnelTransportAssignments.prepareSelectedJob(vehicle, workerId, job)
+    local app = g_helperPersonnelApp
+    if app ~= nil and app.manager ~= nil then
+        local worker = app.manager.getWorkerById ~= nil and app.manager:getWorkerById(workerId) or nil
+        if worker ~= nil then
+            hp1570ClearStaleBridgeAssignment(app, worker)
+        end
+        hp1570ClearTransportStartResidues(app, job, vehicle, workerId)
+    end
+    if type(job) == "table" then
+        job.hpTransportAllowWorkerId = tonumber(workerId)
+    end
+end
+
+function HelperPersonnelTransportAssignments.finishSelectedJob(job, workerId, result)
+    if result == true and type(job) == "table" then
+        job.helperPersonnelTransportStarted = true
+    end
+    hp1570Debug("FS25_HelperPersonnel: Transport diagnostics | sendSelectedAIJob transport result | Worker=%s | Result=%s", tostring(workerId), tostring(result == true))
+end
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer"/>
+    <Bitmap profile="dialogFullscreenBg"/>
+    <GuiElement profile="fs25_dialogBg" size="1250px 700px">
+        <ThreePartBitmap profile="fs25_dialogBgMiddleSmall"/>
+        <ThreePartBitmap profile="fs25_dialogBgTopSmall"/>
+        <ThreePartBitmap profile="fs25_dialogBgBottom"/>
+        <BoxLayout profile="hpPersonnelDialogContent">
+            <Text profile="hpPersonnelDialogTitle" id="dialogTitle"/>
+            <ThreePartBitmap profile="fs25_lineSeparatorTop"/>
+            <Text profile="hpPersonnelDialogIntro" id="dialogIntro"/>
+            <GuiElement profile="hpPersonnelDialogListBox">
+                <SmoothList profile="hpPersonnelDialogList" id="list" selectedWithoutFocus="true">
+                    <ListItem profile="hpPersonnelDialogListItem">
+                        <Text name="personName" profile="hpPersonnelDialogName"/>
+                        <Text name="personDetail" profile="hpPersonnelDialogDetail"/>
+                    </ListItem>
+                </SmoothList>
+                <ThreePartBitmap profile="fs25_listSliderBox"><Slider profile="fs25_listSlider" dataElementId="list"/></ThreePartBitmap>
+                <Text profile="hpPersonnelDialogEmpty" id="emptyText"/>
+            </GuiElement>
+        </BoxLayout>
+            <BoxLayout profile="hpPersonnelDialogButtonBox">
+                <Button profile="buttonYes" id="acceptButton" text="$l10n_ui_button_raise_grant" onClick="onAccept"/>
+                <Button profile="buttonNo" id="declineButton" text="$l10n_ui_button_raise_decline" onClick="onDecline"/>
+                <Button profile="buttonActivate" id="upButton" inputAction="HP_TRANSPORT_PRIORITY_UP" isTriggerableByGlobalAction="false" text="$l10n_ui_transportPriorityMoveUp" onClick="onMoveUp"/>
+                <Button profile="buttonActivate" id="downButton" inputAction="HP_TRANSPORT_PRIORITY_DOWN" isTriggerableByGlobalAction="false" text="$l10n_ui_transportPriorityMoveDown" onClick="onMoveDown"/>
+                <Button profile="buttonActivate" id="toggleButton" text="$l10n_ui_transportPriorityToggle" onClick="onToggle"/>
+                <Button profile="buttonOK" id="applyButton" text="$l10n_ui_transportPriorityApply" onClick="onApply"/>
+                <Button profile="buttonBack" text="$l10n_ui_transportPriorityCancel" onClick="onClickBack"/>
+            </BoxLayout>
+    </GuiElement>
+    <GUIProfiles>
+        <Profile name="hpPersonnelDialogContent" extends="fs25_dialogContentContainer"><flowDirection value="vertical"/><elementSpacing value="10px"/><alignmentX value="center"/><position value="4px -10px"/><absoluteSizeOffset value="21px 30px"/></Profile>
+        <Profile name="hpPersonnelDialogButtonBox" extends="fs25_dialogButtonBox" with="anchorBottomStretchingX"><position value="-6px 32px"/><absoluteSizeOffset value="20px 0"/></Profile>
+        <Profile name="hpPersonnelDialogTitle" extends="baseReference" with="anchorTopStretchingX"><textBold value="true"/><textSize value="24px"/><size value="100% 40px"/></Profile>
+        <Profile name="hpPersonnelDialogIntro" extends="baseReference" with="anchorTopStretchingX"><textMaxNumLines value="3"/><textSize value="16px"/><size value="100% 60px"/></Profile>
+        <Profile name="hpPersonnelDialogListBox" extends="emptyPanel" with="anchorTopStretchingX"><size value="100% 400px"/></Profile>
+        <Profile name="hpPersonnelDialogList" extends="emptyPanel" with="anchorStretchingYStretchingX pivotTopLeft"/>
+        <Profile name="hpPersonnelDialogListItem" extends="baseReference" with="anchorTopStretchingX alternating"><height value="40px"/><imageColor value="$preset_fs25_colorGrey"/><imageSelectedColor value="$preset_fs25_colorMainHighlight"/><alternateBackgroundColor value="$preset_fs25_colorGreyDark_50"/></Profile>
+        <Profile name="hpPersonnelDialogName" extends="fs25_textDarkHighlight" with="anchorStretchingYLeft"><width value="45%"/><textOffset value="12px 0px"/></Profile>
+        <Profile name="hpPersonnelDialogDetail" extends="fs25_textDarkHighlight" with="anchorStretchingYRight"><width value="55%"/><textAlignment value="right"/><textOffset value="-12px 0px"/></Profile>
+        <Profile name="hpPersonnelDialogEmpty" extends="baseReference" with="anchorTopLeft"><textSize value="18px"/><position value="12px -20px"/><size value="800px 40px"/></Profile>
+    </GUIProfiles>
+</GUI>

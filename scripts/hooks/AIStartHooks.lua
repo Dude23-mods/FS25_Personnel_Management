@@ -92,13 +92,12 @@ local function hpInstallStartHook(owner, methodName, hookFunc, hookKey)
         return false
     end
 
-    HelperPersonnelAIStartHooks.installedStartHooks = HelperPersonnelAIStartHooks.installedStartHooks or {}
-    if HelperPersonnelAIStartHooks.installedStartHooks[hookKey] == true then
-        return true
+    if HelperPersonnelHookRegistrar ~= nil and HelperPersonnelHookRegistrar.install ~= nil then
+        return HelperPersonnelHookRegistrar:install(owner, methodName, "overwrite", hookFunc,
+            "giants." .. hookKey, "AI-Start-Auswahl", "both")
     end
 
     owner[methodName] = Utils.overwrittenFunction(owner[methodName], hookFunc)
-    HelperPersonnelAIStartHooks.installedStartHooks[hookKey] = true
     return true
 end
 
@@ -329,6 +328,16 @@ function HelperPersonnelAIStartHooks.getExcludedWorkerIdsForJob(job)
 end
 
 function HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, fallbackJob, fallbackFarmId, reason, delayFrames)
+    local transportJob = fallbackJob
+    if transportJob == nil and vehicle ~= nil and vehicle.getStartableAIJob ~= nil then
+        local ok, job = pcall(vehicle.getStartableAIJob, vehicle)
+        if ok then
+            transportJob = job
+        end
+    end
+    if HelperPersonnelTransportAssignments ~= nil and HelperPersonnelTransportAssignments.isTransportJob(transportJob) then
+        return false
+    end
     if vehicle == nil then
         hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | queueSelectionForVehicle=false | Reason=noVehicle | Job=%s | Farm=%s | ReasonPath=%s",
             HelperPersonnelAIStartHooks.getDebugJobName(fallbackJob),
@@ -369,6 +378,9 @@ function HelperPersonnelAIStartHooks.queueSelectionForVehicle(vehicle, fallbackJ
 end
 
 function HelperPersonnelAIStartHooks.queueSelectionForAIJob(job, fallbackFarmId)
+    if HelperPersonnelTransportAssignments ~= nil and HelperPersonnelTransportAssignments.isTransportJob(job) then
+        return HelperPersonnelAIStartHooks.openSelectionForAIJob(job, fallbackFarmId) == true
+    end
     local vehicle = HelperPersonnelAIStartHooks.getVehicleFromAIJob(job)
     local followVehicle = HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
     local excludedWorkerIds = HelperPersonnelAIStartHooks.getExcludedWorkerIdsForJob(job)
@@ -428,8 +440,36 @@ function HelperPersonnelAIStartHooks.updatePendingSelection(dt)
     end
 end
 
-function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallbackJob, fallbackFarmId)
+local function hpStartNormalizeFarmId(farmId)
+    farmId = tonumber(farmId)
+    if farmId == nil or farmId <= 0 then
+        return nil
+    end
+    farmId = math.floor(farmId + 0.5)
+    if FarmManager ~= nil and FarmManager.SPECTATOR_FARM_ID ~= nil and farmId == FarmManager.SPECTATOR_FARM_ID then
+        return nil
+    end
+    return farmId
+end
+
+local function hpSendSelectedAIJob(vehicle, workerId, fallbackJob, fallbackFarmId)
     local app = g_helperPersonnelApp
+    if app ~= nil and app.manager ~= nil then
+        local workerFarmId = app.manager.getWorkerFarmId ~= nil and hpStartNormalizeFarmId(app.manager:getWorkerFarmId(workerId)) or nil
+        local vehicleFarmId = app.getStrictFarmIdForVehicle ~= nil and hpStartNormalizeFarmId(app:getStrictFarmIdForVehicle(vehicle)) or hpStartNormalizeFarmId(fallbackFarmId)
+        if workerFarmId ~= nil and vehicleFarmId ~= nil and workerFarmId ~= vehicleFarmId then
+            if app.showPlayerMessage ~= nil then
+                app:showPlayerMessage("ui_selectionWorkerUnavailable")
+            end
+            local message = "FS25_HelperPersonnel: Local worker selection rejected: vehicle belongs to farm %s, worker belongs to farm %s."
+            if Logging ~= nil and Logging.warning ~= nil then
+                Logging.warning(message, tostring(vehicleFarmId), tostring(workerFarmId))
+            elseif print ~= nil then
+                print(string.format(message, tostring(vehicleFarmId), tostring(workerFarmId)))
+            end
+            return false
+        end
+    end
     hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob called | Worker=%s | Vehicle=%s | FallbackJob=%s | Farm=%s",
         tostring(workerId),
         HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle),
@@ -467,9 +507,13 @@ function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallba
     HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI job is being prepared with worker ID %s", tostring(workerId))
 
     if g_client ~= nil and g_client.getServerConnection ~= nil and g_client:getServerConnection() ~= nil and AIJobStartRequestEvent ~= nil then
+        local oldSending = HelperPersonnelAIStartHooks.isSendingSelectedAIJob
         HelperPersonnelAIStartHooks.isSendingSelectedAIJob = true
-        local event = AIJobStartRequestEvent.new(aiJob, farmId)
-        HelperPersonnelAIStartHooks.isSendingSelectedAIJob = false
+        local success, event = pcall(AIJobStartRequestEvent.new, aiJob, farmId)
+        HelperPersonnelAIStartHooks.isSendingSelectedAIJob = oldSending
+        if not success then
+            error(event)
+        end
 
         g_client:getServerConnection():sendEvent(event)
         hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob=true | Path=ClientEvent | Worker=%s | Job=%s | Farm=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob), tostring(farmId))
@@ -485,6 +529,23 @@ function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallba
 
     hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | sendSelectedAIJob=false | Reason=noStartPath | Worker=%s | Job=%s", tostring(workerId), HelperPersonnelAIStartHooks.getDebugJobName(aiJob))
     return false
+end
+
+function HelperPersonnelAIStartHooks.sendSelectedAIJob(vehicle, workerId, fallbackJob, fallbackFarmId)
+    local transport = HelperPersonnelTransportAssignments ~= nil and HelperPersonnelTransportAssignments.isTransportJob(fallbackJob)
+    if not transport then
+        return hpSendSelectedAIJob(vehicle, workerId, fallbackJob, fallbackFarmId)
+    end
+    HelperPersonnelTransportAssignments.prepareSelectedJob(vehicle, workerId, fallbackJob)
+    local oldSending = HelperPersonnelAIStartHooks.isSendingSelectedAIJob
+    HelperPersonnelAIStartHooks.isSendingSelectedAIJob = true
+    local success, result = pcall(hpSendSelectedAIJob, vehicle, workerId, fallbackJob, fallbackFarmId)
+    HelperPersonnelAIStartHooks.isSendingSelectedAIJob = oldSending
+    if not success then
+        error(result)
+    end
+    HelperPersonnelTransportAssignments.finishSelectedJob(fallbackJob, workerId, result)
+    return result
 end
 
 function HelperPersonnelAIStartHooks.openSelectionForVehicle(vehicle, fallbackJob, fallbackFarmId)
@@ -529,6 +590,9 @@ function HelperPersonnelAIStartHooks.openSelectionForVehicle(vehicle, fallbackJo
 end
 
 function HelperPersonnelAIStartHooks.openSelectionForAIJob(job, fallbackFarmId)
+    if HelperPersonnelTransportAssignments ~= nil and HelperPersonnelTransportAssignments.isTransportJob(job) then
+        return HelperPersonnelTransportAssignments.startTransportJob(job, fallbackFarmId)
+    end
     local vehicle = HelperPersonnelAIStartHooks.getVehicleFromAIJob(job)
     if vehicle == nil then
         return false
@@ -544,6 +608,33 @@ end
 
 function HelperPersonnelAIStartHooks.handleVehicleStart(vehicle, superFunc, ...)
     hpStartDebug("FS25_HelperPersonnel: Helper start diagnostics | handleVehicleStart called | Vehicle=%s | SuperFunc=%s", HelperPersonnelAIStartHooks.getDebugVehicleName(vehicle), tostring(superFunc ~= nil))
+
+    local app = g_helperPersonnelApp
+    if app ~= nil and app.helperBridge ~= nil and app.helperBridge.isClientJoinRestorePhase ~= nil
+        and app.helperBridge:isClientJoinRestorePhase() and vehicle ~= nil then
+        local startableJob = nil
+        if vehicle.getStartableAIJob ~= nil then
+            local ok, result = pcall(vehicle.getStartableAIJob, vehicle)
+            if ok then
+                startableJob = result
+            end
+        end
+        if startableJob ~= nil and app.helperBridge.attachRestoredJob ~= nil then
+            local workerId = app.helperBridge.resolveRestoredWorkerIdForJob ~= nil and app.helperBridge:resolveRestoredWorkerIdForJob(startableJob) or nil
+            if workerId == nil and app.helperBridge.getWorkerIdByVehicle ~= nil then
+                workerId = app.helperBridge:getWorkerIdByVehicle(vehicle)
+            end
+            if workerId ~= nil then
+                app.helperBridge:attachRestoredJob(startableJob, workerId)
+            end
+        end
+
+        if superFunc ~= nil then
+            return superFunc(vehicle, ...)
+        end
+
+        return nil
+    end
 
     if not HelperPersonnelAIStartHooks.shouldHandleVehicleStart(vehicle) then
         if superFunc ~= nil then
@@ -563,7 +654,6 @@ function HelperPersonnelAIStartHooks.handleVehicleStart(vehicle, superFunc, ...)
         return nil
     end
 
-    local app = g_helperPersonnelApp
     local isRestorePhase = app ~= nil
         and app.activeJobsRestoreDone ~= true
         and app.helperBridge ~= nil

@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="PROFIL" />
         <e k="ui_pmHistoryHeader" v="ELŐZMÉNYEK" />
         <e k="ui_button_train" v="Képzés" />
+        <e k="ui_pmManageSpecialization" v="A specializáció kezelése" />
         <e k="ui_pmStatusApplicant" v="Jelentkező" />
         <e k="ui_pmBirthLine" v="Született: %s" />
         <e k="ui_pmRankLabel" v="Rang" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="Aktív" />
         <e k="ui_transportPriorityInactive" v="Nincs beosztva" />
         <e k="ui_transportPriorityMoveUp" v="Feljebb" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="Feljebb" />
         <e k="ui_transportPriorityMoveDown" v="Lejjebb" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="Lejjebb" />
         <e k="ui_transportPriorityToggle" v="Be-/kikapcsolás" />
         <e k="ui_transportPriorityApply" v="Alkalmaz" />
         <e k="ui_transportPriorityCancel" v="Mégse" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="irodai foglalkozás" />
         <e k="ui_status_retirementPending" v="a hónap végén nyugdíjba vonul" />
         <e k="ui_retirementNotice" v="%s a hónap végén nyugdíjba vonul." />
-        <e k="ui_pmTrainingIntro" v="A specializációk javítják a teljesítményt a megfelelő kategóriában. A képzés csak a hónap elején indul, pénzbe kerül, és a dolgozó a hónap végéig nem elérhető. A fejlődés a befejezéskor kerül jóváírásra. Az ajánlatok és árak havonta változnak; márciustól februárig mezőgazdasági évenként csak egy képzés engedélyezett. A tanult specializációk megmaradnak, de legfeljebb két bónusz aktív. Mindkét hely lehet inaktív. Egy tanult, inaktív specializáció alkalmazottanként és mezőgazdasági évenként csak egyszer aktiválható." />
+        <e k="ui_pmTrainingIntro" v="Fejleszd csapatodat célzottan: válaszd a „%s” lehetőséget, majd válassz egy képzési kategóriát. A specializációk javítják a teljesítményt a megfelelő területen. A képzések a hónap elején kezdődnek, pénzbe kerülnek, és a munkatársat a hónap végéig lekötik. Az elért haladás a képzés befejezése után jóváírásra kerül. Az ajánlatok és az árak havonta változnak. Minden munkavállaló egy képzést végezhet el mezőgazdasági évenként márciustól februárig. A megszerzett specializációk megmaradnak; legfeljebb két bónusz lehet aktív, mindkét hely szünetelhet. Munkavállalónként és mezőgazdasági évenként csak egy megszerzett, inaktív specializáció aktiválható." />
         <e k="ui_pmTrainingCategoryHeader" v="Fejlődési terület" />
         <e k="ui_pmTrainingProgressHeader" v="Haladás a szakosodás felé" />
         <e k="ui_pmTrainingRunning" v="képzés folyamatban" />
@@ -611,9 +614,9 @@
     <e k="ui_pmHelpTopic02Title" v="Áttekintés és létszám" />
     <e k="ui_pmHelpTopic02Body" v="Az áttekintés összefoglalja a vállalat jelenlegi helyzetét: a munkavállalók, a rendelkezésre álló munkavállalók, a jelentkezők és a munkáltatói hírnév szerepelnek a tetején. Alatta a folyamatban lévő megbízások jelennek meg a személy, a jármű, a berendezés és a tevékenység feltüntetésével.&#10;A „Változások” lap csak a releváns személyzeti eseményeket tartalmazza, vagyis a munkáltatói megítélés, a tapasztalat, a megbízhatóság, a lojalitás, az életkor vagy a szakterület változásait. Minden bejegyzés megnevezi az okot, az érintett személyt és a hatást; egy többsoros bejegyzés is egy bejegyzésnek számít.&#10;A „Havi jelentés” és az „Összesítés” az aktuális és az egész pályafutásra vonatkozó mutatókat mutatja. Használd az áttekintést a gyors bevetés-tervezéshez; a részletek, a döntések és a krónikák az egyes szakoldalakra tartoznak." />
     <e k="ui_pmHelpTopic03Title" v="A munkaerőpiac és a munkaerő-felvétel" />
-    <e k="ui_pmHelpTopic03Body" v="Egy új játékmenet négy pályázóval kezdődik. Egy időben legfeljebb nyolc pályázó lehet a piacon. Minden hónapváltáskor legfeljebb három új helyet sorsolnak ki; az esély helyenként 15 % + 0,7 × a munkáltató hírneve. 60-as hírnév esetén ez 57 %, 100-as hírnév esetén 85 % helyenként. Ha a piac üres, akkor legalább egy új pályázót generál a rendszer.&#10;A pályázók a létrehozás hónapjában biztosan elérhetőek maradnak. Az első hónapváltás után elvándorlási esélyük a minőségtől függően 10–30%, a második után 30–50%, a harmadik hónapváltáskor pedig 100%. A jó profilok korábban eltűnhetnek, mert minőségük növeli az elvándorlási esélyt.&#10;A pályázók 18–65 évesek, állandó születési dátummal rendelkeznek, és tovább öregednek. Hátterük lehet családi gazdaság, tejtermelő gazdaság, mezőgazdasági vállalkozás, szántóföldi gazdálkodás, vegyes gazdaság, logisztika, mezőgazdasági gépjavító műhely és irodai munkakör. Az életkor és a háttér elsősorban a tapasztalatot és az esetleges szakmai előismereteket befolyásolja.&#10;A fizetési igény a tapasztalaton és a megbízhatóságon alapul, 96–106%-os véletlenszerű eltérést kap, és a munkáltató hírneve is befolyásolja. Az alacsony hírnév növeli, a magas hírnév csökkenti az igényt. A felvétel előtt megerősítés jelenik meg; a felvétel 1 ponttal növeli a hírnevet." />
+        <e k="ui_pmHelpTopic03Body" v="Minden jelentkező egy globális piacon jön létre. Ezt követően a munkáltatói hírnév határozza meg, hogy mely gazdaságoknak ajánlják fel a jelentkezőt. Ezért a gazdaságok eltérő ajánlatokat kaphatnak; ha ugyanazt a személyt több gazdaságnak is felajánlják, akkor mindenhol ugyanazok az alapadatok, értékek és ugyanaz a kezdeti értéktartomány vonatkoznak rá. Amint egy gazdaság felveszi a személyt, az eltűnik az összes többi gazdaságból.&#10;Kezdetben a tapasztalat, a megbízhatóság, a lojalitás, a rang és a fizetési elvárás rejtve marad. Minden pályázó esetében pontosan az egyik három érték látható, véletlenszerűen elhelyezett 30 százalékpontos tartományban. A valódi érték mindig ebben a tartományban van, de nem feltétlenül a közepén. A név, az életkor, a szakmai háttér, az önéletrajz és a szakterületek láthatók maradnak.&#10;Egy állásinterjú legfeljebb három kérdésből áll. Az első kérdés egy ismeretlen értékre vonatkozik, és 30 százalékpontos tartományt fed fel; további kérdésekkel ez 15 százalékpontra szűkül, egy újabb kérdés pedig feltárja a pontos értéket. A már ismert értékeket nem lehet újra kiválasztani. Az interjú megszakítható, és később ugyanabból a pontból folytatható. A fizetési igény az utolsó válasszal válik láthatóvá." />
     <e k="ui_pmHelpTopic04Title" v="Munkavállalói profil, értékek és státusz" />
-    <e k="ui_pmHelpTopic04Body" v="A tapasztalat, a megbízhatóság és a lojalitás értéke 0 és 100 között mozog. A szám pontosan látható marad; a sávok lehetővé teszik a gyors összehasonlítást.&#10;A besorolás kizárólag a tapasztalat alapján történik: segédmunkás 0–44, szakember 45–74, profi 75–100. A tapasztalat határozza meg a munkavégzés sebességét, a többletkopást és a többletfogyasztást. A megbízhatóság befolyásolja a rövid távú teljesítménycsökkenéseket, a betegségeket, a havi fejlődést és a megbízás megszakításának kockázatát. A lojalitás a vállalathoz való kötődést írja le, és befolyásolja a figyelmeztetéseket, a fizetési vitákat és az önkéntes felmondásokat." />
+        <e k="ui_pmHelpTopic04Body" v="A tapasztalat, a megbízhatóság és a lojalitás értékei 0 és 100 között mozognak. Amíg az állásinterjúk folyamatban vannak, ezek az értékek a jelentkezőknél csak az interjú aktuális állásának megfelelően jelennek meg. A rang kizárólag a tapasztalattól függ, ezért csak akkor jelenik meg, ha a tapasztalat pontos értéke ismert.&#10;A felvétel után az ismeretlen értékek egyelőre rejtve maradnak. A tényleges bevetések során a munkatárs aktív valós idejű tapasztalatot szerez. Minden személy esetében 20 és 35 perc közötti, előre meghatározott idő elteltével mindhárom érték teljes mértékben ismertté válik. A szünetek és a folyamatban lévő bevetés nélküli időszakok nem számítanak bele. Az előrehaladás a játékállásban kerül mentésre.&#10;A tapasztalat határozza meg a munkavégzés sebességét, a többletkopást és a többletfogyasztást. A megbízhatóság befolyásolja a rövid távú teljesítménycsökkenéseket, a betegségeket, a havi fejlődést és a bevetés megszakításának kockázatát. A lojalitás a vállalathoz való kötődést írja le, és befolyásolja a figyelmeztetéseket, a fizetési konfliktusokat és az önkéntes felmondásokat." />
     <e k="ui_pmHelpTopic05Title" v="Mesterséges intelligencia-segítők, szállítás és FollowMe" />
     <e k="ui_pmHelpTopic05Body" v="Egy normál KI-segédmunka elindításakor megnyílik a munkatársak kiválasztási ablaka. Csak a rendelkezésre álló munkatársak választhatók ki. Egy munkatárs nem vállalhat egyszerre több megbízást, és betegség vagy képzés idején nem áll rendelkezésre.&#10;Egy bevetés csak 10 másodperc elteltével kerül rögzítésre befejezett megbízásként. A specializáció előrehaladásához a gyakorlati munkának legalább 3 percig kell tartania.&#10;A T gombbal vagy a menügombbal megnyithatod a szállítási prioritást. Itt állíthatod be, hogy mely munkatársak vállaljanak szállítási feladatokat, és milyen sorrendben legyenek ellenőrizve. Egy „A-ból-B-be” feladat esetén a rendszer fentről lefelé haladva választja ki az első szabad munkatársat. A FollowMe továbbra is a munkatárs-kiválasztást használja, és szállítási munkának számít." />
     <e k="ui_pmHelpTopic06Title" v="Tapasztalatok és a munkára gyakorolt hatások" />
@@ -633,9 +636,9 @@
     <e k="ui_pmHelpTopic13Title" v="Profilok, krónika és statisztikák" />
     <e k="ui_pmHelpTopic13Body" v="A pályázói profilok az életkort, a szakmai hátteret, a tapasztalatot, a megbízhatóságot, a lojalitást, a szakterületeket és a piacon eltöltött időt egyesítik egy dinamikus szöveggé. A munkavállalói profilok kiegészülnek a vállalatnál eltöltött idővel, a bevetésekkel, a képzésekkel és a tanulási előrehaladással.&#10;A személyes krónika rögzítheti a felvételt, a bevetés kezdetét és végét, a bevetés megszakításait, a betegségeket, a képzéseket, a szakterületeket, a fizetési igényeket és döntéseket, a lojalitás és a megbízhatóság változásait, a szállítási megbízásokat, valamint az elbocsátást, az önkéntes kilépést, a nyugdíjazást és a munkaviszony megszűnését.&#10;A munkavállalói pályafutás többek között a bevetéseket, a munkaidőt, a képzéseket, a szállítási státuszt, a legutóbbi eseményeket, a betegszabadságokat, a fizetési igényeket, a bevetés-megszakításokat és az eddig kifizetett teljes fizetést mutatja. Az áttekintés emellett telephelyszintű összesített értékeket is tartalmaz, például az eddig alkalmazottak számát, az elbocsátások számát, az önkéntes kilépések számát és a nyugdíjazások számát." />
     <e k="ui_pmHelpTopic14Title" v="Beállítások, többjátékos mód és eredmények" />
-    <e k="ui_pmHelpTopic14Body" v="A beállítások játékállásonként érvényesek, és a következő kategóriákba sorolhatók: munkateljesítmény, személyzeti fejlesztés, valamint gazdaság és fizetések. A játékmenetre gyakorolt hatások aktiválják a hozzájuk kapcsolódó tapasztalati hatásokat; a tapasztalati hatások pedig szabályozzák a sebességet, a kopást, a fogyóeszközöket és az üzemanyagot. A személyzeti hatások aktiválják a lojalitásváltozásokat és az utómunka opciót. A gazdasági hatások az egyéni fizetéseket és az alap havi fizetést aktiválják.&#10;A deaktivált hatások nem írják át visszamenőlegesen a meglévő személyzeti adatokat. Kizárólag a vonatkozó további hatást akadályozzák meg vagy teszik lehetővé. Az alap havi fizetés alapértékként szolgál, ha az egyéni fizetések deaktiválva vannak; ez közvetlenül a beállításokban módosítható. A gombkiosztás a játékbeállításokban módosítható.&#10;Többjátékos módban a személyzetet, a jelentkezőket, a beosztásokat, a fizetéseket, a képzéseket, a felvételeket és a krónikákat gazdaságonként kezelik és szinkronizálják. A szerver dönt; csak a jogosult gazdaságvezetők módosíthatják a saját gazdaságukat. Az adatok a játékállásban a helperPersonnel.xml fájlban találhatók, és a betöltéskor a folyamatban lévő hozzárendeléseket a lehető legnagyobb mértékben visszaállítják. A régi mentések továbbra is használhatók; a már kilépett alkalmazottak esetében a korábbi adatok hiányosak lehetnek." />
+        <e k="ui_pmHelpTopic14Body" v="Az „Állásinterjúk” beállítás a játék aktuális állására vonatkozik. Ha aktív, akkor a játékidő alatt a rejtett értékek, a beszélgetések és a későbbi felfedés érvényesek. Ha deaktiválva van, akkor az összes pályázó és alkalmazott értéke a korábbiakhoz hasonlóan teljes egészében megjelenik. A beállítást csak a szerver és a jogosult farmmenedzserek módosíthatják.&#10;Többjátékos módban a szerver dönt minden kérdésről, és szinkronizálja a beszélgetés állását. Az első jogosult farmmenedzser, aki megnyitja az ablakot, vezeti az interjút. Ugyanazon gazdaság többi játékosa élőben követheti az eseményeket; témagombjaik deaktivált állapotban maradnak. Ha a beszélgetést vezető játékos bezárja az ablakot, vagy megszakad a kapcsolata, egy másik jogosult farmmenedzser veheti át a vezetést.&#10;A személyzet, a jelentkezők, a beosztások, a fizetések, a képzések, a felvételek és a krónikák gazdaságonként külön kezelendők. A globális jelentkezőket több gazdaságnak is fel lehet ajánlani, beszélgetéseiket azonban minden gazdaság esetében külön tárolják." />
     <e k="ui_pmHelpTopic15Title" v="Beállítás és az első lépések" />
-    <e k="ui_pmHelpTopic15Body" v="Nyisd meg a jelentkező adatait, ellenőrizd az életkorát, hátterét, értékeit, fizetési elvárásait és meglévő szakterületeit, majd erősítsd meg a felvételt. A jelentkező az aktuális udvar alkalmazottja lesz; az összes későbbi döntés, elszámolás és fejlemény az adott udvarra vonatkozik.&#10;A felvétel után először tervezz meg egy rövid, megfelelő munkát. Egy alkalmazottnak rendelkezésre kell állnia: betegség, folyamatban lévő munka, képzés, megerősített munkaviszony-megszűnés vagy még aktív mod-hozzárendelés megakadályozhatja a kiválasztást. Az „Alkalmazottak” fülön látható a konkrét ok.&#10;Az első felvétel egy ponttal javítja a munkáltatói hírnevet. A magas értékek nem mindig jelentenek automatikusan előnyt: egy tapasztalt jelentkező általában többe kerül, míg egy olcsóbb újoncnak több időre van szüksége a fejlődéshez és a képzéshez." />
+        <e k="ui_pmHelpTopic15Body" v="Nyisd meg a „Jelentkező” fülön az interjút, és válaszd ki a „Tapasztalat”, „Megbízhatóság” vagy „Lojalitás” lehetőséget. A kiválasztott kérdés és a válasz megjelenik az interjú lefolyásában. Legkésőbb három kérdés után az interjú véget ér, és láthatóvá válik a fizetési igény. A felvételről a ismert pontos értékek, a tartományok és a fennmaradó bizonytalanságok alapján dönts.&#10;A felvétel után a nem teljesen tisztázott értékek egyelőre az utolsó ismert állapotukban maradnak. Tervezz be tényleges bevetéseket: 20–35 perc aktív valós idő után az értékek teljes mértékben feltárulnak. A munkavállalónak rendelkezésre kell állnia; betegség, folyamatban lévő munka, képzés vagy megerősített munkaviszony-megszűnés megakadályozhatja a kiválasztást.&#10;Egy felvétel egy ponttal javítja a munkáltató hírnevét. A magas értékek nem mindig jelentenek automatikusan előnyt: egy tapasztalt jelentkező általában többe kerül, míg egy olcsóbb pályakezdőnek több időre van szüksége a fejlődéshez és a képzéshez." />
     <e k="ui_pmHelpTopic16Title" v="Tevékenységek és szakterületi besorolás" />
     <e k="ui_pmHelpTopic16Body" v="A besorolás a jármű, a berendezések és – amennyiben van ilyen – a kijuttatott anyag alapján történik. A közvetlen anyagbesorolás élvez elsőbbséget: a vetőmag a vetéshez tartozik; a gyomirtó szer a növényvédelemhez; az ásványi műtrágya, a folyékony műtrágya, a hígtrágya, az erjesztési maradékok és a szar a trágyázáshoz. A mész nem kerül automatikusan felismerésre önálló tanulási kategóriaként.&#10;Jármű- és berendezés-besorolás: az eke, a talajlazító, a rotációs borona, a tárcsás borona, a talajhenger és a mulcsozó a talajműveléshez tartoznak. A vető- és ültetőgépek a vetéshez tartoznak. A mezőpermetezők egyértelmű anyag hiányában a trágyázáshoz tartoznak. A kombájnok, vágóművek, bálázók, fűkaszák, rakodókocsik és szedőgépek a betakarításhoz tartoznak. A pótkocsik és a kirakható járművek a szállításhoz tartoznak.&#10;A FollowMe kiegészíti a gyakorlati felismerést aprítókkal, burgonya- és répaszedő gépekkel, forgatógépekkel, hordázókkal, trágyaszórókkal, trágyatartályokkal, talajlazítókkal, kőgyűjtőkkel, simítókkal és kapákkal. A mod-járművek semlegesek maradhatnak, ha specializációjuk nem tesz lehetővé egyértelmű besorolást. Ilyenkor nem ígérnek téves specializációs bónuszt.&#10;A gépkímélés és a takarékos munkavégzés általános bónuszok: az előbbi csökkenti a tapasztalatból adódó többletkopást, az utóbbi pedig a többletüzemanyag- és anyagfogyasztást. A kiválasztott tevékenység megjelenik a kiválasztó ablakban; a megfelelő aktív specializációt ott kiemelik." />
     <e k="ui_specialization_transport" v="Közlekedés" />
@@ -671,5 +674,244 @@
     <e k="ui_button_specializationActivate" v="Bejelentkezés" />
     <e k="ui_pmSpecializationActive" v="aktív" />
     <e k="ui_pmHelpContents" v="TARTALOMJEGYZÉK" />
+        <e k="ui_hpSetting_applicantInterviews" v="Állásinterjúk" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="Elrejti a jelentkezők adatait. Legfeljebb három kérdéssorozat során derülnek ki a területek vagy a pontos értékek; a kívánt fizetés az interjú végén jelenik meg." />
+        <e k="ui_pmValueUnknown" v="Ismeretlen" />
+        <e k="ui_hpInterviewPrompt" v="Mit szeretnél kérdezni?" />
+        <e k="ui_hpInterviewTitle" v="Állásinterjú" />
+        <e k="ui_hpInterviewTopicExperience" v="Tapasztalat" />
+        <e k="ui_hpInterviewTopicReliability" v="Megbízhatóság" />
+        <e k="ui_hpInterviewTopicLoyalty" v="Hűség" />
+        <e k="ui_hpInterviewRound" v="Kérdések %d/3" />
+        <e k="ui_hpInterviewLeader" v="Te vezeted a beszélgetést." />
+        <e k="ui_hpInterviewObserver" v="Követed a beszélgetést." />
+        <e k="ui_hpInterviewFinished" v="Az állásinterjú véget ért." />
+        <e k="ui_hpInterviewWageIntro" v="A kívánt fizetésem:" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="Milyen gyakorlati tapasztalatokkal rendelkezik a gazdaságunkban végzendő munkához?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="Tudná még pontosabban leírni a gyakorlati tapasztalatait?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="Hogyan biztosítja, hogy a mindennapi munkában számíthassunk Önre?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="Hogyan írná le pontosabban, mennyire megbízható önálló munkavégzés során?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="Mi az, ami fontos Önnek ahhoz, hogy hosszú távon hűséges maradjon egy vállalkozáshoz?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="Hogyan értékelné pontosabban, mennyire elkötelezett egy munkáltató iránt hosszú távon?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="Eddigi pályafutásom még áttekinthető." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="Már vállaltam néhány megfelelő feladatot." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="Széles körű gyakorlati tapasztalattal rendelkezem." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="Ha időszűkében vagyok, néha egyértelmű megállapodásokra van szükségem." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="Általában megbízhatunk a megállapodásokban és az elvégzett feladatokban." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="Nagyon lelkiismeretesen dolgozom, és következetesen betartom az ígéreteimet." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="Egy új vállalkozás esetében eleinte inkább rövid távon hozok döntést." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="Ha jól alakul az együttműködés, akkor szívesen elképzelem, hogy hosszabb ideig is együtt dolgozzunk." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="A megbízhatóság és a hosszú távú együttműködés számomra nagyon fontos." />
+        <e k="ui_hpInterviewAnswerIntro1" v="Én így fogalmaznék:" />
+        <e k="ui_hpInterviewAnswerIntro2" v="Véleményem szerint a következő érvényes:" />
+        <e k="ui_hpInterviewAnswerIntro3" v="A következő értékelés illik rá a legjobban:" />
+        <e k="ui_hpInterviewOpen" v="Állásinterjú" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="Milyen gyakorlati tapasztalatokkal rendelkezik a gazdaságunkban végzendő munkához?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="Milyen feladatokat látott el eddig a mezőgazdaságban?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="Milyen mezőgazdasági munkákkal van már tapasztalata?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Leírná egy kicsit részletesebben, hogy ezek közül mely feladatokat végezte el önállóan?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="Mely munkák végzése során érzi már magát magabiztosnak, és melyek azok, amelyekbe még be kell tanulnia?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="Ön szerint eddigi tapasztalatai közül melyek lennének különösen hasznosak a mi gazdaságunkban?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="Hogyan biztosítja, hogy a mindennapi munkában számíthassunk Önre?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="Hogyan kezeli azokat a feladatokat, amelyeket határidőre el kell végezni?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="Mit várhatunk Öntől, ha a munka közben valami váratlan esemény történik?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="Mit tesz, ha rájön, hogy nem tud betartani egy megállapodást?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="Hogyan tartja kézben a dolgokat, ha egyszerre több feladatot is el kell végeznie?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Leírná részletesebben, hogyan kezeli a felelősséget önálló munkavégzés során?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="Mi az, ami fontos Önnek ahhoz, hogy hosszú távon hűséges maradjon egy vállalkozáshoz?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="Mit vár egy hosszabb távú együttműködéstől a gazdaságunkban?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="Mi lenne az Ön számára megfelelő, hogy szívesen dolgozzon nálunk hosszabb ideig?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="Ön számára milyen szerepet játszik a munkáltatóval való hosszú távú elkötelezettség?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="Hogyan értékelné azt, hogy mennyire lenne hajlandó egy vállalatnál maradni nehezebb időkben is?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="Mi lenne az a döntő tényező, ami miatt folytatná az együttműködést, vagy új irányt választana?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="Eddig főleg egyszerű feladatokban segítettem. Az új feladatokhoz fokozatosan szoknám hozzá magam." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="A gyakorlati tapasztalatom még korlátozott, de szívesen tanulok, és ha valamit nem tudok, akkor kérdezek." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="Ismerem a gazdaságban zajló néhány folyamatot, de a mindennapi munkában még sok mindent meg kell tanulnom." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="Már különböző feladatokat végeztem el egy gazdaságban, és a számomra ismerős feladatokkal jól boldogulok." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="Néhány géppel és munkafolyamattal már dolgoztam. Új feladatok esetén néha szükségem van egy rövid bevezetőre." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="Gyakorlati tapasztalattal rendelkezem, bár biztosan vannak olyan területek, ahol még tanulnom kell." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="Hosszú ideig mezőgazdasági üzemekben dolgoztam, és ezalatt számos feladatot önállóan végeztem el." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="A szokásos munkákkal és gépekkel jól ismerem magam. Az új munkafolyamatokat azonban ennek ellenére először alaposan megvizsgálom." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="Már megismerkedtem különböző vállalatokkal és munkamódszerekkel, és általában gyorsan alkalmazkodni tudok az új feladatokhoz." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="Ha egyszerre sok dolog halmozódik fel, akkor a világos megbeszélések segítenek. Így jobban tudom, mi a legfontosabb." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="Igyekszem a feladataimat rendesen elvégezni. Néha azonban még dolgoznom kell azon, hogy mindent időben szem előtt tartsak." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="Új vagy számomra szokatlan feladatok esetén inkább időnként rákérdezek, hogy ne maradjon ki semmi fontos." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="Figyelek a megbeszélésekre. Ha előre látom, hogy valami nem fog sikerülni, akkor a lehető leghamarabb értesítem az érintetteket." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="A feladataimat lelkiismeretesen végzem el. Ha a prioritások nem egyértelműek, inkább még egyszer egyeztetek." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="Általánosságban elmondható, hogy rám lehet számítani. Ha sok a dolgom, jól jön egy rövid egyeztetés." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="Ha egy feladatot vállalok, akkor gondoskodom róla. Ha bármilyen probléma adódna, azt időben szóvá teszem." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="Figyelemmel kísérem a határidőket és a megbeszéléseket, és a végén ellenőrizem, hogy minden el lett-e intézve." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="Önálló munkavégzés során is nagy jelentőséget tulajdonítok annak, hogy betartsam az ígéreteimet, és tájékoztassam másokat a fontos változásokról." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="Először szeretném megnézni, hogyan zajlik itt a munka. Utána jobban el tudom dönteni, hogyan tovább." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="Nyitott vagyok az új lehetőségekre, és nem szívesen kötöm le magam túl korán egy új munkaadó mellett." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="Számomra a mindennapi együttműködésnek jól kell működnie. Ha a helyzetem megváltozna, más lehetőségeket is megvizsgálnék." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="Ha az együttműködés jól alakul, és a feltételek is megfelelőek, el tudom képzelni, hogy hosszabb ideig maradjak." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="Fontos számomra, hogy megbízható legyen a munkakörnyezet. Az, hogy meddig maradok, attól is függ, hogy hogyan jövünk ki egymással." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="Jó együttműködésre törekszem, és először is szeretnék beilleszkedni. Ha mindkét félnek megfelel, akkor számomra sok minden szól amellett, hogy maradjak." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="Nagyra értékelem a stabilitást, és olyan vállalatot keresek, ahol hosszú távon be tudok illeszkedni." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="Számomra fontos, hogy egy megbízható csapat tagja legyek. Ha jól együttműködünk, nem szeretnék állandóan váltogatni." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="Szeretnék hosszabb ideig egy gazdaságban dolgozni, és a gazdasággal együtt tapasztalatokat szerezni." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ korábban egy vidéki családi gazdaságban dolgozott." />
+        <e k="ui_pmNewApplicantIntro1_2" v="A jelentkezés előtt ZXQNAMEQXZ egy vidéki családi gazdaságban dolgozott." />
+        <e k="ui_pmNewApplicantIntro1_3" v="ZXQNAMEQXZ szakmai pályafutásának része egy vidéki családi gazdaságban végzett munkája." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ korábban egy kis tejtermelő gazdaságban dolgozott." />
+        <e k="ui_pmNewApplicantIntro2_2" v="A jelentkezés előtt ZXQNAMEQXZ egy kis tejtermelő gazdaságban dolgozott." />
+        <e k="ui_pmNewApplicantIntro2_3" v="ZXQNAMEQXZ szakmai pályafutásának része volt egy kis tejtermelő gazdaságban végzett munkája." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ korábban egy mezőgazdasági vállalkozásnál dolgozott." />
+        <e k="ui_pmNewApplicantIntro3_2" v="A jelentkezés előtt ZXQNAMEQXZ egy mezőgazdasági vállalkozásnál dolgozott." />
+        <e k="ui_pmNewApplicantIntro3_3" v="ZXQNAMEQXZ szakmai pályafutásának része egy mezőgazdasági vállalkozásnál végzett munkája." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ korábban egy szántóföldi gazdaságban dolgozott." />
+        <e k="ui_pmNewApplicantIntro4_2" v="A jelentkezés előtt ZXQNAMEQXZ egy szántóföldi gazdaságban dolgozott." />
+        <e k="ui_pmNewApplicantIntro4_3" v="ZXQNAMEQXZ szakmai pályafutásának része egy szántóföldi gazdaságban végzett munkája." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ korábban egy vegyes üzemben dolgozott." />
+        <e k="ui_pmNewApplicantIntro5_2" v="A jelentkezés előtt ZXQNAMEQXZ egy vegyes profilú vállalatnál dolgozott." />
+        <e k="ui_pmNewApplicantIntro5_3" v="ZXQNAMEQXZ szakmai pályafutásának része egy vegyes gazdaságban végzett munkája." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ korábban egy logisztikai vállalatnál dolgozott." />
+        <e k="ui_pmNewApplicantIntro6_2" v="A jelentkezés előtt ZXQNAMEQXZ egy logisztikai vállalatnál dolgozott." />
+        <e k="ui_pmNewApplicantIntro6_3" v="ZXQNAMEQXZ szakmai pályafutásának része egy logisztikai vállalatnál végzett munkája." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ korábban egy mezőgazdasági gépjavító műhelyben dolgozott." />
+        <e k="ui_pmNewApplicantIntro7_2" v="A jelentkezés előtt ZXQNAMEQXZ egy mezőgazdasági gépjavító műhelyben dolgozott." />
+        <e k="ui_pmNewApplicantIntro7_3" v="ZXQNAMEQXZ szakmai pályafutásának része volt egy mezőgazdasági gépek szervizében végzett munkája." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ korábban irodai munkát végzett." />
+        <e k="ui_pmNewApplicantIntro8_2" v="A jelentkezés előtt ZXQNAMEQXZ irodai munkát végzett." />
+        <e k="ui_pmNewApplicantIntro8_3" v="ZXQNAMEQXZ szakmai pályafutásának része egy irodai munkakör betöltése." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ korábban egy vidéki családi gazdaságban dolgozott, és ZXQMONTHSQXZ hónapja tartozik a gazdasághoz." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Mielőtt a gazdaságban kezdett dolgozni, ZXQNAMEQXZ egy vidéki családi gazdaságban dolgozott. A vállalatnál eltöltött idő ZXQMONTHSQXZ hónap." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ ZXQMONTHSQXZ hónapja tagja a csapatnak, és korábban egy vidéki családi gazdaságban dolgozott." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban, korábban pedig egy vidéki családi gazdaságban dolgozott." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ korábban egy vidéki családi gazdaságban dolgozott, és ZXQMONTHSQXZ hónapja dolgozik a gazdaságban." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ korábban egy kis tejtermelő gazdaságban dolgozott, és ZXQMONTHSQXZ hónapja tartozik a gazdasághoz." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Mielőtt a gazdaságban kezdett dolgozni, ZXQNAMEQXZ egy kis tejtermelő gazdaságban dolgozott. A vállalatnál eltöltött idő ZXQMONTHSQXZ hónap." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ ZXQMONTHSQXZ hónapja tagja a csapatnak, és korábban egy kis tejtermelő gazdaságban dolgozott." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban, korábban pedig egy kis tejtermelő gazdaságban dolgozott." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ korábban egy kis tejtermelő gazdaságban dolgozott, és már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ korábban egy mezőgazdasági vállalkozásnál dolgozott, és ZXQMONTHSQXZ hónapja tartozik a céghez." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Mielőtt a gazdaságban kezdett dolgozni, ZXQNAMEQXZ egy mezőgazdasági vállalkozásnál dolgozott. A vállalatnál eltöltött idő ZXQMONTHSQXZ hónap." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ ZXQMONTHSQXZ hónapja tagja a csapatnak, korábban pedig egy mezőgazdasági vállalkozásnál dolgozott." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban, korábban pedig egy mezőgazdasági vállalkozásnál volt alkalmazásban." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ korábban egy mezőgazdasági vállalkozásnál dolgozott, és ZXQMONTHSQXZ hónapja dolgozik a cégnél." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ korábban egy szántóföldi gazdaságban dolgozott, és ZXQMONTHSQXZ hónapja tartozik a gazdasághoz." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Mielőtt a gazdaságban kezdett dolgozni, ZXQNAMEQXZ egy szántóföldi gazdaságban dolgozott. A vállalatnál eltöltött idő ZXQMONTHSQXZ hónap." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ ZXQMONTHSQXZ hónapja tagja a csapatnak, és korábban egy szántóföldi gazdaságban dolgozott." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban, korábban pedig egy szántóföldi gazdaságban dolgozott." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ korábban egy szántóföldi gazdaságban dolgozott, és már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ korábban egy vegyes üzemben dolgozott, és ZXQMONTHSQXZ hónapja tartozik az üzemhez." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Mielőtt a gazdaságban kezdett dolgozni, ZXQNAMEQXZ egy vegyes gazdaságban dolgozott. A vállalatnál eltöltött idő ZXQMONTHSQXZ hónap." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ ZXQMONTHSQXZ hónapja tagja a csapatnak, és korábban egy vegyes üzemű létesítményben dolgozott." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban, korábban pedig egy vegyes gazdaságban dolgozott." />
+        <e k="ui_pmNewWorkerIntro5_5" v="A ZXQNAMEQXZ korábban egy vegyes üzemű létesítményben működött, és már ZXQMONTHSQXZ hónapja üzemel." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ korábban egy logisztikai vállalatnál dolgozott, és ZXQMONTHSQXZ hónapja tartozik a vállalathoz." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Mielőtt a gazdaságban kezdett dolgozni, ZXQNAMEQXZ egy logisztikai vállalatnál dolgozott. A vállalatnál eltöltött idő ZXQMONTHSQXZ hónap." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ ZXQMONTHSQXZ hónapja tagja a csapatnak, és korábban egy logisztikai vállalatnál dolgozott." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban, korábban pedig egy logisztikai vállalatnál volt alkalmazásban." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ korábban egy logisztikai vállalatnál dolgozott, és ZXQMONTHSQXZ hónapja dolgozik a cégnél." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ korábban egy mezőgazdasági gépjavító műhelyben dolgozott, és ZXQMONTHSQXZ hónapja tartozik a vállalathoz." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Mielőtt a gazdaságban kezdett dolgozni, ZXQNAMEQXZ egy mezőgazdasági gépjavító műhelyben dolgozott. A vállalatnál eltöltött idő ZXQMONTHSQXZ hónap." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ ZXQMONTHSQXZ hónapja tagja a csapatnak, korábban pedig egy mezőgazdasági gépjavító műhelyben dolgozott." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ már ZXQMONTHSQXZ hónapja dolgozik a gazdaságban, korábban pedig egy mezőgazdasági gépjavító műhelyben dolgozott." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ korábban egy mezőgazdasági gépjavító műhelyben dolgozott, és már ZXQMONTHSQXZ hónapja a cégnél dolgozik." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ korábban irodai munkát végzett, és ZXQMONTHSQXZ hónapja dolgozik a cégnél." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Mielőtt a gazdaságban kezdett dolgozni, ZXQNAMEQXZ irodai munkát végzett. A vállalatnál eltöltött idő ZXQMONTHSQXZ hónap." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ ZXQMONTHSQXZ hónapja tagja a csapatnak, korábban irodai munkát végzett." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ már ZXQMONTHSQXZ hónapja dolgozik a tanyán, korábban pedig irodai munkát végzett." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ korábban irodai munkát végzett, és ZXQMONTHSQXZ hónapja dolgozik a vállalatnál." />
+        <e k="ui_pmNewApplicantAge1_1" v="ZXQAGEQXZ évesen a szakmai pályafutás még csak most kezdődik." />
+        <e k="ui_pmNewApplicantAge1_2" v="ZXQAGEQXZ éves korától további gyakorlati tapasztalatokat szerezhet a gazdaságban." />
+        <e k="ui_pmNewApplicantAge1_3" v="ZXQAGEQXZ évesen lehetőség nyílik a szakmai pályafutás továbbfejlesztésére." />
+        <e k="ui_pmNewApplicantAge2_1" v="ZXQAGEQXZ éves korukra a szakmai ismereteik tovább szilárdulhatnak." />
+        <e k="ui_pmNewApplicantAge2_2" v="ZXQAGEQXZ évesen az eddigi tapasztalatok új feladatokkal egészülhetnek ki." />
+        <e k="ui_pmNewApplicantAge2_3" v="ZXQAGEQXZ évesen még van lehetőség a eddig bejárt szakmai pálya továbbfejlesztésére." />
+        <e k="ui_pmNewApplicantAge3_1" v="ZXQAGEQXZ évesen már egy hosszú szakmai pályafutás áll mögötte." />
+        <e k="ui_pmNewApplicantAge3_2" v="ZXQAGEQXZ éves koromig eddigi szakmai pályafutásom során sokféle tapasztalatot szereztem." />
+        <e k="ui_pmNewApplicantAge3_3" v="ZXQAGEQXZ éves korától már rendelkezik szakmai tapasztalattal; ennek a mezőgazdasághoz való kapcsolata a pályafutásától függ." />
+        <e k="ui_pmNewApplicantAge4_1" v="ZXQAGEQXZ éves korára már hosszú szakmai pályafutás áll mögötte." />
+        <e k="ui_pmNewApplicantAge4_2" v="ZXQAGEQXZ éves korára már rendelkezik általános szakmai tapasztalattal, ami nem feltétlenül jelenti azt, hogy mezőgazdasági gyakorlatot is szerzett." />
+        <e k="ui_pmNewApplicantAge4_3" v="A ZXQAGEQXZ évei során különféle tapasztalatokat szerzett; ezek hasznossága a gazdaságban az eddigi tevékenységektől függ." />
+        <e k="ui_pmNewApplicantMarket1_1" v="A termék e hónap óta kapható a piacon." />
+        <e k="ui_pmNewApplicantMarket1_2" v="Az új álláskeresés csak nemrég kezdődött el." />
+        <e k="ui_pmNewApplicantMarket1_3" v="A pályázati felhívást ebben a hónapban tették közzé." />
+        <e k="ui_pmNewApplicantMarket2_1" v="A hirdetés egy hónapja szerepel a piacon." />
+        <e k="ui_pmNewApplicantMarket2_2" v="Az új álláskeresés már egy hónapja tart." />
+        <e k="ui_pmNewApplicantMarket2_3" v="A pályázati felhívás egy hónapja elérhető az érdeklődő vállalkozások számára." />
+        <e k="ui_pmNewApplicantMarket3_1" v="A hirdetés már ZXQMONTHSQXZ hónapja szerepel a piacon." />
+        <e k="ui_pmNewApplicantMarket3_2" v="Az új álláskeresés már ZXQMONTHSQXZ hónapja tart." />
+        <e k="ui_pmNewApplicantMarket3_3" v="A pályázati felhívás ZXQMONTHSQXZ hónapja elérhető az érdeklődő vállalkozások számára." />
+        <e k="ui_pmNewWorkerExperience1_1" v="A gyakorlati tapasztalatok még csak most kezdődnek; sok feladat elvégzéséhez még útmutatásra van szükség." />
+        <e k="ui_pmNewWorkerExperience1_2" v="A gazdaságban még sok munkafolyamat új." />
+        <e k="ui_pmNewWorkerExperience1_3" v="A gyakorlati munka még a bevezető szakaszban van." />
+        <e k="ui_pmNewWorkerExperience1_4" v="Az alapvető feladatok elvégzéséhez még gyakorlásra és segítségre van szükség." />
+        <e k="ui_pmNewWorkerExperience1_5" v="A gyakorlati folyamatokat lépésről lépésre sajátítják el." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Néhány alapvető ismeret már megvan, de a bonyolultabb feladatok megoldásához még segítségre van szükség." />
+        <e k="ui_pmNewWorkerExperience2_2" v="Az első gyakorlati tapasztalatok már megvannak; több területen azonban még hiányzik a gyakorlat." />
+        <e k="ui_pmNewWorkerExperience2_3" v="A már jól ismert feladatok egyre jobban mennek, a bonyolultabb munkákhoz viszont további betanításra van szükség." />
+        <e k="ui_pmNewWorkerExperience2_4" v="Az alapok már ismertek, de a folyamatok zökkenőmentes lebonyolításához további gyakorlásra van szükség." />
+        <e k="ui_pmNewWorkerExperience2_5" v="A gyakorlati ismeretek már megvannak, és a mindennapi munkavégzés során tovább lehet őket elmélyíteni." />
+        <e k="ui_pmNewWorkerExperience3_1" v="A szilárd tapasztalat lehetővé teszi, hogy számos szokásos feladatot önállóan elvégezzünk." />
+        <e k="ui_pmNewWorkerExperience3_2" v="A legtöbb mindennapi feladatot biztonságosan el lehet végezni." />
+        <e k="ui_pmNewWorkerExperience3_3" v="A gyakorlati alapok megvannak; a már ismert folyamatokat önállóan végzik el." />
+        <e k="ui_pmNewWorkerExperience3_4" v="A szokásos feladatok elvégzése során jól kialakult rutin látható." />
+        <e k="ui_pmNewWorkerExperience3_5" v="A különböző feladatkörökkel jól ismeri magát, és azokat nagyrészt önállóan végzi el." />
+        <e k="ui_pmNewWorkerExperience4_1" v="A széles körű gyakorlati tapasztalat sokoldalú alkalmazást tesz lehetővé." />
+        <e k="ui_pmNewWorkerExperience4_2" v="A bonyolultabb feladatok is a megszokott feladatkör részét képezik." />
+        <e k="ui_pmNewWorkerExperience4_3" v="A megfelelő gyakorlat segít abban, hogy önállóan végezzük el a különböző munkafolyamatokat." />
+        <e k="ui_pmNewWorkerExperience4_4" v="Ez a tapasztalat abban nyilvánul meg, hogy a feladatkör sokrétűségét magabiztosan kezeli." />
+        <e k="ui_pmNewWorkerExperience4_5" v="Számos gyakorlati munkafolyamatot jól ismer, még változó feladatok esetén is." />
+        <e k="ui_pmNewWorkerExperience5_1" v="Rendkívül sok gyakorlati tapasztalat áll rendelkezésre." />
+        <e k="ui_pmNewWorkerExperience5_2" v="A rendkívül széles körű tapasztalatok még a bonyolult és szokatlan feladatok megoldásában is segítséget nyújtanak." />
+        <e k="ui_pmNewWorkerExperience5_3" v="A gazdaságban végzett munkához különösen széles körű ismeretek állnak rendelkezésre." />
+        <e k="ui_pmNewWorkerExperience5_4" v="A hosszú évekre visszanyúló és sokoldalú gyakorlati tapasztalat nagy biztonságot nyújt a mindennapi munkavégzés során." />
+        <e k="ui_pmNewWorkerExperience5_5" v="A mezőgazdasági munkák széles skáláját rendkívül nagy gyakorlattal végzik." />
+        <e k="ui_pmNewWorkerReliability1_1" v="A megbeszélések és a feladatok gondos végrehajtása különös figyelmet igényel." />
+        <e k="ui_pmNewWorkerReliability1_2" v="A mindennapi munkában gyakori ellenőrzésre és egyértelmű irányelvekre van szükség." />
+        <e k="ui_pmNewWorkerReliability1_3" v="A megbízható tervezés érdekében a feladatokat szorosan nyomon kell követni." />
+        <e k="ui_pmNewWorkerReliability1_4" v="A megállapodásokat és a munkafolyamatokat még nem tartják be következetesen." />
+        <e k="ui_pmNewWorkerReliability1_5" v="A fontos feladatok további egyeztetést és ellenőrzést igényelnek." />
+        <e k="ui_pmNewWorkerReliability2_1" v="A megállapodásokat nem mindig tartják be következetesen; az egyértelmű irányelvek segítenek ebben." />
+        <e k="ui_pmNewWorkerReliability2_2" v="A megbízhatóság még ingadozó; a fontos munkákat felügyelni kell." />
+        <e k="ui_pmNewWorkerReliability2_3" v="A már jól ismert feladatoknál sok minden sikerül, de az alkalmi ellenőrzés továbbra is célszerű." />
+        <e k="ui_pmNewWorkerReliability2_4" v="A ránk bízott feladatok következetesebb végrehajtásán még dolgozunk." />
+        <e k="ui_pmNewWorkerReliability2_5" v="A világos feladatkörök és a rendszeres visszajelzések segítenek a mindennapi munkában." />
+        <e k="ui_pmNewWorkerReliability3_1" v="A legtöbb feladat esetében megbízható végrehajtásra lehet számítani." />
+        <e k="ui_pmNewWorkerReliability3_2" v="A megállapodásokat általában betartják, és a feladatokat többnyire gondosan elvégzik." />
+        <e k="ui_pmNewWorkerReliability3_3" v="A megbízhatóság szilárd alapot biztosít a bevetés-tervezéshez." />
+        <e k="ui_pmNewWorkerReliability3_4" v="A rábízott feladatokat általában lelkiismeretesen és megbízhatóan végzik el." />
+        <e k="ui_pmNewWorkerReliability3_5" v="A mindennapi munkavégzés során túlnyomórészt állandó munkamódszer figyelhető meg." />
+        <e k="ui_pmNewWorkerReliability4_1" v="A munkát megbízhatóan végzik el, és a megállapodásokat gondosan betartják." />
+        <e k="ui_pmNewWorkerReliability4_2" v="A ránk bízott feladatokat következetesen és lelkiismeretesen végezzük el." />
+        <e k="ui_pmNewWorkerReliability4_3" v="A gondos munkavégzés megkönnyíti a megbízható bevetés-tervezést." />
+        <e k="ui_pmNewWorkerReliability4_4" v="A vállalásokra és a munka elvégzésére nagymértékben lehet számítani." />
+        <e k="ui_pmNewWorkerReliability4_5" v="A felelősségeket és a megegyezés szerinti feladatokat megbízhatóan nyomon követjük." />
+        <e k="ui_pmNewWorkerReliability5_1" v="Még a legigényesebb feladatok esetében is rendkívül megbízható a munkája." />
+        <e k="ui_pmNewWorkerReliability5_2" v="A megállapodásokat rendkívül következetesen betartják, a feladatokat pedig különösen lelkiismeretesen végzik el." />
+        <e k="ui_pmNewWorkerReliability5_3" v="A rendkívül megbízható működés nagyfokú tervezési biztonságot nyújt." />
+        <e k="ui_pmNewWorkerReliability5_4" v="A felelősséget nagy gondossággal és rendkívüli állandósággal vállaljuk." />
+        <e k="ui_pmNewWorkerReliability5_5" v="Még a nagy terjedelmű feladatokat is rendkívül megbízhatóan végzi el." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="Jelenleg nagyon csekély a vállalathoz való kötődés." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="Az együttműködést jelenleg inkább rövid távú megoldásnak tekintik." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="Jelenleg a gazdasághoz fűződő hosszú távú kötődés még nem túl erős." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="Jelenleg visszafogottan állnak hozzá a hosszú távú munkaviszonyhoz." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="Jelenleg alacsony az a hajlandóság, hogy hosszabb távon a vállalatnál maradjanak." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="A vállalat iránti elkötelezettség még visszafogott." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="A hosszabb távú együttműködésnek még ki kell alakulnia." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="Még nem alakult ki szoros kapcsolat a vállalattal." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="A további együttműködés még lehetőséget kínál a bizalom kiépítésére." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="Elképzelhető a hosszabb munkaviszony, de ezt egyelőre még óvatosan kezelik." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="Szilárd kötődés mutatkozik a vállalathoz." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="Az együttműködés szilárd alapot biztosít a hosszabb idejű munkaviszonyhoz." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="A kapcsolat a rendszerrel folyamatos." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="A lojalitás szilárd szinten áll." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="Jó alapok vannak ahhoz, hogy az együttműködést hosszú távon is folytassuk." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="A vállalattal való kapcsolat rendkívül szoros." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="A birtokkal való együttműködés kiemelt jelentőségű." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="Kifejezetten erős az a hajlandóság, hogy hosszabb távon a vállalatnál maradjanak." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="Az erős kötelék a tartós együttműködés mellett szól." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="Egyértelműen látszik, hogy a munkavállalók szívesen maradnának hosszabb ideig a vállalatnál." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="A vállalattal való kapcsolat rendkívül szoros." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="A birtokkal folytatott hosszú távú együttműködés kiemelten fontos számunkra." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="A vállalat iránti elkötelezettség rendkívül erős." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="A lojalitás és a tartós együttműködésre való hajlandóság kiemelkedően magas." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="A vállalattal és annak hosszú távú fejlődésével való azonosulás rendkívül erős." />
+        <e k="ui_pmNewWorkerTenureNew" v="Ebben a hónapban megkezdődött a munka a gazdaságban." />
+        <e k="ui_pmNewWorkerTenureOne" v="A gazdaságban való munkavégzés egy hónappal ezelőtt kezdődött." />
     </elements>
 </l10n>

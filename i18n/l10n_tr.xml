@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="PROFİL" />
         <e k="ui_pmHistoryHeader" v="GEÇMİŞ" />
         <e k="ui_button_train" v="Eğit" />
+        <e k="ui_pmManageSpecialization" v="Uzmanlık alanını yönetme" />
         <e k="ui_pmStatusApplicant" v="Aday" />
         <e k="ui_pmBirthLine" v="Doğum: %s" />
         <e k="ui_pmRankLabel" v="Rütbe" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="Etkin" />
         <e k="ui_transportPriorityInactive" v="Atanmamış" />
         <e k="ui_transportPriorityMoveUp" v="Yukarı taşı" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="Yukarı taşı" />
         <e k="ui_transportPriorityMoveDown" v="Aşağı taşı" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="Aşağı taşı" />
         <e k="ui_transportPriorityToggle" v="Etkinleştir/devre dışı bırak" />
         <e k="ui_transportPriorityApply" v="Uygula" />
         <e k="ui_transportPriorityCancel" v="İptal" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="ofis mesleği" />
         <e k="ui_status_retirementPending" v="ay sonunda emekli olacak" />
         <e k="ui_retirementNotice" v="%s ay sonunda emekli olacak." />
-        <e k="ui_pmTrainingIntro" v="Uzmanlıklar, ilgili kategoride performansı artırır. Eğitim yalnızca ay başında başlar, para tutar ve çalışanı ay sonuna kadar kullanılamaz yapar. İlerleme tamamlanınca kaydedilir. Teklifler ve fiyatlar aylık değişir; marttan şubata kadar tarım yılı başına yalnızca bir eğitim yapılabilir. Öğrenilen uzmanlıklar kalır, ancak en fazla iki bonus etkin olur. Her iki yuva da etkin olmayabilir. Öğrenilmiş etkin olmayan uzmanlık, çalışan ve tarım yılı başına yalnızca bir kez etkinleştirilebilir." />
+        <e k="ui_pmTrainingIntro" v="Ekibini hedef odaklı bir şekilde geliştir: “%s” seçeneğini tıkla ve ardından bir eğitim kategorisi seç. Uzmanlıklar, ilgili alandaki performansı artırır. Eğitimler ayın başında başlar, ücretlidir ve çalışanı ay sonuna kadar meşgul eder. Eğitim tamamlandığında ilerleme hesaba yansıtılır. Teklifler ve fiyatlar aylık olarak değişir. Her çalışan, Mart'tan Şubat'a kadar olan tarım yılı boyunca bir eğitim tamamlayabilir. Kazanılan uzmanlıklar korunur; en fazla iki bonus aktif olabilir, her iki yer de askıya alınabilir. Çalışan başına ve tarım yılı başına, kazanılmış ancak aktif olmayan uzmanlıklardan yalnızca biri etkinleştirilebilir." />
         <e k="ui_pmTrainingCategoryHeader" v="Öğrenme kategorisi" />
         <e k="ui_pmTrainingProgressHeader" v="Uzmanlığa doğru ilerleme" />
         <e k="ui_pmTrainingRunning" v="eğitim devam ediyor" />
@@ -633,9 +636,9 @@
     <e k="ui_pmHelpTopic13Title" v="Profiller, Tarihçe ve İstatistikler" />
     <e k="ui_pmHelpTopic13Body" v="Aday profilleri, yaş, mesleki geçmiş, deneyim, güvenilirlik, sadakat, uzmanlık alanları ve piyasada geçirilen süreyi dinamik bir metin halinde bir araya getirir. Çalışan profilleri ise şirketteki kıdem, görevler, eğitimler ve öğrenme sürecindeki ilerlemeleri tamamlar.&#10;Kişisel geçmiş, işe alım, görevin başlangıcı ve bitişi, görev kesintileri, hastalık, eğitimler, uzmanlık alanları, maaş talepleri ve kararlar, sadakat ve güvenilirlikteki değişiklikler, nakliye atamaları ile işten çıkarılma, kendi isteğiyle istifa, emeklilik ve istihdamın sona ermesini içerebilir.&#10;Çalışan geçmişi, görevler, çalışma süresi, eğitimler, nakliye durumu, son olaylar, hastalık günleri, maaş talepleri, görev kesintileri ve bugüne kadar ödenen toplam maaş gibi bilgileri gösterir. Genel bakış ayrıca, şirket genelinde şimdiye kadar işe alınan, işten çıkarılan, kendi isteğiyle istifa eden ve emekli olanların sayıları gibi toplam değerleri de gösterir." />
     <e k="ui_pmHelpTopic14Title" v="Ayarlar, Çok Oyunculu ve Kayıtlar" />
-    <e k="ui_pmHelpTopic14Body" v="Ayarlar her oyun durumu için geçerlidir ve iş performansı, personel gelişimi ile ekonomi ve maaşlar olarak sınıflandırılır. Oynanış etkileri, bunlara bağlı deneyim etkilerini etkinleştirir; deneyim etkileri ise hız, aşınma, sarf malzemeleri ve yakıtı kontrol eder. Personel etkileri, sadakat değişikliklerini ve fazla mesai seçeneğini etkinleştirir. Ekonomi etkileri, bireysel maaşları ve standart aylık maaşı etkinleştirir.&#10;Devre dışı bırakılan etkiler, mevcut personel verilerini geriye dönük olarak değiştirmez. Yalnızca ilgili sonraki etkiyi engeller veya izin verir. Bireysel maaşlar devre dışı bırakıldığında standart aylık maaş temel değer olarak kullanılır; bu değer ayarlardan doğrudan değiştirilebilir. Tuş atamaları oyun ayarlarından değiştirilebilir.&#10;Çok oyunculu modda personel, adaylar, görevler, maaşlar, eğitimler, ayarlar ve kronikler çiftlik bazında yönetilir ve senkronize edilir. Karar sunucuya aittir; yalnızca yetkili çiftlik yöneticileri kendi çiftliklerini değiştirebilir. Veriler, oyun kaydındaki helperPersonnel.xml dosyasında bulunur ve yükleme sırasında mevcut atamalar mümkün olduğunca geri yüklenir. Eski oyun kayıtları kullanılmaya devam edebilir; oyundan ayrılmış çalışanlara ait geçmiş veriler eksik olabilir." />
+        <e k="ui_pmHelpTopic14Body" v="“Mülakatlar” ayarı, her oyun durumu için geçerlidir. Etkin durumdaysa, gizli değerler, mülakatlar ve daha sonra görev süresi boyunca bu değerlerin açığa çıkması geçerlidir. Devre dışı durumdaysa, tüm aday ve çalışan değerleri eskisi gibi tam olarak görüntülenir. Bu ayarı yalnızca sunucu ve yetkili çiftlik yöneticileri değiştirebilir.&#10;Çok oyunculu modda, her soru hakkında karar veren sunucudur ve mülakat durumunu senkronize eder. Pencereyi ilk açan yetkili çiftlik yöneticisi görüşmeyi yürütür. Aynı çiftliğin diğer oyuncuları canlı olarak izleyebilir; konu düğmeleri devre dışı kalır. Görüşmeyi yöneten kişi pencereyi kapatırsa veya bağlantısı kesilirse, yetkili başka bir çiftlik yöneticisi görevi devralabilir.&#10;Personel, adaylar, görevler, maaşlar, eğitimler, işe alımlar ve kronikler çiftlik bazında kalır. Genel adaylar birden fazla çiftliğe teklif edilebilir, ancak görüşmeleri her çiftlik için ayrı ayrı kaydedilir." />
     <e k="ui_pmHelpTopic15Title" v="Kurulum ve ilk adımlar" />
-    <e k="ui_pmHelpTopic15Body" v="Bir adayı aç, yaşını, geçmişini, değerlerini, maaş beklentisini ve mevcut uzmanlık alanlarını kontrol et ve ardından işe alımını onayla. Aday, mevcut çiftliğin çalışanı olur; bundan sonraki tüm kararlar, bordro işlemleri ve gelişmeler bu çiftliğe göre değerlendirilir.&#10;İşe alımdan sonra öncelikle kısa ve uygun bir iş planla. Bir çalışanın müsait olması gerekir: Hastalık, devam eden iş, eğitim, onaylanmış bir işten ayrılma veya hâlâ aktif olan bir mod ataması, seçimi engelleyebilir. Çalışan sekmesi somut nedeni gösterir.&#10;İlk işe alım, işveren itibarını bir puan artırır. Yüksek değerler her zaman otomatik olarak daha iyi değildir: Deneyimli bir aday genellikle daha pahalıdır, oysa daha uygun fiyatlı bir yeni başlayan, gelişim ve eğitim için daha fazla zamana ihtiyaç duyar." />
+        <e k="ui_pmHelpTopic15Body" v="“Aday” sekmesinde mülakatı aç ve “Deneyim”, “Güvenilirlik” veya “Sadakat” seçeneklerinden birini seç. Seçilen soru ve cevap, mülakat akışında görünür. En geç üç sorudan sonra mülakat sona erer ve maaş beklentisi görünür hale gelir. Bilinen kesin değerler, aralıklar ve kalan belirsizliklere dayanarak işe alım kararı verin.&#10;İşe alımdan sonra, tam olarak netleşmemiş değerler ilk etapta son bilinen durumlarında kalır. Gerçek görevleri planlayın: 20 ila 35 dakikalık aktif gerçek zamanlı süreden sonra değerler tamamen ortaya çıkar. Çalışanın müsait olması gerekir; hastalık, devam eden iş, eğitim veya onaylanmış bir işten ayrılma durumu seçimi engelleyebilir.&#10;Bir işe alım, işveren itibarını bir puan artırır. Yüksek değerler her zaman otomatik olarak daha iyi değildir: Deneyimli bir aday genellikle daha pahalıdır, oysa daha uygun maliyetli bir yeni başlayan, gelişim ve eğitim için daha fazla zamana ihtiyaç duyar." />
     <e k="ui_pmHelpTopic16Title" v="Görevler ve Uzmanlık Atamaları" />
     <e k="ui_pmHelpTopic16Body" v="Atama, araç, ekipman ve – varsa – uygulanan malzeme temelinde belirlenir. Doğrudan malzeme ataması önceliklidir: Tohumlar ekime; herbisitler bitki korumasına; mineral gübre, sıvı gübre, sıvı gübre, fermantasyon artıkları ve gübre ise gübrelemeye aittir. Kireç, otomatik olarak ayrı bir öğrenme kategorisi olarak tanınmaz.&#10;Araç ve ekipman ataması: Saban, çapa makinesi, döner çapa, diskli çapa, silindir ve öğütücü toprak işleme faaliyetlerine aittir. Ekim ve dikim makineleri ekim faaliyetlerine aittir. Tarla püskürtücüler, belirgin bir malzeme olmadan gübreleme faaliyetine dahil edilir. Biçerdöverler, kesme üniteleri, balya presleri, biçme makineleri, yükleme römorkları ve toplama araçları hasat faaliyetlerine aittir. Römorklar ve boşaltılabilir araçlar nakliye faaliyetlerine aittir.&#10;FollowMe, pratik tanıma özelliğini ayrıca öğütücüler, patates ve pancar hasat makineleri, çeviriciler, yığınlayıcılar, gübre serpme makineleri, gübre tankları, toprak gevşeticiler, taş toplayıcılar, tırmıklar ve çapalar ile genişletir. Mod araçları, uzmanlık alanları net bir sınıflandırma sağlamıyorsa tarafsız kalabilir. Bu durumda yanlış bir uzmanlık bonusu vaat edilmez.&#10;Makine koruma ve tasarruflu çalışma genel bonuslardır: İlki, deneyime bağlı ek aşınmayı azaltır; ikincisi ise ek yakıt ve malzeme tüketimini azaltır. Seçilen faaliyet seçim penceresinde görüntülenir; uygun aktif uzmanlık alanı burada vurgulanır." />
     <e k="ui_specialization_transport" v="Ulaşım" />
@@ -676,8 +679,247 @@
     <e k="ui_pmHelpTopic02Title" v="Genel Bakış ve Personel Durumu" />
     <e k="ui_pmHelpTopic02Body" v="Genel bakış, işletmenin mevcut durumunu özetler: Çalışanlar, müsait çalışanlar, adaylar ve işveren itibarı en üstte yer alır. Bunun altında, personel, araç, ekipman ve faaliyet bilgilerini içeren devam eden görevler gösterilir.&#10;&quot;Değişiklikler&quot; sekmesi yalnızca ilgili personel olaylarını, yani işveren itibarında, deneyimde, güvenilirlikte, sadakatte, yaşta veya uzmanlık alanındaki değişiklikleri içerir. Her bildirimde neden, etkilenen kişi ve sonuç belirtilir; birden fazla satırdan oluşan bir giriş yine de tek bir bildirim olarak kabul edilir.&#10;&quot;Aylık Rapor&quot; ve &quot;Toplam&quot; sekmeleri, güncel ve toplam göstergeleri gösterir. Genel bakışı hızlı görev planlaması için kullanın; ayrıntılar, kararlar ve geçmiş kayıtlar ise ilgili bölüm sayfalarında yer alır." />
     <e k="ui_pmHelpTopic03Title" v="İşgücü piyasası ve işe alım" />
-    <e k="ui_pmHelpTopic03Body" v="Yeni bir oyun turu dört adayla başlar. Aynı anda piyasada en fazla sekiz aday bulunabilir. Her ayın başında, zar atılarak en fazla üç yeni pozisyon belirlenir; her pozisyon için şans oranı %15 + 0,7 × işveren itibarıdır. 60 itibar değerinde bu oran %57, 100 itibar değerinde ise %85’tir. Piyasa boşsa, en az bir yeni aday oluşturulur.&#10;Adaylar, oluşturuldukları ay boyunca kesin olarak mevcut kalırlar. İlk ayın bitiminden sonra, kalitelerine bağlı olarak ayrılma olasılıkları %10–30, ikinci ayın bitiminden sonra %30–50, üçüncü ayın bitiminde ise %100 olur. Kaliteli profiller, kalitelerinin ayrılma olasılığını artırması nedeniyle daha erken ortadan kalkabilir.&#10;Adaylar 18–65 yaş arasındadır, sabit bir doğum tarihine sahiptir ve yaşlanmaya devam ederler. Geçmişleri arasında aile işletmesi, süt sığırcılığı, tarım hizmetleri, tarım, karma işletme, lojistik, tarım makineleri atölyesi ve ofis işleri bulunur. Yaş ve geçmiş, özellikle deneyim ve olası mesleki ön bilgileri etkiler.&#10;Maaş beklentisi, deneyim ve güvenilirliğe dayanır; %96–106 oranında rastgele sapma gösterir ve işverenin itibarından etkilenir. Düşük itibar beklentiyi artırırken, yüksek itibar beklentiyi düşürür. İşe alımdan önce bir onay mesajı görüntülenir; işe alım, itibarı 1 puan artırır." />
+        <e k="ui_pmHelpTopic03Body" v="Tüm adaylar küresel bir piyasada oluşturulur. Ardından, işveren itibarı, bir adayın hangi çiftliklere sunulacağına karar verir. Bu nedenle çiftlikler farklı teklifler alabilir; aynı kişi birden fazla çiftliğe sunulursa, her yerde aynı temel verilere, değerlere ve aynı başlangıç değer aralığına sahiptir. Bir çiftlik bu kişiyi işe alır almaz, o kişi diğer tüm çiftliklerin listesinden kaybolur.&#10;Başlangıçta deneyim, güvenilirlik, sadakat, rütbe ve maaş beklentisi gizli kalır. Her aday için, üç değerden tam olarak biri, rastgele belirlenmiş 30 puanlık bir aralık olarak görünür. Gerçek değer her zaman bu aralık içindedir, ancak mutlaka ortada olmak zorunda değildir. Ad, yaş, mesleki geçmiş, özgeçmiş ve uzmanlık alanları görünür kalır.&#10;Bir iş görüşmesi en fazla üç sorudan oluşur. Bilinmeyen bir değere ilişkin ilk soru, 30 puanlık bir aralığı ortaya çıkarır; tekrar sorulması halinde bu aralık 15 puana düşer ve bir soru daha sorulduğunda tam değer ortaya çıkar. Zaten bilinen değerler tekrar seçilemez. Görüşme kesilebilir ve daha sonra aynı aşamadan devam edilebilir. Maaş beklentisi, son cevapla birlikte görünür hale gelir." />
     <e k="ui_pmHelpTopic04Title" v="Çalışan profili, değerler ve durum" />
-    <e k="ui_pmHelpTopic04Body" v="Deneyim, güvenilirlik ve sadakat, her biri 0 ile 100 arasında değişir. Sayı tam olarak görünür kalır; çubuklar hızlı karşılaştırma imkanı sağlar.&#10;Sınıflandırma yalnızca deneyime göre belirlenir: Yardımcı 0–44, Uzman 45–74, Profesyonel 75–100. Deneyim, çalışma hızını, ek aşınmayı ve ek tüketimi belirler. Güvenilirlik, kısa vadeli performans düşüşlerini, hastalıkları, aylık gelişimi ve görevin yarıda kesilme riskini etkiler. Sadakat, işletmeye olan bağlılığı tanımlar ve uyarıları, maaş anlaşmazlıklarını ve kendi isteğiyle işten ayrılmaları etkiler." />
+        <e k="ui_pmHelpTopic04Body" v="Deneyim, Güvenilirlik ve Sadakat değerleri 0 ile 100 arasında değişir. İş görüşmeleri devam ettiği sürece, adayların bu değerleri yalnızca bilinen görüşme aşamasına göre gösterilir. Sıralama yalnızca deneyime bağlıdır ve bu nedenle deneyim tam olarak belli olduğunda görünür.&#10;İşe alımdan sonra, henüz bilinmeyen değerler başlangıçta gizli kalır. Çalışan, fiili görevler sırasında aktif gerçek zaman kazanır. Her kişi için 20 ile 35 dakika arasında belirlenen bir sürenin ardından, bu üç değer de tam olarak bilinir hale gelir. Molalar ve görev yapılmayan süreler hesaba katılmaz. İlerleme, oyun durumuna kaydedilir.&#10;Deneyim, çalışma hızını, ek yıpranmayı ve ek tüketimi belirler. Güvenilirlik, kısa vadeli performans düşüşlerini, hastalıkları, aylık gelişimi ve görevin yarıda kesilme riskini etkiler. Sadakat, işletmeye olan bağlılığı tanımlar ve uyarıları, maaş anlaşmazlıklarını ve kendi isteğiyle işten ayrılmaları etkiler." />
+        <e k="ui_hpSetting_applicantInterviews" v="İş görüşmeleri" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="Adayların değerlerini gizler. En fazla üç soru turunda alanlar veya kesin değerler ortaya çıkar; maaş beklentisi görüşmenin sonunda görünür." />
+        <e k="ui_pmValueUnknown" v="Bilinmiyor" />
+        <e k="ui_hpInterviewPrompt" v="Ne hakkında soru sormak istiyorsun?" />
+        <e k="ui_hpInterviewTitle" v="İş görüşmesi" />
+        <e k="ui_hpInterviewTopicExperience" v="Deneyim" />
+        <e k="ui_hpInterviewTopicReliability" v="Güvenilirlik" />
+        <e k="ui_hpInterviewTopicLoyalty" v="Sadakat" />
+        <e k="ui_hpInterviewRound" v="Soru-Cevap Bölümü %d / 3" />
+        <e k="ui_hpInterviewLeader" v="Konuşmayı sen yürütüyorsun." />
+        <e k="ui_hpInterviewObserver" v="Konuşmayı takip ediyorsun." />
+        <e k="ui_hpInterviewFinished" v="Mülakat sona erdi." />
+        <e k="ui_hpInterviewWageIntro" v="Maaş beklentim:" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="Çiftliğimizdeki iş için ne tür pratik deneyimleriniz var?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="Pratik deneyiminizi daha ayrıntılı bir şekilde açıklayabilir misiniz?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="Günlük iş hayatında size güvenebilmemiz için ne gibi önlemler alıyorsunuz?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="Bağımsız çalışırken gösterdiğiniz güvenilirliği daha ayrıntılı olarak nasıl tanımlarsınız?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="Bir işletmeye uzun vadede sadık kalabilmeniz için sizin için ne önemlidir?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="Bir işverene olan uzun vadeli bağlılığınızı daha ayrıntılı olarak nasıl değerlendirirsiniz?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="Şu ana kadarki kariyerim henüz çok kapsamlı değil." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="Şimdiye kadar birkaç uygun görevi üstlendim." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="Kapsamlı bir pratik deneyime sahibim." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="Zaman sıkıntısı olduğunda ara sıra net anlaşmalara ihtiyacım oluyor." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="Genellikle, yapılan anlaşmalara ve tamamlanan görevlere güvenilebilir." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="İşimi son derece titizlikle yapıyorum ve verdiğim sözleri her zaman yerine getiriyorum." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="Yeni bir iş söz konusu olduğunda, ilk etapta daha çok kısa vadeli kararlar veririm." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="İşbirliği iyi giderse, daha uzun süreli bir çalışma süresini gayet olası buluyorum." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="İstikrar ve uzun vadeli bir işbirliği benim için çok önemlidir." />
+        <e k="ui_hpInterviewAnswerIntro1" v="Ben bunu şöyle tarif ederdim:" />
+        <e k="ui_hpInterviewAnswerIntro2" v="Benim görüşüme göre şudur:" />
+        <e k="ui_hpInterviewAnswerIntro3" v="Aşağıdaki değerlendirme en uygun olanıdır:" />
+        <e k="ui_hpInterviewOpen" v="İş görüşmesi" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="Çiftliğimizdeki iş için hangi pratik deneyimlere sahipsiniz?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="Şimdiye kadar tarım alanında hangi görevleri üstlendiniz?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="Bir tarım işletmesinde hangi işlere aşinasınız?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Bu görevlerden hangilerini kendi başınıza yerine getirdiğinizi biraz daha ayrıntılı olarak açıklayabilir misiniz?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="Hangi işlerde kendinizi şimdiden güvende hissediyorsunuz ve hangi konularda daha fazla deneyim kazanmanız gerekiyor?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="Sizin açınızdan bakıldığında, bugüne kadarki deneyimlerinizden hangileri çiftliğimizde özellikle yararlı olabilir?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="Günlük iş hayatında size güvenebilmemiz için ne gibi önlemler alıyorsunuz?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="Zamanında tamamlanması gereken görevlerle nasıl başa çıkıyorsunuz?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="İş yerinde beklenmedik bir durum ortaya çıkarsa sizden ne bekleyebiliriz?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="Bir anlaşmaya uymayacağınızı fark ettiğinizde ne yaparsınız?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="Aynı anda birden fazla görev varken işlerin akışını nasıl takip ediyorsunuz?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Bağımsız çalışırken sorumlulukları nasıl üstlendiğinizi daha ayrıntılı olarak anlatabilir misiniz?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="Bir işletmeye uzun vadede sadık kalabilmeniz için sizin için ne önemlidir?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="Çiftliğimizde uzun vadeli bir işbirliğinden ne bekliyorsunuz?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="Uzun süre bizimle çalışmaktan memnuniyet duymanız için ne gibi koşulların uygun olması gerekir?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="Bir işverene uzun vadeli bağlılık sizin için ne kadar önemli?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="Zorlu dönemlerde bile bir şirkette kalmaya ne kadar istekli olduğunuzu nasıl değerlendirirsiniz?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="Bir işbirliğini sürdürmenize ya da yeni bir yön belirlemenize neden olan en önemli faktör nedir?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="Şimdiye kadar özellikle basit işlerde yardımcı oldum. Yeni görevlere adım adım alışmaya çalışırım." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="Pratik deneyimim henüz sınırlı, ancak öğrenmeyi seviyorum ve bilmediğim bir şey olduğunda soruyorum." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="Bir çiftlikte yapılan bazı işleri biliyorum, ancak günlük işlerimde öğrenmem gereken çok şey var." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="Bir işletmede halihazırda çeşitli işler üstlendim ve aşina olduğum görevleri sorunsuz bir şekilde yerine getiriyorum." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="Bazı makineler ve iş akışlarıyla daha önce çalıştım. Yeni görevlerde bazen kısa bir oryantasyona ihtiyacım oluyor." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="Pratik deneyimim var, ancak elbette hâlâ öğrenebileceğim alanlar da vardır." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="Uzun bir süre tarım işletmelerinde çalıştım ve bu süre zarfında birçok görevi kendi başıma yerine getirdim." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="Geleneksel işler ve makineler konusunda oldukça deneyimliyim. Yine de yeni iş akışlarını önce dikkatle inceliyorum." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="Şimdiye kadar farklı iş yerleri ve çalışma tarzlarıyla tanıştım ve genellikle yeni görevlere hızla uyum sağlayabiliyorum." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="Aynı anda bir sürü iş birikirse, net anlaşmalar bana yardımcı olur. Böylece neye öncelik vermem gerektiğini daha iyi anlarım." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="Görevlerimi düzgün bir şekilde yerine getirmeye çalışıyorum. Ancak bazen her şeyi zamanında takip edebilmek için biraz daha çaba göstermem gerekiyor." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="Yeni veya alışık olmadığım görevlerde, önemli bir şeyin gözden kaçmaması için ara sıra soruları sormayı tercih ederim." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="Anlaşmalara dikkat ederim. Bir şeyin yolunda gitmeyeceğini öngörebiliyorsam, mümkün olduğunca erken haber veririm." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="Görevlerimi titizlikle yerine getiriyorum. Öncelikler net değilse, bir kez daha görüşmeyi tercih ederim." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="Genel olarak bana güvenebilirsiniz. İşler yoğun olduğunda, kısa bir koordinasyon bana yardımcı olur." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="Bir görevi üstlendiğimde, onunla ilgilenirim. Herhangi bir sorun çıkarsa, bunu erkenden dile getiririm." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="Randevuları ve anlaşmaları takip ediyorum ve sonunda her şeyin halledilip halledilmediğini kontrol ediyorum." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="Serbest çalışırken de verdiğim sözleri yerine getirmeye ve önemli değişiklikler konusunda başkalarını bilgilendirmeye özen gösteririm." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="Öncelikle buradaki işlerin nasıl yürüdüğüne bir bakmak istiyorum. Ondan sonra nasıl devam edeceğime daha iyi karar verebilirim." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="Yeni fırsatlara açığım ve yeni bir işverenle ilgili olarak kendimi çok erken bir aşamada bağlamak istemiyorum." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="Benim için günlük hayattaki işbirliği uygun olmalı. Durumum değişirse, başka seçenekleri de değerlendiririm." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="İşbirliği iyi giderse ve koşullar uygun olursa, daha uzun süre kalmayı düşünebilirim." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="Güvenilir bir çalışma ortamı benim için önemlidir. Ne kadar süre kalacağım, birbirimizle nasıl anlaşacağımıza da bağlıdır." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="İyi bir iş birliği arıyorum ve öncelikle buraya yerleşmek istiyorum. Eğer her iki taraf için de uygunsa, kalmam için pek çok neden var." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="İstikrarı önemsiyorum ve kendimi uzun vadede adayabileceğim bir iş yeri arıyorum." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="Güvenilir bir ekibin parçası olmak benim için önemli. Eğer iyi bir şekilde birlikte çalışıyorsak, sürekli iş değiştirmek istemem." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="Bir çiftlikte daha uzun süre çalışmak ve bu işletmeyle birlikte deneyim kazanmak isterim." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ daha önce kırsal bir aile işletmesinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro1_2" v="Başvurudan önce ZXQNAMEQXZ, kırsal bir aile işletmesinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro1_3" v="ZXQNAMEQXZ’nin mesleki geçmişinde, kırsal bir aile işletmesinde çalışmış olması yer almaktadır." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ daha önce küçük bir süt sığırcılığı işletmesinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro2_2" v="Başvurudan önce ZXQNAMEQXZ, küçük bir süt sığırcılığı işletmesinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro2_3" v="ZXQNAMEQXZ’nin mesleki geçmişinde küçük bir süt sığırcılığı işletmesinde çalışmış olması yer almaktadır." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ daha önce bir tarım hizmet şirketinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro3_2" v="Başvurudan önce ZXQNAMEQXZ bir tarım hizmet şirketinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro3_3" v="ZXQNAMEQXZ’nin mesleki geçmişinde bir tarım hizmetleri şirketinde çalışmış olması yer almaktadır." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ daha önce bir tarım işletmesinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro4_2" v="Başvurudan önce ZXQNAMEQXZ bir tarım işletmesinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro4_3" v="ZXQNAMEQXZ’nin mesleki geçmişinde bir tarım işletmesinde çalışmış olması yer almaktadır." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ daha önce karma bir işletmede çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro5_2" v="Başvurudan önce ZXQNAMEQXZ, karma bir işletmede çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro5_3" v="ZXQNAMEQXZ’nin mesleki geçmişinde bir karma işletmede çalışmış olması yer almaktadır." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ daha önce bir lojistik şirketinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro6_2" v="Başvurudan önce ZXQNAMEQXZ bir lojistik şirketinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro6_3" v="ZXQNAMEQXZ’nin mesleki geçmişinde bir lojistik şirketinde çalışmış olması yer almaktadır." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ daha önce bir tarım makineleri atölyesinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro7_2" v="Başvurudan önce ZXQNAMEQXZ, bir tarım makineleri atölyesinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro7_3" v="ZXQNAMEQXZ’nin mesleki geçmişinde bir tarım makineleri tamirhanesinde çalışmış olması yer almaktadır." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ daha önce bir ofis işinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro8_2" v="Başvurudan önce ZXQNAMEQXZ bir ofis işinde çalışıyordu." />
+        <e k="ui_pmNewApplicantIntro8_3" v="ZXQNAMEQXZ’nin mesleki geçmişinde bir ofis işi yer almaktadır." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ daha önce kırsal bir aile işletmesinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmenin bir parçasıdır." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Çiftlikte çalışmaya başlamadan önce, ZXQNAMEQXZ kırsal bir aile işletmesinde çalışıyordu. İşletmede çalışma süresi ZXQMONTHSQXZ aydır." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır ekibin bir parçasıdır ve daha önce kırsal bir aile işletmesinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır çiftlikte çalışıyor ve daha önce kırsal bir aile işletmesinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ daha önce kırsal bir aile işletmesinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmede çalışıyor." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ daha önce küçük bir süt sığırcılığı işletmesinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmenin bir parçasıdır." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Çiftlikte çalışmaya başlamadan önce ZXQNAMEQXZ, küçük bir süt sığırcılığı işletmesinde çalışıyordu. İşletmede çalışma süresi ZXQMONTHSQXZ aydır." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır ekibin bir parçasıdır ve daha önce küçük bir süt sığır çiftliğinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır çiftlikte çalışıyor ve daha önce küçük bir süt sığırcılığı işletmesinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ daha önce küçük bir süt sığır çiftliğinde çalışıyordu ve ZXQMONTHSQXZ aydır bu çiftlikte çalışıyor." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ daha önce bir tarım hizmet şirketinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmede çalışıyor." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Çiftlikte çalışmaya başlamadan önce ZXQNAMEQXZ bir tarım hizmetleri şirketinde çalışıyordu. İşletmede çalışma süresi ZXQMONTHSQXZ aydır." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır ekibin bir parçasıdır ve daha önce bir tarım hizmet şirketinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır çiftlikte çalışıyor ve daha önce bir tarım hizmet şirketinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ daha önce bir tarım hizmet şirketinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmede çalışıyor." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ daha önce bir tarım işletmesinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmenin bir parçasıdır." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Çiftlikte çalışmaya başlamadan önce ZXQNAMEQXZ, bir tarım işletmesinde çalışıyordu. İşletmede çalışma süresi ZXQMONTHSQXZ aydır." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır ekibin bir parçasıdır ve daha önce bir tarım işletmesinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır çiftlikte çalışıyor ve daha önce bir tarım işletmesinde görev yapıyordu." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ daha önce bir tarım işletmesinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmede çalışıyor." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ daha önce karma bir işletmede çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmenin bir parçasıdır." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Çiftlikte çalışmaya başlamadan önce ZXQNAMEQXZ, karma bir işletmede çalışıyordu. İşletmede çalışma süresi ZXQMONTHSQXZ aydır." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır ekibin bir parçasıdır ve daha önce karma işletmede çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır çiftlikte çalışıyor ve daha önce karma bir işletmede görev yapıyordu." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ daha önce karma bir işletmede çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmede görev yapıyor." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ daha önce bir lojistik şirketinde çalışıyordu ve ZXQMONTHSQXZ aydır bu şirkette çalışıyor." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Çiftlikte çalışmaya başlamadan önce ZXQNAMEQXZ bir lojistik şirketinde çalışıyordu. Şirket kıdemi ZXQMONTHSQXZ aydır." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır ekibin bir parçasıdır ve daha önce bir lojistik şirketinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır çiftlikte çalışıyor ve daha önce bir lojistik şirketinde görev yapıyordu." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ daha önce bir lojistik şirketinde çalışıyordu ve ZXQMONTHSQXZ aydır bu şirkette çalışıyor." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ daha önce bir tarım makineleri atölyesinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmede görev yapıyor." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Çiftlikte çalışmaya başlamadan önce ZXQNAMEQXZ, bir tarım makineleri atölyesinde çalışıyordu. İşe giriş süresi ZXQMONTHSQXZ aydır." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır ekibin bir parçasıdır ve daha önce bir tarım makineleri atölyesinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır çiftlikte çalışıyor ve daha önce bir tarım makineleri atölyesinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ daha önce bir tarım makineleri atölyesinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmede çalışıyor." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ daha önce bir ofis işinde çalışıyordu ve ZXQMONTHSQXZ aydır şirkette çalışıyor." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Çiftlikte çalışmaya başlamadan önce ZXQNAMEQXZ bir ofis işinde çalışıyordu. İşletmede çalışma süresi ZXQMONTHSQXZ aydır." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır ekibin bir parçasıdır ve daha önce bir ofis işinde çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ, ZXQMONTHSQXZ aydır çiftlikte çalışıyor ve daha önce bir ofiste çalışıyordu." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ daha önce bir ofis işinde çalışıyordu ve ZXQMONTHSQXZ aydır bu işletmede çalışıyor." />
+        <e k="ui_pmNewApplicantAge1_1" v="ZXQAGEQXZ yaşında, mesleki kariyer henüz başlangıç aşamasındadır." />
+        <e k="ui_pmNewApplicantAge1_2" v="ZXQAGEQXZ yaşında, çiftlikte daha fazla pratik deneyim kazanılabilir." />
+        <e k="ui_pmNewApplicantAge1_3" v="ZXQAGEQXZ yaşında, mesleki kariyerinizi daha da ilerletme fırsatı doğar." />
+        <e k="ui_pmNewApplicantAge2_1" v="ZXQAGEQXZ yaşında mesleki bilgiler daha da pekiştirilebilir." />
+        <e k="ui_pmNewApplicantAge2_2" v="ZXQAGEQXZ yaşında, bugüne kadarki deneyimler yeni görevlerle zenginleştirilebilir." />
+        <e k="ui_pmNewApplicantAge2_3" v="ZXQAGEQXZ yaşında, bugüne kadarki mesleki kariyerini daha da ilerletme imkânı vardır." />
+        <e k="ui_pmNewApplicantAge3_1" v="ZXQAGEQXZ yaşında olmasına rağmen, geride zaten uzun bir mesleki kariyer bırakmıştır." />
+        <e k="ui_pmNewApplicantAge3_2" v="ZXQAGEQXZ yaşında, bugüne kadarki mesleki hayatında çeşitli deneyimler edinilmiştir." />
+        <e k="ui_pmNewApplicantAge3_3" v="ZXQAGEQXZ yaşında mesleki deneyime sahip olunabilir; bunun tarımla olan ilişkisi, kişinin kariyerine bağlıdır." />
+        <e k="ui_pmNewApplicantAge4_1" v="ZXQAGEQXZ yaşında olmasına rağmen, geride zaten uzun bir mesleki kariyer bırakmıştır." />
+        <e k="ui_pmNewApplicantAge4_2" v="ZXQAGEQXZ yaşında, tarım alanında pratik deneyim anlamına gelmeyen genel mesleki deneyim mevcuttur." />
+        <e k="ui_pmNewApplicantAge4_3" v="ZXQAGEQXZ yıl boyunca çeşitli deneyimler edinildi; bunların çiftlikte ne kadar faydalı olacağı, bugüne kadar yapılan faaliyetlere bağlıdır." />
+        <e k="ui_pmNewApplicantMarket1_1" v="Ürün, bu aydan itibaren piyasada." />
+        <e k="ui_pmNewApplicantMarket1_2" v="Yeni bir iş arayışım daha yeni başladı." />
+        <e k="ui_pmNewApplicantMarket1_3" v="Başvuru bu ay yayınlandı." />
+        <e k="ui_pmNewApplicantMarket2_1" v="İlan bir aydır piyasada." />
+        <e k="ui_pmNewApplicantMarket2_2" v="Yeni bir iş arama süreci bir aydır devam ediyor." />
+        <e k="ui_pmNewApplicantMarket2_3" v="Başvuru, ilgilenen işletmelerin kullanımına bir aydır açıktır." />
+        <e k="ui_pmNewApplicantMarket3_1" v="Başvuru, ZXQMONTHSQXZ aydır piyasada." />
+        <e k="ui_pmNewApplicantMarket3_2" v="Yeni bir iş arama süreci ZXQMONTHSQXZ aydır devam ediyor." />
+        <e k="ui_pmNewApplicantMarket3_3" v="Başvuru, ilgilenen işletmelerin kullanımına ZXQMONTHSQXZ aydır açıktır." />
+        <e k="ui_pmNewWorkerExperience1_1" v="Pratik deneyim henüz kazanılma aşamasındadır; birçok iş için hâlâ rehberliğe ihtiyaç vardır." />
+        <e k="ui_pmNewWorkerExperience1_2" v="Çiftlikteki birçok iş süreci hâlâ yeni." />
+        <e k="ui_pmNewWorkerExperience1_3" v="Uygulamalı çalışma henüz erken bir alıştırma aşamasındadır." />
+        <e k="ui_pmNewWorkerExperience1_4" v="Temel görevler için hâlâ alıştırma ve rehberlik gerekiyor." />
+        <e k="ui_pmNewWorkerExperience1_5" v="Pratik işlemler adım adım öğrenilir." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Bazı temel bilgiler biliniyor, ancak daha zorlu görevlerde hâlâ desteğe ihtiyaç var." />
+        <e k="ui_pmNewWorkerExperience2_2" v="İlk pratik deneyimler elde edilmiştir; ancak bazı alanlarda henüz yeterli deneyim kazanılmamıştır." />
+        <e k="ui_pmNewWorkerExperience2_3" v="Alışılmış görevler giderek daha iyi bir şekilde yerine getirilirken, daha karmaşık işler için daha fazla alıştırma gereklidir." />
+        <e k="ui_pmNewWorkerExperience2_4" v="Temel bilgiler biliniyor, ancak işlemlerin güvenli bir şekilde gerçekleştirilebilmesi için daha fazla alıştırma yapılması gerekiyor." />
+        <e k="ui_pmNewWorkerExperience2_5" v="Pratik bilgiler halihazırda edinilmiştir ve günlük iş hayatında daha da pekiştirilebilir." />
+        <e k="ui_pmNewWorkerExperience3_1" v="Sağlam bir deneyim, birçok rutin görevi kendi başına yerine getirme imkânı sağlar." />
+        <e k="ui_pmNewWorkerExperience3_2" v="Günlük işlerin çoğu sorunsuz bir şekilde halledilir." />
+        <e k="ui_pmNewWorkerExperience3_3" v="Pratik bir temel mevcuttur; alışılmış süreçler kendi başına üstlenilir." />
+        <e k="ui_pmNewWorkerExperience3_4" v="Gündelik işlerde düzenli bir rutin göze çarpıyor." />
+        <e k="ui_pmNewWorkerExperience3_5" v="Çeşitli görev alanlarına aşinadır ve bunları büyük ölçüde kendi başına yerine getirir." />
+        <e k="ui_pmNewWorkerExperience4_1" v="Kapsamlı pratik deneyim, çok yönlü kullanım imkânı sağlar." />
+        <e k="ui_pmNewWorkerExperience4_2" v="Daha zorlu işler de alışılmış görevler arasında yer almaktadır." />
+        <e k="ui_pmNewWorkerExperience4_3" v="Bol bol pratik yapmak, farklı iş akışlarını kendi başına üstlenmeye yardımcı olur." />
+        <e k="ui_pmNewWorkerExperience4_4" v="Bu deneyim, çeşitli görevlerin güvenli bir şekilde yerine getirilmesinde kendini gösterir." />
+        <e k="ui_pmNewWorkerExperience4_5" v="Değişen işlerde bile pek çok pratik iş akışına aşinadır." />
+        <e k="ui_pmNewWorkerExperience5_1" v="Olağanüstü derecede fazla pratik deneyim mevcuttur." />
+        <e k="ui_pmNewWorkerExperience5_2" v="Çok geniş bir deneyim birikimi, karmaşık ve alışılmadık görevlerin üstesinden gelmede de yardımcı olur." />
+        <e k="ui_pmNewWorkerExperience5_3" v="Çiftlik işleri konusunda son derece kapsamlı bilgiler mevcuttur." />
+        <e k="ui_pmNewWorkerExperience5_4" v="Uzun yıllara dayanan ve çok yönlü mesleki deneyim, günlük iş hayatında büyük bir güven sağlar." />
+        <e k="ui_pmNewWorkerExperience5_5" v="Geniş bir yelpazedeki tarımsal işler, son derece gelişmiş bir rutinle ustaca yerine getirilmektedir." />
+        <e k="ui_pmNewWorkerReliability1_1" v="Anlaşmalar ve görevlerin titizlikle yerine getirilmesi özel bir dikkat gerektirir." />
+        <e k="ui_pmNewWorkerReliability1_2" v="Günlük iş hayatında sık sık denetim ve net talimatlar gereklidir." />
+        <e k="ui_pmNewWorkerReliability1_3" v="Güvenilir bir planlama için görevler yakından takip edilmelidir." />
+        <e k="ui_pmNewWorkerReliability1_4" v="Anlaşmalar ve iş akışları henüz tutarlı bir şekilde uygulanmamaktadır." />
+        <e k="ui_pmNewWorkerReliability1_5" v="Önemli görevler, ek koordinasyon ve denetim gerektirir." />
+        <e k="ui_pmNewWorkerReliability2_1" v="Anlaşmalar her zaman tutarlı bir şekilde yerine getirilmez; net kurallar bu konuda yardımcı olur." />
+        <e k="ui_pmNewWorkerReliability2_2" v="Güvenilirlik hâlâ değişken; önemli işler sırasında gözetim altında tutulmalıdır." />
+        <e k="ui_pmNewWorkerReliability2_3" v="Alışılmış görevlerde pek çok şey başarılı bir şekilde yerine getirilir; ancak ara sıra kontrol etmek yine de yararlıdır." />
+        <e k="ui_pmNewWorkerReliability2_4" v="Devredilen görevlerin daha istikrarlı bir şekilde yerine getirilmesi için çalışmalar halen devam etmektedir." />
+        <e k="ui_pmNewWorkerReliability2_5" v="Net yetki dağılımı ve düzenli geri bildirimler, günlük iş hayatında yardımcı olur." />
+        <e k="ui_pmNewWorkerReliability3_1" v="Çoğu görevde, işlerin güvenilir bir şekilde yerine getirileceğine güvenilebilir." />
+        <e k="ui_pmNewWorkerReliability3_2" v="Anlaşmalar genellikle yerine getirilir ve görevler çoğunlukla özenle yerine getirilir." />
+        <e k="ui_pmNewWorkerReliability3_3" v="Güvenilirlik, görev planlaması için sağlam bir temel oluşturur." />
+        <e k="ui_pmNewWorkerReliability3_4" v="Verilen görevler genellikle özenle ve güvenilir bir şekilde yerine getirilir." />
+        <e k="ui_pmNewWorkerReliability3_5" v="Günlük iş hayatında, genel olarak tutarlı bir çalışma tarzı göze çarpmaktadır." />
+        <e k="ui_pmNewWorkerReliability4_1" v="İşler güvenilir bir şekilde yürütülür ve anlaşmalar titizlikle yerine getirilir." />
+        <e k="ui_pmNewWorkerReliability4_2" v="Verilen görevler tutarlı ve özenli bir şekilde yerine getirilir." />
+        <e k="ui_pmNewWorkerReliability4_3" v="Titiz çalışma tarzı, güvenilir bir görev planlamasını kolaylaştırır." />
+        <e k="ui_pmNewWorkerReliability4_4" v="Taahhütlere ve işin yerine getirilmesine büyük ölçüde güvenilebilir." />
+        <e k="ui_pmNewWorkerReliability4_5" v="Sorumluluklar ve kararlaştırılan görevler titizlikle takip edilecektir." />
+        <e k="ui_pmNewWorkerReliability5_1" v="En zorlu görevlerde bile, yapılan işe olağanüstü derecede güvenilebilir." />
+        <e k="ui_pmNewWorkerReliability5_2" v="Anlaşmalar son derece tutarlı bir şekilde yerine getirilir ve görevler son derece özenle yerine getirilir." />
+        <e k="ui_pmNewWorkerReliability5_3" v="Son derece güvenilir çalışma şekli, planlama açısından yüksek bir güvenliği sağlar." />
+        <e k="ui_pmNewWorkerReliability5_4" v="Sorumluluk, büyük bir özen ve olağanüstü bir istikrarla üstlenilir." />
+        <e k="ui_pmNewWorkerReliability5_5" v="Kapsamlı görevler bile son derece güvenilir bir şekilde yerine getirilir." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="Şu anda işletmeye bağlılık çok düşük." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="İşbirliği şu anda daha çok kısa vadeli olarak değerlendiriliyor." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="Şu anda çiftliğe uzun vadeli bir bağlılık pek görülmemektedir." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="Şu anda, uzun süreli iş kıdemine karşı temkinli bir tutum sergilenmektedir." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="Şu anda, işletmede uzun vadede kalma isteği düşük seviyededir." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="Şirkete bağlılık hâlâ ılımlı bir seviyede." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="Uzun vadeli bir işbirliği, önce gelişmelidir." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="Şirketle henüz yakın bir bağ kurulmamıştır." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="İlerideki işbirliği, güvenin daha da pekiştirilmesi için imkânlar sunmaktadır." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="Daha uzun süreli hizmet süresi mümkün olmakla birlikte, bu konuda henüz temkinli bir yaklaşım sergilenmektedir." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="İşletmeyle sağlam bir bağ mevcuttur." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="Bu işbirliği, çalışanların şirkette daha uzun süre kalması için sağlam bir temel oluşturmaktadır." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="İşletmeyle olan bağlantı kesintisizdir." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="Sadakat, sağlam bir seviyede seyrediyor." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="İşbirliğini uzun vadede sürdürmek için sağlam bir temel mevcuttur." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="İşletmeyle olan bağ oldukça güçlüdür." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="Çiftlikle olan işbirliği büyük önem taşımaktadır." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="İşletmede uzun vadede kalma isteği oldukça belirgindir." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="Bu güçlü bağ, istikrarlı bir işbirliğinin göstergesidir." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="Çalışanların şirkette daha uzun süre kalmaya yönelik ilgisi açıkça görülüyor." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="İşletmeyle olan bağ son derece güçlüdür." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="Çiftlikle olan uzun vadeli işbirliği bizim için son derece büyük önem taşımaktadır." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="İşletmeye olan bağlılık olağanüstü derecede güçlüdür." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="Sadakat ve uzun vadeli bir işbirliğine yönelik istek özellikle yüksektir." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="Şirketle ve onun uzun vadeli gelişimiyle özdeşleşme duygusu olağanüstü derecede güçlüdür." />
+        <e k="ui_pmNewWorkerTenureNew" v="Bu ay çiftlikte çalışmaya başlandı." />
+        <e k="ui_pmNewWorkerTenureOne" v="Çiftlikte çalışmaya bir ay önce başladım." />
     </elements>
 </l10n>

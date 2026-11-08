@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="HỒ SƠ" />
         <e k="ui_pmHistoryHeader" v="LỊCH SỬ" />
         <e k="ui_button_train" v="Đào tạo" />
+        <e k="ui_pmManageSpecialization" v="Quản lý chuyên môn hóa" />
         <e k="ui_pmStatusApplicant" v="Ứng viên" />
         <e k="ui_pmBirthLine" v="Ngày sinh: %s" />
         <e k="ui_pmRankLabel" v="Cấp bậc" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="Đang bật" />
         <e k="ui_transportPriorityInactive" v="Chưa phân công" />
         <e k="ui_transportPriorityMoveUp" v="Di chuyển lên" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="Di chuyển lên" />
         <e k="ui_transportPriorityMoveDown" v="Di chuyển xuống" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="Di chuyển xuống" />
         <e k="ui_transportPriorityToggle" v="Bật/tắt" />
         <e k="ui_transportPriorityApply" v="Áp dụng" />
         <e k="ui_transportPriorityCancel" v="Hủy" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="nghề văn phòng" />
         <e k="ui_status_retirementPending" v="sẽ nghỉ hưu vào cuối tháng" />
         <e k="ui_retirementNotice" v="%s sẽ nghỉ hưu vào cuối tháng." />
-        <e k="ui_pmTrainingIntro" v="Chuyên môn cải thiện hiệu suất ở danh mục phù hợp. Đào tạo chỉ bắt đầu đầu tháng, tốn tiền và khiến nhân viên không sẵn sàng đến cuối tháng. Tiến độ được ghi nhận sau khi hoàn thành. Ưu đãi và giá thay đổi hằng tháng; chỉ được một khóa đào tạo mỗi năm nông nghiệp từ tháng 3 đến tháng 2. Chuyên môn đã học vẫn được giữ, nhưng tối đa hai phần thưởng hoạt động. Cả hai vị trí có thể không hoạt động. Một chuyên môn đã học và không hoạt động chỉ có thể được kích hoạt một lần cho mỗi nhân viên và năm nông nghiệp." />
+        <e k="ui_pmTrainingIntro" v="Phát triển đội ngũ của bạn một cách có định hướng: Chọn “%s” rồi chọn một danh mục đào tạo. Các chuyên môn sẽ giúp nâng cao hiệu suất trong lĩnh vực tương ứng. Các khóa đào tạo bắt đầu vào đầu tháng, tốn chi phí và nhân viên sẽ phải tham gia đến hết tháng. Tiến độ học tập sẽ được ghi nhận sau khi hoàn thành. Các chương trình và mức giá thay đổi hàng tháng. Mỗi nhân viên có thể tham gia một khóa đào tạo trong mỗi năm nông nghiệp, từ tháng 3 đến tháng 2. Các chuyên môn đã học sẽ được giữ lại; tối đa hai phần thưởng có hiệu lực, cả hai vị trí đều có thể ở trạng thái không hoạt động. Mỗi nhân viên chỉ có thể kích hoạt một chuyên môn đã học nhưng đang không hoạt động trong mỗi năm nông nghiệp." />
         <e k="ui_pmTrainingCategoryHeader" v="Lĩnh vực học tập" />
         <e k="ui_pmTrainingProgressHeader" v="Tiến độ hướng tới chuyên môn" />
         <e k="ui_pmTrainingRunning" v="đang đào tạo" />
@@ -633,9 +636,9 @@
     <e k="ui_pmHelpTopic13Title" v="Hồ sơ, Lịch sử và Thống kê" />
     <e k="ui_pmHelpTopic13Body" v="Hồ sơ ứng viên tổng hợp các yếu tố như tuổi tác, nền tảng nghề nghiệp, kinh nghiệm, tính đáng tin cậy, lòng trung thành, chuyên môn và thời gian hoạt động trên thị trường thành một văn bản sinh động. Hồ sơ nhân viên bổ sung các thông tin về thâm niên làm việc, các nhiệm vụ đã thực hiện, các khóa đào tạo và tiến trình học tập.&#10;Lịch sử cá nhân có thể ghi lại thông tin về việc tuyển dụng, ngày bắt đầu và kết thúc nhiệm vụ, việc ngừng nhiệm vụ, ốm đau, các khóa đào tạo, chuyên môn, yêu cầu lương và các quyết định, những thay đổi về lòng trung thành và độ tin cậy, phân công vận chuyển cũng như sa thải, tự nguyện nghỉ việc, nghỉ hưu và chấm dứt hợp đồng lao động.&#10;Lịch sử nhân viên hiển thị, trong số những thông tin khác, các đợt làm việc, thời gian làm việc, đào tạo, trạng thái vận chuyển, các sự kiện gần đây nhất, ngày nghỉ ốm, yêu cầu lương, việc ngừng làm việc và tổng lương đã được thanh toán cho đến nay. Bảng tổng quan còn hiển thị các số liệu tổng hợp trên toàn công ty như số lượng nhân viên từng được tuyển dụng, sa thải, tự nguyện nghỉ việc và nghỉ hưu." />
     <e k="ui_pmHelpTopic14Title" v="Cài đặt, Chế độ nhiều người chơi và Kết quả trò chơi" />
-    <e k="ui_pmHelpTopic14Body" v="Các cài đặt áp dụng cho từng phiên chơi và được chia thành các mục: Hiệu suất làm việc, Phát triển nhân sự, Kinh tế và Lương bổng. Các tác động đến lối chơi sẽ mở khóa các hiệu ứng kinh nghiệm liên quan; các hiệu ứng kinh nghiệm điều chỉnh tốc độ, mức hao mòn, vật tư tiêu hao và nhiên liệu. Các tác động đến nhân sự sẽ mở khóa các thay đổi về lòng trung thành và tùy chọn làm thêm giờ. Các tác động về kinh tế sẽ mở khóa mức lương cá nhân và mức lương tháng tiêu chuẩn.&#10;Các hiệu ứng bị vô hiệu hóa sẽ không điều chỉnh lại dữ liệu nhân sự hiện có theo hiệu lực hồi tố. Chúng chỉ ngăn chặn hoặc cho phép các tác động tiếp theo tương ứng. Mức lương tháng tiêu chuẩn đóng vai trò là giá trị cơ bản khi mức lương cá nhân bị vô hiệu hóa; giá trị này có thể được điều chỉnh trực tiếp trong phần cài đặt. Cách gán phím có thể được thay đổi trong cài đặt trò chơi.&#10;Trong chế độ nhiều người chơi, nhân sự, ứng viên, nhiệm vụ, mức lương, khóa đào tạo, cài đặt và biên niên sử được quản lý và đồng bộ hóa theo từng trang trại. Máy chủ có quyền quyết định; chỉ những người quản lý trang trại được ủy quyền mới được phép thay đổi trang trại của mình. Dữ liệu được lưu trong tệp helperPersonnel.xml trong tệp lưu trò chơi và các phân công hiện tại sẽ được khôi phục khi tải lại, nếu có thể. Các tệp lưu trò chơi cũ vẫn có thể sử dụng được; dữ liệu lịch sử có thể không đầy đủ đối với những nhân viên đã nghỉ việc." />
+        <e k="ui_pmHelpTopic14Body" v="Cài đặt “Phỏng vấn tuyển dụng” áp dụng cho từng phiên chơi. Nếu cài đặt này được kích hoạt, các chỉ số ẩn, các cuộc phỏng vấn và việc tiết lộ thông tin sau đó sẽ được áp dụng trong thời gian làm việc. Nếu cài đặt này bị vô hiệu hóa, tất cả các chỉ số của ứng viên và nhân viên sẽ được hiển thị đầy đủ như trước đây. Chỉ máy chủ và các quản lý trang trại có quyền mới được phép thay đổi cài đặt này.&#10;Trong chế độ nhiều người chơi, máy chủ sẽ quyết định mọi câu hỏi và đồng bộ hóa tiến trình phỏng vấn. Quản lý trang trại có quyền đầu tiên mở cửa sổ sẽ chủ trì cuộc phỏng vấn. Các người chơi khác trong cùng một trang trại có thể theo dõi trực tiếp; các nút chủ đề của họ vẫn bị vô hiệu hóa. Nếu người chủ trì cuộc trò chuyện đóng cửa sổ hoặc kết nối của họ bị gián đoạn, một quản lý trang trại có quyền khác có thể tiếp quản.&#10;Nhân viên, ứng viên, nhiệm vụ, lương, đào tạo, tuyển dụng và biên niên sử vẫn được liên kết với từng trang trại. Ứng viên toàn cầu có thể được đề nghị cho nhiều trang trại, nhưng các cuộc trò chuyện của họ sẽ được lưu trữ riêng biệt cho từng trang trại." />
     <e k="ui_pmHelpTopic15Title" v="Cài đặt và các bước đầu tiên" />
-    <e k="ui_pmHelpTopic15Body" v="Mở hồ sơ ứng viên, kiểm tra độ tuổi, lý lịch, giá trị, mức lương mong muốn và các chuyên môn hiện có, sau đó xác nhận việc tuyển dụng. Ứng viên sẽ trở thành nhân viên của trang trại hiện tại; tất cả các quyết định, tính lương và diễn biến sau này đều áp dụng cho trang trại đó.&#10;Sau khi tuyển dụng, hãy lên kế hoạch cho một công việc ngắn hạn và phù hợp trước tiên. Nhân viên phải có sẵn: bệnh tật, công việc đang thực hiện, đào tạo, việc chấm dứt hợp đồng đã được xác nhận hoặc việc được phân công làm Mod vẫn còn hiệu lực đều có thể cản trở việc lựa chọn. Tab “Nhân viên” sẽ hiển thị lý do cụ thể.&#10;Việc tuyển dụng đầu tiên sẽ nâng cao uy tín của nhà tuyển dụng thêm một điểm. Các giá trị cao không phải lúc nào cũng tự động tốt hơn: một ứng viên có kinh nghiệm thường có chi phí cao hơn, trong khi một người mới vào nghề với mức lương thấp hơn lại cần nhiều thời gian hơn để phát triển và đào tạo." />
+        <e k="ui_pmHelpTopic15Body" v="Trong tab “Ứng viên”, hãy mở cuộc phỏng vấn và chọn “Kinh nghiệm”, “Độ tin cậy” hoặc “Lòng trung thành”. Câu hỏi đã chọn và câu trả lời sẽ xuất hiện trong diễn biến cuộc phỏng vấn. Sau tối đa ba câu hỏi, cuộc phỏng vấn sẽ kết thúc và mức lương mong muốn sẽ được hiển thị. Dựa trên các giá trị chính xác đã biết, phạm vi dao động và mức độ không chắc chắn còn lại, hãy đưa ra quyết định về việc tuyển dụng.&#10;Sau khi tuyển dụng, các giá trị chưa được làm rõ hoàn toàn sẽ tạm thời giữ nguyên ở mức thông tin mới nhất. Lên kế hoạch cho các ca làm việc thực tế: Sau 20 đến 35 phút hoạt động thời gian thực, các giá trị sẽ được tiết lộ hoàn toàn. Nhân viên phải sẵn sàng làm việc; bệnh tật, công việc đang thực hiện, khóa đào tạo hoặc thông báo chấm dứt hợp đồng đã được xác nhận có thể cản trở việc tuyển dụng.&#10;Việc tuyển dụng sẽ nâng cao uy tín của nhà tuyển dụng thêm một điểm. Các giá trị cao không phải lúc nào cũng tự động tốt hơn: Một ứng viên có kinh nghiệm thường có chi phí cao hơn, trong khi một người mới vào nghề với mức lương thấp hơn lại cần nhiều thời gian hơn để phát triển và đào tạo." />
     <e k="ui_pmHelpTopic16Title" v="Các hoạt động và phân loại chuyên môn" />
     <e k="ui_pmHelpTopic16Body" v="Việc phân loại được xác định dựa trên phương tiện, thiết bị và – nếu có – vật liệu đã được bón. Việc phân loại vật liệu trực tiếp được ưu tiên: Hạt giống thuộc về công đoạn gieo hạt; thuốc diệt cỏ thuộc về bảo vệ thực vật; phân khoáng, phân lỏng, phân chuồng, bã lên men và phân hữu cơ thuộc về công đoạn bón phân. Vôi không tự động được nhận diện là một danh mục học tập riêng biệt.&#10;Phân loại phương tiện và thiết bị: Máy cày, máy xới đất, máy xới quay, máy xới đĩa, máy lăn và máy cắt cỏ thuộc về công đoạn làm đất. Máy gieo hạt và máy trồng cây thuộc về công đoạn gieo hạt. Máy phun thuốc trừ sâu trên đồng ruộng, nếu không có vật liệu cụ thể, được phân loại vào công đoạn bón phân. Máy gặt đập liên hợp, bộ cắt, máy ép kiện, máy cắt cỏ, xe chở hàng và xe thu gom thuộc về công đoạn thu hoạch. Xe kéo và phương tiện có thể dỡ hàng thuộc về công đoạn vận chuyển.&#10;FollowMe mở rộng khả năng nhận diện thực tế thêm các thiết bị như máy băm, máy thu hoạch khoai tây và củ cải đường, máy lật, máy gom rơm, máy rải phân, thùng chứa phân lỏng, máy xới đất sâu, máy thu gom đá, máy chải và máy xới. Các phương tiện mod có thể được coi là trung lập nếu chuyên môn hóa của chúng không cho phép phân loại rõ ràng. Trong trường hợp đó, hệ thống sẽ không hứa hẹn bất kỳ phần thưởng chuyên môn hóa sai nào.&#10;Bảo vệ máy móc và cách làm việc tiết kiệm là các phần thưởng chung: phần thưởng đầu tiên giảm hao mòn bổ sung do kinh nghiệm gây ra, phần thưởng thứ hai giảm mức tiêu thụ nhiên liệu và vật liệu bổ sung. Hoạt động đã chọn sẽ được hiển thị trong cửa sổ lựa chọn; chuyên môn đang hoạt động phù hợp sẽ được làm nổi bật tại đó." />
     <e k="ui_specialization_transport" v="Giao thông" />
@@ -676,8 +679,247 @@
     <e k="ui_pmHelpTopic02Title" v="Tổng quan và tình hình nhân sự" />
     <e k="ui_pmHelpTopic02Body" v="Bảng tổng quan tóm tắt tình hình hiện tại của trang trại: Nhân viên, nhân viên sẵn sàng làm việc, ứng viên và uy tín của nhà tuyển dụng được hiển thị ở phía trên. Phía dưới là các nhiệm vụ đang thực hiện, bao gồm thông tin về nhân sự, phương tiện, thiết bị và công việc.&#10;Ô “Thay đổi” chỉ hiển thị các sự kiện nhân sự có liên quan, tức là những thay đổi về uy tín của nhà tuyển dụng, kinh nghiệm, độ tin cậy, lòng trung thành, độ tuổi hoặc chuyên môn. Mỗi thông báo đều nêu rõ nguyên nhân, người liên quan và tác động; một mục gồm nhiều dòng vẫn được coi là một thông báo.&#10;“Báo cáo hàng tháng” và “Tổng quan” hiển thị các chỉ số hiện tại và tích lũy suốt thời gian làm việc. Hãy sử dụng bảng tổng quan này để lập kế hoạch nhiệm vụ nhanh chóng; các chi tiết, quyết định và lịch sử công việc được trình bày trong các trang chuyên môn riêng biệt." />
     <e k="ui_pmHelpTopic03Title" v="Thị trường lao động và tuyển dụng" />
-    <e k="ui_pmHelpTopic03Body" v="Một vòng chơi mới bắt đầu với bốn ứng viên. Đồng thời, trên thị trường chỉ có thể có tối đa tám ứng viên. Vào mỗi đầu tháng, tối đa ba vị trí mới sẽ được xác định ngẫu nhiên; xác suất cho mỗi vị trí là 15% + 0,7 × điểm uy tín của nhà tuyển dụng. Với 60 điểm uy tín, xác suất là 57%; với 100 điểm uy tín, xác suất là 85% cho mỗi vị trí. Nếu thị trường trống, hệ thống sẽ tạo ra ít nhất một ứng viên mới.&#10;Ứng viên chắc chắn vẫn có mặt trong tháng được tạo ra. Sau lần chuyển tháng đầu tiên, xác suất rời đi của họ dao động từ 10–30% tùy theo chất lượng; sau lần thứ hai là 30–50%; và đến lần chuyển tháng thứ ba là 100%. Những hồ sơ chất lượng cao có thể biến mất sớm hơn vì chất lượng của họ làm tăng xác suất rời đi.&#10;Ứng viên trong độ tuổi từ 18–65, có ngày sinh cố định và tiếp tục già đi. Nền tảng nghề nghiệp bao gồm: doanh nghiệp gia đình, trang trại bò sữa, công ty dịch vụ nông nghiệp, canh tác cây trồng, trang trại hỗn hợp, logistics, xưởng sửa chữa máy móc nông nghiệp và công việc văn phòng. Tuổi tác và nền tảng nghề nghiệp chủ yếu ảnh hưởng đến kinh nghiệm và kiến thức chuyên môn sẵn có.&#10;Mức lương mong muốn dựa trên kinh nghiệm và độ tin cậy, có độ lệch ngẫu nhiên từ 96–106% và bị ảnh hưởng bởi uy tín của nhà tuyển dụng. Uy tín thấp làm tăng mức lương mong muốn, uy tín cao làm giảm mức lương mong muốn. Trước khi tuyển dụng, sẽ xuất hiện một thông báo xác nhận; việc tuyển dụng làm tăng uy tín thêm 1 điểm." />
+        <e k="ui_pmHelpTopic03Body" v="Tất cả ứng viên đều được tạo ra trong một thị trường toàn cầu. Sau đó, uy tín của nhà tuyển dụng sẽ quyết định ứng viên đó sẽ được đề xuất cho những trang trại nào. Do đó, các trang trại có thể nhận được những đề xuất khác nhau; nếu cùng một người được đề xuất cho nhiều trang trại, người đó sẽ có cùng thông tin cơ bản, các giá trị và cùng khoảng giá trị ban đầu ở mọi nơi. Ngay khi một trang trại tuyển dụng người đó, người đó sẽ biến mất khỏi danh sách của tất cả các trang trại còn lại.&#10;Ban đầu, kinh nghiệm, độ tin cậy, lòng trung thành, cấp bậc và mức lương mong muốn đều được ẩn đi. Đối với mỗi ứng viên, chỉ có đúng một trong ba giá trị được hiển thị dưới dạng khoảng dao động ngẫu nhiên 30 điểm phần trăm. Giá trị thực luôn nằm trong khoảng đó, nhưng không nhất thiết phải ở giữa. Tên, tuổi, nền tảng nghề nghiệp, sơ yếu lý lịch và chuyên môn vẫn được hiển thị.&#10;Một cuộc phỏng vấn tuyển dụng bao gồm tối đa ba câu hỏi. Câu hỏi đầu tiên về một giá trị chưa biết sẽ tiết lộ một khoảng dao động 30 điểm; việc hỏi lại sẽ thu hẹp khoảng này xuống còn 15 điểm và câu hỏi tiếp theo sẽ cho biết giá trị chính xác. Các giá trị đã biết trước đó không thể được chọn lại. Cuộc phỏng vấn có thể bị tạm dừng và tiếp tục sau đó với cùng trạng thái. Mức lương mong muốn sẽ được hiển thị cùng với câu trả lời cuối cùng." />
     <e k="ui_pmHelpTopic04Title" v="Hồ sơ nhân viên, giá trị và tình trạng" />
-    <e k="ui_pmHelpTopic04Body" v="Kinh nghiệm, độ tin cậy và lòng trung thành đều được đánh giá trên thang điểm từ 0 đến 100. Con số luôn hiển thị rõ ràng; các thanh biểu đồ giúp so sánh nhanh chóng.&#10;Cấp bậc chỉ dựa hoàn toàn vào kinh nghiệm: Nhân viên hỗ trợ 0–44, Chuyên viên 45–74, Chuyên gia 75–100. Kinh nghiệm quyết định tốc độ làm việc, mức hao mòn thêm và mức tiêu hao thêm. Độ tin cậy ảnh hưởng đến những đợt sụt giảm hiệu suất ngắn hạn, bệnh tật, diễn biến hàng tháng và rủi ro phải ngừng công việc. Lòng trung thành thể hiện mức độ gắn bó với doanh nghiệp và ảnh hưởng đến các cảnh báo, tranh chấp về lương và việc tự nguyện nghỉ việc." />
+        <e k="ui_pmHelpTopic04Body" v="Kinh nghiệm, độ tin cậy và lòng trung thành đều có thang điểm từ 0 đến 100. Trong thời gian các cuộc phỏng vấn tuyển dụng vẫn đang diễn ra, các chỉ số này của ứng viên chỉ được hiển thị dựa trên tiến độ phỏng vấn đã biết. Xếp hạng chỉ phụ thuộc hoàn toàn vào kinh nghiệm và do đó sẽ chỉ xuất hiện khi mức kinh nghiệm được xác định chính xác.&#10;Sau khi được tuyển dụng, các chỉ số chưa được xác định ban đầu sẽ vẫn được ẩn đi. Trong quá trình thực hiện nhiệm vụ thực tế, nhân viên sẽ tích lũy kinh nghiệm theo thời gian thực. Sau một khoảng thời gian được quy định cho từng người từ 20 đến 35 phút, cả ba chỉ số này sẽ được biết đầy đủ. Thời gian nghỉ ngơi và thời gian không tham gia nhiệm vụ sẽ không được tính. Tiến trình này sẽ được lưu trong bảng điểm.&#10;Kinh nghiệm quyết định tốc độ làm việc, mức hao mòn bổ sung và mức tiêu hao bổ sung. Độ tin cậy ảnh hưởng đến các sự sụt giảm hiệu suất ngắn hạn, bệnh tật, sự phát triển hàng tháng và rủi ro ngừng nhiệm vụ. Lòng trung thành mô tả mức độ gắn bó với công ty và ảnh hưởng đến các cảnh báo, tranh chấp về lương và việc tự nguyện nghỉ việc." />
+        <e k="ui_hpSetting_applicantInterviews" v="Phỏng vấn tuyển dụng" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="Ẩn các thông tin về ứng viên. Trong tối đa ba vòng hỏi đáp, các lĩnh vực hoặc con số cụ thể sẽ được tiết lộ; mức lương mong muốn sẽ được nêu ra vào cuối buổi phỏng vấn." />
+        <e k="ui_pmValueUnknown" v="Không rõ" />
+        <e k="ui_hpInterviewPrompt" v="Bạn muốn hỏi gì?" />
+        <e k="ui_hpInterviewTitle" v="Buổi phỏng vấn xin việc" />
+        <e k="ui_hpInterviewTopicExperience" v="Kinh nghiệm" />
+        <e k="ui_hpInterviewTopicReliability" v="Độ tin cậy" />
+        <e k="ui_hpInterviewTopicLoyalty" v="Lòng trung thành" />
+        <e k="ui_hpInterviewRound" v="Phiên hỏi đáp thứ %d trong tổng số 3" />
+        <e k="ui_hpInterviewLeader" v="Cậu là người dẫn dắt cuộc trò chuyện." />
+        <e k="ui_hpInterviewObserver" v="Bạn đang theo dõi cuộc trò chuyện." />
+        <e k="ui_hpInterviewFinished" v="Buổi phỏng vấn đã kết thúc." />
+        <e k="ui_hpInterviewWageIntro" v="Mức lương mong muốn của tôi:" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="Bạn có những kinh nghiệm thực tế nào để áp dụng vào công việc tại trang trại của chúng tôi?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="Anh/chị có thể mô tả chi tiết hơn về kinh nghiệm thực tế của mình không?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="Làm thế nào để quý vị đảm bảo rằng chúng tôi có thể tin tưởng vào quý vị trong công việc hàng ngày?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="Bạn có thể mô tả cụ thể hơn về mức độ đáng tin cậy của mình khi làm việc độc lập như thế nào?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="Điều gì là quan trọng đối với quý vị để quý vị tiếp tục gắn bó lâu dài với một doanh nghiệp?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="Theo ông/bà, mức độ gắn bó lâu dài của ông/bà với một nhà tuyển dụng có thể được đánh giá cụ thể như thế nào?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="Sự nghiệp của tôi cho đến nay vẫn còn khá đơn giản." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="Tôi đã đảm nhận một số nhiệm vụ phù hợp rồi." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="Tôi có nhiều kinh nghiệm thực tế phong phú." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="Khi thời gian gấp rút, thỉnh thoảng tôi cần những thỏa thuận rõ ràng." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="Thông thường, người ta có thể tin tưởng vào các thỏa thuận và các nhiệm vụ đã hoàn thành." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="Tôi làm việc rất tận tâm và luôn tuân thủ nghiêm túc các cam kết của mình." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="Khi bắt đầu một công việc mới, ban đầu tôi thường đưa ra quyết định trong thời gian ngắn." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="Nếu sự hợp tác diễn ra suôn sẻ, tôi hoàn toàn có thể hình dung được việc hợp tác trong một thời gian dài." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="Sự ổn định và mối quan hệ hợp tác lâu dài là điều rất quan trọng đối với tôi." />
+        <e k="ui_hpInterviewAnswerIntro1" v="Tôi sẽ mô tả như sau:" />
+        <e k="ui_hpInterviewAnswerIntro2" v="Theo quan điểm của tôi, điều này là đúng:" />
+        <e k="ui_hpInterviewAnswerIntro3" v="Đánh giá sau đây là phù hợp nhất:" />
+        <e k="ui_hpInterviewOpen" v="Buổi phỏng vấn xin việc" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="Bạn có những kinh nghiệm thực tế nào để áp dụng vào công việc tại trang trại của chúng tôi?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="Cho đến nay, anh/chị đã đảm nhận những công việc nào trong lĩnh vực nông nghiệp?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="Bạn đã quen thuộc với những công việc nào tại một trang trại nông nghiệp?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Bạn có thể mô tả chi tiết hơn một chút về những nhiệm vụ nào trong số đó mà bạn đã tự mình hoàn thành không?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="Với những công việc nào, anh/chị đã cảm thấy tự tin, và còn những công việc nào anh/chị cần phải làm quen thêm?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="Theo anh/chị, những kinh nghiệm nào mà anh/chị đã có cho đến nay sẽ đặc biệt hữu ích tại trang trại của chúng tôi?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="Làm thế nào để quý vị đảm bảo rằng chúng tôi có thể tin tưởng vào quý vị trong công việc hàng ngày?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="Bạn xử lý các nhiệm vụ cần hoàn thành đúng hạn như thế nào?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="Nếu có sự cố bất ngờ xảy ra trong lúc làm việc, chúng tôi có thể mong đợi điều gì từ quý vị?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="Nếu nhận ra rằng mình không thể tuân thủ một thỏa thuận nào đó, bạn sẽ làm gì?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="Làm thế nào để bạn có thể nắm bắt được toàn bộ tình hình khi có nhiều nhiệm vụ cần hoàn thành cùng lúc?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Bạn có thể mô tả cụ thể hơn về cách bạn thể hiện tinh thần trách nhiệm khi làm việc độc lập không?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="Điều gì là quan trọng đối với quý vị để quý vị tiếp tục gắn bó lâu dài với một doanh nghiệp?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="Quý vị mong muốn điều gì từ một mối quan hệ hợp tác lâu dài tại trang trại của chúng tôi?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="Điều gì cần phải phù hợp với anh/chị để anh/chị có thể làm việc tại công ty chúng tôi trong thời gian dài?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="Đối với bạn, mối quan hệ lâu dài với một nhà tuyển dụng đóng vai trò như thế nào?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="Theo ông/bà, mức độ sẵn sàng của ông/bà trong việc tiếp tục gắn bó với một doanh nghiệp ngay cả trong những thời điểm khó khăn là như thế nào?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="Theo ông/bà, yếu tố nào sẽ là quyết định để tiếp tục hợp tác hay tìm hướng đi mới?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="Cho đến nay, tôi chủ yếu giúp đỡ trong những công việc đơn giản. Đối với những nhiệm vụ mới, tôi sẽ tiếp cận từng bước một." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="Kinh nghiệm thực tế của tôi vẫn còn hạn chế, nhưng tôi rất thích học hỏi và sẵn sàng hỏi khi có điều gì chưa rõ." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="Tôi đã biết một số công việc thường ngày ở trang trại, nhưng vẫn còn nhiều điều tôi cần phải học hỏi trong quá trình làm việc hàng ngày." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="Tôi đã đảm nhận nhiều công việc khác nhau tại một cơ sở sản xuất và hoàn thành tốt các nhiệm vụ quen thuộc." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="Tôi đã từng làm việc với một số máy móc và quy trình làm việc. Khi phải thực hiện các nhiệm vụ mới, đôi khi tôi cần được hướng dẫn sơ qua." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="Tôi có kinh nghiệm thực tế, dù chắc chắn vẫn còn những lĩnh vực mà tôi cần học hỏi thêm." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="Tôi đã làm việc tại các trang trại trong một thời gian dài và tự mình hoàn thành nhiều công việc trong quá trình đó." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="Tôi rất thành thạo các công việc và máy móc thông thường. Tuy nhiên, khi gặp các quy trình mới, tôi vẫn sẽ xem xét kỹ lưỡng trước." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="Tôi đã có cơ hội làm quen với nhiều môi trường làm việc và phương thức làm việc khác nhau, và thường có thể nhanh chóng thích nghi với các nhiệm vụ mới." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="Khi có quá nhiều việc phải làm cùng lúc, những thỏa thuận rõ ràng sẽ giúp tôi rất nhiều. Nhờ đó, tôi sẽ biết rõ hơn việc nào cần ưu tiên làm trước." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="Tôi cố gắng hoàn thành công việc của mình một cách chu đáo. Tuy nhiên, đôi khi tôi vẫn cần phải nỗ lực hơn nữa để theo dõi mọi việc kịp thời." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="Khi gặp những nhiệm vụ mới hoặc chưa quen, tôi thường hỏi lại trong quá trình làm để đảm bảo không bỏ sót điều gì quan trọng." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="Tôi luôn chú trọng đến các thỏa thuận. Nếu thấy trước rằng có điều gì đó sẽ không thành công, tôi sẽ thông báo càng sớm càng tốt." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="Tôi thực hiện các nhiệm vụ của mình một cách cẩn thận. Khi các ưu tiên chưa rõ ràng, tôi thường sẽ trao đổi lại để thống nhất." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="Nói chung, các bạn có thể tin tưởng vào tôi. Khi công việc bận rộn, việc trao đổi nhanh với tôi sẽ rất hữu ích." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="Khi tôi nhận một nhiệm vụ, tôi sẽ đảm nhận và hoàn thành nó. Nếu có vấn đề gì, tôi sẽ đề cập đến ngay từ sớm." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="Tôi luôn theo dõi các lịch hẹn và thỏa thuận, đồng thời kiểm tra lại vào cuối ngày để đảm bảo mọi việc đã được hoàn tất." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="Ngay cả khi làm việc độc lập, tôi vẫn luôn coi trọng việc tuân thủ các cam kết và thông báo cho người khác về những thay đổi quan trọng." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="Trước tiên, tôi muốn xem công việc ở đây diễn ra như thế nào. Sau đó, tôi sẽ có thể quyết định rõ hơn về hướng đi tiếp theo." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="Tôi luôn cởi mở với những cơ hội mới và không muốn đưa ra quyết định quá sớm khi làm việc cho một nhà tuyển dụng mới." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="Đối với tôi, sự hợp tác phải phù hợp với cuộc sống hàng ngày. Nếu hoàn cảnh của tôi thay đổi, tôi cũng sẽ xem xét các phương án khác." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="Nếu việc hợp tác diễn ra suôn sẻ và các điều kiện phù hợp, tôi có thể cân nhắc ở lại lâu hơn." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="Một môi trường làm việc đáng tin cậy rất quan trọng đối với tôi. Thời gian tôi ở lại cũng phụ thuộc vào việc chúng ta hòa hợp với nhau như thế nào." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="Tôi mong muốn có một mối quan hệ hợp tác tốt đẹp và trước mắt muốn ổn định công việc. Nếu cả hai bên đều thấy phù hợp, tôi có rất nhiều lý do để ở lại." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="Tôi coi trọng sự ổn định và đang tìm kiếm một doanh nghiệp mà tôi có thể cống hiến lâu dài." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="Điều quan trọng với tôi là được là một phần của một đội ngũ đáng tin cậy. Nếu chúng ta hợp tác tốt với nhau, tôi không muốn phải thay đổi liên tục." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="Tôi rất muốn được làm việc tại một trang trại trong thời gian dài hơn và cùng với trang trại này tích lũy kinh nghiệm." />
+        <e k="ui_pmNewApplicantIntro1_1" v="Trước đây, ZXQNAMEQXZ từng làm việc tại một trang trại gia đình ở vùng nông thôn." />
+        <e k="ui_pmNewApplicantIntro1_2" v="Trước khi nộp đơn xin việc, ZXQNAMEQXZ đã làm việc tại một trang trại gia đình ở vùng nông thôn." />
+        <e k="ui_pmNewApplicantIntro1_3" v="Trong quá trình làm việc của ZXQNAMEQXZ có một khoảng thời gian làm việc tại một trang trại gia đình ở vùng nông thôn." />
+        <e k="ui_pmNewApplicantIntro2_1" v="Trước đây, ZXQNAMEQXZ từng làm việc tại một trang trại chăn nuôi bò sữa quy mô nhỏ." />
+        <e k="ui_pmNewApplicantIntro2_2" v="Trước khi nộp đơn xin việc, ZXQNAMEQXZ đã làm việc tại một trang trại chăn nuôi bò sữa quy mô nhỏ." />
+        <e k="ui_pmNewApplicantIntro2_3" v="Trong quá trình làm việc của ZXQNAMEQXZ có một khoảng thời gian làm việc tại một trang trại bò sữa quy mô nhỏ." />
+        <e k="ui_pmNewApplicantIntro3_1" v="Trước đây, ZXQNAMEQXZ từng làm việc tại một công ty dịch vụ." />
+        <e k="ui_pmNewApplicantIntro3_2" v="Trước khi nộp đơn xin việc, ZXQNAMEQXZ đã làm việc tại một công ty dịch vụ nông nghiệp." />
+        <e k="ui_pmNewApplicantIntro3_3" v="Trong quá trình làm việc của ZXQNAMEQXZ có một khoảng thời gian làm việc tại một công ty dịch vụ nông nghiệp." />
+        <e k="ui_pmNewApplicantIntro4_1" v="Trước đây, ZXQNAMEQXZ từng làm việc tại một trang trại trồng trọt." />
+        <e k="ui_pmNewApplicantIntro4_2" v="Trước khi nộp đơn xin việc, ZXQNAMEQXZ đã làm việc tại một trang trại trồng trọt." />
+        <e k="ui_pmNewApplicantIntro4_3" v="Trong quá trình làm việc của ZXQNAMEQXZ có một khoảng thời gian làm việc tại một trang trại trồng trọt." />
+        <e k="ui_pmNewApplicantIntro5_1" v="Trước đây, ZXQNAMEQXZ từng làm việc tại một cơ sở sản xuất kết hợp." />
+        <e k="ui_pmNewApplicantIntro5_2" v="Trước khi nộp đơn xin việc, ZXQNAMEQXZ đã làm việc tại một cơ sở sản xuất kết hợp." />
+        <e k="ui_pmNewApplicantIntro5_3" v="Trong quá trình phát triển sự nghiệp của ZXQNAMEQXZ có một khoảng thời gian làm việc tại một cơ sở sản xuất đa ngành." />
+        <e k="ui_pmNewApplicantIntro6_1" v="Trước đây, ZXQNAMEQXZ từng làm việc tại một công ty logistics." />
+        <e k="ui_pmNewApplicantIntro6_2" v="Trước khi nộp đơn xin việc, ZXQNAMEQXZ đã từng làm việc tại một công ty logistics." />
+        <e k="ui_pmNewApplicantIntro6_3" v="Trong quá trình làm việc của ZXQNAMEQXZ có một khoảng thời gian làm việc tại một công ty logistics." />
+        <e k="ui_pmNewApplicantIntro7_1" v="Trước đây, ZXQNAMEQXZ từng làm việc tại một xưởng sửa chữa máy móc nông nghiệp." />
+        <e k="ui_pmNewApplicantIntro7_2" v="Trước khi nộp đơn xin việc, ZXQNAMEQXZ đã làm việc tại một xưởng sửa chữa máy móc nông nghiệp." />
+        <e k="ui_pmNewApplicantIntro7_3" v="Trong quá trình làm việc của ZXQNAMEQXZ có một khoảng thời gian làm việc tại một xưởng sửa chữa máy móc nông nghiệp." />
+        <e k="ui_pmNewApplicantIntro8_1" v="Trước đây, ZXQNAMEQXZ từng làm việc trong lĩnh vực văn phòng." />
+        <e k="ui_pmNewApplicantIntro8_2" v="Trước khi nộp đơn xin việc, ZXQNAMEQXZ đã từng làm việc trong một vị trí văn phòng." />
+        <e k="ui_pmNewApplicantIntro8_3" v="Trong quá trình làm việc của ZXQNAMEQXZ có một khoảng thời gian làm việc tại văn phòng." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ trước đây làm việc tại một trang trại gia đình ở vùng nông thôn và đã gia nhập trang trại này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Trước khi làm việc tại trang trại, ZXQNAMEQXZ đã làm việc tại một trang trại gia đình ở nông thôn. Thời gian làm việc tại đây là ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ đã gia nhập đội ngũ được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một trang trại gia đình ở vùng nông thôn." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ đã làm việc tại trang trại này được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một trang trại gia đình ở vùng nông thôn." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ trước đây làm việc tại một trang trại gia đình ở vùng nông thôn và đã làm việc tại đây được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ trước đây làm việc tại một trang trại chăn nuôi bò sữa quy mô nhỏ và đã gia nhập trang trại này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Trước khi làm việc tại trang trại này, ZXQNAMEQXZ đã làm việc tại một trang trại chăn nuôi bò sữa quy mô nhỏ. Thời gian làm việc tại trang trại là ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ đã gia nhập đội ngũ được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một trang trại bò sữa quy mô nhỏ." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ đã làm việc tại trang trại này được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một trang trại bò sữa quy mô nhỏ." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ trước đây làm việc tại một trang trại bò sữa quy mô nhỏ và đã làm việc tại trang trại này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ trước đây làm việc tại một công ty dịch vụ và đã gia nhập doanh nghiệp này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Trước khi làm việc tại trang trại, ZXQNAMEQXZ đã làm việc tại một công ty dịch vụ nông nghiệp. Thời gian làm việc tại công ty là ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ đã gia nhập đội ngũ được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một công ty dịch vụ nông nghiệp." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ đã làm việc tại trang trại được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một công ty dịch vụ nông nghiệp." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ trước đây làm việc tại một công ty gia công và đã làm việc tại công ty này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ trước đây làm việc tại một trang trại trồng trọt và đã gia nhập trang trại này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Trước khi làm việc tại trang trại, ZXQNAMEQXZ đã làm việc tại một trang trại trồng trọt. Thời gian làm việc tại đây là ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ đã gia nhập đội ngũ được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một trang trại trồng trọt." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ đã làm việc tại trang trại này được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một trang trại trồng trọt." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ trước đây làm việc tại một trang trại trồng trọt và đã làm việc tại cơ sở này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ trước đây từng làm việc tại một cơ sở sản xuất hỗn hợp và đã gia nhập cơ sở này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Trước khi làm việc tại trang trại, ZXQNAMEQXZ đã làm việc tại một trang trại đa ngành. Thời gian làm việc tại đây là ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ đã gia nhập đội ngũ được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một cơ sở sản xuất hỗn hợp." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ đã làm việc tại trang trại này được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một trang trại đa ngành." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ trước đây hoạt động trong một cơ sở sản xuất hỗn hợp và đã đi vào hoạt động được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ trước đây từng làm việc tại một doanh nghiệp logistics và đã gia nhập doanh nghiệp này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Trước khi làm việc tại trang trại, ZXQNAMEQXZ từng làm việc tại một công ty logistics. Thời gian làm việc tại công ty là ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ đã gia nhập đội ngũ được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một công ty logistics." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ đã làm việc tại trang trại được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một công ty logistics." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ trước đây làm việc tại một công ty logistics và đã làm việc tại công ty này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ trước đây làm việc tại một xưởng sửa chữa máy móc nông nghiệp và đã gia nhập công ty được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Trước khi làm việc tại trang trại, ZXQNAMEQXZ từng làm việc tại một xưởng sửa chữa máy móc nông nghiệp. Thời gian làm việc tại công ty là ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ đã gia nhập đội ngũ được ZXQMONTHSQXZ tháng và trước đây từng làm việc tại một xưởng sửa chữa máy móc nông nghiệp." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ đã làm việc tại trang trại được ZXQMONTHSQXZ tháng và trước đó từng làm việc tại một xưởng sửa chữa máy móc nông nghiệp." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ trước đây làm việc tại một xưởng sửa chữa máy móc nông nghiệp và đã làm việc tại công ty này được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ trước đây làm việc trong lĩnh vực văn phòng và đã gia nhập công ty được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Trước khi làm việc tại trang trại, ZXQNAMEQXZ từng làm việc văn phòng. Thời gian làm việc tại công ty là ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ đã gia nhập đội ngũ được ZXQMONTHSQXZ tháng và trước đây từng làm việc trong lĩnh vực hành chính văn phòng." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ đã làm việc tại trang trại được ZXQMONTHSQXZ tháng và trước đó từng làm việc văn phòng." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ trước đây làm việc văn phòng và đã làm việc tại công ty được ZXQMONTHSQXZ tháng." />
+        <e k="ui_pmNewApplicantAge1_1" v="Ở tuổi ZXQAGEQXZ, con đường sự nghiệp vẫn còn ở giai đoạn khởi đầu." />
+        <e k="ui_pmNewApplicantAge1_2" v="Khi đã được ZXQAGEQXZ tuổi, các em có thể tích lũy thêm kinh nghiệm thực tế tại trang trại." />
+        <e k="ui_pmNewApplicantAge1_3" v="Ở độ tuổi ZXQAGEQXZ, đây là cơ hội để phát triển sự nghiệp." />
+        <e k="ui_pmNewApplicantAge2_1" v="Ở độ tuổi ZXQAGEQXZ, kiến thức nghề nghiệp có thể được củng cố thêm." />
+        <e k="ui_pmNewApplicantAge2_2" v="Ở độ tuổi ZXQAGEQXZ, những kinh nghiệm tích lũy được cho đến nay có thể được bổ sung bằng những nhiệm vụ mới." />
+        <e k="ui_pmNewApplicantAge2_3" v="Ở độ tuổi ZXQAGEQXZ, vẫn còn nhiều cơ hội để tiếp tục phát triển con đường sự nghiệp của mình." />
+        <e k="ui_pmNewApplicantAge3_1" v="Ở tuổi ZXQAGEQXZ, anh đã có một chặng đường sự nghiệp khá dài phía sau." />
+        <e k="ui_pmNewApplicantAge3_2" v="Trong suốt quãng thời gian làm việc cho đến nay, tôi đã tích lũy được nhiều kinh nghiệm đa dạng trong suốt ZXQAGEQXZ năm qua." />
+        <e k="ui_pmNewApplicantAge3_3" v="Khi đã có ZXQAGEQXZ năm kinh nghiệm làm việc, người ta có thể dựa vào kinh nghiệm đó; mức độ liên quan của kinh nghiệm này đến lĩnh vực nông nghiệp phụ thuộc vào quá trình phát triển sự nghiệp." />
+        <e k="ui_pmNewApplicantAge4_1" v="Ở tuổi ZXQAGEQXZ, anh đã có một chặng đường sự nghiệp khá dài." />
+        <e k="ui_pmNewApplicantAge4_2" v="Ở độ tuổi ZXQAGEQXZ, người đó đã có kinh nghiệm làm việc nói chung, nhưng điều này không nhất thiết có nghĩa là kinh nghiệm thực tế trong lĩnh vực nông nghiệp." />
+        <e k="ui_pmNewApplicantAge4_3" v="Trong suốt ZXQAGEQXZ năm cuộc đời, người ta đã tích lũy được nhiều kinh nghiệm khác nhau; lợi ích của những kinh nghiệm này trong công việc tại trang trại phụ thuộc vào các hoạt động đã thực hiện trước đó." />
+        <e k="ui_pmNewApplicantMarket1_1" v="Sản phẩm này đã được tung ra thị trường từ tháng này." />
+        <e k="ui_pmNewApplicantMarket1_2" v="Việc tìm kiếm một công việc mới mới chỉ bắt đầu cách đây không lâu." />
+        <e k="ui_pmNewApplicantMarket1_3" v="Thông báo tuyển dụng đã được đăng tải trong tháng này." />
+        <e k="ui_pmNewApplicantMarket2_1" v="Đơn xin việc đã được đăng tải trên thị trường được một tháng rồi." />
+        <e k="ui_pmNewApplicantMarket2_2" v="Việc tìm kiếm một công việc mới đã kéo dài được một tháng rồi." />
+        <e k="ui_pmNewApplicantMarket2_3" v="Thông báo tuyển dụng đã được công bố cho các doanh nghiệp quan tâm từ một tháng nay." />
+        <e k="ui_pmNewApplicantMarket3_1" v="Đơn đăng ký đã được đưa ra thị trường được ZXQMONTHSQXZ tháng rồi." />
+        <e k="ui_pmNewApplicantMarket3_2" v="Việc tìm kiếm một công việc mới đã kéo dài suốt ZXQMONTHSQXZ tháng nay." />
+        <e k="ui_pmNewApplicantMarket3_3" v="Hồ sơ ứng tuyển đã được mở cho các doanh nghiệp quan tâm từ ZXQMONTHSQXZ tháng nay." />
+        <e k="ui_pmNewWorkerExperience1_1" v="Kinh nghiệm thực tế mới chỉ đang được tích lũy; nhiều công việc vẫn cần sự hướng dẫn." />
+        <e k="ui_pmNewWorkerExperience1_2" v="Nhiều quy trình làm việc tại trang trại vẫn còn khá mới mẻ." />
+        <e k="ui_pmNewWorkerExperience1_3" v="Công việc thực tế hiện vẫn đang trong giai đoạn làm quen ban đầu." />
+        <e k="ui_pmNewWorkerExperience1_4" v="Các nhiệm vụ cơ bản vẫn cần được rèn luyện và hướng dẫn." />
+        <e k="ui_pmNewWorkerExperience1_5" v="Các quy trình thực hành sẽ được học từng bước một." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Một số kiến thức cơ bản đã được nắm vững, tuy nhiên khi giải quyết các bài toán phức tạp hơn thì vẫn cần sự hỗ trợ." />
+        <e k="ui_pmNewWorkerExperience2_2" v="Đã có những kinh nghiệm thực tiễn ban đầu; tuy nhiên, ở một số lĩnh vực vẫn còn thiếu kinh nghiệm thực tế." />
+        <e k="ui_pmNewWorkerExperience2_3" v="Các nhiệm vụ quen thuộc ngày càng được thực hiện tốt hơn, trong khi những công việc phức tạp hơn đòi hỏi phải có thêm thời gian làm quen." />
+        <e k="ui_pmNewWorkerExperience2_4" v="Các kiến thức cơ bản đã được nắm vững, nhưng để đảm bảo các quy trình diễn ra an toàn thì vẫn cần phải luyện tập thêm." />
+        <e k="ui_pmNewWorkerExperience2_5" v="Các kiến thức thực tiễn đã được tích lũy và có thể tiếp tục được củng cố trong công việc hàng ngày." />
+        <e k="ui_pmNewWorkerExperience3_1" v="Kinh nghiệm vững vàng giúp bạn có thể tự mình hoàn thành nhiều công việc thông thường." />
+        <e k="ui_pmNewWorkerExperience3_2" v="Hầu hết các công việc hàng ngày đều được thực hiện một cách an toàn." />
+        <e k="ui_pmNewWorkerExperience3_3" v="Đã có nền tảng thực tiễn; các quy trình quen thuộc được thực hiện một cách độc lập." />
+        <e k="ui_pmNewWorkerExperience3_4" v="Trong các công việc thường ngày, có thể thấy một thói quen làm việc rất ngăn nắp." />
+        <e k="ui_pmNewWorkerExperience3_5" v="Đã quen thuộc với các lĩnh vực công việc khác nhau và có thể tự chủ trong việc hoàn thành chúng." />
+        <e k="ui_pmNewWorkerExperience4_1" v="Kinh nghiệm thực tiễn phong phú giúp sản phẩm có thể được ứng dụng đa dạng." />
+        <e k="ui_pmNewWorkerExperience4_2" v="Ngay cả những công việc đòi hỏi kỹ năng cao hơn cũng nằm trong phạm vi nhiệm vụ quen thuộc." />
+        <e k="ui_pmNewWorkerExperience4_3" v="Việc thực hiện thường xuyên các công việc sẽ giúp bạn tự chủ trong việc đảm nhận các quy trình làm việc khác nhau." />
+        <e k="ui_pmNewWorkerExperience4_4" v="Kinh nghiệm thể hiện qua khả năng xử lý thành thạo các nhiệm vụ đa dạng." />
+        <e k="ui_pmNewWorkerExperience4_5" v="Nhiều quy trình thực tế đã trở nên quen thuộc, ngay cả khi công việc thay đổi." />
+        <e k="ui_pmNewWorkerExperience5_1" v="Chúng tôi sở hữu một lượng kinh nghiệm thực tiễn vô cùng phong phú." />
+        <e k="ui_pmNewWorkerExperience5_2" v="Kinh nghiệm phong phú cũng giúp ích rất nhiều trong việc giải quyết các nhiệm vụ phức tạp và chưa từng gặp trước đây." />
+        <e k="ui_pmNewWorkerExperience5_3" v="Có sẵn những kiến thức đặc biệt toàn diện dành cho công việc tại trang trại." />
+        <e k="ui_pmNewWorkerExperience5_4" v="Kinh nghiệm thực tiễn lâu năm và đa dạng mang lại sự tự tin cao trong công việc hàng ngày." />
+        <e k="ui_pmNewWorkerExperience5_5" v="Một loạt các công việc nông nghiệp được thực hiện một cách thành thạo với sự thuần thục đặc biệt." />
+        <e k="ui_pmNewWorkerReliability1_1" v="Việc phối hợp và thực hiện các nhiệm vụ một cách cẩn thận đòi hỏi sự chú ý đặc biệt." />
+        <e k="ui_pmNewWorkerReliability1_2" v="Trong công việc hàng ngày, việc kiểm tra thường xuyên và các hướng dẫn rõ ràng là điều cần thiết." />
+        <e k="ui_pmNewWorkerReliability1_3" v="Để lập kế hoạch một cách đáng tin cậy, các nhiệm vụ cần được theo dõi chặt chẽ." />
+        <e k="ui_pmNewWorkerReliability1_4" v="Các thỏa thuận và quy trình làm việc vẫn chưa được tuân thủ một cách nhất quán." />
+        <e k="ui_pmNewWorkerReliability1_5" v="Các nhiệm vụ quan trọng đòi hỏi phải có sự phối hợp và giám sát thêm." />
+        <e k="ui_pmNewWorkerReliability2_1" v="Các thỏa thuận không phải lúc nào cũng được tuân thủ một cách nhất quán; những hướng dẫn rõ ràng sẽ giúp ích." />
+        <e k="ui_pmNewWorkerReliability2_2" v="Độ tin cậy vẫn còn không ổn định; các công việc quan trọng nên được giám sát." />
+        <e k="ui_pmNewWorkerReliability2_3" v="Với những công việc đã quen thuộc, chúng ta có thể hoàn thành được nhiều việc, nhưng việc kiểm tra định kỳ vẫn là cần thiết." />
+        <e k="ui_pmNewWorkerReliability2_4" v="Hiện tại, chúng tôi vẫn đang nỗ lực để thực hiện các nhiệm vụ được giao một cách ổn định hơn." />
+        <e k="ui_pmNewWorkerReliability2_5" v="Việc phân định rõ ràng trách nhiệm và phản hồi thường xuyên sẽ giúp ích rất nhiều trong công việc hàng ngày." />
+        <e k="ui_pmNewWorkerReliability3_1" v="Đối với hầu hết các nhiệm vụ, có thể tin tưởng vào việc thực hiện một cách đáng tin cậy." />
+        <e k="ui_pmNewWorkerReliability3_2" v="Các thỏa thuận thường được tuân thủ và các nhiệm vụ chủ yếu được hoàn thành một cách cẩn thận." />
+        <e k="ui_pmNewWorkerReliability3_3" v="Tính tin cậy tạo nền tảng vững chắc cho việc lập kế hoạch triển khai." />
+        <e k="ui_pmNewWorkerReliability3_4" v="Các nhiệm vụ được giao thường được thực hiện một cách cẩn thận và đáng tin cậy." />
+        <e k="ui_pmNewWorkerReliability3_5" v="Trong công việc hàng ngày, phong cách làm việc chủ yếu là ổn định." />
+        <e k="ui_pmNewWorkerReliability4_1" v="Công việc được thực hiện một cách đáng tin cậy và các thỏa thuận được tuân thủ một cách cẩn thận." />
+        <e k="ui_pmNewWorkerReliability4_2" v="Các nhiệm vụ được giao đều được thực hiện một cách kiên trì và tận tâm." />
+        <e k="ui_pmNewWorkerReliability4_3" v="Cách làm việc cẩn thận giúp việc lập kế hoạch triển khai trở nên đáng tin cậy hơn." />
+        <e k="ui_pmNewWorkerReliability4_4" v="Có thể hoàn toàn tin tưởng vào những cam kết và việc thực hiện công việc." />
+        <e k="ui_pmNewWorkerReliability4_5" v="Chúng tôi luôn theo dõi chặt chẽ các trách nhiệm và nhiệm vụ đã thỏa thuận." />
+        <e k="ui_pmNewWorkerReliability5_1" v="Ngay cả khi phải đối mặt với những nhiệm vụ khó khăn, công việc này vẫn mang lại sự tin cậy vượt trội." />
+        <e k="ui_pmNewWorkerReliability5_2" v="Các thỏa thuận luôn được tuân thủ một cách nhất quán và các nhiệm vụ được hoàn thành một cách đặc biệt cẩn trọng." />
+        <e k="ui_pmNewWorkerReliability5_3" v="Cách thức hoạt động cực kỳ đáng tin cậy này mang lại mức độ chắc chắn cao trong việc lập kế hoạch." />
+        <e k="ui_pmNewWorkerReliability5_4" v="Trách nhiệm được thực hiện với sự cẩn trọng cao độ và sự kiên định phi thường." />
+        <e k="ui_pmNewWorkerReliability5_5" v="Ngay cả những nhiệm vụ phức tạp cũng được hoàn thành một cách đặc biệt đáng tin cậy." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="Hiện tại, mức độ gắn bó với doanh nghiệp còn rất thấp." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="Hiện tại, sự hợp tác này chủ yếu được xem là ngắn hạn." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="Hiện tại, sự gắn bó lâu dài với trang trại vẫn còn khá yếu." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="Hiện tại, việc làm việc liên tục tại công ty đang được xem xét một cách thận trọng." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="Hiện tại, mức độ sẵn sàng tiếp tục làm việc tại công ty trong dài hạn còn khá thấp." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="Mức độ gắn bó với doanh nghiệp vẫn còn khá hạn chế." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="Mối quan hệ hợp tác lâu dài cần có thời gian để phát triển." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="Hiện tại vẫn chưa hình thành được mối liên hệ chặt chẽ với doanh nghiệp." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="Sự hợp tác trong tương lai vẫn còn nhiều cơ hội để xây dựng lòng tin." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="Việc gia hạn thời gian làm việc là điều có thể xem xét, nhưng hiện vẫn đang được cân nhắc một cách thận trọng." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="Có sự gắn bó vững chắc với doanh nghiệp." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="Sự hợp tác này tạo ra một nền tảng vững chắc để nhân viên gắn bó lâu dài với công ty." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="Kết nối với nhà máy luôn ổn định." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="Mức độ trung thành đang ở mức ổn định." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="Có một nền tảng vững chắc để tiếp tục hợp tác trong dài hạn." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="Mối liên hệ với doanh nghiệp rất chặt chẽ." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="Việc hợp tác với trang trại được coi trọng hàng đầu." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="Sự sẵn sàng tiếp tục làm việc tại công ty trong dài hạn là rất rõ rệt." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="Mối quan hệ bền chặt này là minh chứng cho sự hợp tác lâu dài." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="Sự quan tâm đến việc gắn bó lâu dài với công ty là điều có thể nhận thấy rõ ràng." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="Sự gắn bó với doanh nghiệp là vô cùng sâu sắc." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="Sự hợp tác lâu dài với trang trại này có ý nghĩa đặc biệt quan trọng." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="Sự gắn bó với doanh nghiệp là vô cùng sâu sắc." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="Mức độ trung thành và sự sẵn sàng hợp tác lâu dài ở mức rất cao." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="Sự gắn bó với doanh nghiệp và sự phát triển lâu dài của nó là vô cùng mạnh mẽ." />
+        <e k="ui_pmNewWorkerTenureNew" v="Công việc tại trang trại đã bắt đầu trong tháng này." />
+        <e k="ui_pmNewWorkerTenureOne" v="Việc làm tại trang trại bắt đầu cách đây một tháng." />
     </elements>
 </l10n>

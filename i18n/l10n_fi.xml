@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="PROFIILI" />
         <e k="ui_pmHistoryHeader" v="HISTORIA" />
         <e k="ui_button_train" v="Kouluta" />
+        <e k="ui_pmManageSpecialization" v="Hallitse erikoistumista" />
         <e k="ui_pmStatusApplicant" v="Hakija" />
         <e k="ui_pmBirthLine" v="Syntynyt: %s" />
         <e k="ui_pmRankLabel" v="Arvo" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="Aktiivinen" />
         <e k="ui_transportPriorityInactive" v="Ei määritetty" />
         <e k="ui_transportPriorityMoveUp" v="Siirrä ylös" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="Siirrä ylös" />
         <e k="ui_transportPriorityMoveDown" v="Siirrä alas" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="Siirrä alas" />
         <e k="ui_transportPriorityToggle" v="Ota käyttöön/pois" />
         <e k="ui_transportPriorityApply" v="Käytä" />
         <e k="ui_transportPriorityCancel" v="Peruuta" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="toimistotyö" />
         <e k="ui_status_retirementPending" v="jää eläkkeelle kuukauden lopussa" />
         <e k="ui_retirementNotice" v="%s jää eläkkeelle kuukauden lopussa." />
-        <e k="ui_pmTrainingIntro" v="Erikoistumiset parantavat suorituskykyä vastaavassa kategoriassa. Koulutus alkaa vain kuukauden alussa, maksaa rahaa ja tekee työntekijän käytettävissä olemattomaksi kuukauden loppuun asti. Edistyminen hyvitetään valmistumisen jälkeen. Tarjoukset ja hinnat muuttuvat kuukausittain; vain yksi koulutus on sallittu maatalousvuotta kohden maaliskuusta helmikuuhun. Opitut erikoistumiset säilyvät, mutta enintään kaksi bonusta on aktiivisena. Molemmat paikat voivat olla passiivisia. Opittu, passiivinen erikoistuminen voidaan aktivoida vain kerran työntekijää ja maatalousvuotta kohden." />
+        <e k="ui_pmTrainingIntro" v="Kehitä tiimiäsi kohdennetusti: Valitse ”%s” ja valitse sen jälkeen oppimiskategoria. Erikoistumiset parantavat suorituskykyä kyseisellä alueella. Koulutukset alkavat kuun alussa, maksavat rahaa ja sitovat työntekijän kuun loppuun asti. Edistyminen hyvitetään koulutuksen päätyttyä. Tarjoukset ja hinnat vaihtuvat kuukausittain. Jokainen työntekijä voi suorittaa yhden koulutuksen maatalousvuoden aikana maaliskuusta helmikuuhun. Opitut erikoistumiset säilyvät; enintään kaksi bonusta voi olla aktiivisia, ja molemmat paikat voivat olla lepotilassa. Kunkin työntekijän osalta voidaan aktivoida vain yksi opittu, mutta passiivinen erikoistuminen maatalousvuotta kohden." />
         <e k="ui_pmTrainingCategoryHeader" v="Oppimiskategoria" />
         <e k="ui_pmTrainingProgressHeader" v="Edistyminen kohti erikoistumista" />
         <e k="ui_pmTrainingRunning" v="koulutus käynnissä" />
@@ -611,9 +614,9 @@
     <e k="ui_pmHelpTopic02Title" v="Yleiskatsaus ja henkilöstömäärä" />
     <e k="ui_pmHelpTopic02Body" v="Yleiskatsaus esittää tilan nykytilan: työntekijät, käytettävissä olevat työntekijät, hakijat ja työnantajan maine näkyvät yläosassa. Niiden alla näkyvät käynnissä olevat toimeksiannot, joissa on mainittu henkilö, ajoneuvo, laite ja tehtävä.&#10;Muutokset-ruudussa näkyvät vain merkittävät henkilöstötapahtumat, eli muutokset työnantajan maineessa, kokemuksessa, luotettavuudessa, lojaalisuudessa, iässä tai erikoistumisessa. Jokaisessa ilmoituksessa mainitaan syy, asianomainen henkilö ja vaikutus; usean rivin pituinen merkintä lasketaan silti yhdeksi ilmoitukseksi.&#10;Kuukausiraportti ja Yhteenveto esittävät nykyiset ja koko uran kattavat avainluvut. Käytä yleiskatsausta tehtävien nopeaan suunnitteluun; yksityiskohdat, päätökset ja tapahtumahistoria kuuluvat yksittäisille erikoisaloille omistetuille sivuille." />
     <e k="ui_pmHelpTopic03Title" v="Työnhakijamarkkinat ja rekrytointi" />
-    <e k="ui_pmHelpTopic03Body" v="Uusi pelikierros alkaa neljällä hakijalla. Markkinoilla voi olla samanaikaisesti enintään kahdeksan hakijaa. Jokaisen kuukauden vaihteen yhteydessä arvotaan enintään kolme uutta paikkaa; todennäköisyys kutakin paikkaa kohti on 15 % + 0,7 × työnantajan maine. Kun maine on 60, todennäköisyys on 57 %, ja kun maine on 100, todennäköisyys on 85 % kutakin paikkaa kohti. Jos markkinat ovat tyhjät, luodaan vähintään yksi uusi hakija.&#10;Hakijat pysyvät varmasti saatavilla luomiskuukauden ajan. Ensimmäisen kuukauden vaihdon jälkeen heidän poistumistodennäköisyytensä on laadusta riippuen 10–30 %, toisen vaihdon jälkeen 30–50 % ja kolmannen kuukauden vaihdon jälkeen 100 %. Hyvät profiilit voivat kadota aikaisemmin, koska niiden laatu nostaa poistumistodennäköisyyttä.&#10;Hakijat ovat 18–65-vuotiaita, heillä on pysyvä syntymäaika ja he ikääntyvät edelleen. Taustat ovat perheyritys, maitotila, urakoitsija, peltoviljely, sekaviljely, logistiikka, maatalouskoneiden korjaamo ja toimistotyö. Ikä ja tausta vaikuttavat ennen kaikkea kokemukseen ja mahdollisiin ammatillisiin esitietoihin.&#10;Palkkatoive perustuu kokemukseen ja luotettavuuteen, siihen liittyy 96–106 %:n satunnainen vaihtelu ja se riippuu työnantajan maineesta. Huono maine nostaa palkkatoivetta, hyvä maine laskee sitä. Ennen palkkaamista näkyy vahvistus; palkkaaminen nostaa mainetta yhdellä pisteellä." />
+        <e k="ui_pmHelpTopic03Body" v="Kaikki hakijat luodaan globaalilla markkinapaikalla. Sen jälkeen työnantajan maine määrää, mille tiloille hakijaa tarjotaan. Siksi tilat voivat saada erilaisia tarjouksia; jos sama henkilö tarjotaan useille tiloille, hänellä on kaikkialla samat perustiedot, arvot ja sama alkuperäinen arvoalue. Heti kun jokin tila palkkaa henkilön, hän katoaa kaikkien muiden tilojen listalta.&#10;Alussa kokemus, luotettavuus, lojaalisuus, asema ja palkkatoive pysyvät piilossa. Jokaisesta hakijasta on näkyvissä tarkalleen yksi kolmesta arvosta satunnaisesti sijoitettuna 30 prosenttiyksikön vaihteluvälinä. Todellinen arvo on aina tämän vaihteluvälin sisällä, mutta ei välttämättä keskellä. Nimi, ikä, ammatillinen tausta, ansioluettelo ja erikoisalat pysyvät näkyvissä.&#10;Työhaastattelussa esitetään enintään kolme kysymystä. Ensimmäinen kysymys tuntemattomasta arvosta paljastaa 30 pisteen vaihteluvälin; uusinta kysymys kaventaa sen 15 pisteeseen ja seuraava kysymys paljastaa tarkan arvon. Jo tiedossa olevia arvoja ei voi valita uudelleen. Haastattelun voi keskeyttää ja jatkaa myöhemmin samasta kohdasta. Palkkatoive tulee näkyviin viimeisen vastauksen yhteydessä." />
     <e k="ui_pmHelpTopic04Title" v="Henkilöstöprofiili, arvot ja asema" />
-    <e k="ui_pmHelpTopic04Body" v="Kokemus, luotettavuus ja lojaalisuus vaihtelevat kussakin asteikolla 0–100. Luku pysyy selvästi näkyvissä; palkit mahdollistavat nopean vertailun.&#10;Sijoitus määräytyy yksinomaan kokemuksen perusteella: avustaja 0–44, ammattilainen 45–74, asiantuntija 75–100. Kokemus määrää työnopeuden, ylimääräisen kulumisen ja ylimääräisen kulutuksen. Luotettavuus vaikuttaa lyhytaikaisiin suorituskyvyn heikkenemisiin, sairauspoissaoloihin, kuukausittaiseen kehitykseen ja työn keskeyttämisen riskiin. Uskollisuus kuvaa sitoutumista yritykseen ja vaikuttaa varoituksiin, palkkakiistoihin ja oma-aloitteisiin irtisanoutumisiin." />
+        <e k="ui_pmHelpTopic04Body" v="Kokemus, luotettavuus ja lojaalisuus vaihtelevat kussakin asteikolla 0–100. Niin kauan kuin työhaastattelut ovat käynnissä, nämä arvot näkyvät hakijoiden kohdalla vain sen mukaan, missä vaiheessa haastatteluprosessi on. Sijoitus riippuu yksinomaan kokemuksesta, ja siksi se näkyy vasta, kun kokemus on tarkasti tiedossa.&#10;Työhönoton jälkeen vielä tuntemattomat arvot pysyvät aluksi piilossa. Todellisten työtehtävien aikana työntekijä kerää aktiivista reaaliaikaa. Jokaiselle henkilölle määritetyn 20–35 minuutin ajanjakson jälkeen kaikki kolme arvoa tulevat täysin tiedoksi. Tauot ja ajat, jolloin työtehtävää ei suoriteta, eivät lasketa mukaan. Edistyminen tallennetaan pelitilanteeseen.&#10;Kokemus määrää työnopeuden, ylimääräisen kulumisen ja ylimääräisen kulutuksen. Luotettavuus vaikuttaa lyhytaikaisiin suorituskyvyn laskuihin, sairauspoissaoloihin, kuukausittaiseen kehitykseen ja tehtävän keskeyttämisen riskiin. Uskollisuus kuvaa sitoutumista yritykseen ja vaikuttaa varoituksiin, palkkakiistoihin ja oma-aloitteisiin irtisanoutumisiin." />
     1Tekoälyavustajat, kuljetus ja FollowMe2
     1Kun tavallinen tekoälyavustajan työ käynnistyy, avautuu työntekijän valintaikkuna. Vain käytettävissä olevat työntekijät ovat valittavissa. Yksi työntekijä ei voi ottaa vastaan useita toimeksiantoja samanaikaisesti, eikä hän ole käytettävissä sairauden tai koulutuksen aikana.&#10;Tehtävä kirjataan valmiiksi vasta 10 sekunnin kuluttua. Erikoistumisen edistymisen kannalta käytännön työn on kestettävä vähintään 3 minuuttia.&#10;Painamalla T-näppäintä tai valikkopainiketta avaat kuljetusprioriteetin. Siellä määrität, mitkä työntekijät ottavat vastaan kuljetustehtäviä ja missä järjestyksessä heitä tarkastellaan. A-kohtaan-B-toimeksiannossa valitaan ylhäältä alas ensimmäinen vapaa työntekijä. FollowMe käyttää edelleen työntekijävalintaa ja lasketaan kuljetustyöksi.2
     1Kokemus ja vaikutukset työhön2
@@ -629,9 +632,9 @@
     <e k="ui_pmHelpTopic13Title" v="Profiilit, aikajana ja tilastot" />
     <e k="ui_pmHelpTopic13Body" v="Hakijaprofiilit yhdistävät iän, ammatillisen taustan, kokemuksen, luotettavuuden, lojaalisuuden, erikoistumisalat ja tähänastisen työuran dynaamiseksi tekstiksi. Työntekijäprofiilit täydentävät työsuhteen kestoa, työtehtäviä, koulutuksia ja oppimisen edistymistä.&#10;Henkilökohtainen kronikka voi sisältää työsuhteen alkamisen, työtehtävän alkamisen ja päättymisen, työtehtävien keskeytykset, sairaudet, koulutukset, erikoistumiset, palkkavaatimukset ja päätökset, lojaalisuuden ja luotettavuuden muutokset, kuljetusmääräykset sekä irtisanomisen, omasta aloitteesta tapahtuvan irtisanoutumisen, eläkkeelle siirtymisen ja työsuhteen päättymisen.&#10;Työntekijän urakehitys näyttää muun muassa työtehtävät, työajan, koulutuksen, kuljetustilanteen, viimeisimmät tapahtumat, sairauspäivät, palkkavaatimukset, työtehtävien keskeytykset ja tähän mennessä maksetun kokonaispalkkion. Yleiskatsaus näyttää lisäksi koko yrityksen kattavia kokonaistietoja, kuten koskaan palkattujen, irtisanottujen, omasta aloitteesta irtisanoutuneiden ja eläkkeelle jääneiden määrät." />
     <e k="ui_pmHelpTopic14Title" v="Asetukset, moninpeli ja pelitilastot" />
-    <e k="ui_pmHelpTopic14Body" v="Asetukset koskevat kutakin pelitilaa ja jakautuvat työsuorituskykyyn, henkilöstön kehittämiseen sekä talouteen ja palkkoihin. Pelattavuusvaikutukset avaavat niihin liittyvät kokemusvaikutukset; kokemusvaikutukset säätelevät nopeutta, kulumista, kulutustarvikkeita ja polttoainetta. Henkilöstövaikutukset avaavat lojaalisuuden muutokset ja ylitöiden vaihtoehdon. Taloudelliset vaikutukset avaavat yksilölliset palkat ja vakiokuukausipalkan.&#10;Poiskytketyt vaikutukset eivät muuta olemassa olevia henkilöstötietoja takautuvasti. Ne estävät tai sallivat ainoastaan kyseisen jatkovaikutuksen. Vakiokuukausipalkka toimii perusarvona, kun yksilölliset palkat on kytketty pois päältä; sitä voidaan muuttaa suoraan asetuksissa. Näppäimistön näppäinmäärityksiä voidaan muuttaa peliasetuksissa.&#10;Moninpelissä henkilöstöä, hakijoita, työtehtäviä, palkkoja, koulutuksia, palkkauksia ja kronikoita hallitaan ja synkronoidaan tilakohtaisesti. Palvelin päättää; vain valtuutetut tilan johtajat saavat muuttaa omaa tilaansa. Tiedot sijaitsevat pelitallenteessa tiedostossa helperPersonnel.xml, ja käynnissä olevat määritykset palautetaan lataamisen yhteydessä mahdollisuuksien mukaan. Vanhat tallennukset pysyvät käytettävissä; jo lähteneiden työntekijöiden historialliset tiedot voivat olla puutteellisia." />
+        <e k="ui_pmHelpTopic14Body" v="Haastatteluasetus on voimassa kunkin pelitilanteen osalta. Jos asetus on käytössä, peitetyt arvot, keskustelut ja niiden myöhempi paljastaminen ovat voimassa peliajan kuluessa. Jos asetus on pois käytöstä, kaikki hakijoiden ja työntekijöiden arvot näytetään kokonaisuudessaan kuten aiemminkin. Vain palvelin ja valtuutetut farmimanagerit voivat muuttaa tätä asetusta.&#10;Moninpelissä palvelin päättää jokaisesta kysymyksestä ja synkronoi keskustelun tilan. Ensimmäinen valtuutettu tilanhoitaja, joka avaa ikkunan, johtaa keskustelua. Saman tilan muut pelaajat voivat seurata keskustelua reaaliaikaisesti; heidän aihepainikkeensa pysyvät pois käytöstä. Jos keskustelun johtaja sulkee ikkunan tai hänen yhteytensä katkeaa, toinen valtuutettu tilanhoitaja voi ottaa ohjat.&#10;Henkilöstö, hakijat, työtehtävät, palkat, koulutukset, rekrytoinnit ja kronikat pysyvät tilakohtaisina. Globaaleja hakijoita voidaan tarjota useille tiloille, mutta heidän keskustelunsa tallennetaan erikseen jokaiselle tilalle." />
     <e k="ui_pmHelpTopic15Title" v="Asetukset ja ensimmäiset vaiheet" />
-    <e k="ui_pmHelpTopic15Body" v="Avaa hakijan tiedot, tarkista ikä, tausta, arvot, palkkatoive ja olemassa olevat erikoistumisalat ja vahvista sitten palkkaus. Hakijasta tulee nykyisen tilan työntekijä; kaikki seuraavat päätökset, palkanlaskennat ja kehityskulut koskevat kyseistä tilaa.&#10;Suunnittele palkkauksen jälkeen ensin lyhyt, sopiva työtehtävä. Työntekijän on oltava käytettävissä: sairaus, meneillään oleva työ, koulutus, vahvistettu työsuhteen päättyminen tai vielä voimassa oleva mod-määräys voivat estää valinnan. Työntekijä-välilehdessä näkyy tarkka syy.&#10;Ensimmäinen palkkaus parantaa työnantajan mainetta yhdellä pisteellä. Korkeat arvot eivät aina ole automaattisesti parempia: kokenut hakija maksaa yleensä enemmän, kun taas edullisempi aloittelija tarvitsee enemmän aikaa kehitykseen ja koulutukseen." />
+        <e k="ui_pmHelpTopic15Body" v="Avaa ”Hakija”-välilehdessä työhaastattelu ja valitse ”Kokemus”, ”Luotettavuus” tai ”Uskollisuus”. Valittu kysymys ja vastaus näkyvät haastattelun kulussa. Haastattelu päättyy viimeistään kolmen kysymyksen jälkeen, ja palkkatoive tulee näkyviin. Päätä palkkaamisesta tunnettujen tarkkojen arvojen, vaihteluvälien ja jäljellä olevan epävarmuuden perusteella.&#10;Palkkaamisen jälkeen arvoista, joita ei ole täysin selvitetty, säilyy aluksi viimeisin tiedossa oleva tilanne. Suunnittele todelliset työtehtävät: 20–35 minuutin aktiivisen reaaliajan jälkeen arvot paljastuvat kokonaan. Työntekijän on oltava käytettävissä; sairaus, meneillään oleva työ, koulutus tai vahvistettu työsuhteen päättyminen voivat estää valinnan.&#10;Työntekijän palkkaaminen parantaa työnantajan mainetta yhdellä pisteellä. Korkeat arvot eivät aina ole automaattisesti parempia: kokenut hakija maksaa yleensä enemmän, kun taas edullisempi aloittelija tarvitsee enemmän aikaa kehitykseen ja koulutukseen." />
     <e k="ui_pmHelpTopic16Title" v="Tehtävät ja erikoistumisalueet" />
     <e k="ui_pmHelpTopic16Body" v="Luokittelu määritetään ajoneuvon, laitteiden ja – mikäli saatavilla – levitetyn materiaalin perusteella. Suora materiaalin luokittelu on etusijalla: siemenet kuuluvat kylvöön; rikkakasvien torjunta-aineet kasvinsuojeluun; mineraalilannoitteet, nestemäiset lannoitteet, lietelanta, käymisjätteet ja lanta lannoitukseen. Kalkkia ei tunnisteta automaattisesti omaksi oppimiskategoriakseen.&#10;Ajoneuvojen ja laitteiden luokittelu: aura, kultivaattori, pyöräekä, kiekkoekä, jyrä ja silppuri kuuluvat maanmuokkaukseen. Kylvö- ja istutuskoneet kuuluvat kylvöön. Kenttäsumuttimet luokitellaan lannoitukseksi, ellei niille ole määritelty selkeää materiaalia. Leikkuupuimurit, leikkuulaitteet, paalipuristimet, niittokoneet, kuorma-autot ja keräysajoneuvot kuuluvat sadonkorjuuseen. Perävaunut ja tyhjennettävät ajoneuvot kuuluvat kuljetukseen.&#10;FollowMe laajentaa käytännön tunnistusta lisäksi hakkurilla, peruna- ja juurikaspoimijoilla, kääntäjillä, karhottajilla, lannanlevittimillä, lannankäsittelytankkeilla, maaperän irrottajilla, kivienkerääjillä, haravoilla ja kuokilla. Mod-ajoneuvot voivat jäädä neutraaleiksi, jos niiden erikoistuminen ei anna yksiselitteistä luokittelua. Tällöin ei luvata väärää erikoistumisbonusta.&#10;Koneiden säästäminen ja taloudellinen työskentelytapa ovat yleisiä bonuksia: edellinen vähentää kokemuksesta johtuvaa ylimääräistä kulumista, jälkimmäinen ylimääräistä polttoaineen ja materiaalien kulutusta. Valittu toiminta näkyy valintaikkunassa; sopiva aktiivinen erikoistuminen korostetaan siellä." />
     <e k="ui_specialization_transport" v="Liikenne" />
@@ -675,5 +678,244 @@
     <e k="ui_pmHelpTopic09Body" v="Yksilölliset peruspalkat lasketaan kokemuksen ja luotettavuuden perusteella, ja ne interpoloidaan lineaarisesti kunkin kokemusluokan sisällä. Luotettavuus kertoo arvon kertoimella, joka on välillä 0,94–1,06. Hakijat saavat lisäksi satunnaislisän, maine-lisän sekä mahdolliset erikoistumislisät: +5 % pääerikoistumisesta ja +3 % toissijaisesta erikoistumisesta.&#10;Peruspalkka 3 päivää/kuukausi: Kokemus 0–44: 1 800–2 200, 45–74: 2 200–2 700, 75–100: 2 700–3 300. Kuukausipalkka = peruspalkka × kuukauden pituuskerroin × taloudellisten kustannusten kerroin, pyöristettynä kymmeneen. Jos yksilölliset palkat on poistettu käytöstä, sovelletaan vakioperuspalkkaa 100–100 000 kymmenen välein. Kuukauden pituuskertoimet 1–28 päivälle: 0,58; 0,82; 1,00; 1,15; 1,29; 1,41; 1,53; 1,63; 1,73; 1,83; 1,91; 2,00; 2,08; 2,16; 2,24; 2,31; 2,38; 2,45; 2,52; 2,58; 2,65; 2,71; 2,77; 2,83; 2,89; 2,94; 3,00; 3,06.&#10;Palkka maksetaan kuun vaihteessa. Myös työntekijät, joiden työsuhde päättyy tuolloin, saavat erääntyneen palkan etukäteen. Asiantuntija tai ammattilainen voi vaatia palkankorotusta: Perusmahdollisuus 70 %, rajoitettu lojaalisuuden perusteella 55–85 %:iin; myöhemmin voidaan tarkistaa uudelleen kuukausittain puolen mahdollisuuden todennäköisyydellä. Hyväksyminen tuo +3 lojaalisuutta ja +1 arvostusta; hylkääminen laskee lojaalisuutta 5:llä, alle 40:n ollessa 7:llä, ja lisää irtisanomis- ja luotettavuusriskejä 3 kuukauden ajaksi. G avaa kaikki avoimet vaatimukset." />
     <e k="ui_pmHelpTopic10Title" v="Erikoistumiset ja käytännön kehittäminen" />
     <e k="ui_pmHelpTopic10Body" v="PERUSSÄÄNNÖT&#10;– Oppimiskategorioita on kahdeksan: maanmuokkaus, kylvö, lannoitus, kasvinsuojelu, sadonkorjuu, kuljetus, koneiden säästäminen ja taloudellinen työskentelytapa.&#10;– Edistyminen tallennetaan erikseen kunkin kategorian osalta. Opitut erikoistumiset säilyvät pysyvästi; samanaikaisesti voi olla voimassa enintään kaksi bonusta.&#10;OPPIMISEN EDISTYMINEN&#10;– Oppimiskynnykset ovat 240, 420, 600 ja 780 minuuttia; sen jälkeen jokainen seuraava kynnys nousee 180 minuutilla.&#10;– Oppimiskerroin on 1 + (kokemus – 50)/250 + (luotettavuus – 50)/300, ja se on rajoitettu välille 0,75–1,30. Jos tehtäviä on useita, oppimisaika jaetaan painotetusti.&#10;TEHTÄVIEN LUOKITTELU&#10;– Maanmuokkaus: aura, kultivaattori, pyöräekä, kiekkoekä, tela ja silppuri.&#10;– Kylvö: kylvö- ja istutuskoneet sekä siemenet.&#10;– Lannoitus: mineraalilannoitteet, nestemäiset lannoitteet, lietelanta, mädätysjätteet ja lanta. Kasvinsuojelu: rikkakasvien torjunta.&#10;– Sadonkorjuu: leikkuupuimuri, leikkuulaitteet, paalain, niittokone, kuorma-auto ja keräysajoneuvo. Kuljetus: perävaunu, purku ja kuljetus paikasta A paikkaan B.&#10;BONUKSET JA AKTIVOINTI&#10;– Pääerikoistuminen: +12 tehokasta kokemuspistettä ja +5 % peruspalkkaa. Toissijainen erikoistuminen: +6 ja +3 %.&#10;– Molemmat paikat voidaan jättää lepäämään. Yksi opittu, lepäävä erikoistuminen voidaan aktivoida vain kerran työntekijää ja maatalousvuotta (maaliskuu–helmikuu) kohden; lepäämiseen jättäminen ei kuluta tätä oikeutta." />
+        <e k="ui_hpSetting_applicantInterviews" v="Työhaastattelut" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="Piilottaa hakijan tiedot. Enintään kolmessa kysymyskierroksessa paljastetaan eri osa-alueet tai tarkat luvut; palkkatoive tulee esiin haastattelun lopussa." />
+        <e k="ui_pmValueUnknown" v="Tuntematon" />
+        <e k="ui_hpInterviewPrompt" v="Mistä haluaisit kysyä?" />
+        <e k="ui_hpInterviewTitle" v="Työhaastattelu" />
+        <e k="ui_hpInterviewTopicExperience" v="Kokemus" />
+        <e k="ui_hpInterviewTopicReliability" v="Luotettavuus" />
+        <e k="ui_hpInterviewTopicLoyalty" v="Uskollisuus" />
+        <e k="ui_hpInterviewRound" v="Kysymyskierros %d / 3" />
+        <e k="ui_hpInterviewLeader" v="Sinä johdat keskustelua." />
+        <e k="ui_hpInterviewObserver" v="Seuraat keskustelua." />
+        <e k="ui_hpInterviewFinished" v="Työhaastattelu on päättynyt." />
+        <e k="ui_hpInterviewWageIntro" v="Palkkatoiveeni:" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="Mitä käytännön kokemusta teillä on maatilallamme työskentelyyn?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="Voisitteko kuvata käytännön kokemustanne vielä tarkemmin?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="Miten varmistatte, että voimme luottaa teihin päivittäisessä työssä?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="Miten kuvailisitte tarkemmin luotettavuuttanne itsenäisessä työssä?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="Mikä on teille tärkeää, jotta pysyisitte yrityksen uskollisena asiakkaana pitkällä aikavälillä?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="Miten arvioisitte tarkemmin pitkäaikaista sitoutumistanne työnantajaan?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="Urani on tähän mennessä ollut vielä melko lyhyt." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="Olen jo ottanut vastaan muutamia sopivia tehtäviä." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="Minulla on laaja käytännön kokemus." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="Kun aika on tiukalla, tarvitsen toisinaan selkeitä sopimuksia." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="Sovituista asioista ja suoritetuista tehtävistä voi yleensä luottaa." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="Työskentelen erittäin tunnollisesti ja pidän lupaukseni johdonmukaisesti." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="Kun kyseessä on uusi yritys, teen päätöksen aluksi pikemminkin lyhyellä varoitusajalla." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="Jos yhteistyö sujuu hyvin, voin hyvin kuvitella, että se jatkuu pidempään." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="Vakauden ja pitkäaikaisen yhteistyön merkitys on minulle erittäin tärkeä." />
+        <e k="ui_hpInterviewAnswerIntro1" v="Kuvailisin sitä näin:" />
+        <e k="ui_hpInterviewAnswerIntro2" v="Mielestäni pätee seuraava:" />
+        <e k="ui_hpInterviewAnswerIntro3" v="Seuraava arvio sopii parhaiten:" />
+        <e k="ui_hpInterviewOpen" v="Työhaastattelu" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="Mitä käytännön kokemusta teillä on maatilallamme työskentelyyn?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="Mitä tehtäviä olette tähän mennessä hoitanut maataloudessa?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="Mihin maatilan töihin olet jo perehtynyt?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Voisitteko kuvata hieman tarkemmin, mitkä näistä tehtävistä olette hoitanut itsenäisesti?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="Missä töissä tunnet jo olevasi varma, ja missä sinun pitäisi vielä perehtyä asiaan?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="Mitkä aiemmat kokemuksesi olisivat mielestäsi erityisen hyödyllisiä tilallamme?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="Miten varmistatte, että voimme luottaa teihin päivittäisessä työssä?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="Miten hoidatte tehtävät, jotka on saatava valmiiksi määräaikaan mennessä?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="Mitä voimme odottaa teiltä, jos työssä sattuu tulemaan jotain väliin?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="Mitä teette, kun huomaatte, ettette voi noudattaa sovittua?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="Miten pidätte kokonaiskuvan hallussa, kun useita tehtäviä on hoidettavana samanaikaisesti?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Voisitteko kuvata tarkemmin, miten suhtaudutte vastuuseen itsenäisessä työssä?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="Mikä on teille tärkeää, jotta pysyisitte yrityksen uskollisena asiakkaana pitkällä aikavälillä?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="Mitä toivotte pitkäaikaiselta yhteistyöltä tilallamme?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="Mitä tekijöitä sinun pitäisi pitää tärkeinä, jotta voisit työskennellä mielelläsi pitkään meillä?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="Mikä merkitys pitkäaikaisella työsuhteella työnantajaan on sinulle?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="Kuinka arvioisitte halukkuuttanne pysyä samassa yrityksessä myös vaikeina aikoina?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="Mikä olisi teille ratkaiseva tekijä yhteistyön jatkamisessa tai uuden suunnan valitsemisessa?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="Tähän mennessä olen auttanut lähinnä yksinkertaisissa töissä. Uusiin tehtäviin tutustuisin askel askeleelta." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="Käytännön kokemukseni on vielä vähäistä, mutta opiskelen mielelläni uutta ja kysyn, jos en tiedä jotain." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="Tunnen joitakin maatilan rutiineja, mutta minun pitäisi vielä oppia paljon päivittäisessä työssä." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="Olen jo hoitanut erilaisia tehtäviä maatilalla ja selviän hyvin tutuista tehtävistä." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="Olen jo työskennellyt joidenkin koneiden ja työprosessien parissa. Uusissa tehtävissä tarvitsen toisinaan lyhyen perehdytyksen." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="Minulla on käytännön kokemusta, vaikka onkin varmasti alueita, joilla minulla on vielä opittavaa." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="Olen työskennellyt pitkään maatalousyrityksissä ja hoitanut siellä monia tehtäviä itsenäisesti." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="Tunnen tavanomaiset työtehtävät ja koneet hyvin. Tutkin kuitenkin uudet työmenetelmät ensin huolellisesti." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="Olen jo tutustunut erilaisiin yrityksiin ja työskentelytapoihin, ja pystyn yleensä sopeutumaan nopeasti uusiin tehtäviin." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="Kun tehtäviä kertyy paljon kerralla, selkeät sopimukset auttavat minua. Silloin tiedän paremmin, mikä on tärkeintä ensin." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="Yritän hoitaa tehtäväni huolellisesti. Joskus minun on kuitenkin vielä parannettava kykyäni pitää kaikki asiat ajallaan hallinnassa." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="Kun kyseessä on uusia tai vieraita tehtäviä, kysyn mieluummin välillä neuvoa, jotta mikään tärkeä asia ei jää huomiotta." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="Kiinnitän huomiota sovittuihin asioihin. Jos näen, että jokin asia ei tule onnistumaan, ilmoitan siitä mahdollisimman aikaisin." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="Suoritan tehtäväni huolellisesti. Jos prioriteetit eivät ole selkeitä, pyydän mieluummin vielä kerran vahvistusta." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="Yleisesti ottaen minuun voi luottaa. Kun on kiirettä, lyhyt koordinointi auttaa minua." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="Kun otan tehtävän hoitaakseni, huolehdin siitä. Jos ongelmia ilmenee, otan ne esille jo varhaisessa vaiheessa." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="Pidän silmällä aikatauluja ja sovittuja asioita ja tarkistan lopuksi, onko kaikki hoidettu." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="Myös itsenäisessä työssä pidän tärkeänä, että pidän lupaukseni ja ilmoitan muille tärkeistä muutoksista." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="Haluaisin ensin tutustua siihen, miten työ täällä sujuu. Sen jälkeen voin paremmin päättää, miten jatkan." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="Olen avoin uusille mahdollisuuksille, enkä halua sitoutua liian aikaisin uuteen työnantajaan." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="Minulle yhteistyön on toimittava arjessa. Jos tilanteeni muuttuu, harkitsisin myös muita vaihtoehtoja." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="Jos yhteistyö sujuu hyvin ja olosuhteet ovat suotuisat, voin kuvitella jääväni pidemmäksi aikaa." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="Luotettava työympäristö on minulle tärkeää. Se, kuinka kauan jään, riippuu myös siitä, kuinka hyvin tulemme toimeen keskenämme." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="Toivon hyvää yhteistyötä ja haluaisin ensin päästä asettumaan paikoilleni. Jos tilanne sopii molemmille osapuolille, minulla on paljon syitä jäädä." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="Arvostan vakautta ja etsin yritystä, jossa voin sitoutua pitkäaikaisesti." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="Minulle on tärkeää kuulua luotettavaan tiimiin. Jos teemme hyvää yhteistyötä, en halua vaihtaa työpaikkaa jatkuvasti." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="Haluaisin työskennellä maatilalla pidempään ja hankkia kokemusta yhdessä tilan henkilökunnan kanssa." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ oli aiemmin töissä maaseudulla sijaitsevassa perheyrityksessä." />
+        <e k="ui_pmNewApplicantIntro1_2" v="Ennen hakemustaan ZXQNAMEQXZ työskenteli maaseudulla sijaitsevalla perheyrityksessä." />
+        <e k="ui_pmNewApplicantIntro1_3" v="ZXQNAMEQXZ:n työhistoriaan kuuluu työskentely maaseudulla sijaitsevassa perheyrityksessä." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ oli aiemmin töissä pienellä maitotilalla." />
+        <e k="ui_pmNewApplicantIntro2_2" v="Ennen hakemustaan ZXQNAMEQXZ työskenteli pienellä maitotilalla." />
+        <e k="ui_pmNewApplicantIntro2_3" v="ZXQNAMEQXZ:n työhistoriaan kuuluu työskentely pienellä maitotilalla." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ oli aiemmin töissä maatalousurakoitsijalla." />
+        <e k="ui_pmNewApplicantIntro3_2" v="Ennen hakemustaan ZXQNAMEQXZ työskenteli maatalousurakoitsijalla." />
+        <e k="ui_pmNewApplicantIntro3_3" v="ZXQNAMEQXZ:n työhistoriaan kuuluu työskentely maatalousurakoitsijayrityksessä." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ oli aiemmin töissä viljelytilalla." />
+        <e k="ui_pmNewApplicantIntro4_2" v="Ennen hakemustaan ZXQNAMEQXZ työskenteli viljelytilalla." />
+        <e k="ui_pmNewApplicantIntro4_3" v="ZXQNAMEQXZ:n työhistoriaan kuuluu työskentely viljelytilalla." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ oli aiemmin töissä sekatoiminnassa." />
+        <e k="ui_pmNewApplicantIntro5_2" v="Ennen hakemustaan ZXQNAMEQXZ työskenteli sekatoiminnassa." />
+        <e k="ui_pmNewApplicantIntro5_3" v="ZXQNAMEQXZ:n työhistoriaan kuuluu työskentely monialaisessa yrityksessä." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ työskenteli aiemmin logistiikkayrityksessä." />
+        <e k="ui_pmNewApplicantIntro6_2" v="Ennen hakemustaan ZXQNAMEQXZ työskenteli logistiikkayrityksessä." />
+        <e k="ui_pmNewApplicantIntro6_3" v="ZXQNAMEQXZ:n työhistoriaan kuuluu työskentely logistiikkayrityksessä." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ työskenteli aiemmin maatalouskoneiden korjaamossa." />
+        <e k="ui_pmNewApplicantIntro7_2" v="Ennen hakemustaan ZXQNAMEQXZ työskenteli maatalouskoneiden korjaamossa." />
+        <e k="ui_pmNewApplicantIntro7_3" v="ZXQNAMEQXZ:n työhistoriaan kuuluu työskentely maatalouskoneiden korjaamossa." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ työskenteli aiemmin toimistotyössä." />
+        <e k="ui_pmNewApplicantIntro8_2" v="Ennen hakemustaan ZXQNAMEQXZ työskenteli toimistotehtävissä." />
+        <e k="ui_pmNewApplicantIntro8_3" v="ZXQNAMEQXZ:n työhistoriaan kuuluu toimistotyö." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ työskenteli aiemmin maaseudulla sijaitsevassa perheyrityksessä ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Ennen maatilalla työskentelyä ZXQNAMEQXZ työskenteli maaseudulla sijaitsevassa perheyrityksessä. Hänen palvelusaikansa on ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ on ollut osa tiimiä jo ZXQMONTHSQXZ kuukautta ja työskenteli aiemmin maaseudulla sijaitsevalla perheviljelmällä." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ on työskennellyt tilalla jo ZXQMONTHSQXZ kuukautta, ja sitä ennen hän työskenteli maaseudulla sijaitsevalla perhetilalla." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ työskenteli aiemmin maaseudulla sijaitsevalla perheyrityksessä ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ työskenteli aiemmin pienellä maitotilalla ja on ollut tilan palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Ennen maatilalla työskentelyä ZXQNAMEQXZ työskenteli pienellä maitotilalla. Hän on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ on ollut osa tiimiä jo ZXQMONTHSQXZ kuukautta ja työskenteli aiemmin pienellä maitotilalla." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ on työskennellyt tilalla jo ZXQMONTHSQXZ kuukautta, ja sitä ennen hän työskenteli pienellä maitotilalla." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ työskenteli aiemmin pienellä maitotilalla ja on ollut tällä tilalla ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ työskenteli aiemmin maatalousurakoitsijalla ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Ennen maatilalla työskentelyä ZXQNAMEQXZ työskenteli maatalousurakoitsijalla. Hänen palvelusaikansa on ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ on ollut osa tiimiä jo ZXQMONTHSQXZ kuukautta ja työskenteli aiemmin maatalousurakoitsijayrityksessä." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ on työskennellyt tilalla jo ZXQMONTHSQXZ kuukautta, ja sitä ennen hän oli töissä maatalousurakoitsijalla." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ työskenteli aiemmin maatalousurakoitsijalla ja on ollut yrityksessä ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ työskenteli aiemmin viljelytilalla ja on ollut tilan palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Ennen maatilalla työskentelyä ZXQNAMEQXZ työskenteli viljelytilalla. Hänen palvelusaikansa on ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ on ollut osa tiimiä jo ZXQMONTHSQXZ kuukautta ja työskenteli aiemmin viljelytilalla." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ on työskennellyt maatilalla jo ZXQMONTHSQXZ kuukautta, ja sitä ennen hän työskenteli viljelytilalla." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ työskenteli aiemmin viljelytilalla ja on ollut yrityksessä ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ työskenteli aiemmin sekatoiminnassa ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Ennen maatilalla työskentelyä ZXQNAMEQXZ työskenteli sekaviljelytilalla. Hänen palvelusaikansa on ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ on ollut osa tiimiä jo ZXQMONTHSQXZ kuukautta ja työskenteli aiemmin sekatoiminnassa." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ on työskennellyt maatilalla ZXQMONTHSQXZ kuukautta, ja sitä ennen hän työskenteli sekaviljelytilalla." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ toimi aiemmin sekakäytössä ja on ollut käytössä ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ työskenteli aiemmin logistiikkayrityksessä ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Ennen maatilalla työskentelyä ZXQNAMEQXZ työskenteli logistiikkayrityksessä. Hänen palvelusaikansa on ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ on ollut osa tiimiä jo ZXQMONTHSQXZ kuukautta ja työskenteli aiemmin logistiikkayrityksessä." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ on työskennellyt maatilalla jo ZXQMONTHSQXZ kuukautta, ja sitä ennen hän oli töissä logistiikkayrityksessä." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ työskenteli aiemmin logistiikkayrityksessä ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ työskenteli aiemmin maatalouskoneiden korjaamossa ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Ennen maatilalla työskentelyä ZXQNAMEQXZ työskenteli maatalouskoneiden korjaamossa. Hänen palvelusaikansa on ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ on ollut osa tiimiä jo ZXQMONTHSQXZ kuukautta ja työskenteli aiemmin maatalouskoneiden korjaamossa." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ on työskennellyt maatilalla jo ZXQMONTHSQXZ kuukautta, ja sitä ennen hän työskenteli maatalouskoneiden korjaamossa." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ työskenteli aiemmin maatalouskoneiden korjaamossa ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ työskenteli aiemmin toimistotehtävissä ja on ollut yrityksen palveluksessa ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Ennen maatilalla työskentelyä ZXQNAMEQXZ työskenteli toimistotyössä. Hänen palvelusaikansa on ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ on ollut osa tiimiä jo ZXQMONTHSQXZ kuukautta ja työskenteli aiemmin toimistotehtävissä." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ on työskennellyt maatilalla jo ZXQMONTHSQXZ kuukautta, ja sitä ennen hän työskenteli toimistotyössä." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ työskenteli aiemmin toimistotyössä ja on ollut yrityksessä ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewApplicantAge1_1" v="ZXQAGEQXZ-vuotiaana ammatillinen ura on vielä alkuvaiheessa." />
+        <e k="ui_pmNewApplicantAge1_2" v="ZXQAGEQXZ-vuotiaana voi hankkia lisää käytännön kokemusta maatilalla." />
+        <e k="ui_pmNewApplicantAge1_3" v="ZXQAGEQXZ-vuotiaana on mahdollisuus kehittää uraansa edelleen." />
+        <e k="ui_pmNewApplicantAge2_1" v="ZXQAGEQXZ-vuotiaana ammatilliset taidot voivat vakiintua entisestään." />
+        <e k="ui_pmNewApplicantAge2_2" v="ZXQAGEQXZ-vuotiaana aiempia kokemuksia voidaan täydentää uusilla tehtävillä." />
+        <e k="ui_pmNewApplicantAge2_3" v="ZXQAGEQXZ-vuotiaana on mahdollisuus kehittää edellistä urapolkuaan edelleen." />
+        <e k="ui_pmNewApplicantAge3_1" v="ZXQAGEQXZ-vuotiaana hänellä on jo takanaan pitkä työura." />
+        <e k="ui_pmNewApplicantAge3_2" v="ZXQAGEQXZ vuoden aikana olen kerännyt monipuolista työkokemusta tähänastisella työurallani." />
+        <e k="ui_pmNewApplicantAge3_3" v="ZXQAGEQXZ vuoden iässä on jo hankittu työkokemusta; sen yhteys maatalouteen riippuu urakehityksestä." />
+        <e k="ui_pmNewApplicantAge4_1" v="ZXQAGEQXZ-vuotiaana hänellä on jo takanaan pitkä työura." />
+        <e k="ui_pmNewApplicantAge4_2" v="ZXQAGEQXZ vuoden iässä henkilöllä on yleistä työkokemusta, joka ei välttämättä tarkoita maatalousalan kokemusta." />
+        <e k="ui_pmNewApplicantAge4_3" v="ZXQAGEQXZ elinvuoden aikana on kertynyt erilaisia kokemuksia; niiden hyöty maatilalla riippuu tähänastisista toiminnoista." />
+        <e k="ui_pmNewApplicantMarket1_1" v="Tuote on ollut markkinoilla tämän kuun alusta lähtien." />
+        <e k="ui_pmNewApplicantMarket1_2" v="Uuden työpaikan etsiminen on alkanut vasta äskettäin." />
+        <e k="ui_pmNewApplicantMarket1_3" v="Hakemus julkaistiin tässä kuussa." />
+        <e k="ui_pmNewApplicantMarket2_1" v="Ilmoitus on ollut markkinoilla jo kuukauden ajan." />
+        <e k="ui_pmNewApplicantMarket2_2" v="Uuden työpaikan etsiminen on kestänyt jo kuukauden." />
+        <e k="ui_pmNewApplicantMarket2_3" v="Hakemus on ollut kiinnostuneiden yritysten saatavilla jo kuukauden ajan." />
+        <e k="ui_pmNewApplicantMarket3_1" v="Ilmoitus on ollut markkinoilla jo ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewApplicantMarket3_2" v="Uuden työpaikan etsiminen on kestänyt jo ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewApplicantMarket3_3" v="Hakemus on ollut kiinnostuneiden yritysten saatavilla jo ZXQMONTHSQXZ kuukautta." />
+        <e k="ui_pmNewWorkerExperience1_1" v="Käytännön kokemusta on vasta kertynyt; monissa töissä tarvitaan vielä ohjausta." />
+        <e k="ui_pmNewWorkerExperience1_2" v="Monet maatilan työprosessit ovat vielä uusia." />
+        <e k="ui_pmNewWorkerExperience1_3" v="Käytännön työ on vielä varhaisessa perehdytysvaiheessa." />
+        <e k="ui_pmNewWorkerExperience1_4" v="Perustehtävät vaativat vielä harjoittelua ja ohjausta." />
+        <e k="ui_pmNewWorkerExperience1_5" v="Käytännön menettelytavat opitaan vaihe vaiheelta." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Jotkut perusasiat ovat jo tuttuja, mutta vaativammissa tehtävissä tarvitaan vielä apua." />
+        <e k="ui_pmNewWorkerExperience2_2" v="Ensimmäisiä käytännön kokemuksia on jo kertynyt, mutta useilla aloilla rutiini puuttuu vielä." />
+        <e k="ui_pmNewWorkerExperience2_3" v="Tuttujen tehtävien suorittaminen sujuu yhä paremmin, mutta monimutkaisemmat tehtävät vaativat vielä lisää perehtymistä." />
+        <e k="ui_pmNewWorkerExperience2_4" v="Perusasiat ovat jo tuttuja, mutta turvallisten toimintatapojen varmistamiseksi tarvitaan vielä lisää harjoitusta." />
+        <e k="ui_pmNewWorkerExperience2_5" v="Käytännön osaamista on jo hankittu, ja sitä voidaan edelleen vahvistaa päivittäisessä työssä." />
+        <e k="ui_pmNewWorkerExperience3_1" v="Vankka kokemus mahdollistaa monien tavallisten tehtävien itsenäisen hoitamisen." />
+        <e k="ui_pmNewWorkerExperience3_2" v="Suurin osa arkipäiväisistä töistä sujuu turvallisesti." />
+        <e k="ui_pmNewWorkerExperience3_3" v="Käytännön perusta on olemassa; tutut toimintatavat omaksutaan itsenäisesti." />
+        <e k="ui_pmNewWorkerExperience3_4" v="Tavallisissa töissä näkyy vakiintunut rutiini." />
+        <e k="ui_pmNewWorkerExperience3_5" v="Erilaiset tehtäväalueet ovat tuttuja, ja ne hoidetaan suurelta osin itsenäisesti." />
+        <e k="ui_pmNewWorkerExperience4_1" v="Laaja käytännön kokemus mahdollistaa monipuolisen käytön." />
+        <e k="ui_pmNewWorkerExperience4_2" v="Myös vaativammat työt kuuluvat tuttuun tehtäväpiiriin." />
+        <e k="ui_pmNewWorkerExperience4_3" v="Kokemus auttaa ottamaan erilaiset työprosessit itsenäisesti haltuun." />
+        <e k="ui_pmNewWorkerExperience4_4" v="Kokemus näkyy siinä, että pystyn suoriutumaan monenlaisista tehtävistä varmalla otteella." />
+        <e k="ui_pmNewWorkerExperience4_5" v="Lukuisat käytännön työmenettelyt ovat tuttuja, myös vaihtelevissa työtehtävissä." />
+        <e k="ui_pmNewWorkerExperience5_1" v="Käytännön kokemusta on poikkeuksellisen paljon." />
+        <e k="ui_pmNewWorkerExperience5_2" v="Erittäin laaja kokemus auttaa myös monimutkaisten ja vieraiden tehtävien suorittamisessa." />
+        <e k="ui_pmNewWorkerExperience5_3" v="Maatilalla työskentelyyn on käytettävissä erityisen laaja-alaista tietoa." />
+        <e k="ui_pmNewWorkerExperience5_4" v="Vuosien mittainen ja monipuolinen käytännön kokemus takaa vankan varmuuden päivittäisessä työssä." />
+        <e k="ui_pmNewWorkerExperience5_5" v="Laaja valikoima maataloustöitä hallitaan erityisen sujuvasti." />
+        <e k="ui_pmNewWorkerReliability1_1" v="Sopimukset ja tehtävien huolellinen suorittaminen vaativat erityistä huomiota." />
+        <e k="ui_pmNewWorkerReliability1_2" v="Työelämässä tarvitaan säännöllistä valvontaa ja selkeitä ohjeita." />
+        <e k="ui_pmNewWorkerReliability1_3" v="Luotettavan suunnittelun varmistamiseksi tehtäviä tulisi seurata tiiviisti." />
+        <e k="ui_pmNewWorkerReliability1_4" v="Sopimuksia ja työprosesseja ei vielä noudateta johdonmukaisesti." />
+        <e k="ui_pmNewWorkerReliability1_5" v="Tärkeät tehtävät vaativat lisää koordinointia ja valvontaa." />
+        <e k="ui_pmNewWorkerReliability2_1" v="Sopimuksia ei aina noudateta johdonmukaisesti; selkeät ohjeet auttavat." />
+        <e k="ui_pmNewWorkerReliability2_2" v="Luotettavuus vaihtelee edelleen; tärkeiden töiden suorittamista tulisi valvoa." />
+        <e k="ui_pmNewWorkerReliability2_3" v="Tuttujen tehtävien kohdalla sujuu moni asia hyvin, mutta satunnainen valvonta on edelleen järkevää." />
+        <e k="ui_pmNewWorkerReliability2_4" v="Siirrettyjen tehtävien vakaamman toteutuksen kehittämistä jatketaan edelleen." />
+        <e k="ui_pmNewWorkerReliability2_5" v="Selkeät vastuualueet ja säännöllinen palaute helpottavat päivittäistä työtä." />
+        <e k="ui_pmNewWorkerReliability3_1" v="Useimmissa tehtävissä voidaan luottaa siihen, että ne hoidetaan luotettavasti." />
+        <e k="ui_pmNewWorkerReliability3_2" v="Sopimuksia noudatetaan yleensä, ja tehtävät hoidetaan pääosin huolellisesti." />
+        <e k="ui_pmNewWorkerReliability3_3" v="Luotettavuus tarjoaa vankan perustan toiminnan suunnittelulle." />
+        <e k="ui_pmNewWorkerReliability3_4" v="Annetut tehtävät hoidetaan yleensä huolellisesti ja luotettavasti." />
+        <e k="ui_pmNewWorkerReliability3_5" v="Työelämässä työskentelytapa on pääosin vakiintunut." />
+        <e k="ui_pmNewWorkerReliability4_1" v="Työ suoritetaan luotettavasti ja sovittuja asioita noudatetaan huolellisesti." />
+        <e k="ui_pmNewWorkerReliability4_2" v="Annetut tehtävät hoidetaan johdonmukaisesti ja huolellisesti." />
+        <e k="ui_pmNewWorkerReliability4_3" v="Huolellinen työskentelytapa helpottaa luotettavaa työvuorojen suunnittelua." />
+        <e k="ui_pmNewWorkerReliability4_4" v="Lupauksiin ja työn suorittamiseen voi luottaa erittäin hyvin." />
+        <e k="ui_pmNewWorkerReliability4_5" v="Vastuu ja sovitut tehtävät pidetään luotettavasti silmällä." />
+        <e k="ui_pmNewWorkerReliability5_1" v="Työhön voi luottaa poikkeuksellisen hyvin myös vaativissa tehtävissä." />
+        <e k="ui_pmNewWorkerReliability5_2" v="Sopimuksia noudatetaan erittäin johdonmukaisesti ja tehtävät hoidetaan erityisen huolellisesti." />
+        <e k="ui_pmNewWorkerReliability5_3" v="Erittäin luotettava toimintatapa takaa erinomaisen suunnitteluvarmuuden." />
+        <e k="ui_pmNewWorkerReliability5_4" v="Vastuu kannetaan suurella huolellisuudella ja poikkeuksellisella johdonmukaisuudella." />
+        <e k="ui_pmNewWorkerReliability5_5" v="Myös laajat tehtävät hoidetaan erityisen luotettavasti." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="Sitoutuminen yritykseen on tällä hetkellä hyvin vähäistä." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="Yhteistyötä pidetään tällä hetkellä pikemminkin lyhytaikaisena." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="Pitkäaikainen sitoutuminen maatilaan on tällä hetkellä varsin vähäistä." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="Pitkäaikaiseen työsuhteeseen suhtaudutaan tällä hetkellä varauksellisesti." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="Halukkuus jatkaa työskentelyä yrityksessä pidemmällä aikavälillä on tällä hetkellä vähäistä." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="Sitoutuminen yritykseen on vielä varovaista." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="Pitkän aikavälin yhteistyö on vielä vasta kehittymässä." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="Tiivistä yhteyttä yritykseen ei ole vielä syntynyt." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="Jatkossa yhteistyössä on vielä tilaa luottamuksen rakentamiselle." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="Pidempi työsuhde on mahdollinen, mutta siihen suhtaudutaan vielä varauksellisesti." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="Työntekijällä on vahva side yritykseen." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="Yhteistyö tarjoaa hyvän perustan pidemmälle työsuhteelle." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="Yhteys laitokseen on vakaa." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="Uskollisuus on vakaalla tasolla." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="On olemassa hyvät edellytykset yhteistyön jatkamiselle pidemmällä aikavälillä." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="Yhteys yritykseen on erittäin vahva." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="Yhteistyö maatilan kanssa on meille erittäin tärkeää." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="Halukkuus jatkaa työskentelyä yrityksessä pitkällä aikavälillä on selvästi ilmeistä." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="Vahva side on osoitus pitkäaikaisesta yhteistyöstä." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="Kiinnostus pidempää työsuhdetta kohtaan on selvästi havaittavissa." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="Yhteys yritykseen on poikkeuksellisen vahva." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="Pitkäaikainen yhteistyö tilan kanssa on erityisen tärkeää." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="Sitoutuminen yritykseen on poikkeuksellisen vahva." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="Uskollisuus ja halukkuus pitkäaikaiseen yhteistyöhön ovat erityisen korkealla tasolla." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="Tunnistautuminen yritykseen ja sen pitkän aikavälin kehitykseen on poikkeuksellisen vahva." />
+        <e k="ui_pmNewWorkerTenureNew" v="Työskentely maatilalla on alkanut tässä kuussa." />
+        <e k="ui_pmNewWorkerTenureOne" v="Työskentely maatilalla alkoi kuukausi sitten." />
     </elements>
 </l10n>

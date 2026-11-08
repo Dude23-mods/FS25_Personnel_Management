@@ -4,9 +4,15 @@ HelperPersonnelNetwork = HelperPersonnelNetwork or {}
 HelperPersonnelNetwork.ACTION_HIRE = "hire"
 HelperPersonnelNetwork.ACTION_DISMISS = "dismiss"
 HelperPersonnelNetwork.ACTION_TRAIN_WORKER = "trainWorker"
+HelperPersonnelNetwork.ACTION_ACTIVATE_SPECIALIZATION = "activateSpecialization"
+HelperPersonnelNetwork.ACTION_DEACTIVATE_SPECIALIZATION = "deactivateSpecialization"
 HelperPersonnelNetwork.ACTION_GRANT_SALARY_RAISE = "grantSalaryRaise"
 HelperPersonnelNetwork.ACTION_DECLINE_SALARY_RAISE = "declineSalaryRaise"
 HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER = "emergencyReleaseWorker"
+HelperPersonnelNetwork.ACTION_OPEN_APPLICANT_INTERVIEW = "openApplicantInterview"
+HelperPersonnelNetwork.ACTION_CLOSE_APPLICANT_INTERVIEW = "closeApplicantInterview"
+HelperPersonnelNetwork.ACTION_ASK_APPLICANT_INTERVIEW = "askApplicantInterview"
+HelperPersonnelNetwork.ACTION_SET_APPLICANT_INTERVIEWS = "setApplicantInterviews"
 
 function HelperPersonnelNetwork.writeString(streamId, value)
     streamWriteString(streamId, value ~= nil and tostring(value) or "")
@@ -161,6 +167,33 @@ function HelperPersonnelNetwork.writePerson(streamId, person)
     HelperPersonnelNetwork.writeLearnedSpecializations(streamId, person.learnedSpecializations)
     streamWriteInt32(streamId, tonumber(person.specializationActivationYear) or 0)
     HelperPersonnelNetwork.writeString(streamId, person.specializationActivationLastKey)
+    HelperPersonnelNetwork.writeSalaryRaiseAndDismissalData(streamId, person)
+    if HelperPersonnelNetwork.STATE_VERSION >= 21 then
+        streamWriteInt32(streamId, tonumber(person.interviewSeed) or 0)
+        HelperPersonnelNetwork.writeString(streamId, person.interviewInitialTopic)
+        streamWriteUInt8(streamId, tonumber(person.interviewQuestionsUsed) or 0)
+        streamWriteUInt8(streamId, tonumber(person.interviewExperienceLevel) or tonumber(person.experienceKnowledgeLevel) or 0)
+        streamWriteUInt8(streamId, tonumber(person.interviewReliabilityLevel) or tonumber(person.reliabilityKnowledgeLevel) or 0)
+        streamWriteUInt8(streamId, tonumber(person.interviewLoyaltyLevel) or tonumber(person.loyaltyKnowledgeLevel) or 0)
+        streamWriteBool(streamId, person.interviewCompleted == true)
+        for _, topic in ipairs({"experience", "reliability", "loyalty"}) do
+            HelperPersonnelNetwork.writeOptionalInt(streamId, person[topic .. "KnowledgeMin"])
+            HelperPersonnelNetwork.writeOptionalInt(streamId, person[topic .. "KnowledgeMax"])
+        end
+        local history = type(person.interviewHistory) == "table" and person.interviewHistory or {}
+        local count = math.min(#history, 3)
+        streamWriteUInt8(streamId, count)
+        for index = 1, count do
+            local entry = history[index] or {}
+            HelperPersonnelNetwork.writeString(streamId, entry.topic)
+            streamWriteUInt8(streamId, tonumber(entry.level) or 0)
+            streamWriteUInt8(streamId, tonumber(entry.variant) or 1)
+            streamWriteUInt8(streamId, tonumber(entry.band) or 0)
+        end
+        streamWriteFloat32(streamId, tonumber(person.personnelKnowledgeRealtimeMs) or 0)
+        streamWriteFloat32(streamId, tonumber(person.personnelKnowledgeThresholdMs) or 0)
+        streamWriteBool(streamId, person.personnelValuesDiscovered == true)
+    end
 end
 
 function HelperPersonnelNetwork.readPerson(streamId, version)
@@ -313,6 +346,31 @@ function HelperPersonnelNetwork.readPerson(streamId, version)
         person.specializationActivationLastKey = nil
     end
 
+    HelperPersonnelNetwork.readSalaryRaiseAndDismissalData(streamId, version, person)
+    if (version or 0) >= 21 then
+        person.interviewSeed = streamReadInt32(streamId) or 0
+        person.interviewInitialTopic = HelperPersonnelNetwork.readString(streamId)
+        person.interviewQuestionsUsed = streamReadUInt8(streamId) or 0
+        person.interviewExperienceLevel = streamReadUInt8(streamId) or 0
+        person.interviewReliabilityLevel = streamReadUInt8(streamId) or 0
+        person.interviewLoyaltyLevel = streamReadUInt8(streamId) or 0
+        person.interviewCompleted = streamReadBool(streamId) == true
+        for _, topic in ipairs({"experience", "reliability", "loyalty"}) do
+            person[topic .. "KnowledgeMin"] = HelperPersonnelNetwork.readOptionalInt(streamId)
+            person[topic .. "KnowledgeMax"] = HelperPersonnelNetwork.readOptionalInt(streamId)
+        end
+        person.interviewHistory = {}
+        local historyCount = math.min(3, streamReadUInt8(streamId) or 0)
+        for _ = 1, historyCount do
+            table.insert(person.interviewHistory, {topic = HelperPersonnelNetwork.readString(streamId), level = streamReadUInt8(streamId) or 0, variant = streamReadUInt8(streamId) or 1, band = streamReadUInt8(streamId) or 0})
+        end
+        person.personnelKnowledgeRealtimeMs = streamReadFloat32(streamId) or 0
+        person.personnelKnowledgeThresholdMs = streamReadFloat32(streamId) or 0
+        person.personnelValuesDiscovered = streamReadBool(streamId) == true
+    else
+        person.interviewHistory = {}
+        person.personnelValuesDiscovered = true
+    end
     return person
 end
 
@@ -346,16 +404,81 @@ function HelperPersonnelNetwork.readHistory(streamId)
 end
 
 HelperPersonnelNetwork = HelperPersonnelNetwork or {}
-HelperPersonnelNetwork.STATE_VERSION = 20
+HelperPersonnelNetwork.STATE_VERSION = 21
 HelperPersonnelNetwork.ACTION_SELECT_WORKER = "selectWorker"
 HelperPersonnelNetwork.MAX_NETWORK_FARMS = 64
-HelperPersonnelNetwork.MAX_NETWORK_PEOPLE = 1024
+HelperPersonnelNetwork.MAX_NETWORK_PEOPLE = 2048
 HelperPersonnelNetwork.MAX_NETWORK_HISTORY = 64
-HelperPersonnelNetwork.MAX_NETWORK_ASSIGNMENTS = 1024
+HelperPersonnelNetwork.MAX_NETWORK_ASSIGNMENTS = 2048
 HelperPersonnelNetwork.MAX_NETWORK_CHRONICLE_RECORDS = 4096
 HelperPersonnelNetwork.MAX_NETWORK_CHRONICLE_ENTRIES = 8192
-HelperPersonnelNetwork.MAX_NETWORK_WORKER_HISTORY_OVERVIEWS = 1024
-HelperPersonnelNetwork.MAX_NETWORK_TOTAL_ITEMS = 32768
+HelperPersonnelNetwork.MAX_NETWORK_WORKER_HISTORY_OVERVIEWS = 2048
+HelperPersonnelNetwork.MAX_NETWORK_TOTAL_ITEMS = 65536
+local HP_INVALID_NETWORK_STATE = {}
+
+-- Check the exact collection counts used by the current writer before an
+-- event is sent. Never trim the state: that would silently lose client data.
+function HelperPersonnelNetwork.validateOutgoingState(state)
+    if type(state) ~= "table" then
+        return false, "state is not a table"
+    end
+
+    local remaining = HelperPersonnelNetwork.MAX_NETWORK_TOTAL_ITEMS
+    local function countItems(count, limit, label)
+        if count > limit then
+            return false, string.format("%s count %d exceeds limit %d", label, count, limit)
+        end
+        if count > remaining then
+            return false, string.format("%s count %d exceeds remaining total budget %d", label, count, remaining)
+        end
+        remaining = remaining - count
+        return true
+    end
+
+    local farms = state.farms or {}
+    local ok, reason = countItems(#farms, HelperPersonnelNetwork.MAX_NETWORK_FARMS, "farms")
+    if not ok then return false, reason end
+    for farmIndex, farm in ipairs(farms) do
+        local prefix = string.format("farm[%d]", farmIndex)
+        local collections = {
+            {farm.workers or {}, HelperPersonnelNetwork.MAX_NETWORK_PEOPLE, "workers"},
+            {farm.applicants or {}, HelperPersonnelNetwork.MAX_NETWORK_PEOPLE, "applicants"},
+            {farm.reputationHistory or {}, HelperPersonnelNetwork.MAX_NETWORK_HISTORY, "reputationHistory", true},
+            {farm.actionHistory or {}, HelperPersonnelNetwork.MAX_NETWORK_HISTORY, "actionHistory", true}
+        }
+        for _, collection in ipairs(collections) do
+            local count = #collection[1]
+            if collection[4] then
+                count = math.min(count, HelperPersonnelManager ~= nil and (HelperPersonnelManager.MAX_HISTORY_ENTRIES or 3) or 3)
+            end
+            ok, reason = countItems(count, collection[2], prefix .. "." .. collection[3])
+            if not ok then return false, reason end
+        end
+
+        if HelperPersonnelNetwork.STATE_VERSION >= 20 then
+            local count = 0
+            for personId, overview in pairs(type(farm.workerHistoryOverviews) == "table" and farm.workerHistoryOverviews or {}) do
+                if type(overview) == "table" and tonumber(personId) ~= nil then
+                    count = count + 1
+                end
+            end
+            ok, reason = countItems(count, HelperPersonnelNetwork.MAX_NETWORK_WORKER_HISTORY_OVERVIEWS, prefix .. ".workerHistoryOverviews")
+            if not ok then return false, reason end
+        else
+            local records = type(farm.personChronicles) == "table" and farm.personChronicles or {}
+            ok, reason = countItems(#records, HelperPersonnelNetwork.MAX_NETWORK_CHRONICLE_RECORDS, prefix .. ".personChronicles")
+            if not ok then return false, reason end
+            for index, record in ipairs(records) do
+                local entries = type(record.entries) == "table" and record.entries or {}
+                ok, reason = countItems(#entries, HelperPersonnelNetwork.MAX_NETWORK_CHRONICLE_ENTRIES, string.format("%s.personChronicles[%d].entries", prefix, index))
+                if not ok then return false, reason end
+            end
+        end
+        ok, reason = countItems(#(farm.activeAssignments or {}), HelperPersonnelNetwork.MAX_NETWORK_ASSIGNMENTS, prefix .. ".activeAssignments")
+        if not ok then return false, reason end
+    end
+    return true
+end
 
 function HelperPersonnelNetwork.beginNetworkRead()
     HelperPersonnelNetwork.networkReadInvalid = false
@@ -376,7 +499,7 @@ function HelperPersonnelNetwork.readBoundedCount(streamId, limit, label)
 
     if count < 0 or count > limit or (remaining ~= nil and count > remaining) then
         HelperPersonnelNetwork.invalidateNetworkRead(label, count, limit)
-        return 0
+        error(HP_INVALID_NETWORK_STATE, 0)
     end
 
     if remaining ~= nil then
@@ -455,6 +578,7 @@ function HelperPersonnelNetwork.writeConfigState(streamId, config)
     streamWriteBool(streamId, config.personnelEffectsEnabled ~= false)
     streamWriteBool(streamId, config.loyaltyEffectsEnabled ~= false)
     streamWriteBool(streamId, config.nightWorkLoyaltyEffectEnabled ~= false)
+    streamWriteBool(streamId, config.applicantInterviewsEnabled ~= false)
     streamWriteBool(streamId, config.economicEffectsEnabled ~= false)
     streamWriteBool(streamId, config.individualWagesEnabled ~= false)
     streamWriteFloat32(streamId, tonumber(config.standardBaseMonthlyWage) or (HelperPersonnelConfig ~= nil and HelperPersonnelConfig.DEFAULT_STANDARD_BASE_MONTHLY_WAGE or 2500))
@@ -475,10 +599,16 @@ function HelperPersonnelNetwork.readConfigState(streamId, version)
         state.personnelEffectsEnabled = streamReadBool(streamId) == true
         state.loyaltyEffectsEnabled = streamReadBool(streamId) == true
         state.nightWorkLoyaltyEffectEnabled = streamReadBool(streamId) == true
+        if (version or 0) >= 21 then
+            state.applicantInterviewsEnabled = streamReadBool(streamId) == true
+        else
+            state.applicantInterviewsEnabled = true
+        end
     else
         state.personnelEffectsEnabled = true
         state.loyaltyEffectsEnabled = true
         state.nightWorkLoyaltyEffectEnabled = true
+        state.applicantInterviewsEnabled = true
     end
 
     state.economicEffectsEnabled = streamReadBool(streamId) == true
@@ -840,11 +970,14 @@ function HelperPersonnelNetwork.writeState(streamId, state)
     end
 end
 
-function HelperPersonnelNetwork.readState(streamId)
-    HelperPersonnelNetwork.beginNetworkRead()
-
+local function readNetworkStateBody(streamId)
     local version = streamReadUInt8(streamId)
     local state = { version = version, farms = {} }
+
+    if version == nil or version > HelperPersonnelNetwork.STATE_VERSION then
+        HelperPersonnelNetwork.invalidateNetworkRead("stateVersion", version or -1, HelperPersonnelNetwork.STATE_VERSION)
+        error(HP_INVALID_NETWORK_STATE, 0)
+    end
 
     if version ~= nil and version >= 2 and version <= HelperPersonnelNetwork.STATE_VERSION then
         state.nextPersonId = streamReadInt32(streamId)
@@ -861,17 +994,13 @@ function HelperPersonnelNetwork.readState(streamId)
             local farmId = farmState ~= nil and tonumber(farmState.farmId) or nil
             if farmId == nil or farmId <= 0 or farmIds[farmId] == true then
                 HelperPersonnelNetwork.invalidateNetworkRead("farmId", farmId or -1, 1)
-                break
+                error(HP_INVALID_NETWORK_STATE, 0)
             end
             farmIds[farmId] = true
             table.insert(state.farms, farmState)
             if HelperPersonnelNetwork.networkReadInvalid == true then
                 break
             end
-        end
-
-        if HelperPersonnelNetwork.finishNetworkRead() then
-            return nil
         end
 
         return state
@@ -895,11 +1024,23 @@ function HelperPersonnelNetwork.readState(streamId)
     state.reputationHistory = HelperPersonnelNetwork.readHistory(streamId)
     state.actionHistory = HelperPersonnelNetwork.readHistory(streamId)
 
-    if HelperPersonnelNetwork.finishNetworkRead() then
+    return state
+end
+
+function HelperPersonnelNetwork.readState(streamId)
+    HelperPersonnelNetwork.beginNetworkRead()
+    local ok, result = pcall(readNetworkStateBody, streamId)
+    local invalid = HelperPersonnelNetwork.finishNetworkRead()
+    if not ok then
+        if result ~= HP_INVALID_NETWORK_STATE then
+            error(result, 0)
+        end
         return nil
     end
-
-    return state
+    if invalid then
+        return nil
+    end
+    return result
 end
 
 
@@ -1011,6 +1152,39 @@ function HelperPersonnelNotificationEvent:run(connection)
         app:showIngameNotificationLocal(self.text, self.notificationType)
     elseif g_currentMission ~= nil and g_currentMission.addIngameNotification ~= nil then
         g_currentMission:addIngameNotification(self.notificationType or 0, self.text or "")
+    end
+end
+
+HelperPersonnelInterviewStatusEvent = {}
+local HelperPersonnelInterviewStatusEvent_mt = Class(HelperPersonnelInterviewStatusEvent, Event)
+InitEventClass(HelperPersonnelInterviewStatusEvent, "HelperPersonnelInterviewStatusEvent")
+
+function HelperPersonnelInterviewStatusEvent.emptyNew()
+    return Event.new(HelperPersonnelInterviewStatusEvent_mt)
+end
+
+function HelperPersonnelInterviewStatusEvent.new(applicantId, canControl)
+    local self = HelperPersonnelInterviewStatusEvent.emptyNew()
+    self.applicantId = tonumber(applicantId) or 0
+    self.canControl = canControl == true
+    return self
+end
+
+function HelperPersonnelInterviewStatusEvent:writeStream(streamId, connection)
+    streamWriteInt32(streamId, self.applicantId or 0)
+    streamWriteBool(streamId, self.canControl == true)
+end
+
+function HelperPersonnelInterviewStatusEvent:readStream(streamId, connection)
+    self.applicantId = streamReadInt32(streamId) or 0
+    self.canControl = streamReadBool(streamId) == true
+    self:run(connection)
+end
+
+function HelperPersonnelInterviewStatusEvent:run(connection)
+    local app = g_helperPersonnelApp
+    if app ~= nil and app.setApplicantInterviewControl ~= nil then
+        app:setApplicantInterviewControl(self.applicantId, self.canControl)
     end
 end
 

@@ -27,6 +27,24 @@ HelperPersonnelAIJobHooks.XML_ATTR_HELPER_NAME = "#helperPersonnelHelperName"
 HelperPersonnelAIJobHooks.XML_ATTR_BASE_HELPER_INDEX = "#helperPersonnelBaseHelperIndex"
 HelperPersonnelAIJobHooks.pendingRestoredJobs = HelperPersonnelAIJobHooks.pendingRestoredJobs or {}
 
+local function hpRegisterAIJobHook(owner, methodName, hookKind, hookFunction, hookKey, purpose, side)
+    if HelperPersonnelHookRegistrar ~= nil and HelperPersonnelHookRegistrar.install ~= nil then
+        return HelperPersonnelHookRegistrar:install(owner, methodName, hookKind, hookFunction, hookKey, purpose, side)
+    end
+
+    if owner == nil or owner[methodName] == nil or Utils == nil then
+        return false
+    end
+    if hookKind == "append" then
+        owner[methodName] = Utils.appendedFunction(owner[methodName], hookFunction)
+    elseif hookKind == "prepend" then
+        owner[methodName] = Utils.prependedFunction(owner[methodName], hookFunction)
+    else
+        owner[methodName] = Utils.overwrittenFunction(owner[methodName], hookFunction)
+    end
+    return true
+end
+
 function HelperPersonnelAIJobHooks.onAIJobSaveToXMLFile(job, superFunc, xmlFile, key, ...)
     superFunc(job, xmlFile, key, ...)
 
@@ -103,37 +121,37 @@ function HelperPersonnelAIJobHooks.installJobClassHooks(className, classObject, 
 
     local saveToXMLFile = rawget(classObject, "saveToXMLFile")
     if saveToXMLFile ~= nil then
-        classObject.saveToXMLFile = Utils.overwrittenFunction(saveToXMLFile, HelperPersonnelAIJobHooks.onAIJobSaveToXMLFile)
+        hpRegisterAIJobHook(classObject, "saveToXMLFile", "overwrite", HelperPersonnelAIJobHooks.onAIJobSaveToXMLFile, "giants." .. className .. ".saveToXMLFile", "KI-Job-Persistenz", "both")
     end
 
     local loadFromXMLFile = rawget(classObject, "loadFromXMLFile")
     if loadFromXMLFile ~= nil then
-        classObject.loadFromXMLFile = Utils.overwrittenFunction(loadFromXMLFile, HelperPersonnelAIJobHooks.onAIJobLoadFromXMLFile)
+        hpRegisterAIJobHook(classObject, "loadFromXMLFile", "overwrite", HelperPersonnelAIJobHooks.onAIJobLoadFromXMLFile, "giants." .. className .. ".loadFromXMLFile", "KI-Job-Persistenz", "both")
     end
 
     local writeStream = rawget(classObject, "writeStream")
     if writeStream ~= nil then
-        classObject.writeStream = Utils.overwrittenFunction(writeStream, HelperPersonnelAIJobHooks.onAIJobWriteStream)
+        hpRegisterAIJobHook(classObject, "writeStream", "overwrite", HelperPersonnelAIJobHooks.onAIJobWriteStream, "giants." .. className .. ".writeStream", "KI-Job-Netzwerk", "both")
     end
 
     local readStream = rawget(classObject, "readStream")
     if readStream ~= nil and hookOptions.skipReadStream ~= true then
-        classObject.readStream = Utils.overwrittenFunction(readStream, HelperPersonnelAIJobHooks.onAIJobReadStream)
+        hpRegisterAIJobHook(classObject, "readStream", "overwrite", HelperPersonnelAIJobHooks.onAIJobReadStream, "giants." .. className .. ".readStream", "KI-Job-Netzwerk", "both")
     end
 
     local getHelperName = rawget(classObject, "getHelperName")
     if getHelperName ~= nil then
-        classObject.getHelperName = Utils.overwrittenFunction(getHelperName, HelperPersonnelAIJobHooks.onAIJobGetHelperName)
+        hpRegisterAIJobHook(classObject, "getHelperName", "overwrite", HelperPersonnelAIJobHooks.onAIJobGetHelperName, "giants." .. className .. ".getHelperName", "KI-Helferprofil", "both")
     end
 
     local getTitle = rawget(classObject, "getTitle")
     if getTitle ~= nil then
-        classObject.getTitle = Utils.overwrittenFunction(getTitle, HelperPersonnelAIJobHooks.onAIJobGetTitle)
+        hpRegisterAIJobHook(classObject, "getTitle", "overwrite", HelperPersonnelAIJobHooks.onAIJobGetTitle, "giants." .. className .. ".getTitle", "KI-Helferprofil", "both")
     end
 
     local getPricePerMs = rawget(classObject, "getPricePerMs")
     if getPricePerMs ~= nil then
-        classObject.getPricePerMs = Utils.overwrittenFunction(getPricePerMs, HelperPersonnelAIJobHooks.onGetPricePerMs)
+        hpRegisterAIJobHook(classObject, "getPricePerMs", "overwrite", HelperPersonnelAIJobHooks.onGetPricePerMs, "giants." .. className .. ".getPricePerMs", "KI-Lohnberechnung", "server")
     end
 end
 
@@ -170,60 +188,70 @@ function HelperPersonnelAIJobHooks.install(stageName)
 
     if AIJob ~= nil then
         if AIJob.start ~= nil then
-            AIJob.start = Utils.overwrittenFunction(AIJob.start, HelperPersonnelAIJobHooks.onAIJobStart)
+            hpRegisterAIJobHook(AIJob, "start", "overwrite", HelperPersonnelAIJobHooks.onAIJobStart, "giants.AIJob.start", "KI-Job-Start", "both")
         end
         if AIJob.stop ~= nil then
-            AIJob.stop = Utils.prependedFunction(AIJob.stop, HelperPersonnelAIJobHooks.onAIJobStop)
+            hpRegisterAIJobHook(AIJob, "stop", "prepend", HelperPersonnelAIJobHooks.onAIJobStop, "giants.AIJob.stop", "KI-Job-Ende", "both")
         end
         if AIJob.writeStream ~= nil then
-            AIJob.writeStream = Utils.overwrittenFunction(AIJob.writeStream, HelperPersonnelAIJobHooks.onAIJobWriteStream)
+            hpRegisterAIJobHook(AIJob, "writeStream", "overwrite", HelperPersonnelAIJobHooks.onAIJobWriteStream, "giants.AIJob.writeStream", "KI-Job-Netzwerk", "both")
         end
         if AIJob.readStream ~= nil then
-            AIJob.readStream = Utils.overwrittenFunction(AIJob.readStream, HelperPersonnelAIJobHooks.onAIJobReadStream)
+            hpRegisterAIJobHook(AIJob, "readStream", "overwrite", HelperPersonnelAIJobHooks.onAIJobReadStream, "giants.AIJob.readStream", "KI-Job-Netzwerk", "both")
         end
 
         if AIJob.saveToXMLFile ~= nil then
-            AIJob.saveToXMLFile = Utils.overwrittenFunction(AIJob.saveToXMLFile, HelperPersonnelAIJobHooks.onAIJobSaveToXMLFile)
+            hpRegisterAIJobHook(AIJob, "saveToXMLFile", "overwrite", HelperPersonnelAIJobHooks.onAIJobSaveToXMLFile, "giants.AIJob.saveToXMLFile", "KI-Job-Persistenz", "both")
         end
 
         if AIJob.loadFromXMLFile ~= nil then
-            AIJob.loadFromXMLFile = Utils.overwrittenFunction(AIJob.loadFromXMLFile, HelperPersonnelAIJobHooks.onAIJobLoadFromXMLFile)
+            hpRegisterAIJobHook(AIJob, "loadFromXMLFile", "overwrite", HelperPersonnelAIJobHooks.onAIJobLoadFromXMLFile, "giants.AIJob.loadFromXMLFile", "KI-Job-Persistenz", "both")
         end
 
         if AIJob.getHelperName ~= nil then
-            AIJob.getHelperName = Utils.overwrittenFunction(AIJob.getHelperName, HelperPersonnelAIJobHooks.onAIJobGetHelperName)
+            hpRegisterAIJobHook(AIJob, "getHelperName", "overwrite", HelperPersonnelAIJobHooks.onAIJobGetHelperName, "giants.AIJob.getHelperName", "KI-Helferprofil", "both")
         end
 
         if AIJob.getTitle ~= nil then
-            AIJob.getTitle = Utils.overwrittenFunction(AIJob.getTitle, HelperPersonnelAIJobHooks.onAIJobGetTitle)
+            hpRegisterAIJobHook(AIJob, "getTitle", "overwrite", HelperPersonnelAIJobHooks.onAIJobGetTitle, "giants.AIJob.getTitle", "KI-Helferprofil", "both")
         end
 
         if AIJob.getPricePerMs ~= nil then
-            AIJob.getPricePerMs = Utils.overwrittenFunction(AIJob.getPricePerMs, HelperPersonnelAIJobHooks.onGetPricePerMs)
+            hpRegisterAIJobHook(AIJob, "getPricePerMs", "overwrite", HelperPersonnelAIJobHooks.onGetPricePerMs, "giants.AIJob.getPricePerMs", "KI-Lohnberechnung", "server")
         end
     end
 
     if AISystem ~= nil and AISystem.startJob ~= nil then
-        AISystem.startJob = Utils.overwrittenFunction(AISystem.startJob, HelperPersonnelAIJobHooks.onAISystemStartJob)
+        hpRegisterAIJobHook(AISystem, "startJob", "overwrite", HelperPersonnelAIJobHooks.onAISystemStartJob, "giants.AISystem.startJob", "KI-Job-Start", "both")
     end
 
     if AIJobStartRequestEvent ~= nil then
         if AIJobStartRequestEvent.new ~= nil and HelperPersonnelAIJobHooks.originalAIJobStartRequestEventNew == nil then
             HelperPersonnelAIJobHooks.originalAIJobStartRequestEventNew = AIJobStartRequestEvent.new
-            AIJobStartRequestEvent.new = HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew
+            if HelperPersonnelHookRegistrar ~= nil and HelperPersonnelHookRegistrar.replace ~= nil then
+                HelperPersonnelHookRegistrar:replace(AIJobStartRequestEvent, "new", HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew,
+                    "giants.AIJobStartRequestEvent.new", "KI-Start-Anfrage", "client")
+            else
+                AIJobStartRequestEvent.new = HelperPersonnelAIJobHooks.onAIJobStartRequestEventNew
+            end
         end
 
         if AIJobStartRequestEvent.writeStream ~= nil then
-            AIJobStartRequestEvent.writeStream = Utils.overwrittenFunction(AIJobStartRequestEvent.writeStream, HelperPersonnelAIJobHooks.onAIJobStartRequestEventWriteStream)
+            hpRegisterAIJobHook(AIJobStartRequestEvent, "writeStream", "overwrite", HelperPersonnelAIJobHooks.onAIJobStartRequestEventWriteStream, "giants.AIJobStartRequestEvent.writeStream", "KI-Start-Anfrage", "client")
         end
 
         if AIJobStartRequestEvent.readStream ~= nil and HelperPersonnelAIJobHooks.originalAIJobStartRequestEventReadStream == nil then
             HelperPersonnelAIJobHooks.originalAIJobStartRequestEventReadStream = AIJobStartRequestEvent.readStream
-            AIJobStartRequestEvent.readStream = HelperPersonnelAIJobHooks.onAIJobStartRequestEventReadStream
+            if HelperPersonnelHookRegistrar ~= nil and HelperPersonnelHookRegistrar.replace ~= nil then
+                HelperPersonnelHookRegistrar:replace(AIJobStartRequestEvent, "readStream", HelperPersonnelAIJobHooks.onAIJobStartRequestEventReadStream,
+                    "giants.AIJobStartRequestEvent.readStream", "KI-Start-Anfrage", "server")
+            else
+                AIJobStartRequestEvent.readStream = HelperPersonnelAIJobHooks.onAIJobStartRequestEventReadStream
+            end
         end
 
         if AIJobStartRequestEvent.run ~= nil then
-            AIJobStartRequestEvent.run = Utils.overwrittenFunction(AIJobStartRequestEvent.run, HelperPersonnelAIJobHooks.onAIJobStartRequestEventRun)
+            hpRegisterAIJobHook(AIJobStartRequestEvent, "run", "overwrite", HelperPersonnelAIJobHooks.onAIJobStartRequestEventRun, "giants.AIJobStartRequestEvent.run", "KI-Start-Autorisierung", "server")
         end
     end
 
@@ -353,7 +381,14 @@ function HelperPersonnelAIJobHooks.onAIJobGetTitle(job, superFunc, ...)
     return superFunc(job, ...)
 end
 
+function HelperPersonnelAIJobHooks.isTransportJob(job)
+    return HelperPersonnelTransportAssignments ~= nil and HelperPersonnelTransportAssignments.isTransportJob(job) == true
+end
+
 function HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
+    if HelperPersonnelTransportAssignments ~= nil and HelperPersonnelTransportAssignments.shouldIgnoreWorkerFromJob(job) then
+        return nil
+    end
     if job == nil then
         return nil
     end
@@ -373,6 +408,10 @@ function HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
 
     if job.helperPersonnelWorkerId ~= nil then
         return job.helperPersonnelWorkerId
+    end
+
+    if job.hpCourseplayNeedsWorkerSelection == true then
+        return nil
     end
 
     local app = g_helperPersonnelApp
@@ -425,6 +464,9 @@ function HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
 end
 
 function HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
+    if HelperPersonnelTransportAssignments ~= nil and HelperPersonnelTransportAssignments.shouldIgnoreWorkerForJob(app, job) then
+        return nil
+    end
     if app == nil or job == nil then
         return nil
     end
@@ -490,6 +532,7 @@ function HelperPersonnelAIJobHooks.applyWorkerToJob(job, workerId)
         return nil
     end
 
+    job.hpCourseplayNeedsWorkerSelection = nil
     job.helperPersonnelWorkerId = workerId
 
     if app.helperBridge ~= nil then
@@ -501,6 +544,11 @@ end
 
 function HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job)
     local app = g_helperPersonnelApp
+    if app ~= nil and app.isMultiplayerClient ~= nil and app:isMultiplayerClient() then
+        if app.hpJoinSyncApplied ~= true or app.activeJobsRestoreDone ~= true then
+            return true
+        end
+    end
     if app == nil or workerId == nil then
         return false
     end
@@ -571,6 +619,12 @@ end
 
 function HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
     if app == nil or app.helperBridge == nil or job == nil or workerId == nil then
+        if job ~= nil then
+            job.hpHelperPersonnelFinalized = true
+            if job.hp1565RestoreRestart == true then
+                job.hp1565RestoreConfirmed = true
+            end
+        end
         return
     end
 
@@ -583,6 +637,49 @@ function HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
     if app.consumePendingWorkerForVehicle ~= nil then
         app:consumePendingWorkerForVehicle(HelperPersonnelAIJobHooks.getVehicleFromJob(job))
     end
+
+    job.hpHelperPersonnelFinalized = true
+    if job.hp1565RestoreRestart == true then
+        job.hp1565RestoreConfirmed = true
+    end
+end
+
+function HelperPersonnelAIJobHooks.getStartedJobActiveState(app, job)
+    if app == nil or job == nil or app.getActiveAIJobs == nil then
+        return false, false
+    end
+
+    local activeJobs = app:getActiveAIJobs()
+    if type(activeJobs) ~= "table" then
+        return false, false
+    end
+
+    for key, value in pairs(activeJobs) do
+        if value == job or key == job then
+            return true, true
+        end
+    end
+
+    return true, false
+end
+
+function HelperPersonnelAIJobHooks.shouldFinalizeStartedJob(app, job)
+    local known, active = HelperPersonnelAIJobHooks.getStartedJobActiveState(app, job)
+    if known then
+        return active == true
+    end
+
+    return true
+end
+
+function HelperPersonnelAIJobHooks.clearPendingStart(app, job)
+    if app == nil then
+        return
+    end
+
+    if app.consumePendingWorkerForVehicle ~= nil and HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.getVehicleFromJob ~= nil then
+        app:consumePendingWorkerForVehicle(HelperPersonnelAIJobHooks.getVehicleFromJob(job))
+    end
 end
 
 function HelperPersonnelAIJobHooks.onAIJobStart(job, superFunc, farmId, ...)
@@ -590,12 +687,9 @@ function HelperPersonnelAIJobHooks.onAIJobStart(job, superFunc, farmId, ...)
     local app = g_helperPersonnelApp
     local workerId = HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
     local result = nil
-
-    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.start | Job=%s | Farm=%s | Worker=%s | App=%s",
-        hpJobDebugJobName(job), tostring(farmId), tostring(workerId), tostring(app ~= nil))
+    local insideAISystemStart = (HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth or 0) > 0
 
     if workerId ~= nil and not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job) then
-        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.start aborted | Reason=workerNotAvailable | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
         HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, job)
         return false
     end
@@ -608,110 +702,88 @@ function HelperPersonnelAIJobHooks.onAIJobStart(job, superFunc, farmId, ...)
         result = superFunc(job, farmId, unpack(args))
     end
 
-    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.start result | Job=%s | Worker=%s | Result=%s", hpJobDebugJobName(job), tostring(workerId), tostring(result))
-
-    if result ~= false and app ~= nil and app.helperBridge ~= nil and job ~= nil then
+    if result ~= false and app ~= nil and app.helperBridge ~= nil and job ~= nil and not insideAISystemStart then
         if workerId == nil then
             workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
         end
 
-        if workerId ~= nil then
-            hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJob.start finalized | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
+        if workerId ~= nil and HelperPersonnelAIJobHooks.shouldFinalizeStartedJob(app, job) then
             HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
+        elseif workerId ~= nil then
+            HelperPersonnelAIJobHooks.clearPendingStart(app, job)
         end
     end
 
     return result
 end
 
+local function hpCallAISystemStart(callback)
+    HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth = (HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth or 0) + 1
+    local success, result = pcall(callback)
+    HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth = math.max(0, (HelperPersonnelAIJobHooks.hp1564InsideAISystemStartDepth or 1) - 1)
+    if not success then
+        error(result)
+    end
+    return result
+end
+
 function HelperPersonnelAIJobHooks.onAISystemStartJob(aiSystem, superFunc, job, farmId, ...)
     local args = {...}
     local app = g_helperPersonnelApp
-    if HelperPersonnelCourseplayCompatibility ~= nil and HelperPersonnelCourseplayCompatibility.prepareAIJobStart ~= nil then
+    local isRunningStartRequest = HelperPersonnelAIJobHooks.isRunningStartRequestEvent == true
+    if not isRunningStartRequest and HelperPersonnelCourseplayCompatibility ~= nil and HelperPersonnelCourseplayCompatibility.prepareAIJobStart ~= nil then
         HelperPersonnelCourseplayCompatibility.prepareAIJobStart(job)
     end
     local workerId = HelperPersonnelAIJobHooks.getWorkerIdForJob(app, job)
+    local result = nil
 
-    local isRestorePhase = app ~= nil
-        and app.activeJobsRestoreDone ~= true
-
-    local isSendingSelected = HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.isSendingSelectedAIJob == true
-    local isRunningStartRequest = HelperPersonnelAIJobHooks.isRunningStartRequestEvent == true
-    local shouldHandleStart = false
-
-    if workerId == nil
-        and app ~= nil
-        and not isRestorePhase
-        and not isSendingSelected
-        and not isRunningStartRequest
-        and HelperPersonnelAIStartHooks ~= nil
-        and HelperPersonnelAIStartHooks.shouldHandleAIJobStart ~= nil then
-        shouldHandleStart = HelperPersonnelAIStartHooks.shouldHandleAIJobStart(job)
-    end
-
-    local isFollowMe = HelperPersonnelAIJobHooks.isFollowMeJob(job)
-    local followVehicle = nil
-    if HelperPersonnelAIStartHooks ~= nil and HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow ~= nil then
-        followVehicle = HelperPersonnelAIStartHooks.getFollowMeVehicleToFollow(job)
-    end
-
-    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob | Job=%s | FollowMe=%s | Vehicle=%s | Target=%s | Farm=%s | Worker=%s | Restore=%s | SelectedSend=%s | EventRun=%s | ShouldSelect=%s",
-        hpJobDebugJobName(job),
-        tostring(isFollowMe),
-        hpJobDebugVehicleName(HelperPersonnelAIJobHooks.getVehicleFromJob(job)),
-        hpJobDebugVehicleName(followVehicle),
-        tostring(farmId),
-        tostring(workerId),
-        tostring(isRestorePhase),
-        tostring(isSendingSelected),
-        tostring(isRunningStartRequest),
-        tostring(shouldHandleStart))
-
-    if shouldHandleStart then
-        local queued = false
-        if HelperPersonnelAIStartHooks.queueSelectionForAIJob ~= nil then
-            queued = HelperPersonnelAIStartHooks.queueSelectionForAIJob(job, farmId)
-        elseif HelperPersonnelAIStartHooks.openSelectionForAIJob ~= nil then
-            queued = HelperPersonnelAIStartHooks.openSelectionForAIJob(job, farmId)
+    local startHooks = HelperPersonnelAIStartHooks
+    if workerId == nil and app ~= nil and app.activeJobsRestoreDone == true and g_client ~= nil
+        and not isRunningStartRequest and startHooks ~= nil and startHooks.isSendingSelectedAIJob ~= true
+        and startHooks.shouldHandleAIJobStart ~= nil and startHooks.shouldHandleAIJobStart(job) then
+        if startHooks.queueSelectionForAIJob ~= nil then
+            startHooks.queueSelectionForAIJob(job, farmId)
         end
-
-        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob selection inserted | Job=%s | Queued=%s", hpJobDebugJobName(job), tostring(queued))
-
-        if not queued then
-            hpJobStartDebug("FS25_HelperPersonnel: Direct AI job without a worker was blocked")
-        end
-
         return false
     end
 
     if workerId ~= nil then
         if not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, job) then
-            hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob aborted | Reason=workerNotAvailable | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
             HelperPersonnelAIJobHooks.rejectUnavailableWorker(workerId, job)
             return false
         end
 
-        local result = HelperPersonnelAIJobHooks.callWithForcedHelper(job, workerId, function()
-            return superFunc(aiSystem, job, farmId, unpack(args))
+        result = hpCallAISystemStart(function()
+            return HelperPersonnelAIJobHooks.callWithForcedHelper(job, workerId, function()
+                return superFunc(aiSystem, job, farmId, unpack(args))
+            end)
         end)
 
-        hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob result with worker | Job=%s | Worker=%s | Result=%s", hpJobDebugJobName(job), tostring(workerId), tostring(result))
-
         if result ~= false then
-            HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
+            if HelperPersonnelAIJobHooks.shouldFinalizeStartedJob(app, job) then
+                HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
+            else
+                HelperPersonnelAIJobHooks.clearPendingStart(app, job)
+                HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI start was not registered as an active assignment because the job ended immediately")
+            end
         end
 
         return result
     end
 
-    local result = superFunc(aiSystem, job, farmId, unpack(args))
-    hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob result without worker | Job=%s | Result=%s", hpJobDebugJobName(job), tostring(result))
+    result = hpCallAISystemStart(function()
+        return superFunc(aiSystem, job, farmId, unpack(args))
+    end)
 
     if result ~= false and app ~= nil and app.helperBridge ~= nil and job ~= nil then
         workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
         if workerId ~= nil then
-            hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AISystem.startJob finalized afterward | Job=%s | Worker=%s", hpJobDebugJobName(job), tostring(workerId))
-            HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
+            if HelperPersonnelAIJobHooks.shouldFinalizeStartedJob(app, job) then
+                HelperPersonnelAIJobHooks.finalizeStartedJob(app, job, workerId)
+            else
+                HelperPersonnelAIJobHooks.clearPendingStart(app, job)
+                HelperPersonnel.debugInfo("FS25_HelperPersonnel: AI start was not registered as an active assignment because the job ended immediately")
+            end
         end
     end
 
@@ -720,6 +792,48 @@ end
 
 function HelperPersonnelAIJobHooks.onAIJobStop(job, aiMessage)
     local app = g_helperPersonnelApp
+    if job ~= nil and job.hpHelperPersonnelStopHandled == true then
+        return
+    end
+    local restoreWorkerId = job ~= nil and job.helperPersonnelWorkerId or nil
+    if restoreWorkerId == nil then
+        restoreWorkerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
+    end
+    local bridge = app ~= nil and app.helperBridge or nil
+    if bridge ~= nil and job ~= nil and restoreWorkerId ~= nil
+        and HelperPersonnelCourseplayCompatibility ~= nil
+        and HelperPersonnelCourseplayCompatibility.isCourseplayJob(job) then
+        local assignedJob = bridge.workerJobById ~= nil and bridge.workerJobById[restoreWorkerId] or nil
+        local worker = app.manager ~= nil and app.manager.getWorkerById ~= nil and app.manager:getWorkerById(restoreWorkerId) or nil
+        local vehicleKey = bridge.getVehicleKeyFromJob ~= nil and bridge:getVehicleKeyFromJob(job) or nil
+        local workerOnOtherVehicle = worker ~= nil and worker.busy == true and worker.vehicleKey ~= nil
+            and vehicleKey ~= nil and worker.vehicleKey ~= vehicleKey
+        if (assignedJob ~= nil and assignedJob ~= job) or workerOnOtherVehicle then
+            if bridge.jobWorkerIds ~= nil then bridge.jobWorkerIds[job] = nil end
+            if vehicleKey ~= nil and bridge.vehicleWorkerIds ~= nil and bridge.vehicleWorkerIds[vehicleKey] == restoreWorkerId
+                and (worker == nil or worker.vehicleKey ~= vehicleKey) then
+                bridge.vehicleWorkerIds[vehicleKey] = nil
+            end
+            job.helperPersonnelWorkerId = nil
+            job.hpHelperPersonnelStopHandled = true
+            return
+        end
+    end
+    if job ~= nil and restoreWorkerId ~= nil and job.hpHelperPersonnelFinalized ~= true then
+        if app ~= nil and app.hp1565ClearFailedRestoreJob ~= nil then
+            app:hp1565ClearFailedRestoreJob(job, restoreWorkerId, job.hp1565RestoreAssignment, "job was not confirmed as an active assignment")
+        end
+        return
+    end
+    if job ~= nil and job.hp1565RestoreRestart == true then
+        local now = g_time or (g_currentMission ~= nil and g_currentMission.time) or 0
+        if now <= (job.hp1565RestoreProtectUntil or 0) then
+            if app ~= nil and app.hp1565ClearFailedRestoreJob ~= nil then
+                app:hp1565ClearFailedRestoreJob(job, restoreWorkerId, job.hp1565RestoreAssignment, "restore job ended during the grace period")
+            end
+            return
+        end
+    end
     local workerId = HelperPersonnelAIJobHooks.getWorkerIdFromJob(job)
     local isFollowMe = HelperPersonnelAIJobHooks.isFollowMeJob(job)
     local followVehicle = nil
@@ -921,6 +1035,35 @@ function HelperPersonnelAIJobHooks.onAIJobStartRequestEventRun(event, superFunc,
     end
 
     local workerId = event.helperPersonnelWorkerId
+    local app = g_helperPersonnelApp
+    if g_server ~= nil and connection ~= nil and connection.getIsServer == nil then
+        if Logging ~= nil and Logging.warning ~= nil then
+            Logging.warning("FS25_HelperPersonnel: AI job start rejected: connection authority could not be resolved")
+        end
+        return
+    end
+    if g_server ~= nil and connection ~= nil and not connection:getIsServer() then
+        local vehicle = event.job ~= nil and HelperPersonnelAIJobHooks.getVehicleFromJob(event.job) or nil
+        local vehicleFarmId = app ~= nil and app.getStrictFarmIdForVehicle ~= nil and app:getStrictFarmIdForVehicle(vehicle) or nil
+        local workerFarmId = nil
+        if workerId ~= nil and app ~= nil and app.manager ~= nil and app.manager.findWorkerFarmData ~= nil then
+            local workerData
+            workerData, workerFarmId = app.manager:findWorkerFarmData(workerId)
+            if workerData == nil then
+                workerFarmId = nil
+            end
+        end
+        local allowed, authorizedFarmId = false, nil
+        if app ~= nil and app.resolveAuthorizedFarmId ~= nil and vehicleFarmId ~= nil and workerFarmId ~= nil then
+            allowed, authorizedFarmId = app:resolveAuthorizedFarmId(connection, event.startFarmId, vehicleFarmId, "aiJobStart")
+        end
+        if not allowed or tonumber(workerFarmId) ~= tonumber(authorizedFarmId) then
+            if Logging ~= nil and Logging.warning ~= nil then
+                Logging.warning("FS25_HelperPersonnel: AI job start rejected: connection, vehicle or worker farm could not be authorized")
+            end
+            return
+        end
+    end
     if workerId ~= nil and event.job ~= nil then
         if not HelperPersonnelAIJobHooks.canUseWorkerForJob(workerId, event.job) then
             hpJobStartDebug("FS25_HelperPersonnel: Helper start diagnostics | AIJobStartRequestEvent.run aborted | Reason=workerNotAvailable | Job=%s | Worker=%s", hpJobDebugJobName(event.job), tostring(workerId))

@@ -37,6 +37,15 @@ function HelperPersonnelApp:tryRegisterStandaloneMenu()
         self.standaloneMenuPages.settings:setContext(self)
         self.standaloneMenuPages.help:setContext(self)
 
+        self.personnelDialog = HelperPersonnelPersonnelDialog.new()
+        g_gui:loadGui(Utils.getFilename("gui/HelperPersonnelPersonnelDialog.xml", self.modDir), "HelperPersonnelPersonnelDialog", self.personnelDialog)
+
+        self.selectionDialog = HelperPersonnelSelectionDialog.new()
+        g_gui:loadGui(Utils.getFilename("gui/HelperPersonnelSelectionDialog.xml", self.modDir), "HelperPersonnelSelectionDialog", self.selectionDialog)
+
+        self.interviewDialog = HelperPersonnelInterviewDialog.new()
+        g_gui:loadGui(Utils.getFilename("gui/HelperPersonnelInterviewDialog.xml", self.modDir), "HelperPersonnelInterviewDialog", self.interviewDialog)
+
         g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuOverview.xml", self.modDir), "HelperPersonnelMenuOverview", self.standaloneMenuPages.overview, true)
         g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuApplicants.xml", self.modDir), "HelperPersonnelMenuApplicants", self.standaloneMenuPages.applicants, true)
         g_gui:loadGui(Utils.getFilename("gui/frames/HelperPersonnelMenuEmployees.xml", self.modDir), "HelperPersonnelMenuEmployees", self.standaloneMenuPages.employees, true)
@@ -93,6 +102,45 @@ function HelperPersonnelApp:onActionOpenPersonnelMenu(actionName, inputValue)
     self:openStandaloneMenu("overview")
 end
 
+function HelperPersonnelApp.onVehicleActionOpenPersonnelMenu(vehicle, actionName, inputValue)
+    if g_helperPersonnelApp ~= nil then
+        g_helperPersonnelApp:onActionOpenPersonnelMenu(actionName, inputValue)
+    end
+end
+
+function HelperPersonnelApp:registerVehicleMenuAction(vehicle)
+    if g_inputBinding ~= nil and Vehicle ~= nil and Vehicle.INPUT_CONTEXT_NAME ~= nil and g_inputBinding.beginActionEventsModification ~= nil and g_inputBinding.endActionEventsModification ~= nil then
+        g_inputBinding:beginActionEventsModification(Vehicle.INPUT_CONTEXT_NAME)
+        if vehicle.hpPersonnelMenuActionEventId ~= nil and g_inputBinding.removeActionEvent ~= nil then
+            g_inputBinding:removeActionEvent(vehicle.hpPersonnelMenuActionEventId)
+            vehicle.hpPersonnelMenuActionEventId = nil
+        end
+        local actionId = self:getActionId("HP_OPEN_PERSONNEL_MENU")
+        local success, actionEventId = g_inputBinding:registerActionEvent(actionId, vehicle, HelperPersonnelApp.onVehicleActionOpenPersonnelMenu, false, true, false, true, nil, true)
+        if success == true and actionEventId ~= nil then
+            vehicle.hpPersonnelMenuActionEventId = actionEventId
+            self.standaloneVehicleMenuActionEventId = actionEventId
+            self.standaloneVehicleMenuVehicle = vehicle
+            if g_inputBinding.setActionEventText ~= nil then
+                local text = g_i18n ~= nil and g_i18n:getText("input_HP_OPEN_PERSONNEL_MENU") or "Personalmanagement öffnen"
+                g_inputBinding:setActionEventText(actionEventId, text)
+            end
+            if g_inputBinding.setActionEventTextPriority ~= nil then
+                g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_HIGH)
+            end
+            if g_inputBinding.setActionEventTextVisibility ~= nil then
+                g_inputBinding:setActionEventTextVisibility(actionEventId, true)
+            end
+            if g_inputBinding.setActionEventActive ~= nil then
+                g_inputBinding:setActionEventActive(actionEventId, true)
+            end
+        elseif Logging ~= nil and Logging.warning ~= nil then
+            Logging.warning("%s: Keyboard shortcut for the personnel management menu could not be registered in the vehicle input context.", tostring(self.modName or "FS25_PersonnelManagement"))
+        end
+        g_inputBinding:endActionEventsModification()
+    end
+end
+
 function HelperPersonnelApp:registerStandaloneMenuAction()
     if self.standaloneMenuActionRegistered == true or g_inputBinding == nil then
         return false
@@ -140,6 +188,17 @@ function HelperPersonnelApp:registerStandaloneMenuAction()
 end
 
 function HelperPersonnelApp:unregisterStandaloneMenuAction()
+    if self.standaloneVehicleMenuActionEventId ~= nil and g_inputBinding ~= nil and g_inputBinding.removeActionEvent ~= nil and Vehicle ~= nil and Vehicle.INPUT_CONTEXT_NAME ~= nil and g_inputBinding.beginActionEventsModification ~= nil and g_inputBinding.endActionEventsModification ~= nil then
+        g_inputBinding:beginActionEventsModification(Vehicle.INPUT_CONTEXT_NAME)
+        g_inputBinding:removeActionEvent(self.standaloneVehicleMenuActionEventId)
+        g_inputBinding:endActionEventsModification()
+    end
+    self.standaloneVehicleMenuActionEventId = nil
+    if self.standaloneVehicleMenuVehicle ~= nil then
+        self.standaloneVehicleMenuVehicle.hpPersonnelMenuActionEventId = nil
+        self.standaloneVehicleMenuVehicle = nil
+    end
+
     if self.standaloneMenuActionRegistered == true and g_inputBinding ~= nil then
         if self.standaloneMenuActionEventId ~= nil and g_inputBinding.removeActionEvent ~= nil then
             g_inputBinding:removeActionEvent(self.standaloneMenuActionEventId)

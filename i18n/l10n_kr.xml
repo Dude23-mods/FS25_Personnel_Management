@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="프로필" />
         <e k="ui_pmHistoryHeader" v="기록" />
         <e k="ui_button_train" v="교육" />
+        <e k="ui_pmManageSpecialization" v="전문화 관리" />
         <e k="ui_pmStatusApplicant" v="지원자" />
         <e k="ui_pmBirthLine" v="출생: %s" />
         <e k="ui_pmRankLabel" v="등급" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="활성" />
         <e k="ui_transportPriorityInactive" v="미배정" />
         <e k="ui_transportPriorityMoveUp" v="위로 이동" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="위로 이동" />
         <e k="ui_transportPriorityMoveDown" v="아래로 이동" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="아래로 이동" />
         <e k="ui_transportPriorityToggle" v="활성/비활성" />
         <e k="ui_transportPriorityApply" v="적용" />
         <e k="ui_transportPriorityCancel" v="취소" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="사무직" />
         <e k="ui_status_retirementPending" v="월말에 은퇴 예정" />
         <e k="ui_retirementNotice" v="%s은(는) 월말에 은퇴합니다." />
-        <e k="ui_pmTrainingIntro" v="전문화는 해당 범주의 성과를 높입니다. 교육은 월초에만 시작하며 비용이 들고 직원은 월말까지 이용할 수 없습니다. 진행도는 완료 후 반영됩니다. 제공 항목과 가격은 매월 바뀌며 3월부터 2월까지의 농업 연도마다 교육은 한 번만 가능합니다. 습득한 전문화는 유지되지만 활성 보너스는 최대 두 개입니다. 두 슬롯 모두 비활성일 수 있습니다. 습득했지만 비활성인 전문화는 직원 한 명당 농업 연도마다 한 번만 활성화할 수 있습니다." />
+        <e k="ui_pmTrainingIntro" v="팀을 목표에 맞춰 발전시키세요: “%s”를 선택한 후 학습 카테고리를 결정하세요. 전문 분야를 습득하면 해당 분야의 성과가 향상됩니다. 교육은 매월 초에 시작되며, 비용이 발생하고 직원은 해당 월 말까지 교육에 참여해야 합니다. 교육 완료 시 진척도가 반영됩니다. 제공되는 과정과 가격은 매월 변경됩니다. 각 직원은 3월부터 2월까지의 농업 연도당 한 번씩 교육을 이수할 수 있습니다. 습득한 전문 분야는 유지되며, 최대 두 개의 보너스만 활성화될 수 있고, 두 자리 모두 휴면 상태로 둘 수 있습니다. 직원 한 명당 농업 연도마다 습득했으나 비활성화된 전문 분야 중 하나만 활성화할 수 있습니다." />
         <e k="ui_pmTrainingCategoryHeader" v="학습 분야" />
         <e k="ui_pmTrainingProgressHeader" v="전문화 진행도" />
         <e k="ui_pmTrainingRunning" v="교육 진행 중" />
@@ -611,9 +614,9 @@
     <e k="ui_pmHelpTopic02Title" v="개요 및 인원 현황" />
     <e k="ui_pmHelpTopic02Body" v="이 개요는 농장의 현재 상황을 요약하여 보여줍니다. 상단에는 직원, 근무 가능한 직원, 지원자 및 고용주 평판이 표시됩니다. 그 아래에는 담당자, 차량, 장비 및 업무 내용이 포함된 진행 중인 업무가 나타납니다.&#10;‘변경 사항’ 타일에는 고용주 평판, 경력, 신뢰도, 충성도, 연령 또는 전문 분야의 변경과 같은 관련 인사 사건만 포함됩니다. 각 알림에는 원인, 관련자 및 영향이 명시되며, 여러 줄로 구성된 항목도 하나의 알림으로 간주됩니다.&#10;‘월간 보고서’와 ‘전체’에서는 현재 및 누적 지표를 확인할 수 있습니다. 이 개요를 활용하여 신속하게 근무 계획을 수립하고, 세부 사항, 의사 결정 및 기록은 각 전문 페이지에서 확인하십시오." />
     <e k="ui_pmHelpTopic03Title" v="구직 시장과 채용" />
-    <e k="ui_pmHelpTopic03Body" v="새로운 게임 라운드는 4명의 구직자로 시작됩니다. 동시에 시장에 존재할 수 있는 구직자는 최대 8명입니다. 매월 초마다 주사위를 굴려 최대 3개의 새로운 자리가 생성되며, 자리당 확률은 15% + 0.7 × 고용주 평판입니다. 평판이 60일 경우 자리당 57%, 100일 경우 85%의 확률이 적용됩니다. 시장이 비어 있으면 최소 한 명의 새로운 구직자가 생성됩니다.&#10;지원자는 생성된 달 동안은 확실히 이용 가능합니다. 첫 번째 달이 바뀌면 품질에 따라 이탈 확률이 10~30%가 되며, 두 번째 달이 바뀌면 30~50%, 세 번째 달이 바뀌면 100%가 됩니다. 우수한 프로필은 품질이 높을수록 이탈 확률이 높아지기 때문에 더 일찍 사라질 수 있습니다.&#10;지원자는 18~65세이며, 고정된 생년월일을 가지고 있고 나이가 계속 들어갑니다. 배경으로는 가족 경영 농장, 낙농장, 농업 용역 업체, 경작 농업, 복합 농업, 물류, 농기계 정비소 및 사무직이 있습니다. 연령과 배경은 특히 경험과 잠재적인 전문 지식에 영향을 미칩니다.&#10;희망 연봉은 경험과 신뢰도를 바탕으로 산정되며, 96~106%의 무작위 편차가 적용되고 고용주의 평판에 영향을 받습니다. 평판이 낮으면 희망 연봉이 상승하고, 평판이 높으면 하락합니다. 채용 전 확인 메시지가 표시되며, 채용 시 평판이 1포인트 상승합니다." />
+        <e k="ui_pmHelpTopic03Body" v="모든 지원자는 글로벌 시장에서 생성됩니다. 그 후, 고용주의 평판에 따라 지원자가 어느 농장에 제안될지가 결정됩니다. 따라서 농장마다 서로 다른 제안을 받을 수 있습니다. 동일한 인물이 여러 농장에 제안될 경우, 해당 인물은 모든 농장에서 동일한 기본 정보, 가치, 초기 가치 범위를 갖습니다. 한 농장이 해당 인물을 채용하는 즉시, 그 인물은 다른 모든 농장에서 사라집니다.&#10;초기에는 경험, 신뢰도, 충성도, 직급 및 희망 연봉이 숨겨져 있습니다. 각 지원자에 대해 세 가지 가치 중 정확히 하나만이 무작위로 배치된 30퍼센트 포인트 범위로 표시됩니다. 실제 값은 항상 그 범위 내에 있지만, 반드시 중간에 있는 것은 아닙니다. 이름, 나이, 경력, 이력서 및 전문 분야는 계속 표시됩니다.&#10;면접은 최대 세 개의 질문으로 이루어집니다. 알려지지 않은 값에 대한 첫 번째 질문은 30포인트 범위를 드러내며, 재질문 시 범위는 15포인트로 좁혀지고, 한 번 더 질문하면 정확한 값이 표시됩니다. 이미 알려진 값은 다시 선택할 수 없습니다. 면접은 중단했다가 나중에 동일한 진행 상태에서 재개할 수 있습니다. 희망 연봉은 마지막 답변과 함께 표시됩니다." />
     <e k="ui_pmHelpTopic04Title" v="직원 프로필, 가치관 및 현황" />
-    <e k="ui_pmHelpTopic04Body" v="경험, 신뢰도, 충성도는 각각 0에서 100까지의 범위를 가집니다. 수치는 정확히 표시되며, 막대 그래프를 통해 빠르게 비교할 수 있습니다.&#10;등급은 오로지 경험에 따라 결정됩니다: 보조원 0–44, 숙련공 45–74, 전문가 75–100. 경험은 작업 속도, 추가 마모 및 추가 소모량을 결정합니다. 신뢰성은 단기적인 성능 저하, 질병, 월별 성과 추이 및 업무 중단 위험에 영향을 미칩니다. 충성도는 회사에 대한 애착을 나타내며, 경고, 급여 분쟁 및 자진 퇴사에 영향을 미칩니다." />
+        <e k="ui_pmHelpTopic04Body" v="경험, 신뢰도, 충성도는 각각 0에서 100까지의 범위를 가집니다. 면접이 진행 중인 동안에는 지원자의 이러한 수치가 알려진 면접 진행 단계에 따라만 표시됩니다. 등급은 오로지 경험에 따라 결정되므로, 경험이 정확히 파악되는 시점에야 비로소 표시됩니다.&#10;채용이 완료된 후에도 아직 알려지지 않은 수치는 당분간 숨겨집니다. 실제 업무 수행 중에는 직원이 실시간으로 경험을 쌓습니다. 각 인물별로 정해진 20분에서 35분 사이의 시간이 경과하면 세 가지 수치가 모두 완전히 파악됩니다. 휴식 시간과 진행 중인 임무가 없는 시간은 계산에 포함되지 않습니다. 진행 상황은 게임 기록에 저장됩니다.&#10;경험치는 작업 속도, 추가 마모 및 추가 소모량을 결정합니다. 신뢰도는 단기적인 성능 저하, 질병, 월별 발전 상황 및 임무 중단 위험에 영향을 미칩니다. 충성도는 회사에 대한 애착을 나타내며, 경고, 급여 분쟁 및 자진 퇴사에 영향을 미칩니다." />
     <e k="ui_pmHelpTopic05Title" v="AI 도우미, 이동 및 FollowMe" />
     <e k="ui_pmHelpTopic05Body" v="일반 AI 보조 업무를 시작하면 직원 선택 화면이 열립니다. 이용 가능한 직원만 선택할 수 있습니다. 한 직원은 동시에 여러 건의 업무를 맡을 수 없으며, 병가나 교육 기간 중에는 이용 불가능합니다.&#10;업무는 10초가 지나야 완료된 업무로 기록됩니다. 전문성 향상을 위해서는 실무 시간이 최소 3분 이상이어야 합니다.&#10;T 키나 메뉴 버튼을 눌러 운송 우선순위 설정을 열 수 있습니다. 여기서 어떤 직원이 운송 업무를 담당할지, 그리고 어떤 순서로 검토될지를 지정합니다. A에서 B로 이동하는 작업의 경우, 상단부터 하단 순서로 첫 번째로 가용한 직원이 선택됩니다. FollowMe 기능은 여전히 직원 선택 기능을 사용하며, 운송 업무로 간주됩니다." />
     <e k="ui_pmHelpTopic06Title" v="경험과 업무에 미치는 영향" />
@@ -633,9 +636,9 @@
     <e k="ui_pmHelpTopic13Title" v="프로필, 활동 내역 및 통계" />
     <e k="ui_pmHelpTopic13Body" v="지원자 프로필은 연령, 직업적 배경, 경력, 신뢰성, 충성심, 전문 분야 및 현재까지의 시장 경력을 하나의 역동적인 텍스트로 통합합니다. 직원 프로필은 근속 기간, 업무 배정, 교육 및 학습 진척도를 보완합니다.&#10;개인 이력에는 채용, 근무 시작 및 종료, 근무 중단, 병가, 교육, 전문 분야, 급여 요구 및 결정, 충성도와 신뢰도 변화, 운송 배정, 해고, 자진 퇴사, 정년 퇴직 및 고용 종료 등이 기록됩니다.&#10;직원 이력에는 배치 내역, 근무 시간, 교육, 운송 상태, 최근 사건, 병가 일수, 급여 청구, 배치 중단 및 현재까지 지급된 총 급여 등이 표시됩니다. 이 개요에는 또한 전체 사업장 차원의 총계 값, 즉 총 채용 인원, 해고 인원, 자진 퇴사자 및 퇴직자 수 등이 추가로 표시됩니다." />
     <e k="ui_pmHelpTopic14Title" v="설정, 멀티플레이어 및 게임 기록" />
-    <e k="ui_pmHelpTopic14Body" v="설정은 각 게임 진행 상황에 따라 적용되며, 업무 성과, 인력 개발, 경제 및 급여로 구분됩니다. 게임플레이 효과는 이에 따른 경험치 효과를 활성화하며, 경험치 효과는 속도, 마모, 소모품 및 연료를 제어합니다. 인력 효과는 충성도 변화와 추가 근무 옵션을 활성화합니다. 경제 관련 효과는 개별 급여와 표준 월급을 활성화합니다.&#10;비활성화된 효과는 기존 인력 데이터를 소급하여 수정하지 않습니다. 해당 효과는 오직 향후 발생할 수 있는 영향을 차단하거나 허용할 뿐입니다. 개별 급여가 비활성화된 경우 표준 월급이 기본값으로 적용되며, 설정에서 직접 변경할 수 있습니다. 키 배정은 게임 설정에서 변경할 수 있습니다.&#10;멀티플레이어 모드에서는 직원, 지원자, 배치, 급여, 교육, 채용 및 연대기가 농장 단위로 관리 및 동기화됩니다. 서버가 결정권을 가지며, 권한이 있는 농장 관리자만 자신의 농장을 변경할 수 있습니다. 데이터는 게임 저장 파일의 helperPersonnel.xml에 저장되며, 로딩 시 진행 중인 배정은 가능한 한 복원됩니다. 기존 게임 저장 파일은 계속 사용할 수 있습니다. 이미 퇴사한 직원의 경우 과거 데이터가 불완전할 수 있습니다." />
+        <e k="ui_pmHelpTopic14Body" v="‘면접’ 설정은 게임 진행 상황에 따라 적용됩니다. 이 설정이 활성화되어 있으면, 배치 기간 동안 숨겨진 수치, 면접 내용 및 이후의 공개 정보가 적용됩니다. 비활성화되어 있으면, 모든 지원자 및 직원 수치가 기존과 같이 완전히 표시됩니다. 이 설정을 변경할 수 있는 권한은 서버와 권한이 있는 팜 매니저에게만 있습니다.&#10;멀티플레이어 모드에서는 서버가 모든 질문을 결정하고 면접 진행 상황을 동기화합니다. 창을 가장 먼저 연 권한 있는 농장 관리자가 면접을 진행합니다. 같은 농장의 다른 플레이어들은 실시간으로 지켜볼 수 있으며, 이들의 주제 버튼은 비활성화된 상태로 유지됩니다. 대화 진행자가 창을 닫거나 연결이 끊어지면, 다른 권한이 있는 농장 관리자가 대화를 이어받을 수 있습니다.&#10;직원, 지원자, 배치, 급여, 교육, 채용 및 연대기는 농장별로 관리됩니다. 전역 지원자는 여러 농장에 제안될 수 있지만, 그들의 대화 내역은 각 농장별로 별도로 저장됩니다." />
     <e k="ui_pmHelpTopic15Title" v="설정 및 첫 단계" />
-    <e k="ui_pmHelpTopic15Body" v="지원자 정보를 열어 나이, 배경, 가치관, 희망 연봉 및 보유한 전문 분야를 확인한 후 채용을 확정하세요. 지원자는 현재 농장의 직원이 되며, 이후의 모든 결정, 급여 계산 및 발전 사항은 해당 농장을 기준으로 적용됩니다.&#10;채용 후에는 먼저 짧고 적합한 업무를 계획하세요. 직원은 근무 가능 상태여야 합니다. 질병, 진행 중인 업무, 교육, 확정된 퇴사 또는 아직 유효한 모드 배정 등은 선발을 방해할 수 있습니다. ‘직원’ 탭에서 구체적인 사유를 확인할 수 있습니다.&#10;첫 채용 시 고용주 평판이 1포인트 상승합니다. 높은 수치가 항상 더 좋은 것은 아닙니다. 경험 많은 지원자는 대개 비용이 더 많이 드는 반면, 비용이 저렴한 신입은 성장과 교육에 더 많은 시간이 필요합니다." />
+        <e k="ui_pmHelpTopic15Body" v="‘지원자’ 탭에서 면접을 열고 ‘경험’, ‘신뢰성’ 또는 ‘충성심’을 선택하세요. 선택한 질문과 답변이 대화 기록에 표시됩니다. 최대 세 가지 질문이 끝나면 면접이 종료되고 희망 연봉이 표시됩니다. 알려진 정확한 수치, 범위 및 남아 있는 불확실성을 바탕으로 채용 여부를 결정하십시오.&#10;채용 후에도 완전히 명확해지지 않은 수치는 당분간 마지막으로 파악된 상태로 유지됩니다. 실제 근무를 계획하십시오: 20~35분간의 활성 실시간 시간이 지나면 수치가 완전히 공개됩니다. 직원은 근무 가능 상태여야 합니다. 질병, 진행 중인 업무, 교육 또는 확정된 퇴사 등은 선발을 방해할 수 있습니다.&#10;채용 시 고용주의 평판이 1점 상승합니다. 높은 수치가 항상 자동으로 더 좋은 것은 아닙니다. 경험 많은 지원자는 대개 비용이 더 많이 드는 반면, 비용이 저렴한 신입 사원은 개발 및 교육에 더 많은 시간이 필요합니다." />
     <e k="ui_pmHelpTopic16Title" v="업무 및 전문 분야 배정" />
     <e k="ui_pmHelpTopic16Body" v="할당은 차량, 장비 및 (있는 경우) 살포된 자재를 바탕으로 결정됩니다. 직접적인 자재 할당이 우선 적용됩니다: 종자는 파종에, 제초제는 병해충 방제에, 광물질 비료, 액체 비료, 액분, 발효 잔여물 및 거름은 시비에 해당합니다. 석회는 자동으로 별도의 학습 범주로 인식되지 않습니다.&#10;차량 및 장비 분류: 쟁기, 경운기, 회전식 해머, 디스크 해머, 롤러 및 멀처는 토양 경작에 속합니다. 파종기 및 식재기는 파종에 속합니다. 농약 살포기는 명확한 자재가 없는 경우 비료 시비에 속합니다. 콤바인, 수확기, 베일 프레스, 예초기, 적재차 및 픽업 트럭은 수확에 속합니다. 트레일러 및 하역 가능한 차량은 운송에 속합니다.&#10;FollowMe는 이 실용적인 인식 기능을 추가로 확장하여, 분쇄기, 감자 및 사탕무 수확기, 뒤집기 기계, 뭉치기 기계, 거름 살포기, 액비 탱크, 심토 풀기 기계, 돌 수집기, 갈퀴 및 괭이까지 포함합니다. 모드 차량은 그 전문성이 명확한 분류를 제공하지 않는 경우 중립 상태를 유지할 수 있습니다. 그러면 잘못된 전문성 보너스가 약속되지 않습니다.&#10;기계 보호와 절약형 작업 방식은 일반적인 보너스입니다. 전자는 경험에 따른 추가 마모를 줄여주고, 후자는 추가 연료 및 자재 소비를 줄여줍니다. 선택한 작업은 선택 창에 표시되며, 이에 적합한 활성화된 전문 분야가 해당 창에서 강조 표시됩니다." />
     <e k="ui_specialization_transport" v="교통" />
@@ -671,5 +674,244 @@
     <e k="ui_button_specializationActivate" v="로그인" />
     <e k="ui_pmSpecializationActive" v="활성" />
     <e k="ui_pmHelpContents" v="목차" />
+        <e k="ui_hpSetting_applicantInterviews" v="면접" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="지원자의 평가 항목을 숨깁니다. 최대 3차례의 질문 과정을 통해 해당 분야나 정확한 수치가 드러나며, 희망 연봉은 면접이 끝날 때 표시됩니다." />
+        <e k="ui_pmValueUnknown" v="알 수 없음" />
+        <e k="ui_hpInterviewPrompt" v="무엇을 여쭤보고 싶으신가요?" />
+        <e k="ui_hpInterviewTitle" v="면접" />
+        <e k="ui_hpInterviewTopicExperience" v="경험" />
+        <e k="ui_hpInterviewTopicReliability" v="신뢰성" />
+        <e k="ui_hpInterviewTopicLoyalty" v="충성심" />
+        <e k="ui_hpInterviewRound" v="질문 세션 3개 중 %d번째" />
+        <e k="ui_hpInterviewLeader" v="대화를 주도하는 건 너야." />
+        <e k="ui_hpInterviewObserver" v="너는 대화를 지켜보고 있다." />
+        <e k="ui_hpInterviewFinished" v="면접이 끝났습니다." />
+        <e k="ui_hpInterviewWageIntro" v="희망 연봉:" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="저희 농장에서 일하기 위해 어떤 실무 경험을 가지고 계신가요?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="실무 경험을 좀 더 구체적으로 설명해 주실 수 있나요?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="일상 업무에서 저희가 귀하를 믿고 의지할 수 있도록 어떻게 보장해 주시나요?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="독립적으로 업무를 수행할 때 본인의 신뢰성을 좀 더 구체적으로 어떻게 설명하시겠습니까?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="어떤 점이 중요해야 한 기업에 오랫동안 충성할 수 있나요?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="고용주와의 장기적인 유대 관계를 어떻게 더 구체적으로 평가하시겠습니까?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="지금까지의 제 경력은 아직 그리 길지 않습니다." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="이미 몇 가지 적합한 업무를 맡아 처리했습니다." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="저는 풍부한 실무 경험을 갖추고 있습니다." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="시간이 촉박할 때는 가끔 명확한 협의가 필요합니다." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="일반적으로 합의된 사항과 완료된 업무는 믿을 수 있다." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="저는 매우 성실하게 일하며, 한 약속은 철저히 지킵니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="새로운 사업을 시작할 때는 우선 단기적인 관점에서 결정을 내리는 편입니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="협업이 잘 맞다면, 장기간 함께 일하는 것도 충분히 생각해 볼 수 있습니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="일관성과 장기적인 협력은 저에게 매우 중요합니다." />
+        <e k="ui_hpInterviewAnswerIntro1" v="저는 이렇게 설명하고 싶습니다:" />
+        <e k="ui_hpInterviewAnswerIntro2" v="제 생각에는 다음과 같습니다:" />
+        <e k="ui_hpInterviewAnswerIntro3" v="다음과 같은 평가가 가장 적절합니다:" />
+        <e k="ui_hpInterviewOpen" v="면접" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="저희 농장에서 일하시면서 어떤 실무 경험을 가지고 계신가요?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="지금까지 농업 분야에서 어떤 업무를 담당해 오셨나요?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="농업 현장에서 어떤 업무에 이미 익숙하신가요?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="이 업무 중 어떤 것을 스스로 처리하셨는지 좀 더 자세히 설명해 주실 수 있나요?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="어떤 업무는 이미 자신 있게 처리할 수 있고, 어떤 부분은 아직 익혀야 할까요?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="지금까지 쌓아오신 경험 중, 저희 농장에서 특히 도움이 될 만한 것은 무엇이라고 생각하시나요?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="일상 업무에서 저희가 귀하를 믿고 의지할 수 있도록 어떻게 보장해 주시나요?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="기한 내에 완료해야 하는 업무는 어떻게 처리하시나요?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="업무 중에 예기치 못한 일이 발생할 경우, 귀하께서는 어떤 조치를 취해 주실 수 있습니까?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="약속을 지키지 못할 것 같다는 사실을 깨달았을 때 어떻게 하시나요?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="여러 가지 업무가 동시에 밀려올 때 어떻게 전체 상황을 파악하고 계신가요?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="독립적으로 업무를 수행할 때 책임을 어떻게 다하고 계신지 좀 더 자세히 설명해 주시겠습니까?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="어떤 점이 중요해야 한 기업에 오랫동안 충성할 수 있나요?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="저희 농장에서의 장기적인 협력 관계를 통해 무엇을 기대하시나요?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="장기간 저희 회사에서 즐겁게 근무하시려면 어떤 조건이 갖춰져야 할까요?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="고용주와의 장기적인 유대 관계가 귀하에게 어떤 의미를 갖습니까?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="어려운 시기에도 한 회사에 계속 근무할 의향이 어느 정도라고 생각하시나요?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="협력을 계속할지, 아니면 새로운 방향을 모색할지 결정하는 데 있어 어떤 요소가 결정적인 역할을 할까요?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="지금까지는 주로 간단한 업무를 도와드렸습니다. 새로운 업무는 단계적으로 차근차근 익혀 나가겠습니다." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="실무 경험은 아직 부족하지만, 배우는 것을 좋아하고 모르는 것이 있으면 적극적으로 질문합니다." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="농장에서 이루어지는 몇 가지 업무 과정은 알고 있지만, 일상 업무 중 많은 부분은 아직 익혀야 할 것 같습니다." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="저는 이미 농장에서 여러 가지 업무를 맡아 수행해 왔으며, 익숙한 업무는 잘 처리하고 있습니다." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="일부 기계와 작업 절차는 이미 다뤄본 적이 있습니다. 새로운 업무를 맡을 때는 가끔 간단한 안내가 필요합니다." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="저는 실무 경험을 갖추고 있지만, 물론 아직 배워야 할 부분이 분명히 있습니다." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="저는 오랫동안 농업 현장에서 일하면서 다양한 업무를 스스로 처리해 왔습니다." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="일반적인 작업과 기계 사용법에는 익숙합니다. 그래도 새로운 작업 절차는 먼저 꼼꼼히 살펴봅니다." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="저는 이미 다양한 업무 환경과 업무 방식을 경험해 보았으며, 대개 새로운 업무에 빠르게 적응할 수 있습니다." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="한꺼번에 할 일이 많이 쌓일 때는 명확한 협의가 도움이 됩니다. 그래야 무엇이 우선인지 더 잘 알 수 있으니까요." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="저는 제 업무를 차질 없이 처리하려고 노력하고 있습니다. 하지만 때로는 모든 일을 제때 파악하는 데 아직 더 노력해야 할 때가 있습니다." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="새롭거나 익숙하지 않은 업무를 할 때는 중요한 사항을 놓치지 않도록 중간중간 확인하는 편입니다." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="약속을 잘 지키려고 노력합니다. 일이 잘 풀리지 않을 것 같으면 가능한 한 빨리 알려드립니다." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="저는 제 업무를 성실하게 처리합니다. 우선순위가 명확하지 않을 때는 차라리 다시 한 번 상사와 상의하는 편입니다." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="대체로 저를 믿고 의지하셔도 됩니다. 일이 많을 때는 미리 간단히 상의해 주시면 도움이 됩니다." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="제가 어떤 일을 맡으면, 그 일을 책임지고 처리합니다. 문제가 생기면 조기에 제기합니다." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="약속과 협의 사항을 잘 파악하고, 마지막에 모든 일이 처리되었는지 확인합니다." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="독립적으로 업무를 수행할 때도 약속을 지키고, 중요한 변경 사항이 있을 경우 다른 사람들에게 알리는 것을 중요하게 생각합니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="우선 이곳에서 업무가 어떻게 진행되는지 살펴보고 싶습니다. 그 후에 앞으로 어떻게 할지 더 잘 결정할 수 있을 것 같습니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="저는 새로운 기회에 대해 열린 마음을 가지고 있으며, 새로운 직장에 입사할 때 너무 일찍 결정을 내리는 것을 꺼립니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="저에게는 일상 속에서 협업이 잘 맞아떨어져야 합니다. 제 상황이 바뀌면 다른 방법도 고려해 볼 생각입니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="협력이 잘 진행되고 조건이 맞다면, 좀 더 오래 머물 수도 있을 것 같습니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="신뢰할 수 있는 근무 환경이 저에게는 중요합니다. 제가 얼마나 오래 머물지는 우리가 서로 잘 지내는지에 따라 달라질 것입니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="서로 잘 협력해 나가고 싶으며, 우선은 이곳에 자리를 잡았으면 합니다. 양측 모두에게 적합하다면, 제가 계속 머물러야 할 이유가 충분합니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="저는 안정성을 중요하게 생각하며, 장기적으로 일할 수 있는 회사를 찾고 있습니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="저에게는 믿음직한 팀의 일원이 되는 것이 중요합니다. 우리가 잘 협력한다면, 자꾸만 팀을 옮기고 싶지는 않습니다." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="농장에서 더 오랫동안 일하며 그 농장과 함께 경험을 쌓고 싶습니다." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ는 이전에 시골의 가족 농장에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro1_2" v="지원하기 전, ZXQNAMEQXZ는 시골의 가족 농장에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro1_3" v="ZXQNAMEQXZ의 경력에는 시골의 가족 농장에서 일한 경험이 포함되어 있습니다." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ는 이전에 소규모 낙농장에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro2_2" v="지원하기 전, ZXQNAMEQXZ는 소규모 낙농장에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro2_3" v="ZXQNAMEQXZ의 경력에는 소규모 낙농장에서 근무한 경험이 포함됩니다." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ는 이전에 농기계 대여 업체에서 근무했습니다." />
+        <e k="ui_pmNewApplicantIntro3_2" v="지원하기 전, ZXQNAMEQXZ는 농기계 대행 업체에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro3_3" v="ZXQNAMEQXZ의 경력에는 농기계 용역 업체에서의 근무 경험이 포함됩니다." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ는 이전에 농장에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro4_2" v="지원하기 전, ZXQNAMEQXZ는 한 농장에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro4_3" v="ZXQNAMEQXZ의 경력에는 농장 근무 경험이 포함되어 있습니다." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ는 이전에 복합 사업장에서 근무했습니다." />
+        <e k="ui_pmNewApplicantIntro5_2" v="지원하기 전, ZXQNAMEQXZ는 복합 사업장에서 근무했습니다." />
+        <e k="ui_pmNewApplicantIntro5_3" v="ZXQNAMEQXZ의 경력에는 복합 농장에서 근무한 경험이 포함됩니다." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ는 이전에 물류 업체에서 근무했습니다." />
+        <e k="ui_pmNewApplicantIntro6_2" v="지원하기 전, ZXQNAMEQXZ는 한 물류 회사에서 근무했습니다." />
+        <e k="ui_pmNewApplicantIntro6_3" v="ZXQNAMEQXZ의 경력에는 물류 회사에서의 근무 경험이 포함됩니다." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ는 이전에 농기계 정비소에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro7_2" v="지원하기 전, ZXQNAMEQXZ는 농기계 정비소에서 일했습니다." />
+        <e k="ui_pmNewApplicantIntro7_3" v="ZXQNAMEQXZ의 경력에는 농기계 정비소에서의 근무 경험이 포함되어 있습니다." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ는 이전에 사무직에 종사했습니다." />
+        <e k="ui_pmNewApplicantIntro8_2" v="지원하기 전, ZXQNAMEQXZ는 사무직으로 일했습니다." />
+        <e k="ui_pmNewApplicantIntro8_3" v="ZXQNAMEQXZ의 경력에는 사무직 근무 경험이 포함됩니다." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ는 이전에 시골의 가족 경영 농장에서 근무했으며, ZXQMONTHSQXZ개월 전부터 이 농장에 소속되어 있습니다." />
+        <e k="ui_pmNewWorkerIntro1_2" v="농장에서 일하기 전, ZXQNAMEQXZ는 시골의 가족 농장에서 일했습니다. 근속 기간은 ZXQMONTHSQXZ개월입니다." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 팀의 일원이 되었으며, 그 전에는 시골의 가족 농장에서 일했습니다." />
+        <e k="ui_pmNewWorkerIntro1_4" v="ZXQNAMEQXZ는 지난 ZXQMONTHSQXZ개월 동안 이 농장에서 일해 왔으며, 그 전에는 시골의 가족 농장에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ는 이전에 시골의 가족 농장에서 일했으며, ZXQMONTHSQXZ개월 동안 이 농장에서 근무해 왔습니다." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ는 이전에 소규모 낙농장에서 근무했으며, ZXQMONTHSQXZ개월 전부터 이 농장에 소속되어 있습니다." />
+        <e k="ui_pmNewWorkerIntro2_2" v="농장에서 일하기 전, ZXQNAMEQXZ는 소규모 낙농장에서 근무했습니다. 재직 기간은 ZXQMONTHSQXZ개월입니다." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 팀의 일원이 되었으며, 그 전에는 소규모 낙농장에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro2_4" v="ZXQNAMEQXZ는 지난 ZXQMONTHSQXZ개월 동안 이 농장에서 일해 왔으며, 그 전에는 소규모 낙농장에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ는 이전에 소규모 낙농장에서 일했으며, 이 농장에 온 지 ZXQMONTHSQXZ개월이 되었습니다." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ는 이전에 한 농기계 용역 업체에서 근무했으며, ZXQMONTHSQXZ개월 전부터 이 회사에 재직 중입니다." />
+        <e k="ui_pmNewWorkerIntro3_2" v="농장에서 일하기 전, ZXQNAMEQXZ는 농업 용역 업체에서 근무했습니다. 재직 기간은 ZXQMONTHSQXZ개월입니다." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 팀의 일원이 되었으며, 그 전에는 농기계 용역 업체에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro3_4" v="ZXQNAMEQXZ는 지난 ZXQMONTHSQXZ개월 동안 농장에서 일해 왔으며, 그 전에는 농기계 도급 업체에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ는 이전에 한 농기계 용역 업체에서 근무했으며, ZXQMONTHSQXZ개월째 이 회사에서 근무하고 있습니다." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ는 이전에 한 농장에서 근무했으며, ZXQMONTHSQXZ개월 전부터 이 농장에 소속되어 있습니다." />
+        <e k="ui_pmNewWorkerIntro4_2" v="농장에서 일하기 전, ZXQNAMEQXZ는 경작 농장에서 근무했습니다. 근속 기간은 ZXQMONTHSQXZ개월입니다." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 팀의 일원이 되었으며, 그 전에는 농장에서 일했습니다." />
+        <e k="ui_pmNewWorkerIntro4_4" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 이 농장에서 일하고 있으며, 그 전에는 경작 농장에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ는 이전에 농장에서 일했으며, 이 농장에 온 지 ZXQMONTHSQXZ개월이 되었습니다." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ는 이전에 혼합 운영 현장에서 근무했으며, ZXQMONTHSQXZ개월 전부터 이 회사에 소속되어 있습니다." />
+        <e k="ui_pmNewWorkerIntro5_2" v="농장에서 일하기 전, ZXQNAMEQXZ는 복합 농장에서 근무했습니다. 근속 기간은 ZXQMONTHSQXZ개월입니다." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 팀의 일원이 되었으며, 그 전에는 복합 사업장에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro5_4" v="ZXQNAMEQXZ는 지난 ZXQMONTHSQXZ개월 동안 이 농장에서 일해 왔으며, 그 전에는 복합 농업 경영체에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ는 이전에 복합 발전소에서 근무했으며, ZXQMONTHSQXZ개월 동안 이 발전소에서 근무해 왔습니다." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ는 이전에 물류 업체에서 근무했으며, ZXQMONTHSQXZ개월 전부터 이 회사에 재직 중입니다." />
+        <e k="ui_pmNewWorkerIntro6_2" v="농장에서 일하기 전, ZXQNAMEQXZ는 물류 회사에서 근무했습니다. 근속 기간은 ZXQMONTHSQXZ개월입니다." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 팀의 일원이 되었으며, 이전에는 물류 업체에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro6_4" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 동안 농장에서 일해 왔으며, 그 전에는 물류 회사에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ는 이전에 물류 업체에서 근무했으며, 현재 이 회사에서 ZXQMONTHSQXZ개월째 근무하고 있습니다." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ는 이전에 농기계 정비소에서 근무했으며, ZXQMONTHSQXZ개월 전부터 이 회사에 재직 중입니다." />
+        <e k="ui_pmNewWorkerIntro7_2" v="농장에서 일하기 전, ZXQNAMEQXZ는 농기계 정비소에서 근무했습니다. 근속 기간은 ZXQMONTHSQXZ개월입니다." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 팀의 일원이 되었으며, 그 전에는 농기계 정비소에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro7_4" v="ZXQNAMEQXZ는 지난 ZXQMONTHSQXZ개월 동안 농장에서 일해 왔으며, 그 전에는 농기계 정비소에서 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ는 이전에 농기계 정비소에서 근무했으며, ZXQMONTHSQXZ개월 동안 이 회사에서 근무해 왔습니다." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ는 이전에 사무직으로 근무했으며, ZXQMONTHSQXZ개월 전부터 이 회사에 재직 중입니다." />
+        <e k="ui_pmNewWorkerIntro8_2" v="농장에서 일하기 전, ZXQNAMEQXZ는 사무직으로 근무했습니다. 재직 기간은 ZXQMONTHSQXZ개월입니다." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 전부터 팀의 일원이 되었으며, 이전에는 사무직으로 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro8_4" v="ZXQNAMEQXZ는 ZXQMONTHSQXZ개월 동안 농장에서 일해 왔으며, 그 전에는 사무직으로 근무했습니다." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ는 이전에 사무직으로 근무했으며, ZXQMONTHSQXZ개월째 이 회사에서 근무하고 있습니다." />
+        <e k="ui_pmNewApplicantAge1_1" v="ZXQAGEQXZ 세이면 직업 생활은 아직 시작 단계에 불과합니다." />
+        <e k="ui_pmNewApplicantAge1_2" v="ZXQAGEQXZ세부터 농장에서 더 많은 실무 경험을 쌓을 수 있습니다." />
+        <e k="ui_pmNewApplicantAge1_3" v="ZXQAGEQXZ 세가 되면 직업적 경력을 한 단계 더 발전시킬 기회가 찾아옵니다." />
+        <e k="ui_pmNewApplicantAge2_1" v="ZXQAGEQXZ세가 되면 직업적 지식을 더욱 공고히 할 수 있습니다." />
+        <e k="ui_pmNewApplicantAge2_2" v="ZXQAGEQXZ세가 되면 지금까지의 경험을 새로운 과제를 통해 보완할 수 있습니다." />
+        <e k="ui_pmNewApplicantAge2_3" v="ZXQAGEQXZ세의 나이라면, 지금까지의 직업 경력을 더욱 발전시킬 여지가 있습니다." />
+        <e k="ui_pmNewApplicantAge3_1" v="ZXQAGEQXZ세의 나이에 이미 꽤 긴 직업 경력을 쌓아왔습니다." />
+        <e k="ui_pmNewApplicantAge3_2" v="ZXQAGEQXZ세 동안 지금까지의 직장 생활을 통해 다양한 경험을 쌓을 수 있었습니다." />
+        <e k="ui_pmNewApplicantAge3_3" v="ZXQAGEQXZ세부터는 직업 경력을 활용할 수 있으며, 이 경력이 농업과 어떤 관련이 있는지는 개인의 경력 경로에 따라 달라집니다." />
+        <e k="ui_pmNewApplicantAge4_1" v="ZXQAGEQXZ세의 나이에 이미 꽤 긴 경력을 쌓아왔습니다." />
+        <e k="ui_pmNewApplicantAge4_2" v="ZXQAGEQXZ세의 경우 일반적인 직업 경험이 있으나, 이것이 반드시 농업 실무 경험을 의미하는 것은 아닙니다." />
+        <e k="ui_pmNewApplicantAge4_3" v="ZXQAGEQXZ년의 세월 동안 다양한 경험을 쌓아왔으며, 농장에서의 그 경험의 유용성은 지금까지의 활동에 따라 달라집니다." />
+        <e k="ui_pmNewApplicantMarket1_1" v="이 제품은 이번 달부터 시장에 출시되었습니다." />
+        <e k="ui_pmNewApplicantMarket1_2" v="새로운 일자리를 찾는 일은 얼마 전부터 시작되었습니다." />
+        <e k="ui_pmNewApplicantMarket1_3" v="이번 달에 채용 공고가 게시되었습니다." />
+        <e k="ui_pmNewApplicantMarket2_1" v="이 채용 공고는 한 달 전부터 공개되어 있습니다." />
+        <e k="ui_pmNewApplicantMarket2_2" v="새로운 일자리를 찾는 지 한 달이 지났다." />
+        <e k="ui_pmNewApplicantMarket2_3" v="이 모집 공고는 한 달 전부터 관심 있는 업체들에게 공개되어 있습니다." />
+        <e k="ui_pmNewApplicantMarket3_1" v="이 상품은 ZXQMONTHSQXZ개월 동안 시장에 나와 있습니다." />
+        <e k="ui_pmNewApplicantMarket3_2" v="새로운 일자리를 찾는 지 ZXQMONTHSQXZ개월째입니다." />
+        <e k="ui_pmNewApplicantMarket3_3" v="이 모집 공고는 관심 있는 기업들을 대상으로 ZXQMONTHSQXZ개월 전부터 공개되어 있습니다." />
+        <e k="ui_pmNewWorkerExperience1_1" v="실무 경험은 이제 막 쌓이기 시작했으며, 많은 업무에서 여전히 지도가 필요합니다." />
+        <e k="ui_pmNewWorkerExperience1_2" v="농장에서의 많은 업무 절차는 아직 낯설다." />
+        <e k="ui_pmNewWorkerExperience1_3" v="실무 작업은 아직 초기 적응 단계에 있습니다." />
+        <e k="ui_pmNewWorkerExperience1_4" v="기본적인 과제는 아직 연습과 지도가 필요합니다." />
+        <e k="ui_pmNewWorkerExperience1_5" v="실무 절차는 단계별로 익히게 됩니다." />
+        <e k="ui_pmNewWorkerExperience2_1" v="몇 가지 기본 사항은 알고 있지만, 좀 더 어려운 과제를 풀 때는 여전히 도움이 필요합니다." />
+        <e k="ui_pmNewWorkerExperience2_2" v="초기 실무 경험은 쌓여 있지만, 여러 분야에서 아직 숙련도가 부족한 실정이다." />
+        <e k="ui_pmNewWorkerExperience2_3" v="익숙한 업무는 점점 더 잘 해내고 있지만, 더 복잡한 업무는 추가적인 적응 기간이 필요합니다." />
+        <e k="ui_pmNewWorkerExperience2_4" v="기본은 익혔지만, 안전하게 작업을 수행하기 위해서는 더 많은 연습이 필요합니다." />
+        <e k="ui_pmNewWorkerExperience2_5" v="실무 지식은 이미 쌓여 있으며, 일상 업무에서 더욱 공고히 다질 수 있습니다." />
+        <e k="ui_pmNewWorkerExperience3_1" v="탄탄한 경험을 바탕으로 많은 일상적인 업무를 스스로 처리할 수 있습니다." />
+        <e k="ui_pmNewWorkerExperience3_2" v="대부분의 일상적인 작업은 문제없이 잘 이루어집니다." />
+        <e k="ui_pmNewWorkerExperience3_3" v="실무적인 기반이 마련되어 있으며, 익숙한 업무 절차를 스스로 수행할 수 있다." />
+        <e k="ui_pmNewWorkerExperience3_4" v="일상적인 업무에서는 탄탄한 업무 루틴이 드러납니다." />
+        <e k="ui_pmNewWorkerExperience3_5" v="다양한 업무 분야에 익숙하며, 이를 대체로 독자적으로 처리할 수 있다." />
+        <e k="ui_pmNewWorkerExperience4_1" v="폭넓은 실무 경험을 바탕으로 다양한 분야에서 활용할 수 있습니다." />
+        <e k="ui_pmNewWorkerExperience4_2" v="더 까다로운 업무도 익숙한 업무 범위에 포함됩니다." />
+        <e k="ui_pmNewWorkerExperience4_3" v="일상적인 업무에 익숙해지면 다양한 업무 절차를 스스로 처리하는 데 도움이 됩니다." />
+        <e k="ui_pmNewWorkerExperience4_4" v="이러한 경험은 다양한 업무를 자신 있게 처리하는 모습에서 드러납니다." />
+        <e k="ui_pmNewWorkerExperience4_5" v="업무가 바뀌더라도 수많은 실무 절차에 익숙합니다." />
+        <e k="ui_pmNewWorkerExperience5_1" v="실무 경험이 유난히 풍부합니다." />
+        <e k="ui_pmNewWorkerExperience5_2" v="매우 폭넓은 경험은 복잡하고 익숙하지 않은 업무에도 도움이 됩니다." />
+        <e k="ui_pmNewWorkerExperience5_3" v="농장 업무에 대해서는 특히 폭넓은 지식이 제공됩니다." />
+        <e k="ui_pmNewWorkerExperience5_4" v="오랜 기간에 걸친 다방면의 실무 경험은 일상 업무에서 높은 안정성을 보장합니다." />
+        <e k="ui_pmNewWorkerExperience5_5" v="매우 숙련된 기술로 광범위한 농업 작업을 능숙하게 수행한다." />
+        <e k="ui_pmNewWorkerReliability1_1" v="협의와 업무의 꼼꼼한 수행에는 각별한 주의가 필요합니다." />
+        <e k="ui_pmNewWorkerReliability1_2" v="일상 업무에서는 빈번한 점검과 명확한 지침이 필요합니다." />
+        <e k="ui_pmNewWorkerReliability1_3" v="신뢰할 수 있는 계획을 세우려면 업무를 면밀히 관리해야 합니다." />
+        <e k="ui_pmNewWorkerReliability1_4" v="협의 사항과 업무 절차가 아직 일관되게 준수되지 않고 있다." />
+        <e k="ui_pmNewWorkerReliability1_5" v="중요한 업무는 추가적인 협의와 점검이 필요합니다." />
+        <e k="ui_pmNewWorkerReliability2_1" v="합의 사항이 항상 일관되게 지켜지는 것은 아니므로, 명확한 지침이 도움이 됩니다." />
+        <e k="ui_pmNewWorkerReliability2_2" v="안정성은 아직 들쑥날쑥하므로, 중요한 작업은 감독하에 진행해야 합니다." />
+        <e k="ui_pmNewWorkerReliability2_3" v="익숙한 업무라면 많은 일을 잘 해낼 수 있지만, 가끔씩 점검하는 것은 여전히 필요합니다." />
+        <e k="ui_pmNewWorkerReliability2_4" v="위임된 업무를 보다 일관성 있게 수행할 수 있는 방안을 마련하기 위해 현재 노력 중입니다." />
+        <e k="ui_pmNewWorkerReliability2_5" v="명확한 업무 분담과 정기적인 피드백은 일상 업무에 도움이 됩니다." />
+        <e k="ui_pmNewWorkerReliability3_1" v="대부분의 업무에서는 신뢰할 수 있는 수행을 기대할 수 있습니다." />
+        <e k="ui_pmNewWorkerReliability3_2" v="약속은 대체로 지켜지며, 업무는 대부분 꼼꼼하게 처리됩니다." />
+        <e k="ui_pmNewWorkerReliability3_3" v="이러한 신뢰성은 작전 계획 수립을 위한 탄탄한 기반을 제공합니다." />
+        <e k="ui_pmNewWorkerReliability3_4" v="위임받은 업무는 대개 성실하고 책임감 있게 처리됩니다." />
+        <e k="ui_pmNewWorkerReliability3_5" v="일상 업무에서는 대체로 일관된 업무 방식이 드러납니다." />
+        <e k="ui_pmNewWorkerReliability4_1" v="업무는 신뢰할 수 있게 수행되며, 합의된 사항은 꼼꼼히 지켜집니다." />
+        <e k="ui_pmNewWorkerReliability4_2" v="위임받은 업무는 꾸준히 그리고 성실하게 수행합니다." />
+        <e k="ui_pmNewWorkerReliability4_3" v="꼼꼼한 업무 방식은 신뢰할 수 있는 투입 계획을 세우는 데 도움이 됩니다." />
+        <e k="ui_pmNewWorkerReliability4_4" v="약속 이행과 업무 수행에 있어 매우 신뢰할 수 있습니다." />
+        <e k="ui_pmNewWorkerReliability4_5" v="책임과 합의된 업무는 확실하게 관리됩니다." />
+        <e k="ui_pmNewWorkerReliability5_1" v="까다로운 업무에서도 그 업무 수행 능력을 유난히 신뢰할 수 있습니다." />
+        <e k="ui_pmNewWorkerReliability5_2" v="약속은 매우 꾸준히 지켜지며, 업무는 특히 성실하게 처리됩니다." />
+        <e k="ui_pmNewWorkerReliability5_3" v="매우 신뢰할 수 있는 작동 방식 덕분에 계획 수립 시 높은 안정성을 보장합니다." />
+        <e k="ui_pmNewWorkerReliability5_4" v="책임은 세심한 주의를 기울이고 탁월한 일관성을 바탕으로 다뤄집니다." />
+        <e k="ui_pmNewWorkerReliability5_5" v="대규모 작업도 특히 신뢰할 수 있게 처리됩니다." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="현재 회사에 대한 충성도는 매우 낮은 편입니다." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="현재 이 협력은 다소 단기적인 관점에서 바라보고 있다." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="현재 농장에 대한 장기적인 유대감은 그다지 강하지 않다." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="현재는 장기 근속을 다소 소극적으로 받아들이는 분위기입니다." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="현재 장기적으로 회사에 계속 근무하려는 의지는 낮은 편이다." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="회사에 대한 충성심은 아직 미미한 편이다." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="장기적인 협력 관계는 먼저 형성되어야 합니다." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="아직 사업장과 긴밀한 유대 관계는 형성되지 않았다." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="앞으로도 계속 협력해 나간다면 신뢰를 쌓을 여지가 여전히 남아 있습니다." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="근속 기간을 더 늘리는 것도 가능하지만, 아직은 신중한 입장을 취하고 있다." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="회사와의 유대감이 확고하게 형성되어 있다." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="이러한 협력 관계는 장기 근속을 위한 탄탄한 기반을 마련해 줍니다." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="운영 시스템과의 연결은 안정적입니다." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="충성도는 안정적인 수준을 유지하고 있습니다." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="장기적으로 협력을 지속해 나갈 수 있는 탄탄한 기반이 마련되어 있습니다." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="기업과의 연계가 매우 밀접합니다." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="이 농장과의 협력은 매우 중요합니다." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="장기적으로 회사에 계속 근무하려는 의지가 뚜렷하다." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="이러한 강한 유대감은 지속적인 협력을 뒷받침합니다." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="장기 근속에 대한 관심이 뚜렷이 드러난다." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="이 회사와의 유대감은 유난히 강합니다." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="이 농장과의 장기적인 협력 관계는 특히 큰 중요성을 지닙니다." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="회사에 대한 충성심이 유난히 강하다." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="충성심과 지속적인 협력에 대한 의지가 특히 높습니다." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="회사와 그 장기적인 발전에 대한 소속감은 유난히 강하다." />
+        <e k="ui_pmNewWorkerTenureNew" v="이번 달부터 농장 일손 돕기가 시작되었습니다." />
+        <e k="ui_pmNewWorkerTenureOne" v="농장에서 일하기 시작한 지 한 달이 지났습니다." />
     </elements>
 </l10n>

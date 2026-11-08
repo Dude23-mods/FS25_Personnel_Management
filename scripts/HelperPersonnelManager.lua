@@ -82,7 +82,7 @@ HelperPersonnelManager.EXPERIENCE_MONTHLY_GAIN_LIMITS = {
     [28] = 12
 }
 HelperPersonnelManager.MAX_HISTORY_ENTRIES = 36
-HelperPersonnelManager.PORTRAIT_COUNT = 10
+HelperPersonnelManager.PORTRAIT_COUNT = #HelperPersonnelPortraitProfiles
 HelperPersonnelManager.MAX_APPLICANTS = 8
 HelperPersonnelManager.INITIAL_APPLICANT_COUNT = 4
 HelperPersonnelManager.INITIAL_APPLICANT_GENDER_SEQUENCE = {
@@ -573,6 +573,11 @@ HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.
 HelperPersonnelManager.xmlSchema:register(XMLValueType.BOOL, "helperPersonnel.workers.worker(?)#trainingProgressDeferred", "Training progress is applied at month end", false)
 HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.workers.worker(?).specializationProgress(?)#key", "Parallel specialization progress key", "")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.workers.worker(?).specializationProgress(?)#minutes", "Parallel specialization progress minutes", 0)
+HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, "helperPersonnel.workers.worker(?).specializationProgress(?)#remainderMs", "Fractional specialization learning time", 0)
+HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.workers.worker(?)#currentJobSpecializationKey", "Active job specialization")
+HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.workers.worker(?).jobSpecializationPractice(?)#key", "Active job practice type")
+HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, "helperPersonnel.workers.worker(?).jobSpecializationPractice(?)#weight", "Active job practice weight")
+HelperPersonnelManager.xmlSchema:register(XMLValueType.BOOL, "helperPersonnel.workers.worker(?).jobSpecializationPractice(?)#independent", "Independent activity sample")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, "helperPersonnel.workers.worker(?)#wage", "Worker wage")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, "helperPersonnel.workers.worker(?)#baseWage", "Worker base wage before month-length and economy multipliers")
 HelperPersonnelManager.xmlSchema:register(XMLValueType.BOOL, "helperPersonnel.workers.worker(?)#busy", "Worker busy state")
@@ -829,6 +834,10 @@ end
 
 function HelperPersonnelManager:getGenderForAvatarIndex(avatarIndex)
     avatarIndex = tonumber(avatarIndex) or 0
+
+    if avatarIndex > 10 and HelperPersonnelPortraitProfiles[avatarIndex] ~= nil then
+        return HelperPersonnelPortraitProfiles[avatarIndex][1]
+    end
 
     local bridge = self.app ~= nil and self.app.helperBridge or nil
     if bridge ~= nil and bridge.getGenderForBaseHelperIndex ~= nil then
@@ -1423,6 +1432,58 @@ function HelperPersonnelManager:readSpecializationProgressesFromXML(xmlFile, bas
     return progresses
 end
 
+function HelperPersonnelManager:readSpecializationProgressRemaindersFromXML(xmlFile, basePath)
+    local remainders = {}
+    if xmlFile == nil or basePath == nil then return remainders end
+    local index = 0
+    while true do
+        local path = string.format("%s.specializationProgress(%d)", basePath, index)
+        if not xmlFile:hasProperty(path) then break end
+        local key = self:normalizeSpecializationKey(xmlFile:getString(path .. "#key"))
+        local remainder = math.max(0, math.min(59999.999, tonumber(xmlFile:getFloat(path .. "#remainderMs", 0)) or 0))
+        if key ~= nil and remainder > 0 then remainders[key] = math.max(remainders[key] or 0, remainder) end
+        index = index + 1
+    end
+    return remainders
+end
+
+function HelperPersonnelManager:readJobSpecializationContextFromXML(xmlFile, basePath, worker)
+    if xmlFile == nil or type(worker) ~= "table" or (worker.busy ~= true and worker.restorePending ~= true) then return end
+    worker.currentJobSpecializationKey = self:normalizeSpecializationKey(xmlFile:getString(basePath .. "#currentJobSpecializationKey"))
+    local practice, independent = {}, {}
+    local index = 0
+    while true do
+        local path = string.format("%s.jobSpecializationPractice(%d)", basePath, index)
+        if not xmlFile:hasProperty(path) then break end
+        local key = self:normalizeSpecializationKey(xmlFile:getString(path .. "#key"))
+        local weight = tonumber(xmlFile:getFloat(path .. "#weight", 0)) or 0
+        if key ~= nil and weight > 0 then
+            practice[key] = math.max(practice[key] or 0, weight)
+            independent[key] = independent[key] == true or xmlFile:getBool(path .. "#independent", false) == true
+        end
+        index = index + 1
+    end
+    if next(practice) ~= nil then worker.currentJobSpecializationPractice = practice end
+    if next(independent) ~= nil then worker.currentJobIndependentPractice = independent end
+end
+
+function HelperPersonnelManager:writeJobSpecializationContextToXML(xmlFile, basePath, worker)
+    if xmlFile == nil or type(worker) ~= "table" or (worker.busy ~= true and worker.restorePending ~= true) then return end
+    local currentKey = self:normalizeSpecializationKey(worker.currentJobSpecializationKey)
+    if currentKey ~= nil then xmlFile:setString(basePath .. "#currentJobSpecializationKey", currentKey) end
+    local index = 0
+    for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
+        local weight = tonumber((worker.currentJobSpecializationPractice or {})[key]) or 0
+        if weight > 0 then
+            local path = string.format("%s.jobSpecializationPractice(%d)", basePath, index)
+            xmlFile:setString(path .. "#key", key)
+            xmlFile:setFloat(path .. "#weight", weight)
+            xmlFile:setBool(path .. "#independent", (worker.currentJobIndependentPractice or {})[key] == true)
+            index = index + 1
+        end
+    end
+end
+
 function HelperPersonnelManager:writeSpecializationProgressesToXML(xmlFile, basePath, person)
     if xmlFile == nil or basePath == nil or type(person) ~= "table" then
         return
@@ -1433,10 +1494,12 @@ function HelperPersonnelManager:writeSpecializationProgressesToXML(xmlFile, base
     for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
         local specializationKey = self:normalizeSpecializationKey(key)
         local minutes = self:getSpecializationProgressMinutes(person, specializationKey)
-        if specializationKey ~= nil and minutes > 0 and not self:workerHasSpecialization(person, specializationKey) then
+        local remainder = math.max(0, tonumber((person.specializationProgressRemaindersMs or {})[specializationKey]) or 0)
+        if specializationKey ~= nil and (minutes > 0 or remainder > 0) and not self:workerHasLearnedSpecialization(person, specializationKey) then
             local progressPath = string.format("%s.specializationProgress(%d)", basePath, index)
             xmlFile:setString(progressPath .. "#key", specializationKey)
             xmlFile:setInt(progressPath .. "#minutes", minutes)
+            if remainder > 0 then xmlFile:setFloat(progressPath .. "#remainderMs", remainder) end
             index = index + 1
         end
     end
@@ -1742,7 +1805,7 @@ function HelperPersonnelManager:getWorkerSpecializationLearningMinutes(worker, s
     local factor = 1 + ((experience - 50) / 250) + ((reliability - 50) / 300)
     factor = math.max(HelperPersonnelManager.SPECIALIZATION_LEARNING_MIN_FACTOR or 0.75, math.min(HelperPersonnelManager.SPECIALIZATION_LEARNING_MAX_FACTOR or 1.30, factor))
 
-    return math.max(1, math.floor((workMinutes * factor) + 0.5))
+    return workMinutes * factor
 end
 
 function HelperPersonnelManager:clearWorkerSpecializationRuntimeContext(worker)
@@ -1752,6 +1815,7 @@ function HelperPersonnelManager:clearWorkerSpecializationRuntimeContext(worker)
 
     worker.currentJobSpecializationKey = nil
     worker.currentJobSpecializationPractice = nil
+    worker.currentJobIndependentPractice = nil
     worker.currentJobActivityText = nil
     worker.currentJobActivityKey = nil
     worker.currentJobActivityFallback = nil
@@ -1765,8 +1829,8 @@ function HelperPersonnelManager:addWorkerSpecializationProgress(worker, speciali
     end
 
     specializationKey = self:normalizeSpecializationKey(specializationKey)
-    workMinutes = math.max(0, math.floor((tonumber(workMinutes) or 0) + 0.5))
-    if specializationKey == nil or workMinutes < (HelperPersonnelManager.SPECIALIZATION_MIN_PRACTICE_JOB_MINUTES or 3) then
+    workMinutes = math.max(0, tonumber(workMinutes) or 0)
+    if specializationKey == nil or workMinutes <= 0 then
         return false
     end
 
@@ -1774,13 +1838,18 @@ function HelperPersonnelManager:addWorkerSpecializationProgress(worker, speciali
         return false
     end
 
+    worker.specializationProgressRemaindersMs = worker.specializationProgressRemaindersMs or {}
+    local remainders = worker.specializationProgressRemaindersMs
+    local accumulatedMs = math.max(0, tonumber(remainders[specializationKey]) or 0) + workMinutes * 60000
+    local wholeMinutes = math.floor((accumulatedMs + 0.000001) / 60000)
+    remainders[specializationKey] = math.max(0, accumulatedMs - wholeMinutes * 60000)
     local progresses = self:getSpecializationProgressTable(worker)
-    progresses[specializationKey] = math.max(0, math.floor((tonumber(progresses[specializationKey]) or 0) + workMinutes + 0.5))
+    progresses[specializationKey] = math.max(0, (tonumber(progresses[specializationKey]) or 0) + wholeMinutes)
     self:normalizeSpecializationProgresses(worker)
     return true
 end
 
-local function hpLayer_HelperPersonnelManager_applyWorkerSpecializationIfReady_1(self, worker, preferredKey)
+function HelperPersonnelManager:applyReadySpecialization(worker, preferredKey)
     if type(worker) ~= "table" then
         return nil
     end
@@ -1874,7 +1943,7 @@ function HelperPersonnelManager:recordWorkerSpecializationPracticeFromCurrentJob
                 if self:isGeneralSpecializationKey(specializationKey) and not hasTaskPractice then
                     weightFactor = 1
                 end
-                local weightedLearningMinutes = math.max(0, math.floor(learningMinutes * weightFactor + 0.5))
+                local weightedLearningMinutes = math.max(0, learningMinutes * weightFactor)
                 if self:addWorkerSpecializationProgress(worker, specializationKey, weightedLearningMinutes) then
                     didAddProgress = true
                 end
@@ -2066,7 +2135,20 @@ function HelperPersonnelManager:getWorkerTrainingInfoLine(worker)
     return string.format(template, lastText)
 end
 
-local function hpLayer_HelperPersonnelManager_trainWorker_1(self, workerId, requestedSpecializationKey)
+function HelperPersonnelManager:trainWorker(workerId, requestedSpecializationKey)
+    local chronicleWorker = self:getWorkerById(workerId)
+    local wasTraining = chronicleWorker ~= nil and self:isWorkerInTraining(chronicleWorker)
+    local chronicleSpecializationKey = chronicleWorker ~= nil and self:getWorkerTrainingSpecializationKey(chronicleWorker, requestedSpecializationKey) or nil
+    local chronicleCost = chronicleWorker ~= nil and chronicleSpecializationKey ~= nil and self:getWorkerTrainingCost(chronicleWorker, chronicleSpecializationKey) or 0
+    local offerWorker = self:getWorkerById(workerId)
+    local offerSpecializationKey = offerWorker ~= nil and self:getWorkerTrainingSpecializationKey(offerWorker, requestedSpecializationKey) or nil
+    if offerWorker ~= nil and offerSpecializationKey ~= nil then
+        local _, _, _, available = self:getWorkerTrainingCostDetails(offerWorker, offerSpecializationKey)
+        if not available then
+            self:showIngameNotification(self:getLocalizedText("ui_pmTrainingNoPlacesMessage", "Für diese Schulung sind aktuell keine Plätze frei."), self:getInfoNotificationType())
+            return false
+        end
+    end
     local worker = self:getWorkerById(workerId)
     if worker == nil then
         return false
@@ -2132,19 +2214,39 @@ local function hpLayer_HelperPersonnelManager_trainWorker_1(self, workerId, requ
     self:addActionHistoryEntry(text, period, year)
     self.changeCounter = (self.changeCounter or 0) + 1
     self:showIngameNotification(text, self:getInfoNotificationType())
+    worker = self:getWorkerById(workerId) or chronicleWorker
+    if worker ~= nil and not wasTraining and self:isWorkerInTraining(worker) then
+        self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_TRAINING_STARTED, {
+            category = worker.trainingActiveSpecialization or chronicleSpecializationKey,
+            amount = chronicleCost,
+            text = self:getLocalizedText("ui_pmChronicleTrainingStarted", "Schulung begonnen.")
+        })
+    end
     return true
 end
 
-local function hpLayer_HelperPersonnelManager_completeFinishedTrainings_1(self, period, year)
+function HelperPersonnelManager:completeFinishedTrainings(period, year)
+    local chroniclePeriod, chronicleYear = period, year
+    local snapshots = {}
+    for _, worker in ipairs(self.workers or {}) do
+        if (tonumber(worker.trainingActivePeriod) or 0) > 0 then
+            local key = self:normalizeSpecializationKey(worker.trainingActiveSpecialization)
+            snapshots[worker.id] = {
+                worker = worker,
+                category = key,
+                before = key ~= nil and self:getSpecializationProgressPercentForMinutes(worker, self:getSpecializationProgressMinutes(worker, key)) or 0
+            }
+        end
+    end
     period, year = self:getApplicantPeriodInfo(period, year)
     if period == nil or year == nil then
-        return 0
+        period, year = nil, nil
     end
 
-    local currentAbsolute = ((year - 1) * 12) + period
+    local currentAbsolute = period ~= nil and year ~= nil and (((year - 1) * 12) + period) or nil
     local completed = 0
 
-    for _, worker in ipairs(self.workers or {}) do
+    for _, worker in ipairs(currentAbsolute ~= nil and self.workers or {}) do
         self:normalizePersonRuntimeData(worker)
 
         local activePeriod = tonumber(worker.trainingActivePeriod) or 0
@@ -2182,6 +2284,21 @@ local function hpLayer_HelperPersonnelManager_completeFinishedTrainings_1(self, 
         self.changeCounter = (self.changeCounter or 0) + 1
     end
 
+    for workerId, snapshot in pairs(snapshots) do
+        local worker = self:getWorkerById(workerId) or snapshot.worker
+        if worker ~= nil and (tonumber(worker.trainingActivePeriod) or 0) <= 0 then
+            local after = snapshot.category ~= nil and (self:workerHasSpecialization(worker, snapshot.category) and 100 or self:getSpecializationProgressPercentForMinutes(worker, self:getSpecializationProgressMinutes(worker, snapshot.category))) or snapshot.before
+            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_TRAINING_COMPLETED, {
+                period = chroniclePeriod,
+                gameYear = chronicleYear,
+                category = snapshot.category,
+                oldValue = snapshot.before,
+                newValue = after,
+                delta = after - snapshot.before,
+                text = self:getLocalizedText("ui_pmChronicleTrainingCompleted", "Schulung abgeschlossen.")
+            })
+        end
+    end
     return completed
 end
 
@@ -2428,9 +2545,9 @@ function HelperPersonnelManager:getCurrentMonthlyWage(person)
     return wage
 end
 
-local function hpLayer_HelperPersonnelManager_normalizePersonRuntimeData_1(self, person)
+function HelperPersonnelManager:normalizePersonRuntimeData(person)
     if type(person) ~= "table" then
-        return
+        return person
     end
 
     person.jobsCompleted = math.max(0, person.jobsCompleted or 0)
@@ -2526,18 +2643,38 @@ local function hpLayer_HelperPersonnelManager_normalizePersonRuntimeData_1(self,
         person.restorePending = false
     end
 
+    person.reliabilityJobAbortChecked = person.reliabilityJobAbortChecked == true
+    person.reliabilityJobAbortCheckAt = math.max(0, tonumber(person.reliabilityJobAbortCheckAt) or 0)
+    person.transportDriver = person.transportDriver == true
+    person.transportPriority = person.transportDriver == true and math.max(0, math.floor((tonumber(person.transportPriority) or 0) + 0.5)) or 0
+    if person.personnelValuesDiscovered == nil then
+        person.personnelValuesDiscovered = true
+    end
+    person.personnelKnowledgeRealtimeMs = math.max(0, tonumber(person.personnelKnowledgeRealtimeMs) or 0)
+    person.personnelKnowledgeThresholdMs = math.max(0, tonumber(person.personnelKnowledgeThresholdMs) or 0)
+    self:ensurePersonBiography(person)
+    self:normalizeSalaryRaiseData(person)
     return person
 end
 
-local function hpLayer_HelperPersonnelManager_normalizeApplicantRuntimeData_1(self, applicant)
+function HelperPersonnelManager:normalizeApplicantRuntimeData(applicant)
     if type(applicant) ~= "table" then
         return
     end
 
     self:normalizePersonRuntimeData(applicant)
+    if self.normalizeApplicantInterviewData ~= nil then
+        self:normalizeApplicantInterviewData(applicant)
+    end
 
     applicant.monthsAvailable = tonumber(applicant.monthsAvailable) or 0
     applicant.monthsAvailable = math.max(0, math.floor(applicant.monthsAvailable + 0.5))
+
+    self:ensurePersonBiography(applicant)
+    local age = self:getPersonAge(applicant)
+    if age < 23 and applicant.backgroundKey == HelperPersonnelManager.BACKGROUND_CONTRACTOR then
+        applicant.backgroundKey = self:getDeterministicBackgroundKey(applicant, age)
+    end
 
     return applicant
 end
@@ -2641,6 +2778,7 @@ function HelperPersonnelManager:awardWorkerExperience(worker, workMinutes)
     local alreadyGained = math.max(0, math.floor((tonumber(worker.experienceThisPeriod) or 0) + 0.5))
     local remaining = math.max(0, maxGain - alreadyGained)
     local currentExperience = self:clampPersonStat(worker.experience or 0)
+    local previousExperience = currentExperience
 
     if remaining <= 0 or currentExperience >= 100 then
         return 0, maxGain
@@ -2671,6 +2809,7 @@ function HelperPersonnelManager:awardWorkerExperience(worker, workMinutes)
     if gained > 0 then
         worker.experience = currentExperience
         worker.experienceThisPeriod = alreadyGained + gained
+        self:createSalaryRaiseRequest(worker, previousExperience, currentExperience)
     end
 
     return gained, maxGain
@@ -2795,7 +2934,7 @@ function HelperPersonnelManager:showExperienceLimitNotification(worker, monthlyL
     self:showIngameNotification(text, self:getInfoNotificationType())
 end
 
-local function hpLayer_HelperPersonnelManager_loadFromSavegame_1(self)
+local function loadLegacyFarmFromSavegame(self)
     self:loadConfig()
     self.workers = {}
     self.applicants = {}
@@ -2938,6 +3077,7 @@ local function hpLayer_HelperPersonnelManager_loadFromSavegame_1(self)
             specializationProgressKey = xmlFile:getString(key .. "#specializationProgressKey"),
             specializationProgressMinutes = xmlFile:getInt(key .. "#specializationProgressMinutes", 0) or 0,
             specializationProgresses = self:readSpecializationProgressesFromXML(xmlFile, key),
+            specializationProgressRemaindersMs = self:readSpecializationProgressRemaindersFromXML(xmlFile, key),
             learnedSpecializations = self:readLearnedSpecializationsFromXML(xmlFile, key),
             specializationActivationYear = xmlFile:getInt(key .. "#specializationActivationYear", 0) or 0,
             specializationActivationLastKey = xmlFile:getString(key .. "#specializationActivationLastKey"),
@@ -2965,6 +3105,7 @@ local function hpLayer_HelperPersonnelManager_loadFromSavegame_1(self)
             currentJobElapsedMs = savedBusy and savedElapsedMs or 0
         }
 
+        self:readJobSpecializationContextFromXML(xmlFile, key, worker)
         self:normalizePersonRuntimeData(worker)
 
         table.insert(self.workers, worker)
@@ -3026,16 +3167,16 @@ function HelperPersonnelManager:getCurrentJobElapsedMs(worker)
     end
 
     local elapsedMs = math.max(0, worker.currentJobElapsedMs or 0)
-    local startedAt = worker.currentJobStartedAt or 0
+    local startedAt = worker.currentJobStartedAt
 
-    if startedAt > 0 then
-        elapsedMs = math.max(elapsedMs, self:getCurrentTimestampMs() - startedAt)
+    if startedAt ~= nil and startedAt >= 0 and worker.restorePending ~= true then
+        elapsedMs = elapsedMs + math.max(0, self:getCurrentTimestampMs() - startedAt)
     end
 
     return elapsedMs
 end
 
-local function hpLayer_HelperPersonnelManager_captureSaveSnapshot_1(self, activeJobs, getVehicleKeyFunc, helperBridge)
+local function captureCurrentFarmSaveSnapshot(self, activeJobs, getVehicleKeyFunc, helperBridge)
     self.saveBusyWorkerLookup = {}
     self.saveActiveJobSnapshot = {}
 
@@ -3415,80 +3556,11 @@ function HelperPersonnelManager:getApplicantsSorted()
     return items
 end
 
-local function hpLayer_HelperPersonnelManager_getWorkerById_1(self, workerId)
+local function findWorkerInCurrentFarm(self, workerId)
     for _, worker in ipairs(self.workers) do
         if worker.id == workerId then
             return worker
         end
-    end
-
-    return nil
-end
-
-local function hpLayer_HelperPersonnelManager_getWorkerByVehicleKey_1(self, vehicleKey)
-    if vehicleKey == nil or vehicleKey == "" then
-        return nil
-    end
-
-    for _, worker in ipairs(self.workers) do
-        if worker.busy == true and worker.vehicleKey == vehicleKey then
-            return worker
-        end
-        if worker.restorePending == true and worker.restoreVehicleKey == vehicleKey then
-            return worker
-        end
-    end
-
-    return nil
-end
-
-local function hpLayer_HelperPersonnelManager_getPendingRestoredWorkerCount_1(self)
-    local count = 0
-
-    for _, worker in ipairs(self.workers) do
-        if worker.restorePending == true then
-            count = count + 1
-        end
-    end
-
-    return count
-end
-
-local function hpLayer_HelperPersonnelManager_getSinglePendingRestoredWorker_1(self)
-    local result = nil
-    local count = 0
-
-    for _, worker in ipairs(self.workers) do
-        if worker.restorePending == true then
-            result = worker
-            count = count + 1
-        end
-    end
-
-    if count == 1 then
-        return result
-    end
-
-    return nil
-end
-
-local function hpLayer_HelperPersonnelManager_getPendingRestoredWorkerByVehicleName_1(self, vehicleName)
-    if vehicleName == nil or vehicleName == "" then
-        return nil
-    end
-
-    local result = nil
-    local count = 0
-
-    for _, worker in ipairs(self.workers) do
-        if worker.restorePending == true and worker.restoreVehicleName == vehicleName then
-            result = worker
-            count = count + 1
-        end
-    end
-
-    if count == 1 then
-        return result
     end
 
     return nil
@@ -3555,7 +3627,7 @@ function HelperPersonnelManager:getWorkerCounts()
     return total, available, busy
 end
 
-local function hpLayer_HelperPersonnelManager_hireApplicant_1(self, applicantId)
+function HelperPersonnelManager:hireApplicant(applicantId, skipChronicle)
     local applicant = nil
     local removeIndex = nil
 
@@ -3571,7 +3643,15 @@ local function hpLayer_HelperPersonnelManager_hireApplicant_1(self, applicantId)
         return false
     end
 
-    table.remove(self.applicants, removeIndex)
+    if self.removeGlobalApplicantOffers ~= nil then
+        self:removeGlobalApplicantOffers(applicantId)
+        self.applicants = self.currentFarmData ~= nil and self.currentFarmData.applicants or self.applicants
+    else
+        table.remove(self.applicants, removeIndex)
+    end
+    if self.prepareHiredWorkerDiscovery ~= nil then
+        self:prepareHiredWorkerDiscovery(applicant)
+    end
     applicant.busy = false
     applicant.vehicleName = ""
     applicant.currentJobStartedAt = 0
@@ -3628,6 +3708,16 @@ local function hpLayer_HelperPersonnelManager_hireApplicant_1(self, applicantId)
     self:touch(string.format("%s wurde eingestellt.", fullName))
     self:rebuildHelperProfilesSafe()
 
+    if skipChronicle ~= true then
+        local worker = self:getWorkerById(applicantId)
+        if worker ~= nil then
+            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_EMPLOYMENT_STARTED, {
+                reason = worker.backgroundKey,
+                amount = tonumber(worker.baseWage) or tonumber(worker.wage) or 0,
+                text = self:getLocalizedText("ui_pmChronicleHired", "Mitarbeiter wurde eingestellt.")
+            })
+        end
+    end
     return true
 end
 
@@ -3740,7 +3830,10 @@ function HelperPersonnelManager:applyDismissalNoticePenalties(worker)
     return oldLoyalty, worker.loyalty, oldReliability, worker.reliability
 end
 
-local function hpLayer_HelperPersonnelManager_dismissWorker_1(self, workerId)
+function HelperPersonnelManager:dismissWorker(workerId, skipChronicle)
+    local chronicleWorker = self:getWorkerById(workerId)
+    local chronicleOldLoyalty = chronicleWorker ~= nil and tonumber(chronicleWorker.loyalty) or nil
+    local chronicleOldReliability = chronicleWorker ~= nil and tonumber(chronicleWorker.reliability) or nil
     local worker = nil
 
     for _, candidate in ipairs(self.workers) do
@@ -3786,6 +3879,27 @@ local function hpLayer_HelperPersonnelManager_dismissWorker_1(self, workerId)
     self:touch(actionText)
     self:rebuildHelperProfilesSafe()
 
+    if skipChronicle ~= true then
+        local person = self:getWorkerById(workerId) or chronicleWorker
+        if person ~= nil then
+            self:addPersonChronicleEntry(person, HelperPersonnelManager.CHRONICLE_EVENT_DISMISSAL_NOTICE, {
+                reason = "dismissedByFarm",
+                text = self:getLocalizedText("ui_pmChronicleDismissal", "Kündigung durch den Betrieb ausgesprochen.")
+            })
+            if chronicleOldLoyalty ~= nil and tonumber(person.loyalty) ~= chronicleOldLoyalty then
+                self:addPersonChronicleEntry(person, HelperPersonnelManager.CHRONICLE_EVENT_LOYALTY_CHANGED, {
+                    reason = "dismissalNotice", valueName = "loyalty", oldValue = chronicleOldLoyalty,
+                    newValue = tonumber(person.loyalty), delta = tonumber(person.loyalty) - chronicleOldLoyalty
+                })
+            end
+            if chronicleOldReliability ~= nil and tonumber(person.reliability) ~= chronicleOldReliability then
+                self:addPersonChronicleEntry(person, HelperPersonnelManager.CHRONICLE_EVENT_RELIABILITY_CHANGED, {
+                    reason = "dismissalNotice", valueName = "reliability", oldValue = chronicleOldReliability,
+                    newValue = tonumber(person.reliability), delta = tonumber(person.reliability) - chronicleOldReliability
+                })
+            end
+        end
+    end
     return true, nil
 end
 
@@ -3803,7 +3917,10 @@ function HelperPersonnelManager:rebuildHelperProfilesSafe()
     end
 end
 
-local function hpLayer_HelperPersonnelManager_startWorkerJob_1(self, workerId, vehicleName, vehicleKey)
+function HelperPersonnelManager:startWorkerJob(workerId, vehicleName, vehicleKey)
+    local chronicleWorker = self:getWorkerById(workerId)
+    local wasBusy = chronicleWorker ~= nil and chronicleWorker.busy == true
+    local wasRestorePendingChronicle = chronicleWorker ~= nil and chronicleWorker.restorePending == true
     local worker = self:getWorkerById(workerId)
     if worker == nil then
         return false
@@ -3824,10 +3941,10 @@ local function hpLayer_HelperPersonnelManager_startWorkerJob_1(self, workerId, v
     worker.vehicleKey = vehicleKey
     worker.nightWorkLastMinute = self:getIngameDayMinute()
 
-    if wasRestorePending and savedElapsedMs > 0 then
-        worker.currentJobStartedAt = now - savedElapsedMs
-        worker.currentJobElapsedMs = 0
-    elseif worker.currentJobStartedAt == nil or worker.currentJobStartedAt <= 0 then
+    if wasRestorePending then
+        worker.currentJobStartedAt = now
+        worker.currentJobElapsedMs = savedElapsedMs
+    elseif not wasBusy then
         worker.currentJobStartedAt = now
         worker.currentJobElapsedMs = 0
     end
@@ -3838,12 +3955,39 @@ local function hpLayer_HelperPersonnelManager_startWorkerJob_1(self, workerId, v
 
     self:touch(nil)
 
+    worker = self:getWorkerById(workerId) or chronicleWorker
+    if worker ~= nil and not wasBusy then
+        if wasRestorePendingChronicle then
+            worker.reliabilityJobAbortChecked = true
+            worker.reliabilityJobAbortCheckAt = 0
+        else
+            worker.reliabilityJobAbortChecked = false
+            local startedAt = math.max(0, tonumber(worker.currentJobStartedAt) or 0)
+            if startedAt <= 0 then
+                startedAt = self:getCurrentTimestampMs()
+            end
+            worker.reliabilityJobAbortCheckAt = startedAt + (HelperPersonnelManager.RELIABILITY_JOB_ABORT_CHECK_DELAY_MS or 60000)
+            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_JOB_STARTED, {
+                vehicleName = vehicleName or worker.vehicleName,
+                text = self:getLocalizedText("ui_pmChronicleJobStarted", "Einsatz begonnen.")
+            })
+        end
+    end
     return true
 end
 
-local function hpLayer_HelperPersonnelManager_finishWorkerJob_1(self, workerId)
+function HelperPersonnelManager:finishWorkerJob(workerId)
+    local chronicleWorker = self:getWorkerById(workerId)
+    local beforeJobs = chronicleWorker ~= nil and tonumber(chronicleWorker.jobsCompleted) or 0
+    local beforeExperience = chronicleWorker ~= nil and tonumber(chronicleWorker.experience) or 0
+    local chronicleVehicleName = chronicleWorker ~= nil and chronicleWorker.vehicleName or nil
     local worker = self:getWorkerById(workerId)
     if worker == nil then
+        local person = self:getWorkerById(workerId) or chronicleWorker
+        if person ~= nil then
+            person.reliabilityJobAbortChecked = false
+            person.reliabilityJobAbortCheckAt = 0
+        end
         return false
     end
 
@@ -3857,6 +4001,10 @@ local function hpLayer_HelperPersonnelManager_finishWorkerJob_1(self, workerId)
     worker.currentJobStartedAt = 0
     worker.currentJobElapsedMs = 0
 
+    local learnedSpecializationKey = nil
+    if durationMs > 0 then
+        learnedSpecializationKey = self:recordWorkerSpecializationPracticeFromCurrentJob(worker, durationMs / 60000)
+    end
     if durationMs >= HelperPersonnelManager.MIN_RECORDED_JOB_DURATION_MS then
         local workMinutes = math.max(1, math.floor((durationMs / 60000) + 0.5))
         self:recordWorkerReliabilityWork(worker, workMinutes)
@@ -3868,7 +4016,6 @@ local function hpLayer_HelperPersonnelManager_finishWorkerJob_1(self, workerId)
         worker.jobsCompleted = (worker.jobsCompleted or 0) + 1
         worker.totalWorkMinutes = (worker.totalWorkMinutes or 0) + workMinutes
         worker.lastJobMinutes = workMinutes
-        local learnedSpecializationKey = self:recordWorkerSpecializationPracticeFromCurrentJob(worker, workMinutes)
         if learnedSpecializationKey ~= nil then
             local specName = self:getSpecializationDisplayName(learnedSpecializationKey)
             self:touch(string.format("%s hat eine Spezialisierung entwickelt: %s.", fullName, specName))
@@ -3889,6 +4036,20 @@ local function hpLayer_HelperPersonnelManager_finishWorkerJob_1(self, workerId)
         self:touch(nil)
     end
 
+    worker = self:getWorkerById(workerId) or chronicleWorker
+    if worker ~= nil then
+        worker.reliabilityJobAbortChecked = false
+        worker.reliabilityJobAbortCheckAt = 0
+        if (tonumber(worker.jobsCompleted) or 0) > beforeJobs then
+            local afterExperience = tonumber(worker.experience) or beforeExperience
+            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_JOB_COMPLETED, {
+                minutes = tonumber(worker.lastJobMinutes) or 0, vehicleName = chronicleVehicleName,
+                valueName = "experience", oldValue = beforeExperience, newValue = afterExperience,
+                delta = afterExperience - beforeExperience,
+                text = self:getLocalizedText("ui_pmChronicleJobCompleted", "Einsatz abgeschlossen.")
+            })
+        end
+    end
     return true
 end
 
@@ -4963,7 +5124,22 @@ function HelperPersonnelManager:getApplicantMarketUpdateActionText(added, expire
     return nil
 end
 
+local function hpApplicantMarketIsClient()
+    if g_server ~= nil then
+        return false
+    end
+    if g_client ~= nil then
+        return true
+    end
+    local app = g_helperPersonnelApp
+    return app ~= nil and app.isMultiplayerClient ~= nil and app:isMultiplayerClient() == true
+end
+
 function HelperPersonnelManager:ensureApplicantBuffer(minimumCount, targetCount)
+    if hpApplicantMarketIsClient() then
+        self.applicants = self.applicants or {}
+        return 0
+    end
     minimumCount = minimumCount or 1
     targetCount = targetCount or minimumCount
     targetCount = math.min(targetCount, HelperPersonnelManager.MAX_APPLICANTS or targetCount)
@@ -5021,6 +5197,10 @@ function HelperPersonnelManager:initializeApplicantPeriodIfMissing()
 end
 
 function HelperPersonnelManager:initializeNewApplicantMarket()
+    if hpApplicantMarketIsClient() then
+        self.applicants = self.applicants or {}
+        return 0
+    end
     self.applicants = {}
 
     local maxApplicants = HelperPersonnelManager.MAX_APPLICANTS or 6
@@ -5064,6 +5244,10 @@ function HelperPersonnelManager:rollMonthlyApplicantCount(forceAtLeastOne)
 end
 
 function HelperPersonnelManager:generateMonthlyApplicants(forceAtLeastOne)
+    if hpApplicantMarketIsClient() then
+        self.applicants = self.applicants or {}
+        return 0
+    end
     self:trimApplicantMarketToCap()
 
     local maxApplicants = HelperPersonnelManager.MAX_APPLICANTS or 6
@@ -5403,7 +5587,7 @@ function HelperPersonnelManager:processMonthlyReliabilityDevelopment(period, yea
     return totalDelta, affected, text
 end
 
-local function hpLayer_HelperPersonnelManager_processApplicantPeriodChange_1(self, period, year, forceCheck)
+function HelperPersonnelManager:processApplicantPeriodChangeCore(period, year, forceCheck)
     period, year = self:getApplicantPeriodInfo(period, year)
     if period == nil then
         return false
@@ -5429,9 +5613,12 @@ local function hpLayer_HelperPersonnelManager_processApplicantPeriodChange_1(sel
     local dismissedCount = self:processPendingDismissalsForPeriodChange(period, year)
     local resignedCount = self:processPendingResignationsForPeriodChange(period, year)
     local workerLoyaltyDelta, workerLoyaltyAffected = 0, 0
-    local expired = self:ageApplicantMarketForNewPeriod()
-    local forceAtLeastOne = #self.applicants <= 0
-    local added = self:generateMonthlyApplicants(forceAtLeastOne)
+    local expired = tonumber(self.currentFarmData ~= nil and self.currentFarmData.pendingApplicantMarketExpired) or 0
+    local added = tonumber(self.currentFarmData ~= nil and self.currentFarmData.pendingApplicantMarketAdded) or 0
+    if self.currentFarmData ~= nil then
+        self.currentFarmData.pendingApplicantMarketExpired = nil
+        self.currentFarmData.pendingApplicantMarketAdded = nil
+    end
     local loyaltyDelta, loyaltyWorkers = self:processWorkerLoyaltyMilestones(period, year)
     local reliabilityDelta, reliabilityWorkers, reliabilityText = self:processMonthlyReliabilityDevelopment(period, year)
     local actionText = self:getApplicantMarketUpdateActionText(added, expired)
@@ -5476,11 +5663,17 @@ local function hpLayer_HelperPersonnelManager_processApplicantPeriodChange_1(sel
         self:touch(nil)
     end
 
+    local currentPeriod, currentYear = self:getApplicantPeriodInfo(period, year)
+    self:processPendingRetirementsForPeriodChange(currentPeriod, currentYear)
     return true
 end
 
-local function hpLayer_HelperPersonnelManager_onPeriodChanged_1(self, period, year)
-    self:processApplicantPeriodChange(period, year, true)
+function HelperPersonnelManager:processApplicantPeriodChange(period, year, forceCheck)
+    local changed = self:processApplicantPeriodChangeCore(period, year, forceCheck)
+    period, year = self:getApplicantPeriodInfo(period, year)
+    local createdCount = self:processMonthlySalaryRaiseFollowupChecks(period, year)
+    local penaltyCount = self:processOpenSalaryRaiseRequestPenalties(period, year)
+    return changed == true or (tonumber(createdCount) or 0) > 0 or (tonumber(penaltyCount) or 0) > 0
 end
 
 
@@ -5489,8 +5682,8 @@ function HelperPersonnelManager:clampPersonStat(value)
     return math.max(0, math.min(100, value))
 end
 
-function HelperPersonnelManager:getApplicantReputationModifiers()
-    local reputation = self:getEmployerReputation()
+function HelperPersonnelManager:getApplicantReputationModifiers(reputationOverride)
+    local reputation = reputationOverride ~= nil and self:clampEmployerReputation(reputationOverride) or self:getEmployerReputation()
 
     local experienceBonus = math.floor(((reputation - 60) / 4) + 0.5)
     local reliabilityBonus = math.floor(((reputation - 60) / 5) + 0.5)
@@ -5524,7 +5717,14 @@ function HelperPersonnelManager:getRankText(person)
     return g_i18n:getText("ui_rank_helper")
 end
 
-local function hpLayer_HelperPersonnelManager_getStatusText_1(self, person)
+function HelperPersonnelManager:getStatusText(person)
+    if type(person) == "table" and person.retirementPending == true then
+        local statusText = self:getLocalizedText("ui_status_retirementPending", "Ruhestand zum Monatsende")
+        if person.dismissalPending == true then
+            return string.format("%s, %s", statusText, self:getLocalizedText("ui_status_dismissed", "gekündigt"))
+        end
+        return statusText
+    end
     if type(person) ~= "table" then
         return g_i18n:getText("ui_status_idle")
     end
@@ -5591,7 +5791,15 @@ function HelperPersonnelManager:getWorkerHiredLine(person)
 
     if person.transportDriver == true then
         local marker = g_i18n ~= nil and g_i18n:getText("ui_transportMarker") or "Transport"
-        return string.format("%s | %s", line, marker)
+        line = string.format("%s | %s", line, marker)
+    end
+
+    local salaryRaiseLine = self:getSalaryRaiseLine(person)
+    if salaryRaiseLine ~= nil and salaryRaiseLine ~= "" then
+        if line ~= nil and line ~= "" then
+            return string.format("%s | %s", line, salaryRaiseLine)
+        end
+        return salaryRaiseLine
     end
 
     return line
@@ -5755,7 +5963,7 @@ function HelperPersonnelManager:getApplicantLine2(person)
     return string.format(g_i18n:getText("ui_applicant_line2_age"), wageText, ageText)
 end
 
-local function hpLayer_HelperPersonnelManager_copyPersonForNetwork_1(self, person)
+function HelperPersonnelManager:copyPersonBaseForNetwork(person)
     if type(person) ~= "table" then
         return {}
     end
@@ -5841,7 +6049,7 @@ local function hpLayer_HelperPersonnelManager_copyPersonForNetwork_1(self, perso
         lastJobMinutes = person.lastJobMinutes,
         totalEarnings = person.totalEarnings,
         currentJobStartedAt = person.currentJobStartedAt,
-        currentJobElapsedMs = self:getCurrentJobElapsedMs(person),
+        currentJobElapsedMs = person.busy == true and self:getCurrentJobElapsedMs(person) or person.currentJobElapsedMs,
         monthsAvailable = person.monthsAvailable
     }
 end
@@ -6233,7 +6441,7 @@ function HelperPersonnelManager:processReliabilityJobAbortsForCurrentFarm()
     return aborted
 end
 
-local function hpLayer_HelperPersonnelManager_markWorkerSickForToday_1(self, worker, period, year, day)
+function HelperPersonnelManager:markWorkerSickForTodayCore(worker, period, year, day)
     if type(worker) ~= "table" then
         return false
     end
@@ -6369,7 +6577,7 @@ function HelperPersonnelManager:updateWorkerNightWorkTracking(worker, dt, curren
     end
 end
 
-local function hpLayer_HelperPersonnelManager_updateLoyaltyRuntimeForCurrentFarm_1(self, dt)
+function HelperPersonnelManager:updateLoyaltyRuntimeForCurrentFarm(dt)
     local currentMinute = self:getIngameDayMinute()
 
     for _, worker in ipairs(self.workers or {}) do
@@ -6378,6 +6586,8 @@ local function hpLayer_HelperPersonnelManager_updateLoyaltyRuntimeForCurrentFarm
 
     self:processDailySicknessIfDue(currentMinute)
     self:processDailyLoyaltyEvaluationIfDue(currentMinute)
+    self:processBirthdaysForCurrentDate()
+    self:processReliabilityJobAbortsForCurrentFarm()
 end
 
 function HelperPersonnelManager:updateLoyaltyRuntimeForAllFarms(dt)
@@ -6841,15 +7051,19 @@ function HelperPersonnelManager:processDailyLoyaltyChanges(period, year)
     return totalDelta, affectedWorkers
 end
 
-local function hpLayer_HelperPersonnelManager_getLoyaltyResignationChance_1(self, worker)
-    if type(worker) ~= "table" or worker.resignationPending == true or worker.dismissalPending == true then
+function HelperPersonnelManager:getLoyaltyResignationChance(worker)
+    if type(worker) ~= "table" or worker.resignationPending == true or worker.dismissalPending == true or worker.retirementPending == true then
         return 0
     end
 
     local loyalty = self:clampPersonStat(worker.loyalty or HelperPersonnelManager.DEFAULT_LOYALTY)
     for _, tier in ipairs(HelperPersonnelManager.LOYALTY_RESIGNATION_CHANCES or {}) do
         if loyalty <= (tier.maxLoyalty or 0) then
-            return tonumber(tier.chance) or 0
+            local chance = tonumber(tier.chance) or 0
+            if chance > 0 and self:isSalaryRaiseDeclineAftereffectActive(worker) then
+                chance = math.min(0.45, chance + (HelperPersonnelManager.SALARY_RAISE_DECLINE_RESIGNATION_BONUS or 0.05))
+            end
+            return chance
         end
     end
 
@@ -6865,7 +7079,7 @@ function HelperPersonnelManager:showResignationNotice(worker)
     self:showIngameNotification(string.format(template, self:getFullName(worker)), self:getInfoNotificationType())
 end
 
-local function hpLayer_HelperPersonnelManager_scheduleWorkerResignation_1(self, worker, period, year)
+function HelperPersonnelManager:scheduleWorkerResignationCore(worker, period, year)
     if type(worker) ~= "table" or worker.resignationPending == true then
         return false
     end
@@ -6934,7 +7148,7 @@ function HelperPersonnelManager:abortActiveJobForResigningWorker(worker)
     return aborted
 end
 
-local function hpLayer_HelperPersonnelManager_processPendingDismissalsForPeriodChange_1(self, period, year)
+function HelperPersonnelManager:processPendingDismissalsCore(period, year)
     local removed = 0
     local actionTexts = {}
 
@@ -6969,7 +7183,7 @@ local function hpLayer_HelperPersonnelManager_processPendingDismissalsForPeriodC
     return removed
 end
 
-local function hpLayer_HelperPersonnelManager_processPendingResignationsForPeriodChange_1(self, period, year)
+function HelperPersonnelManager:processPendingResignationsCore(period, year)
     local removed = 0
     local actionTexts = {}
 
@@ -7030,16 +7244,6 @@ function HelperPersonnelManager:processDailyLoyaltyEvaluationIfDue(currentMinute
     local _, affectedWorkers = self:processDailyLoyaltyChanges(period, year)
     return affectedWorkers > 0
 end
-
-local HP_ORIGINAL_MANAGER_LOAD_FROM_SAVEGAME = hpLayer_HelperPersonnelManager_loadFromSavegame_1
-local HP_ORIGINAL_MANAGER_ON_PERIOD_CHANGED = hpLayer_HelperPersonnelManager_onPeriodChanged_1
-local HP_ORIGINAL_MANAGER_CAPTURE_SAVE_SNAPSHOT = hpLayer_HelperPersonnelManager_captureSaveSnapshot_1
-local HP_ORIGINAL_MANAGER_GET_WORKER_BY_ID = hpLayer_HelperPersonnelManager_getWorkerById_1
-local HP_ORIGINAL_MANAGER_GET_WORKER_BY_VEHICLE_KEY = hpLayer_HelperPersonnelManager_getWorkerByVehicleKey_1
-local HP_ORIGINAL_MANAGER_GET_PENDING_RESTORED_WORKER_COUNT = hpLayer_HelperPersonnelManager_getPendingRestoredWorkerCount_1
-local HP_ORIGINAL_MANAGER_GET_SINGLE_PENDING_RESTORED_WORKER = hpLayer_HelperPersonnelManager_getSinglePendingRestoredWorker_1
-local HP_ORIGINAL_MANAGER_GET_PENDING_RESTORED_WORKER_BY_VEHICLE_NAME = hpLayer_HelperPersonnelManager_getPendingRestoredWorkerByVehicleName_1
-local HP_ORIGINAL_MANAGER_INITIALIZE_APPLICANT_MARKET = HelperPersonnelManager.initializeNewApplicantMarket
 
 function HelperPersonnelManager:getSavegamePath()
     if self.app ~= nil and self.app.getSavegamePath ~= nil then
@@ -7164,6 +7368,11 @@ function HelperPersonnelManager.registerFarmXMLPaths(schema, basePath)
     HelperPersonnelManager.xmlSchema:register(XMLValueType.BOOL, workerPath .. "#trainingProgressDeferred", "Schulungsfortschritt wird am Monatsende gutgeschrieben")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, workerPath .. ".specializationProgress(?)#key", "Spezialisierungsfortschritt-Typ")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, workerPath .. ".specializationProgress(?)#minutes", "Spezialisierungsfortschritt-Minuten")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, workerPath .. ".specializationProgress(?)#remainderMs", "Spezialisierungsfortschritt Restzeit")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, workerPath .. "#currentJobSpecializationKey", "Spezialisierung des laufenden Einsatzes")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, workerPath .. ".jobSpecializationPractice(?)#key", "Tätigkeit des laufenden Einsatzes")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, workerPath .. ".jobSpecializationPractice(?)#weight", "Gewichtung der Tätigkeit")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.BOOL, workerPath .. ".jobSpecializationPractice(?)#independent", "Unabhängig erfasste Tätigkeit")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, workerPath .. "#jobsCompleted", "Abgeschlossene Arbeiten")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, workerPath .. "#totalWorkMinutes", "Arbeitsminuten gesamt")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, workerPath .. "#lastJobMinutes", "Letzte Arbeitsminuten")
@@ -7221,7 +7430,7 @@ function HelperPersonnelManager:getFallbackFarmId()
     return 1
 end
 
-local function hpLayer_HelperPersonnelManager_getCurrentFarmId_2(self)
+local function getMissionFarmId(self)
     local farmId = nil
 
     if g_currentMission ~= nil then
@@ -7255,113 +7464,17 @@ local function hpLayer_HelperPersonnelManager_getCurrentFarmId_2(self)
     return farmId
 end
 
-local function hpLayer_HelperPersonnelManager_createFarmData_1(self, farmId)
-    return {
-        farmId = tonumber(farmId) or self:getFallbackFarmId(),
-        workers = {},
-        applicants = {},
-        employerReputation = HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50,
-        lastActionText = "",
-        lastReputationChangeText = "",
-        lastPayrollText = "noch keine Gehaltsabrechnung",
-        lastPayrollAmount = 0,
-        totalPayrollPaid = 0,
-        dismissalPeriod = nil,
-        dismissalYear = nil,
-        monthlyDismissals = 0,
-        lastApplicantPeriod = nil,
-        lastApplicantYear = nil,
-        lastLoyaltyDailyCheckMinute = nil,
-        lastSicknessDailyCheckMinute = nil,
-        sicknessCurrentDay = nil,
-        sicknessDayPeriod = nil,
-        sicknessDayYear = nil,
-        pendingPayrollLoyaltyDelta = 0,
-        applicantMarketInitialized = false,
-        reputationHistory = {},
-        actionHistory = {},
-        historySequence = 0,
-        saveActiveJobSnapshot = {}
-    }
-end
-
-local function hpLayer_HelperPersonnelManager_bindFarmData_1(self, data)
-    if data == nil then
-        return nil
-    end
-
-    data.workers = data.workers or {}
-    data.applicants = data.applicants or {}
-    data.reputationHistory = data.reputationHistory or {}
-    data.actionHistory = data.actionHistory or {}
-    data.saveActiveJobSnapshot = data.saveActiveJobSnapshot or {}
-    data.applicantMarketInitialized = data.applicantMarketInitialized == true
-
-    self.currentFarmData = data
-    self.activeFarmId = data.farmId
-    self.workers = data.workers
-    self.applicants = data.applicants
-    self.employerReputation = data.employerReputation or HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50
-    self.lastActionText = data.lastActionText or ""
-    self.lastReputationChangeText = data.lastReputationChangeText or ""
-    self.lastPayrollText = data.lastPayrollText or "noch keine Gehaltsabrechnung"
-    self.lastPayrollAmount = data.lastPayrollAmount or 0
-    self.totalPayrollPaid = data.totalPayrollPaid or 0
-    self.dismissalPeriod = data.dismissalPeriod
-    self.dismissalYear = data.dismissalYear
-    self.monthlyDismissals = data.monthlyDismissals or 0
-    self.lastApplicantPeriod = data.lastApplicantPeriod
-    self.lastApplicantYear = data.lastApplicantYear
-    self.lastLoyaltyDailyCheckMinute = data.lastLoyaltyDailyCheckMinute
-    self.lastSicknessDailyCheckMinute = data.lastSicknessDailyCheckMinute
-    self.sicknessCurrentDay = data.sicknessCurrentDay
-    self.sicknessDayPeriod = data.sicknessDayPeriod
-    self.sicknessDayYear = data.sicknessDayYear
-    self.pendingPayrollLoyaltyDelta = tonumber(data.pendingPayrollLoyaltyDelta) or 0
-    self.applicantMarketInitialized = data.applicantMarketInitialized == true
-    self.reputationHistory = data.reputationHistory
-    self.actionHistory = data.actionHistory
-    self.historySequence = math.max(tonumber(data.historySequence) or 0, self:getHighestHistorySequence())
-    self.saveActiveJobSnapshot = data.saveActiveJobSnapshot
-
-    return data
-end
-
-local function hpLayer_HelperPersonnelManager_storeCurrentFarmData_1(self)
-    local data = self.currentFarmData
-    if data == nil then
-        return nil
-    end
-
-    data.workers = self.workers or data.workers or {}
-    data.applicants = self.applicants or data.applicants or {}
-    data.employerReputation = self.employerReputation or data.employerReputation or HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50
-    data.lastActionText = self.lastActionText or ""
-    data.lastReputationChangeText = self.lastReputationChangeText or ""
-    data.lastPayrollText = self.lastPayrollText or "noch keine Gehaltsabrechnung"
-    data.lastPayrollAmount = self.lastPayrollAmount or 0
-    data.totalPayrollPaid = self.totalPayrollPaid or 0
-    data.dismissalPeriod = self.dismissalPeriod
-    data.dismissalYear = self.dismissalYear
-    data.monthlyDismissals = self.monthlyDismissals or 0
-    data.lastApplicantPeriod = self.lastApplicantPeriod
-    data.lastApplicantYear = self.lastApplicantYear
-    data.lastLoyaltyDailyCheckMinute = self.lastLoyaltyDailyCheckMinute
-    data.lastSicknessDailyCheckMinute = self.lastSicknessDailyCheckMinute
-    data.sicknessCurrentDay = self.sicknessCurrentDay
-    data.sicknessDayPeriod = self.sicknessDayPeriod
-    data.sicknessDayYear = self.sicknessDayYear
-    data.pendingPayrollLoyaltyDelta = tonumber(self.pendingPayrollLoyaltyDelta) or 0
-    data.applicantMarketInitialized = self.applicantMarketInitialized == true or data.applicantMarketInitialized == true
-    data.reputationHistory = self.reputationHistory or data.reputationHistory or {}
-    data.actionHistory = self.actionHistory or data.actionHistory or {}
-    data.historySequence = math.max(tonumber(self.historySequence) or 0, self:getHighestHistorySequence())
-    data.saveActiveJobSnapshot = self.saveActiveJobSnapshot or data.saveActiveJobSnapshot or {}
-
-    return data
-end
-
 function HelperPersonnelManager:ensureInitialApplicantMarketForFarmData(data)
+    if self.ensureGlobalApplicantMarketForFarmData ~= nil then
+        return self:ensureGlobalApplicantMarketForFarmData(data)
+    end
+    if hpApplicantMarketIsClient() then
+        if type(data) == "table" then
+            data.workers = data.workers or {}
+            data.applicants = data.applicants or {}
+        end
+        return 0
+    end
     if data == nil then
         return 0
     end
@@ -7408,6 +7521,9 @@ function HelperPersonnelManager:ensureInitialApplicantMarketForFarmData(data)
 end
 
 function HelperPersonnelManager:getOrCreateFarmData(farmId, initializeApplicants)
+    if self.app ~= nil and self.app.isMultiplayerClient ~= nil and self.app:isMultiplayerClient() then
+        initializeApplicants = false
+    end
     farmId = tonumber(farmId) or self:getCurrentFarmId()
     if self.farms == nil then
         self.farms = {}
@@ -7547,11 +7663,7 @@ function HelperPersonnelManager:getWorkerById(workerId)
         return nil
     end
 
-    if HP_ORIGINAL_MANAGER_GET_WORKER_BY_ID ~= nil then
-        return HP_ORIGINAL_MANAGER_GET_WORKER_BY_ID(self, workerId)
-    end
-
-    return nil
+    return findWorkerInCurrentFarm(self, workerId)
 end
 
 function HelperPersonnelManager:getWorkerByVehicleKey(vehicleKey)
@@ -7645,7 +7757,7 @@ function HelperPersonnelManager:forEachRuntimeFarm(callback)
     self:refreshFarmContext()
 end
 
-local function hpLayer_HelperPersonnelManager_readPersonFromXML_1(self, xmlFile, key)
+function HelperPersonnelManager:readPersonBaseFromXML(xmlFile, key)
     local person = {
         id = xmlFile:getInt(key .. "#id"),
         firstName = xmlFile:getString(key .. "#firstName", ""),
@@ -7663,6 +7775,7 @@ local function hpLayer_HelperPersonnelManager_readPersonFromXML_1(self, xmlFile,
         specializationProgressKey = xmlFile:getString(key .. "#specializationProgressKey"),
         specializationProgressMinutes = xmlFile:getInt(key .. "#specializationProgressMinutes", 0),
         specializationProgresses = self:readSpecializationProgressesFromXML(xmlFile, key),
+        specializationProgressRemaindersMs = self:readSpecializationProgressRemaindersFromXML(xmlFile, key),
         learnedSpecializations = self:readLearnedSpecializationsFromXML(xmlFile, key),
         specializationActivationYear = xmlFile:getInt(key .. "#specializationActivationYear", 0),
         specializationActivationLastKey = xmlFile:getString(key .. "#specializationActivationLastKey"),
@@ -7672,8 +7785,34 @@ local function hpLayer_HelperPersonnelManager_readPersonFromXML_1(self, xmlFile,
         trainingActivePeriod = xmlFile:getInt(key .. "#trainingActivePeriod", 0),
         trainingActiveYear = xmlFile:getInt(key .. "#trainingActiveYear", 0),
         trainingActiveSpecialization = xmlFile:getString(key .. "#trainingActiveSpecialization"),
-        trainingProgressDeferred = xmlFile:getBool(key .. "#trainingProgressDeferred", false)
+        trainingProgressDeferred = xmlFile:getBool(key .. "#trainingProgressDeferred", false),
+        interviewSeed = xmlFile:getInt(key .. "#interviewSeed"),
+        interviewInitialTopic = xmlFile:getString(key .. "#interviewInitialTopic"),
+        interviewQuestionsUsed = xmlFile:getInt(key .. "#interviewQuestionsUsed", 0),
+        interviewExperienceLevel = xmlFile:getInt(key .. "#interviewExperienceLevel", 0),
+        interviewReliabilityLevel = xmlFile:getInt(key .. "#interviewReliabilityLevel", 0),
+        interviewLoyaltyLevel = xmlFile:getInt(key .. "#interviewLoyaltyLevel", 0),
+        interviewCompleted = xmlFile:getBool(key .. "#interviewCompleted", false) == true,
+        personnelKnowledgeRealtimeMs = xmlFile:getFloat(key .. "#personnelKnowledgeRealtimeMs", 0),
+        personnelKnowledgeThresholdMs = xmlFile:getFloat(key .. "#personnelKnowledgeThresholdMs", 0)
     }
+
+    if xmlFile:hasProperty(key .. "#personnelValuesDiscovered") then
+        person.personnelValuesDiscovered = xmlFile:getBool(key .. "#personnelValuesDiscovered", false) == true
+    end
+
+    person.interviewHistory = {}
+    for historyIndex = 0, 2 do
+        local historyPath = string.format("%s.interviewHistory.entry(%d)", key, historyIndex)
+        if xmlFile:hasProperty(historyPath) then
+            table.insert(person.interviewHistory, {
+                topic = xmlFile:getString(historyPath .. "#topic"),
+                level = xmlFile:getInt(historyPath .. "#level", 0),
+                variant = xmlFile:getInt(historyPath .. "#variant", 1),
+                band = xmlFile:getInt(historyPath .. "#band")
+            })
+        end
+    end
 
     if person.id == nil or person.id <= 0 then
         return nil
@@ -7737,11 +7876,12 @@ local function hpLayer_HelperPersonnelManager_readPersonFromXML_1(self, xmlFile,
     person.restorePending = xmlFile:getBool(key .. "#restorePending", false)
     person.restoreVehicleName = xmlFile:getString(key .. "#restoreVehicleName")
     person.restoreVehicleKey = xmlFile:getString(key .. "#restoreVehicleKey")
+    self:readJobSpecializationContextFromXML(xmlFile, key, person)
 
     return person
 end
 
-local function hpLayer_HelperPersonnelManager_writePersonToXML_1(self, xmlFile, key, person, includeWorkerState)
+function HelperPersonnelManager:writePersonBaseToXML(xmlFile, key, person, includeWorkerState)
     if xmlFile == nil or person == nil or person.id == nil then
         return
     end
@@ -7786,6 +7926,25 @@ local function hpLayer_HelperPersonnelManager_writePersonToXML_1(self, xmlFile, 
         xmlFile:setString(key .. "#trainingActiveSpecialization", person.trainingActiveSpecialization)
     end
     xmlFile:setBool(key .. "#trainingProgressDeferred", person.trainingProgressDeferred == true)
+    if person.interviewSeed ~= nil then xmlFile:setInt(key .. "#interviewSeed", person.interviewSeed) end
+    if person.interviewInitialTopic ~= nil then xmlFile:setString(key .. "#interviewInitialTopic", person.interviewInitialTopic) end
+    xmlFile:setInt(key .. "#interviewQuestionsUsed", person.interviewQuestionsUsed or 0)
+    xmlFile:setInt(key .. "#interviewExperienceLevel", person.interviewExperienceLevel or 0)
+    xmlFile:setInt(key .. "#interviewReliabilityLevel", person.interviewReliabilityLevel or 0)
+    xmlFile:setInt(key .. "#interviewLoyaltyLevel", person.interviewLoyaltyLevel or 0)
+    xmlFile:setBool(key .. "#interviewCompleted", person.interviewCompleted == true)
+    for historyIndex, entry in ipairs(person.interviewHistory or {}) do
+        if historyIndex <= 3 then
+            local historyPath = string.format("%s.interviewHistory.entry(%d)", key, historyIndex - 1)
+            xmlFile:setString(historyPath .. "#topic", entry.topic or "")
+            xmlFile:setInt(historyPath .. "#level", entry.level or 0)
+            xmlFile:setInt(historyPath .. "#variant", entry.variant or 1)
+            if entry.band ~= nil then xmlFile:setInt(historyPath .. "#band", entry.band) end
+        end
+    end
+    xmlFile:setFloat(key .. "#personnelKnowledgeRealtimeMs", person.personnelKnowledgeRealtimeMs or 0)
+    xmlFile:setFloat(key .. "#personnelKnowledgeThresholdMs", person.personnelKnowledgeThresholdMs or 0)
+    xmlFile:setBool(key .. "#personnelValuesDiscovered", person.personnelValuesDiscovered == true)
 
     if includeWorkerState == true then
         xmlFile:setBool(key .. "#busy", person.busy == true)
@@ -7856,8 +8015,10 @@ local function hpLayer_HelperPersonnelManager_writePersonToXML_1(self, xmlFile, 
         xmlFile:setInt(key .. "#lastJobMinutes", person.lastJobMinutes or 0)
         xmlFile:setFloat(key .. "#totalEarnings", person.totalEarnings or 0)
         xmlFile:setFloat(key .. "#currentJobStartedAt", person.currentJobStartedAt or 0)
-        xmlFile:setFloat(key .. "#currentJobElapsedMs", person.currentJobElapsedMs or 0)
+        local elapsedMs = person.busy == true and self:getCurrentJobElapsedMs(person) or person.currentJobElapsedMs or 0
+        xmlFile:setFloat(key .. "#currentJobElapsedMs", elapsedMs)
         xmlFile:setBool(key .. "#restorePending", person.restorePending == true)
+        self:writeJobSpecializationContextToXML(xmlFile, key, person)
         if person.restoreVehicleName ~= nil and person.restoreVehicleName ~= "" then
             xmlFile:setString(key .. "#restoreVehicleName", tostring(person.restoreVehicleName))
         end
@@ -7901,7 +8062,7 @@ function HelperPersonnelManager:writeHistoryToXML(xmlFile, basePath, history)
     end
 end
 
-local function hpLayer_HelperPersonnelManager_loadFarmDataFromXML_1(self, xmlFile, basePath, fallbackFarmId)
+local function hpReadFarmDataFromXMLCore(self, xmlFile, basePath, fallbackFarmId)
     local farmId = xmlFile:getInt(basePath .. "#farmId", fallbackFarmId or self:getFallbackFarmId())
     local data = self:createFarmData(farmId)
 
@@ -7983,7 +8144,7 @@ local function hpLayer_HelperPersonnelManager_loadFarmDataFromXML_1(self, xmlFil
     return data
 end
 
-local function hpLayer_HelperPersonnelManager_writeFarmDataToXML_1(self, xmlFile, basePath, data)
+local function hpWriteFarmDataToXMLCore(self, xmlFile, basePath, data)
     if data == nil then
         return
     end
@@ -8076,7 +8237,7 @@ local function hpOpenPersonnelSaveFile(path)
     return xmlFile
 end
 
-local function hpLayer_HelperPersonnelManager_loadFromSavegame_2(self)
+local function hpLoadFarmSavegameCore(self)
     self:loadConfig()
     self.farms = {}
     self.currentFarmData = nil
@@ -8153,9 +8314,7 @@ local function hpLayer_HelperPersonnelManager_loadFromSavegame_2(self)
 
     xmlFile:delete()
 
-    if HP_ORIGINAL_MANAGER_LOAD_FROM_SAVEGAME ~= nil then
-        HP_ORIGINAL_MANAGER_LOAD_FROM_SAVEGAME(self)
-    end
+    loadLegacyFarmFromSavegame(self)
 
     self.savegameLoadState = "loaded"
     self:adoptFlatStateAsFarm(self:getCurrentFarmId())
@@ -8371,16 +8530,13 @@ function HelperPersonnelManager:saveToSavegame()
 end
 
 function HelperPersonnelManager:captureSaveSnapshot(activeJobs, getVehicleKeyFunc, helperBridge)
-    if HP_ORIGINAL_MANAGER_CAPTURE_SAVE_SNAPSHOT == nil then
-        return
-    end
 
     self:refreshFarmContext()
     for _, data in pairs(self.farms or {}) do
         data.saveActiveJobSnapshot = {}
     end
 
-    HP_ORIGINAL_MANAGER_CAPTURE_SAVE_SNAPSHOT(self, activeJobs, getVehicleKeyFunc, helperBridge)
+    captureCurrentFarmSaveSnapshot(self, activeJobs, getVehicleKeyFunc, helperBridge)
 
     local snapshot = self.saveActiveJobSnapshot or {}
     for _, assignment in ipairs(snapshot) do
@@ -8443,7 +8599,7 @@ function HelperPersonnelManager:getNetworkState()
     return state
 end
 
-local function hpLayer_HelperPersonnelManager_applyNetworkState_2(self, state)
+function HelperPersonnelManager:applyNetworkFarmSnapshot(state)
     if state == nil then
         return false
     end
@@ -8559,14 +8715,11 @@ for _, methodName in ipairs(HP_FARM_SCOPED_METHODS) do
     end
 end
 
-local HP_ORIGINAL_MANAGER_HIRE_APPLICANT = hpLayer_HelperPersonnelManager_hireApplicant_1
-local HP_ORIGINAL_MANAGER_DISMISS_WORKER = hpLayer_HelperPersonnelManager_dismissWorker_1
-local HP_MANAGER_GET_CURRENT_FARM_ID_WITHOUT_FORCE = hpLayer_HelperPersonnelManager_getCurrentFarmId_2
 function HelperPersonnelManager:getCurrentFarmId()
     if self.forcedFarmId ~= nil then
         return self.forcedFarmId
     end
-    return HP_MANAGER_GET_CURRENT_FARM_ID_WITHOUT_FORCE(self)
+    return getMissionFarmId(self)
 end
 
 function HelperPersonnelManager:executeWithFarmContext(farmId, callback, storeChanges)
@@ -8602,10 +8755,17 @@ function HelperPersonnelManager:executeWithFarmContext(farmId, callback, storeCh
     return unpackResults(results)
 end
 
-local function hpLayer_HelperPersonnelManager_processPeriodChangeForFarm_1(self, farmId, period, year, forceCheck)
-    return self:executeWithFarmContext(farmId, function()
+function HelperPersonnelManager:processPeriodChangeForFarm(farmId, period, year, forceCheck)
+    if self.processGlobalApplicantPeriod ~= nil then
+        self:processGlobalApplicantPeriod(period, year)
+    end
+    local changed = self:executeWithFarmContext(farmId, function()
         return self:processApplicantPeriodChange(period, year, forceCheck == true)
     end, true)
+    local offersChanged = self:executeWithFarmContext(farmId, function()
+        return self:ensureMonthlyTrainingOffers(period, year)
+    end, true)
+    return changed == true or offersChanged == true
 end
 
 function HelperPersonnelManager:onPeriodChanged(period, year)
@@ -8633,6 +8793,9 @@ function HelperPersonnelManager:update(dt)
 
         self:forEachRuntimeFarm(function()
             self:updateLoyaltyRuntimeForCurrentFarm(elapsedLoyaltyMs)
+            if self.updatePersonnelKnowledgeRuntime ~= nil then
+                self:updatePersonnelKnowledgeRuntime(elapsedLoyaltyMs)
+            end
         end)
         processed = true
     end
@@ -8655,19 +8818,13 @@ end
 
 function HelperPersonnelManager:hireApplicantForFarm(applicantId, farmId)
     return self:executeWithFarmContext(farmId, function()
-        if HP_ORIGINAL_MANAGER_HIRE_APPLICANT == nil then
-            return false
-        end
-        return HP_ORIGINAL_MANAGER_HIRE_APPLICANT(self, applicantId)
+        return self:hireApplicant(applicantId)
     end, true)
 end
 
 function HelperPersonnelManager:dismissWorkerForFarm(workerId, farmId)
     return self:executeWithFarmContext(farmId, function()
-        if HP_ORIGINAL_MANAGER_DISMISS_WORKER == nil then
-            return false
-        end
-        return HP_ORIGINAL_MANAGER_DISMISS_WORKER(self, workerId)
+        return self:dismissWorker(workerId)
     end, true)
 end
 
@@ -9294,9 +9451,9 @@ function HelperPersonnelManager:getRandomApplicantAge()
     return math.random(math.max(minimumAge, 60), math.min(maximumAge, 65))
 end
 
-function HelperPersonnelManager:createRandomApplicant(preferredGender)
-    local _, reliabilityBonus, wageMultiplier = self:getApplicantReputationModifiers()
-    local reputation = self:getEmployerReputation()
+function HelperPersonnelManager:createRandomApplicant(preferredGender, reputationOverride)
+    local _, reliabilityBonus, wageMultiplier = self:getApplicantReputationModifiers(reputationOverride)
+    local reputation = reputationOverride ~= nil and self:clampEmployerReputation(reputationOverride) or self:getEmployerReputation()
     local loyaltyBonus = math.floor(((reputation - 50) / 5) + 0.5)
     local age = self:getRandomApplicantAge()
     local backgroundKey = self:getRandomBackgroundKey(age)
@@ -9438,7 +9595,7 @@ function HelperPersonnelManager:getRetirementRiskAtAge(person, age)
     return math.max(0, math.min(targetRisk, targetRisk * accumulated / math.max(total, 0.0001)))
 end
 
-local function hpLayer_HelperPersonnelManager_scheduleWorkerRetirement_1(self, worker, period, year)
+function HelperPersonnelManager:scheduleWorkerRetirementCore(worker, period, year)
     if type(worker) ~= "table" or worker.retirementPending == true or worker.resignationPending == true or worker.dismissalPending == true then
         return false
     end
@@ -9511,7 +9668,7 @@ function HelperPersonnelManager:processBirthdaysForCurrentDate()
     return processed
 end
 
-local function hpLayer_HelperPersonnelManager_processPendingRetirementsForPeriodChange_1(self, period, year)
+function HelperPersonnelManager:processPendingRetirementsCore(period, year)
     local removed = 0
     local actionTexts = {}
 
@@ -9546,68 +9703,8 @@ local function hpLayer_HelperPersonnelManager_processPendingRetirementsForPeriod
     return removed
 end
 
-local hpBiographyOriginalNormalizePersonRuntimeData = hpLayer_HelperPersonnelManager_normalizePersonRuntimeData_1
-function HelperPersonnelManager:normalizePersonRuntimeData(person)
-    local result = hpBiographyOriginalNormalizePersonRuntimeData(self, person)
-    person.reliabilityJobAbortChecked = person.reliabilityJobAbortChecked == true
-    person.reliabilityJobAbortCheckAt = math.max(0, tonumber(person.reliabilityJobAbortCheckAt) or 0)
-    person.transportDriver = person.transportDriver == true
-    person.transportPriority = person.transportDriver == true and math.max(0, math.floor((tonumber(person.transportPriority) or 0) + 0.5)) or 0
-    self:ensurePersonBiography(person)
-    return result or person
-end
-
-local hpBiographyOriginalNormalizeApplicantRuntimeData = hpLayer_HelperPersonnelManager_normalizeApplicantRuntimeData_1
-function HelperPersonnelManager:normalizeApplicantRuntimeData(applicant)
-    local result = hpBiographyOriginalNormalizeApplicantRuntimeData(self, applicant)
-    self:ensurePersonBiography(applicant)
-    local age = self:getPersonAge(applicant)
-    if age < 23 and applicant.backgroundKey == HelperPersonnelManager.BACKGROUND_CONTRACTOR then
-        applicant.backgroundKey = self:getDeterministicBackgroundKey(applicant, age)
-    end
-    return result or applicant
-end
-
-local hpBiographyOriginalGetStatusText = hpLayer_HelperPersonnelManager_getStatusText_1
-function HelperPersonnelManager:getStatusText(person)
-    if type(person) == "table" and person.retirementPending == true then
-        local statusText = self:getLocalizedText("ui_status_retirementPending", "Ruhestand zum Monatsende")
-        if person.dismissalPending == true then
-            return string.format("%s, %s", statusText, self:getLocalizedText("ui_status_dismissed", "gekündigt"))
-        end
-        return statusText
-    end
-    return hpBiographyOriginalGetStatusText(self, person)
-end
-
-local hpBiographyOriginalGetLoyaltyResignationChance = hpLayer_HelperPersonnelManager_getLoyaltyResignationChance_1
-function HelperPersonnelManager:getLoyaltyResignationChance(worker)
-    if type(worker) == "table" and worker.retirementPending == true then
-        return 0
-    end
-    return hpBiographyOriginalGetLoyaltyResignationChance(self, worker)
-end
-
-local hpBiographyOriginalUpdateLoyaltyRuntimeForCurrentFarm = hpLayer_HelperPersonnelManager_updateLoyaltyRuntimeForCurrentFarm_1
-function HelperPersonnelManager:updateLoyaltyRuntimeForCurrentFarm(dt)
-    hpBiographyOriginalUpdateLoyaltyRuntimeForCurrentFarm(self, dt)
-    self:processBirthdaysForCurrentDate()
-    self:processReliabilityJobAbortsForCurrentFarm()
-end
-
-local hpBiographyOriginalProcessApplicantPeriodChange = hpLayer_HelperPersonnelManager_processApplicantPeriodChange_1
-function HelperPersonnelManager:processApplicantPeriodChange(period, year, forceCheck)
-    local changed = hpBiographyOriginalProcessApplicantPeriodChange(self, period, year, forceCheck)
-    if changed == true then
-        local currentPeriod, currentYear = self:getApplicantPeriodInfo(period, year)
-        self:processPendingRetirementsForPeriodChange(currentPeriod, currentYear)
-    end
-    return changed
-end
-
-local hpBiographyOriginalReadPersonFromXML = hpLayer_HelperPersonnelManager_readPersonFromXML_1
 function HelperPersonnelManager:readPersonFromXML(xmlFile, key)
-    local person = hpBiographyOriginalReadPersonFromXML(self, xmlFile, key)
+    local person = self:readPersonBaseFromXML(xmlFile, key)
     if person == nil then
         return nil
     end
@@ -9624,13 +9721,13 @@ function HelperPersonnelManager:readPersonFromXML(xmlFile, key)
     person.transportDriver = xmlFile:getBool(key .. "#transportDriver", false) == true
     person.transportPriority = xmlFile:getInt(key .. "#transportPriority", 0) or 0
     self:ensurePersonBiography(person)
+    self:readSalaryRaiseDataFromXML(xmlFile, key, person)
     return person
 end
 
-local hpBiographyOriginalWritePersonToXML = hpLayer_HelperPersonnelManager_writePersonToXML_1
 function HelperPersonnelManager:writePersonToXML(xmlFile, key, person, includeWorkerState)
     self:ensurePersonBiography(person)
-    hpBiographyOriginalWritePersonToXML(self, xmlFile, key, person, includeWorkerState)
+    self:writePersonBaseToXML(xmlFile, key, person, includeWorkerState)
     xmlFile:setInt(key .. "#birthDay", person.birthDay or 1)
     xmlFile:setInt(key .. "#birthMonth", person.birthMonth or 1)
     xmlFile:setInt(key .. "#birthYear", person.birthYear or 2000)
@@ -9645,11 +9742,11 @@ function HelperPersonnelManager:writePersonToXML(xmlFile, key, person, includeWo
         xmlFile:setBool(key .. "#transportDriver", person.transportDriver == true)
         xmlFile:setInt(key .. "#transportPriority", person.transportDriver == true and (person.transportPriority or 0) or 0)
     end
+    self:writeSalaryRaiseDataToXML(xmlFile, key, person, includeWorkerState)
 end
 
-local hpBiographyOriginalCopyPersonForNetwork = hpLayer_HelperPersonnelManager_copyPersonForNetwork_1
 function HelperPersonnelManager:copyPersonForNetwork(person)
-    local copy = hpBiographyOriginalCopyPersonForNetwork(self, person)
+    local copy = self:copyPersonBaseForNetwork(person)
     self:ensurePersonBiography(person)
     copy.birthDay = person.birthDay
     copy.birthMonth = person.birthMonth
@@ -9663,38 +9760,26 @@ function HelperPersonnelManager:copyPersonForNetwork(person)
     copy.retirementNoticeYear = person.retirementNoticeYear
     copy.transportDriver = person.transportDriver == true
     copy.transportPriority = person.transportDriver == true and (person.transportPriority or 0) or 0
+    self:copySalaryRaiseDataForNetwork(person, copy)
+    if person.monthsAvailable ~= nil and self.copyApplicantInterviewForNetwork ~= nil then
+        self:copyApplicantInterviewForNetwork(person, copy)
+    else
+        copy.personnelKnowledgeRealtimeMs = person.personnelKnowledgeRealtimeMs
+        copy.personnelKnowledgeThresholdMs = person.personnelKnowledgeThresholdMs
+        copy.personnelValuesDiscovered = person.personnelValuesDiscovered ~= false
+        if self:isApplicantInterviewsEnabled() and person.personnelValuesDiscovered == false then
+            for _, topic in ipairs({"experience", "reliability", "loyalty"}) do
+                local level, minimum, maximum = self:getApplicantInterviewKnowledge(person, topic)
+                copy["interview" .. string.upper(string.sub(topic, 1, 1)) .. string.sub(topic, 2) .. "Level"] = level
+                copy[topic .. "KnowledgeMin"] = minimum
+                copy[topic .. "KnowledgeMax"] = maximum
+                if level < 3 then
+                    copy[topic] = -1
+                end
+            end
+        end
+    end
     return copy
-end
-
-local hpBiographyOriginalLoadFromSavegame = hpLayer_HelperPersonnelManager_loadFromSavegame_2
-local function hpLayer_HelperPersonnelManager_loadFromSavegame_3(self)
-    hpBiographyOriginalLoadFromSavegame(self)
-    for _, data in pairs(self.farms or {}) do
-        for _, worker in ipairs(data.workers or {}) do
-            self:ensurePersonBiography(worker)
-            self:normalizePersonRuntimeData(worker)
-        end
-        for _, applicant in ipairs(data.applicants or {}) do
-            self:ensurePersonBiography(applicant)
-            self:normalizeApplicantRuntimeData(applicant)
-        end
-    end
-    self:refreshFarmContext()
-end
-
-local hpBiographyOriginalApplyNetworkState = hpLayer_HelperPersonnelManager_applyNetworkState_2
-local function hpLayer_HelperPersonnelManager_applyNetworkState_3(self, state)
-    local result = hpBiographyOriginalApplyNetworkState(self, state)
-    for _, data in pairs(self.farms or {}) do
-        for _, worker in ipairs(data.workers or {}) do
-            self:ensurePersonBiography(worker)
-        end
-        for _, applicant in ipairs(data.applicants or {}) do
-            self:ensurePersonBiography(applicant)
-        end
-    end
-    self:refreshFarmContext(state ~= nil and state.activeFarmId or nil)
-    return result
 end
 
 local function hpRegisterBiographyXMLPath(schema, basePath)
@@ -9717,8 +9802,10 @@ if HelperPersonnelManager.xmlSchema ~= nil then
     hpRegisterBiographyXMLPath(HelperPersonnelManager.xmlSchema, "helperPersonnel.farms.farm(?).applicants.applicant(?)")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.applicants.applicant(?).specializationProgress(?)#key", "Bewerber-Spezialisierungsfortschritt")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.applicants.applicant(?).specializationProgress(?)#minutes", "Bewerber-Spezialisierungsminuten")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, "helperPersonnel.applicants.applicant(?).specializationProgress(?)#remainderMs", "Bewerber-Spezialisierungsrestzeit")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.farms.farm(?).applicants.applicant(?).specializationProgress(?)#key", "Bewerber-Spezialisierungsfortschritt")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.farms.farm(?).applicants.applicant(?).specializationProgress(?)#minutes", "Bewerber-Spezialisierungsminuten")
+    HelperPersonnelManager.xmlSchema:register(XMLValueType.FLOAT, "helperPersonnel.farms.farm(?).applicants.applicant(?).specializationProgress(?)#remainderMs", "Bewerber-Spezialisierungsrestzeit")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.farms.farm(?).workers.worker(?).learnedSpecialization(?)#key", "Gelernte Mitarbeiterspezialisierung")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.INT, "helperPersonnel.farms.farm(?).workers.worker(?)#specializationActivationYear", "Letztes Aktivierungsjahr einer Spezialisierung")
     HelperPersonnelManager.xmlSchema:register(XMLValueType.STRING, "helperPersonnel.farms.farm(?).workers.worker(?)#specializationActivationLastKey", "Zuletzt aktivierte Mitarbeiterspezialisierung")
@@ -9836,136 +9923,6 @@ end
 function HelperPersonnelManager:getWorkerTrainingCost(worker, specializationKey)
     local finalCost = self:getWorkerTrainingCostDetails(worker, specializationKey)
     return finalCost
-end
-
-local hpTrainingOffersOriginalCreateFarmData = hpLayer_HelperPersonnelManager_createFarmData_1
-local function hpLayer_HelperPersonnelManager_createFarmData_2(self, farmId)
-    local data = hpTrainingOffersOriginalCreateFarmData(self, farmId)
-    data.trainingOfferPeriod = nil
-    data.trainingOfferYear = nil
-    data.trainingOffers = {}
-    return data
-end
-
-local hpTrainingOffersOriginalBindFarmData = hpLayer_HelperPersonnelManager_bindFarmData_1
-local function hpLayer_HelperPersonnelManager_bindFarmData_2(self, data)
-    if data ~= nil then
-        data.trainingOffers = type(data.trainingOffers) == "table" and data.trainingOffers or {}
-    end
-
-    local result = hpTrainingOffersOriginalBindFarmData(self, data)
-    if data ~= nil then
-        self.trainingOfferPeriod = data.trainingOfferPeriod
-        self.trainingOfferYear = data.trainingOfferYear
-        self.trainingOffers = data.trainingOffers
-    end
-    return result
-end
-
-local hpTrainingOffersOriginalStoreCurrentFarmData = hpLayer_HelperPersonnelManager_storeCurrentFarmData_1
-local function hpLayer_HelperPersonnelManager_storeCurrentFarmData_2(self)
-    local data = hpTrainingOffersOriginalStoreCurrentFarmData(self)
-    if data ~= nil then
-        data.trainingOfferPeriod = self.trainingOfferPeriod
-        data.trainingOfferYear = self.trainingOfferYear
-        data.trainingOffers = type(self.trainingOffers) == "table" and self.trainingOffers or {}
-    end
-    return data
-end
-
-local hpTrainingOffersOriginalLoadFarmDataFromXML = hpLayer_HelperPersonnelManager_loadFarmDataFromXML_1
-local function hpLayer_HelperPersonnelManager_loadFarmDataFromXML_2(self, xmlFile, basePath, fallbackFarmId)
-    local data = hpTrainingOffersOriginalLoadFarmDataFromXML(self, xmlFile, basePath, fallbackFarmId)
-    data.trainingOfferPeriod = xmlFile:getInt(basePath .. "#trainingOfferPeriod")
-    data.trainingOfferYear = xmlFile:getInt(basePath .. "#trainingOfferYear")
-    data.trainingOffers = {}
-
-    local index = 0
-    while true do
-        local key = string.format("%s.trainingOffers.offer(%d)", basePath, index)
-        if not xmlFile:hasProperty(key) then
-            break
-        end
-        local specializationKey = self:normalizeSpecializationKey(xmlFile:getString(key .. "#key"))
-        if specializationKey ~= nil then
-            data.trainingOffers[specializationKey] = {
-                modifierPercent = xmlFile:getInt(key .. "#modifierPercent", 0),
-                available = xmlFile:getBool(key .. "#available", true) == true
-            }
-        end
-        index = index + 1
-    end
-
-    return data
-end
-
-local hpTrainingOffersOriginalWriteFarmDataToXML = hpLayer_HelperPersonnelManager_writeFarmDataToXML_1
-local function hpLayer_HelperPersonnelManager_writeFarmDataToXML_2(self, xmlFile, basePath, data)
-    hpTrainingOffersOriginalWriteFarmDataToXML(self, xmlFile, basePath, data)
-
-    if data.trainingOfferPeriod ~= nil then
-        xmlFile:setInt(basePath .. "#trainingOfferPeriod", data.trainingOfferPeriod)
-    end
-    if data.trainingOfferYear ~= nil then
-        xmlFile:setInt(basePath .. "#trainingOfferYear", data.trainingOfferYear)
-    end
-
-    local index = 0
-    for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
-        local specializationKey = self:normalizeSpecializationKey(key)
-        local offer = specializationKey ~= nil and type(data.trainingOffers) == "table" and data.trainingOffers[specializationKey] or nil
-        if type(offer) == "table" then
-            local offerPath = string.format("%s.trainingOffers.offer(%d)", basePath, index)
-            xmlFile:setString(offerPath .. "#key", specializationKey)
-            xmlFile:setInt(offerPath .. "#modifierPercent", tonumber(offer.modifierPercent) or 0)
-            xmlFile:setBool(offerPath .. "#available", offer.available ~= false)
-            index = index + 1
-        end
-    end
-end
-
-local hpTrainingOffersOriginalApplyNetworkState = hpLayer_HelperPersonnelManager_applyNetworkState_3
-local function hpLayer_HelperPersonnelManager_applyNetworkState_4(self, state)
-    local result = hpTrainingOffersOriginalApplyNetworkState(self, state)
-
-    if type(state) == "table" and type(state.farms) == "table" then
-        for _, farmState in ipairs(state.farms) do
-            local farmId = tonumber(farmState.farmId)
-            local data = farmId ~= nil and type(self.farms) == "table" and self.farms[farmId] or nil
-            if data ~= nil then
-                data.trainingOfferPeriod = farmState.trainingOfferPeriod
-                data.trainingOfferYear = farmState.trainingOfferYear
-                data.trainingOffers = type(farmState.trainingOffers) == "table" and farmState.trainingOffers or {}
-            end
-        end
-    end
-
-    self:refreshFarmContext(state ~= nil and state.activeFarmId or nil)
-    return result
-end
-
-local hpTrainingOffersOriginalProcessPeriodChangeForFarm = hpLayer_HelperPersonnelManager_processPeriodChangeForFarm_1
-function HelperPersonnelManager:processPeriodChangeForFarm(farmId, period, year, forceCheck)
-    local changed = hpTrainingOffersOriginalProcessPeriodChangeForFarm(self, farmId, period, year, forceCheck)
-    local offersChanged = self:executeWithFarmContext(farmId, function()
-        return self:ensureMonthlyTrainingOffers(period, year)
-    end, true)
-    return changed == true or offersChanged == true
-end
-
-local hpTrainingOffersOriginalTrainWorker = hpLayer_HelperPersonnelManager_trainWorker_1
-local function hpLayer_HelperPersonnelManager_trainWorker_2(self, workerId, requestedSpecializationKey)
-    local worker = self:getWorkerById(workerId)
-    local specializationKey = worker ~= nil and self:getWorkerTrainingSpecializationKey(worker, requestedSpecializationKey) or nil
-    if worker ~= nil and specializationKey ~= nil then
-        local _, _, _, available = self:getWorkerTrainingCostDetails(worker, specializationKey)
-        if not available then
-            self:showIngameNotification(self:getLocalizedText("ui_pmTrainingNoPlacesMessage", "Für diese Schulung sind aktuell keine Plätze frei."), self:getInfoNotificationType())
-            return false
-        end
-    end
-
-    return hpTrainingOffersOriginalTrainWorker(self, workerId, requestedSpecializationKey)
 end
 
 if HelperPersonnelManager.xmlSchema ~= nil then
@@ -10378,6 +10335,28 @@ function HelperPersonnelManager:getProfileBackgroundPhrase(worker)
     return self:getLocalizedText(key, fallback)
 end
 
+local function hpProfileBackgroundIndex(manager, person)
+    local key = manager:normalizeBackgroundKey(type(person) == "table" and person.backgroundKey or nil)
+    local indexes = {
+        [HelperPersonnelManager.BACKGROUND_FAMILY_FARM] = 1,
+        [HelperPersonnelManager.BACKGROUND_DAIRY_FARM] = 2,
+        [HelperPersonnelManager.BACKGROUND_CONTRACTOR] = 3,
+        [HelperPersonnelManager.BACKGROUND_ARABLE_FARM] = 4,
+        [HelperPersonnelManager.BACKGROUND_MIXED_FARM] = 5,
+        [HelperPersonnelManager.BACKGROUND_LOGISTICS] = 6,
+        [HelperPersonnelManager.BACKGROUND_WORKSHOP] = 7,
+        [HelperPersonnelManager.BACKGROUND_OFFICE] = 8
+    }
+    return indexes[key] or 5
+end
+
+local function hpProfileReplaceTokens(text, name, age, months)
+    text = tostring(text or "")
+    text = text:gsub("ZXQNAMEQXZ", function() return tostring(name or "") end)
+    text = text:gsub("ZXQAGEQXZ", function() return tostring(age or 0) end)
+    return text:gsub("ZXQMONTHSQXZ", function() return tostring(months or 0) end)
+end
+
 function HelperPersonnelManager:getDynamicApplicantProfileText(applicant)
     if type(applicant) ~= "table" then
         return ""
@@ -10386,7 +10365,9 @@ function HelperPersonnelManager:getDynamicApplicantProfileText(applicant)
     local name = self:getFullName(applicant)
     local backgroundPhrase = self:getProfileBackgroundPhrase(applicant)
     local age = self:getPersonAge(applicant)
-    local intro = string.format(self:getLocalizedText("ui_pmApplicantProfileIntro", "%s war zuvor %s tätig."), name, backgroundPhrase)
+    local introFallback = string.format(self:getLocalizedText("ui_pmApplicantProfileIntro", "%s war zuvor %s tätig."), name, backgroundPhrase)
+    local introKey = string.format("ui_pmNewApplicantIntro%d_%d", hpProfileBackgroundIndex(self, applicant), self:getProfileVariantIndex(applicant, 101, 3))
+    local intro = hpProfileReplaceTokens(self:getLocalizedText(introKey, introFallback), name, age, 0)
 
     local ageTier
     if age <= 22 then
@@ -10430,7 +10411,9 @@ function HelperPersonnelManager:getDynamicApplicantProfileText(applicant)
         "Die außergewöhnlich hohe Loyalität deutet auf eine besonders ausgeprägte langfristige Bindungsbereitschaft hin."
     }
 
-    local ageText = string.format(self:getLocalizedText(string.format("ui_pmApplicantProfileAge%d", ageTier), ageFallbacks[ageTier]), age)
+    local ageFallback = string.format(self:getLocalizedText(string.format("ui_pmApplicantProfileAge%d", ageTier), ageFallbacks[ageTier]), age)
+    local ageKey = string.format("ui_pmNewApplicantAge%d_%d", ageTier, self:getProfileVariantIndex(applicant, 107, 3))
+    local ageText = hpProfileReplaceTokens(self:getLocalizedText(ageKey, ageFallback), name, age, 0)
     local experienceText = self:getLocalizedText(string.format("ui_pmApplicantProfileExperience%d", experienceTier), experienceFallbacks[experienceTier])
     local reliabilityText = self:getLocalizedText(string.format("ui_pmApplicantProfileReliability%d", reliabilityTier), reliabilityFallbacks[reliabilityTier])
     local loyaltyText = self:getLocalizedText(string.format("ui_pmApplicantProfileLoyalty%d", loyaltyTier), loyaltyFallbacks[loyaltyTier])
@@ -10442,6 +10425,14 @@ function HelperPersonnelManager:getDynamicApplicantProfileText(applicant)
         marketText = self:getLocalizedText("ui_pmApplicantProfileMarketOneMonth", "Die Bewerbung befindet sich seit einem Monat auf dem Markt.")
     else
         marketText = string.format(self:getLocalizedText("ui_pmApplicantProfileMarketMonths", "Die Bewerbung befindet sich seit %d Monaten auf dem Markt."), monthsAvailable)
+    end
+
+    local marketTier = monthsAvailable <= 0 and 1 or (monthsAvailable == 1 and 2 or 3)
+    local marketKey = string.format("ui_pmNewApplicantMarket%d_%d", marketTier, self:getProfileVariantIndex(applicant, 109, 3))
+    marketText = hpProfileReplaceTokens(self:getLocalizedText(marketKey, marketText), name, age, monthsAvailable)
+
+    if self.isApplicantInterviewsEnabled ~= nil and self:isApplicantInterviewsEnabled() then
+        return table.concat({intro, ageText, marketText}, " ")
     end
 
     return table.concat({intro, ageText, experienceText, reliabilityText, loyaltyText, marketText}, " ")
@@ -10468,6 +10459,20 @@ function HelperPersonnelManager:getDynamicWorkerProfileText(worker)
         intro = string.format(introTemplate, name, employmentMonths, backgroundPhrase)
     else
         intro = string.format(introTemplate, name, backgroundPhrase, employmentMonths)
+    end
+    if employmentMonths <= 1 then
+        local key = string.format("ui_pmNewApplicantIntro%d_%d", hpProfileBackgroundIndex(self, worker), self:getProfileVariantIndex(worker, 101, 3))
+        local shortIntro = hpProfileReplaceTokens(self:getLocalizedText(key, intro), name, 0, employmentMonths)
+        local tenureKey = employmentMonths <= 0 and "ui_pmNewWorkerTenureNew" or "ui_pmNewWorkerTenureOne"
+        local tenure = self:getLocalizedText(tenureKey, "")
+        intro = tenure ~= "" and (shortIntro .. " " .. tenure) or shortIntro
+    else
+        local key = string.format("ui_pmNewWorkerIntro%d_%d", hpProfileBackgroundIndex(self, worker), self:getProfileVariantIndex(worker, 113, 5))
+        intro = hpProfileReplaceTokens(self:getLocalizedText(key, intro), name, 0, employmentMonths)
+    end
+
+    if self.isApplicantInterviewsEnabled ~= nil and self:isApplicantInterviewsEnabled() and worker.personnelValuesDiscovered == false then
+        return intro
     end
 
     local experienceTier = self:getProfileTier(worker.experience, {20, 40, 60, 80})
@@ -10583,9 +10588,9 @@ function HelperPersonnelManager:getDynamicWorkerProfileText(worker)
     local experienceTemplate = self:getLocalizedText(experienceKey, experienceFallbacks[experienceTier][experienceVariant])
     local reliabilityTemplate = self:getLocalizedText(reliabilityKey, reliabilityFallbacks[reliabilityTier][reliabilityVariant])
     local loyaltyTemplate = self:getLocalizedText(loyaltyKey, loyaltyFallbacks[loyaltyTier][loyaltyVariant])
-    local experienceText = string.format(experienceTemplate, experienceSubjects[experienceVariant])
-    local reliabilityText = string.format(reliabilityTemplate, reliabilitySubjects[reliabilityVariant])
-    local loyaltyText = string.format(loyaltyTemplate, loyaltySubjects[loyaltyVariant])
+    local experienceText = self:getLocalizedText(string.format("ui_pmNewWorkerExperience%d_%d", experienceTier, self:getProfileVariantIndex(worker, 127, 5)), string.format(experienceTemplate, experienceSubjects[experienceVariant]))
+    local reliabilityText = self:getLocalizedText(string.format("ui_pmNewWorkerReliability%d_%d", reliabilityTier, self:getProfileVariantIndex(worker, 131, 5)), string.format(reliabilityTemplate, reliabilitySubjects[reliabilityVariant]))
+    local loyaltyText = self:getLocalizedText(string.format("ui_pmNewWorkerLoyalty%d_%d", loyaltyTier, self:getProfileVariantIndex(worker, 137, 5)), string.format(loyaltyTemplate, loyaltySubjects[loyaltyVariant]))
 
     local specializationText
     local specializations = {}
@@ -10755,71 +10760,229 @@ function HelperPersonnelManager:writePersonChroniclesToXML(xmlFile, basePath, re
     end
 end
 
-local hpChronicleOriginalCreateFarmData = hpLayer_HelperPersonnelManager_createFarmData_2
 function HelperPersonnelManager:createFarmData(farmId)
-    local data = hpChronicleOriginalCreateFarmData(self, farmId)
-    data.personChronicles = self:normalizePersonChronicles(data.personChronicles)
-    return data
+    return {
+        farmId = tonumber(farmId) or self:getFallbackFarmId(),
+        workers = {},
+        applicants = {},
+        employerReputation = HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50,
+        lastActionText = "",
+        lastReputationChangeText = "",
+        lastPayrollText = "noch keine Gehaltsabrechnung",
+        lastPayrollAmount = 0,
+        totalPayrollPaid = 0,
+        dismissalPeriod = nil,
+        dismissalYear = nil,
+        monthlyDismissals = 0,
+        lastApplicantPeriod = nil,
+        lastApplicantYear = nil,
+        lastLoyaltyDailyCheckMinute = nil,
+        lastSicknessDailyCheckMinute = nil,
+        sicknessCurrentDay = nil,
+        sicknessDayPeriod = nil,
+        sicknessDayYear = nil,
+        pendingPayrollLoyaltyDelta = 0,
+        applicantMarketInitialized = false,
+        reputationHistory = {},
+        actionHistory = {},
+        historySequence = 0,
+        saveActiveJobSnapshot = {},
+        trainingOfferPeriod = nil,
+        trainingOfferYear = nil,
+        trainingOffers = {},
+        personChronicles = {}
+    }
 end
 
-local hpChronicleOriginalBindFarmData = hpLayer_HelperPersonnelManager_bindFarmData_2
 function HelperPersonnelManager:bindFarmData(data)
-    if data ~= nil then
-        data.personChronicles = type(data.personChronicles) == "table" and data.personChronicles or {}
+    if data == nil then
+        return nil
     end
-    local result = hpChronicleOriginalBindFarmData(self, data)
-    if data ~= nil then
-        self.personChronicles = data.personChronicles
-    end
-    return result
-end
 
-local hpChronicleOriginalStoreCurrentFarmData = hpLayer_HelperPersonnelManager_storeCurrentFarmData_2
-function HelperPersonnelManager:storeCurrentFarmData()
-    local data = hpChronicleOriginalStoreCurrentFarmData(self)
-    if data ~= nil then
-        data.personChronicles = type(self.personChronicles) == "table" and self.personChronicles or (type(data.personChronicles) == "table" and data.personChronicles or {})
-        self.personChronicles = data.personChronicles
-    end
+    data.workers = type(data.workers) == "table" and data.workers or {}
+    data.applicants = type(data.applicants) == "table" and data.applicants or {}
+    data.reputationHistory = type(data.reputationHistory) == "table" and data.reputationHistory or {}
+    data.actionHistory = type(data.actionHistory) == "table" and data.actionHistory or {}
+    data.saveActiveJobSnapshot = type(data.saveActiveJobSnapshot) == "table" and data.saveActiveJobSnapshot or {}
+    data.trainingOffers = type(data.trainingOffers) == "table" and data.trainingOffers or {}
+    data.personChronicles = type(data.personChronicles) == "table" and data.personChronicles or {}
+    data.applicantMarketInitialized = data.applicantMarketInitialized == true
+
+    self.currentFarmData = data
+    self.activeFarmId = data.farmId
+    self.workers = data.workers
+    self.applicants = data.applicants
+    self.employerReputation = data.employerReputation or HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50
+    self.lastActionText = data.lastActionText or ""
+    self.lastReputationChangeText = data.lastReputationChangeText or ""
+    self.lastPayrollText = data.lastPayrollText or "noch keine Gehaltsabrechnung"
+    self.lastPayrollAmount = data.lastPayrollAmount or 0
+    self.totalPayrollPaid = data.totalPayrollPaid or 0
+    self.dismissalPeriod = data.dismissalPeriod
+    self.dismissalYear = data.dismissalYear
+    self.monthlyDismissals = data.monthlyDismissals or 0
+    self.lastApplicantPeriod = data.lastApplicantPeriod
+    self.lastApplicantYear = data.lastApplicantYear
+    self.lastLoyaltyDailyCheckMinute = data.lastLoyaltyDailyCheckMinute
+    self.lastSicknessDailyCheckMinute = data.lastSicknessDailyCheckMinute
+    self.sicknessCurrentDay = data.sicknessCurrentDay
+    self.sicknessDayPeriod = data.sicknessDayPeriod
+    self.sicknessDayYear = data.sicknessDayYear
+    self.pendingPayrollLoyaltyDelta = tonumber(data.pendingPayrollLoyaltyDelta) or 0
+    self.applicantMarketInitialized = data.applicantMarketInitialized == true
+    self.reputationHistory = data.reputationHistory
+    self.actionHistory = data.actionHistory
+    self.historySequence = math.max(tonumber(data.historySequence) or 0, self:getHighestHistorySequence())
+    self.saveActiveJobSnapshot = data.saveActiveJobSnapshot
+    self.trainingOfferPeriod = data.trainingOfferPeriod
+    self.trainingOfferYear = data.trainingOfferYear
+    self.trainingOffers = data.trainingOffers
+    self.personChronicles = data.personChronicles
+
     return data
 end
 
-local hpChronicleOriginalLoadFarmDataFromXML = hpLayer_HelperPersonnelManager_loadFarmDataFromXML_2
+function HelperPersonnelManager:storeCurrentFarmData()
+    local data = self.currentFarmData
+    if data == nil then
+        return nil
+    end
+
+    data.workers = type(self.workers) == "table" and self.workers or data.workers or {}
+    data.applicants = type(self.applicants) == "table" and self.applicants or data.applicants or {}
+    data.employerReputation = self.employerReputation or data.employerReputation or HelperPersonnelManager.DEFAULT_EMPLOYER_REPUTATION or 50
+    data.lastActionText = self.lastActionText or ""
+    data.lastReputationChangeText = self.lastReputationChangeText or ""
+    data.lastPayrollText = self.lastPayrollText or "noch keine Gehaltsabrechnung"
+    data.lastPayrollAmount = self.lastPayrollAmount or 0
+    data.totalPayrollPaid = self.totalPayrollPaid or 0
+    data.dismissalPeriod = self.dismissalPeriod
+    data.dismissalYear = self.dismissalYear
+    data.monthlyDismissals = self.monthlyDismissals or 0
+    data.lastApplicantPeriod = self.lastApplicantPeriod
+    data.lastApplicantYear = self.lastApplicantYear
+    data.lastLoyaltyDailyCheckMinute = self.lastLoyaltyDailyCheckMinute
+    data.lastSicknessDailyCheckMinute = self.lastSicknessDailyCheckMinute
+    data.sicknessCurrentDay = self.sicknessCurrentDay
+    data.sicknessDayPeriod = self.sicknessDayPeriod
+    data.sicknessDayYear = self.sicknessDayYear
+    data.pendingPayrollLoyaltyDelta = tonumber(self.pendingPayrollLoyaltyDelta) or 0
+    data.applicantMarketInitialized = self.applicantMarketInitialized == true or data.applicantMarketInitialized == true
+    data.reputationHistory = type(self.reputationHistory) == "table" and self.reputationHistory or data.reputationHistory or {}
+    data.actionHistory = type(self.actionHistory) == "table" and self.actionHistory or data.actionHistory or {}
+    data.historySequence = math.max(tonumber(self.historySequence) or 0, self:getHighestHistorySequence())
+    data.saveActiveJobSnapshot = type(self.saveActiveJobSnapshot) == "table" and self.saveActiveJobSnapshot or data.saveActiveJobSnapshot or {}
+    data.trainingOfferPeriod = self.trainingOfferPeriod
+    data.trainingOfferYear = self.trainingOfferYear
+    data.trainingOffers = type(self.trainingOffers) == "table" and self.trainingOffers or data.trainingOffers or {}
+    data.personChronicles = type(self.personChronicles) == "table" and self.personChronicles or (type(data.personChronicles) == "table" and data.personChronicles or {})
+    self.personChronicles = data.personChronicles
+
+    return data
+end
+
 function HelperPersonnelManager:loadFarmDataFromXML(xmlFile, basePath, fallbackFarmId)
-    local data = hpChronicleOriginalLoadFarmDataFromXML(self, xmlFile, basePath, fallbackFarmId)
+    local data = hpReadFarmDataFromXMLCore(self, xmlFile, basePath, fallbackFarmId)
+    data.trainingOfferPeriod = xmlFile:getInt(basePath .. "#trainingOfferPeriod")
+    data.trainingOfferYear = xmlFile:getInt(basePath .. "#trainingOfferYear")
+    data.trainingOffers = {}
+    local index = 0
+    while true do
+        local key = string.format("%s.trainingOffers.offer(%d)", basePath, index)
+        if not xmlFile:hasProperty(key) then
+            break
+        end
+        local specializationKey = self:normalizeSpecializationKey(xmlFile:getString(key .. "#key"))
+        if specializationKey ~= nil then
+            data.trainingOffers[specializationKey] = {
+                modifierPercent = xmlFile:getInt(key .. "#modifierPercent", 0),
+                available = xmlFile:getBool(key .. "#available", true) == true
+            }
+        end
+        index = index + 1
+    end
     data.personChronicles = self:readPersonChroniclesFromXML(xmlFile, basePath .. ".personChronicles")
     return data
 end
 
-local hpChronicleOriginalWriteFarmDataToXML = hpLayer_HelperPersonnelManager_writeFarmDataToXML_2
 function HelperPersonnelManager:writeFarmDataToXML(xmlFile, basePath, data)
-    hpChronicleOriginalWriteFarmDataToXML(self, xmlFile, basePath, data)
-    self:writePersonChroniclesToXML(xmlFile, basePath .. ".personChronicles", data ~= nil and data.personChronicles or {})
+    if data == nil then
+        return
+    end
+    hpWriteFarmDataToXMLCore(self, xmlFile, basePath, data)
+    if data.trainingOfferPeriod ~= nil then
+        xmlFile:setInt(basePath .. "#trainingOfferPeriod", data.trainingOfferPeriod)
+    end
+    if data.trainingOfferYear ~= nil then
+        xmlFile:setInt(basePath .. "#trainingOfferYear", data.trainingOfferYear)
+    end
+    local index = 0
+    for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
+        local specializationKey = self:normalizeSpecializationKey(key)
+        local offer = specializationKey ~= nil and type(data.trainingOffers) == "table" and data.trainingOffers[specializationKey] or nil
+        if type(offer) == "table" then
+            local offerPath = string.format("%s.trainingOffers.offer(%d)", basePath, index)
+            xmlFile:setString(offerPath .. "#key", specializationKey)
+            xmlFile:setInt(offerPath .. "#modifierPercent", tonumber(offer.modifierPercent) or 0)
+            xmlFile:setBool(offerPath .. "#available", offer.available ~= false)
+            index = index + 1
+        end
+    end
+    self:writePersonChroniclesToXML(xmlFile, basePath .. ".personChronicles", data.personChronicles or {})
 end
 
-local hpChronicleOriginalLoadFromSavegame = hpLayer_HelperPersonnelManager_loadFromSavegame_3
 function HelperPersonnelManager:loadFromSavegame()
-    hpChronicleOriginalLoadFromSavegame(self)
+    hpLoadFarmSavegameCore(self)
+    for _, data in pairs(self.farms or {}) do
+        for _, worker in ipairs(data.workers or {}) do
+            self:ensurePersonBiography(worker)
+            self:normalizePersonRuntimeData(worker)
+        end
+        for _, applicant in ipairs(data.applicants or {}) do
+            self:ensurePersonBiography(applicant)
+            self:normalizeApplicantRuntimeData(applicant)
+        end
+    end
     if self:isChronicleAuthority() then
+        local previousData = self.currentFarmData
         for _, data in pairs(self.farms or {}) do
             data.personChronicles = self:normalizePersonChronicles(data.personChronicles)
+            self:bindFarmData(data)
             for _, worker in ipairs(data.workers or {}) do
                 worker.farmId = data.farmId
-                local previousData = self.currentFarmData
-                self:bindFarmData(data)
                 self:ensureWorkerChronicleBaseline(worker)
-                if previousData ~= nil and previousData ~= data then
-                    self:bindFarmData(previousData)
-                end
             end
+        end
+        if previousData ~= nil then
+            self:bindFarmData(previousData)
         end
     end
     self:refreshFarmContext()
 end
 
-local hpChronicleOriginalApplyNetworkState = hpLayer_HelperPersonnelManager_applyNetworkState_4
 function HelperPersonnelManager:applyNetworkState(state)
-    local result = hpChronicleOriginalApplyNetworkState(self, state)
+    local result = self:applyNetworkFarmSnapshot(state)
+    for _, data in pairs(self.farms or {}) do
+        for _, worker in ipairs(data.workers or {}) do
+            self:ensurePersonBiography(worker)
+        end
+        for _, applicant in ipairs(data.applicants or {}) do
+            self:ensurePersonBiography(applicant)
+        end
+    end
+    self:refreshFarmContext(state ~= nil and state.activeFarmId or nil)
+    if type(state) == "table" and type(state.farms) == "table" then
+        for _, farmState in ipairs(state.farms) do
+            local farmId = tonumber(farmState.farmId)
+            local data = farmId ~= nil and type(self.farms) == "table" and self.farms[farmId] or nil
+            if data ~= nil then
+                data.trainingOfferPeriod = farmState.trainingOfferPeriod
+                data.trainingOfferYear = farmState.trainingOfferYear
+                data.trainingOffers = type(farmState.trainingOffers) == "table" and farmState.trainingOffers or {}
+            end
+        end
+    end
+    self:refreshFarmContext(state ~= nil and state.activeFarmId or nil)
     if type(state) == "table" and type(state.farms) == "table" then
         for _, farmState in ipairs(state.farms) do
             local farmId = tonumber(farmState.farmId)
@@ -10838,79 +11001,8 @@ function HelperPersonnelManager:applyNetworkState(state)
     return result
 end
 
-local hpChronicleOriginalHireApplicant = hpLayer_HelperPersonnelManager_hireApplicant_1
-function HelperPersonnelManager:hireApplicant(applicantId)
-    local result = hpChronicleOriginalHireApplicant(self, applicantId)
-    if result == true then
-        local worker = self:getWorkerById(applicantId)
-        if worker ~= nil then
-            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_EMPLOYMENT_STARTED, {
-                reason = worker.backgroundKey,
-                amount = tonumber(worker.baseWage) or tonumber(worker.wage) or 0,
-                text = self:getLocalizedText("ui_pmChronicleHired", "Mitarbeiter wurde eingestellt.")
-            })
-        end
-    end
-    return result
-end
-
-local hpChronicleOriginalStartWorkerJob = hpLayer_HelperPersonnelManager_startWorkerJob_1
-function HelperPersonnelManager:startWorkerJob(workerId, vehicleName, vehicleKey)
-    local worker = self:getWorkerById(workerId)
-    local wasBusy = worker ~= nil and worker.busy == true
-    local wasRestorePending = worker ~= nil and worker.restorePending == true
-    local result = hpChronicleOriginalStartWorkerJob(self, workerId, vehicleName, vehicleKey)
-    worker = self:getWorkerById(workerId) or worker
-    if result == true and worker ~= nil and not wasBusy then
-        if wasRestorePending then
-            worker.reliabilityJobAbortChecked = true
-            worker.reliabilityJobAbortCheckAt = 0
-        else
-            worker.reliabilityJobAbortChecked = false
-            local startedAt = math.max(0, tonumber(worker.currentJobStartedAt) or 0)
-            if startedAt <= 0 then
-                startedAt = self:getCurrentTimestampMs()
-            end
-            worker.reliabilityJobAbortCheckAt = startedAt + (HelperPersonnelManager.RELIABILITY_JOB_ABORT_CHECK_DELAY_MS or 60000)
-            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_JOB_STARTED, {
-                vehicleName = vehicleName or worker.vehicleName,
-                text = self:getLocalizedText("ui_pmChronicleJobStarted", "Einsatz begonnen.")
-            })
-        end
-    end
-    return result
-end
-
-local hpChronicleOriginalFinishWorkerJob = hpLayer_HelperPersonnelManager_finishWorkerJob_1
-function HelperPersonnelManager:finishWorkerJob(workerId)
-    local worker = self:getWorkerById(workerId)
-    local beforeJobs = worker ~= nil and tonumber(worker.jobsCompleted) or 0
-    local beforeExperience = worker ~= nil and tonumber(worker.experience) or 0
-    local vehicleName = worker ~= nil and worker.vehicleName or nil
-    local result = hpChronicleOriginalFinishWorkerJob(self, workerId)
-    worker = self:getWorkerById(workerId) or worker
-    if worker ~= nil then
-        worker.reliabilityJobAbortChecked = false
-        worker.reliabilityJobAbortCheckAt = 0
-    end
-    if result == true and worker ~= nil and (tonumber(worker.jobsCompleted) or 0) > beforeJobs then
-        local afterExperience = tonumber(worker.experience) or beforeExperience
-        self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_JOB_COMPLETED, {
-            minutes = tonumber(worker.lastJobMinutes) or 0,
-            vehicleName = vehicleName,
-            valueName = "experience",
-            oldValue = beforeExperience,
-            newValue = afterExperience,
-            delta = afterExperience - beforeExperience,
-            text = self:getLocalizedText("ui_pmChronicleJobCompleted", "Einsatz abgeschlossen.")
-        })
-    end
-    return result
-end
-
-local hpChronicleOriginalApplyWorkerSpecializationIfReady = hpLayer_HelperPersonnelManager_applyWorkerSpecializationIfReady_1
 function HelperPersonnelManager:applyWorkerSpecializationIfReady(worker, preferredKey)
-    local learnedKey = hpChronicleOriginalApplyWorkerSpecializationIfReady(self, worker, preferredKey)
+    local learnedKey = self:applyReadySpecialization(worker, preferredKey)
     if learnedKey ~= nil and type(worker) == "table" then
         self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_SPECIALIZATION_ACQUIRED, {
             category = learnedKey,
@@ -10920,62 +11012,8 @@ function HelperPersonnelManager:applyWorkerSpecializationIfReady(worker, preferr
     return learnedKey
 end
 
-local hpChronicleOriginalTrainWorker = hpLayer_HelperPersonnelManager_trainWorker_2
-function HelperPersonnelManager:trainWorker(workerId, requestedSpecializationKey)
-    local worker = self:getWorkerById(workerId)
-    local wasTraining = worker ~= nil and self:isWorkerInTraining(worker)
-    local specializationKey = worker ~= nil and self:getWorkerTrainingSpecializationKey(worker, requestedSpecializationKey) or nil
-    local cost = worker ~= nil and specializationKey ~= nil and self:getWorkerTrainingCost(worker, specializationKey) or 0
-    local result = hpChronicleOriginalTrainWorker(self, workerId, requestedSpecializationKey)
-    worker = self:getWorkerById(workerId) or worker
-    if result == true and worker ~= nil and not wasTraining and self:isWorkerInTraining(worker) then
-        self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_TRAINING_STARTED, {
-            category = worker.trainingActiveSpecialization or specializationKey,
-            amount = cost,
-            text = self:getLocalizedText("ui_pmChronicleTrainingStarted", "Schulung begonnen.")
-        })
-    end
-    return result
-end
-
-local hpChronicleOriginalCompleteFinishedTrainings = hpLayer_HelperPersonnelManager_completeFinishedTrainings_1
-function HelperPersonnelManager:completeFinishedTrainings(period, year)
-    local snapshots = {}
-    for _, worker in ipairs(self.workers or {}) do
-        if (tonumber(worker.trainingActivePeriod) or 0) > 0 then
-            local key = self:normalizeSpecializationKey(worker.trainingActiveSpecialization)
-            snapshots[worker.id] = {
-                worker = worker,
-                category = key,
-                before = key ~= nil and self:getSpecializationProgressPercentForMinutes(worker, self:getSpecializationProgressMinutes(worker, key)) or 0
-            }
-        end
-    end
-
-    local result = hpChronicleOriginalCompleteFinishedTrainings(self, period, year)
-
-    for workerId, snapshot in pairs(snapshots) do
-        local worker = self:getWorkerById(workerId) or snapshot.worker
-        if worker ~= nil and (tonumber(worker.trainingActivePeriod) or 0) <= 0 then
-            local after = snapshot.category ~= nil and (self:workerHasSpecialization(worker, snapshot.category) and 100 or self:getSpecializationProgressPercentForMinutes(worker, self:getSpecializationProgressMinutes(worker, snapshot.category))) or snapshot.before
-            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_TRAINING_COMPLETED, {
-                period = period,
-                gameYear = year,
-                category = snapshot.category,
-                oldValue = snapshot.before,
-                newValue = after,
-                delta = after - snapshot.before,
-                text = self:getLocalizedText("ui_pmChronicleTrainingCompleted", "Schulung abgeschlossen.")
-            })
-        end
-    end
-
-    return result
-end
-
-local hpChronicleOriginalMarkWorkerSickForToday = hpLayer_HelperPersonnelManager_markWorkerSickForToday_1
 function HelperPersonnelManager:markWorkerSickForToday(worker, period, year, day)
-    local result = hpChronicleOriginalMarkWorkerSickForToday(self, worker, period, year, day)
+    local result = self:markWorkerSickForTodayCore(worker, period, year, day)
     if result == true and type(worker) == "table" then
         self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_SICKNESS, {
             period = period,
@@ -10988,44 +11026,9 @@ function HelperPersonnelManager:markWorkerSickForToday(worker, period, year, day
     return result
 end
 
-local hpChronicleOriginalDismissWorker = hpLayer_HelperPersonnelManager_dismissWorker_1
-function HelperPersonnelManager:dismissWorker(workerId)
-    local worker = self:getWorkerById(workerId)
-    local oldLoyalty = worker ~= nil and tonumber(worker.loyalty) or nil
-    local oldReliability = worker ~= nil and tonumber(worker.reliability) or nil
-    local result, reason = hpChronicleOriginalDismissWorker(self, workerId)
-    worker = self:getWorkerById(workerId) or worker
-    if result == true and worker ~= nil then
-        self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_DISMISSAL_NOTICE, {
-            reason = "dismissedByFarm",
-            text = self:getLocalizedText("ui_pmChronicleDismissal", "Kündigung durch den Betrieb ausgesprochen.")
-        })
-        if oldLoyalty ~= nil and tonumber(worker.loyalty) ~= oldLoyalty then
-            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_LOYALTY_CHANGED, {
-                reason = "dismissalNotice",
-                valueName = "loyalty",
-                oldValue = oldLoyalty,
-                newValue = tonumber(worker.loyalty),
-                delta = tonumber(worker.loyalty) - oldLoyalty
-            })
-        end
-        if oldReliability ~= nil and tonumber(worker.reliability) ~= oldReliability then
-            self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_RELIABILITY_CHANGED, {
-                reason = "dismissalNotice",
-                valueName = "reliability",
-                oldValue = oldReliability,
-                newValue = tonumber(worker.reliability),
-                delta = tonumber(worker.reliability) - oldReliability
-            })
-        end
-    end
-    return result, reason
-end
-
-local hpChronicleOriginalScheduleWorkerResignation = hpLayer_HelperPersonnelManager_scheduleWorkerResignation_1
 function HelperPersonnelManager:scheduleWorkerResignation(worker, period, year)
     local wasPending = type(worker) == "table" and worker.resignationPending == true
-    local result = hpChronicleOriginalScheduleWorkerResignation(self, worker, period, year)
+    local result = self:scheduleWorkerResignationCore(worker, period, year)
     if type(worker) == "table" and not wasPending and worker.resignationPending == true then
         self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_RESIGNATION_NOTICE, {
             period = period,
@@ -11037,10 +11040,9 @@ function HelperPersonnelManager:scheduleWorkerResignation(worker, period, year)
     return result
 end
 
-local hpChronicleOriginalScheduleWorkerRetirement = hpLayer_HelperPersonnelManager_scheduleWorkerRetirement_1
 function HelperPersonnelManager:scheduleWorkerRetirement(worker, period, year)
     local wasPending = type(worker) == "table" and worker.retirementPending == true
-    local result = hpChronicleOriginalScheduleWorkerRetirement(self, worker, period, year)
+    local result = self:scheduleWorkerRetirementCore(worker, period, year)
     if type(worker) == "table" and not wasPending and worker.retirementPending == true then
         self:addPersonChronicleEntry(worker, HelperPersonnelManager.CHRONICLE_EVENT_RETIREMENT_NOTICE, {
             period = period,
@@ -11080,26 +11082,23 @@ local function hpChronicleRecordRemovedWorkers(manager, snapshots, reason, perio
     end
 end
 
-local hpChronicleOriginalProcessPendingDismissals = hpLayer_HelperPersonnelManager_processPendingDismissalsForPeriodChange_1
 function HelperPersonnelManager:processPendingDismissalsForPeriodChange(period, year)
     local snapshots = hpChronicleCollectPendingWorkers(self.workers, "dismissalPending")
-    local result = hpChronicleOriginalProcessPendingDismissals(self, period, year)
+    local result = self:processPendingDismissalsCore(period, year)
     hpChronicleRecordRemovedWorkers(self, snapshots, "dismissal", period, year)
     return result
 end
 
-local hpChronicleOriginalProcessPendingResignations = hpLayer_HelperPersonnelManager_processPendingResignationsForPeriodChange_1
 function HelperPersonnelManager:processPendingResignationsForPeriodChange(period, year)
     local snapshots = hpChronicleCollectPendingWorkers(self.workers, "resignationPending")
-    local result = hpChronicleOriginalProcessPendingResignations(self, period, year)
+    local result = self:processPendingResignationsCore(period, year)
     hpChronicleRecordRemovedWorkers(self, snapshots, "resignation", period, year)
     return result
 end
 
-local hpChronicleOriginalProcessPendingRetirements = hpLayer_HelperPersonnelManager_processPendingRetirementsForPeriodChange_1
 function HelperPersonnelManager:processPendingRetirementsForPeriodChange(period, year)
     local snapshots = hpChronicleCollectPendingWorkers(self.workers, "retirementPending")
-    local result = hpChronicleOriginalProcessPendingRetirements(self, period, year)
+    local result = self:processPendingRetirementsCore(period, year)
     hpChronicleRecordRemovedWorkers(self, snapshots, "retirement", period, year)
     return result
 end

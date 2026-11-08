@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <modDesc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" descVersion="109" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>Dude23</author>
-    <version>1.1.5.0</version>
+    <version>1.2.0.0</version>
     <title>
         <en>Personnel Management</en>
         <de>Personalmanagement</de>
@@ -28,6 +28,8 @@
         <action name="HP_SALARY_RAISE_MANAGE" category="VEHICLE" axisType="HALF" />
         <action name="HP_EMERGENCY_RELEASE_WORKER" category="VEHICLE" axisType="HALF" />
         <action name="HP_OPEN_PERSONNEL_MENU" />
+        <action name="HP_TRANSPORT_PRIORITY_UP" />
+        <action name="HP_TRANSPORT_PRIORITY_DOWN" />
     </actions>
     <inputBinding>
         <actionBinding action="HP_SELECT_LEFT">
@@ -59,6 +61,12 @@
         </actionBinding>
         <actionBinding action="HP_OPEN_PERSONNEL_MENU">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_m" />
+        </actionBinding>
+        <actionBinding action="HP_TRANSPORT_PRIORITY_UP">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_o" />
+        </actionBinding>
+        <actionBinding action="HP_TRANSPORT_PRIORITY_DOWN">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_u" />
         </actionBinding>
     </inputBinding>
 </modDesc>

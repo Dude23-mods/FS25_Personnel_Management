@@ -69,61 +69,15 @@ function HelperPersonnelSelectionOverlay.new(app, customMt)
     self.showAllWorkers = false
     self.excludedWorkerIds = {}
     self.expectedSpecializationKey = nil
-    self.portraitOverlays = {}
-
-    local pixelFile = Utils.getFilename("gui/solidPixel.dds", app.modDir)
-    self.backgroundOverlay = Overlay.new(pixelFile, 0.25, 0.375, 0.50, 0.29)
-    self.backgroundOverlay:setColor(0.045, 0.055, 0.04, 0.94)
-
-    self.highlightOverlay = Overlay.new(pixelFile, 0.29, 0.43, 0.42, 0.115)
-    self.highlightOverlay:setColor(0.11, 0.13, 0.075, 0.96)
-
-    self.accentOverlay = Overlay.new(pixelFile, 0.25, 0.661, 0.50, 0.004)
-    self.accentOverlay:setColor(0.61, 0.73, 0.07, 1)
-
-    self.cardAccentOverlay = Overlay.new(pixelFile, 0.29, 0.43, 0.004, 0.115)
-    self.cardAccentOverlay:setColor(0.61, 0.73, 0.07, 1)
-
-    self.solidOverlay = Overlay.new(pixelFile, 0, 0, 1, 1)
 
     return self
 end
 
 function HelperPersonnelSelectionOverlay:delete()
+    if self.isVisible then self:close(false) end
     self:unregisterActionEvents()
     self:restoreGameplayInput()
     self.consumeCancelUntilReleased = false
-
-    if self.backgroundOverlay ~= nil then
-        self.backgroundOverlay:delete()
-        self.backgroundOverlay = nil
-    end
-
-    if self.highlightOverlay ~= nil then
-        self.highlightOverlay:delete()
-        self.highlightOverlay = nil
-    end
-
-    if self.accentOverlay ~= nil then
-        self.accentOverlay:delete()
-        self.accentOverlay = nil
-    end
-
-    if self.cardAccentOverlay ~= nil then
-        self.cardAccentOverlay:delete()
-        self.cardAccentOverlay = nil
-    end
-
-    if self.solidOverlay ~= nil then
-        self.solidOverlay:delete()
-        self.solidOverlay = nil
-    end
-    for _, cached in pairs(self.portraitOverlays or {}) do
-        if cached ~= nil and cached.overlay ~= nil then
-            cached.overlay:delete()
-        end
-    end
-    self.portraitOverlays = {}
 end
 
 function HelperPersonnelSelectionOverlay:isWorkerExcluded(worker)
@@ -247,6 +201,11 @@ function HelperPersonnelSelectionOverlay:open(vehicle, callback, excludedWorkerI
         return false
     end
 
+    if self.isVisible or self.app.tryRegisterStandaloneMenu == nil or not self.app:tryRegisterStandaloneMenu()
+        or self.app.selectionDialog == nil or g_gui == nil then
+        return false
+    end
+
     self.vehicle = vehicle
     self.callback = callback
     self.excludedWorkerIds = excludedWorkerIds or {}
@@ -258,15 +217,36 @@ function HelperPersonnelSelectionOverlay:open(vehicle, callback, excludedWorkerI
     self.lastFallbackCommand = nil
     self.lastWorkerClickIndex = nil
     self.lastWorkerClickTime = 0
+    self.dialogRefreshElapsed = 0
 
     self:suspendGameplayInput()
+    self.app.selectionDialog:setContext(self)
+    self.guiTransition = true
+    local ok, dialog = pcall(g_gui.showDialog, g_gui, "HelperPersonnelSelectionDialog")
+    self.guiTransition = false
+    if not ok or dialog == nil then
+        self.isVisible = false
+        self.callback = nil
+        self.vehicle = nil
+        self.app.selectionDialog:setContext(nil)
+        self.guiTransition = true
+        local closed, closeError = pcall(g_gui.closeDialogByName, g_gui, "HelperPersonnelSelectionDialog")
+        self.guiTransition = false
+        if not closed then
+            Logging.warning("FS25_HelperPersonnel: Failed to clean up employee selection dialog: %s", tostring(closeError))
+        end
+        self:restoreGameplayInput()
+        Logging.warning("FS25_HelperPersonnel: Employee selection dialog could not open: %s", tostring(dialog))
+        return false
+    end
     hpSelectionDebug("FS25_HelperPersonnel: Selection diagnostics | open=true | Vehicle=%s | Available=%s | FirstSelection=%s", hpSelectionVehicleName(vehicle), tostring(#availableWorkers), tostring(availableWorkers[1] ~= nil and availableWorkers[1].id or nil))
     return true
 end
 
-function HelperPersonnelSelectionOverlay:close(confirmSelection)
+function HelperPersonnelSelectionOverlay:close(confirmSelection, fromDialog)
     hpSelectionDebug("FS25_HelperPersonnel: Selection diagnostics | close ENTER | Confirm=%s | Vehicle=%s | SelectedIndex=%s | Available=%s", tostring(confirmSelection == true), hpSelectionVehicleName(self.vehicle), tostring(self.selectedIndex), tostring(#self.availableWorkers))
 
+    if not self.isVisible then return false end
     local callback = self.callback
     local selectedWorker = nil
 
@@ -293,6 +273,11 @@ function HelperPersonnelSelectionOverlay:close(confirmSelection)
     self.lastWorkerClickTime = 0
 
     self:unregisterActionEvents()
+    if not fromDialog and g_gui ~= nil and self.app.selectionDialog ~= nil then
+        self.guiTransition = true
+        g_gui:closeDialogByName("HelperPersonnelSelectionDialog")
+        self.guiTransition = false
+    end
     self:restoreGameplayInput()
 
     hpSelectionDebug("FS25_HelperPersonnel: Selection diagnostics | close Callback | HasCallback=%s | Worker=%s", tostring(callback ~= nil), tostring(selectedWorker ~= nil and selectedWorker.id or nil))
@@ -518,6 +503,7 @@ function HelperPersonnelSelectionOverlay:suspendGameplayInput()
     end
 
     if g_inputBinding ~= nil and g_inputBinding.setShowMouseCursor ~= nil then
+        self.mouseCursorBackup = g_inputBinding.getShowMouseCursor ~= nil and g_inputBinding:getShowMouseCursor() or false
         g_inputBinding:setShowMouseCursor(true)
         self.inputBlockActive = true
     end
@@ -554,11 +540,12 @@ function HelperPersonnelSelectionOverlay:restoreGameplayInput()
     end
 
     if self.inputBlockActive and g_inputBinding ~= nil and g_inputBinding.setShowMouseCursor ~= nil then
-        g_inputBinding:setShowMouseCursor(false)
+        g_inputBinding:setShowMouseCursor(self.mouseCursorBackup == true)
     end
 
     self.playerFrozenBackup = nil
     self.playerFrozenBackupWasSet = false
+    self.mouseCursorBackup = nil
     self.inputBlockActive = false
 end
 
@@ -645,6 +632,7 @@ function HelperPersonnelSelectionOverlay:onActionLeft(actionName, inputValue)
     if self.selectedIndex < 1 then
         self.selectedIndex = #self.availableWorkers
     end
+    if self.app.selectionDialog ~= nil then self.app.selectionDialog:refresh() end
 end
 
 function HelperPersonnelSelectionOverlay:onActionRight(actionName, inputValue)
@@ -656,6 +644,7 @@ function HelperPersonnelSelectionOverlay:onActionRight(actionName, inputValue)
     if self.selectedIndex > #self.availableWorkers then
         self.selectedIndex = 1
     end
+    if self.app.selectionDialog ~= nil then self.app.selectionDialog:refresh() end
 end
 
 function HelperPersonnelSelectionOverlay:onActionConfirm(actionName, inputValue)
@@ -689,65 +678,8 @@ function HelperPersonnelSelectionOverlay:onActionToggleAll(actionName, inputValu
                 end
             end
         end
+        if self.app.selectionDialog ~= nil then self.app.selectionDialog:refresh() end
     end
-end
-
-function HelperPersonnelSelectionOverlay:resetClickAreas()
-    self.clickAreas = {}
-end
-
-function HelperPersonnelSelectionOverlay:addClickArea(x, y, width, height, workerIndex, action)
-    if self.clickAreas == nil then
-        self.clickAreas = {}
-    end
-
-    table.insert(self.clickAreas, {
-        x = x,
-        y = y,
-        width = width,
-        height = height,
-        workerIndex = workerIndex,
-        action = action
-    })
-end
-
-function HelperPersonnelSelectionOverlay:isPointInArea(posX, posY, area)
-    return posX >= area.x and posX <= area.x + area.width and posY >= area.y and posY <= area.y + area.height
-end
-
-function HelperPersonnelSelectionOverlay:mouseEvent(posX, posY, isDown, isUp, button, eventUsed)
-    if not self.isVisible then
-        return eventUsed == true
-    end
-
-    if not isDown and not isUp then
-        return true
-    end
-
-    local leftMouseButton = Input ~= nil and Input.MOUSE_BUTTON_LEFT or nil
-    local isLeftMouseButton = button == nil or button == 0 or button == 1 or (leftMouseButton ~= nil and button == leftMouseButton)
-
-    for i = #(self.clickAreas or {}), 1, -1 do
-        local area = self.clickAreas[i]
-        if area ~= nil and self:isPointInArea(posX, posY, area) then
-            if isUp and isLeftMouseButton and area.action == "toggleAll" then
-                self:onActionToggleAll(nil, 1)
-            elseif isUp and isLeftMouseButton and area.workerIndex ~= nil and self.availableWorkers[area.workerIndex] ~= nil then
-                local clickTime = tonumber(g_time) or 0
-                local isDoubleClick = self.lastWorkerClickIndex == area.workerIndex and clickTime - (self.lastWorkerClickTime or 0) <= 400
-                self.selectedIndex = area.workerIndex
-                self.lastWorkerClickIndex = area.workerIndex
-                self.lastWorkerClickTime = clickTime
-                if isDoubleClick then
-                    self:close(true)
-                end
-            end
-
-            return true
-        end
-    end
-
-    return true
 end
 
 function HelperPersonnelSelectionOverlay:getKeyConstant(keyName)
@@ -803,6 +735,11 @@ function HelperPersonnelSelectionOverlay:update(dt)
         end
     end
     self:lockGameplayCameras()
+    self.dialogRefreshElapsed = (self.dialogRefreshElapsed or 0) + (dt or 0)
+    if self.dialogRefreshElapsed >= 500 then
+        self.dialogRefreshElapsed = 0
+        if self.app.selectionDialog ~= nil then self.app.selectionDialog:refresh() end
+    end
     local command = nil
     if self:isAnyKeyPressed(HelperPersonnelSelectionOverlay.KEYS_LEFT) then
         command = "left"
@@ -840,248 +777,3 @@ function HelperPersonnelSelectionOverlay:update(dt)
     end
 end
 
-function HelperPersonnelSelectionOverlay:keyEvent(unicode, sym, modifier, isDown)
-    if not isDown or not self.isVisible then
-        return false
-    end
-
-    if sym == self:getKeyConstant("KEY_left") or sym == self:getKeyConstant("KEY_a") then
-        self:onActionLeft(nil, 1)
-        return true
-    elseif sym == self:getKeyConstant("KEY_right") or sym == self:getKeyConstant("KEY_d") then
-        self:onActionRight(nil, 1)
-        return true
-    elseif sym == self:getKeyConstant("KEY_space") then
-        self:onActionConfirm(nil, 1)
-        return true
-    elseif sym == self:getKeyConstant("KEY_esc") or sym == self:getKeyConstant("KEY_escape") then
-        self:onActionCancel(nil, 1)
-        return true
-    elseif sym == self:getKeyConstant("KEY_tab") then
-        self:onActionToggleAll(nil, 1)
-        return true
-    end
-
-    return false
-end
-
-local function hpSelectionToLinear(value)
-    value = math.max(0, math.min(1, tonumber(value) or 0))
-    if value <= 0.04045 then
-        return value / 12.92
-    end
-    return ((value + 0.055) / 1.055) ^ 2.4
-end
-
-function HelperPersonnelSelectionOverlay:drawRect(x, y, width, height, r, g, b, a)
-    if self.solidOverlay == nil then
-        return
-    end
-    self.solidOverlay:setPosition(x, y)
-    self.solidOverlay:setDimension(width, height)
-    self.solidOverlay:setColor(hpSelectionToLinear(r), hpSelectionToLinear(g), hpSelectionToLinear(b), a)
-    self.solidOverlay:render()
-end
-
-function HelperPersonnelSelectionOverlay:drawLabel(x, y, size, alignment, text, r, g, b, a, bold)
-    setTextAlignment(alignment)
-    setTextColor(hpSelectionToLinear(r), hpSelectionToLinear(g), hpSelectionToLinear(b), a or 1)
-    setTextBold(bold == true)
-    renderText(x, y, size, tostring(text or ""))
-    setTextBold(false)
-end
-
-function HelperPersonnelSelectionOverlay:drawMetric(x, y, width, title, value)
-    local px, py = self.drawPixelX, self.drawPixelY
-    self:drawRect(x, y, width, 74 * py, 0.125, 0.137, 0.125, 1)
-    self:drawLabel(x + 13 * px, y + 51 * py, 12 * py, RenderText.ALIGN_LEFT, title, 0.667, 0.690, 0.659, 1, false)
-    self:drawLabel(x + width - 13 * px, y + 45 * py, 21 * py, RenderText.ALIGN_RIGHT, string.format("%d", math.floor((tonumber(value) or 0) + 0.5)), 0.941, 0.949, 0.933, 1, true)
-    self:drawRect(x + 13 * px, y + 11 * py, width - 26 * px, 4 * py, 0.231, 0.251, 0.227, 1)
-    self:drawRect(x + 13 * px, y + 11 * py, (width - 26 * px) * math.max(0, math.min(100, tonumber(value) or 0)) / 100, 4 * py, 0.722, 0.875, 0.098, 1)
-end
-
-function HelperPersonnelSelectionOverlay:getPortraitOverlay(worker)
-    local workerId = worker ~= nil and worker.id or nil
-    local bridge = self.app ~= nil and self.app.helperBridge or nil
-    local filename = bridge ~= nil and bridge.getPortraitFilenameForPerson ~= nil and bridge:getPortraitFilenameForPerson(worker) or nil
-    if workerId == nil or filename == nil or filename == "" then
-        return nil
-    end
-    local cached = self.portraitOverlays[workerId]
-    if cached == nil or cached.filename ~= filename then
-        if cached ~= nil and cached.overlay ~= nil then
-            cached.overlay:delete()
-        end
-        cached = {filename = filename, overlay = Overlay.new(filename, 0, 0, 1, 1)}
-        self.portraitOverlays[workerId] = cached
-    end
-    return cached.overlay
-end
-
-function HelperPersonnelSelectionOverlay:draw()
-    if not self.isVisible then
-        return
-    end
-
-    self:resetClickAreas()
-    local screenWidth = math.max(1, tonumber(g_screenWidth) or 1920)
-    local screenHeight = math.max(1, tonumber(g_screenHeight) or 1080)
-    local resolutionScale = math.min(screenWidth / 1920, screenHeight / 1080)
-    local scale = math.min(1.25, math.max(1, resolutionScale), (screenWidth - 48) / 896, (screenHeight - 48) / 510)
-    local px, py = scale / screenWidth, scale / screenHeight
-    self.drawPixelX, self.drawPixelY = px, py
-    local windowWidth, windowHeight = 896 * px, 510 * py
-    local windowX, windowY = (1 - windowWidth) * 0.5, (1 - windowHeight) * 0.5
-    local headerHeight, footerHeight = 94 * py, 56 * py
-    local contentY = windowY + footerHeight
-    local contentHeight = windowHeight - headerHeight - footerHeight
-    local headerY = windowY + windowHeight - headerHeight
-    self:drawRect(windowX, windowY, windowWidth, windowHeight, 0.345, 0.376, 0.341, 1)
-    self:drawRect(windowX + px, windowY + py, windowWidth - 2 * px, windowHeight - 2 * py, 0.067, 0.075, 0.067, 1)
-    self:drawRect(windowX + px, windowY + windowHeight - 4 * py, windowWidth - 2 * px, 3 * py, 0.722, 0.875, 0.098, 1)
-    self:drawRect(windowX, headerY, windowWidth, 1 * py, 0.255, 0.278, 0.251, 1)
-    self:drawRect(windowX, windowY + footerHeight, windowWidth, 1 * py, 0.255, 0.278, 0.251, 1)
-
-    self:drawLabel(windowX + 32 * px, headerY + 64 * py, 11 * py, RenderText.ALIGN_LEFT, g_i18n:getText("ui_selectionKicker"), 0.722, 0.875, 0.098, 1, true)
-    self:drawLabel(windowX + 32 * px, headerY + 24 * py, 28 * py, RenderText.ALIGN_LEFT, g_i18n:getText("ui_selectionTitle"), 0.941, 0.949, 0.933, 1, false)
-
-    local count = #self.availableWorkers
-    local worker = self.availableWorkers[self.selectedIndex]
-    self:drawLabel(windowX + windowWidth - 32 * px, headerY + 42 * py, 15 * py, RenderText.ALIGN_RIGHT, string.format("%d / %d", math.min(self.selectedIndex, count), count), 0.667, 0.690, 0.659, 1, false)
-
-    if worker ~= nil then
-        local manager = self.app.manager
-        local available = self:isWorkerAvailable(worker)
-        local identityX, identityY, identityWidth = windowX + 32 * px, contentY + 28 * py, 185 * px
-        local profileX = identityX + identityWidth + 26 * px
-        local profileWidth = windowX + windowWidth - 32 * px - profileX
-        self:addClickArea(windowX, contentY, windowWidth, contentHeight, self.selectedIndex)
-
-        local portraitWidth, portraitHeight = 100 * px, 100 * py
-        local portraitX = identityX + (identityWidth - portraitWidth) * 0.5
-        local portraitY = identityY + 202 * py
-        self:drawRect(portraitX - 3 * px, portraitY - 3 * py, portraitWidth + 6 * px, portraitHeight + 6 * py, available and 0.722 or 0.32, available and 0.875 or 0.34, available and 0.098 or 0.32, 1)
-        local portrait = self:getPortraitOverlay(worker)
-        if portrait ~= nil then
-            portrait:setPosition(portraitX, portraitY)
-            portrait:setDimension(portraitWidth, portraitHeight)
-            portrait:setColor(available and 1 or hpSelectionToLinear(0.55), available and 1 or hpSelectionToLinear(0.55), available and 1 or hpSelectionToLinear(0.55), 1)
-            portrait:render()
-        end
-
-        self:drawLabel(identityX + identityWidth * 0.5, identityY + 175 * py, 18 * py, RenderText.ALIGN_CENTER, manager:getFullName(worker), available and 0.941 or 0.54, available and 0.949 or 0.54, available and 0.933 or 0.54, 1, false)
-        local rankText = self.app.manager:getRankText(worker)
-        self:drawLabel(identityX + identityWidth * 0.5, identityY + 151 * py, 13 * py, RenderText.ALIGN_CENTER, rankText, available and 0.722 or 0.45, available and 0.875 or 0.45, available and 0.098 or 0.45, 1, false)
-        self:drawRect(identityX + 28 * px, identityY + 108 * py, identityWidth - 56 * px, 27 * py, available and 0.208 or 0.17, available and 0.267 or 0.17, available and 0.051 or 0.17, 1)
-        self:drawLabel(identityX + identityWidth * 0.5, identityY + 116 * py, 12 * py, RenderText.ALIGN_CENTER, self:getWorkerAvailabilityReason(worker), available and 0.843 or 0.62, available and 0.945 or 0.62, available and 0.541 or 0.62, 1, false)
-
-        local experience = tonumber(worker.experience) or 0
-        local reliability = tonumber(worker.reliability) or 0
-        local loyalty = tonumber(worker.loyalty) or 65
-        self:drawLabel(profileX, identityY + 300 * py, 11 * py, RenderText.ALIGN_LEFT, g_i18n:getText("ui_selectionPerformanceProfile"), 0.667, 0.690, 0.659, 1, true)
-        local metricY = identityY + 210 * py
-        local metricGap = 10 * px
-        local metricWidth = (profileWidth - metricGap * 2) / 3
-        self:drawMetric(profileX, metricY, metricWidth, g_i18n:getText("ui_pmStatExperience"), experience)
-        self:drawMetric(profileX + metricWidth + metricGap, metricY, metricWidth, g_i18n:getText("ui_pmStatReliability"), reliability)
-        self:drawMetric(profileX + (metricWidth + metricGap) * 2, metricY, metricWidth, g_i18n:getText("ui_pmStatLoyalty"), loyalty)
-
-        local wage = worker.wage or 0
-        if manager.getCurrentMonthlyWage ~= nil then
-            wage = manager:getCurrentMonthlyWage(worker)
-        end
-        local wageText = g_i18n:formatMoney(wage, 0, true, false)
-        local jobsCompleted = tonumber(worker.jobsCompleted) or 0
-        local workSpeedPercent = manager.getWorkerWorkSpeedPercent ~= nil and manager:getWorkerWorkSpeedPercent(worker) or 100
-        local age = manager.getPersonAge ~= nil and manager:getPersonAge(worker) or 0
-        local detailY = identityY + 151 * py
-        local detailWidth = profileWidth / 4
-        local detailLabels = {g_i18n:getText("ui_selectionAgeLabel"), g_i18n:getText("ui_selectionWageLabel"), g_i18n:getText("ui_selectionJobsLabel"), g_i18n:getText("ui_selectionSpeedLabel")}
-        local detailValues = {string.format(g_i18n:getText("ui_selectionAgeValue"), age), wageText, tostring(jobsCompleted), string.format("%d %%", workSpeedPercent)}
-        for index = 1, 4 do
-            local x = profileX + (index - 1) * detailWidth
-            self:drawRect(x, detailY - 10 * py, detailWidth - 1 * px, 54 * py, 0.125, 0.137, 0.125, 1)
-            self:drawLabel(x + 12 * px, detailY + 19 * py, 11 * py, RenderText.ALIGN_LEFT, detailLabels[index], 0.667, 0.690, 0.659, 1, false)
-            self:drawLabel(x + 12 * px, detailY - 3 * py, 14 * py, RenderText.ALIGN_LEFT, detailValues[index], available and 0.941 or 0.58, available and 0.949 or 0.58, available and 0.933 or 0.58, 1, false)
-        end
-
-        local lowerY = identityY
-        local lowerHeight = 127 * py
-        local lowerGap = 12 * px
-        local lowerWidth = (profileWidth - lowerGap) * 0.43
-        local developmentX = profileX + lowerWidth + lowerGap
-        local developmentWidth = profileWidth - lowerWidth - lowerGap
-        self:drawRect(profileX, lowerY, lowerWidth, lowerHeight, 0.125, 0.137, 0.125, 1)
-        self:drawRect(developmentX, lowerY, developmentWidth, lowerHeight, 0.125, 0.137, 0.125, 1)
-        self:drawLabel(profileX + 13 * px, lowerY + lowerHeight - 22 * py, 11 * py, RenderText.ALIGN_LEFT, g_i18n:getText("ui_specialization_short"), 0.667, 0.690, 0.659, 1, true)
-        local specY = lowerY + lowerHeight - 47 * py
-        local learned = manager.getLearnedSpecializationTable ~= nil and manager:getLearnedSpecializationTable(worker) or {}
-        local specCount = 0
-        for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
-            if learned[key] == true and specCount < 5 then
-                local active = manager:workerHasSpecialization(worker, key)
-                local matchesExpectedJob = active and key == self.expectedSpecializationKey
-                local textRed, textGreen, textBlue = 0.82, 0.82, 0.82
-                if not available then
-                    textRed, textGreen, textBlue = 0.55, 0.55, 0.55
-                end
-                if matchesExpectedJob then
-                    textRed, textGreen, textBlue = 0.722, 0.875, 0.098
-                end
-                self:drawLabel(profileX + 13 * px, specY, 12 * py, RenderText.ALIGN_LEFT, manager:getSpecializationDisplayName(key), textRed, textGreen, textBlue, 1, matchesExpectedJob)
-                specY = specY - 19 * py
-                specCount = specCount + 1
-            end
-        end
-        if specCount == 0 then
-            self:drawLabel(profileX + 13 * px, specY, 12 * py, RenderText.ALIGN_LEFT, g_i18n:getText("ui_selectionNoSpecialization"), 0.667, 0.690, 0.659, 1, false)
-        end
-
-        self:drawLabel(developmentX + 13 * px, lowerY + lowerHeight - 22 * py, 11 * py, RenderText.ALIGN_LEFT, g_i18n:getText("ui_selectionProfessionalDevelopment"), 0.667, 0.690, 0.659, 1, true)
-        local learnedCount = 0
-        local developmentEntries = {}
-        for _, key in ipairs(HelperPersonnelManager.SPECIALIZATION_KEYS or {}) do
-            if manager:workerHasLearnedSpecialization(worker, key) then
-                learnedCount = learnedCount + 1
-            else
-                local minutes = manager:getSpecializationProgressMinutes(worker, key)
-                if minutes > 0 then
-                    table.insert(developmentEntries, {key = key, minutes = minutes})
-                end
-            end
-        end
-        local requiredMinutes = (HelperPersonnelManager.SPECIALIZATION_LEARN_BASE_MINUTES or 240) + learnedCount * (HelperPersonnelManager.SPECIALIZATION_LEARN_INCREMENT_MINUTES or 180)
-        for _, entry in ipairs(developmentEntries) do
-            entry.percent = requiredMinutes > 0 and math.max(0, math.min(99, math.floor(entry.minutes / requiredMinutes * 100 + 0.5))) or 0
-        end
-        table.sort(developmentEntries, function(a, b)
-            return a.percent == b.percent and a.minutes > b.minutes or a.percent > b.percent
-        end)
-        if #developmentEntries == 0 then
-            self:drawLabel(developmentX + 13 * px, lowerY + lowerHeight - 51 * py, 11 * py, RenderText.ALIGN_LEFT, g_i18n:getText("ui_selectionNoSpecializationProgress"), 0.667, 0.690, 0.659, 1, false)
-        else
-            local progressY = lowerY + lowerHeight - 47 * py
-            local barX = developmentX + 13 * px
-            local barWidth = developmentWidth - 26 * px
-            for index = 1, math.min(4, #developmentEntries) do
-                local entry = developmentEntries[index]
-                self:drawLabel(barX, progressY, 11 * py, RenderText.ALIGN_LEFT, manager:getSpecializationDisplayName(entry.key), available and 0.82 or 0.55, available and 0.82 or 0.55, available and 0.82 or 0.55, 1, false)
-                self:drawLabel(developmentX + developmentWidth - 13 * px, progressY, 11 * py, RenderText.ALIGN_RIGHT, string.format("%d %%", entry.percent), available and 0.941 or 0.58, available and 0.949 or 0.58, available and 0.933 or 0.58, 1, true)
-                self:drawRect(barX, progressY - 9 * py, barWidth, 4 * py, 0.231, 0.251, 0.227, 1)
-                self:drawRect(barX, progressY - 9 * py, barWidth * entry.percent / 100, 4 * py, 0.722, 0.875, 0.098, 1)
-                progressY = progressY - 25 * py
-            end
-        end
-    else
-        self:drawLabel(0.5, contentY + contentHeight * 0.5, 0.016, RenderText.ALIGN_CENTER, g_i18n:getText("ui_selectionNoWorkers"), 0.67, 0.69, 0.66, 1, false)
-    end
-
-    local toggleText = self.showAllWorkers and g_i18n:getText("ui_selectionShowAvailable") or g_i18n:getText("ui_selectionShowAll")
-    self:drawRect(windowX + 32 * px, windowY + 18 * py, 18 * px, 18 * py, self.showAllWorkers and 0.722 or 0.25, self.showAllWorkers and 0.875 or 0.28, self.showAllWorkers and 0.098 or 0.25, 1)
-    self:drawLabel(windowX + 61 * px, windowY + 20 * py, 12 * py, RenderText.ALIGN_LEFT, toggleText, 0.667, 0.690, 0.659, 1, false)
-    self:addClickArea(windowX + 24 * px, windowY + 10 * py, 245 * px, 38 * py, nil, "toggleAll")
-    self:drawLabel(windowX + windowWidth - 32 * px, windowY + 20 * py, 12 * py, RenderText.ALIGN_RIGHT, g_i18n:getText("ui_selectionFooterControls"), 0.667, 0.690, 0.659, 1, false)
-    setTextAlignment(RenderText.ALIGN_LEFT)
-    setTextColor(1, 1, 1, 1)
-    setTextBold(false)
-end

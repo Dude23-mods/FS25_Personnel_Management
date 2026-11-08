@@ -240,6 +240,7 @@
         <e k="ui_pmProfileHeader" v="PROFIL" />
         <e k="ui_pmHistoryHeader" v="ISTORIC" />
         <e k="ui_button_train" v="Instruiește" />
+        <e k="ui_pmManageSpecialization" v="Gestionarea specializării" />
         <e k="ui_pmStatusApplicant" v="Candidat" />
         <e k="ui_pmBirthLine" v="Născut(ă): %s" />
         <e k="ui_pmRankLabel" v="Rang" />
@@ -285,7 +286,9 @@
         <e k="ui_transportPriorityActive" v="Activ" />
         <e k="ui_transportPriorityInactive" v="Nealocat" />
         <e k="ui_transportPriorityMoveUp" v="Mută în sus" />
+        <e k="input_HP_TRANSPORT_PRIORITY_UP" v="Mută în sus" />
         <e k="ui_transportPriorityMoveDown" v="Mută în jos" />
+        <e k="input_HP_TRANSPORT_PRIORITY_DOWN" v="Mută în jos" />
         <e k="ui_transportPriorityToggle" v="Activează/dezactivează" />
         <e k="ui_transportPriorityApply" v="Aplică" />
         <e k="ui_transportPriorityCancel" v="Anulează" />
@@ -304,7 +307,7 @@
         <e k="ui_pmOrigin8" v="profesie de birou" />
         <e k="ui_status_retirementPending" v="se pensionează la sfârșitul lunii" />
         <e k="ui_retirementNotice" v="%s se va pensiona la sfârșitul lunii." />
-        <e k="ui_pmTrainingIntro" v="Specializările îmbunătățesc performanța în categoria potrivită. Instruirea începe doar la începutul lunii, costă bani și face angajatul indisponibil până la finalul lunii. Progresul se acordă după finalizare. Ofertele și prețurile se schimbă lunar; este permis un singur curs pe an agricol, din martie până în februarie. Specializările învățate rămân cunoscute, dar sunt active cel mult două bonusuri. Ambele sloturi pot fi inactive. O specializare învățată și inactivă poate fi activată doar o dată pentru fiecare angajat și an agricol." />
+        <e k="ui_pmTrainingIntro" v="Dezvoltă-ți echipa în mod țintit: selectează „%s” și alege apoi o categorie de formare. Specializările îmbunătățesc performanța în domeniul respectiv. Cursurile încep la începutul lunii, implică costuri și angajează angajatul până la sfârșitul lunii. Progresul este creditat la finalizare. Ofertele și prețurile se schimbă lunar. Fiecare angajat poate urma un curs de formare pe an agricol, din martie până în februarie. Specializările dobândite se păstrează; pot fi active cel mult două bonusuri, iar ambele locuri pot fi suspendate. Pentru fiecare angajat și pe fiecare an agricol, poate fi activată doar o singură specializare inactivă dobândită." />
         <e k="ui_pmTrainingCategoryHeader" v="Categorie de învățare" />
         <e k="ui_pmTrainingProgressHeader" v="Progres către specializare" />
         <e k="ui_pmTrainingRunning" v="instruire în desfășurare" />
@@ -633,9 +636,9 @@
     <e k="ui_pmHelpTopic13Title" v="Profiluri, cronologie și statistici" />
     <e k="ui_pmHelpTopic13Body" v="Profilurile candidaților combină vârsta, parcursul profesional, experiența, fiabilitatea, loialitatea, specializările și vechimea pe piața muncii într-un text dinamic. Profilurile angajaților completează vechimea în companie, misiunile, cursurile de formare și progresele învățării.&#10;Cronologia personală poate înregistra angajarea, data începerii și a încheierii misiunilor, întreruperile misiunilor, concediile medicale, cursurile de formare, specializările, cererile salariale și deciziile, schimbările privind loialitatea și fiabilitatea, alocările de transport, precum și concedierea, demisia voluntară, pensionarea și încetarea raporturilor de muncă.&#10;Istoricul angajatului prezintă, printre altele, misiunile, timpul de lucru, cursurile de formare, starea transporturilor, ultimele evenimente, zilele de concediu medical, cererile salariale, întreruperile misiunilor și salariul total plătit până în prezent. Prezentarea generală afișează, în plus, valori totale la nivel de companie, cum ar fi numărul total de angajări, concedieri, demisii și pensionări." />
     <e k="ui_pmHelpTopic14Title" v="Setări, Modul multiplayer și Scoruri" />
-    <e k="ui_pmHelpTopic14Body" v="Setările se aplică pentru fiecare stadiu al jocului și se împart în „Performanță”, „Dezvoltarea personalului”, „Economie” și „Salarii”. Efectele asupra gameplay-ului deblochează efectele de experiență dependente; efectele de experiență controlează viteza, uzura, consumabilele și combustibilul. Efectele asupra personalului deblochează modificările de loialitate și opțiunea de lucru suplimentar. Efectele economice deblochează salariile individuale și salariul lunar standard.&#10;Efectele dezactivate nu modifică retroactiv datele existente privind personalul. Ele împiedică sau permit exclusiv efectul ulterior respectiv. Salariul lunar standard servește ca valoare de bază atunci când salariile individuale sunt dezactivate; acesta poate fi modificat direct în setări. Configurația tastelor poate fi modificată în setările jocului.&#10;În modul multiplayer, personalul, candidații, misiunile, salariile, cursurile de formare, angajările și cronicile sunt gestionate și sincronizate la nivel de fermă. Serverul decide; numai managerii de fermă autorizați pot modifica propria fermă. Datele se află în fișierul helperPersonnel.xml din salvarea jocului, iar alocările curente sunt restabilite pe cât posibil la încărcare. Fișierele de joc vechi rămân utilizabile; datele istorice pot fi incomplete pentru angajații care au părăsit deja ferma." />
+        <e k="ui_pmHelpTopic14Body" v="Setarea „Interviuri de angajare” se aplică pentru fiecare stadiu al jocului. Dacă este activă, valorile ascunse, discuțiile și dezvăluirea ulterioară a acestora se aplică pe durata perioadei de angajare. Dacă este dezactivată, toate valorile candidaților și angajaților sunt afișate integral, ca până acum. Setarea poate fi modificată doar de server și de managerii de fermă autorizați.&#10;În modul multiplayer, serverul decide asupra fiecărei întrebări și sincronizează stadiul discuțiilor. Primul manager de fermă autorizat care deschide fereastra conduce interviul. Alți jucători din aceeași fermă pot urmări în direct; butoanele lor tematice rămân dezactivate. Dacă cel care conduce discuția închide fereastra sau îi cade conexiunea, un alt manager de fermă autorizat poate prelua conducerea.&#10;Personalul, candidații, misiunile, salariile, cursurile de formare, angajările și cronicile rămân specifice fiecărei ferme. Candidații globali pot fi propuși mai multor ferme, însă discuțiile lor sunt stocate separat pentru fiecare fermă." />
     <e k="ui_pmHelpTopic15Title" v="Configurare și pași inițiali" />
-    <e k="ui_pmHelpTopic15Body" v="Deschide profilul unui candidat, verifică vârsta, experiența, valorile, salariul dorit și specializările existente, apoi confirmă angajarea. Candidatul devine angajat al fermei actuale; toate deciziile, decontările și evoluțiile ulterioare se referă la această fermă.&#10;După angajare, planifică mai întâi o sarcină scurtă și potrivită. Un angajat trebuie să fie disponibil: boala, sarcinile de lucru în curs, formarea profesională, o încetare a contractului confirmată sau o alocare la un mod încă activ pot împiedica selecția. Fila „Angajați” afișează motivul concret.&#10;Prima angajare îmbunătățește reputația angajatorului cu un punct. Valorile ridicate nu sunt întotdeauna automat mai bune: un candidat cu experiență costă de obicei mai mult, în timp ce un începător mai ieftin are nevoie de mai mult timp pentru dezvoltare și formare profesională." />
+        <e k="ui_pmHelpTopic15Body" v="În fila „Candidat”, deschide interviul și selectează „Experiență”, „Fiabilitate” sau „Loialitate”. Întrebarea selectată și răspunsul apar în istoricul conversației. După cel mult trei întrebări, interviul se încheie și se afișează salariul dorit. Decide cu privire la angajare pe baza valorilor exacte cunoscute, a intervalelor și a incertitudinii rămase.&#10;După angajare, valorile care nu au fost clarificate complet rămân inițial la ultimul nivel de cunoaștere. Planifică misiuni reale: după 20 până la 35 de minute de activitate în timp real, valorile sunt dezvăluite în totalitate. Angajatul trebuie să fie disponibil; boala, munca în curs, formarea profesională sau o încetare confirmată a contractului pot împiedica selecția.&#10;O angajare îmbunătățește reputația angajatorului cu un punct. Valorile ridicate nu sunt întotdeauna automat mai bune: un candidat cu experiență costă de obicei mai mult, în timp ce un începător mai ieftin are nevoie de mai mult timp pentru dezvoltare și formare profesională." />
     <e k="ui_pmHelpTopic16Title" v="Activități și domenii de specializare" />
     <e k="ui_pmHelpTopic16Body" v="Alocarea se determină pe baza vehiculului, a utilajelor și – dacă este cazul – a materialului aplicat. Alocarea directă a materialului are prioritate: semințele țin de însămânțare; erbicidele, de protecția plantelor; îngrășămintele minerale, îngrășămintele lichide, gunoiul de grajd, reziduurile de fermentare și bălegarul țin de fertilizare. Varul nu este recunoscut automat ca o categorie de învățare separată.&#10;Alocarea vehiculelor și a utilajelor: plugul, cultivatorul, grapa rotativă, grapa cu discuri, cilindrul compactor și tocătorul fac parte din prelucrarea solului. Semănătorile și mașinile de plantat fac parte din însămânțare. Pulverizatoarele agricole sunt clasificate ca fertilizare în absența unui material specific. Comboinele, mecanismele de tăiere, presele de balotat, cositoarele, remorcile de încărcare și pickup-urile fac parte din recoltare. Remorcile și vehiculele descărcabile fac parte din transport.&#10;FollowMe extinde recunoașterea practică și la tocătoare, combinele pentru cartofi și sfeclă, întorcătoare, andocatoare, împrăștiatoare de gunoi de grajd, cisterne pentru dejecții, subsolatoare, colectoare de pietre, greble și sape. Vehiculele modificate pot rămâne neutre dacă specializarea lor nu permite o clasificare clară. În acest caz, nu se promite un bonus de specializare eronat.&#10;Protejarea utilajelor și modul de lucru economic sunt bonusuri generale: primul reduce uzura suplimentară cauzată de experiență, iar cel de-al doilea consumul suplimentar de combustibil și materiale. Activitatea selectată este afișată în fereastra de selecție; o specializare activă potrivită este evidențiată acolo." />
     <e k="ui_specialization_transport" v="Transport" />
@@ -676,8 +679,247 @@
     <e k="ui_pmHelpTopic02Title" v="Prezentare generală și efectivul de personal" />
     <e k="ui_pmHelpTopic02Body" v="Prezentarea generală rezumă situația actuală a fermei: angajații, angajații disponibili, candidații și reputația angajatorului sunt afișate în partea de sus. Sub acestea apar misiunile în curs, cu menționarea persoanei, vehiculului, echipamentului și activității.&#10;Secțiunea „Modificări” conține doar evenimentele relevante legate de personal, adică modificări ale reputației angajatorului, experienței, fiabilității, loialității, vârstei sau specializării. Fiecare notificare menționează cauza, persoana afectată și consecința; o înregistrare pe mai multe rânduri rămâne o singură notificare.&#10;„Raportul lunar” și „Total” afișează indicatorii actuali și pe întreaga durată a activității. Utilizează prezentarea generală pentru planificarea rapidă a misiunilor; detaliile, deciziile și cronologiile se regăsesc în paginile de specialitate individuale." />
     <e k="ui_pmHelpTopic03Title" v="Piața forței de muncă și recrutarea" />
-    <e k="ui_pmHelpTopic03Body" v="O nouă rundă începe cu patru candidați. În același timp, pe piață pot fi prezenți cel mult opt candidați. La fiecare schimbare de lună, se generează prin aruncarea zarurilor până la trei locuri noi; șansa pentru fiecare loc este de 15 % + 0,7 × reputația angajatorului. La o reputație de 60, aceasta reprezintă 57 %, iar la o reputație de 100, 85 % pentru fiecare loc. Dacă piața este goală, se generează cel puțin un candidat nou.&#10;Candidații rămân disponibili cu siguranță în luna în care au fost generați. După prima schimbare de lună, șansa lor de plecare este de 10–30 %, în funcție de calitate; după a doua, de 30–50 %, iar la a treia schimbare de lună, de 100 %. Profilurile bune pot dispărea mai devreme, deoarece calitatea lor crește șansa de plecare.&#10;Candidații au vârsta cuprinsă între 18 și 65 de ani, au o dată de naștere fixă și continuă să îmbătrânească. Contextele de proveniență sunt: întreprindere familială, fermă de vaci de lapte, întreprindere de prestări servicii agricole, agricultură, exploatație mixtă, logistică, atelier de utilaje agricole și profesie de birou. Vârsta și contextul de proveniență influențează în special experiența și eventualele cunoștințe tehnice prealabile.&#10;Salarul dorit se bazează pe experiență și fiabilitate, prezintă o variație aleatorie de 96–106 % și este influențat de reputația angajatorului. O reputație scăzută crește salariul dorit, iar una ridicată îl scade. Înainte de angajare apare o confirmare; angajarea crește reputația cu 1 punct." />
+        <e k="ui_pmHelpTopic03Body" v="Toți candidații sunt generați într-o piață globală. Ulterior, reputația angajatorului determină la ce ferme este propus un candidat. De aceea, fermele pot primi oferte diferite; dacă aceeași persoană este propusă mai multor ferme, ea are peste tot aceleași date de bază, valori și același interval inițial de valori. Imediat ce o fermă angajează persoana respectivă, aceasta dispare de la toate celelalte ferme.&#10;La început, experiența, fiabilitatea, loialitatea, rangul și salariul dorit rămân ascunse. Pentru fiecare candidat, exact una dintre cele trei valori este vizibilă sub forma unui interval plasat aleatoriu de 30 de puncte procentuale. Valoarea reală se află întotdeauna în acest interval, dar nu neapărat în mijlocul acestuia. Numele, vârsta, experiența profesională, CV-ul și specializările rămân vizibile.&#10;Un interviu de angajare cuprinde cel mult trei întrebări. O primă întrebare referitoare la o valoare necunoscută dezvăluie un interval de 30 de puncte; întrebările ulterioare reduc acest interval la 15 puncte, iar o întrebare suplimentară dezvăluie valoarea exactă. Valorile deja cunoscute nu pot fi selectate din nou. Interviul poate fi întrerupt și reluat ulterior din același punct. Salariul dorit devine vizibil odată cu ultimul răspuns." />
     <e k="ui_pmHelpTopic04Title" v="Profilul angajaților, valorile și statutul" />
-    <e k="ui_pmHelpTopic04Body" v="Experiența, fiabilitatea și loialitatea sunt evaluate pe o scară de la 0 la 100. Valoarea rămâne vizibilă cu precizie; barele permit o comparație rapidă.&#10;Clasificarea se bazează exclusiv pe experiență: asistent 0–44, specialist 45–74, profesionist 75–100. Experiența determină viteza de lucru, uzura suplimentară și consumul suplimentar. Fiabilitatea influențează scăderile de performanță pe termen scurt, bolile, evoluția lunară și riscul de întrerupere a misiunii. Loialitatea descrie atașamentul față de companie și influențează avertismentele, conflictele salariale și demisiile voluntare." />
+        <e k="ui_pmHelpTopic04Body" v="Experiența, fiabilitatea și loialitatea au valori cuprinse între 0 și 100. Atâta timp cât interviurile de angajare sunt în curs, aceste valori sunt afișate pentru candidați doar în funcție de stadiul cunoscut al interviului. Clasamentul depinde exclusiv de experiență și, prin urmare, apare abia atunci când experiența este cunoscută cu exactitate.&#10;După angajare, valorile încă necunoscute rămân inițial ascunse. În timpul misiunilor efective, angajatul acumulează experiență activă în timp real. După o durată stabilită pentru fiecare persoană, cuprinsă între 20 și 35 de minute, toate cele trei valori devin complet cunoscute. Pauzele și perioadele fără misiuni în curs nu sunt luate în calcul. Progresul este salvat în scorul jocului.&#10;Experiența determină viteza de lucru, uzura suplimentară și consumul suplimentar. Fiabilitatea influențează scăderile de performanță pe termen scurt, bolile, evoluția lunară și riscul de întrerupere a misiunii. Loialitatea descrie atașamentul față de companie și influențează avertismentele, conflictele salariale și demisiile voluntare." />
+        <e k="ui_hpSetting_applicantInterviews" v="Interviuri de angajare" />
+        <e k="ui_hpSetting_applicantInterviews_desc" v="Ascunde valorile candidaților. În cel mult trei runde de întrebări sunt dezvăluite anumite domenii sau valori exacte; salariul dorit apare la finalul interviului." />
+        <e k="ui_pmValueUnknown" v="Necunoscut" />
+        <e k="ui_hpInterviewPrompt" v="Ce ai vrea să întrebi?" />
+        <e k="ui_hpInterviewTitle" v="Interviu de angajare" />
+        <e k="ui_hpInterviewTopicExperience" v="Experiență" />
+        <e k="ui_hpInterviewTopicReliability" v="Fiabilitate" />
+        <e k="ui_hpInterviewTopicLoyalty" v="Loialitate" />
+        <e k="ui_hpInterviewRound" v="Sesiune de întrebări %d din 3" />
+        <e k="ui_hpInterviewLeader" v="Tu conduci discuția." />
+        <e k="ui_hpInterviewObserver" v="Tu urmărești conversația." />
+        <e k="ui_hpInterviewFinished" v="Interviul de angajare s-a încheiat." />
+        <e k="ui_hpInterviewWageIntro" v="Suma pe care o doresc ca salariu:" />
+        <e k="ui_hpInterviewQuestionExperienceFirst" v="Ce experiență practică aveți pentru munca la ferma noastră?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowup" v="Puteți descrie mai detaliat experiența dumneavoastră practică?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirst" v="Cum vă asigurați că putem conta pe dumneavoastră în activitatea noastră de zi cu zi?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowup" v="Cum ați descrie mai exact cât de fiabil sunteți atunci când lucrați pe cont propriu?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirst" v="Ce aspecte sunt importante pentru dumneavoastră pentru a rămâne fidel unei companii pe termen lung?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowup" v="Cum ați evalua mai exact loialitatea dumneavoastră pe termen lung față de un angajator?" />
+        <e k="ui_hpInterviewAnswerExperienceLow" v="Până acum, parcursul meu profesional este încă destul de scurt." />
+        <e k="ui_hpInterviewAnswerExperienceMedium" v="Am preluat deja câteva sarcini potrivite." />
+        <e k="ui_hpInterviewAnswerExperienceHigh" v="Am o vastă experiență practică." />
+        <e k="ui_hpInterviewAnswerReliabilityLow" v="Când sunt presat de timp, am nevoie uneori de înțelegeri clare." />
+        <e k="ui_hpInterviewAnswerReliabilityMedium" v="De regulă, te poți baza pe înțelegerile făcute și pe sarcinile îndeplinite." />
+        <e k="ui_hpInterviewAnswerReliabilityHigh" v="Lucrez cu mare conștiinciozitate și îmi respect întotdeauna angajamentele." />
+        <e k="ui_hpInterviewAnswerLoyaltyLow" v="Când este vorba de o nouă afacere, iau inițial o decizie mai degrabă pe termen scurt." />
+        <e k="ui_hpInterviewAnswerLoyaltyMedium" v="Dacă colaborarea decurge bine, îmi pot imagina cu ușurință că vom continua să lucrăm împreună pentru o perioadă mai lungă." />
+        <e k="ui_hpInterviewAnswerLoyaltyHigh" v="Stabilitatea și o colaborare pe termen lung sunt foarte importante pentru mine." />
+        <e k="ui_hpInterviewAnswerIntro1" v="Aș descrie-o astfel:" />
+        <e k="ui_hpInterviewAnswerIntro2" v="Din punctul meu de vedere, valabil este următorul lucru:" />
+        <e k="ui_hpInterviewAnswerIntro3" v="Cea mai potrivită evaluare este următoarea:" />
+        <e k="ui_hpInterviewOpen" v="Interviu de angajare" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV1" v="Ce experiență practică aveți pentru munca la ferma noastră?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV2" v="Ce sarcini ați îndeplinit până acum în domeniul agriculturii?" />
+        <e k="ui_hpInterviewQuestionExperienceFirstV3" v="Cu ce tipuri de activități dintr-o exploatație agricolă sunteți deja familiarizat?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV1" v="Puteți descrie mai în detaliu care dintre aceste sarcini le-ați îndeplinit în mod independent?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV2" v="În ce tipuri de activități vă simțiți deja în siguranță și în ce domenii ar trebui să vă mai familiarizați?" />
+        <e k="ui_hpInterviewQuestionExperienceFollowupV3" v="Care dintre experiențele dumneavoastră anterioare considerați că ar fi deosebit de utile la ferma noastră?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV1" v="Cum vă asigurați că putem conta pe dumneavoastră în activitatea noastră de zi cu zi?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV2" v="Cum abordați sarcinile care trebuie finalizate la termen?" />
+        <e k="ui_hpInterviewQuestionReliabilityFirstV3" v="La ce ne putem aștepta din partea dumneavoastră dacă apare vreo problemă la locul de muncă?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV1" v="Ce faceți atunci când vă dați seama că nu puteți respecta o înțelegere?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV2" v="Cum reușiți să păstrați o imagine de ansamblu atunci când aveți mai multe sarcini de îndeplinit în același timp?" />
+        <e k="ui_hpInterviewQuestionReliabilityFollowupV3" v="Puteți descrie mai detaliat cum vă asumați responsabilitatea atunci când lucrați pe cont propriu?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV1" v="Ce aspecte sunt importante pentru dumneavoastră pentru a rămâne fidel unei companii pe termen lung?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV2" v="Ce vă doriți de la o colaborare pe termen lung la ferma noastră?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFirstV3" v="Ce ar trebui să existe pentru ca dumneavoastră să doriți să lucrați la noi pe termen lung?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV1" v="Ce importanță are pentru dumneavoastră o relație de muncă pe termen lung cu un angajator?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV2" v="Cum ați evalua disponibilitatea dumneavoastră de a rămâne la o companie chiar și în perioadele mai dificile?" />
+        <e k="ui_hpInterviewQuestionLoyaltyFollowupV3" v="Care ar fi factorul decisiv care v-ar determina să continuați colaborarea sau să vă reorientați?" />
+        <e k="ui_hpInterviewAnswerExperienceLowV1" v="Până acum am ajutat mai ales la sarcini simple. M-aș apropia treptat de sarcinile noi." />
+        <e k="ui_hpInterviewAnswerExperienceLowV2" v="Experiența mea practică este încă limitată, dar îmi place să învăț lucruri noi și pun întrebări atunci când nu știu ceva." />
+        <e k="ui_hpInterviewAnswerExperienceLowV3" v="Cunosc câteva procese care se desfășoară la o fermă, dar ar mai trebui să învăț multe lucruri în cadrul muncii de zi cu zi." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV1" v="Am preluat deja diverse sarcini în cadrul unei întreprinderi și mă descurc bine cu sarcinile cu care sunt familiarizat." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV2" v="Am mai lucrat deja cu unele utilaje și procese de lucru. Când am de îndeplinit sarcini noi, am uneori nevoie de o scurtă instruire." />
+        <e k="ui_hpInterviewAnswerExperienceMediumV3" v="Am experiență practică, chiar dacă există cu siguranță domenii în care mai am încă de învățat." />
+        <e k="ui_hpInterviewAnswerExperienceHighV1" v="Am lucrat o perioadă îndelungată în exploatații agricole și, în acest context, am îndeplinit multe sarcini în mod autonom." />
+        <e k="ui_hpInterviewAnswerExperienceHighV2" v="Sunt foarte familiarizat cu lucrările și utilajele obișnuite. Cu toate acestea, analizez mai întâi cu atenție noile procese." />
+        <e k="ui_hpInterviewAnswerExperienceHighV3" v="Am avut deja ocazia să cunosc diverse companii și moduri de lucru și, de obicei, mă adaptez rapid la sarcini noi." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV1" v="Când am multe lucruri de făcut în același timp, îmi sunt de ajutor înțelegerile clare. Astfel știu mai bine ce este cel mai important." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV2" v="Încerc să-mi îndeplinesc sarcinile cum se cuvine. Uneori, însă, mai am de lucrat la a ține totul sub control la timp." />
+        <e k="ui_hpInterviewAnswerReliabilityLowV3" v="Când am de-a face cu sarcini noi sau cu care nu sunt obișnuit, prefer să întreb din când în când, ca să nu-mi scape nimic important." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV1" v="Sunt atent la înțelegeri. Dacă îmi dau seama că ceva nu va merge, anunț cât mai devreme posibil." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV2" v="Îmi îndeplinesc sarcinile cu conștiinciozitate. În cazul în care prioritățile nu sunt clare, prefer să mă consult din nou cu cineva." />
+        <e k="ui_hpInterviewAnswerReliabilityMediumV3" v="În general, poți conta pe mine. Când sunt multe de făcut, mi-ar fi de ajutor o scurtă coordonare." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV1" v="Când îmi asum o sarcină, mă ocup de ea. Dacă apare vreo problemă, o semnalez din timp." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV2" v="Țin evidența termenelor și a înțelegerilor și verific la final dacă totul a fost rezolvat." />
+        <e k="ui_hpInterviewAnswerReliabilityHighV3" v="Chiar și atunci când lucrez pe cont propriu, acord o mare importanță respectării angajamentelor asumate și informării celorlalți cu privire la schimbările importante." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV1" v="Aș vrea să văd mai întâi cum decurge munca aici. Abia apoi voi putea decide mai bine cum să procedez în continuare." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV2" v="Sunt deschis la noi oportunități și nu îmi place să mă angajez prea devreme față de un nou angajator." />
+        <e k="ui_hpInterviewAnswerLoyaltyLowV3" v="Pentru mine, colaborarea trebuie să se potrivească cu viața de zi cu zi. Dacă situația mea s-ar schimba, aș lua în considerare și alte opțiuni." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV1" v="Dacă colaborarea decurge bine și condițiile sunt favorabile, îmi pot imagina să rămân mai mult timp." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV2" v="Pentru mine este important să am un mediu de lucru stabil. Cât timp voi rămâne depinde și de modul în care ne înțelegem." />
+        <e k="ui_hpInterviewAnswerLoyaltyMediumV3" v="Îmi doresc o colaborare fructuoasă și aș vrea, mai întâi, să mă acomodez. Dacă totul merge bine pentru ambele părți, am multe motive să rămân." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV1" v="Apreciez stabilitatea și caut o companie în care să mă pot implica pe termen lung." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV2" v="Pentru mine este important să fac parte dintr-o echipă de încredere. Dacă colaborăm bine, nu aș vrea să schimb mereu locul de muncă." />
+        <e k="ui_hpInterviewAnswerLoyaltyHighV3" v="Mi-ar plăcea să lucrez mai mult timp la o fermă și să acumulez experiență alături de echipa de acolo." />
+        <e k="ui_pmNewApplicantIntro1_1" v="ZXQNAMEQXZ a lucrat anterior într-o exploatație agricolă familială." />
+        <e k="ui_pmNewApplicantIntro1_2" v="Înainte de a-și depune candidatura, ZXQNAMEQXZ a lucrat într-o exploatație agricolă familială din mediul rural." />
+        <e k="ui_pmNewApplicantIntro1_3" v="Printre experiențele profesionale ale lui ZXQNAMEQXZ se numără și activitatea desfășurată într-o exploatație agricolă familială din mediul rural." />
+        <e k="ui_pmNewApplicantIntro2_1" v="ZXQNAMEQXZ a lucrat anterior la o mică fermă de vaci de lapte." />
+        <e k="ui_pmNewApplicantIntro2_2" v="Înainte de a-și depune candidatura, ZXQNAMEQXZ a lucrat la o mică fermă de vaci de lapte." />
+        <e k="ui_pmNewApplicantIntro2_3" v="Printre experiențele profesionale ale lui ZXQNAMEQXZ se numără și activitatea desfășurată într-o mică fermă de vaci de lapte." />
+        <e k="ui_pmNewApplicantIntro3_1" v="ZXQNAMEQXZ a lucrat anterior la o firmă de servicii agricole." />
+        <e k="ui_pmNewApplicantIntro3_2" v="Înainte de a-și depune candidatura, ZXQNAMEQXZ a lucrat la o firmă de servicii agricole." />
+        <e k="ui_pmNewApplicantIntro3_3" v="Printre experiențele profesionale ale lui ZXQNAMEQXZ se numără și o perioadă în care a lucrat la o întreprindere de servicii agricole." />
+        <e k="ui_pmNewApplicantIntro4_1" v="ZXQNAMEQXZ a lucrat anterior la o exploatație agricolă." />
+        <e k="ui_pmNewApplicantIntro4_2" v="Înainte de a-și depune candidatura, ZXQNAMEQXZ a lucrat la o exploatație agricolă." />
+        <e k="ui_pmNewApplicantIntro4_3" v="Printre experiențele profesionale ale lui ZXQNAMEQXZ se numără și activitatea desfășurată într-o exploatație agricolă." />
+        <e k="ui_pmNewApplicantIntro5_1" v="ZXQNAMEQXZ a lucrat anterior într-o unitate cu activități mixte." />
+        <e k="ui_pmNewApplicantIntro5_2" v="Înainte de a-și depune candidatura, ZXQNAMEQXZ a lucrat într-o întreprindere cu activități mixte." />
+        <e k="ui_pmNewApplicantIntro5_3" v="Printre experiențele profesionale ale lui ZXQNAMEQXZ se numără și activitatea desfășurată într-o întreprindere mixtă." />
+        <e k="ui_pmNewApplicantIntro6_1" v="ZXQNAMEQXZ a lucrat anterior într-o companie de logistică." />
+        <e k="ui_pmNewApplicantIntro6_2" v="Înainte de a-și depune candidatura, ZXQNAMEQXZ a lucrat într-o companie de logistică." />
+        <e k="ui_pmNewApplicantIntro6_3" v="Printre experiențele profesionale ale lui ZXQNAMEQXZ se numără și o perioadă în care a lucrat într-o companie de logistică." />
+        <e k="ui_pmNewApplicantIntro7_1" v="ZXQNAMEQXZ a lucrat anterior într-un atelier de utilaje agricole." />
+        <e k="ui_pmNewApplicantIntro7_2" v="Înainte de a-și depune candidatura, ZXQNAMEQXZ a lucrat într-un atelier de utilaje agricole." />
+        <e k="ui_pmNewApplicantIntro7_3" v="Printre experiențele profesionale ale lui ZXQNAMEQXZ se numără și activitatea desfășurată într-un atelier de utilaje agricole." />
+        <e k="ui_pmNewApplicantIntro8_1" v="ZXQNAMEQXZ a lucrat anterior într-un post de birou." />
+        <e k="ui_pmNewApplicantIntro8_2" v="Înainte de a-și depune candidatura, ZXQNAMEQXZ a lucrat într-un post de birou." />
+        <e k="ui_pmNewApplicantIntro8_3" v="Printre experiențele profesionale ale lui ZXQNAMEQXZ se numără și o activitate în domeniul administrativ." />
+        <e k="ui_pmNewWorkerIntro1_1" v="ZXQNAMEQXZ a lucrat anterior într-o exploatație familială rurală și face parte din această exploatație de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro1_2" v="Înainte de a începe să lucreze la fermă, ZXQNAMEQXZ a lucrat într-o exploatație agricolă familială. Vechimea în muncă este de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro1_3" v="ZXQNAMEQXZ face parte din echipă de ZXQMONTHSQXZ luni și a lucrat anterior într-o exploatație agricolă familială din mediul rural." />
+        <e k="ui_pmNewWorkerIntro1_4" v="De ZXQMONTHSQXZ luni, ZXQNAMEQXZ lucrează la fermă, iar înainte de aceasta a lucrat la o exploatație agricolă familială." />
+        <e k="ui_pmNewWorkerIntro1_5" v="ZXQNAMEQXZ a lucrat anterior într-o exploatație agricolă familială și lucrează în această exploatație de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro2_1" v="ZXQNAMEQXZ a lucrat anterior la o mică fermă de vaci de lapte și face parte din această fermă de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro2_2" v="Înainte de a începe să lucreze la fermă, ZXQNAMEQXZ a lucrat la o mică fermă de vaci de lapte. Vechimea sa în muncă este de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro2_3" v="ZXQNAMEQXZ face parte din echipă de ZXQMONTHSQXZ luni și a lucrat anterior la o mică fermă de vaci de lapte." />
+        <e k="ui_pmNewWorkerIntro2_4" v="De ZXQMONTHSQXZ luni, ZXQNAMEQXZ lucrează la fermă, iar înainte de aceasta a lucrat la o mică fermă de vaci de lapte." />
+        <e k="ui_pmNewWorkerIntro2_5" v="ZXQNAMEQXZ a lucrat anterior la o mică fermă de vaci de lapte și lucrează la această fermă de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro3_1" v="ZXQNAMEQXZ a lucrat anterior la o firmă de servicii agricole și face parte din întreprindere de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro3_2" v="Înainte de a începe să lucreze la fermă, ZXQNAMEQXZ a lucrat la o firmă de servicii agricole. Vechimea în muncă este de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro3_3" v="ZXQNAMEQXZ face parte din echipă de ZXQMONTHSQXZ luni și a lucrat anterior la o firmă de servicii agricole." />
+        <e k="ui_pmNewWorkerIntro3_4" v="De ZXQMONTHSQXZ luni, ZXQNAMEQXZ lucrează la fermă, iar înainte de aceasta a lucrat la o firmă de servicii agricole." />
+        <e k="ui_pmNewWorkerIntro3_5" v="ZXQNAMEQXZ a lucrat anterior la o firmă de servicii agricole și lucrează la această întreprindere de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro4_1" v="ZXQNAMEQXZ a lucrat anterior la o exploatație agricolă și face parte din această exploatație de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro4_2" v="Înainte de a începe să lucreze la fermă, ZXQNAMEQXZ a lucrat la o exploatație agricolă. Vechimea în muncă este de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro4_3" v="ZXQNAMEQXZ face parte din echipă de ZXQMONTHSQXZ luni și a lucrat anterior la o exploatație agricolă." />
+        <e k="ui_pmNewWorkerIntro4_4" v="De ZXQMONTHSQXZ luni, ZXQNAMEQXZ lucrează la fermă, iar înainte de aceasta a lucrat la o exploatație agricolă." />
+        <e k="ui_pmNewWorkerIntro4_5" v="ZXQNAMEQXZ a lucrat anterior la o exploatație agricolă și lucrează la această exploatație de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro5_1" v="ZXQNAMEQXZ a lucrat anterior într-o unitate cu activități mixte și face parte din această unitate de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro5_2" v="Înainte de a începe să lucreze la fermă, ZXQNAMEQXZ a lucrat într-o exploatație mixtă. Vechimea în muncă este de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro5_3" v="ZXQNAMEQXZ face parte din echipă de ZXQMONTHSQXZ luni și a lucrat anterior într-o unitate cu regim mixt." />
+        <e k="ui_pmNewWorkerIntro5_4" v="De ZXQMONTHSQXZ luni, ZXQNAMEQXZ lucrează la fermă, iar înainte de aceasta a lucrat într-o exploatație mixtă." />
+        <e k="ui_pmNewWorkerIntro5_5" v="ZXQNAMEQXZ a funcționat anterior într-un regim mixt și este în funcțiune de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro6_1" v="ZXQNAMEQXZ a lucrat anterior într-o companie de logistică și face parte din această companie de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro6_2" v="Înainte de a începe să lucreze la fermă, ZXQNAMEQXZ a lucrat într-o companie de logistică. Vechimea sa în muncă este de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro6_3" v="ZXQNAMEQXZ face parte din echipă de ZXQMONTHSQXZ luni și a lucrat anterior într-o companie de logistică." />
+        <e k="ui_pmNewWorkerIntro6_4" v="De ZXQMONTHSQXZ luni, ZXQNAMEQXZ lucrează la fermă, iar înainte de aceasta a lucrat într-o companie de logistică." />
+        <e k="ui_pmNewWorkerIntro6_5" v="ZXQNAMEQXZ a lucrat anterior într-o companie de logistică și lucrează la această companie de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro7_1" v="ZXQNAMEQXZ a lucrat anterior într-un atelier de utilaje agricole și face parte din echipă de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro7_2" v="Înainte de a începe să lucreze la fermă, ZXQNAMEQXZ a lucrat într-un atelier de utilaje agricole. Vechimea în muncă este de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro7_3" v="ZXQNAMEQXZ face parte din echipă de ZXQMONTHSQXZ luni și a lucrat anterior într-un atelier de utilaje agricole." />
+        <e k="ui_pmNewWorkerIntro7_4" v="De ZXQMONTHSQXZ luni, ZXQNAMEQXZ lucrează la fermă, iar înainte de asta a lucrat într-un atelier de utilaje agricole." />
+        <e k="ui_pmNewWorkerIntro7_5" v="ZXQNAMEQXZ a lucrat anterior într-un atelier de utilaje agricole și lucrează la această firmă de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro8_1" v="ZXQNAMEQXZ a lucrat anterior într-un post de birou și face parte din companie de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro8_2" v="Înainte de a începe să lucreze la fermă, ZXQNAMEQXZ a ocupat un post de birou. Vechimea în muncă este de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerIntro8_3" v="ZXQNAMEQXZ face parte din echipă de ZXQMONTHSQXZ luni și a lucrat anterior într-un post de birou." />
+        <e k="ui_pmNewWorkerIntro8_4" v="De ZXQMONTHSQXZ luni, ZXQNAMEQXZ lucrează la fermă, iar înainte de aceasta a lucrat într-un birou." />
+        <e k="ui_pmNewWorkerIntro8_5" v="ZXQNAMEQXZ a lucrat anterior într-un post de birou și lucrează în această întreprindere de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewApplicantAge1_1" v="La vârsta de ZXQAGEQXZ ani, parcursul profesional este încă la început." />
+        <e k="ui_pmNewApplicantAge1_2" v="La vârsta de ZXQAGEQXZ ani, se pot acumula experiențe practice suplimentare la fermă." />
+        <e k="ui_pmNewApplicantAge1_3" v="La vârsta de ZXQAGEQXZ ani, se ivește ocazia de a-ți dezvolta în continuare cariera." />
+        <e k="ui_pmNewApplicantAge2_1" v="La vârsta de ZXQAGEQXZ de ani, cunoștințele profesionale se pot consolida în continuare." />
+        <e k="ui_pmNewApplicantAge2_2" v="La vârsta de ZXQAGEQXZ ani, experiențele acumulate până acum pot fi completate cu noi sarcini." />
+        <e k="ui_pmNewApplicantAge2_3" v="La vârsta de ZXQAGEQXZ ani, există posibilitatea de a-și dezvolta în continuare parcursul profesional de până acum." />
+        <e k="ui_pmNewApplicantAge3_1" v="La vârsta de ZXQAGEQXZ ani, are deja în spate o carieră profesională îndelungată." />
+        <e k="ui_pmNewApplicantAge3_2" v="La vârsta de ZXQAGEQXZ ani, am acumulat diverse experiențe de-a lungul carierei mele profesionale de până acum." />
+        <e k="ui_pmNewApplicantAge3_3" v="La vârsta de ZXQAGEQXZ ani se poate conta pe experiența profesională; legătura acesteia cu agricultura depinde de parcursul profesional." />
+        <e k="ui_pmNewApplicantAge4_1" v="La vârsta de ZXQAGEQXZ ani, are deja în spate o carieră profesională îndelungată." />
+        <e k="ui_pmNewApplicantAge4_2" v="La vârsta de ZXQAGEQXZ ani, se dispune de experiență profesională generală, care nu înseamnă neapărat experiență în domeniul agricol." />
+        <e k="ui_pmNewApplicantAge4_3" v="De-a lungul celor ZXQAGEQXZ ani de viață s-au acumulat diverse experiențe; utilitatea acestora la fermă depinde de activitățile desfășurate până în prezent." />
+        <e k="ui_pmNewApplicantMarket1_1" v="Anunțul de angajare a fost publicat pe piață începând din această lună." />
+        <e k="ui_pmNewApplicantMarket1_2" v="Căutarea unui nou loc de muncă a început abia de curând." />
+        <e k="ui_pmNewApplicantMarket1_3" v="Anunțul de angajare a fost publicat în această lună." />
+        <e k="ui_pmNewApplicantMarket2_1" v="Anunțul de angajare este publicat de o lună." />
+        <e k="ui_pmNewApplicantMarket2_2" v="Căutarea unui nou loc de muncă durează de o lună." />
+        <e k="ui_pmNewApplicantMarket2_3" v="Formularul de înscriere este disponibil pentru întreprinderile interesate de o lună." />
+        <e k="ui_pmNewApplicantMarket3_1" v="Anunțul este publicat pe piață de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewApplicantMarket3_2" v="Căutarea unui nou loc de muncă durează de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewApplicantMarket3_3" v="Formularul de candidatură este disponibil pentru întreprinderile interesate de ZXQMONTHSQXZ luni." />
+        <e k="ui_pmNewWorkerExperience1_1" v="Experiența practică abia începe să se acumuleze; multe sarcini necesită încă îndrumare." />
+        <e k="ui_pmNewWorkerExperience1_2" v="Multe dintre activitățile de la fermă sunt încă noi." />
+        <e k="ui_pmNewWorkerExperience1_3" v="Activitatea practică se află încă într-o fază incipientă de familiarizare." />
+        <e k="ui_pmNewWorkerExperience1_4" v="Sarcinile de bază necesită încă exercițiu și îndrumare." />
+        <e k="ui_pmNewWorkerExperience1_5" v="Procedurile practice se învață pas cu pas." />
+        <e k="ui_pmNewWorkerExperience2_1" v="Se cunosc câteva noțiuni de bază, însă pentru sarcinile mai complexe este încă nevoie de sprijin." />
+        <e k="ui_pmNewWorkerExperience2_2" v="Există deja primele experiențe practice; în mai multe domenii încă nu s-a dobândit o experiență suficientă." />
+        <e k="ui_pmNewWorkerExperience2_3" v="Sarcinile cu care este deja familiarizat sunt îndeplinite din ce în ce mai bine, în timp ce sarcinile mai complexe necesită o perioadă suplimentară de adaptare." />
+        <e k="ui_pmNewWorkerExperience2_4" v="Noțiunile de bază sunt cunoscute, însă pentru a asigura desfășurarea fără probleme a operațiunilor este nevoie de mai multă practică." />
+        <e k="ui_pmNewWorkerExperience2_5" v="S-au dobândit deja cunoștințe practice, care pot fi consolidate în continuare în cadrul activității zilnice." />
+        <e k="ui_pmNewWorkerExperience3_1" v="O experiență solidă permite îndeplinirea în mod autonom a multor sarcini obișnuite." />
+        <e k="ui_pmNewWorkerExperience3_2" v="Cele mai multe activități cotidiene se desfășoară fără probleme." />
+        <e k="ui_pmNewWorkerExperience3_3" v="Există o bază practică; procedurile cunoscute sunt preluate în mod autonom." />
+        <e k="ui_pmNewWorkerExperience3_4" v="În ceea ce privește sarcinile obișnuite, se observă o rutină bine stabilită." />
+        <e k="ui_pmNewWorkerExperience3_5" v="Este familiarizat cu diverse domenii de activitate și le gestionează în mare măsură în mod autonom." />
+        <e k="ui_pmNewWorkerExperience4_1" v="Experiența practică vastă permite o utilizare versatilă." />
+        <e k="ui_pmNewWorkerExperience4_2" v="Chiar și lucrările mai complexe fac parte din sfera de competențe obișnuită." />
+        <e k="ui_pmNewWorkerExperience4_3" v="O experiență vastă te ajută să preiei în mod autonom diverse procese de lucru." />
+        <e k="ui_pmNewWorkerExperience4_4" v="Experiența se manifestă prin capacitatea de a gestiona cu încredere o gamă variată de sarcini." />
+        <e k="ui_pmNewWorkerExperience4_5" v="Sunt familiarizat cu numeroase proceduri practice, chiar și în cazul unor sarcini variate." />
+        <e k="ui_pmNewWorkerExperience5_1" v="Se dispune de o experiență practică extrem de vastă." />
+        <e k="ui_pmNewWorkerExperience5_2" v="O experiență foarte vastă este de ajutor chiar și în cazul sarcinilor complexe și neobișnuite." />
+        <e k="ui_pmNewWorkerExperience5_3" v="Pentru munca la fermă se dispune de cunoștințe deosebit de ample." />
+        <e k="ui_pmNewWorkerExperience5_4" v="Experiența îndelungată și diversificată asigură un nivel ridicat de siguranță în activitatea de zi cu zi." />
+        <e k="ui_pmNewWorkerExperience5_5" v="O gamă largă de activități agricole este stăpânită cu o măiestrie deosebită." />
+        <e k="ui_pmNewWorkerReliability1_1" v="Coordonarea și îndeplinirea cu atenție a sarcinilor necesită o atenție deosebită." />
+        <e k="ui_pmNewWorkerReliability1_2" v="În activitatea de zi cu zi sunt necesare verificări frecvente și instrucțiuni clare." />
+        <e k="ui_pmNewWorkerReliability1_3" v="Pentru o planificare fiabilă, sarcinile ar trebui să fie monitorizate îndeaproape." />
+        <e k="ui_pmNewWorkerReliability1_4" v="Înțelegerile și procedurile de lucru nu sunt încă respectate în mod consecvent." />
+        <e k="ui_pmNewWorkerReliability1_5" v="Sarcinile importante necesită o coordonare și un control suplimentare." />
+        <e k="ui_pmNewWorkerReliability2_1" v="Înțelegerile nu sunt întotdeauna respectate în mod consecvent; orientările clare sunt de ajutor." />
+        <e k="ui_pmNewWorkerReliability2_2" v="Fiabilitatea este încă instabilă; lucrările importante ar trebui supravegheate." />
+        <e k="ui_pmNewWorkerReliability2_3" v="În cazul sarcinilor cu care suntem familiarizați, multe lucruri se realizează cu succes, însă verificările ocazionale rămân utile." />
+        <e k="ui_pmNewWorkerReliability2_4" v="Se lucrează în continuare la o modalitate mai stabilă de îndeplinire a sarcinilor delegate." />
+        <e k="ui_pmNewWorkerReliability2_5" v="Competențele clar definite și feedback-ul regulat sunt de ajutor în activitatea de zi cu zi." />
+        <e k="ui_pmNewWorkerReliability3_1" v="În cazul majorității sarcinilor, se poate conta pe o execuție fiabilă." />
+        <e k="ui_pmNewWorkerReliability3_2" v="De regulă, înțelegerile sunt respectate, iar sarcinile sunt îndeplinite, în mare parte, cu atenție." />
+        <e k="ui_pmNewWorkerReliability3_3" v="Fiabilitatea oferă o bază solidă pentru planificarea intervențiilor." />
+        <e k="ui_pmNewWorkerReliability3_4" v="Sarcinile încredințate sunt îndeplinite, de cele mai multe ori, cu conștiinciozitate și seriozitate." />
+        <e k="ui_pmNewWorkerReliability3_5" v="În activitatea de zi cu zi se observă un mod de lucru în mare parte constant." />
+        <e k="ui_pmNewWorkerReliability4_1" v="Lucrările sunt executate cu seriozitate, iar înțelegerile sunt respectate cu strictețe." />
+        <e k="ui_pmNewWorkerReliability4_2" v="Sarcinile încredințate sunt îndeplinite cu consecvență și conștiinciozitate." />
+        <e k="ui_pmNewWorkerReliability4_3" v="Modul de lucru meticulos facilitează o planificare fiabilă a intervențiilor." />
+        <e k="ui_pmNewWorkerReliability4_4" v="Se poate conta în mare măsură pe angajamentele asumate și pe executarea lucrărilor." />
+        <e k="ui_pmNewWorkerReliability4_5" v="Responsabilitățile și sarcinile convenite sunt urmărite cu atenție." />
+        <e k="ui_pmNewWorkerReliability5_1" v="Chiar și în cazul sarcinilor exigente, ne putem baza pe munca lor într-o măsură excepțională." />
+        <e k="ui_pmNewWorkerReliability5_2" v="Angajamentele sunt respectate cu mare consecvență, iar sarcinile sunt îndeplinite cu deosebită conștiinciozitate." />
+        <e k="ui_pmNewWorkerReliability5_3" v="Modul de funcționare extrem de fiabil oferă un grad ridicat de siguranță în planificare." />
+        <e k="ui_pmNewWorkerReliability5_4" v="Responsabilitatea este asumată cu mare atenție și cu o consecvență excepțională." />
+        <e k="ui_pmNewWorkerReliability5_5" v="Chiar și sarcinile de amploare sunt îndeplinite cu o fiabilitate deosebită." />
+        <e k="ui_pmNewWorkerLoyalty1_1" v="În prezent, loialitatea față de companie este foarte scăzută." />
+        <e k="ui_pmNewWorkerLoyalty1_2" v="În prezent, colaborarea este privită mai degrabă ca fiind pe termen scurt." />
+        <e k="ui_pmNewWorkerLoyalty1_3" v="În prezent, legătura pe termen lung cu ferma este încă slabă." />
+        <e k="ui_pmNewWorkerLoyalty1_4" v="În prezent, se manifestă o atitudine rezervată față de vechimea îndelungată în muncă." />
+        <e k="ui_pmNewWorkerLoyalty1_5" v="În prezent, disponibilitatea de a rămâne în cadrul întreprinderii pe termen lung este redusă." />
+        <e k="ui_pmNewWorkerLoyalty2_1" v="Loialitatea față de companie este încă moderată." />
+        <e k="ui_pmNewWorkerLoyalty2_2" v="O colaborare pe termen lung trebuie să se dezvolte mai întâi." />
+        <e k="ui_pmNewWorkerLoyalty2_3" v="Încă nu s-a creat o legătură strânsă cu întreprinderea." />
+        <e k="ui_pmNewWorkerLoyalty2_4" v="Continuarea colaborării oferă încă posibilitatea de a consolida încrederea." />
+        <e k="ui_pmNewWorkerLoyalty2_5" v="O vechime mai îndelungată în cadrul companiei este posibilă, dar este încă privită cu rezerve." />
+        <e k="ui_pmNewWorkerLoyalty3_1" v="Există o legătură puternică cu întreprinderea." />
+        <e k="ui_pmNewWorkerLoyalty3_2" v="Colaborarea oferă o bază solidă pentru o vechime mai îndelungată în cadrul companiei." />
+        <e k="ui_pmNewWorkerLoyalty3_3" v="Conexiunea cu unitatea este stabilă." />
+        <e k="ui_pmNewWorkerLoyalty3_4" v="Loialitatea se menține la un nivel stabil." />
+        <e k="ui_pmNewWorkerLoyalty3_5" v="Există o bază solidă pentru continuarea colaborării pe termen lung." />
+        <e k="ui_pmNewWorkerLoyalty4_1" v="Legătura cu întreprinderea este foarte strânsă." />
+        <e k="ui_pmNewWorkerLoyalty4_2" v="Colaborarea cu curtea are o importanță deosebită." />
+        <e k="ui_pmNewWorkerLoyalty4_3" v="Există o dorință pronunțată de a rămâne în cadrul întreprinderii pe termen lung." />
+        <e k="ui_pmNewWorkerLoyalty4_4" v="Legătura puternică este dovada unei colaborări durabile." />
+        <e k="ui_pmNewWorkerLoyalty4_5" v="Se observă clar interesul pentru o vechime mai îndelungată în cadrul companiei." />
+        <e k="ui_pmNewWorkerLoyalty5_1" v="Legătura cu întreprinderea este extrem de puternică." />
+        <e k="ui_pmNewWorkerLoyalty5_2" v="Colaborarea pe termen lung cu curtea are o importanță deosebită." />
+        <e k="ui_pmNewWorkerLoyalty5_3" v="Atașamentul față de întreprindere este extrem de puternic." />
+        <e k="ui_pmNewWorkerLoyalty5_4" v="Loialitatea și disponibilitatea pentru o colaborare pe termen lung sunt deosebit de ridicate." />
+        <e k="ui_pmNewWorkerLoyalty5_5" v="Sentimentul de apartenență față de întreprindere și față de dezvoltarea sa pe termen lung este extrem de puternic." />
+        <e k="ui_pmNewWorkerTenureNew" v="Munca la fermă a început în această lună." />
+        <e k="ui_pmNewWorkerTenureOne" v="Colaborarea la fermă a început acum o lună." />
     </elements>
 </l10n>

@@ -52,11 +52,11 @@ HelperPersonnelViewBase.TYPOGRAPHY = {
 
 HelperPersonnelViewBase.MENU_DESIGN = {
     colors = {
-        metric = {0.075, 0.115, 0.075, 0.94},
-        panel = {0.055, 0.090, 0.060, 0.94},
-        row = {0.032, 0.052, 0.036, 0.84},
+        metric = {0.022, 0.030, 0.025, 1},
+        panel = {0.022, 0.030, 0.025, 1},
+        row = {0.033, 0.043, 0.037, 1},
         accent = {0.70, 0.86, 0.12, 1},
-        textAccent = {0.61, 0.73, 0.07, 1},
+        textAccent = {0.72, 0.77, 0.73, 1},
         muted = {0.66, 0.70, 0.66, 1}
     },
     layout = {
@@ -149,7 +149,7 @@ function HelperPersonnelViewBase.new(subclass_mt, messageCenter)
     self.uiScale = g_gameSettings:getValue("uiScale") or 1
     self.lineOverlay = nil
     self.portraitOverlays = {}
-    self.portraitCount = #HelperPersonnelViewBase.PORTRAIT_FILENAMES
+    self.portraitCount = #HelperPersonnelPortraitProfiles
 
     self.btnBack = {
         inputAction = InputAction.MENU_BACK,
@@ -2093,6 +2093,10 @@ function HelperPersonnelViewBase:getActiveWorkerOverviewLines(worker)
 end
 
 function HelperPersonnelViewBase:keyEvent(unicode, sym, modifier, isDown)
+    if isDown and self.mode == HelperPersonnelViewBase.MODE_WORKERS and Input ~= nil and Input.KEY_s ~= nil and sym == Input.KEY_s then
+        return self:onClickTrainWorker()
+    end
+
     if not isDown then
         return false
     end

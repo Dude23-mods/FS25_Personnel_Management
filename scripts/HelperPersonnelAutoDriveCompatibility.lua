@@ -32,6 +32,10 @@ HelperPersonnelAutoDriveCompatibility.vehicleHooks = setmetatable({}, {__mode = 
 HelperPersonnelAutoDriveCompatibility.reconciliationLogStateByVehicleKey = {}
 HelperPersonnelAutoDriveCompatibility.HANDOFF_TIMEOUT_MS = 10000
 
+local function hpRegisterAutoDriveHook(owner, methodName, hookFunction, hookKey, purpose, side)
+    return HelperPersonnelHookRegistrar:install(owner, methodName, "overwrite", hookFunction, hookKey, purpose, side)
+end
+
 function HelperPersonnelAutoDriveCompatibility.getAutoDriveEnvironment()
     if type(FS25_AutoDrive) == "table" then
         return FS25_AutoDrive
@@ -777,7 +781,7 @@ function HelperPersonnelAutoDriveCompatibility.installVehicleHooks(vehicle)
             and vehicle.startAutoDrive == autoDrive.startAutoDrive then
             hooks.start = true
         else
-            vehicle.startAutoDrive = Utils.overwrittenFunction(vehicle.startAutoDrive, HelperPersonnelAutoDriveCompatibility.onStartAutoDrive)
+            hpRegisterAutoDriveHook(vehicle, "startAutoDrive", HelperPersonnelAutoDriveCompatibility.onStartAutoDrive, "autodrive.vehicle." .. tostring(vehicle) .. ".start", "AutoDrive-Start", "both")
             hooks.start = true
             installed = true
         end
@@ -788,7 +792,7 @@ function HelperPersonnelAutoDriveCompatibility.installVehicleHooks(vehicle)
             and vehicle.stopAutoDrive == autoDrive.stopAutoDrive then
             hooks.stop = true
         else
-            vehicle.stopAutoDrive = Utils.overwrittenFunction(vehicle.stopAutoDrive, HelperPersonnelAutoDriveCompatibility.onStopAutoDrive)
+            hpRegisterAutoDriveHook(vehicle, "stopAutoDrive", HelperPersonnelAutoDriveCompatibility.onStopAutoDrive, "autodrive.vehicle." .. tostring(vehicle) .. ".stop", "AutoDrive-Ende", "both")
             hooks.stop = true
             installed = true
         end
@@ -1280,58 +1284,47 @@ function HelperPersonnelAutoDriveCompatibility.install(stage)
 
     if inputManager ~= nil and inputManager.onInputCall ~= nil
         and HelperPersonnelAutoDriveCompatibility.inputHookInstalled ~= true then
-        inputManager.onInputCall = Utils.overwrittenFunction(inputManager.onInputCall, HelperPersonnelAutoDriveCompatibility.onInputCall)
-        HelperPersonnelAutoDriveCompatibility.inputHookInstalled = true
+        HelperPersonnelAutoDriveCompatibility.inputHookInstalled = hpRegisterAutoDriveHook(inputManager, "onInputCall", HelperPersonnelAutoDriveCompatibility.onInputCall, "autodrive.ADInputManager.onInputCall", "AutoDrive-Eingabe", "client")
     end
 
     if inputEvent ~= nil and inputEvent.sendEvent ~= nil
         and HelperPersonnelAutoDriveCompatibility.inputEventHookInstalled ~= true then
-        inputEvent.sendEvent = Utils.overwrittenFunction(inputEvent.sendEvent, HelperPersonnelAutoDriveCompatibility.onInputEventSend)
-        HelperPersonnelAutoDriveCompatibility.inputEventHookInstalled = true
+        HelperPersonnelAutoDriveCompatibility.inputEventHookInstalled = hpRegisterAutoDriveHook(inputEvent, "sendEvent", HelperPersonnelAutoDriveCompatibility.onInputEventSend, "autodrive.AutoDriveInputEventEvent.sendEvent", "AutoDrive-Eingabe", "client")
     end
 
     if startStopEvent ~= nil and startStopEvent.sendStartEvent ~= nil
         and HelperPersonnelAutoDriveCompatibility.startEventHookInstalled ~= true then
-        startStopEvent.sendStartEvent = Utils.overwrittenFunction(
-            startStopEvent.sendStartEvent,
-            HelperPersonnelAutoDriveCompatibility.onStartEventSend)
-        HelperPersonnelAutoDriveCompatibility.startEventHookInstalled = true
+        HelperPersonnelAutoDriveCompatibility.startEventHookInstalled = hpRegisterAutoDriveHook(startStopEvent, "sendStartEvent", HelperPersonnelAutoDriveCompatibility.onStartEventSend, "autodrive.AutoDriveStartStopEvent.sendStartEvent", "AutoDrive-Startanforderung", "server")
     end
 
     if autoDrive ~= nil then
         if autoDrive.startAutoDrive ~= nil and HelperPersonnelAutoDriveCompatibility.startHookInstalled ~= true then
-            autoDrive.startAutoDrive = Utils.overwrittenFunction(autoDrive.startAutoDrive, HelperPersonnelAutoDriveCompatibility.onStartAutoDrive)
-            HelperPersonnelAutoDriveCompatibility.startHookInstalled = true
+            HelperPersonnelAutoDriveCompatibility.startHookInstalled = hpRegisterAutoDriveHook(autoDrive, "startAutoDrive", HelperPersonnelAutoDriveCompatibility.onStartAutoDrive, "autodrive.AutoDrive.startAutoDrive", "AutoDrive-Start", "both")
         end
         if autoDrive.stopAutoDrive ~= nil and HelperPersonnelAutoDriveCompatibility.stopHookInstalled ~= true then
-            autoDrive.stopAutoDrive = Utils.overwrittenFunction(autoDrive.stopAutoDrive, HelperPersonnelAutoDriveCompatibility.onStopAutoDrive)
-            HelperPersonnelAutoDriveCompatibility.stopHookInstalled = true
+            HelperPersonnelAutoDriveCompatibility.stopHookInstalled = hpRegisterAutoDriveHook(autoDrive, "stopAutoDrive", HelperPersonnelAutoDriveCompatibility.onStopAutoDrive, "autodrive.AutoDrive.stopAutoDrive", "AutoDrive-Ende", "both")
         end
         if autoDrive.onUpdateTick ~= nil and HelperPersonnelAutoDriveCompatibility.updateTickHookInstalled ~= true then
-            autoDrive.onUpdateTick = Utils.overwrittenFunction(autoDrive.onUpdateTick, HelperPersonnelAutoDriveCompatibility.onUpdateTick)
-            HelperPersonnelAutoDriveCompatibility.updateTickHookInstalled = true
+            HelperPersonnelAutoDriveCompatibility.updateTickHookInstalled = hpRegisterAutoDriveHook(autoDrive, "onUpdateTick", HelperPersonnelAutoDriveCompatibility.onUpdateTick, "autodrive.AutoDrive.onUpdateTick", "AutoDrive-Status", "both")
         end
         if autoDrive.getSetting ~= nil and HelperPersonnelAutoDriveCompatibility.getSettingHookInstalled ~= true then
             local originalGetSetting = autoDrive.getSetting
-            autoDrive.getSetting = function(settingName, vehicle)
+            HelperPersonnelAutoDriveCompatibility.getSettingHookInstalled = HelperPersonnelHookRegistrar:replace(autoDrive, "getSetting", function(settingName, vehicle)
                 if settingName == "driverWages"
                     and HelperPersonnelAutoDriveCompatibility.wageContextVehicle ~= nil then
                     return 0
                 end
                 return originalGetSetting(settingName, vehicle)
-            end
-            HelperPersonnelAutoDriveCompatibility.getSettingHookInstalled = true
+            end, "autodrive.AutoDrive.getSetting", "AutoDrive-Lohnkontext", "both")
         end
 
         if autoDrive.handleCPFieldWorker ~= nil and HelperPersonnelAutoDriveCompatibility.handleCPHookInstalled ~= true then
-            autoDrive.handleCPFieldWorker = Utils.overwrittenFunction(autoDrive.handleCPFieldWorker, HelperPersonnelAutoDriveCompatibility.captureFromHandleCP)
-            HelperPersonnelAutoDriveCompatibility.handleCPHookInstalled = true
+            HelperPersonnelAutoDriveCompatibility.handleCPHookInstalled = hpRegisterAutoDriveHook(autoDrive, "handleCPFieldWorker", HelperPersonnelAutoDriveCompatibility.captureFromHandleCP, "autodrive.AutoDrive.handleCPFieldWorker", "Courseplay-Uebergabe", "both")
         end
         for _, functionName in ipairs({"onCpFinished", "onCpFuelEmpty", "onCpBroken"}) do
             local flagName = functionName .. "HelperPersonnelHookInstalled"
             if autoDrive[functionName] ~= nil and HelperPersonnelAutoDriveCompatibility[flagName] ~= true then
-                autoDrive[functionName] = Utils.overwrittenFunction(autoDrive[functionName], HelperPersonnelAutoDriveCompatibility.captureFromVehicleEvent)
-                HelperPersonnelAutoDriveCompatibility[flagName] = true
+                HelperPersonnelAutoDriveCompatibility[flagName] = hpRegisterAutoDriveHook(autoDrive, functionName, HelperPersonnelAutoDriveCompatibility.captureFromVehicleEvent, "autodrive.AutoDrive." .. functionName, "Courseplay-Fahrzeugereignis", "both")
             end
         end
     end

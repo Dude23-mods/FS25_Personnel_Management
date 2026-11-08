@@ -664,30 +664,7 @@ if HelperPersonnelManager ~= nil then
         return self:declineSalaryRaise(workerId)
     end
 
-    local HP_SR_ORIGINAL_AWARD_WORKER_EXPERIENCE = HelperPersonnelManager.awardWorkerExperience
-    local function hpOverride_HelperPersonnelManager_awardWorkerExperience_1(self, worker, workMinutes)
-        if HP_SR_ORIGINAL_AWARD_WORKER_EXPERIENCE == nil then
-            return 0, 0
-        end
-
-        local previousExperience = type(worker) == "table" and self:clampPersonStat(worker.experience or 0) or 0
-        local experienceGain, monthlyLimit = HP_SR_ORIGINAL_AWARD_WORKER_EXPERIENCE(self, worker, workMinutes)
-        local newExperience = type(worker) == "table" and self:clampPersonStat(worker.experience or previousExperience) or previousExperience
-
-        if (tonumber(experienceGain) or 0) > 0 then
-            self:createSalaryRaiseRequest(worker, previousExperience, newExperience)
-        end
-
-        return experienceGain, monthlyLimit
-    end
-    HelperPersonnelManager.awardWorkerExperience = hpOverride_HelperPersonnelManager_awardWorkerExperience_1
-
-    local HP_SR_ORIGINAL_NORMALIZE_PERSON = HelperPersonnelManager.normalizePersonRuntimeData
-    local function hpOverride_HelperPersonnelManager_normalizePersonRuntimeData_2(self, person)
-        if HP_SR_ORIGINAL_NORMALIZE_PERSON ~= nil then
-            HP_SR_ORIGINAL_NORMALIZE_PERSON(self, person)
-        end
-
+    function HelperPersonnelManager:normalizeSalaryRaiseData(person)
         if type(person) == "table" then
             person.salaryRaisePending = person.salaryRaisePending == true
             person.salaryRaiseTargetBaseWage = math.max(0, tonumber(person.salaryRaiseTargetBaseWage) or 0)
@@ -708,11 +685,7 @@ if HelperPersonnelManager ~= nil then
 
         return person
     end
-    HelperPersonnelManager.normalizePersonRuntimeData = hpOverride_HelperPersonnelManager_normalizePersonRuntimeData_2
-
-    local HP_SR_ORIGINAL_COPY_PERSON_FOR_NETWORK = HelperPersonnelManager.copyPersonForNetwork
-    local function hpOverride_HelperPersonnelManager_copyPersonForNetwork_2(self, person)
-        local copy = HP_SR_ORIGINAL_COPY_PERSON_FOR_NETWORK ~= nil and HP_SR_ORIGINAL_COPY_PERSON_FOR_NETWORK(self, person) or {}
+    function HelperPersonnelManager:copySalaryRaiseDataForNetwork(person, copy)
         if type(person) == "table" then
             copy.salaryRaisePending = person.salaryRaisePending == true
             copy.salaryRaiseTargetBaseWage = person.salaryRaiseTargetBaseWage
@@ -733,11 +706,7 @@ if HelperPersonnelManager ~= nil then
 
         return copy
     end
-    HelperPersonnelManager.copyPersonForNetwork = hpOverride_HelperPersonnelManager_copyPersonForNetwork_2
-
-    local HP_SR_ORIGINAL_READ_PERSON_FROM_XML = HelperPersonnelManager.readPersonFromXML
-    local function hpOverride_HelperPersonnelManager_readPersonFromXML_2(self, xmlFile, key)
-        local person = HP_SR_ORIGINAL_READ_PERSON_FROM_XML ~= nil and HP_SR_ORIGINAL_READ_PERSON_FROM_XML(self, xmlFile, key) or nil
+    function HelperPersonnelManager:readSalaryRaiseDataFromXML(xmlFile, key, person)
         if person ~= nil and xmlFile ~= nil and key ~= nil then
             person.salaryRaisePending = xmlFile:getBool(key .. "#salaryRaisePending", false) == true
             person.salaryRaiseTargetBaseWage = xmlFile:getFloat(key .. "#salaryRaiseTargetBaseWage", 0)
@@ -758,14 +727,7 @@ if HelperPersonnelManager ~= nil then
 
         return person
     end
-    HelperPersonnelManager.readPersonFromXML = hpOverride_HelperPersonnelManager_readPersonFromXML_2
-
-    local HP_SR_ORIGINAL_WRITE_PERSON_TO_XML = HelperPersonnelManager.writePersonToXML
-    local function hpOverride_HelperPersonnelManager_writePersonToXML_2(self, xmlFile, key, person, includeWorkerState)
-        if HP_SR_ORIGINAL_WRITE_PERSON_TO_XML ~= nil then
-            HP_SR_ORIGINAL_WRITE_PERSON_TO_XML(self, xmlFile, key, person, includeWorkerState)
-        end
-
+    function HelperPersonnelManager:writeSalaryRaiseDataToXML(xmlFile, key, person, includeWorkerState)
         if xmlFile == nil or person == nil or key == nil or includeWorkerState ~= true then
             return
         end
@@ -786,56 +748,11 @@ if HelperPersonnelManager ~= nil then
         xmlFile:setInt(key .. "#salaryRaiseDeclinedUntilPeriod", tonumber(person.salaryRaiseDeclinedUntilPeriod) or 0)
         xmlFile:setInt(key .. "#salaryRaiseDeclinedUntilYear", tonumber(person.salaryRaiseDeclinedUntilYear) or 0)
     end
-    HelperPersonnelManager.writePersonToXML = hpOverride_HelperPersonnelManager_writePersonToXML_2
 
-    local HP_SR_ORIGINAL_WORKER_HIRED_LINE = HelperPersonnelManager.getWorkerHiredLine
-    local function hpOverride_HelperPersonnelManager_getWorkerHiredLine_2(self, person)
-        local line = HP_SR_ORIGINAL_WORKER_HIRED_LINE ~= nil and HP_SR_ORIGINAL_WORKER_HIRED_LINE(self, person) or ""
-        local salaryRaiseLine = self:getSalaryRaiseLine(person)
-        if salaryRaiseLine ~= nil and salaryRaiseLine ~= "" then
-            if line ~= nil and line ~= "" then
-                return string.format("%s | %s", line, salaryRaiseLine)
-            end
-            return salaryRaiseLine
-        end
-
-        return line
-    end
-    HelperPersonnelManager.getWorkerHiredLine = hpOverride_HelperPersonnelManager_getWorkerHiredLine_2
-
-    local HP_SR_ORIGINAL_PROCESS_APPLICANT_PERIOD_CHANGE = HelperPersonnelManager.processApplicantPeriodChange
-    local function hpOverride_HelperPersonnelManager_processApplicantPeriodChange_1(self, period, year, forceCheck)
-        local changed = HP_SR_ORIGINAL_PROCESS_APPLICANT_PERIOD_CHANGE ~= nil and HP_SR_ORIGINAL_PROCESS_APPLICANT_PERIOD_CHANGE(self, period, year, forceCheck) or false
-
-        if self.getApplicantPeriodInfo ~= nil then
-            period, year = self:getApplicantPeriodInfo(period, year)
-        end
-        local createdCount = self:processMonthlySalaryRaiseFollowupChecks(period, year)
-        local penaltyCount = self:processOpenSalaryRaiseRequestPenalties(period, year)
-        return changed == true or (tonumber(createdCount) or 0) > 0 or (tonumber(penaltyCount) or 0) > 0
-    end
-    HelperPersonnelManager.processApplicantPeriodChange = hpOverride_HelperPersonnelManager_processApplicantPeriodChange_1
-
-    local HP_SR_ORIGINAL_GET_LOYALTY_RESIGNATION_CHANCE = HelperPersonnelManager.getLoyaltyResignationChance
-    local function hpOverride_HelperPersonnelManager_getLoyaltyResignationChance_1(self, worker)
-        local chance = HP_SR_ORIGINAL_GET_LOYALTY_RESIGNATION_CHANCE ~= nil and HP_SR_ORIGINAL_GET_LOYALTY_RESIGNATION_CHANCE(self, worker) or 0
-
-        if chance > 0 and self:isSalaryRaiseDeclineAftereffectActive(worker) then
-            chance = math.min(0.45, chance + (HelperPersonnelManager.SALARY_RAISE_DECLINE_RESIGNATION_BONUS or 0.05))
-        end
-
-        return chance
-    end
-    HelperPersonnelManager.getLoyaltyResignationChance = hpOverride_HelperPersonnelManager_getLoyaltyResignationChance_1
 end
 
 if HelperPersonnelNetwork ~= nil then
-    local HP_SR_ORIGINAL_WRITE_PERSON = HelperPersonnelNetwork.writePerson
-    local function hpOverride_HelperPersonnelNetwork_writePerson_1(streamId, person)
-        if HP_SR_ORIGINAL_WRITE_PERSON ~= nil then
-            HP_SR_ORIGINAL_WRITE_PERSON(streamId, person)
-        end
-
+    function HelperPersonnelNetwork.writeSalaryRaiseAndDismissalData(streamId, person)
         person = person or {}
         streamWriteBool(streamId, person.salaryRaisePending == true)
         streamWriteFloat32(streamId, tonumber(person.salaryRaiseTargetBaseWage) or 0)
@@ -858,12 +775,7 @@ if HelperPersonnelNetwork ~= nil then
         streamWriteInt32(streamId, tonumber(person.dismissalEffectivePeriod) or 0)
         streamWriteInt32(streamId, tonumber(person.dismissalEffectiveYear) or 0)
     end
-    HelperPersonnelNetwork.writePerson = hpOverride_HelperPersonnelNetwork_writePerson_1
-
-    local HP_SR_ORIGINAL_READ_PERSON = HelperPersonnelNetwork.readPerson
-    local function hpOverride_HelperPersonnelNetwork_readPerson_1(streamId, version)
-        local person = HP_SR_ORIGINAL_READ_PERSON ~= nil and HP_SR_ORIGINAL_READ_PERSON(streamId, version) or {}
-
+    function HelperPersonnelNetwork.readSalaryRaiseAndDismissalData(streamId, version, person)
         if (version or 0) >= 8 then
             person.salaryRaisePending = streamReadBool(streamId) == true
             person.salaryRaiseTargetBaseWage = streamReadFloat32(streamId)
@@ -926,7 +838,6 @@ if HelperPersonnelNetwork ~= nil then
 
         return person
     end
-    HelperPersonnelNetwork.readPerson = hpOverride_HelperPersonnelNetwork_readPerson_1
 end
 
 if HelperPersonnelApp ~= nil then

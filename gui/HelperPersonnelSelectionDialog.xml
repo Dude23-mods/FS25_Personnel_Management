@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose">
+    <GuiElement profile="newLayer"/>
+    <GuiElement profile="hpSelectionWindow">
+        <Bitmap id="windowBorder" profile="hpSelectionPixel" position="0px 0px" size="896px 510px" imageColor="0.097530 0.116665 0.095206 1"/>
+        <Bitmap id="windowBackground" profile="hpSelectionPixel" position="1px 1px" size="894px 508px" imageColor="0.005642 0.006571 0.005642 1"/>
+        <Bitmap id="windowAccent" profile="hpSelectionPixel" position="1px 506px" size="894px 3px" imageColor="0.479959 0.738845 0.009715 1"/>
+        <Bitmap id="headerLine" profile="hpSelectionPixel" position="0px 416px" size="896px 1px" imageColor="0.052901 0.062815 0.051277 1"/>
+        <Bitmap id="footerLine" profile="hpSelectionPixel" position="0px 56px" size="896px 1px" imageColor="0.052901 0.062815 0.051277 1"/>
+        <Text id="kicker" profile="hpSelectionText" position="32px 472px" size="600px 15px" textSize="11px" textColor="0.479959 0.738845 0.009715 1" textAlignment="left" textBold="true"/>
+        <Text id="title" profile="hpSelectionText" position="32px 432px" size="700px 35px" textSize="28px" textColor="0.870997 0.887882 0.854301 1" textAlignment="left" textBold="false"/>
+        <Text id="counter" profile="hpSelectionText" position="760px 452px" size="104px 20px" textSize="15px" textColor="0.402424 0.433880 0.391805 1" textAlignment="right" textBold="false"/>
+        <GuiElement id="content" profile="emptyPanel" position="0px 0px" size="896px 510px">
+        <Bitmap id="portraitFrame" profile="hpSelectionPixel" position="71.5px 283px" size="106px 106px" imageColor="0.479959 0.738845 0.009715 1"/>
+        <Bitmap id="portrait" position="74.5px 286px" size="100px 100px"/>
+        <Text id="personName" profile="hpSelectionText" position="32px 253px" size="185px 24px" textSize="18px" textColor="0.870997 0.887882 0.854301 1" textAlignment="center" textBold="false"/>
+        <Text id="rank" profile="hpSelectionText" position="32px 229px" size="185px 18px" textSize="13px" textColor="0.479959 0.738845 0.009715 1" textAlignment="center" textBold="false"/>
+        <Bitmap id="statusBackground" profile="hpSelectionPixel" position="60px 192px" size="129px 27px" imageColor="0.035652 0.057949 0.004027 1"/>
+        <Text id="status" profile="hpSelectionText" position="60px 198px" size="129px 18px" textSize="12px" textColor="0.679293 0.879415 0.253972 1" textAlignment="center" textBold="false"/>
+        <Text id="profileTitle" profile="hpSelectionText" position="243px 378px" size="621px 16px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="true"/>
+        <Bitmap id="metricBackground1" profile="hpSelectionPixel" position="243.0px 294px" size="200.33333333333334px 74px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Text id="metricLabel1" profile="hpSelectionText" position="256.0px 345px" size="174.33333333333334px 16px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="metricValue1" profile="hpSelectionText" position="256.0px 339px" size="174.33333333333334px 25px" textSize="21px" textColor="0.870997 0.887882 0.854301 1" textAlignment="right" textBold="true"/>
+        <Bitmap id="metricBar1" profile="hpSelectionPixel" position="256.0px 305px" size="174.33333333333334px 4px" imageColor="0.043599 0.051277 0.042149 1"/>
+        <Bitmap id="metricFill1" profile="hpSelectionPixel" position="256.0px 305px" size="174.33333333333334px 4px" imageColor="0.479959 0.738845 0.009715 1"/>
+        <Bitmap id="metricBackground2" profile="hpSelectionPixel" position="453.33333333333337px 294px" size="200.33333333333334px 74px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Text id="metricLabel2" profile="hpSelectionText" position="466.33333333333337px 345px" size="174.33333333333334px 16px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="metricValue2" profile="hpSelectionText" position="466.33333333333337px 339px" size="174.33333333333334px 25px" textSize="21px" textColor="0.870997 0.887882 0.854301 1" textAlignment="right" textBold="true"/>
+        <Bitmap id="metricBar2" profile="hpSelectionPixel" position="466.33333333333337px 305px" size="174.33333333333334px 4px" imageColor="0.043599 0.051277 0.042149 1"/>
+        <Bitmap id="metricFill2" profile="hpSelectionPixel" position="466.33333333333337px 305px" size="174.33333333333334px 4px" imageColor="0.479959 0.738845 0.009715 1"/>
+        <Bitmap id="metricBackground3" profile="hpSelectionPixel" position="663.6666666666667px 294px" size="200.33333333333334px 74px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Text id="metricLabel3" profile="hpSelectionText" position="676.6666666666667px 345px" size="174.33333333333334px 16px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="metricValue3" profile="hpSelectionText" position="676.6666666666667px 339px" size="174.33333333333334px 25px" textSize="21px" textColor="0.870997 0.887882 0.854301 1" textAlignment="right" textBold="true"/>
+        <Bitmap id="metricBar3" profile="hpSelectionPixel" position="676.6666666666667px 305px" size="174.33333333333334px 4px" imageColor="0.043599 0.051277 0.042149 1"/>
+        <Bitmap id="metricFill3" profile="hpSelectionPixel" position="676.6666666666667px 305px" size="174.33333333333334px 4px" imageColor="0.479959 0.738845 0.009715 1"/>
+        <Bitmap id="detailBackground1" profile="hpSelectionPixel" position="243.0px 225px" size="154.25px 54px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Text id="detailLabel1" profile="hpSelectionText" position="255.0px 254px" size="131.25px 14px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="detailValue1" profile="hpSelectionText" position="255.0px 232px" size="131.25px 18px" textSize="14px" textColor="0.870997 0.887882 0.854301 1" textAlignment="left" textBold="false"/>
+        <Bitmap id="detailBackground2" profile="hpSelectionPixel" position="398.25px 225px" size="154.25px 54px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Text id="detailLabel2" profile="hpSelectionText" position="410.25px 254px" size="131.25px 14px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="detailValue2" profile="hpSelectionText" position="410.25px 232px" size="131.25px 18px" textSize="14px" textColor="0.870997 0.887882 0.854301 1" textAlignment="left" textBold="false"/>
+        <Bitmap id="detailBackground3" profile="hpSelectionPixel" position="553.5px 225px" size="154.25px 54px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Text id="detailLabel3" profile="hpSelectionText" position="565.5px 254px" size="131.25px 14px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="detailValue3" profile="hpSelectionText" position="565.5px 232px" size="131.25px 18px" textSize="14px" textColor="0.870997 0.887882 0.854301 1" textAlignment="left" textBold="false"/>
+        <Bitmap id="detailBackground4" profile="hpSelectionPixel" position="708.75px 225px" size="154.25px 54px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Text id="detailLabel4" profile="hpSelectionText" position="720.75px 254px" size="131.25px 14px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="detailValue4" profile="hpSelectionText" position="720.75px 232px" size="131.25px 18px" textSize="14px" textColor="0.870997 0.887882 0.854301 1" textAlignment="left" textBold="false"/>
+        <Bitmap id="specBackground" profile="hpSelectionPixel" position="243px 84px" size="261.87px 127px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Bitmap id="developmentBackground" profile="hpSelectionPixel" position="516.87px 84px" size="347.13px 127px" imageColor="0.014350 0.016754 0.014350 1"/>
+        <Text id="specTitle" profile="hpSelectionText" position="256px 189px" size="235.87px 15px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="true"/>
+        <Text id="developmentTitle" profile="hpSelectionText" position="529.87px 189px" size="321.13px 15px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="true"/>
+        <Text id="spec1" profile="hpSelectionText" position="256px 164px" size="235.87px 16px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="spec2" profile="hpSelectionText" position="256px 145px" size="235.87px 16px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="spec3" profile="hpSelectionText" position="256px 126px" size="235.87px 16px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="spec4" profile="hpSelectionText" position="256px 107px" size="235.87px 16px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="spec5" profile="hpSelectionText" position="256px 88px" size="235.87px 16px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="progressLabel1" profile="hpSelectionText" position="529.87px 164px" size="321.13px 14px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="progressValue1" profile="hpSelectionText" position="529.87px 164px" size="321.13px 14px" textSize="11px" textColor="0.870997 0.887882 0.854301 1" textAlignment="right" textBold="true"/>
+        <Bitmap id="progressBackground1" profile="hpSelectionPixel" position="529.87px 155px" size="321.13px 4px" imageColor="0.043599 0.051277 0.042149 1"/>
+        <Bitmap id="progressFill1" profile="hpSelectionPixel" position="529.87px 155px" size="321.13px 4px" imageColor="0.479959 0.738845 0.009715 1"/>
+        <Text id="progressLabel2" profile="hpSelectionText" position="529.87px 139px" size="321.13px 14px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="progressValue2" profile="hpSelectionText" position="529.87px 139px" size="321.13px 14px" textSize="11px" textColor="0.870997 0.887882 0.854301 1" textAlignment="right" textBold="true"/>
+        <Bitmap id="progressBackground2" profile="hpSelectionPixel" position="529.87px 130px" size="321.13px 4px" imageColor="0.043599 0.051277 0.042149 1"/>
+        <Bitmap id="progressFill2" profile="hpSelectionPixel" position="529.87px 130px" size="321.13px 4px" imageColor="0.479959 0.738845 0.009715 1"/>
+        <Text id="progressLabel3" profile="hpSelectionText" position="529.87px 114px" size="321.13px 14px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="progressValue3" profile="hpSelectionText" position="529.87px 114px" size="321.13px 14px" textSize="11px" textColor="0.870997 0.887882 0.854301 1" textAlignment="right" textBold="true"/>
+        <Bitmap id="progressBackground3" profile="hpSelectionPixel" position="529.87px 105px" size="321.13px 4px" imageColor="0.043599 0.051277 0.042149 1"/>
+        <Bitmap id="progressFill3" profile="hpSelectionPixel" position="529.87px 105px" size="321.13px 4px" imageColor="0.479959 0.738845 0.009715 1"/>
+        <Text id="progressLabel4" profile="hpSelectionText" position="529.87px 89px" size="321.13px 14px" textSize="11px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="progressValue4" profile="hpSelectionText" position="529.87px 89px" size="321.13px 14px" textSize="11px" textColor="0.870997 0.887882 0.854301 1" textAlignment="right" textBold="true"/>
+        <Bitmap id="progressBackground4" profile="hpSelectionPixel" position="529.87px 80px" size="321.13px 4px" imageColor="0.043599 0.051277 0.042149 1"/>
+        <Bitmap id="progressFill4" profile="hpSelectionPixel" position="529.87px 80px" size="321.13px 4px" imageColor="0.479959 0.738845 0.009715 1"/>
+        </GuiElement>
+        <Text id="emptyText" profile="hpSelectionText" position="100px 250px" size="696px 24px" textSize="16px" textColor="0.402424 0.433880 0.391805 1" textAlignment="center" textBold="false"/>
+        <Bitmap id="toggleMark" profile="hpSelectionPixel" position="32px 18px" size="18px 18px" imageColor="0.050876 0.063724 0.050876 1"/>
+        <Text id="toggleLabel" profile="hpSelectionText" position="61px 20px" size="220px 18px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="left" textBold="false"/>
+        <Text id="footer" profile="hpSelectionText" position="300px 20px" size="564px 18px" textSize="12px" textColor="0.402424 0.433880 0.391805 1" textAlignment="right" textBold="false"/>
+        <Button id="workerHit" profile="hpSelectionHit" position="0px 56px" size="896px 360px" onClick="onWorkerClick"/>
+        <Button id="toggleHit" profile="hpSelectionHit" position="24px 10px" size="245px 38px" onClick="onToggle"/>
+    </GuiElement>
+    <GUIProfiles>
+        <Profile name="hpSelectionWindow" extends="fs25_dialogBg"><size value="896px 510px"/></Profile>
+        <Profile name="hpSelectionPixel" extends="baseReference"/>
+        <Profile name="hpSelectionText" extends="baseReference"/>
+        <Profile name="hpSelectionHit" extends="emptyPanel"><handleFocus value="false"/><isTriggerableByGlobalAction value="false"/><fitToContent value="false"/><textAutoWidth value="false"/><textAutoHeight value="false"/><imageColor value="0 0 0 0"/></Profile>
+    </GUIProfiles>
+</GUI>

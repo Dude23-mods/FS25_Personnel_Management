@@ -27,6 +27,11 @@ function HelperPersonnelApp:load()
     self.manager = HelperPersonnelManager.new(self)
     self.helperBridge = HelperPersonnelHelperBridge.new(self)
     self.selectionOverlay = HelperPersonnelSelectionOverlay.new(self)
+    self.appearanceCycle = HelperPersonnelAppearanceCycle.new(self)
+
+    if self.initializeNetworkJoinSync ~= nil then
+        self:initializeNetworkJoinSync()
+    end
 
     if self:isServerAuthority() then
         self.manager:loadFromSavegame()
@@ -63,7 +68,6 @@ function HelperPersonnelApp:load()
     self:registerStandaloneMenuAction()
 end
 
-
 function HelperPersonnelApp:beginMissionDelete()
     self.isMissionDeleting = true
 
@@ -73,6 +77,10 @@ function HelperPersonnelApp:beginMissionDelete()
 end
 
 function HelperPersonnelApp:delete()
+    if self.appearanceCycle ~= nil then
+        self.appearanceCycle:delete()
+        self.appearanceCycle = nil
+    end
     if g_messageCenter ~= nil and g_messageCenter.unsubscribeAll ~= nil then
         g_messageCenter:unsubscribeAll(self)
     end
@@ -115,11 +123,17 @@ function HelperPersonnelApp:save()
 end
 
 function HelperPersonnelApp:update(dt)
+    if self.appearanceCycle ~= nil then
+        self.appearanceCycle:update(dt)
+    end
     self:tryRegisterStandaloneMenu()
     self:registerStandaloneMenuAction()
 
     if self:isServerAuthority() and self.manager ~= nil and self.manager.update ~= nil then
         self.manager:update(dt)
+        if self.helperBridge ~= nil and self.helperBridge.sampleActiveJobSpecializations ~= nil then
+            self.helperBridge:sampleActiveJobSpecializations(dt)
+        end
         self:syncNetworkStateIfNeeded()
     end
 
@@ -139,6 +153,20 @@ function HelperPersonnelApp:update(dt)
             self:finishActiveJobRestore()
         end
     end
+
+    if self.updateNetworkJoinSync ~= nil and self.isMissionDeleting ~= true then
+        self:updateNetworkJoinSync(dt)
+    end
+
+    self:hp1565VerifyPendingRestoreRestarts()
+
+    if HelperPersonnelAutoDriveCompatibility ~= nil and HelperPersonnelAutoDriveCompatibility.update ~= nil then
+        HelperPersonnelAutoDriveCompatibility.update(dt)
+    end
+
+    if self.hp15611UpdateFinishedJobAudit ~= nil then
+        self:hp15611UpdateFinishedJobAudit(dt)
+    end
 end
 
 
@@ -154,6 +182,10 @@ function HelperPersonnelApp:onPeriodChanged(period, year)
 end
 
 function HelperPersonnelApp:finishActiveJobRestore()
+    if self.finalizeRestoredAssignments ~= nil then
+        return self:finalizeRestoredAssignments()
+    end
+
     if HelperPersonnelAIJobHooks ~= nil and HelperPersonnelAIJobHooks.pendingRestoredJobs ~= nil then
         for job, _ in pairs(HelperPersonnelAIJobHooks.pendingRestoredJobs) do
             HelperPersonnelAIJobHooks.pendingRestoredJobs[job] = nil
@@ -176,24 +208,16 @@ function HelperPersonnelApp:finishActiveJobRestore()
 end
 
 function HelperPersonnelApp:draw()
-    if self.selectionOverlay ~= nil then
-        self.selectionOverlay:draw()
+    if self.appearanceCycle ~= nil then
+        self.appearanceCycle:draw()
     end
 end
 
 function HelperPersonnelApp:mouseEvent(posX, posY, isDown, isUp, button)
-    if self.selectionOverlay ~= nil and self.selectionOverlay.mouseEvent ~= nil then
-        return self.selectionOverlay:mouseEvent(posX, posY, isDown, isUp, button)
-    end
-
     return false
 end
 
 function HelperPersonnelApp:keyEvent(unicode, sym, modifier, isDown)
-    if self.selectionOverlay ~= nil then
-        return self.selectionOverlay:keyEvent(unicode, sym, modifier, isDown)
-    end
-
     return false
 end
 
@@ -211,6 +235,10 @@ function HelperPersonnelApp:getActiveAIJobs()
 end
 
 function HelperPersonnelApp:restoreActiveAIJobs()
+    if self.restoreActiveAIJobAssignments ~= nil then
+        return self:restoreActiveAIJobAssignments()
+    end
+
     if self.helperBridge == nil then
         return false
     end
@@ -338,11 +366,13 @@ function HelperPersonnelApp:setPendingWorkerForVehicle(vehicle, workerId)
     self.pendingWorkerIdForNextAIJob = workerId
 
     local key = self:getVehicleKey(vehicle)
-    if key == nil then
-        return
+    if key ~= nil then
+        self.pendingWorkerIdsByVehicleKey[key] = workerId
     end
 
-    self.pendingWorkerIdsByVehicleKey[key] = workerId
+    if self.syncPendingWorkerSelection ~= nil then
+        self:syncPendingWorkerSelection(vehicle, workerId)
+    end
 end
 
 function HelperPersonnelApp:getPendingWorkerForVehicle(vehicle)
@@ -514,6 +544,10 @@ function HelperPersonnelApp:isMultiplayerClient()
 end
 
 function HelperPersonnelApp:getNetworkState()
+    if self.manager ~= nil and self.manager.getSynchronizedNetworkState ~= nil then
+        return self.manager:getSynchronizedNetworkState()
+    end
+
     if self.manager ~= nil and self.manager.getNetworkState ~= nil then
         return self.manager:getNetworkState()
     end
@@ -521,13 +555,32 @@ function HelperPersonnelApp:getNetworkState()
     return nil
 end
 
+function HelperPersonnelApp:validateNetworkStateForSend(state)
+    local valid, reason = HelperPersonnelNetwork.validateOutgoingState(state)
+    if valid then
+        self.lastNetworkStateValidationError = nil
+        return true
+    end
+    if self.lastNetworkStateValidationError ~= reason then
+        self.lastNetworkStateValidationError = reason
+        if Logging ~= nil and Logging.error ~= nil then
+            Logging.error("FS25_PersonnelManagement: Network state was not sent; no data was discarded: %s", tostring(reason))
+        end
+    end
+    return false
+end
+
 function HelperPersonnelApp:sendNetworkStateToConnection(connection)
     if not self:isServerAuthority() or connection == nil or connection.sendEvent == nil then
         return false
     end
 
+    if self.prepareNetworkSyncForConnection ~= nil then
+        self:prepareNetworkSyncForConnection(connection)
+    end
+
     local state = self:getNetworkState()
-    if state == nil or HelperPersonnelNetworkStateEvent == nil then
+    if state == nil or HelperPersonnelNetworkStateEvent == nil or not self:validateNetworkStateForSend(state) then
         return false
     end
 
@@ -540,8 +593,12 @@ function HelperPersonnelApp:syncNetworkStateToClients()
         return false
     end
 
+    if self.prepareNetworkSyncForBroadcast ~= nil then
+        self:prepareNetworkSyncForBroadcast()
+    end
+
     local state = self:getNetworkState()
-    if state == nil then
+    if state == nil or not self:validateNetworkStateForSend(state) then
         return false
     end
 
@@ -562,6 +619,10 @@ function HelperPersonnelApp:syncNetworkStateIfNeeded()
 end
 
 function HelperPersonnelApp:requestNetworkState()
+    if self.requestSynchronizedNetworkState ~= nil then
+        return self:requestSynchronizedNetworkState()
+    end
+
     if not self:isMultiplayerClient() or g_client == nil or HelperPersonnelNetworkRequestStateEvent == nil then
         return false
     end
@@ -579,6 +640,11 @@ function HelperPersonnelApp:applyNetworkState(state)
     if self:isServerAuthority() then
         return false
     end
+
+    if self.applySynchronizedNetworkState ~= nil then
+        return self:applySynchronizedNetworkState(state)
+    end
+
     if self.manager == nil or self.manager.applyNetworkState == nil then
         return false
     end
@@ -625,36 +691,44 @@ end
 
 
 function HelperPersonnelApp:processNetworkAction(actionName, targetId, connection, farmId, actionData)
-    if not self:isServerAuthority() or self.manager == nil then
+    if self.processAuthorizedNetworkAction == nil then
         return false
     end
 
-    farmId = tonumber(farmId) or self:getCurrentFarmId()
-    local changed = false
-    local releaseFeedback = nil
-
-    if actionName == HelperPersonnelNetwork.ACTION_HIRE and self.manager.hireApplicantForFarm ~= nil then
-        changed = self.manager:hireApplicantForFarm(targetId, farmId) == true
-    elseif actionName == HelperPersonnelNetwork.ACTION_DISMISS and self.manager.dismissWorkerForFarm ~= nil then
-        changed = self.manager:dismissWorkerForFarm(targetId, farmId) == true
-    elseif actionName == HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER and self.emergencyReleaseWorkerForFarm ~= nil then
-        changed, releaseFeedback = self:emergencyReleaseWorkerForFarm(targetId, farmId)
-    end
-
-    if changed then
-        self:syncNetworkStateToClients()
-    elseif connection ~= nil then
-        self:sendNetworkStateToConnection(connection)
-    end
-
-    if actionName == HelperPersonnelNetwork.ACTION_EMERGENCY_RELEASE_WORKER and releaseFeedback ~= nil then
-        self:sendNotificationToConnection(connection, releaseFeedback)
-    end
-
-    return changed
+    return self:processAuthorizedNetworkAction(actionName, targetId, connection, farmId, actionData)
 end
 
 function HelperPersonnelApp:requestHireApplicant(applicantId)
+    if self:isMultiplayerClient() then
+        if self.hpJoinSyncApplied ~= true then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            return false
+        end
+        local applicantFarmId = self:hpMP102GetSyncedApplicantFarmId(applicantId)
+        if applicantFarmId == nil then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            if self.refreshPersonnelMenu ~= nil then
+                self:refreshPersonnelMenu()
+            end
+            return false
+        end
+        if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
+            self.manager:refreshFarmContext(applicantFarmId)
+        end
+        if self.hpJoinSyncApplied ~= true or self:hpMP101ClientHasSyncedApplicant(applicantId) ~= true then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            if self.refreshPersonnelMenu ~= nil then
+                self:refreshPersonnelMenu()
+            end
+            return false
+        end
+    end
     local farmId = self:getCurrentFarmId()
 
     if self:isServerAuthority() then
@@ -676,7 +750,68 @@ function HelperPersonnelApp:requestHireApplicant(applicantId)
     return false
 end
 
+function HelperPersonnelApp:sendApplicantInterviewAction(actionName, applicantId, topic)
+    local farmId = self:getCurrentFarmId()
+    if self:isServerAuthority() then
+        return self:processNetworkAction(actionName, applicantId, nil, farmId, topic)
+    end
+    if self:isMultiplayerClient() and g_client ~= nil and HelperPersonnelNetworkActionEvent ~= nil then
+        local connection = g_client.getServerConnection ~= nil and g_client:getServerConnection() or nil
+        if connection ~= nil and connection.sendEvent ~= nil then
+            connection:sendEvent(HelperPersonnelNetworkActionEvent.new(actionName, applicantId, nil, farmId, topic))
+            return true
+        end
+    end
+    return false
+end
+
+function HelperPersonnelApp:requestOpenApplicantInterview(applicantId)
+    return self:sendApplicantInterviewAction(HelperPersonnelNetwork.ACTION_OPEN_APPLICANT_INTERVIEW, applicantId, nil)
+end
+
+function HelperPersonnelApp:requestCloseApplicantInterview(applicantId)
+    return self:sendApplicantInterviewAction(HelperPersonnelNetwork.ACTION_CLOSE_APPLICANT_INTERVIEW, applicantId, nil)
+end
+
+function HelperPersonnelApp:requestApplicantInterviewQuestion(applicantId, topic)
+    return self:sendApplicantInterviewAction(HelperPersonnelNetwork.ACTION_ASK_APPLICANT_INTERVIEW, applicantId, topic)
+end
+
+function HelperPersonnelApp:requestApplicantInterviewsSetting(enabled)
+    return self:sendApplicantInterviewAction(HelperPersonnelNetwork.ACTION_SET_APPLICANT_INTERVIEWS, 0, enabled == true and "1" or "0")
+end
+
 function HelperPersonnelApp:requestDismissWorker(workerId)
+    if self:isMultiplayerClient() then
+        if self.hpJoinSyncApplied ~= true then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            return false
+        end
+        local workerFarmId = self:hpMP102GetSyncedWorkerFarmId(workerId)
+        if workerFarmId == nil then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            if self.refreshPersonnelMenu ~= nil then
+                self:refreshPersonnelMenu()
+            end
+            return false
+        end
+        if self.manager ~= nil and self.manager.refreshFarmContext ~= nil then
+            self.manager:refreshFarmContext(workerFarmId)
+        end
+        if self.hpJoinSyncApplied ~= true or self:hpMP101ClientHasSyncedWorker(workerId) ~= true then
+            if self.requestNetworkState ~= nil then
+                self:requestNetworkState()
+            end
+            if self.refreshPersonnelMenu ~= nil then
+                self:refreshPersonnelMenu()
+            end
+            return false
+        end
+    end
     local farmId = self:getCurrentFarmId()
 
     if self:isServerAuthority() then
